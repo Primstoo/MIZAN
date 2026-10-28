@@ -1,0 +1,1354 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Probas S3 · Révision</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,700;1,500&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<script>
+window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'},startup:{typeset:false}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"></script>
+<style>
+/* Layout : en-tête collant avec onglets, colonne de lecture ~68ch, outils en grilles qui passent sur une colonne au téléphone */
+:root{
+  --paper:#f6f7f4; --card:#ffffff; --ink:#1d2430; --muted:#5d6676; --line:#d9dde3;
+  --accent:#1f5c8a; --accent-soft:#e3edf6; --mark:#fff2a8; --mark-ink:#5b4a00;
+  --ok:#2f7d4f; --ok-soft:#e2f2e8; --warn:#a86a00; --warn-soft:#fbefd9; --bad:#b23a3a; --bad-soft:#f8e3e3;
+  --f-display:"Spectral", Georgia, "Times New Roman", serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#12161c; --card:#1a2029; --ink:#e4e8ee; --muted:#9aa4b2; --line:#2c3440;
+  --accent:#7fb4e0; --accent-soft:#1d2d3d; --mark:#4a4214; --mark-ink:#f5e7a0;
+  --ok:#6cc792; --ok-soft:#183126; --warn:#e2ad55; --warn-soft:#3a2d16; --bad:#ef8a8a; --bad-soft:#3b1f22; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#12161c; --card:#1a2029; --ink:#e4e8ee; --muted:#9aa4b2; --line:#2c3440;
+  --accent:#7fb4e0; --accent-soft:#1d2d3d; --mark:#4a4214; --mark-ink:#f5e7a0;
+  --ok:#6cc792; --ok-soft:#183126; --warn:#e2ad55; --warn-soft:#3a2d16; --bad:#ef8a8a; --bad-soft:#3b1f22; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--card)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.brand{display:flex;align-items:baseline;gap:12px;padding-block:10px 4px;flex-wrap:wrap}
+.brand h1{font-family:var(--f-display);font-size:1.35rem;margin:0;font-weight:700}
+.brand .sub{color:var(--muted);font-size:.85rem}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;padding-bottom:0;scrollbar-width:thin}
+nav.tabs button{border:0;background:none;color:var(--muted);font:600 .9rem var(--f-body);padding:8px 11px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+nav.tabs button:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main{padding-block:20px 60px}
+h2{font-family:var(--f-display);font-size:1.6rem;margin:0 0 6px;text-wrap:balance;font-weight:700}
+h3{font-family:var(--f-display);font-size:1.2rem;margin:22px 0 6px;text-wrap:balance}
+h4{margin:16px 0 4px;font-size:1rem}
+p{margin:6px 0}
+.lede{color:var(--muted);max-width:68ch}
+.read{max-width:72ch}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+.mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;min-width:0}
+.btn{border:1px solid var(--accent);background:var(--accent);color:var(--card);font:600 .9rem var(--f-body);padding:7px 13px;border-radius:6px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.small{padding:4px 9px;font-size:.82rem}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.bad{border-color:var(--bad);background:var(--bad)}
+.btn.ok{border-color:var(--ok);background:var(--ok)}
+input[type=text],input[type=number],textarea,select{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:6px 8px;max-width:100%}
+textarea{width:100%;min-height:70px}
+.chip{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.chip.ok{background:var(--ok-soft);color:var(--ok)} .chip.warn{background:var(--warn-soft);color:var(--warn)} .chip.bad{background:var(--bad-soft);color:var(--bad)}
+.box{border-left:3px solid var(--accent);background:var(--accent-soft);padding:8px 12px;border-radius:0 6px 6px 0;margin:10px 0}
+.box.trap{border-color:var(--bad);background:var(--bad-soft)}
+.box.prof{border-color:var(--warn);background:var(--warn-soft)}
+.box.ok{border-color:var(--ok);background:var(--ok-soft)}
+mark,.hl{background:var(--mark);color:var(--mark-ink);padding:0 3px;border-radius:2px}
+.formula{overflow-x:auto;margin:8px 0}
+table.t{border-collapse:collapse;margin:8px 0;font-variant-numeric:tabular-nums}
+table.t th,table.t td{border:1px solid var(--line);padding:4px 9px;text-align:center}
+table.t th{background:var(--accent-soft)}
+.tablewrap{overflow-x:auto;max-width:100%}
+.steps{counter-reset:s;padding-left:0;list-style:none}
+.steps>li{counter-increment:s;position:relative;padding-left:30px;margin:7px 0}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:50%;background:var(--accent);color:var(--card);font:700 .78rem var(--f-body);display:grid;place-items:center}
+.notionlist{display:grid;gap:8px}
+.nitem{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:9px 12px;cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%}
+.nitem:hover{border-color:var(--accent)}
+.dot{width:12px;height:12px;border-radius:3px;background:var(--line)}
+.dot.lu{background:var(--warn)} .dot.ok{background:var(--ok)}
+.imp{font-family:var(--f-mono);font-size:.8rem;color:var(--warn)}
+.chhead{font-family:var(--f-display);font-size:1.05rem;margin:18px 0 6px;color:var(--muted)}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent)}
+.freq{display:grid;grid-template-columns:minmax(0,1fr) 110px 44px;gap:8px;align-items:center;font-size:.9rem;padding:3px 0}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:10px 0}
+.q .opts{display:grid;gap:6px;margin-top:8px}
+.q .opts button{text-align:left;font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:7px 10px;cursor:pointer}
+.q .opts button.right{border-color:var(--ok);background:var(--ok-soft)}
+.q .opts button.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin-top:8px;font-size:.93rem}
+.lock{color:var(--muted);font-size:.85rem}
+.check{display:flex;gap:8px;align-items:flex-start;padding:4px 0}
+.check input{margin-top:5px}
+.card3d{min-height:170px;display:grid;place-items:center;text-align:center;font-size:1.05rem;cursor:pointer;padding:22px}
+.kbd{font-family:var(--f-mono);font-size:.8rem;border:1px solid var(--line);border-radius:4px;padding:0 5px}
+.timer{font-family:var(--f-mono);font-size:1.5rem;font-variant-numeric:tabular-nums}
+.big{font-family:var(--f-display);font-size:2.2rem;font-weight:700;line-height:1}
+.kpi{display:grid;gap:4px}
+.toast{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:8px 14px;border-radius:6px;font-size:.9rem;z-index:20}
+details>summary{cursor:pointer;font-weight:600}
+mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
+mjx-container[display="true"]{margin:8px 0!important}
+.ntable td{min-width:52px}
+@media (max-width:520px){h2{font-size:1.35rem}.freq{grid-template-columns:minmax(0,1fr) 70px 38px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><h1>Probabilités &amp; Statistique</h1><span class="sub">S3 · FSABM · révision complète à partir des examens 2016-2024</span></div>
+    <nav class="tabs" role="tablist" id="tabs">
+      <button data-tab="accueil" aria-selected="true">Accueil</button>
+      <button data-tab="cours">Cours</button>
+      <button data-tab="exos">Exercices-types</button>
+      <button data-tab="annales">Annales</button>
+      <button data-tab="calc">Calculs</button>
+      <button data-tab="cartes">Cartes</button>
+      <button data-tab="blanc">Examen blanc</button>
+      <button data-tab="formulaire">Formulaire</button>
+      <button data-tab="table">Table N(0,1)</button>
+      <button data-tab="suivi">Suivi</button>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="main"></main>
+<div class="toast" id="toast" hidden></div>
+<script>
+const CHAPS={A:"Bases de probabilité",B:"Variables aléatoires discrètes",C:"Variables aléatoires continues",D:"Lois usuelles discrètes",E:"Lois usuelles continues"};
+const NOTIONS=[
+/* ======================= CHAPITRE A ======================= */
+{id:"denombrement",ch:"A",t:"Dénombrement : compter les cas",imp:2,src:"TD 3, 4, 5 · base de tous les calculs",
+body:String.raw`
+<p>Avant de calculer une probabilité, il faut souvent <b>compter</b> les cas possibles. Trois questions décident de la formule :</p>
+<ol class="steps">
+<li><b>L'ordre compte-t-il ?</b> Tirer « une boule puis une autre » (ordre) ou « deux boules d'un coup » (pas d'ordre, on dit <i>simultanément</i>).</li>
+<li><b>Y a-t-il remise ?</b> Avec remise, le même objet peut ressortir.</li>
+<li><b>Combien d'objets</b> $n$ au total, et <b>combien</b> $p$ on en prend.</li>
+</ol>
+<div class="tablewrap"><table class="t"><tr><th>Situation</th><th>Nombre de cas</th><th>Exemple</th></tr>
+<tr><td>Ordre + sans remise (arrangement)</td><td>$A_n^p=\dfrac{n!}{(n-p)!}$</td><td>podium de 3 parmi 10 : $A_{10}^3=720$</td></tr>
+<tr><td>Ordre + avec remise</td><td>$n^p$</td><td>code à 4 chiffres : $10^4$</td></tr>
+<tr><td>Sans ordre + sans remise (combinaison)</td><td>$C_n^p=\dfrac{n!}{p!\,(n-p)!}$</td><td>2 boules parmi 7 : $C_7^2=21$</td></tr>
+<tr><td>Tout ranger ($p=n$)</td><td>$n!$</td><td>5 livres sur une étagère : $120$</td></tr></table></div>
+<div class="box"><b>Équiprobabilité.</b> Quand tous les résultats élémentaires ont la même chance (pièce équilibrée, tirage « au hasard »), on a
+$$P(A)=\frac{\text{Card}(A)}{\text{Card}(\Omega)}=\frac{\text{nombre de cas favorables}}{\text{nombre de cas possibles}}.$$</div>
+<h4>Exemple du TD (exercice 5)</h4>
+<p>Une urne contient une boule « 0 », deux boules « 1 » et quatre boules « 3 ». On tire <b>simultanément</b> deux boules : $C_7^2=21$ paires équiprobables. La somme vaut 4 quand on tire un « 1 » et un « 3 » : $2\times4=8$ paires, donc $P(X=4)=8/21$.</p>
+<div class="box trap"><b>Piège.</b> « Simultanément » = combinaisons. Ne multiplie pas par 2 pour l'ordre, sinon il faut aussi compter $\Omega$ avec ordre ($7\times6=42$) : le résultat est le même, mais mélanger les deux conventions donne une erreur.</div>
+`,
+quiz:[
+{t:"q",q:"On tire simultanément 3 cartes parmi 32. Nombre de mains possibles ?",o:["$32^3$","$A_{32}^3$","$C_{32}^3$","$3!$"],a:2,e:"Simultanément, sans ordre, sans remise : combinaison $C_{32}^3=4960$."},
+{t:"n",q:"Calcule $C_7^2$.",a:21,tol:0,e:"$C_7^2=\\frac{7\\times6}{2}=21$."},
+{t:"q",q:"On lance une pièce 3 fois. Nombre de résultats possibles ?",o:["6","8","9","3"],a:1,e:"Ordre + « remise » (chaque lancer a 2 issues) : $2^3=8$."},
+{t:"n",q:"Urne du TD (0 ; 1,1 ; 3,3,3,3), deux boules tirées simultanément. Donne $P(X=6)$ en décimal (somme = 6). Arrondis à 3 décimales.",a:6/21,tol:0.002,e:"Il faut deux « 3 » : $C_4^2=6$ paires sur 21, soit $6/21=2/7\\approx0{,}286$."}
+]},
+
+{id:"probas",ch:"A",t:"Probabilité, conditionnelle, Bayes",imp:2,src:"TD 2, 4 · cours chapitre 1",
+body:String.raw`
+<p>Une <b>expérience aléatoire</b> a des résultats imprévisibles. L'ensemble de tous les résultats est l'<b>univers</b> $\Omega$. Un <b>événement</b> est une partie de $\Omega$.</p>
+<div class="box"><b>Règles de base</b> (à savoir réciter) :
+<ul><li>$0\le P(A)\le 1$, $P(\Omega)=1$, $P(\emptyset)=0$</li>
+<li>$P(\bar A)=1-P(A)$</li>
+<li>$P(A\cup B)=P(A)+P(B)-P(A\cap B)$ ; si $A\cap B=\emptyset$ (incompatibles), $P(A\cup B)=P(A)+P(B)$</li>
+<li>Si $A\subset B$ : $P(A)\le P(B)$ et $P(B\setminus A)=P(B)-P(A)$</li></ul>
+« ET » se traduit par un produit (si indépendance ou en conditionnant), « OU » exclusif par une somme.</div>
+<h4>Probabilité conditionnelle</h4>
+<p>Si $P(B)\neq0$, la probabilité de $A$ <b>sachant</b> que $B$ est réalisé :</p>
+$$P(A\mid B)=\frac{P(A\cap B)}{P(B)}\qquad\text{donc}\qquad P(A\cap B)=P(B)\,P(A\mid B).$$
+<h4>Probabilités totales et Bayes</h4>
+<p>Si $A_1,\dots,A_n$ forment un <b>système complet</b> (ils sont disjoints et leur réunion vaut $\Omega$) :</p>
+$$P(B)=\sum_{j=1}^n P(A_j)\,P(B\mid A_j)\qquad\qquad P(A_i\mid B)=\frac{P(A_i)\,P(B\mid A_i)}{\sum_{j=1}^n P(A_j)\,P(B\mid A_j)}.$$
+<h4>Exemple (cours, 3 urnes)</h4>
+<p>On choisit une urne au hasard parmi 3, puis une boule. Si $P(\text{rouge}\mid U_1)=\tfrac12$, $P(\text{rouge}\mid U_2)=\tfrac14$, $P(\text{rouge}\mid U_3)=0$, alors $P(\text{rouge})=\tfrac13(\tfrac12+\tfrac14+0)=\tfrac14$ et $P(U_1\mid\text{rouge})=\dfrac{\frac13\cdot\frac12}{\frac14}=\tfrac23$.</p>
+<div class="box trap"><b>Piège.</b> $P(A\mid B)\neq P(B\mid A)$ en général. Bayes sert justement à « retourner » le conditionnement.</div>
+`,
+quiz:[
+{t:"q",q:"$P(A)=0{,}5$, $P(B)=0{,}4$, $P(A\\cap B)=0{,}2$. Que vaut $P(A\\mid B)$ ?",o:["0,4","0,5","0,8","0,2"],a:1,e:"$0{,}2/0{,}4=0{,}5$."},
+{t:"n",q:"Même données. Calcule $P(A\\cup B)$.",a:0.7,tol:0.001,e:"$0{,}5+0{,}4-0{,}2=0{,}7$."},
+{t:"q",q:"La formule de Bayes sert à calculer…",o:["$P(B)$ à partir des $P(A_j)$","$P(A_i\\mid B)$ quand on connaît les $P(B\\mid A_j)$","$P(A\\cap B)$ pour des événements indépendants","le nombre de cas favorables"],a:1,e:"Bayes retourne le conditionnement : on connaît $P(B\\mid A_j)$, on veut $P(A_i\\mid B)$."},
+{t:"n",q:"Tournoi du TD 3 : chaque partie est gagnée par A avec probabilité 1/2. Probabilité que la finale s'arrête en 2 parties (AA ou BB) ?",a:0.5,tol:0.001,e:"$P(AA)+P(BB)=\\frac14+\\frac14=\\frac12$."}
+]},
+
+{id:"independance",ch:"A",t:"Indépendance d'événements",imp:2,src:"TD 2",
+body:String.raw`
+<div class="box">$A$ et $B$ sont <b>indépendants</b> $\iff P(A\cap B)=P(A)\,P(B)$.</div>
+<p>Pour trois événements, on distingue :</p>
+<ul><li><b>Deux à deux</b> : $P(A\cap B)=P(A)P(B)$, $P(A\cap C)=P(A)P(C)$, $P(B\cap C)=P(B)P(C)$.</li>
+<li><b>Mutuellement</b> (dans leur ensemble) : les trois égalités <b>et</b> $P(A\cap B\cap C)=P(A)P(B)P(C)$.</li></ul>
+<p>Deux à deux n'implique pas mutuellement. Contre-exemple du cours : deux pièces, $A$ = « 1<sup>re</sup> pile », $B$ = « 2<sup>e</sup> pile », $C$ = « une seule pile ». Chaque paire est indépendante ($1/4=1/2\times1/2$) mais $A\cap B\cap C=\emptyset$.</p>
+<h4>Démonstration classique (TD 2-II) : si $A$, $B$ indépendants, alors $A$ et $\bar B$ aussi</h4>
+<ol class="steps">
+<li>$A=(A\cap B)\cup(A\cap\bar B)$, union disjointe, donc $P(A)=P(A\cap B)+P(A\cap\bar B)$.</li>
+<li>$P(A\cap\bar B)=P(A)-P(A)P(B)=P(A)\,(1-P(B))=P(A)\,P(\bar B)$.</li>
+<li>Même raisonnement pour $\bar A$ et $\bar B$ : $P(\bar A\cap\bar B)=1-P(A\cup B)=\dots=P(\bar A)P(\bar B)$.</li></ol>
+<div class="box trap"><b>Piège.</b> Incompatibles ($A\cap B=\emptyset$) n'est pas indépendants. Si $P(A)>0$ et $P(B)>0$, deux événements incompatibles sont même forcément <b>dépendants</b> ($0\neq P(A)P(B)$).</div>
+`,
+quiz:[
+{t:"q",q:"$P(A)=0{,}3$, $P(B)=0{,}5$, $A$ et $B$ indépendants. $P(A\\cap B)$ ?",o:["0,8","0,15","0,2","0"],a:1,e:"Produit : $0{,}15$."},
+{t:"q",q:"$A$ et $B$ incompatibles, de probabilités non nulles. Sont-ils indépendants ?",o:["Oui toujours","Non, jamais","Ça dépend"],a:1,e:"$P(A\\cap B)=0\\neq P(A)P(B)>0$."},
+{t:"q",q:"Trois événements indépendants deux à deux sont-ils mutuellement indépendants ?",o:["Toujours","Pas forcément"],a:1,e:"Il faut en plus $P(A\\cap B\\cap C)=P(A)P(B)P(C)$."}
+]},
+
+/* ======================= CHAPITRE B ======================= */
+{id:"vad",ch:"B",t:"V.a discrète : loi, espérance, variance",imp:4,src:"Examens 2020-21 ord., 2022-23 ratt. (4 pts)",
+body:String.raw`
+<p>Une <b>variable aléatoire discrète</b> $X$ associe un nombre à chaque résultat ; elle prend des valeurs $x_1,x_2,\dots$ en nombre fini ou dénombrable. Sa <b>loi</b> est la liste des couples $(x_i,\,p_i)$ avec $p_i=P(X=x_i)$.</p>
+<div class="box"><b>Vérifier qu'une suite est une loi de probabilité</b> : deux conditions, toutes deux à écrire.
+$$\text{(1) } 0\le p_i\le 1\ \text{ pour tout } i\qquad\text{(2) }\sum_i p_i=1$$</div>
+<h4>Les formules à connaître par cœur</h4>
+$$E(X)=\sum_i x_i\,p_i\qquad E(g(X))=\sum_i g(x_i)\,p_i\qquad V(X)=E(X^2)-\big(E(X)\big)^2$$
+$$E(aX+b)=aE(X)+b\qquad V(aX+b)=a^2\,V(X)\qquad \sigma(X)=\sqrt{V(X)}$$
+<p>Fonction de répartition : $F(x)=P(X\le x)=\sum_{x_i\le x}p_i$. C'est une fonction en escalier, croissante, de 0 à 1.</p>
+<h3>L'exercice qui tombe (4 pts)</h3>
+<p>$P(X=0)=(1-p)^2$, $P(X=1)=2p(1-p)$, $P(X=2)=p^2$ avec $0\le p\le1$.</p>
+<ol class="steps">
+<li><b>C'est une loi.</b> Chaque terme est un produit de nombres de $[0,1]$ donc dans $[0,1]$ (pour $2p(1-p)$ : son maximum vaut $1/2$ en $p=1/2$). Somme : $(1-p)^2+2p(1-p)+p^2=\big((1-p)+p\big)^2=1$.</li>
+<li>$E(X)=0\cdot(1-p)^2+1\cdot2p(1-p)+2p^2=2p$.</li>
+<li>$E(X^2)=2p(1-p)+4p^2=2p+2p^2$, donc $V(X)=2p+2p^2-4p^2=2p(1-p)$.</li>
+<li>$Y=-3X+1$ : $E(Y)=-3E(X)+1=1-6p$ et $V(Y)=(-3)^2V(X)=18p(1-p)$.</li></ol>
+<div class="box prof"><b>Remarque qui rapporte.</b> Cette loi est la binomiale $\mathcal B(2,p)$ : on retrouve $E=np=2p$ et $V=np(1-p)$. Le dire en une ligne montre que tu as compris.</div>
+<div class="box trap"><b>Pièges.</b> $V(-3X+1)=9V(X)$, jamais $-3V(X)$ ; la constante $+1$ disparaît dans la variance. Et $V(X)=E(X^2)-E(X)^2$, pas $E(X)^2-E(X^2)$.</div>
+`,
+quiz:[
+{t:"q",q:"$V(-3X+1)$ vaut :",o:["$-3V(X)+1$","$9V(X)+1$","$9V(X)$","$-3V(X)$"],a:2,e:"$V(aX+b)=a^2V(X)$."},
+{t:"n",q:"Avec la loi $(1-p)^2,\\ 2p(1-p),\\ p^2$ et $p=0{,}3$ : calcule $E(-3X+1)$.",a:-0.8,tol:0.001,e:"$1-6p=1-1{,}8=-0{,}8$."},
+{t:"n",q:"Même loi, $p=0{,}3$ : calcule $V(-3X+1)$.",a:3.78,tol:0.001,e:"$18p(1-p)=18\\times0{,}3\\times0{,}7=3{,}78$."},
+{t:"q",q:"Pour montrer qu'une suite $(p_i)$ est une loi de probabilité, on vérifie…",o:["seulement $\\sum p_i=1$","$p_i\\ge0$ et $\\sum p_i=1$","$E(X)$ existe","que $F$ est continue"],a:1,e:"Positivité (donc $\\le1$) et somme égale à 1."},
+{t:"n",q:"TD 1 : $X(a)=X(b)=X(c)=X(d)=-1$, $X(e)=0$ avec $P(\\{a,b\\})=2/5$, $P(\\{c,d\\})=1/5$, $P(\\{e\\})=2/5$. Donne $P(X=-1)$ en décimal.",a:0.6,tol:0.001,e:"$2/5+1/5=3/5=0{,}6$."}
+]},
+
+{id:"linearite",ch:"B",t:"Preuves : E(X+Y) et E(XY)",imp:3,src:"Examen 2023-24 ord. (4 pts)",
+body:String.raw`
+<p>Ces deux démonstrations sont courtes et tombent telles quelles. On travaille avec la <b>loi du couple</b> $p_{ij}=P(X=x_i,\,Y=y_j)$ et ses marginales $p_{i\bullet}=\sum_j p_{ij}=P(X=x_i)$, $p_{\bullet j}=\sum_i p_{ij}=P(Y=y_j)$.</p>
+<h4>1) $E(X+Y)=E(X)+E(Y)$</h4>
+$$\begin{aligned}E(X+Y)&=\sum_i\sum_j (x_i+y_j)\,p_{ij}=\sum_i x_i\sum_j p_{ij}+\sum_j y_j\sum_i p_{ij}\\&=\sum_i x_i\,p_{i\bullet}+\sum_j y_j\,p_{\bullet j}=E(X)+E(Y).\end{aligned}$$
+<h4>2) Si $X$ et $Y$ sont indépendantes, $E(XY)=E(X)E(Y)$</h4>
+<p>Indépendance : $p_{ij}=p_{i\bullet}\,p_{\bullet j}$ pour tous $i,j$.</p>
+$$E(XY)=\sum_i\sum_j x_iy_j\,p_{ij}=\sum_i\sum_j x_iy_j\,p_{i\bullet}p_{\bullet j}=\Big(\sum_i x_ip_{i\bullet}\Big)\Big(\sum_j y_jp_{\bullet j}\Big)=E(X)E(Y).$$
+<div class="box prof"><b>Barème probable.</b> Écrire la définition avec la loi du couple, séparer les sommes, reconnaître les marginales, citer l'hypothèse d'indépendance au bon endroit. Chaque étape compte : n'en saute aucune.</div>
+<div class="box trap"><b>Piège.</b> La première égalité n'a besoin d'aucune hypothèse. La seconde exige l'indépendance : la réciproque est fausse ($E(XY)=E(X)E(Y)$ n'entraîne pas l'indépendance, voir la notion « Covariance nulle »).</div>
+`,
+quiz:[
+{t:"q",q:"$E(X+Y)=E(X)+E(Y)$ nécessite…",o:["l'indépendance","rien de plus que l'existence des espérances","que $X$ et $Y$ aient la même loi"],a:1,e:"La linéarité de l'espérance est toujours vraie."},
+{t:"q",q:"Dans la preuve de $E(XY)=E(X)E(Y)$, l'étape clé est :",o:["$p_{ij}=p_{i\\bullet}+p_{\\bullet j}$","$p_{ij}=p_{i\\bullet}\\,p_{\\bullet j}$","$\\sum_j p_{ij}=1$"],a:1,e:"C'est la définition de l'indépendance pour un couple discret."}
+]},
+
+{id:"couple",ch:"B",t:"Couple discret : tableau, marginales, covariance",imp:5,src:"5 examens sur 11 (les « trois pièces »), 4 à 8 pts",
+body:String.raw`
+<p>C'est l'exercice le plus répété du module. Méthode en 6 étapes, toujours la même.</p>
+<h3>L'énoncé</h3>
+<p>On lance trois pièces. $X$ = nombre de faces sur les <b>deux premières</b>, $Y$ = nombre de piles sur les <b>deux dernières</b>. La pièce du milieu compte pour les deux.</p>
+<h4>Étape 1 : lister les 8 résultats équiprobables (probabilité 1/8 chacun)</h4>
+<div class="tablewrap"><table class="t"><tr><th>Résultat</th><th>FFF</th><th>FFP</th><th>FPF</th><th>FPP</th><th>PFF</th><th>PFP</th><th>PPF</th><th>PPP</th></tr>
+<tr><td>$X$ (faces sur 1-2)</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>$Y$ (piles sur 2-3)</td><td>0</td><td>1</td><td>1</td><td>2</td><td>0</td><td>1</td><td>1</td><td>2</td></tr></table></div>
+<h4>Étape 2 : le tableau de la loi du couple, avec les marges</h4>
+<div class="tablewrap"><table class="t"><tr><th>$X\backslash Y$</th><th>0</th><th>1</th><th>2</th><th>$P(X=i)$</th></tr>
+<tr><th>0</th><td>0</td><td>1/8</td><td>1/8</td><td>2/8</td></tr>
+<tr><th>1</th><td>1/8</td><td>2/8</td><td>1/8</td><td>4/8</td></tr>
+<tr><th>2</th><td>1/8</td><td>1/8</td><td>0</td><td>2/8</td></tr>
+<tr><th>$P(Y=j)$</th><td>2/8</td><td>4/8</td><td>2/8</td><td>1</td></tr></table></div>
+<h4>Étape 3 : lois marginales</h4>
+<p>On somme les lignes (loi de $X$) et les colonnes (loi de $Y$) : $X$ et $Y$ prennent 0, 1, 2 avec probabilités $\tfrac14,\tfrac12,\tfrac14$.</p>
+<h4>Étape 4 : indépendance ?</h4>
+<p>Il suffit d'<b>un seul</b> contre-exemple : $P(X=0,Y=0)=0\neq P(X=0)P(Y=0)=\tfrac14\cdot\tfrac14$. Donc <b>non indépendantes</b>. (Pour prouver l'indépendance, il faudrait vérifier <i>toutes</i> les cases.)</p>
+<h4>Étape 5 : covariance</h4>
+$$E(X)=E(Y)=0\cdot\tfrac14+1\cdot\tfrac12+2\cdot\tfrac14=1,\qquad E(XY)=\sum_{i,j}ij\,p_{ij}=1\cdot1\cdot\tfrac28+1\cdot2\cdot\tfrac18+2\cdot1\cdot\tfrac18=\tfrac34$$
+$$\text{Cov}(X,Y)=E(XY)-E(X)E(Y)=\tfrac34-1=-\tfrac14.$$
+<h4>Étape 6 : loi du couple $(\min\{X,Y\},\max\{X,Y\})$</h4>
+<p>Pour chaque case non nulle, on écrit le couple (min, max) puis on regroupe :</p>
+<div class="tablewrap"><table class="t"><tr><th>$(X,Y)$</th><td>(0,1)</td><td>(0,2)</td><td>(1,0)</td><td>(1,1)</td><td>(1,2)</td><td>(2,0)</td><td>(2,1)</td></tr>
+<tr><th>(min, max)</th><td>(0,1)</td><td>(0,2)</td><td>(0,1)</td><td>(1,1)</td><td>(1,2)</td><td>(0,2)</td><td>(1,2)</td></tr>
+<tr><th>proba</th><td>1/8</td><td>1/8</td><td>1/8</td><td>2/8</td><td>1/8</td><td>1/8</td><td>1/8</td></tr></table></div>
+<div class="tablewrap"><table class="t"><tr><th>$\min\backslash\max$</th><th>0</th><th>1</th><th>2</th></tr>
+<tr><th>0</th><td>0</td><td>1/4</td><td>1/4</td></tr><tr><th>1</th><td>—</td><td>1/4</td><td>1/4</td></tr><tr><th>2</th><td>—</td><td>—</td><td>0</td></tr></table></div>
+<div class="box prof"><b>Variante vue en TD (examen 7 pts)</b> : tableau $X\in\{1,2,3\}$, $Y\in\{1,2,3,4\}$ dont chaque case vaut le produit des marges. Là il faut écrire « $P(X=i,Y=j)=P(X=i)P(Y=j)$ pour <b>toutes</b> les cases », donc indépendance et $\text{Cov}=0$.</div>
+<div class="box trap"><b>Pièges vus dans les copies.</b> Oublier que la pièce du milieu est commune ; confondre « faces » et « piles » ; ne pas vérifier que le tableau somme à 1 ; conclure à l'indépendance sans tout vérifier.</div>
+<h4>Loi de la somme (cours 7.4)</h4>
+<p>$P(X+Y=k)=\sum_{i}P(X=i,\,Y=k-i)$ : on additionne les cases d'une même « anti-diagonale ».</p>
+`,
+quiz:[
+{t:"n",q:"Trois pièces : donne $P(X=1,Y=1)$ en décimal.",a:0.25,tol:0.001,e:"FPF et PFP : $2/8=0{,}25$."},
+{t:"n",q:"Calcule $E(XY)$ (trois pièces), en décimal.",a:0.75,tol:0.001,e:"$\\frac28+\\frac28+\\frac28=\\frac34$."},
+{t:"n",q:"Donne $\\text{Cov}(X,Y)$ en décimal.",a:-0.25,tol:0.001,e:"$\\frac34-1\\times1=-\\frac14$."},
+{t:"q",q:"Pour montrer que $X$ et $Y$ ne sont pas indépendantes, il faut…",o:["vérifier toutes les cases","trouver une seule case où $p_{ij}\\neq p_{i\\bullet}p_{\\bullet j}$","montrer que $\\text{Cov}\\neq0$ uniquement"],a:1,e:"Un seul contre-exemple suffit (et $\\text{Cov}\\neq0$ marche aussi, mais un contre-exemple est plus rapide)."},
+{t:"n",q:"Toujours les trois pièces : $P(X+Y=2)$ en décimal.",a:0.5,tol:0.001,e:"Cases (0,2), (1,1), (2,0) : $\\frac18+\\frac28+\\frac18=\\frac12$."},
+{t:"n",q:"$P(\\min\\{X,Y\\}=0)$ en décimal.",a:0.5,tol:0.001,e:"(0,1) et (0,2) : $\\frac14+\\frac14$."}
+]},
+
+{id:"covnulle",ch:"B",t:"Covariance nulle et indépendance",imp:4,src:"Examens 2020-21 ratt., 2021-22 ratt. (5 à 8 pts)",
+body:String.raw`
+$$\text{Cov}(X,Y)=E\big[(X-E X)(Y-E Y)\big]=E(XY)-E(X)E(Y)$$
+<div class="box"><b>Le résultat central.</b> Indépendantes $\Rightarrow$ $\text{Cov}=0$. <b>La réciproque est fausse en général</b>, sauf pour deux variables de Bernoulli.</div>
+<h3>1) Indépendantes ⇒ Cov = 0</h3>
+<p>Cas continu (examen 2021-22) : <b>CNS d'indépendance</b> : $f(x,y)=f_X(x)\,f_Y(y)$ pour tout $(x,y)$ (ou $F(x,y)=F_X(x)F_Y(y)$). Alors
+$$E(XY)=\iint xy\,f_X(x)f_Y(y)\,dx\,dy=\int x f_X(x)dx\int yf_Y(y)dy=E(X)E(Y),$$ donc $\text{Cov}(X,Y)=0$.</p>
+<h3>2) Contre-exemple : $Z\sim\mathcal N(0,1)$ et $T=Z^2$</h3>
+<ol class="steps"><li>$E(Z^3)=\int_{-\infty}^{+\infty}\frac{x^3}{\sqrt{2\pi}}e^{-x^2/2}dx=0$ : la fonction est <b>impaire</b> et l'intégrale converge, sur un intervalle symétrique.</li>
+<li>$\text{Cov}(Z,T)=E(Z\cdot Z^2)-E(Z)E(Z^2)=E(Z^3)-0\times1=0$.</li>
+<li><b>Conclusion</b> : $\text{Cov}(Z,T)=0$ alors que $T=Z^2$ dépend totalement de $Z$. Une covariance nulle n'implique pas l'indépendance.</li></ol>
+<h3>3) Le cas Bernoulli où la réciproque est vraie</h3>
+<p>Tableau donné (avec $0\le p<1$) :</p>
+<div class="tablewrap"><table class="t"><tr><th>$X\backslash Y$</th><th>0</th><th>1</th><th>$P(X=i)$</th></tr>
+<tr><th>0</th><td>$p$</td><td>$1-p-p_1$</td><td>$1-p_1$</td></tr>
+<tr><th>1</th><td>$1-p-p_2$</td><td>$p_1+p_2+p-1$</td><td>$p_1$</td></tr>
+<tr><th>$P(Y=j)$</th><td>$1-p_2$</td><td>$p_2$</td><td>1</td></tr></table></div>
+<ol class="steps">
+<li>$XY$ vaut 1 seulement si $X=Y=1$ : $E(XY)=P(X=1,Y=1)=p_1+p_2+p-1$.</li>
+<li>$E(X)=p_1$, $E(Y)=p_2$, donc $\text{Cov}(X,Y)=p_1+p_2+p-1-p_1p_2$.</li>
+<li><b>CNS d'indépendance</b> : $P(X=i,Y=j)=P(X=i)P(Y=j)$ pour les 4 cases.</li>
+<li><b>Si Cov = 0</b> : $P(1,1)=p_1p_2$. Puis on déduit les trois autres cases :
+$P(1,0)=p_1-p_1p_2=p_1(1-p_2)$ ; $P(0,1)=p_2-p_1p_2=(1-p_1)p_2$ ; $P(0,0)=1-p_1-p_2+p_1p_2=(1-p_1)(1-p_2)$. Les 4 cases sont des produits : $X$ et $Y$ sont indépendantes.</li></ol>
+<div class="box prof">Le prof a aussi donné en TD un tableau ($X\in\{0,1\}$, $Y\in\{0,1,2\}$, cases 1/20, 1/4, 0 / 17/60, 1/4, 1/6) où $\text{Cov}=0$ mais $P(X=0,Y=2)=0\neq\frac3{10}\cdot\frac16$ : non indépendantes. Même message.</div>
+`,
+quiz:[
+{t:"q",q:"$\\text{Cov}(X,Y)=0$. Peut-on conclure que $X$ et $Y$ sont indépendantes ?",o:["Oui","Non en général ; oui si ce sont deux Bernoulli"],a:1,e:"Contre-exemple $Z$ et $Z^2$. Exception : variables de Bernoulli."},
+{t:"n",q:"$Z\\sim\\mathcal N(0,1)$. Combien vaut $E(Z^3)$ ?",a:0,tol:0,e:"Intégrande impaire sur $\\mathbb R$ : 0."},
+{t:"n",q:"Tableau Bernoulli avec $p=0{,}2$, $p_1=0{,}5$, $p_2=0{,}6$. Calcule $\\text{Cov}(X,Y)$.",a:0.0,tol:0.001,e:"$0{,}5+0{,}6+0{,}2-1-0{,}3=0$ : ici elles sont indépendantes."},
+{t:"n",q:"Même tableau avec $p=0{,}3$, $p_1=0{,}5$, $p_2=0{,}6$. $\\text{Cov}(X,Y)$ ?",a:0.1,tol:0.001,e:"$0{,}4-0{,}3=0{,}1$."}
+]},
+
+/* ======================= CHAPITRE C ======================= */
+{id:"densite",ch:"C",t:"Densité, fonction de répartition, probabilités",imp:5,src:"Toutes les questions continues · examens 2019-20, 2022-23 (U[0,1])",
+body:String.raw`
+<p>Une v.a <b>continue</b> $X$ a une <b>densité</b> $f$ : une fonction $f\ge0$ avec $\int_{-\infty}^{+\infty}f(x)\,dx=1$. Alors $P(a\le X\le b)=\int_a^b f(x)\,dx$ et $P(X=a)=0$ (donc $<$ ou $\le$, c'est pareil).</p>
+<div class="box"><b>Fonction de répartition</b> : $F(x)=P(X\le x)=\int_{-\infty}^x f(t)\,dt$, et $F'=f$ là où $f$ est continue.
+$$P(a<X\le b)=F(b)-F(a)$$
+Propriétés : $0\le F\le1$, $F$ croissante, $\lim_{-\infty}F=0$, $\lim_{+\infty}F=1$, continue à droite.</div>
+<h4>Méthode pour calculer $F$ : découper en zones</h4>
+<p>Écris toujours les trois cas : à gauche du support ($F=0$), dans le support (on intègre), à droite ($F=1$).</p>
+<h3>Exercice qui tombe : $X\sim\mathcal U[0,1]$, $P(x_1\le X\le x_2)$ (4 à 5 pts)</h3>
+<p>$f(x)=1$ sur $[0,1]$, 0 ailleurs. $P(x_1\le X\le x_2)=\int_{x_1}^{x_2}f$. Il faut <b>discuter selon la position de $x_1<x_2$</b> :</p>
+<div class="tablewrap"><table class="t"><tr><th>Cas</th><th>$P(x_1\le X\le x_2)$</th></tr>
+<tr><td>$x_2<0$</td><td>0</td></tr>
+<tr><td>$x_1<0\le x_2\le1$</td><td>$x_2$</td></tr>
+<tr><td>$0\le x_1<x_2\le1$</td><td>$x_2-x_1$</td></tr>
+<tr><td>$0\le x_1\le1<x_2$</td><td>$1-x_1$</td></tr>
+<tr><td>$x_1<0$ et $x_2>1$</td><td>1</td></tr>
+<tr><td>$x_1>1$</td><td>0</td></tr></table></div>
+<div class="box prof">Les points viennent de la <b>discussion complète</b> : beaucoup d'étudiants ne donnent que $x_2-x_1$ et perdent la moitié.</div>
+<h4>TD 8 : $F(x)=ax^2$ sur $]0,1]$</h4>
+<p>$F$ continue en 1 : $a\cdot1^2=1$, donc $a=1$. $f(x)=F'(x)=2x$ sur $[0,1]$. $P(0{,}25<X<0{,}5)=F(0{,}5)-F(0{,}25)=0{,}25-0{,}0625=0{,}1875$, et on retrouve la même valeur avec $\int_{0{,}25}^{0{,}5}2x\,dx$.</p>
+<h4>TD 9 : $f(x)=\tfrac34\sqrt{1-|x|}$ sur $[-1,1]$</h4>
+<p>Pour $-1\le x\le0$ : $F(x)=\int_{-1}^x\tfrac34\sqrt{1+t}\,dt=\tfrac12(1+x)^{3/2}$. Pour $0\le x\le1$ : $F(x)=1-\tfrac12(1-x)^{3/2}$ (par symétrie). $F=0$ avant $-1$, $F=1$ après 1.</p>
+`,
+quiz:[
+{t:"n",q:"$X\\sim\\mathcal U[0,1]$. $P(-0{,}5\\le X\\le 0{,}3)$ ?",a:0.3,tol:0.001,e:"Cas $x_1<0\\le x_2\\le1$ : $x_2=0{,}3$."},
+{t:"n",q:"$X\\sim\\mathcal U[0,1]$. $P(0{,}4\\le X\\le 2)$ ?",a:0.6,tol:0.001,e:"$1-x_1=0{,}6$."},
+{t:"n",q:"$F(x)=ax^2$ sur $]0,1]$. Que vaut $a$ ?",a:1,tol:0,e:"Continuité en 1."},
+{t:"q",q:"Pour une v.a continue, $P(X=2)$ vaut…",o:["$f(2)$","$F(2)$","0"],a:2,e:"Un point a une probabilité nulle."},
+{t:"n",q:"$f(x)=2x$ sur $[0,1]$. $P(X\\le0{,}5)$ ?",a:0.25,tol:0.001,e:"$F(0{,}5)=0{,}5^2$."}
+]},
+
+{id:"momentsc",ch:"C",t:"Espérance et variance (cas continu)",imp:5,src:"4 examens sur 11 (densité $\\frac2a(1-\\frac xa)$), 5 à 8 pts",
+body:String.raw`
+$$E(X)=\int_{-\infty}^{+\infty}x f(x)\,dx\qquad E(g(X))=\int g(x)f(x)\,dx\qquad V(X)=E(X^2)-E(X)^2$$
+<h3>L'exercice phare : $f(x)=\frac2a\left(1-\frac xa\right)$ sur $[0,a]$</h3>
+<h4>1) Fonction de répartition</h4>
+<ul><li>Si $x<0$ : $F(x)=0$.</li>
+<li>Si $0\le x\le a$ : $F(x)=\int_0^x\frac2a\left(1-\frac ta\right)dt=\frac2a\left[t-\frac{t^2}{2a}\right]_0^x=\frac{2x}a-\frac{x^2}{a^2}=\frac{2x}{a}\left(1-\frac{x}{2a}\right)$.</li>
+<li>Si $x>a$ : $F(x)=1$ (vérification : $F(a)=2-1=1$).</li></ul>
+<h4>2) Espérance et variance</h4>
+$$E(X)=\int_0^a \frac2a\left(x-\frac{x^2}a\right)dx=\frac2a\left(\frac{a^2}2-\frac{a^2}3\right)=\frac a3$$
+$$E(X^2)=\int_0^a\frac2a\left(x^2-\frac{x^3}a\right)dx=\frac2a\left(\frac{a^3}3-\frac{a^3}4\right)=\frac{a^2}6,\qquad V(X)=\frac{a^2}6-\frac{a^2}9=\frac{a^2}{18}.$$
+<p>La question 3 (le maximum $M_n$) est traitée dans la notion « Min et max ».</p>
+<div class="box trap"><b>Piège de calcul.</b> Développe d'abord $x\cdot\frac2a(1-\frac xa)=\frac2a(x-\frac{x^2}a)$, puis intègre terme à terme. Vérifie toujours que $F(a)=1$ : si ce n'est pas le cas, l'erreur est dans l'intégrale.</div>
+`,
+quiz:[
+{t:"n",q:"$f(x)=\\frac2a(1-\\frac xa)$ avec $a=3$. Calcule $E(X)$.",a:1,tol:0.001,e:"$a/3=1$."},
+{t:"n",q:"Même densité, $a=3$. Calcule $V(X)$.",a:0.5,tol:0.001,e:"$a^2/18=9/18$."},
+{t:"n",q:"Même densité, $a=2$. Calcule $F(1)$.",a:0.75,tol:0.001,e:"$\\frac{2}{2}-\\frac{1}{4}=0{,}75$."},
+{t:"q",q:"$V(X)$ se calcule par :",o:["$E(X^2)-E(X)^2$","$E(X)^2-E(X^2)$","$\\int x^2f-\\int xf$"],a:0,e:"Formule de König."}
+]},
+
+{id:"transfo",ch:"C",t:"Loi de Y = g(X) : la méthode de la fonction de répartition",imp:5,src:"Cœur des exercices Gamma et Normale (10 à 12 pts) · TD 12",
+body:String.raw`
+<p>Presque toutes les questions « donner la loi de $Y$ » ou « montrer que $Y\sim\dots$ » se font avec <b>une seule méthode</b> :</p>
+<ol class="steps">
+<li>Écrire $G(y)=P(Y\le y)$.</li>
+<li>Remplacer $Y$ par $g(X)$ et <b>isoler $X$</b> : on obtient $G(y)$ en fonction de $F$.</li>
+<li>Dériver : $g_Y(y)=G'(y)$ (dérivée d'une composée : $[F(u(y))]'=u'(y)\,f(u(y))$).</li>
+<li>Remplacer $f$ par sa formule et <b>reconnaître</b> une densité connue.</li></ol>
+<h4>Cas 1 : $Y=aX+b$</h4>
+<p>Si $a>0$ : $G(y)=P(aX+b\le y)=P\left(X\le\frac{y-b}a\right)=F\left(\frac{y-b}a\right)$, donc $g(y)=\frac1a f\left(\frac{y-b}a\right)$.<br>
+Si $a<0$ : l'inégalité change de sens, $G(y)=1-F\left(\frac{y-b}a\right)$, $g(y)=-\frac1af\left(\frac{y-b}a\right)$.<br>
+Les deux cas ensemble : $g(y)=\dfrac1{|a|}f\left(\dfrac{y-b}a\right)$.</p>
+<h4>Cas 2 : $Z=|X|$</h4>
+<p>Pour $z\le0$ : $H(z)=0$. Pour $z>0$ : $H(z)=P(-z\le X\le z)=F(z)-F(-z)$, donc $h(z)=f(z)+f(-z)$.</p>
+<h4>Cas 3 : $T=\ln|X|$</h4>
+<p>$K(t)=P(|X|\le e^t)=F(e^t)-F(-e^t)$, donc $k(t)=e^t\big(f(e^t)+f(-e^t)\big)$ pour tout $t\in\mathbb R$.</p>
+<h4>Cas 4 : $T=\ln|aX+b|$ (TD 16-II)</h4>
+<p>$K(t)=P(|aX+b|\le e^t)$. Pour $a>0$ : $K(t)=F\left(\frac{e^t-b}a\right)-F\left(\frac{-e^t-b}a\right)$, et dans tous les cas $k(t)=\dfrac{e^t}{|a|}\left[f\left(\frac{e^t-b}a\right)+f\left(\frac{-e^t-b}a\right)\right]$.</p>
+<h4>Cas 5 : $Y=U^2$ (sert pour le Khi-deux)</h4>
+<p>Pour $y>0$ : $G(y)=P(-\sqrt y\le U\le\sqrt y)=F(\sqrt y)-F(-\sqrt y)$, donc $g(y)=\frac1{2\sqrt y}\big(f(\sqrt y)+f(-\sqrt y)\big)$.</p>
+<div class="box prof"><b>Ce que le correcteur attend.</b> La ligne $G(y)=P(Y\le y)$ écrite explicitement, la discussion sur le signe de $a$ quand il n'est pas imposé, et la conclusion « on reconnaît la densité de … ».</div>
+`,
+quiz:[
+{t:"q",q:"$Y=aX+b$ avec $a<0$. $G(y)$ vaut :",o:["$F(\\frac{y-b}a)$","$1-F(\\frac{y-b}a)$","$F(ay+b)$"],a:1,e:"Diviser par $a<0$ change le sens : $P(X\\ge\\frac{y-b}a)$."},
+{t:"q",q:"Densité de $|X|$ pour $z>0$ :",o:["$f(z)-f(-z)$","$f(z)+f(-z)$","$2f(z)$ toujours"],a:1,e:"Dérivée de $F(z)-F(-z)$ : $f(z)+f(-z)$ ($2f(z)$ seulement si $f$ est paire)."},
+{t:"q",q:"Première ligne à écrire pour trouver la loi de $Y=g(X)$ :",o:["$g_Y(y)=f(g(y))$","$G(y)=P(Y\\le y)$","$E(Y)=g(E(X))$"],a:1,e:"On part toujours de la fonction de répartition."},
+{t:"n",q:"$X$ de densité $f$, $Y=2X+1$. On a $g(5)=\\frac1{2}f(c)$. Que vaut $c$ ?",a:2,tol:0,e:"$\\frac{y-b}a=\\frac{5-1}2=2$."}
+]},
+
+{id:"minmax",ch:"C",t:"Min et max de n variables indépendantes",imp:5,src:"5 examens sur 11, 3 à 8 pts",
+body:String.raw`
+<p>$X_1,\dots,X_n$ indépendantes, de même fonction de répartition $F$ et même densité $f$. On note $M_n=\max X_i$ et $m_n=\min X_i$.</p>
+<h4>Le maximum</h4>
+<p>$M_n\le x$ signifie que <b>tous</b> les $X_i$ sont $\le x$ :</p>
+$$G(x)=P(M_n\le x)=P\Big(\bigcap_{i=1}^n\{X_i\le x\}\Big)\overset{\text{indép.}}{=}\prod_{i=1}^nP(X_i\le x)=F(x)^n,\qquad g(x)=n\,f(x)\,F(x)^{n-1}.$$
+<h4>Le minimum</h4>
+<p>$m_n>x$ signifie que tous les $X_i$ sont $>x$ :</p>
+$$H(x)=P(m_n\le x)=1-P(m_n>x)=1-\big(1-F(x)\big)^n,\qquad h(x)=n\,f(x)\,\big(1-F(x)\big)^{n-1}.$$
+<h3>Application 1 : densité $\frac2a(1-\frac xa)$ (l'exercice phare)</h3>
+<p>Avec $F(x)=\frac{2x}a-\frac{x^2}{a^2}$ sur $[0,a]$ : $G(x)=0$ si $x<0$ ; $G(x)=\left(\frac{2x}a-\frac{x^2}{a^2}\right)^n$ si $0\le x\le a$ ; $G(x)=1$ si $x>a$. Densité :
+$$g(x)=n\cdot\frac2a\left(1-\frac xa\right)\left(\frac{2x}a-\frac{x^2}{a^2}\right)^{n-1}\ \text{ sur }[0,a],\quad 0\ \text{sinon.}$$</p>
+<h3>Application 2 : loi uniforme sur [0,1] (examen 2016-17 ratt.)</h3>
+<p>$F(x)=x$ sur $[0,1]$. Donc $g(x)=nx^{n-1}$ et $h(x)=n(1-x)^{n-1}$ sur $[0,1]$.</p>
+$$E(M_n)=\int_0^1 x\cdot nx^{n-1}dx=\frac n{n+1},\qquad E(m_n)=\int_0^1 xn(1-x)^{n-1}dx=\frac1{n+1}.$$
+<p><b>$m_n$ et $1-M_n$ ont la même loi</b> : $P(1-M_n\le x)=P(M_n\ge1-x)=1-(1-x)^n=H(x)$. On en déduit $E(m_n)=E(1-M_n)=1-E(M_n)$.</p>
+<div class="box trap"><b>Pièges.</b> Écrire le mot « indépendantes » au moment de transformer l'intersection en produit (c'est là que sont les points). Ne pas oublier les zones $x<0$ et $x>a$.</div>
+`,
+quiz:[
+{t:"q",q:"$P(M_n\\le x)$ vaut :",o:["$1-(1-F(x))^n$","$F(x)^n$","$nF(x)$"],a:1,e:"Tous les $X_i\\le x$, indépendance, produit."},
+{t:"n",q:"$X_i\\sim\\mathcal U[0,1]$, $n=4$. $E(M_4)$ ?",a:0.8,tol:0.001,e:"$n/(n+1)=4/5$."},
+{t:"n",q:"$X_i\\sim\\mathcal U[0,1]$, $n=4$. $E(m_4)$ ?",a:0.2,tol:0.001,e:"$1/(n+1)$."},
+{t:"n",q:"$X_i\\sim\\mathcal U[0,1]$, $n=3$. $P(M_3\\le0{,}5)$ ?",a:0.125,tol:0.001,e:"$0{,}5^3$."}
+]},
+
+{id:"couplec",ch:"C",t:"Couple de v.a continues",imp:2,src:"Examen 2016-17 ratt. (6 pts) · TD 10",
+body:String.raw`
+<p>La loi d'un couple continu est donnée par une densité $f(x,y)\ge0$ avec $\iint f=1$.</p>
+<ul><li>$F(x,y)=P(X\le x,Y\le y)=\int_{-\infty}^x\int_{-\infty}^y f(u,v)\,dv\,du$</li>
+<li>Marginales : $f_X(x)=\int f(x,y)\,dy$ et $f_Y(y)=\int f(x,y)\,dx$</li>
+<li>Indépendance $\iff f(x,y)=f_X(x)f_Y(y)$ partout</li>
+<li>Loi conditionnelle : $f_{Y\mid X=x}(y)=\dfrac{f(x,y)}{f_X(x)}$</li></ul>
+<h3>Examen : $f(x,y)=\frac{xy}2$ sur $0\le y\le x\le2$</h3>
+<p>Dessine le triangle : $x$ de 0 à 2, et pour chaque $x$, $y$ de 0 à $x$.</p>
+<ol class="steps">
+<li>Pour $0\le y\le x\le2$ : $F(x,y)=\int_0^y\int_v^x\frac{uv}2\,du\,dv=\int_0^y\frac v4(x^2-v^2)\,dv=\frac{x^2y^2}8-\frac{y^4}{16}$. Contrôle : $F(2,2)=2-1=1$.</li>
+<li>$f_X(x)=\int_0^x\frac{xy}2dy=\frac{x^3}4$ sur $[0,2]$ ; $f_Y(y)=\int_y^2\frac{xy}2dx=\frac{y(4-y^2)}4$ sur $[0,2]$.</li>
+<li>$f_X(x)f_Y(y)\neq f(x,y)$ (par exemple en $x=1$, $y=1{,}5$ : $f=0$ mais le produit est non nul) : <b>pas indépendantes</b>. Un support triangulaire donne toujours des variables dépendantes.</li>
+<li>$f_{Y\mid X=x}(y)=\dfrac{xy/2}{x^3/4}=\dfrac{2y}{x^2}$ pour $0\le y\le x$.</li></ol>
+<h3>TD 10 : $f(x,y)=k(x+y)$ sur $[0,1]^2$</h3>
+<p>$\iint (x+y)=1$ donc $k=1$. $F(x,y)=\frac{xy(x+y)}2$ sur $[0,1]^2$. $f_X(x)=x+\frac12$, $f_Y(y)=y+\frac12$. Non indépendantes. $f_{Y\mid X=x}(y)=\dfrac{x+y}{x+\frac12}$.</p>
+`,
+quiz:[
+{t:"n",q:"$f(x,y)=k(x+y)$ sur $[0,1]^2$. Valeur de $k$ ?",a:1,tol:0,e:"$\\iint(x+y)=\\frac12+\\frac12=1$."},
+{t:"n",q:"$f(x,y)=\\frac{xy}2$ sur $0\\le y\\le x\\le2$. $f_X(2)$ ?",a:2,tol:0.001,e:"$x^3/4=8/4$."},
+{t:"q",q:"Un couple de densité non nulle seulement sur un triangle peut-il être indépendant ?",o:["Oui","Non"],a:1,e:"Le produit des marginales serait non nul sur tout un rectangle."}
+]},
+
+{id:"mgf",ch:"C",t:"Fonction génératrice des moments",imp:3,src:"Examens 2017-18 et 2020-21 (8 pts)",
+body:String.raw`
+$$M_X(t)=E\big(e^{tX}\big)=\int_{-\infty}^{+\infty}e^{tx}f(x)\,dx\quad(\text{continu}),\qquad =\sum_k e^{tk}P(X=k)\quad(\text{discret}).$$
+<p>Elle « génère » les moments : $M_X'(0)=E(X)$, $M_X''(0)=E(X^2)$.</p>
+<h3>Les trois calculs demandés à l'examen</h3>
+<h4>a) Uniforme sur $[a,b]$</h4>
+<p>$M_X(t)=\int_a^b\frac{e^{tx}}{b-a}dx$. Si $t=0$ : $M_X(0)=1$. Si $t\neq0$ :
+$$M_X(t)=\frac{e^{tb}-e^{ta}}{t(b-a)}.$$</p>
+<h4>b) Exponentielle de paramètre $\theta$</h4>
+<p>$M_X(t)=\int_0^{+\infty}e^{tx}\theta e^{-\theta x}dx=\theta\int_0^{+\infty}e^{(t-\theta)x}dx$. L'intégrale converge seulement si $t-\theta<0$ :
+$$M_X(t)=\frac{\theta}{\theta-t}\quad\text{si } t<\theta,\qquad M_X(t)=+\infty\quad\text{si } t\ge\theta.$$</p>
+<h4>c) Normale centrée réduite</h4>
+<p>On complète le carré : $tx-\frac{x^2}2=-\frac12(x-t)^2+\frac{t^2}2$.
+$$M_X(t)=\frac1{\sqrt{2\pi}}\int e^{-\frac{(x-t)^2}2}e^{\frac{t^2}2}dx=e^{t^2/2}\underbrace{\int\frac1{\sqrt{2\pi}}e^{-s^2/2}ds}_{=1}=e^{t^2/2}\quad(s=x-t).$$</p>
+<div class="box trap"><b>Pièges.</b> Tes notes manuscrites écrivent $\frac{-\theta}{t-\theta}$ : c'est juste, c'est la même chose que $\frac\theta{\theta-t}$. Le piège est d'oublier la condition $t<\theta$ (l'intégrale diverge si $t\ge\theta$) et le cas $t=0$ pour l'uniforme (on ne peut pas diviser par $t$).</div>
+`,
+quiz:[
+{t:"n",q:"$X\\sim\\mathcal E(2)$. $M_X(1)$ ?",a:2,tol:0.001,e:"$\\frac{2}{2-1}=2$."},
+{t:"n",q:"$X\\sim\\mathcal N(0,1)$. $M_X(2)$ arrondi à 2 décimales ?",a:Math.exp(2),tol:0.01,e:"$e^{2}\\approx7{,}39$."},
+{t:"q",q:"Pour $X\\sim\\mathcal E(\\theta)$, $M_X(t)$ est finie pour…",o:["$t>\\theta$","$t<\\theta$","tout $t$"],a:1,e:"Il faut $t-\\theta<0$."},
+{t:"q",q:"$M_X(0)$ vaut toujours :",o:["0","1","$E(X)$"],a:1,e:"$E(e^0)=1$."}
+]},
+
+/* ======================= CHAPITRE D ======================= */
+{id:"binomiale",ch:"D",t:"Bernoulli, binomiale (et uniforme, Dirac)",imp:3,src:"Base des exercices discrets",
+body:String.raw`
+<div class="tablewrap"><table class="t"><tr><th>Loi</th><th>Valeurs</th><th>$P(X=k)$</th><th>$E$</th><th>$V$</th></tr>
+<tr><td>Dirac $\delta_a$</td><td>$a$</td><td>1</td><td>$a$</td><td>0</td></tr>
+<tr><td>Uniforme sur $\{x_1..x_n\}$</td><td>$x_i$</td><td>$1/n$</td><td>$\bar x$</td><td>$\frac1n\sum x_i^2-\bar x^2$</td></tr>
+<tr><td>Bernoulli $\mathcal B(p)$</td><td>0, 1</td><td>$P(X=1)=p$</td><td>$p$</td><td>$p(1-p)$</td></tr>
+<tr><td>Binomiale $\mathcal B(n,p)$</td><td>$0..n$</td><td>$C_n^kp^k(1-p)^{n-k}$</td><td>$np$</td><td>$np(1-p)$</td></tr></table></div>
+<p><b>Binomiale</b> = nombre de succès en $n$ épreuves <b>indépendantes</b> et identiques. On écrit $X=X_1+\dots+X_n$ (Bernoulli indépendantes), d'où $E=np$ et $V=np(1-p)$.</p>
+<p><b>Somme</b> : si $X_1\sim\mathcal B(n_1,p)$ et $X_2\sim\mathcal B(n_2,p)$ indépendantes, $X_1+X_2\sim\mathcal B(n_1+n_2,p)$ (même $p$ obligatoire).</p>
+<h4>Exemple du cours</h4>
+<p>On lance un dé 100 fois, succès = « 3 ou 6 » ($p=1/3$). $X\sim\mathcal B(100,\frac13)$, $E(X)=\frac{100}3\approx33{,}3$, $V(X)=100\cdot\frac13\cdot\frac23\approx22{,}2$, $\sigma\approx4{,}71$.</p>
+<div class="box trap"><b>Piège</b> (exercice du poly) : $P(X=1{,}5)=0$ pour une binomiale, car 1,5 n'est pas une valeur possible.</div>
+`,
+quiz:[
+{t:"n",q:"$X\\sim\\mathcal B(20;0{,}1)$. $E(X)$ ?",a:2,tol:0,e:"$np$."},
+{t:"n",q:"$X\\sim\\mathcal B(20;0{,}1)$. $P(X=0)$ à 4 décimales ?",a:Math.pow(0.9,20),tol:0.0005,e:"$0{,}9^{20}\\approx0{,}1216$."},
+{t:"n",q:"$X\\sim\\mathcal B(20;0{,}1)$. $P(X=1{,}5)$ ?",a:0,tol:0,e:"Valeur impossible."},
+{t:"n",q:"$V(X)$ pour $\\mathcal B(100,\\frac13)$, à 2 décimales ?",a:200/9,tol:0.01,e:"$100\\cdot\\frac13\\cdot\\frac23=22{,}22$."}
+]},
+
+{id:"poisson",ch:"D",t:"Loi de Poisson et loi conditionnelle",imp:3,src:"Examen 2017-18 (8 pts) · TD 11",
+body:String.raw`
+<p>$X\sim\mathcal P(\lambda)$ compte des apparitions d'un événement pendant une durée ; $\lambda$ est la moyenne.</p>
+$$P(X=k)=e^{-\lambda}\frac{\lambda^k}{k!},\ k\in\mathbb N,\qquad E(X)=V(X)=\lambda.$$
+<p><b>Somme</b> : $X\sim\mathcal P(\lambda)$, $Y\sim\mathcal P(\mu)$ indépendantes $\Rightarrow S=X+Y\sim\mathcal P(\lambda+\mu)$.</p>
+<h3>Exercice d'examen : loi de $X$ sachant $S=s$</h3>
+<ol class="steps">
+<li>Pour $0\le x\le s$ : $P(X=x\mid S=s)=\dfrac{P(X=x,\,S=s)}{P(S=s)}=\dfrac{P(X=x,\,Y=s-x)}{P(S=s)}$.</li>
+<li>Indépendance : $=\dfrac{e^{-\lambda}\frac{\lambda^x}{x!}\cdot e^{-\mu}\frac{\mu^{s-x}}{(s-x)!}}{e^{-(\lambda+\mu)}\frac{(\lambda+\mu)^s}{s!}}$.</li>
+<li>Simplifier : les exponentielles s'annulent, $\frac{s!}{x!(s-x)!}=C_s^x$, donc $P(X=x\mid S=s)=C_s^x\left(\frac\lambda{\lambda+\mu}\right)^x\left(1-\frac\lambda{\lambda+\mu}\right)^{s-x}$.</li>
+<li>On reconnaît : $X\mid(S=s)\sim\mathcal B\!\left(s,\frac\lambda{\lambda+\mu}\right)$.</li>
+<li>Fonction de régression : $E(X\mid S=s)=s\,\frac\lambda{\lambda+\mu}$, donc $E(X\mid S)=S\frac\lambda{\lambda+\mu}$.</li>
+<li>$E\big[E(X\mid S)\big]=\frac\lambda{\lambda+\mu}E(S)=\frac\lambda{\lambda+\mu}(\lambda+\mu)=\lambda=E(X)$.</li></ol>
+<h4>Exemple du cours</h4>
+<p>Une machine tombe en panne 2 fois par mois en moyenne : $X\sim\mathcal P(2)$. $P(X=0)=e^{-2}\approx0{,}135$ ; $P(X\ge2)=1-e^{-2}(1+2)\approx0{,}594$.</p>
+`,
+quiz:[
+{t:"n",q:"$X\\sim\\mathcal P(2)$. $P(X\\ge2)$ à 3 décimales ?",a:1-3*Math.exp(-2),tol:0.002,e:"$1-e^{-2}(1+2)\\approx0{,}594$."},
+{t:"q",q:"$X\\sim\\mathcal P(\\lambda)$, $Y\\sim\\mathcal P(\\mu)$ indépendantes. Loi de $X$ sachant $X+Y=s$ :",o:["$\\mathcal P(\\lambda)$","$\\mathcal B(s,\\frac\\lambda{\\lambda+\\mu})$","$\\mathcal P(\\lambda+\\mu)$"],a:1,e:"Calcul direct avec la définition de la probabilité conditionnelle."},
+{t:"n",q:"$\\lambda=1$, $\\mu=3$, $s=8$. $E(X\\mid S=8)$ ?",a:2,tol:0.001,e:"$8\\times\\frac14$."},
+{t:"n",q:"$X\\sim\\mathcal P(4)$. $V(X)$ ?",a:4,tol:0,e:"$V=\\lambda$."}
+]},
+
+{id:"geometrique",ch:"D",t:"Loi géométrique (de Pascal)",imp:3,src:"Examens 2021-22 ratt. et 2022-23 ord. (5 pts)",
+body:String.raw`
+<p>On répète des épreuves <b>indépendantes</b> de probabilité de succès $p$ <b>jusqu'au premier succès</b>. $X$ = nombre d'épreuves nécessaires (succès compris).</p>
+$$P(X=k)=p\,(1-p)^{k-1},\ k\in\mathbb N^*,\qquad E(X)=\frac1p,\qquad V(X)=\frac{1-p}{p^2}.$$
+<p>$\{X=k\}$ = $k-1$ échecs puis un succès : $\underbrace{\bar A\cdots\bar A}_{k-1}A$.</p>
+<p>Formule utile : $P(X>k)=(1-p)^k$ (les $k$ premiers essais sont des échecs), donc $P(X\le k)=1-(1-p)^k$.</p>
+<h3>L'exercice des cartes (examen)</h3>
+<p>$n$ cartes numérotées de 1 à $n$, tirages <b>avec remise</b> jusqu'à obtenir la carte $n$.</p>
+<ol class="steps">
+<li>Chaque tirage est une épreuve de Bernoulli indépendante, succès = « tirer la carte $n$ », $p=\frac1n$. Donc $X\sim\mathcal G(\frac1n)$.</li>
+<li>$P(X=k)=\frac1n\left(1-\frac1n\right)^{k-1}=\dfrac{(n-1)^{k-1}}{n^k}$, $k\ge1$.</li>
+<li>$P(X\le50)=1-P(X>50)=1-\left(1-\frac1n\right)^{50}$. Pour $n=100$ : $1-0{,}99^{50}\approx0{,}395$.</li></ol>
+<p>Version du cours : $P(X=21)=\frac{99^{20}}{100^{21}}\approx0{,}0082$ ; $P(X\le60)=1-0{,}99^{60}\approx0{,}453$.</p>
+<div class="box prof">Si tu préfères la somme : $P(X>50)=\sum_{k\ge51}p(1-p)^{k-1}=p(1-p)^{50}\cdot\frac1{1-(1-p)}=(1-p)^{50}$. C'est la démarche du poly ; montre-la pour avoir tous les points.</div>
+`,
+quiz:[
+{t:"n",q:"Cartes, $n=100$. $P(X\\le50)$ à 3 décimales ?",a:1-Math.pow(0.99,50),tol:0.002,e:"$1-0{,}99^{50}\\approx0{,}395$."},
+{t:"n",q:"$X\\sim\\mathcal G(0{,}2)$. $E(X)$ ?",a:5,tol:0,e:"$1/p$."},
+{t:"n",q:"$X\\sim\\mathcal G(0{,}5)$. $P(X=3)$ ?",a:0.125,tol:0.001,e:"$0{,}5\\times0{,}5^2$."},
+{t:"q",q:"Les tirages des cartes se font avec remise. Pourquoi est-ce indispensable pour la loi géométrique ?",o:["Pour que $p$ reste constant et les épreuves indépendantes","Pour que $X$ soit fini","Ce n'est pas indispensable"],a:0,e:"Sans remise, la probabilité changerait à chaque tirage."}
+]},
+
+{id:"autresdiscretes",ch:"D",t:"Binomiale négative, hypergéométrique, différences",imp:2,src:"Examen 2020-21 ord. (8 pts)",
+body:String.raw`
+<h4>Binomiale négative $\mathcal{BN}(n,p)$</h4>
+<p>Épreuves indépendantes jusqu'à obtenir <b>$n$ succès</b>. $Y$ = nombre d'épreuves. $\{Y=y\}$ : $n-1$ succès parmi les $y-1$ premières, puis un succès.</p>
+$$P(Y=y)=C_{y-1}^{n-1}p^n(1-p)^{y-n},\ y\ge n,\qquad E(Y)=\frac np,\ V(Y)=\frac{n(1-p)}{p^2}.$$
+<p>C'est une somme de $n$ géométriques indépendantes.</p>
+<h4>Hypergéométrique $\mathcal H(N,n,N_A)$</h4>
+<p>$n$ tirages <b>sans remise</b> dans $N$ objets dont $N_A$ de type A. $X$ = nombre d'objets A tirés.</p>
+$$P(X=k)=\frac{C_{N_A}^k\,C_{N-N_A}^{n-k}}{C_N^n},\qquad \max\{0,\,n-(N-N_A)\}\le k\le\min\{n,\,N_A\},\qquad E(X)=n\frac{N_A}N.$$
+<h3>Exercice d'examen : les représentants</h3>
+<p>On choisit $n$ étudiants parmi $N$, dont $N_1$ garçons. $X$ = nombre de garçons choisis.</p>
+<ol class="steps"><li>Choix simultané, sans remise : $X\sim\mathcal H(N,n,N_1)$.</li>
+<li>$k\le n$ et $k\le N_1$ ; il y a $n-k$ filles, donc $n-k\le N-N_1$. D'où $m=\max\{0,\,n-(N-N_1)\}$ et $M=\min\{n,\,N_1\}$.</li>
+<li>$P(X=k)=\dfrac{C_{N_1}^kC_{N-N_1}^{n-k}}{C_N^n}$ pour $m\le k\le M$.</li></ol>
+<h4>Les différences demandées</h4>
+<div class="tablewrap"><table class="t"><tr><th>Paire</th><th>Ce qui est fixé</th><th>Ce qui est aléatoire</th></tr>
+<tr><td>Binomiale / binomiale négative</td><td>Binomiale : le nombre d'épreuves $n$. BN : le nombre de succès $n$.</td><td>Binomiale : le nombre de succès. BN : le nombre d'épreuves.</td></tr>
+<tr><td>Géométrique / binomiale négative</td><td colspan="2">La géométrique est le cas $n=1$ de la BN (attente du <b>premier</b> succès, au lieu du $n$-ième).</td></tr>
+<tr><td>Binomiale / hypergéométrique</td><td colspan="2">Binomiale : tirages <b>avec remise</b>, indépendants, $p$ constant. Hypergéométrique : <b>sans remise</b>, tirages dépendants. Avec remise, $\mathcal H$ devient $\mathcal B(n,\frac{N_A}N)$.</td></tr></table></div>
+<div class="box trap">Le poly dit que les indicatrices $X_i$ de l'hypergéométrique sont « indépendantes » : c'est inexact (sans remise, elles sont dépendantes). Le calcul de $E(X)$ reste juste, car la linéarité de l'espérance n'a pas besoin d'indépendance. Ne recopie pas cette phrase.</div>
+`,
+quiz:[
+{t:"n",q:"$N=10$, $N_1=4$ garçons, $n=8$ choisis. Valeur minimale $m$ du nombre de garçons ?",a:2,tol:0,e:"$\\max(0,8-6)=2$."},
+{t:"n",q:"Même situation. Valeur maximale $M$ ?",a:4,tol:0,e:"$\\min(8,4)=4$."},
+{t:"q",q:"Laquelle fixe le nombre de succès et rend aléatoire le nombre d'épreuves ?",o:["Binomiale","Binomiale négative","Hypergéométrique"],a:1,e:"BN : on attend le $n$-ième succès."},
+{t:"n",q:"$\\mathcal{BN}(10,\\frac13)$ : $E(Y)$ ?",a:30,tol:0,e:"$n/p$."}
+]},
+
+/* ======================= CHAPITRE E ======================= */
+{id:"uniexpo",ch:"E",t:"Uniforme et exponentielle (et taux de hasard)",imp:3,src:"Examens 2016-17 ord. (7 pts), U[0,1] dans 2 sujets",
+body:String.raw`
+<div class="tablewrap"><table class="t"><tr><th>Loi</th><th>Densité</th><th>$F(x)$</th><th>$E$</th><th>$V$</th></tr>
+<tr><td>$\mathcal U[a,b]$</td><td>$\frac1{b-a}$ sur $[a,b]$</td><td>$\frac{x-a}{b-a}$ sur $[a,b]$</td><td>$\frac{a+b}2$</td><td>$\frac{(b-a)^2}{12}$</td></tr>
+<tr><td>$\mathcal E(\theta)$</td><td>$\theta e^{-\theta x}$, $x>0$</td><td>$1-e^{-\theta x}$, $x>0$</td><td>$\frac1\theta$</td><td>$\frac1{\theta^2}$</td></tr></table></div>
+<p>L'exponentielle modélise une durée de vie. C'est aussi $\gamma(1,\theta)$ : voir la notion Gamma.</p>
+<h3>Exercice d'examen : le taux de hasard</h3>
+<p>$X\ge0$ de densité $f$ et répartition $F$ ; $g(x)=\dfrac{f(x)}{1-F(x)}$.</p>
+<ol class="steps">
+<li>$\dfrac{f}{1-F}=-\big(\ln(1-F)\big)'$. On intègre de 0 à $x$ avec $F(0)=0$ : $G(x)=\int_0^xg(u)du=-\ln(1-F(x))$.</li>
+<li>Donc $1-F(x)=e^{-G(x)}$, soit $F(x)=1-e^{-G(x)}$.</li>
+<li>Exponentielle : $g(x)=\dfrac{\lambda e^{-\lambda x}}{e^{-\lambda x}}=\lambda$ (taux constant : pas de vieillissement).</li>
+<li>$f(x)=\alpha\lambda x^{\alpha-1}e^{-\lambda x^\alpha}$ (loi de Weibull) : $F(x)=1-e^{-\lambda x^\alpha}$, donc $g(x)=\alpha\lambda x^{\alpha-1}$.</li></ol>
+`,
+quiz:[
+{t:"n",q:"$X\\sim\\mathcal U[2,8]$. $V(X)$ ?",a:3,tol:0.001,e:"$36/12$."},
+{t:"n",q:"$X\\sim\\mathcal E(0{,}5)$. $E(X)$ ?",a:2,tol:0,e:"$1/\\theta$."},
+{t:"n",q:"$X\\sim\\mathcal E(0{,}5)$. $P(X>2)$ à 3 décimales ?",a:Math.exp(-1),tol:0.002,e:"$e^{-1}\\approx0{,}368$."},
+{t:"q",q:"Taux de hasard de $\\mathcal E(\\lambda)$ :",o:["$\\lambda x$","$\\lambda$","$1/\\lambda$"],a:1,e:"Constant."}
+]},
+
+{id:"normale",ch:"E",t:"Loi normale : transformations et table",imp:5,src:"5 examens sur 11, souvent 10 à 12 pts",
+body:String.raw`
+<p>$X\sim\mathcal N(m,\sigma)$ (attention : dans ce cours, le 2<sup>e</sup> paramètre est l'<b>écart-type</b> $\sigma$, pas la variance) :</p>
+$$f(x)=\frac1{\sigma\sqrt{2\pi}}\exp\left[-\frac{(x-m)^2}{2\sigma^2}\right],\qquad E(X)=m,\ V(X)=\sigma^2.$$
+<h3>1-a) Montrer que $Y=aX+b\sim\mathcal N(am+b,\,a\sigma)$ ($a>0$)</h3>
+<ol class="steps">
+<li>$G(y)=P(Y\le y)=P\left(X\le\frac{y-b}a\right)=F\left(\frac{y-b}a\right)$ car $a>0$.</li>
+<li>$g(y)=\frac1af\left(\frac{y-b}a\right)=\frac1{a\sigma\sqrt{2\pi}}\exp\left[-\frac{\left(\frac{y-b}a-m\right)^2}{2\sigma^2}\right]$.</li>
+<li>$\left(\frac{y-b}a-m\right)^2=\frac{(y-(am+b))^2}{a^2}$, donc $g(y)=\frac1{(a\sigma)\sqrt{2\pi}}\exp\left[-\frac{(y-(am+b))^2}{2(a\sigma)^2}\right]$.</li>
+<li>On reconnaît la densité de $\mathcal N(am+b,\,a\sigma)$.</li></ol>
+<h3>1-b) En déduire $Z=\frac{X-m}\sigma\sim\mathcal N(0,1)$</h3>
+<p>$Z=\frac1\sigma X-\frac m\sigma$ : c'est $aX+b$ avec $a=\frac1\sigma>0$ et $b=-\frac m\sigma$. Donc $Z\sim\mathcal N\left(\frac m\sigma-\frac m\sigma,\ \frac\sigma\sigma\right)=\mathcal N(0,1)$.</p>
+<h3>1-c) Si $Z\sim\mathcal N(0,1)$, alors $\sigma Z+m\sim\mathcal N(m,\sigma)$</h3>
+<p>Appliquer 1-a à $Z$ (paramètres $0$ et $1$) avec $a=\sigma>0$, $b=m$ : $\mathcal N(\sigma\cdot0+m,\ \sigma\cdot1)=\mathcal N(m,\sigma)$.</p>
+<h3>Utiliser la table</h3>
+<p>$\Phi(x)=P(U\le x)$ pour $U\sim\mathcal N(0,1)$, donnée pour $x\ge0$. Pour $x<0$ : $\Phi(-x)=1-\Phi(x)$. Pour une normale quelconque :
+$$P(X\le x)=\Phi\left(\frac{x-m}\sigma\right).$$</p>
+<h3>Problème inverse (examen 2016-17 et TD 15)</h3>
+<p>$P(X<2)=0{,}0668$ et $P(X\ge12)=0{,}1587$. On lit dans la table $\Phi(1{,}5)=0{,}9332$ et $\Phi(1)=0{,}8413$, donc :</p>
+<ul><li>$\Phi\left(\frac{2-m}\sigma\right)=0{,}0668=1-0{,}9332$ ⇒ $\frac{2-m}\sigma=-1{,}5$</li>
+<li>$1-\Phi\left(\frac{12-m}\sigma\right)=0{,}1587$ ⇒ $\frac{12-m}\sigma=1$</li></ul>
+<p>Soustraction : $\frac{10}\sigma=2{,}5$, donc $\sigma=4$, $m=8$. Puis $P\big((X-8)^2<a\big)=P\left(|U|<\frac{\sqrt a}4\right)=2\Phi\left(\frac{\sqrt a}4\right)-1=0{,}95$ ⇒ $\Phi\left(\frac{\sqrt a}4\right)=0{,}975$ ⇒ $\frac{\sqrt a}4=1{,}96$ ⇒ $a=7{,}84^2\approx61{,}47$.</p>
+<div class="box trap"><b>Erreur dans le corrigé du TD 15</b> (« exercices_proba », page 19). Avec $P(X<3)=0{,}1587$ et $P(X>12)=0{,}0228$, il faut $\frac{3-m}\sigma=-1$ et $\frac{12-m}\sigma=2$, donc $\sigma=3$ et $m=6$, puis $P(1<X<10)=\Phi(1{,}33)-\Phi(-1{,}67)\approx0{,}9082+0{,}9525-1=0{,}861$. Le corrigé trouve $m=1{,}9$, $\sigma=5{,}05$ et $0{,}51$ : c'est faux (il a lu la table à l'envers). Vérifié par calcul.</div>
+`,
+quiz:[
+{t:"q",q:"$X\\sim\\mathcal N(m,\\sigma)$, $Y=3X-2$. Loi de $Y$ :",o:["$\\mathcal N(3m-2,\\,9\\sigma)$","$\\mathcal N(3m-2,\\,3\\sigma)$","$\\mathcal N(3m,\\,3\\sigma)$"],a:1,e:"$\\mathcal N(am+b,\\,a\\sigma)$ avec le 2e paramètre = écart-type."},
+{t:"n",q:"$X\\sim\\mathcal N(10,2)$. $P(X\\le12)$ à 4 décimales (table) ?",a:0.8413,tol:0.0006,e:"$\\Phi(1)=0{,}8413$."},
+{t:"n",q:"$X\\sim\\mathcal N(10,2)$. $P(X\\le7)$ à 4 décimales ?",a:0.0668,tol:0.0006,e:"$\\Phi(-1{,}5)=1-0{,}9332$."},
+{t:"n",q:"Problème inverse de l'examen 2016-17 : valeur de $\\sigma$ ?",a:4,tol:0.001,e:"$10/2{,}5$."},
+{t:"n",q:"TD 15 corrigé juste : $P(1<X<10)$ à 2 décimales ?",a:0.86,tol:0.006,e:"$m=6$, $\\sigma=3$ : $\\approx0{,}861$."}
+]},
+
+{id:"gamma",ch:"E",t:"Loi Gamma",imp:5,src:"Examens 2022-23 ord. (10 pts) et 2023-24 ord. (12 pts)",
+body:String.raw`
+<p>$X\sim\gamma(p,\theta)$ ($p>0$, $\theta>0$) : v.a positive de densité
+$$f(x)=\frac{\theta^p}{\Gamma(p)}e^{-\theta x}x^{p-1}\ (x\ge0),\qquad \Gamma(p)=\int_0^{+\infty}e^{-x}x^{p-1}dx.$$
+<p>Cas particulier : $\gamma(1,\theta)=\mathcal E(\theta)$.</p>
+<h3>1-a) $\Gamma(p)=(p-1)!$</h3>
+<ol class="steps">
+<li>Intégration par parties avec $u=x^{p-1}$, $v'=e^{-x}$ (pour $p>1$) :
+$\Gamma(p)=\big[-e^{-x}x^{p-1}\big]_0^{+\infty}+(p-1)\int_0^{+\infty}e^{-x}x^{p-2}dx$.</li>
+<li>Le crochet vaut 0 (en $+\infty$ l'exponentielle l'emporte ; en 0, $x^{p-1}\to0$ car $p>1$). Donc $\Gamma(p)=(p-1)\Gamma(p-1)$.</li>
+<li>$\Gamma(1)=\int_0^{+\infty}e^{-x}dx=1$.</li>
+<li>Par récurrence, pour $p\in\mathbb N^*$ : $\Gamma(p)=(p-1)(p-2)\cdots1\cdot\Gamma(1)=(p-1)!$</li></ol>
+<p class="small muted">L'énoncé écrit « $\forall p>1$ » ; la factorielle n'a de sens que pour $p$ entier. Précise-le en une ligne.</p>
+<h3>1-b) $E(X)=\frac p\theta$ et $V(X)=\frac p{\theta^2}$</h3>
+<p>Changement de variable $y=\theta x$ ($dx=dy/\theta$) :
+$$E(X)=\frac{\theta^p}{\Gamma(p)}\int_0^{+\infty}e^{-\theta x}x^pdx=\frac{\theta^p}{\Gamma(p)}\int_0^{+\infty}e^{-y}\frac{y^p}{\theta^p}\frac{dy}\theta=\frac1\theta\frac{\Gamma(p+1)}{\Gamma(p)}=\frac p\theta,$$
+car $\Gamma(p+1)=p\,\Gamma(p)$. De même $E(X^2)=\frac1{\theta^2}\frac{\Gamma(p+2)}{\Gamma(p)}=\frac{p(p+1)}{\theta^2}$, d'où $V(X)=\frac{p(p+1)-p^2}{\theta^2}=\frac p{\theta^2}$.</p>
+<h3>2) Loi de $Y=\theta X$</h3>
+<p>$G(y)=P(\theta X\le y)=F\left(\frac y\theta\right)$ donc $g(y)=\frac1\theta f\left(\frac y\theta\right)=\frac1\theta\frac{\theta^p}{\Gamma(p)}e^{-y}\frac{y^{p-1}}{\theta^{p-1}}=\frac{e^{-y}y^{p-1}}{\Gamma(p)}$ pour $y\ge0$ : <b>$Y\sim\gamma(p,1)$</b>.</p>
+<h3>3-a) $E(Y)=p$ et $V(Y)=p$</h3>
+<p>Formules précédentes avec $\theta=1$, ou bien $E(Y)=\theta E(X)=p$ et $V(Y)=\theta^2V(X)=p$.</p>
+<h3>3-b) Passer de $\gamma(p,1)$ à $\gamma(p,\theta)$</h3>
+<p>Si $Y\sim\gamma(p,1)$, alors $X=\frac Y\theta\sim\gamma(p,\theta)$ : $F_X(x)=P(Y\le\theta x)=F_Y(\theta x)$, donc $f_X(x)=\theta f_Y(\theta x)=\theta\frac{e^{-\theta x}(\theta x)^{p-1}}{\Gamma(p)}=\frac{\theta^p}{\Gamma(p)}e^{-\theta x}x^{p-1}$.</p>
+<h3>4) Loi de $\theta S_n$ avec $X_i\sim\mathcal E(\theta)$ indépendantes</h3>
+<p><b>Convolution</b> (cours) : si $X\sim\gamma(p,\theta)$ et $Y\sim\gamma(q,\theta)$ sont indépendantes, $X+Y\sim\gamma(p+q,\theta)$. Comme $X_i\sim\gamma(1,\theta)$, $S_n\sim\gamma(n,\theta)$, puis d'après la question 2, $\theta S_n\sim\gamma(n,1)$.</p>
+<div class="box prof">Variante possible : prouver la somme avec la fonction génératrice : $M_{S_n}(t)=\prod M_{X_i}(t)=\left(\frac\theta{\theta-t}\right)^n$, qui est celle de $\gamma(n,\theta)$.</div>
+<p>Les questions 5 et 6 (Khi-deux) sont dans la notion suivante.</p>
+`,
+quiz:[
+{t:"n",q:"$\\Gamma(5)$ ?",a:24,tol:0,e:"$4!$."},
+{t:"n",q:"$X\\sim\\gamma(3,2)$. $E(X)$ ?",a:1.5,tol:0.001,e:"$p/\\theta$."},
+{t:"n",q:"$X\\sim\\gamma(3,2)$. $V(X)$ ?",a:0.75,tol:0.001,e:"$p/\\theta^2=3/4$."},
+{t:"q",q:"$X\\sim\\gamma(p,\\theta)$. Loi de $\\theta X$ :",o:["$\\gamma(p,\\theta^2)$","$\\gamma(p,1)$","$\\gamma(\\theta p,1)$"],a:1,e:"Question 2 de l'examen."},
+{t:"q",q:"$X_1,\\dots,X_n$ indépendantes $\\mathcal E(\\theta)$. Loi de $S_n$ :",o:["$\\mathcal E(n\\theta)$","$\\gamma(n,\\theta)$","$\\gamma(1,n\\theta)$"],a:1,e:"Convolution des Gamma de même $\\theta$."}
+]},
+
+{id:"khideux",ch:"E",t:"Loi du Khi-deux et liens Normale-Gamma",imp:5,src:"Examens 2019-20, 2021-22, 2022-23, 2023-24",
+body:String.raw`
+<div class="box">$\chi^2_n=\gamma\left(\frac n2,\frac12\right)$, $n$ entier $\ge1$ (degrés de liberté). Donc
+$$E(\chi^2_n)=\frac{n/2}{1/2}=n,\qquad V(\chi^2_n)=\frac{n/2}{1/4}=2n.$$</div>
+<h3>5-6) Passer de $\gamma(p,1)$ à $\chi^2_{2p}$</h3>
+<p>Si $Y\sim\gamma(p,1)$ et $X=2Y$ : $G(x)=P(2Y\le x)=F_Y\left(\frac x2\right)$, donc
+$$g(x)=\frac12f_Y\left(\frac x2\right)=\frac12\frac{e^{-x/2}(x/2)^{p-1}}{\Gamma(p)}=\frac{(1/2)^p}{\Gamma(p)}e^{-x/2}x^{p-1},$$
+qui est la densité de $\gamma(p,\frac12)=\chi^2_{2p}$.</p>
+<h3>Si $X\sim\mathcal N(m,\sigma)$ alors $\left(\frac{X-m}\sigma\right)^2\sim\chi^2_1$</h3>
+<p>Indications données à l'examen : $\chi^2_1=\gamma(\frac12,\frac12)$ et $\Gamma(\frac12)=\sqrt\pi$.</p>
+<ol class="steps">
+<li>$U=\frac{X-m}\sigma\sim\mathcal N(0,1)$ (question précédente). On pose $Y=U^2$, densité de $U$ : $\varphi(u)=\frac1{\sqrt{2\pi}}e^{-u^2/2}$, répartition $\Phi$.</li>
+<li>Pour $y\le0$ : $G(y)=0$. Pour $y>0$ : $G(y)=P(-\sqrt y\le U\le\sqrt y)=\Phi(\sqrt y)-\Phi(-\sqrt y)$.</li>
+<li>$g(y)=\frac1{2\sqrt y}\big[\varphi(\sqrt y)+\varphi(-\sqrt y)\big]=\frac{\varphi(\sqrt y)}{\sqrt y}=\frac{e^{-y/2}}{\sqrt{2\pi y}}$ (car $\varphi$ est paire).</li>
+<li>On réécrit : $\frac{e^{-y/2}}{\sqrt{2\pi}\sqrt y}=\frac{(1/2)^{1/2}}{\sqrt\pi}e^{-y/2}y^{\frac12-1}=\frac{(1/2)^{1/2}}{\Gamma(1/2)}e^{-y/2}y^{\frac12-1}$.</li>
+<li>C'est la densité de $\gamma(\frac12,\frac12)=\chi^2_1$.</li></ol>
+<h3>Somme de carrés (examen 2019-20)</h3>
+<p>$X_1,\dots,X_n$ <b>indépendantes</b> de loi $\mathcal N(0,1)$ : chaque $X_i^2\sim\chi^2_1=\gamma(\frac12,\frac12)$. Par convolution des Gamma de même $\theta=\frac12$ :
+$$X_1^2+\dots+X_n^2\sim\gamma\left(\frac n2,\frac12\right)=\chi^2_n.$$
+Plus généralement $\chi^2_n+\chi^2_m=\chi^2_{n+m}$ (indépendantes) : en ajoutant un carré de plus, on obtient $\chi^2_{n+1}$.</p>
+<div class="box prof">Le nombre de degrés de liberté = nombre de v.a indépendantes qui entrent dans la construction (moins le nombre de relations entre elles).</div>
+`,
+quiz:[
+{t:"n",q:"$E(\\chi^2_{10})$ ?",a:10,tol:0,e:"$n$."},
+{t:"n",q:"$V(\\chi^2_{10})$ ?",a:20,tol:0,e:"$2n$."},
+{t:"q",q:"$Y\\sim\\gamma(3,1)$. Loi de $2Y$ :",o:["$\\chi^2_3$","$\\chi^2_6$","$\\gamma(6,\\frac12)$"],a:1,e:"$\\gamma(p,\\frac12)=\\chi^2_{2p}$."},
+{t:"q",q:"$X_1..X_5$ indépendantes $\\mathcal N(0,1)$. Loi de $\\sum X_i^2$ :",o:["$\\mathcal N(0,5)$","$\\chi^2_5$","$\\gamma(5,1)$"],a:1,e:"$\\gamma(\\frac52,\\frac12)$."},
+{t:"q",q:"Quelle indication sert à reconnaître $\\gamma(\\frac12,\\frac12)$ ?",o:["$\\Gamma(1)=1$","$\\Gamma(\\frac12)=\\sqrt\\pi$","$\\Phi(-x)=1-\\Phi(x)$"],a:1,e:"On remplace $\\sqrt\\pi$ par $\\Gamma(\\frac12)$."}
+]}
+];
+/* Exercices-types : chaque énoncé réellement tombé, corrigé rédigé « copie modèle » + barème de relecture */
+const EXOS=[
+{id:"gamma",t:"Loi Gamma (et passage au Khi-deux)",pts:"10 à 12 pts",notion:"gamma",
+enonce:String.raw`<p>Une v.a $X$ suit la loi gamma de paramètres $p>0$ et $\theta>0$ si c'est une v.a positive dont la densité est $f(x)=\frac{\theta^p}{\Gamma(p)}e^{-\theta x}x^{p-1}$, $x\ge0$, avec $\Gamma(p)=\int_0^{+\infty}e^{-x}x^{p-1}dx$.</p>`,
+qs:[
+{q:String.raw`1) a) Montrer que $\Gamma(p)=(p-1)!$ &nbsp; b) Calculer (ou montrer) $E(X)=\frac p\theta$ et $V(X)=\frac p{\theta^2}$.`,
+corr:String.raw`<p><b>a)</b> Pour $p>1$, intégration par parties ($u=x^{p-1}$, $v'=e^{-x}$) : $\Gamma(p)=\left[-e^{-x}x^{p-1}\right]_0^{+\infty}+(p-1)\int_0^{+\infty}e^{-x}x^{p-2}dx=0+(p-1)\Gamma(p-1)$. Comme $\Gamma(1)=\int_0^{+\infty}e^{-x}dx=1$, par récurrence $\Gamma(p)=(p-1)!$ pour $p\in\mathbb N^*$.</p>
+<p><b>b)</b> Avec $y=\theta x$ : $E(X)=\frac{\theta^p}{\Gamma(p)}\int_0^{+\infty}e^{-\theta x}x^{p}dx=\frac{1}{\theta\Gamma(p)}\int_0^{+\infty}e^{-y}y^{p}dy=\frac{\Gamma(p+1)}{\theta\Gamma(p)}=\frac p\theta$. De même $E(X^2)=\frac{\Gamma(p+2)}{\theta^2\Gamma(p)}=\frac{p(p+1)}{\theta^2}$, donc $V(X)=\frac{p(p+1)}{\theta^2}-\frac{p^2}{\theta^2}=\frac p{\theta^2}$.</p>`,
+bar:["IPP écrite avec u et v'","Crochet justifié nul (en 0 et en +∞)","Γ(p)=(p−1)Γ(p−1) puis Γ(1)=1 et récurrence","Changement de variable y=θx pour E(X)","Γ(p+1)=pΓ(p) utilisé, E(X)=p/θ","E(X²)=p(p+1)/θ² puis V(X)=p/θ²"]},
+{q:String.raw`2) Étudier (donner) la loi de la v.a $Y=\theta X$.`,
+corr:String.raw`<p>$G(y)=P(Y\le y)=P\left(X\le\frac y\theta\right)=F\left(\frac y\theta\right)$ car $\theta>0$. En dérivant : $g(y)=\frac1\theta f\left(\frac y\theta\right)=\frac1\theta\cdot\frac{\theta^p}{\Gamma(p)}e^{-y}\left(\frac y\theta\right)^{p-1}=\frac{1}{\Gamma(p)}e^{-y}y^{p-1}$ pour $y\ge0$, et $g(y)=0$ pour $y<0$. On reconnaît $Y\sim\gamma(p,1)$.</p>`,
+bar:["G(y)=P(θX≤y)=F(y/θ) écrit","Dérivation g(y)=(1/θ)f(y/θ)","Simplification des puissances de θ","Conclusion Y ~ γ(p,1)"]},
+{q:String.raw`3) a) Donner $E(Y)$ et $V(Y)$. &nbsp; b) Montrer comment passer de la loi $\gamma(p,1)$ à la loi $\gamma(p,\theta)$.`,
+corr:String.raw`<p><b>a)</b> $E(Y)=\theta E(X)=p$ et $V(Y)=\theta^2V(X)=p$ (ou formules de 1-b avec $\theta=1$).</p>
+<p><b>b)</b> Si $Y\sim\gamma(p,1)$, on pose $X=\frac Y\theta$. $F_X(x)=P(Y\le\theta x)=F_Y(\theta x)$, donc $f_X(x)=\theta f_Y(\theta x)=\theta\frac{e^{-\theta x}(\theta x)^{p-1}}{\Gamma(p)}=\frac{\theta^p}{\Gamma(p)}e^{-\theta x}x^{p-1}$ : $\frac Y\theta\sim\gamma(p,\theta)$.</p>`,
+bar:["E(Y)=p et V(Y)=p","Pose X=Y/θ et écrit F_X(x)=F_Y(θx)","Densité obtenue et loi γ(p,θ) reconnue"]},
+{q:String.raw`4) $X_1,\dots,X_n$ indépendantes de même loi exponentielle de paramètre $\theta$. Donner la loi de $\theta S_n$ où $S_n=\sum_{i=1}^nX_i$.`,
+corr:String.raw`<p>$\mathcal E(\theta)=\gamma(1,\theta)$. La somme de v.a Gamma <b>indépendantes</b> de même paramètre $\theta$ est Gamma (convolution) : $S_n\sim\gamma(n,\theta)$. D'après la question 2 appliquée à $S_n$, $\theta S_n\sim\gamma(n,1)$.</p>`,
+bar:["Expo(θ)=γ(1,θ)","Convolution citée avec l'hypothèse d'indépendance","S_n ~ γ(n,θ)","θS_n ~ γ(n,1)"]},
+{q:String.raw`5) La loi du Khi-deux à $n$ degrés de liberté est $\chi^2_n=\gamma(\frac n2,\frac12)$. Calculer $E(\chi^2_n)$ et $V(\chi^2_n)$. &nbsp; 6) Montrer comment passer de $\gamma(p,1)$ à $\chi^2_{2p}$.`,
+corr:String.raw`<p><b>5)</b> $E=\frac{n/2}{1/2}=n$, $V=\frac{n/2}{(1/2)^2}=2n$.</p>
+<p><b>6)</b> Si $Y\sim\gamma(p,1)$, $X=2Y$ : $G(x)=P(2Y\le x)=F_Y(\frac x2)$, $g(x)=\frac12f_Y(\frac x2)=\frac{(1/2)^p}{\Gamma(p)}e^{-x/2}x^{p-1}$, densité de $\gamma(p,\frac12)=\chi^2_{2p}$.</p>`,
+bar:["E(χ²_n)=n","V(χ²_n)=2n","X=2Y et G(x)=F_Y(x/2)","Densité réécrite avec (1/2)^p et loi χ²_2p reconnue"]}
+]},
+
+{id:"normale",t:"Normale : aX+b, centrer-réduire, Khi-deux",pts:"10 à 12 pts",notion:"normale",
+enonce:String.raw`<p>La densité de $\mathcal N(m,\sigma)$ est $f(x)=\frac1{\sigma\sqrt{2\pi}}\exp\left[-\frac{(x-m)^2}{2\sigma^2}\right]$. Soient $X\sim\mathcal N(m,\sigma)$ et $(a,b)\in\mathbb R_+^*\times\mathbb R$.</p>`,
+qs:[
+{q:String.raw`1) a) Montrer que $Y=aX+b\sim\mathcal N(am+b,\,a\sigma)$.`,
+corr:String.raw`<p>$G(y)=P(aX+b\le y)=P\left(X\le\frac{y-b}a\right)=F\left(\frac{y-b}a\right)$ car $a>0$. Donc $g(y)=\frac1af\left(\frac{y-b}a\right)=\frac1{a\sigma\sqrt{2\pi}}\exp\left[-\frac{(\frac{y-b}a-m)^2}{2\sigma^2}\right]$. Or $\left(\frac{y-b}a-m\right)^2=\frac{(y-(am+b))^2}{a^2}$, donc $g(y)=\frac1{(a\sigma)\sqrt{2\pi}}\exp\left[-\frac{(y-(am+b))^2}{2(a\sigma)^2}\right]$ : densité de $\mathcal N(am+b,a\sigma)$.</p>`,
+bar:["G(y)=P(Y≤y) puis isolement de X avec a>0","g(y)=(1/a)f((y−b)/a)","Mise au même dénominateur (y−(am+b))²/a²","Conclusion N(am+b, aσ)"]},
+{q:String.raw`b) En déduire que $Z=\frac{X-m}\sigma\sim\mathcal N(0,1)$. &nbsp; c) Montrer que si $Z\sim\mathcal N(0,1)$ alors $\sigma Z+m\sim\mathcal N(m,\sigma)$.`,
+corr:String.raw`<p><b>b)</b> $Z=aX+b$ avec $a=\frac1\sigma>0$ et $b=-\frac m\sigma$. D'après a), $Z\sim\mathcal N\left(\frac m\sigma-\frac m\sigma,\frac\sigma\sigma\right)=\mathcal N(0,1)$.</p>
+<p><b>c)</b> On applique a) à $Z\sim\mathcal N(0,1)$ avec $a=\sigma>0$, $b=m$ : $\sigma Z+m\sim\mathcal N(\sigma\cdot0+m,\sigma\cdot1)=\mathcal N(m,\sigma)$.</p>`,
+bar:["Identifie a=1/σ et b=−m/σ","Calcule les paramètres 0 et 1","Pour c) : a=σ, b=m appliqués à N(0,1)"]},
+{q:String.raw`2) Sachant que $\gamma(p,\theta)$ a pour densité $\frac{\theta^p}{\Gamma(p)}e^{-\theta x}x^{p-1}$ ($x>0$), montrer que si $X\sim\mathcal N(m,\sigma)$ alors $\left(\frac{X-m}\sigma\right)^2\sim\chi^2_1$. (Ind. $\chi^2_1=\gamma(\frac12,\frac12)$ et $\Gamma(\frac12)=\sqrt\pi$.)`,
+corr:String.raw`<p>$U=\frac{X-m}\sigma\sim\mathcal N(0,1)$, densité $\varphi$, répartition $\Phi$. On pose $Y=U^2\ge0$. Pour $y\le0$, $G(y)=0$. Pour $y>0$ : $G(y)=P(-\sqrt y\le U\le\sqrt y)=\Phi(\sqrt y)-\Phi(-\sqrt y)$. En dérivant : $g(y)=\frac1{2\sqrt y}\left[\varphi(\sqrt y)+\varphi(-\sqrt y)\right]=\frac{\varphi(\sqrt y)}{\sqrt y}=\frac{e^{-y/2}}{\sqrt{2\pi}\sqrt y}$ ($\varphi$ paire). Puis $\frac1{\sqrt{2\pi}}y^{-1/2}=\frac{(1/2)^{1/2}}{\sqrt\pi}y^{\frac12-1}=\frac{(1/2)^{1/2}}{\Gamma(1/2)}y^{\frac12-1}$, donc $g(y)=\frac{(1/2)^{1/2}}{\Gamma(1/2)}e^{-y/2}y^{\frac12-1}$ : densité de $\gamma(\frac12,\frac12)=\chi^2_1$.</p>`,
+bar:["U=(X−m)/σ ~ N(0,1) rappelé","Cas y≤0 traité","G(y)=Φ(√y)−Φ(−√y)","Dérivée avec le facteur 1/(2√y) et parité de φ","Réécriture avec Γ(1/2)=√π","Conclusion γ(1/2,1/2)=χ²_1"]},
+{q:String.raw`3) Soient $X_1,\dots,X_n$ indépendantes de même loi $\mathcal N(0,1)$. Donner la loi de $X_1^2+\dots+X_n^2$ (puis avec un carré de plus).`,
+corr:String.raw`<p>Chaque $X_i^2\sim\chi^2_1=\gamma(\frac12,\frac12)$ (question 2 avec $m=0$, $\sigma=1$), et les $X_i^2$ sont indépendantes. La somme de Gamma indépendantes de même $\theta=\frac12$ est $\gamma(\frac n2,\frac12)=\chi^2_n$. Avec $n+1$ carrés indépendants : $\chi^2_{n+1}$.</p>`,
+bar:["X_i² ~ χ²_1 justifié","Indépendance mentionnée","Convolution ⇒ γ(n/2,1/2)=χ²_n"]}
+]},
+
+{id:"pieces",t:"Trois pièces : loi du couple (X, Y)",pts:"4 à 8 pts",notion:"couple",
+enonce:String.raw`<p>On lance successivement trois pièces de monnaie. $X$ et $Y$ désignent respectivement le nombre de faces apparues sur les deux premières pièces et le nombre de piles sur les deux dernières.</p>`,
+qs:[
+{q:String.raw`1) Déterminer (dans un tableau) la loi du couple $(X,Y)$, puis les lois marginales de $X$ et $Y$.`,
+corr:String.raw`<p>8 résultats équiprobables (1/8). FFF→(2,0), FFP→(2,1), FPF→(1,1), FPP→(1,2), PFF→(1,0), PFP→(1,1), PPF→(0,1), PPP→(0,2).</p>
+<table class="t"><tr><th>X\Y</th><th>0</th><th>1</th><th>2</th><th>P(X=i)</th></tr><tr><th>0</th><td>0</td><td>1/8</td><td>1/8</td><td>1/4</td></tr><tr><th>1</th><td>1/8</td><td>2/8</td><td>1/8</td><td>1/2</td></tr><tr><th>2</th><td>1/8</td><td>1/8</td><td>0</td><td>1/4</td></tr><tr><th>P(Y=j)</th><td>1/4</td><td>1/2</td><td>1/4</td><td>1</td></tr></table>`,
+bar:["Liste des 8 résultats avec (X,Y)","Tableau correct (la pièce du milieu est commune)","Marginales de X et de Y","Total = 1 vérifié"]},
+{q:String.raw`2) Les v.a $X$ et $Y$ sont-elles indépendantes ?`,
+corr:String.raw`<p>$P(X=0,Y=0)=0\neq P(X=0)P(Y=0)=\frac1{16}$ : $X$ et $Y$ ne sont pas indépendantes.</p>`,
+bar:["Contre-exemple précis avec les deux nombres","Conclusion « non indépendantes »"]},
+{q:String.raw`3) Calculer $\text{Cov}(X,Y)$.`,
+corr:String.raw`<p>$E(X)=E(Y)=0\cdot\frac14+1\cdot\frac12+2\cdot\frac14=1$. $E(XY)=1\cdot1\cdot\frac28+1\cdot2\cdot\frac18+2\cdot1\cdot\frac18=\frac34$. $\text{Cov}(X,Y)=E(XY)-E(X)E(Y)=\frac34-1=-\frac14$.</p>`,
+bar:["E(X)=E(Y)=1","E(XY)=3/4 (seules les cases ij≠0 comptent)","Cov=−1/4"]},
+{q:String.raw`4) Déterminer la loi du couple $(\min\{X,Y\},\max\{X,Y\})$.`,
+corr:String.raw`<p>On transforme chaque case non nulle : (0,1)→(0,1) ; (0,2)→(0,2) ; (1,0)→(0,1) ; (1,1)→(1,1) ; (1,2)→(1,2) ; (2,0)→(0,2) ; (2,1)→(1,2).</p>
+<table class="t"><tr><th>min\max</th><th>1</th><th>2</th></tr><tr><th>0</th><td>1/8+1/8=1/4</td><td>1/8+1/8=1/4</td></tr><tr><th>1</th><td>2/8=1/4</td><td>1/8+1/8=1/4</td></tr></table><p>Toutes les autres combinaisons ont probabilité 0 (en particulier (0,0) et (2,2)).</p>`,
+bar:["Correspondance case par case","Regroupement des probabilités","Tableau final qui somme à 1"]}
+]},
+
+{id:"densite2a",t:"Densité 2/a(1 − x/a) : F, E, V et maximum",pts:"5 à 8 pts",notion:"momentsc",
+enonce:String.raw`<p>Soit $X$ de densité $f(x)=\frac2a\left(1-\frac xa\right)$ si $0\le x\le a$, $0$ sinon, où $a>0$.</p>`,
+qs:[
+{q:String.raw`1) Déterminer la fonction de répartition de $X$.`,
+corr:String.raw`<p>Si $x<0$ : $F(x)=0$. Si $0\le x\le a$ : $F(x)=\int_0^x\frac2a(1-\frac ta)dt=\frac2a\left[t-\frac{t^2}{2a}\right]_0^x=\frac{2x}a-\frac{x^2}{a^2}$. Si $x>a$ : $F(x)=1$ (cohérent : $F(a)=2-1=1$).</p>`,
+bar:["Les trois zones écrites","Intégrale correcte sur [0,x]","F(x)=2x/a − x²/a²","Vérification F(a)=1"]},
+{q:String.raw`2) Calculer $E(X)$ et $V(X)$.`,
+corr:String.raw`<p>$E(X)=\int_0^a\frac2a(x-\frac{x^2}a)dx=\frac2a\left(\frac{a^2}2-\frac{a^2}3\right)=\frac a3$. $E(X^2)=\int_0^a\frac2a(x^2-\frac{x^3}a)dx=\frac2a\left(\frac{a^3}3-\frac{a^3}4\right)=\frac{a^2}6$. $V(X)=\frac{a^2}6-\frac{a^2}9=\frac{a^2}{18}$.</p>`,
+bar:["E(X)=a/3","E(X²)=a²/6","V(X)=a²/18"]},
+{q:String.raw`3) $X_1,\dots,X_n$ indépendantes de même loi que $X$. Déterminer la fonction de répartition puis la densité de $M_n=\max\{X_1,\dots,X_n\}$.`,
+corr:String.raw`<p>$G(x)=P(M_n\le x)=P\left(\bigcap_i\{X_i\le x\}\right)=\prod_iP(X_i\le x)=F(x)^n$ par indépendance. Donc $G(x)=0$ si $x<0$, $G(x)=\left(\frac{2x}a-\frac{x^2}{a^2}\right)^n$ si $0\le x\le a$, $G(x)=1$ si $x>a$. Densité : $g(x)=nf(x)F(x)^{n-1}=n\frac2a\left(1-\frac xa\right)\left(\frac{2x}a-\frac{x^2}{a^2}\right)^{n-1}$ sur $[0,a]$, 0 sinon.</p>`,
+bar:["{M_n≤x} = intersection des {X_i≤x}","Indépendance ⇒ produit ⇒ F(x)^n","Les trois zones pour G","g = n f F^(n−1) explicitée"]}
+]},
+
+{id:"discretp",t:"Loi (1−p)², 2p(1−p), p² et Y = −3X + 1",pts:"4 pts",notion:"vad",
+enonce:String.raw`<p>$P(X=0)=(1-p)^2$, $P(X=1)=2p(1-p)$, $P(X=2)=p^2$, avec $0\le p\le1$.</p>`,
+qs:[
+{q:String.raw`1) Vérifier que $X$ suit bien une loi de probabilité.`,
+corr:String.raw`<p>Pour $0\le p\le1$, les trois nombres sont $\ge0$ (produits de nombres positifs). Leur somme : $(1-p)^2+2p(1-p)+p^2=\big((1-p)+p\big)^2=1$. Donc chacun est aussi $\le1$ et c'est une loi de probabilité.</p>`,
+bar:["Positivité justifiée","Somme = 1 (identité remarquable)"]},
+{q:String.raw`2) On pose $Y=-3X+1$. Quelles sont l'espérance et la variance de $Y$ ?`,
+corr:String.raw`<p>$E(X)=2p(1-p)+2p^2=2p$ ; $E(X^2)=2p(1-p)+4p^2=2p+2p^2$ ; $V(X)=2p+2p^2-4p^2=2p(1-p)$. Donc $E(Y)=-3E(X)+1=1-6p$ et $V(Y)=9V(X)=18p(1-p)$.</p>`,
+bar:["E(X)=2p","V(X)=2p(1−p) via E(X²)","E(aX+b)=aE(X)+b ⇒ 1−6p","V(aX+b)=a²V(X) ⇒ 18p(1−p)"]}
+]},
+
+{id:"bernoulli",t:"Covariance nulle et indépendance (Bernoulli, Z et Z²)",pts:"5 à 8 pts",notion:"covnulle",
+enonce:String.raw`<p>I) Soient $X$, $Y$ deux v.a continues. II) $X$ et $Y$ suivent des lois de Bernoulli de paramètres $p_1$, $p_2$ avec la loi jointe : $P(0,0)=p$, $P(0,1)=1-p-p_1$, $P(1,0)=1-p-p_2$, $P(1,1)=p_1+p_2+p-1$ (où $0\le p<1$).</p>`,
+qs:[
+{q:String.raw`I-1) a) Donner la CNS pour que $X$ et $Y$ (continues) soient indépendantes. b) Montrer que si elles sont indépendantes, $\text{Cov}(X,Y)=0$.`,
+corr:String.raw`<p><b>a)</b> $X$ et $Y$ indépendantes $\iff f(x,y)=f_X(x)f_Y(y)$ pour tout $(x,y)$ (équivalent : $F(x,y)=F_X(x)F_Y(y)$).</p><p><b>b)</b> $E(XY)=\iint xyf_X(x)f_Y(y)dxdy=\int xf_X(x)dx\cdot\int yf_Y(y)dy=E(X)E(Y)$, donc $\text{Cov}(X,Y)=E(XY)-E(X)E(Y)=0$.</p>`,
+bar:["CNS avec les densités","Séparation de l'intégrale double","Cov=0"]},
+{q:String.raw`I-2) $Z\sim\mathcal N(0,1)$ et $T=Z^2$. a) Calculer $E(Z^3)$ puis $\text{Cov}(Z,T)$. b) Que peut-on conclure ?`,
+corr:String.raw`<p>$E(Z^3)=\int_{\mathbb R}\frac{x^3}{\sqrt{2\pi}}e^{-x^2/2}dx=0$ (intégrande impaire, intégrale convergente). $\text{Cov}(Z,T)=E(Z^3)-E(Z)E(Z^2)=0-0\cdot1=0$. <b>Conclusion</b> : $T=Z^2$ dépend de $Z$, pourtant la covariance est nulle. Une covariance nulle n'implique pas l'indépendance.</p>`,
+bar:["E(Z³)=0 par imparité","Cov(Z,T)=0","Conclusion : la réciproque est fausse"]},
+{q:String.raw`II-1) Calculer $E(XY)$ puis $\text{Cov}(X,Y)$. II-2) CNS d'indépendance. II-3) Montrer que si $\text{Cov}(X,Y)=0$ alors $X$ et $Y$ sont indépendantes.`,
+corr:String.raw`<p><b>1)</b> $XY\in\{0,1\}$ et $XY=1\iff X=Y=1$ : $E(XY)=p_1+p_2+p-1$. Marges : $P(X=1)=1-p-p_2+p_1+p_2+p-1=p_1$, $P(Y=1)=p_2$. $\text{Cov}=p_1+p_2+p-1-p_1p_2$.</p>
+<p><b>2)</b> $P(X=i,Y=j)=P(X=i)P(Y=j)$ pour $i,j\in\{0,1\}$.</p>
+<p><b>3)</b> Cov = 0 donne $P(1,1)=p_1p_2$. Alors $P(1,0)=p_1-p_1p_2=p_1(1-p_2)$, $P(0,1)=p_2-p_1p_2=(1-p_1)p_2$, $P(0,0)=1-p_1-p_2+p_1p_2=(1-p_1)(1-p_2)$. Les 4 cases vérifient la CNS : indépendantes.</p>`,
+bar:["E(XY)=P(X=1,Y=1)","Marges p1 et p2 vérifiées","Cov=p1+p2+p−1−p1p2","CNS sur les 4 cases","Les 3 autres cases déduites de P(1,1)=p1p2"]}
+]},
+
+{id:"cartes",t:"Cartes tirées avec remise : loi géométrique",pts:"5 pts",notion:"geometrique",
+enonce:String.raw`<p>Dans une boîte, il y a $n$ cartes numérotées de 1 à $n$. On effectue des tirages successifs avec remise, jusqu'à obtenir la carte $n$. Soit $X$ le nombre de tirages effectués.</p>`,
+qs:[
+{q:String.raw`1) Quelle est la loi de $X$ ? Donner $P(X=k)$ pour $k\in\mathbb N^*$.`,
+corr:String.raw`<p>Chaque tirage (avec remise, donc indépendant) est une épreuve de Bernoulli de succès « tirer la carte $n$ », $p=\frac1n$. $X$ = rang du premier succès : $X\sim\mathcal G(\frac1n)$, $P(X=k)=\frac1n\left(1-\frac1n\right)^{k-1}=\frac{(n-1)^{k-1}}{n^k}$.</p>`,
+bar:["Épreuves indépendantes de probabilité 1/n","Loi géométrique nommée","Formule de P(X=k)"]},
+{q:String.raw`2) Probabilité que le nombre de cartes tirées soit $\le50$. Application : $n=100$.`,
+corr:String.raw`<p>$P(X\le50)=1-P(X>50)$ et $P(X>50)=\sum_{k\ge51}p(1-p)^{k-1}=p(1-p)^{50}\frac1{1-(1-p)}=(1-p)^{50}$. Donc $P(X\le50)=1-\left(1-\frac1n\right)^{50}$. Pour $n=100$ : $1-0{,}99^{50}\approx0{,}395$.</p>`,
+bar:["Passage au complémentaire","Somme géométrique calculée","Valeur numérique ≈ 0,395"]}
+]},
+
+{id:"unif01",t:"Uniforme sur [0,1] : P(x₁ ≤ X ≤ x₂)",pts:"4 à 5 pts",notion:"densite",
+enonce:String.raw`<p>Une v.a $X$ suit la loi uniforme sur $[0,1]$. Exprimer $P(x_1\le X\le x_2)$ en fonction des réels $x_1<x_2$.</p>`,
+qs:[
+{q:String.raw`Discussion complète.`,
+corr:String.raw`<p>$f=1$ sur $[0,1]$, $0$ ailleurs, et $P(x_1\le X\le x_2)=\int_{x_1}^{x_2}f(t)dt$ = longueur de $[x_1,x_2]\cap[0,1]$ :</p><ul><li>$x_2<0$ ou $x_1>1$ : 0</li><li>$x_1<0\le x_2\le1$ : $x_2$</li><li>$0\le x_1<x_2\le1$ : $x_2-x_1$</li><li>$0\le x_1\le1<x_2$ : $1-x_1$</li><li>$x_1<0$ et $x_2>1$ : 1</li></ul>`,
+bar:["Densité écrite","Cas hors du support (0)","Cas à cheval à gauche (x₂)","Cas intérieur (x₂−x₁)","Cas à cheval à droite (1−x₁)","Cas englobant (1)"]}
+]},
+
+{id:"mgf",t:"Fonction génératrice des moments",pts:"8 pts",notion:"mgf",
+enonce:String.raw`<p>On appelle fonction génératrice des moments de $X$ la fonction $M_X(t)=E(e^{tX})$. La déterminer lorsque $X$ suit une loi a) uniforme sur $[a,b]$ ; b) exponentielle de paramètre $\theta$ ; c) normale centrée réduite.</p>`,
+qs:[
+{q:String.raw`a), b), c)`,
+corr:String.raw`<p><b>a)</b> $M_X(t)=\frac1{b-a}\int_a^be^{tx}dx$ : vaut 1 si $t=0$, et $\frac{e^{tb}-e^{ta}}{t(b-a)}$ si $t\neq0$.</p>
+<p><b>b)</b> $M_X(t)=\theta\int_0^{+\infty}e^{(t-\theta)x}dx=\frac\theta{\theta-t}$ si $t<\theta$ ; $+\infty$ si $t\ge\theta$.</p>
+<p><b>c)</b> $tx-\frac{x^2}2=-\frac{(x-t)^2}2+\frac{t^2}2$, donc $M_X(t)=e^{t^2/2}\int\frac1{\sqrt{2\pi}}e^{-(x-t)^2/2}dx=e^{t^2/2}$ (changement $s=x-t$, intégrale d'une densité = 1).</p>`,
+bar:["Uniforme : cas t=0 séparé","Uniforme : formule pour t≠0","Expo : condition t<θ","Expo : θ/(θ−t)","Normale : complétion du carré","Normale : e^(t²/2)"]}
+]},
+
+{id:"poissoncond",t:"Deux Poisson : loi conditionnelle et régression",pts:"8 pts",notion:"poisson",
+enonce:String.raw`<p>$X$ et $Y$ indépendantes de lois de Poisson de paramètres $\lambda$ et $\mu$, $S=X+Y$.</p>`,
+qs:[
+{q:String.raw`a) Loi conditionnelle de $X$ lorsque $S=s$. b) Fonction de régression de $X$ sur $S$ et valeur de $E[E(X\mid S)]$.`,
+corr:String.raw`<p><b>a)</b> $S\sim\mathcal P(\lambda+\mu)$. Pour $0\le x\le s$ : $P(X=x\mid S=s)=\frac{P(X=x)P(Y=s-x)}{P(S=s)}=\frac{e^{-\lambda}\frac{\lambda^x}{x!}e^{-\mu}\frac{\mu^{s-x}}{(s-x)!}}{e^{-(\lambda+\mu)}\frac{(\lambda+\mu)^s}{s!}}=C_s^x\left(\frac\lambda{\lambda+\mu}\right)^x\left(\frac\mu{\lambda+\mu}\right)^{s-x}$. Donc $X\mid(S=s)\sim\mathcal B(s,\frac\lambda{\lambda+\mu})$.</p>
+<p><b>b)</b> $E(X\mid S=s)=\frac{s\lambda}{\lambda+\mu}$ (régression linéaire en $s$), donc $E[E(X\mid S)]=\frac{\lambda}{\lambda+\mu}E(S)=\lambda$.</p>`,
+bar:["S ~ P(λ+μ) par indépendance","Définition de la proba conditionnelle","Simplification vers C_s^x","Loi binomiale reconnue","E(X|S)=Sλ/(λ+μ)","E[E(X|S)]=λ"]}
+]},
+
+{id:"hypergeo",t:"Représentants d'étudiants : loi hypergéométrique",pts:"8 pts",notion:"autresdiscretes",
+enonce:String.raw`<p>On choisit au hasard $n$ étudiants parmi $N$ ($n\le N$), dont $N_1$ garçons. $X$ = nombre de garçons choisis.</p>`,
+qs:[
+{q:String.raw`1) Loi de $X$. 2) Domaine $m\le x\le M$. 3) Probabilité de choisir $k$ garçons. II) Différences : binomiale / binomiale négative ; géométrique / binomiale négative ; binomiale / hypergéométrique.`,
+corr:String.raw`<p><b>1)</b> Choix sans remise : $X\sim\mathcal H(N,n,N_1)$. <b>2)</b> $m=\max\{0,n-(N-N_1)\}$, $M=\min\{n,N_1\}$. <b>3)</b> $P(X=k)=\frac{C_{N_1}^kC_{N-N_1}^{n-k}}{C_N^n}$.</p>
+<p><b>II</b> a) Binomiale : nombre d'épreuves fixé, nombre de succès aléatoire ; binomiale négative : nombre de succès fixé, nombre d'épreuves aléatoire. b) Géométrique = binomiale négative avec 1 seul succès attendu. c) Binomiale : tirages avec remise (indépendants, $p$ constant) ; hypergéométrique : sans remise (dépendants).</p>`,
+bar:["Loi H(N,n,N₁) nommée","m et M justifiés","Formule de P(X=k)","Trois différences correctes"]}
+]},
+
+{id:"linearite",t:"Preuves : E(X+Y) et E(XY)",pts:"4 pts",notion:"linearite",
+enonce:String.raw`<p>1) $X$, $Y$ discrètes : montrer $E(X+Y)=E(X)+E(Y)$. 2) $X$, $Y$ discrètes indépendantes : montrer $E(XY)=E(X)E(Y)$.</p>`,
+qs:[{q:"1) et 2)",corr:String.raw`<p>Voir la notion « Preuves » : on écrit les sommes doubles avec $p_{ij}$, on sépare, on reconnaît les marges ; pour 2) on utilise $p_{ij}=p_{i\bullet}p_{\bullet j}$.</p>
+$$E(X+Y)=\sum_{i,j}(x_i+y_j)p_{ij}=\sum_ix_ip_{i\bullet}+\sum_jy_jp_{\bullet j}\qquad E(XY)=\sum_{i,j}x_iy_jp_{i\bullet}p_{\bullet j}=E(X)E(Y)$$`,
+bar:["Définition avec la loi du couple","Séparation des sommes et marges","Indépendance utilisée au bon endroit"]}]},
+
+{id:"minmaxgen",t:"Min et max de n variables (cas général et U[0,1])",pts:"8 pts",notion:"minmax",
+enonce:String.raw`<p>$X_1,\dots,X_n$ indépendantes de densité $f$ et répartition $F$ ; $m_n=\min X_i$, $M_n=\max X_i$.</p>`,
+qs:[{q:String.raw`1) Répartitions et densités de $m_n$, $M_n$. 2) Cas $\mathcal U[0,1]$ : $E(m_n)$, $E(M_n)$. 3) $m_n$ et $1-M_n$ ont même loi ; en déduire $E(m_n)=1-E(M_n)$.`,
+corr:String.raw`<p><b>1)</b> $F_{M}=F^n$, $f_M=nfF^{n-1}$ ; $F_m=1-(1-F)^n$, $f_m=nf(1-F)^{n-1}$ (indépendance).</p>
+<p><b>2)</b> $F(x)=x$ sur $[0,1]$ : $E(M_n)=\int_0^1nx^ndx=\frac n{n+1}$ ; $E(m_n)=\int_0^1xn(1-x)^{n-1}dx=\frac1{n+1}$ (par parties ou avec $u=1-x$).</p>
+<p><b>3)</b> $P(1-M_n\le x)=P(M_n\ge1-x)=1-(1-x)^n=F_{m_n}(x)$ : même loi, donc même espérance, $E(m_n)=1-E(M_n)$.</p>`,
+bar:["Max : intersection + produit","Min : passage par P(m>x)","Densités par dérivation","E(M_n)=n/(n+1)","E(m_n)=1/(n+1)","Même loi justifiée"]}]},
+
+{id:"couplexy",t:"Couple continu f(x,y) = xy/2 sur un triangle",pts:"6 pts",notion:"couplec",
+enonce:String.raw`<p>$f(x,y)=\frac{xy}2$ si $0\le x\le2$ et $0\le y\le x$, $0$ sinon.</p>`,
+qs:[{q:String.raw`1) $F$ pour $0\le y\le x\le2$. 2) Lois marginales, indépendance. 3) Loi de $Y$ sachant $X=x$.`,
+corr:String.raw`<p><b>1)</b> $F(x,y)=\int_0^y\int_v^x\frac{uv}2du\,dv=\frac{x^2y^2}8-\frac{y^4}{16}$. <b>2)</b> $f_X(x)=\frac{x^3}4$, $f_Y(y)=\frac{y(4-y^2)}4$ sur $[0,2]$ ; $f\neq f_Xf_Y$ (support triangulaire) : non indépendantes. <b>3)</b> $f_{Y\mid X=x}(y)=\frac{2y}{x^2}$ pour $0\le y\le x$.</p>`,
+bar:["Bornes d'intégration correctes (v≤u≤x)","F(x,y) juste","Deux marginales justes","Non-indépendance justifiée","Densité conditionnelle"]}]},
+
+{id:"hasard",t:"Taux de hasard g = f / (1 − F)",pts:"7 pts",notion:"uniexpo",
+enonce:String.raw`<p>$F$, $f$ : répartition et densité d'une v.a positive ; $g(x)=\frac{f(x)}{1-F(x)}$.</p>`,
+qs:[{q:String.raw`1) Montrer $F(x)=1-e^{-G(x)}$ où $G(x)=\int_0^xg$. 2) $g$ pour $\mathcal E(\lambda)$, puis pour $f(x)=\alpha\lambda x^{\alpha-1}e^{-\lambda x^\alpha}$.`,
+corr:String.raw`<p><b>1)</b> $g=-(\ln(1-F))'$ ; avec $F(0)=0$ : $G(x)=-\ln(1-F(x))$, donc $F=1-e^{-G}$. <b>2)</b> Exponentielle : $g=\lambda$. Weibull : $F=1-e^{-\lambda x^\alpha}$, donc $g(x)=\alpha\lambda x^{\alpha-1}$.</p>`,
+bar:["Reconnaître la dérivée de −ln(1−F)","F(0)=0 utilisé","g=λ pour l'expo","F puis g pour Weibull"]}]},
+
+{id:"normtable",t:"Normale : retrouver m et σ avec la table",pts:"5 pts",notion:"normale",
+enonce:String.raw`<p>$X$ normale avec $P(X<2)=0{,}0668$ et $P(X\ge12)=0{,}1587$. Calculer $a$ tel que $P\big([X-E(X)]^2<a\big)=0{,}95$.</p>`,
+qs:[{q:"Calcul complet.",corr:String.raw`<p>$\Phi(\frac{2-m}\sigma)=0{,}0668$ ⇒ $\frac{2-m}\sigma=-1{,}5$ ; $\Phi(\frac{12-m}\sigma)=0{,}8413$ ⇒ $\frac{12-m}\sigma=1$. D'où $\sigma=4$, $m=8$. $P((X-8)^2<a)=P(|U|<\frac{\sqrt a}4)=2\Phi(\frac{\sqrt a}4)-1=0{,}95$ ⇒ $\frac{\sqrt a}4=1{,}96$ ⇒ $a=61{,}47$.</p>`,
+bar:["Lecture inverse de la table (−1,5 et 1)","Système résolu : σ=4, m=8","Passage à |U|<√a/4","2Φ−1=0,95 ⇒ 1,96","a ≈ 61,47"]}]},
+
+{id:"tableau34",t:"Tableau 3×4 aux cases « produit » (TD, 7 pts)",pts:"7 pts",notion:"couple",
+enonce:String.raw`<table class="t"><tr><th>X\Y</th><th>1</th><th>2</th><th>3</th><th>4</th></tr><tr><th>1</th><td>0,08</td><td>0,04</td><td>0,16</td><td>0,12</td></tr><tr><th>2</th><td>0,04</td><td>0,02</td><td>0,08</td><td>0,06</td></tr><tr><th>3</th><td>0,08</td><td>0,04</td><td>0,16</td><td>0,12</td></tr></table>`,
+qs:[{q:String.raw`1) Marginales, indépendance. 2) $\text{Cov}(X,Y)$. 3) Loi de $(\min,\max)$.`,
+corr:String.raw`<p><b>1)</b> $P(X=1,2,3)=0{,}4;\ 0{,}2;\ 0{,}4$ ; $P(Y=1..4)=0{,}2;\ 0{,}1;\ 0{,}4;\ 0{,}3$. Chacune des 12 cases est le produit de ses marges : indépendantes. <b>2)</b> Donc $\text{Cov}=0$.</p>
+<p><b>3)</b> (1,1) 0,08 ; (1,2) 0,08 ; (1,3) 0,24 ; (1,4) 0,12 ; (2,2) 0,02 ; (2,3) 0,12 ; (2,4) 0,06 ; (3,3) 0,16 ; (3,4) 0,12 (total 1).</p>`,
+bar:["Marginales justes","Vérification de toutes les cases","Cov=0 justifiée par l'indépendance","Table (min,max) complète"]}]}
+];
+
+/* Les 11 sujets réellement donnés */
+const EXAMS=[
+{id:"2324o",an:"2023-2024",s:"Ordinaire",d:"1h30",parts:[["gamma","12 pts","Q1 à Q6 (Gamma + Khi-deux)"],["linearite","4 pts",""],["pieces","4 pts","Q1-Q2 seulement"]]},
+{id:"2223r",an:"2022-2023",s:"Rattrapage",d:"1h30",parts:[["discretp","4 pts",""],["densite2a","6 pts","Q1 et Q3"],["normale","10 pts","Q1 puis Gamma (page 2 manquante dans ton scan)"]]},
+{id:"2223o",an:"2022-2023",s:"Ordinaire",d:"1h30",parts:[["gamma","10 pts","Q1 à Q4"],["cartes","5 pts",""],["unif01","5 pts",""]]},
+{id:"2122r",an:"2021-2022",s:"Rattrapage",d:"1h30",parts:[["cartes","5 pts","Q1"],["bernoulli","8 pts","partie I (CNS, Cov, Z et Z²)"],["bernoulli","7 pts","partie II (tableau Bernoulli)"]]},
+{id:"2122o",an:"2021-2022",s:"Ordinaire",d:"1h30",parts:[["normale","12 pts","Q1, Q2 (Khi-deux)"],["pieces","8 pts","Q1 à Q4"]]},
+{id:"2021r",an:"2020-2021",s:"Rattrapage",d:"1h30",parts:[["densite2a","8 pts","Q1 et Q3"],["pieces","7 pts","Q1-Q2"],["bernoulli","5 pts","II-3 seulement"]]},
+{id:"2021o",an:"2020-2021",s:"Ordinaire",d:"1h30",parts:[["discretp","4 pts",""],["hypergeo","8 pts",""],["mgf","8 pts",""]]},
+{id:"1920o",an:"2019-2020",s:"Ordinaire",d:"2h",parts:[["normale","10 pts","Q1 à Q3"],["pieces","6 pts","Q1, Q3, Q4"],["unif01","4 pts",""]]},
+{id:"1718o",an:"2017-2018",s:"Ordinaire",d:"2h",parts:[["densite2a","5 pts","Q1 à Q3"],["poissoncond","8 pts",""],["mgf","(8 pts)","partie 2 du même exercice"]]},
+{id:"1617r",an:"2016-2017",s:"Rattrapage",d:"2h",parts:[["minmaxgen","8 pts",""],["couplexy","6 pts",""],["pieces","6 pts","Q1 et Cov"]]},
+{id:"1617o",an:"2016-2017",s:"Ordinaire",d:"2h",parts:[["hasard","7 pts",""],["densite2a","8 pts",""],["normtable","5 pts",""]]}
+];
+/* Cartes : « recto || verso || notion » */
+const CARDS_RAW=String.raw`
+$P(\bar A)$ ? || $1-P(A)$ || probas
+$P(A\cup B)$ ? || $P(A)+P(B)-P(A\cap B)$ || probas
+Définition de $P(A\mid B)$ || $\dfrac{P(A\cap B)}{P(B)}$, avec $P(B)\neq0$ || probas
+Formule de Bayes || $P(A_i\mid B)=\dfrac{P(A_i)P(B\mid A_i)}{\sum_j P(A_j)P(B\mid A_j)}$ || probas
+$A$, $B$ indépendants $\iff$ ? || $P(A\cap B)=P(A)P(B)$ || independance
+$C_n^p$ ? || $\dfrac{n!}{p!(n-p)!}$ (sans ordre, sans remise) || denombrement
+$A_n^p$ ? || $\dfrac{n!}{(n-p)!}$ (avec ordre, sans remise) || denombrement
+Deux conditions pour qu'une suite $(p_i)$ soit une loi || $p_i\ge0$ et $\sum p_i=1$ || vad
+$E(aX+b)$ et $V(aX+b)$ || $aE(X)+b$ et $a^2V(X)$ || vad
+Formule de König || $V(X)=E(X^2)-E(X)^2$ || vad
+$\text{Cov}(X,Y)$ ? || $E(XY)-E(X)E(Y)$ || couple
+Indépendance d'un couple discret || $P(X=x_i,Y=y_j)=P(X=x_i)P(Y=y_j)$ pour TOUTES les cases || couple
+Trois pièces : loi marginale de $X$ || $0,1,2$ avec $\frac14,\frac12,\frac14$ || couple
+Trois pièces : $\text{Cov}(X,Y)$ || $\frac34-1=-\frac14$ || couple
+Trois pièces : loi de $(\min,\max)$ || (0,1), (0,2), (1,1), (1,2) chacun $\frac14$ || couple
+Indépendantes $\Rightarrow$ Cov = 0. Et la réciproque ? || Fausse en général (contre-exemple $Z$, $Z^2$). Vraie pour deux Bernoulli. || covnulle
+$E(Z^3)$ pour $Z\sim\mathcal N(0,1)$ || 0 (fonction impaire) || covnulle
+Tableau Bernoulli : $E(XY)$ || $P(X=1,Y=1)=p_1+p_2+p-1$ || covnulle
+CNS d'indépendance, cas continu || $f(x,y)=f_X(x)f_Y(y)$ pour tout $(x,y)$ || covnulle
+Lien entre $F$ et $f$ (continu) || $F(x)=\int_{-\infty}^xf(t)dt$ et $F'=f$ || densite
+$P(a<X\le b)$ avec $F$ || $F(b)-F(a)$ || densite
+$\mathcal U[0,1]$ : $P(x_1\le X\le x_2)$ si $0\le x_1\le1<x_2$ || $1-x_1$ || densite
+$f=\frac2a(1-\frac xa)$ : $F(x)$ sur $[0,a]$ || $\frac{2x}a-\frac{x^2}{a^2}$ || momentsc
+$f=\frac2a(1-\frac xa)$ : $E(X)$ et $V(X)$ || $\frac a3$ et $\frac{a^2}{18}$ || momentsc
+Méthode pour la loi de $Y=g(X)$ || Écrire $G(y)=P(Y\le y)$, isoler $X$, dériver, reconnaître || transfo
+Densité de $Y=aX+b$ || $\frac1{|a|}f\left(\frac{y-b}a\right)$ || transfo
+Densité de $|X|$ ($z>0$) || $f(z)+f(-z)$ || transfo
+Densité de $\ln|X|$ || $e^t\left(f(e^t)+f(-e^t)\right)$ || transfo
+Répartition et densité du max $M_n$ || $F^n$ et $nfF^{n-1}$ || minmax
+Répartition du min $m_n$ || $1-(1-F)^n$ || minmax
+$\mathcal U[0,1]$ : $E(M_n)$ et $E(m_n)$ || $\frac n{n+1}$ et $\frac1{n+1}$ || minmax
+Marginale $f_X$ d'un couple continu || $\int f(x,y)dy$ || couplec
+Densité conditionnelle $f_{Y\mid X=x}$ || $\dfrac{f(x,y)}{f_X(x)}$ || couplec
+Fonction génératrice des moments || $M_X(t)=E(e^{tX})$ || mgf
+$M_X(t)$ pour $\mathcal U[a,b]$ || $\frac{e^{tb}-e^{ta}}{t(b-a)}$ si $t\neq0$, 1 si $t=0$ || mgf
+$M_X(t)$ pour $\mathcal E(\theta)$ || $\frac\theta{\theta-t}$ si $t<\theta$ || mgf
+$M_X(t)$ pour $\mathcal N(0,1)$ || $e^{t^2/2}$ || mgf
+Binomiale $\mathcal B(n,p)$ : $P(X=k)$, $E$, $V$ || $C_n^kp^k(1-p)^{n-k}$, $np$, $np(1-p)$ || binomiale
+Poisson $\mathcal P(\lambda)$ : $P(X=k)$, $E$, $V$ || $e^{-\lambda}\frac{\lambda^k}{k!}$, $\lambda$, $\lambda$ || poisson
+$X\mid(X+Y=s)$ pour deux Poisson indépendantes || $\mathcal B\left(s,\frac\lambda{\lambda+\mu}\right)$ || poisson
+Géométrique $\mathcal G(p)$ : $P(X=k)$, $E$, $V$ || $p(1-p)^{k-1}$, $\frac1p$, $\frac{1-p}{p^2}$ || geometrique
+Géométrique : $P(X>k)$ || $(1-p)^k$ || geometrique
+Binomiale négative : $P(Y=y)$ || $C_{y-1}^{n-1}p^n(1-p)^{y-n}$, $y\ge n$ || autresdiscretes
+Hypergéométrique : $P(X=k)$ || $\frac{C_{N_A}^kC_{N-N_A}^{n-k}}{C_N^n}$ || autresdiscretes
+Hypergéométrique : bornes de $k$ || $\max\{0,n-(N-N_A)\}\le k\le\min\{n,N_A\}$ || autresdiscretes
+$\mathcal U[a,b]$ : $E$ et $V$ || $\frac{a+b}2$ et $\frac{(b-a)^2}{12}$ || uniexpo
+$\mathcal E(\theta)$ : $F$, $E$, $V$ || $1-e^{-\theta x}$, $\frac1\theta$, $\frac1{\theta^2}$ || uniexpo
+Taux de hasard et $F$ || $F=1-e^{-G}$, $G=\int_0^xg$ || uniexpo
+$\mathcal N(m,\sigma)$ : que représente $\sigma$ ? || L'écart-type ($V=\sigma^2$) || normale
+Loi de $aX+b$ si $X\sim\mathcal N(m,\sigma)$, $a>0$ || $\mathcal N(am+b,\,a\sigma)$ || normale
+$\Phi(-x)$ ? || $1-\Phi(x)$ || normale
+$P(|U|<c)$ pour $U\sim\mathcal N(0,1)$ || $2\Phi(c)-1$ || normale
+Valeurs de table à connaître || $\Phi(1)=0{,}8413$ ; $\Phi(1{,}5)=0{,}9332$ ; $\Phi(1{,}96)=0{,}975$ ; $\Phi(2)=0{,}9772$ || normale
+Densité de $\gamma(p,\theta)$ || $\frac{\theta^p}{\Gamma(p)}e^{-\theta x}x^{p-1}$, $x\ge0$ || gamma
+$\Gamma(p)$ pour $p$ entier ; $\Gamma(\frac12)$ || $(p-1)!$ ; $\sqrt\pi$ || gamma
+$\gamma(p,\theta)$ : $E$ et $V$ || $\frac p\theta$ et $\frac p{\theta^2}$ || gamma
+Loi de $\theta X$ si $X\sim\gamma(p,\theta)$ || $\gamma(p,1)$ || gamma
+Somme de $n$ exponentielles $\mathcal E(\theta)$ indépendantes || $\gamma(n,\theta)$ || gamma
+$\chi^2_n$ = quelle loi Gamma ? || $\gamma\left(\frac n2,\frac12\right)$ || khideux
+$E(\chi^2_n)$ et $V(\chi^2_n)$ || $n$ et $2n$ || khideux
+Loi de $2Y$ si $Y\sim\gamma(p,1)$ || $\gamma(p,\frac12)=\chi^2_{2p}$ || khideux
+Loi de $\left(\frac{X-m}\sigma\right)^2$ si $X\sim\mathcal N(m,\sigma)$ || $\chi^2_1$ || khideux
+$\sum_{i=1}^nX_i^2$, $X_i$ i.i.d. $\mathcal N(0,1)$ || $\chi^2_n$ || khideux
+`;
+const CARDS=CARDS_RAW.trim().split("\n").map(l=>{const p=l.split("||").map(s=>s.trim());return{f:p[0],b:p[1],n:p[2]}});
+/* Générateurs d'exercices : énoncé tiré au hasard, réponse calculée par le code */
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const r4=x=>Math.round(x*1e4)/1e4;
+const fr=x=>String(r4(x)).replace(".","{,}");
+function erf(x){const s=Math.sign(x);x=Math.abs(x);const t=1/(1+0.3275911*x);const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return s*y}
+const Phi=z=>0.5*(1+erf(z/Math.SQRT2));
+const PhiT=z=>{const zz=Math.round(Math.abs(z)*100)/100;const v=Math.round(Phi(zz)*1e4)/1e4;return z<0?r4(1-v):v};
+function C(n,k){if(k<0||k>n)return 0;let r=1;for(let i=1;i<=k;i++)r=r*(n-k+i)/i;return r}
+const fact=n=>n<=1?1:n*fact(n-1);
+
+const GENS=[
+{id:"discret",t:"Loi discrète et Y = aX + b",notion:"vad",make(){
+  const p=pick([0.1,0.2,0.25,0.3,0.4,0.6,0.7,0.75,0.8]);let a=pick([-4,-3,-2,2,3,5]);const b=R(-3,4);
+  const EX=2*p,VX=2*p*(1-p);
+  return{q:"$P(X=0)=(1-p)^2$, $P(X=1)=2p(1-p)$, $P(X=2)=p^2$ avec $p="+fr(p)+"$. On pose $Y="+a+"X"+(b>=0?"+"+b:b)+"$.",
+  f:[["E(Y)",a*EX+b],["V(Y)",a*a*VX]],
+  s:String.raw`$E(X)=2p=`+fr(EX)+String.raw`$, $V(X)=2p(1-p)=`+fr(VX)+String.raw`$. $E(Y)=`+a+String.raw`E(X)+`+b+"="+fr(a*EX+b)+String.raw`$, $V(Y)=`+(a*a)+String.raw`V(X)=`+fr(a*a*VX)+"$."}}},
+{id:"pieces",t:"Pièces : loi d'un couple (variantes)",notion:"couple",make(){
+  const N=pick([3,4]);const nx=2;const ny=pick(N===3?[2]:[2,3]);const fx=pick(["F","P"]),fy=pick(["F","P"]);
+  const tab={};let tot=0;
+  for(let m=0;m<(1<<N);m++){const c=[];for(let i=0;i<N;i++)c.push(m>>i&1?"F":"P");
+    const X=c.slice(0,nx).filter(v=>v===fx).length,Y=c.slice(N-ny).filter(v=>v===fy).length;const k=X+","+Y;tab[k]=(tab[k]||0)+1;tot++}
+  let EX=0,EY=0,EXY=0;for(const k in tab){const[x,y]=k.split(",").map(Number);const pr=tab[k]/tot;EX+=x*pr;EY+=y*pr;EXY+=x*y*pr}
+  const nom=v=>v==="F"?"faces":"piles";
+  const p00=(tab["0,0"]||0)/tot;
+  let rows="<table class='t'><tr><th>X\\Y</th>";for(let y=0;y<=ny;y++)rows+="<th>"+y+"</th>";rows+="</tr>";
+  for(let x=0;x<=nx;x++){rows+="<tr><th>"+x+"</th>";for(let y=0;y<=ny;y++)rows+="<td>"+(tab[x+","+y]||0)+"/"+tot+"</td>";rows+="</tr>"}rows+="</table>";
+  return{q:"On lance "+N+" pièces. $X$ = nombre de "+nom(fx)+" sur les 2 premières, $Y$ = nombre de "+nom(fy)+" sur les "+ny+" dernières. Donne $P(X=0,Y=0)$, $E(XY)$ et $\\text{Cov}(X,Y)$ (en décimal).",
+  f:[["P(X=0,Y=0)",p00],["E(XY)",EXY],["Cov(X,Y)",EXY-EX*EY]],
+  s:"Tableau (dénominateur "+tot+") :"+rows+"$E(X)="+fr(EX)+"$, $E(Y)="+fr(EY)+"$, $E(XY)="+fr(EXY)+"$, $\\text{Cov}="+fr(EXY-EX*EY)+"$."+(Math.abs(EXY-EX*EY)<1e-9&&ny+nx<=N?" Les pièces ne se chevauchent pas : $X$ et $Y$ sont indépendantes.":"")}}},
+{id:"densite",t:"Densité 2/a(1 − x/a) et maximum",notion:"momentsc",make(){
+  const a=pick([1,2,3,4,5,6]);const n=pick([2,3,4,5]);const x0=r4(a*pick([0.25,0.5,0.75]));
+  const F=x=>2*x/a-x*x/(a*a);
+  return{q:"$f(x)=\\frac2a(1-\\frac xa)$ sur $[0,a]$ avec $a="+a+"$. Calcule $E(X)$, $V(X)$, $F("+fr(x0)+")$ et $P(M_{"+n+"}\\le"+fr(x0)+")$ pour le max de "+n+" copies indépendantes.",
+  f:[["E(X)",a/3],["V(X)",a*a/18],["F(x0)",F(x0)],["P(Mn≤x0)",Math.pow(F(x0),n)]],
+  s:"$E=a/3="+fr(a/3)+"$, $V=a^2/18="+fr(a*a/18)+"$, $F(x_0)=\\frac{2x_0}a-\\frac{x_0^2}{a^2}="+fr(F(x0))+"$, $P(M_n\\le x_0)=F(x_0)^{"+n+"}="+fr(Math.pow(F(x0),n))+"$."}}},
+{id:"densite2",t:"Densité (k+1)xᵏ/aᵏ⁺¹ : constante, F, E",notion:"densite",make(){
+  const k=pick([1,2,3]);const a=pick([1,2,3]);const x0=r4(a*pick([0.5,0.8]));
+  return{q:"$f(x)=c\\,x^{"+k+"}$ sur $[0,"+a+"]$, 0 sinon. Trouve $c$, $F("+fr(x0)+")$ et $E(X)$.",
+  f:[["c",(k+1)/Math.pow(a,k+1)],["F(x0)",Math.pow(x0/a,k+1)],["E(X)",(k+1)*a/(k+2)]],
+  s:"$\\int_0^a cx^k=c\\frac{a^{k+1}}{k+1}=1$ donc $c=\\frac{k+1}{a^{k+1}}="+fr((k+1)/Math.pow(a,k+1))+"$. $F(x)=(x/a)^{k+1}$ donc $F(x_0)="+fr(Math.pow(x0/a,k+1))+"$. $E=\\frac{k+1}{k+2}a="+fr((k+1)*a/(k+2))+"$."}}},
+{id:"normale",t:"Normale : P(x₁ < X < x₂) avec la table",notion:"normale",make(){
+  const m=R(5,20),s=pick([1,2,3,4,5]);const z1=-pick([0.5,1,1.25,1.5,2]),z2=pick([0.5,0.75,1,1.33,1.96,2]);const x1=r4(m+z1*s),x2=r4(m+z2*s);
+  const v=PhiT(z2)-PhiT(z1);
+  return{q:"$X\\sim\\mathcal N("+m+","+s+")$. Calcule $P("+fr(x1)+"<X<"+fr(x2)+")$ (table à 4 décimales).",f:[["P",v]],tol:0.002,
+  s:"$P=\\Phi(\\frac{"+fr(x2)+"-"+m+"}{"+s+"})-\\Phi(\\frac{"+fr(x1)+"-"+m+"}{"+s+"})=\\Phi("+fr(z2)+")-\\Phi("+fr(z1)+")="+fr(PhiT(z2))+"-"+fr(PhiT(z1))+"="+fr(v)+"$."}}},
+{id:"norminv",t:"Normale : retrouver m et σ",notion:"normale",make(){
+  const m=R(4,15),s=pick([1,2,3,4,5]);const k1=pick([1,1.5,2]),k2=pick([0.5,1,2]);const a=m-k1*s,b=m+k2*s;
+  return{q:"$X$ normale avec $P(X<"+a+")="+fr(1-PhiT(k1))+"$ et $P(X>"+b+")="+fr(1-PhiT(k2))+"$. Trouve $m$ et $\\sigma$.",f:[["m",m],["σ",s]],tol:0.05,
+  s:"Table : $\\frac{"+a+"-m}\\sigma=-"+fr(k1)+"$ et $\\frac{"+b+"-m}\\sigma="+fr(k2)+"$. Soustraction : $\\frac{"+(b-a)+"}\\sigma="+fr(k1+k2)+"$ donc $\\sigma="+s+"$, $m="+m+"$."}}},
+{id:"geo",t:"Géométrique : les cartes",notion:"geometrique",make(){
+  const n=pick([5,6,10,20,50,100]);const k=R(2,6);const K=pick([5,10,20,30,50]);const p=1/n;
+  return{q:"$n="+n+"$ cartes, tirages avec remise jusqu'à la carte $n$. Calcule $P(X="+k+")$, $P(X\\le"+K+")$ et $E(X)$.",
+  f:[["P(X=k)",p*Math.pow(1-p,k-1)],["P(X≤K)",1-Math.pow(1-p,K)],["E(X)",n]],
+  s:"$X\\sim\\mathcal G(1/"+n+")$. $P(X="+k+")=\\frac1{"+n+"}(1-\\frac1{"+n+"})^{"+(k-1)+"}="+fr(p*Math.pow(1-p,k-1))+"$ ; $P(X\\le"+K+")=1-(1-\\frac1{"+n+"})^{"+K+"}="+fr(1-Math.pow(1-p,K))+"$ ; $E=n="+n+"$."}}},
+{id:"binpois",t:"Binomiale et Poisson",notion:"binomiale",make(){
+  const n=pick([5,8,10,20]),p=pick([0.1,0.2,0.3,0.5]),k=R(0,3),l=pick([1,2,3,4]);
+  const pk=C(n,k)*Math.pow(p,k)*Math.pow(1-p,n-k);const pg=1-Math.exp(-l)*(1+l);
+  return{q:"$X\\sim\\mathcal B("+n+";"+fr(p)+")$ : $P(X="+k+")$ et $V(X)$. $Y\\sim\\mathcal P("+l+")$ : $P(Y\\ge2)$.",
+  f:[["P(X=k)",pk],["V(X)",n*p*(1-p)],["P(Y≥2)",pg]],
+  s:"$C_{"+n+"}^{"+k+"}p^{"+k+"}(1-p)^{"+(n-k)+"}="+fr(pk)+"$ ; $V=np(1-p)="+fr(n*p*(1-p))+"$ ; $P(Y\\ge2)=1-e^{-"+l+"}(1+"+l+")="+fr(pg)+"$."}}},
+{id:"gamma",t:"Gamma et Khi-deux",notion:"gamma",make(){
+  const p=R(1,6),th=pick([0.5,1,2,3,4]),c=pick([2,3,0.5]),n=R(1,12);
+  return{q:"$X\\sim\\gamma("+p+","+fr(th)+")$. Donne $E(X)$, $V(X)$, $\\Gamma("+p+")$, le 2e paramètre de la loi de $"+fr(c)+"X$ (c'est $\\gamma("+p+",\\theta')$), puis $V(\\chi^2_{"+n+"})$.",
+  f:[["E(X)",p/th],["V(X)",p/(th*th)],["Γ(p)",fact(p-1)],["θ'",th/c],["V(χ²)",2*n]],
+  s:"$E=p/\\theta="+fr(p/th)+"$, $V=p/\\theta^2="+fr(p/(th*th))+"$, $\\Gamma("+p+")="+(p-1)+"!="+fact(p-1)+"$. $cX\\sim\\gamma(p,\\theta/c)$ (même méthode que $\\theta X$) : $\\theta'="+fr(th/c)+"$. $V(\\chi^2_n)=2n="+(2*n)+"$."}}},
+{id:"unif",t:"Uniforme : intervalle et moments",notion:"densite",make(){
+  const a=R(-2,2),b=a+R(2,6);const x1=r4(a+pick([-1,0.5,1])),x2=r4(x1+pick([1,2,4,8]));
+  const L=Math.max(0,Math.min(b,x2)-Math.max(a,x1))/(b-a);
+  return{q:"$X\\sim\\mathcal U["+a+","+b+"]$. Calcule $P("+fr(x1)+"\\le X\\le"+fr(x2)+")$, $E(X)$ et $V(X)$.",
+  f:[["P",L],["E(X)",(a+b)/2],["V(X)",(b-a)*(b-a)/12]],
+  s:"Longueur de $[x_1,x_2]\\cap[a,b]$ divisée par $b-a$ : "+fr(L)+". $E=\\frac{a+b}2="+fr((a+b)/2)+"$, $V=\\frac{(b-a)^2}{12}="+fr((b-a)*(b-a)/12)+"$."}}},
+{id:"minmax",t:"Min et max de lois uniformes",notion:"minmax",make(){
+  const n=R(2,8),x=pick([0.2,0.5,0.8,0.9]);
+  return{q:"$X_1..X_{"+n+"}$ i.i.d. $\\mathcal U[0,1]$. Calcule $E(M_n)$, $E(m_n)$, $P(M_n\\le"+fr(x)+")$ et $P(m_n\\le"+fr(x)+")$.",
+  f:[["E(Mn)",n/(n+1)],["E(mn)",1/(n+1)],["P(Mn≤x)",Math.pow(x,n)],["P(mn≤x)",1-Math.pow(1-x,n)]],
+  s:"$\\frac n{n+1}="+fr(n/(n+1))+"$, $\\frac1{n+1}="+fr(1/(n+1))+"$, $x^n="+fr(Math.pow(x,n))+"$, $1-(1-x)^n="+fr(1-Math.pow(1-x,n))+"$."}}},
+{id:"poicond",t:"Poisson : loi conditionnelle",notion:"poisson",make(){
+  const l=R(1,5),mu=R(1,5),s=R(3,8),k=R(0,3);const q=l/(l+mu);
+  return{q:"$X\\sim\\mathcal P("+l+")$, $Y\\sim\\mathcal P("+mu+")$ indépendantes, $S=X+Y$. Calcule $P(X="+k+"\\mid S="+s+")$ et $E(X\\mid S="+s+")$.",
+  f:[["P",C(s,k)*Math.pow(q,k)*Math.pow(1-q,s-k)],["E",s*q]],
+  s:"$X\\mid S="+s+"\\sim\\mathcal B("+s+",\\frac{"+l+"}{"+(l+mu)+"})$ : $C_{"+s+"}^{"+k+"}q^{"+k+"}(1-q)^{"+(s-k)+"}="+fr(C(s,k)*Math.pow(q,k)*Math.pow(1-q,s-k))+"$ ; $E="+fr(s*q)+"$."}}},
+{id:"hyper",t:"Hypergéométrique",notion:"autresdiscretes",make(){
+  const N=R(10,20),N1=R(3,N-3),n=R(2,Math.min(8,N-1));const m=Math.max(0,n-(N-N1)),M=Math.min(n,N1);const k=R(m,M);
+  return{q:"$N="+N+"$ étudiants dont $N_1="+N1+"$ garçons ; on en choisit $n="+n+"$. Donne $m$, $M$, $P(X="+k+")$ et $E(X)$.",
+  f:[["m",m],["M",M],["P(X=k)",C(N1,k)*C(N-N1,n-k)/C(N,n)],["E(X)",n*N1/N]],
+  s:"$m=\\max(0,n-(N-N_1))="+m+"$, $M=\\min(n,N_1)="+M+"$, $P=\\frac{C_{"+N1+"}^{"+k+"}C_{"+(N-N1)+"}^{"+(n-k)+"}}{C_{"+N+"}^{"+n+"}}="+fr(C(N1,k)*C(N-N1,n-k)/C(N,n))+"$, $E=n\\frac{N_1}N="+fr(n*N1/N)+"$."}}},
+{id:"expomgf",t:"Exponentielle et fonction génératrice",notion:"mgf",make(){
+  const th=pick([2,3,4]),t=pick([0.5,1]),x=pick([0.5,1,2]),a=R(0,2),b=a+R(1,3);
+  return{q:"$X\\sim\\mathcal E("+th+")$ : $M_X("+fr(t)+")$ et $P(X>"+fr(x)+")$. $U\\sim\\mathcal U["+a+","+b+"]$ : $M_U(1)$.",
+  f:[["M_X(t)",th/(th-t)],["P(X>x)",Math.exp(-th*x)],["M_U(1)",(Math.exp(b)-Math.exp(a))/(b-a)]],
+  s:"$\\frac\\theta{\\theta-t}="+fr(th/(th-t))+"$ ; $e^{-\\theta x}="+fr(Math.exp(-th*x))+"$ ; $\\frac{e^{b}-e^{a}}{b-a}="+fr((Math.exp(b)-Math.exp(a))/(b-a))+"$."}}},
+{id:"bern",t:"Tableau Bernoulli : covariance",notion:"covnulle",make(){
+  const p1=pick([0.3,0.4,0.5,0.6]),p2=pick([0.3,0.4,0.5,0.7]);const indep=Math.random()<0.4;const p=indep?r4((1-p1)*(1-p2)):r4((1-p1)*(1-p2)+pick([-0.05,0.05,0.1]));
+  const p11=r4(p1+p2+p-1);
+  return{q:"Tableau Bernoulli avec $p="+fr(p)+"$, $p_1="+fr(p1)+"$, $p_2="+fr(p2)+"$. Calcule $E(XY)$ et $\\text{Cov}(X,Y)$. (Indépendantes si Cov = 0.)",
+  f:[["E(XY)",p11],["Cov",p11-p1*p2]],
+  s:"$E(XY)=p_1+p_2+p-1="+fr(p11)+"$ ; $\\text{Cov}=E(XY)-p_1p_2="+fr(p11-p1*p2)+"$ : "+(Math.abs(p11-p1*p2)<1e-9?"indépendantes.":"pas indépendantes.")}}}
+];
+/* ================= État (navigateur de l'étudiant) ================= */
+const KEY="ps3_revision_v1";
+const DEF={notions:{},exos:{},errs:[],cards:{},blanc:[],gen:{},time:{},signals:[],plan:{},started:null};
+let S;
+try{S=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){S=JSON.parse(JSON.stringify(DEF))}
+if(!S.started)S.started=new Date().toISOString().slice(0,10);
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+const $=(s,r=document)=>r.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const today=()=>new Date().toISOString().slice(0,10);
+function toast(t){const el=$("#toast");el.textContent=t;el.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>el.hidden=true,2200)}
+function typeset(el){const go=()=>{try{MathJax.typesetPromise([el]).catch(()=>{})}catch(e){}};
+  if(window.MathJax&&MathJax.typesetPromise)go();else{let n=0;const iv=setInterval(()=>{if(window.MathJax&&MathJax.typesetPromise){clearInterval(iv);go()}else if(++n>60)clearInterval(iv)},250)}}
+function logErr(where,q,note){S.errs.unshift({d:today(),where,q:String(q).slice(0,400),note:note||"",done:false});S.errs=S.errs.slice(0,200);save()}
+
+/* temps de travail : une minute comptée si la page est visible et utilisée */
+let lastAct=Date.now();["click","keydown","scroll","touchstart"].forEach(e=>addEventListener(e,()=>lastAct=Date.now(),{passive:true}));
+setInterval(()=>{if(document.visibilityState==="visible"&&Date.now()-lastAct<180000){S.time[today()]=(S.time[today()]||0)+1;save()}},60000);
+
+/* ================= Calculs dérivés ================= */
+const NBY=Object.fromEntries(NOTIONS.map(n=>[n.id,n]));
+const XBY=Object.fromEntries(EXOS.map(x=>[x.id,x]));
+function exoMastery(id){const st=S.exos[id];let best=null;
+  if(st){let tot=0,ok=0,seen=0;XBY[id].qs.forEach((q,i)=>{const b=st[i];if(b&&b.open){seen++;tot+=q.bar.length;ok+=(b.bar||[]).filter(Boolean).length}});if(seen===XBY[id].qs.length&&tot)best=ok/tot;else if(seen)best=(ok/Math.max(1,tot))*(seen/XBY[id].qs.length)}
+  S.blanc.forEach(b=>(b.parts||[]).forEach(p=>{if(p.id===id&&p.tot){const r=p.ok/p.tot;if(best===null||r>best)best=r}}));
+  return best===null?0:best}
+const ptsNum=s=>parseFloat(String(s).replace(/[^0-9.,]/g,"").replace(",","."))||0;
+function predicted(){let sum=0;EXAMS.forEach(e=>{let s=0;e.parts.forEach(([id,pts])=>{s+=ptsNum(pts)*exoMastery(id)});sum+=Math.min(20,s)});return sum/EXAMS.length}
+function freqTable(){const m={};EXAMS.forEach(e=>{const seen=new Set();e.parts.forEach(([id,pts])=>{m[id]=m[id]||{n:0,pts:0};if(!seen.has(id)){m[id].n++;seen.add(id)}m[id].pts+=ptsNum(pts)})});
+  return Object.entries(m).map(([id,v])=>({id,n:v.n,avg:v.pts/v.n})).sort((a,b)=>b.n-a.n||b.avg-a.avg)}
+function nStatus(id){const s=S.notions[id];if(!s)return"";if(s.best>=0.8)return"ok";if(s.read)return"lu";return""}
+
+/* ================= Plan de séances ================= */
+const PLAN=[
+["Méthode de la fonction de répartition + loi normale",["transfo","normale"],["normale"],"normale"],
+["Loi Gamma (l'exercice à 10-12 pts)",["gamma"],["gamma"],"gamma"],
+["Khi-deux et liens Normale-Gamma",["khideux"],["normale"],"gamma"],
+["Couple discret : les trois pièces",["couple"],["pieces","tableau34"],"pieces"],
+["Covariance nulle, Bernoulli, preuves E(X+Y) et E(XY)",["covnulle","linearite"],["bernoulli","linearite"],"bern"],
+["Densité, F, espérance, variance",["densite","momentsc"],["densite2a","unif01"],"densite"],
+["Min et max, couple continu",["minmax","couplec"],["minmaxgen","couplexy"],"minmax"],
+["V.a discrète, binomiale, géométrique",["vad","binomiale","geometrique"],["discretp","cartes"],"geo"],
+["Poisson, autres lois discrètes, fonction génératrice",["poisson","autresdiscretes","mgf"],["poissoncond","hypergeo","mgf"],"poicond"],
+["Uniforme, exponentielle, taux de hasard",["uniexpo"],["hasard","normtable"],"expomgf"],
+["Examen blanc n°1 (1h30, conditions réelles)",[],[],null,"blanc"],
+["Chapitre 1 (TD) : dénombrement, conditionnelle, indépendance",["denombrement","probas","independance"],[],null],
+["Carnet d'erreurs : refaire les 3 exercices les plus ratés",[],[],null,"suivi"],
+["Examen blanc n°2, puis cartes chaque jour jusqu'à l'examen",[],[],null,"blanc"]];
+
+/* ================= Navigation ================= */
+const TABS=["accueil","cours","exos","annales","calc","cartes","blanc","formulaire","table","suivi"];
+let cur={tab:"accueil",sub:null};
+function go(tab,sub){cur={tab,sub:sub||null};document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===tab));
+  render();scrollTo(0,0)}
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(b)go(b.dataset.tab)});
+function render(){const m=$("#main");m.innerHTML="";const f={accueil:vAccueil,cours:vCours,exos:vExos,annales:vAnnales,calc:vCalc,cartes:vCartes,blanc:vBlanc,formulaire:vFormulaire,table:vTable,suivi:vSuivi}[cur.tab];f(m);typeset(m)}
+document.addEventListener("click",e=>{const a=e.target.closest("[data-go]");if(a){e.preventDefault();const[t,s]=a.dataset.go.split(":");go(t,s)}});
+
+/* ================= Accueil ================= */
+function vAccueil(m){
+  const done=NOTIONS.filter(n=>nStatus(n.id)==="ok").length;const due=CARDS.filter((c,i)=>isDue(i)).length;
+  const mins=Object.values(S.time).reduce((a,b)=>a+b,0);const pr=predicted();
+  const nextIdx=PLAN.findIndex((p,i)=>!S.plan[i]);
+  m.innerHTML=`<h2>Objectif : 17/20 minimum</h2>
+  <p class="lede">La prof redonne presque les mêmes exercices depuis 2016. Ce programme part donc des <b>11 sujets réels</b> : chaque exercice qui est tombé a son cours complet, sa copie modèle avec barème, et des calculs générés pour t'entraîner. Tu n'as besoin d'aucun autre support.</p>
+  <div class="grid" style="margin-top:14px">
+    <div class="panel kpi"><span class="muted small">Note prévue sur les 11 sujets</span><span class="big num">${pr.toFixed(1)}<span style="font-size:1rem">/20</span></span><span class="small muted">calculée d'après tes auto-corrections</span></div>
+    <div class="panel kpi"><span class="muted small">Notions validées (test ≥ 80 %)</span><span class="big num">${done}<span style="font-size:1rem">/${NOTIONS.length}</span></span><div class="bar"><i style="width:${100*done/NOTIONS.length}%"></i></div></div>
+    <div class="panel kpi"><span class="muted small">Cartes à revoir aujourd'hui</span><span class="big num">${due}</span><button class="btn small ghost" data-go="cartes" style="justify-self:start">Réviser</button></div>
+    <div class="panel kpi"><span class="muted small">Temps de travail</span><span class="big num">${Math.floor(mins/60)}h${String(mins%60).padStart(2,"0")}</span><span class="small muted">depuis le ${S.started}</span></div>
+  </div>
+  ${nextIdx>=0?`<div class="panel" style="margin-top:14px;border-color:var(--accent)"><span class="chip">Prochaine séance · ${nextIdx+1}/${PLAN.length}</span><h3 style="margin-top:8px">${PLAN[nextIdx][0]}</h3>${seanceHTML(nextIdx)}</div>`:`<div class="box ok">Plan terminé. Continue les cartes chaque jour et un examen blanc par semaine.</div>`}
+  <h3>Ce que la prof redonne (11 sujets, 2016-2024)</h3>
+  <div class="panel">${freqTable().map(r=>`<div class="freq"><a href="#" data-go="exos:${r.id}">${XBY[r.id].t}</a><div class="bar"><i style="width:${100*r.n/11}%"></i></div><span class="num small">${r.n}/11</span></div>`).join("")}
+  <p class="small muted" style="margin-top:8px">Les exercices Gamma et Normale-Khi-deux valent 10 à 12 points et l'un des deux tombe dans 6 sujets sur 11. Avec les trois pièces et la densité $\\frac2a(1-\\frac xa)$, ces quatre exercices couvrent l'essentiel de chaque sujet. Le chapitre 1 (dénombrement, Bayes) n'est jamais tombé à l'examen : il passe en dernier.</p></div>
+  <h3>La méthode (adaptée à un module de calcul et de démonstration)</h3>
+  <div class="read"><ol class="steps">
+  <li><b>Cours complet d'abord.</b> Chaque notion part de zéro. Le test ne s'ouvre qu'une fois la lecture terminée, comme pour Réseaux.</li>
+  <li><b>Test en fin de notion.</b> 80 % pour la valider. Chaque erreur va dans le carnet.</li>
+  <li><b>Rédaction sur papier.</b> En probas, les points viennent des étapes écrites. Pour chaque exercice-type, tu rédiges sur une feuille, tu tapes au moins ton résultat, puis le corrigé s'ouvre avec le barème à cocher. C'est ce barème qui calcule ta note prévue.</li>
+  <li><b>Calculs générés.</b> Mêmes exercices, autres nombres, réponse vérifiée par le code. Ça entraîne la mécanique sans apprendre les réponses par cœur.</li>
+  <li><b>Cartes espacées</b> (1, 3, 7, 14, 30 jours) pour les formules : 5 minutes au début de chaque séance.</li>
+  <li><b>Examens blancs chronométrés</b> (1h30), corrigés avec le barème.</li></ol>
+  <p class="small muted">Séance type, 60 à 90 min : 5 cartes → la notion du jour (lecture + test) → l'exercice-type rédigé sur papier → 10 min de calculs générés. Plan total : 14 séances, environ 15 heures.</p></div>
+  <h3>Plan des 14 séances</h3>
+  <div class="notionlist">${PLAN.map((p,i)=>`<label class="nitem" style="cursor:default"><input type="checkbox" id="plan${i}" data-plan="${i}" ${S.plan[i]?"checked":""}><span><b>${i+1}.</b> ${p[0]}</span><span class="small muted">${p[1].length?p[1].length+" notion"+(p[1].length>1?"s":""):""}</span></label>`).join("")}</div>`;
+  m.querySelectorAll("[data-plan]").forEach(c=>c.onchange=()=>{S.plan[c.dataset.plan]=c.checked;save();toast(c.checked?"Séance cochée":"Séance décochée")});
+}
+function seanceHTML(i){const p=PLAN[i];let h="<ol class='steps'><li>5 cartes : <a href='#' data-go='cartes'>réviser</a></li>";
+  p[1].forEach(n=>h+=`<li>Cours + test : <a href="#" data-go="cours:${n}">${NBY[n].t}</a></li>`);
+  p[2].forEach(x=>h+=`<li>Rédiger sur papier : <a href="#" data-go="exos:${x}">${XBY[x].t}</a></li>`);
+  if(p[3])h+=`<li>10 min de calculs : <a href="#" data-go="calc:${p[3]}">${GENS.find(g=>g.id===p[3]).t}</a></li>`;
+  if(p[4]==="blanc")h+=`<li><a href="#" data-go="blanc">Lancer l'examen blanc</a> (1h30, sans notes)</li>`;
+  if(p[4]==="suivi")h+=`<li><a href="#" data-go="suivi">Ouvrir le carnet d'erreurs</a></li>`;
+  return h+"</ol>"}
+
+/* ================= Cours ================= */
+function vCours(m){
+  if(cur.sub&&NBY[cur.sub])return vNotion(m,NBY[cur.sub]);
+  let h=`<h2>Cours</h2><p class="lede">${NOTIONS.length} notions, dans l'ordre du programme. Les étoiles indiquent le poids à l'examen (d'après les 11 sujets). Carré gris : pas lu · orange : lu · vert : validé.</p>`;
+  Object.entries(CHAPS).forEach(([k,v])=>{h+=`<div class="chhead">${k==="A"?"Chapitre 1":k==="B"?"Chapitre 2":k==="C"?"Chapitre 2 (suite)":k==="D"?"Chapitre 3":"Chapitre 4"} · ${v}</div><div class="notionlist">`;
+    NOTIONS.filter(n=>n.ch===k).forEach(n=>{const st=nStatus(n.id);const b=S.notions[n.id];
+      h+=`<button class="nitem" data-go="cours:${n.id}"><span class="dot ${st}"></span><span><b>${n.t}</b><br><span class="small muted">${n.src}</span></span><span class="imp" title="Importance à l'examen">${"★".repeat(n.imp)}${"☆".repeat(5-n.imp)}${b&&b.best!=null?`<br><span class="small">${Math.round(b.best*100)} %</span>`:""}</span></button>`});h+="</div>"});
+  m.innerHTML=h}
+function vNotion(m,n){
+  const i=NOTIONS.indexOf(n);const st=S.notions[n.id]||{};const ex=EXOS.filter(x=>x.notion===n.id);
+  m.innerHTML=`<div class="row small"><a href="#" data-go="cours">← Toutes les notions</a><span class="muted">${CHAPS[n.ch]}</span></div>
+  <h2 style="margin-top:8px">${n.t}</h2><div class="row"><span class="chip warn">${"★".repeat(n.imp)} examen</span><span class="small muted">${n.src}</span></div>
+  <article class="read" style="margin-top:10px">${n.body}</article>
+  ${ex.length?`<div class="box">Exercice${ex.length>1?"s":""}-type${ex.length>1?"s":""} lié${ex.length>1?"s":""} : ${ex.map(x=>`<a href="#" data-go="exos:${x.id}">${x.t}</a>`).join(" · ")}</div>`:""}
+  <div class="panel" style="margin-top:16px" id="qzone"></div>
+  <div class="row" style="justify-content:space-between;margin-top:16px">${i>0?`<a href="#" data-go="cours:${NOTIONS[i-1].id}">← ${NOTIONS[i-1].t}</a>`:"<span></span>"}${i<NOTIONS.length-1?`<a href="#" data-go="cours:${NOTIONS[i+1].id}">${NOTIONS[i+1].t} →</a>`:""}</div>`;
+  const z=$("#qzone",m);
+  const showQuiz=()=>{z.innerHTML=`<h3 style="margin-top:0">Test de la notion</h3><p class="small muted">${n.quiz.length} questions. Validation à 80 %. Les erreurs vont dans ton carnet.</p><div id="qs"></div><div id="qres"></div>`;runQuiz($("#qs",z),$("#qres",z),n);typeset(z)};
+  if(st.read){showQuiz()}else{z.innerHTML=`<p><b>Lis toute la notion avant de te tester.</b> Le test sert à repérer tes failles, pas à deviner.</p><button class="btn" id="readbtn">J'ai fini de lire, je passe au test</button>`;
+    $("#readbtn",z).onclick=()=>{S.notions[n.id]=Object.assign(S.notions[n.id]||{},{read:true,readOn:today()});save();showQuiz()}}
+}
+function runQuiz(box,res,n){
+  let answered=0,good=0;const tot=n.quiz.length;
+  n.quiz.forEach((q,qi)=>{const d=document.createElement("div");d.className="q";
+    if(q.t==="q"){d.innerHTML=`<div><b>${qi+1}.</b> ${q.q}</div><div class="opts">${q.o.map((o,j)=>`<button data-j="${j}">${o}</button>`).join("")}</div><div class="fb" hidden></div>`;
+      d.querySelectorAll(".opts button").forEach(b=>b.onclick=()=>{if(d.dataset.done)return;d.dataset.done=1;const j=+b.dataset.j;const ok=j===q.a;
+        d.querySelectorAll(".opts button")[q.a].classList.add("right");if(!ok){b.classList.add("wrong");logErr("Test · "+n.t,q.q,"Réponse choisie : "+q.o[j])}
+        const fb=$(".fb",d);fb.hidden=false;fb.innerHTML=(ok?"<b style='color:var(--ok)'>Juste.</b> ":"<b style='color:var(--bad)'>Faux.</b> ")+q.e;typeset(fb);fin(ok)})}
+    else{d.innerHTML=`<div><b>${qi+1}.</b> ${q.q}</div><div class="row" style="margin-top:8px"><input type="text" inputmode="decimal" id="q_${n.id}_${qi}" placeholder="ta réponse" style="width:140px"><button class="btn small">Vérifier</button></div><div class="fb" hidden></div>`;
+      const inp=$("input",d);const chk=()=>{if(d.dataset.done||!inp.value.trim())return;d.dataset.done=1;const v=parseFloat(inp.value.replace(",",".").replace(/\s/g,""));
+        const ok=!isNaN(v)&&Math.abs(v-q.a)<=Math.max(q.tol||0,1e-9);inp.disabled=true;if(!ok)logErr("Test · "+n.t,q.q,"Réponse donnée : "+inp.value);
+        const fb=$(".fb",d);fb.hidden=false;fb.innerHTML=(ok?"<b style='color:var(--ok)'>Juste.</b> ":"<b style='color:var(--bad)'>Faux.</b> Réponse attendue : "+String(r4(q.a)).replace(".",",")+". ")+q.e;typeset(fb);fin(ok)};
+      $("button",d).onclick=chk;inp.onkeydown=e=>{if(e.key==="Enter")chk()}}
+    box.appendChild(d)});
+  function fin(ok){answered++;if(ok)good++;if(answered<tot)return;const sc=good/tot;const st=S.notions[n.id]=Object.assign(S.notions[n.id]||{},{read:true});
+    st.last=sc;st.best=Math.max(st.best||0,sc);st.tries=(st.tries||0)+1;save();
+    res.innerHTML=`<div class="box ${sc>=0.8?"ok":"trap"}"><b>${good}/${tot}</b> · ${sc>=0.8?"Notion validée.":"Pas encore validée : relis les parties liées à tes erreurs, puis refais le test."}</div><button class="btn ghost small" id="redo">Refaire le test</button>`;
+    $("#redo",res).onclick=()=>{box.innerHTML="";res.innerHTML="";runQuiz(box,res,n);typeset(box)}}
+}
+
+/* ================= Exercices-types ================= */
+function vExos(m){
+  if(cur.sub&&XBY[cur.sub])return vExo(m,XBY[cur.sub]);
+  const fq=Object.fromEntries(freqTable().map(r=>[r.id,r.n]));
+  m.innerHTML=`<h2>Exercices-types</h2><p class="lede">Chaque exercice réellement tombé, avec sa copie modèle et son barème. Rédige sur papier, tape au moins ton résultat, puis ouvre le corrigé et coche honnêtement les étapes que tu avais.</p>
+  <div class="notionlist" style="margin-top:12px">${EXOS.slice().sort((a,b)=>(fq[b.id]||0)-(fq[a.id]||0)).map(x=>{const ms=exoMastery(x.id);return`<button class="nitem" data-go="exos:${x.id}"><span class="dot ${ms>=0.8?"ok":ms>0?"lu":""}"></span><span><b>${x.t}</b><br><span class="small muted">${x.pts} · tombé ${fq[x.id]||0} fois sur 11${x.id==="tableau34"?" (TD)":""}</span></span><span class="num small">${Math.round(ms*100)} %</span></button>`}).join("")}</div>`}
+function vExo(m,x){
+  const st=S.exos[x.id]=S.exos[x.id]||{};
+  const where=EXAMS.filter(e=>e.parts.some(p=>p[0]===x.id)).map(e=>e.an+" "+e.s.slice(0,4)+".");
+  m.innerHTML=`<div class="row small"><a href="#" data-go="exos">← Tous les exercices</a><a href="#" data-go="cours:${x.notion}">Revoir le cours : ${NBY[x.notion].t}</a></div>
+  <h2 style="margin-top:8px">${x.t}</h2><div class="row"><span class="chip">${x.pts}</span><span class="small muted">${where.length?"Tombé en : "+where.join(", "):"Exercice de TD"}</span></div>
+  <div class="panel read" style="margin-top:12px">${x.enonce}</div><div id="qq"></div>`;
+  const qq=$("#qq",m);
+  x.qs.forEach((q,i)=>{const b=st[i]=st[i]||{};const d=document.createElement("div");d.className="q read";
+    d.innerHTML=`<div><b>Question ${x.qs.length>1?i+1:""}</b> ${q.q}</div>
+    <label class="small muted" for="ans_${x.id}_${i}" style="display:block;margin-top:8px">Ton résultat ou les étapes principales (rédige d'abord sur papier)</label>
+    <textarea id="ans_${x.id}_${i}">${esc(b.ans||"")}</textarea>
+    <div class="row" style="margin-top:6px"><button class="btn small" data-open>Voir le corrigé et le barème</button><span class="lock">Écris au moins 10 caractères pour débloquer.</span></div><div data-corr></div>`;
+    const ta=$("textarea",d),btn=$("[data-open]",d),cz=$("[data-corr]",d);
+    const upd=()=>{btn.disabled=ta.value.trim().length<10&&!b.open};upd();
+    ta.oninput=()=>{b.ans=ta.value;save();upd()};
+    const show=()=>{b.open=true;b.bar=b.bar||q.bar.map(()=>false);save();btn.hidden=true;$(".lock",d).hidden=true;
+      cz.innerHTML=`<div class="box ok" style="margin-top:10px"><b>Copie modèle</b>${q.corr}</div><div class="panel"><b>Barème : coche ce que ta copie contenait vraiment</b>${q.bar.map((s,k)=>`<label class="check"><input type="checkbox" id="bar_${x.id}_${i}_${k}" data-k="${k}" ${b.bar[k]?"checked":""}><span>${s}</span></label>`).join("")}<p class="small muted" data-sc></p></div>`;
+      const sc=()=>{const n=b.bar.filter(Boolean).length;$("[data-sc]",cz).textContent=n+"/"+q.bar.length+" étapes";};sc();
+      cz.querySelectorAll("input[data-k]").forEach(c=>c.onchange=()=>{b.bar[+c.dataset.k]=c.checked;save();sc();if(!c.checked)logErr("Exercice · "+x.t,"Q"+(i+1)+" : "+q.bar[+c.dataset.k],"étape manquée")});
+      typeset(cz)};
+    btn.onclick=show;if(b.open)show();qq.appendChild(d)});
+}
+
+/* ================= Annales ================= */
+function vAnnales(m){
+  m.innerHTML=`<h2>Annales 2016-2024</h2><p class="lede">Les 11 sujets de ton dossier, exercice par exercice. Chaque ligne renvoie à l'exercice-type corrigé. Le bouton « Passer ce sujet » le lance en examen blanc chronométré.</p>
+  <div class="grid" style="margin-top:12px">${EXAMS.map(e=>`<div class="panel"><div class="row" style="justify-content:space-between"><b>${e.an}</b><span class="chip ${e.s==="Rattrapage"?"warn":""}">${e.s}</span></div><p class="small muted">Durée ${e.d}</p>
+  <ul style="padding-left:18px;margin:6px 0">${e.parts.map(([id,pts,note])=>`<li><a href="#" data-go="exos:${id}">${XBY[id].t}</a> <span class="num small">${pts}</span>${note?`<br><span class="small muted">${note}</span>`:""}</li>`).join("")}</ul>
+  <button class="btn small ghost" data-exam="${e.id}">Passer ce sujet</button></div>`).join("")}</div>
+  <div class="box prof" style="margin-top:14px">Le scan du rattrapage 2022-23 s'arrête au milieu de l'exercice 3 (page 2 absente), et celui de l'ordinaire 2019-20 est illisible à la question 3-b. Si tu retrouves ces pages, envoie-les : j'ajouterai les questions manquantes.</div>`;
+  m.querySelectorAll("[data-exam]").forEach(b=>b.onclick=()=>{startBlanc(EXAMS.find(e=>e.id===b.dataset.exam));go("blanc")})}
+
+/* ================= Calculs générés ================= */
+function vCalc(m){
+  m.innerHTML=`<h2>Calculs générés</h2><p class="lede">Les mêmes exercices que la prof, avec d'autres nombres. Le code calcule la réponse exacte ; une tolérance d'arrondi est appliquée (virgule ou point acceptés).</p><div class="grid" id="gg" style="margin-top:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))"></div>`;
+  const gg=$("#gg",m);
+  const list=cur.sub?[GENS.find(g=>g.id===cur.sub),...GENS.filter(g=>g.id!==cur.sub)]:GENS;
+  list.forEach(g=>{const p=document.createElement("div");p.className="panel";gg.appendChild(p);newGen(p,g)})}
+function newGen(p,g){const ex=g.make();const st=S.gen[g.id]=S.gen[g.id]||{ok:0,tot:0};
+  p.innerHTML=`<div class="row" style="justify-content:space-between"><b>${g.t}</b><span class="small muted num">${st.ok}/${st.tot} juste${st.ok>1?"s":""}</span></div><p>${ex.q}</p>
+  <div class="row">${ex.f.map((f,k)=>`<label class="small" style="display:grid;gap:2px">${f[0]}<input type="text" inputmode="decimal" id="g_${g.id}_${k}" style="width:110px"></label>`).join("")}</div>
+  <div class="row" style="margin-top:8px"><button class="btn small" data-c>Vérifier</button><button class="btn small ghost" data-n>Nouveau</button><a href="#" class="small" data-go="cours:${g.notion}">Cours</a></div><div class="fb" data-fb></div>`;
+  $("[data-n]",p).onclick=()=>{newGen(p,g);typeset(p)};
+  $("[data-c]",p).onclick=()=>{let all=true;const tol=ex.tol;const out=ex.f.map((f,k)=>{const inp=$("#g_"+g.id+"_"+k,p);const v=parseFloat(inp.value.replace(",",".").replace(/\s/g,""));
+      const t=tol!=null?tol:Math.max(0.002,Math.abs(f[1])*0.002);const ok=!isNaN(v)&&Math.abs(v-f[1])<=t;if(!ok)all=false;inp.style.borderColor=ok?"var(--ok)":"var(--bad)";return ok});
+    st.tot++;if(all)st.ok++;else logErr("Calcul · "+g.t,ex.q.replace(/<[^>]+>/g,""),"au moins un résultat faux");save();
+    const fb=$("[data-fb]",p);fb.innerHTML=(all?"<b style='color:var(--ok)'>Tout est juste.</b> ":"<b style='color:var(--bad)'>"+out.filter(x=>!x).length+" résultat(s) faux.</b> ")+"<div class='box' style='margin-top:6px'>"+ex.s+"</div>";typeset(fb);
+    $(".num",p).textContent=st.ok+"/"+st.tot+" juste"+(st.ok>1?"s":"")};
+}
+
+/* ================= Cartes (Leitner) ================= */
+const INTV=[0,1,3,7,14,30];
+function isDue(i){const c=S.cards[i];if(!c)return true;return c.due<=today()}
+function vCartes(m){
+  const only=S.cardsReadOnly!==false;
+  const pool=CARDS.map((c,i)=>i).filter(i=>isDue(i)&&(!only||!NBY[CARDS[i].n]||S.notions[CARDS[i].n]?.read));
+  m.innerHTML=`<h2>Cartes de formules</h2><p class="lede">Répétition espacée : une carte sue revient dans 1, 3, 7, 14 puis 30 jours ; une carte ratée revient demain.</p>
+  <label class="check"><input type="checkbox" id="onlyread" ${only?"checked":""}><span>Seulement les cartes des notions que j'ai lues (${CARDS.filter(c=>S.notions[c.n]?.read).length}/${CARDS.length})</span></label>
+  <div id="cz" style="margin-top:10px"></div>`;
+  $("#onlyread",m).onchange=e=>{S.cardsReadOnly=e.target.checked;save();render()};
+  const cz=$("#cz",m);let k=0;
+  const show=()=>{if(k>=pool.length){cz.innerHTML=`<div class="box ok">${pool.length?"Fini pour aujourd'hui.":"Aucune carte à revoir"+(only?" (lis d'abord des notions, ou décoche le filtre).":".")}</div>`;return}
+    const i=pool[k],c=CARDS[i];const box=(S.cards[i]||{}).box||0;
+    cz.innerHTML=`<p class="small muted num">Carte ${k+1}/${pool.length} · boîte ${box} · ${NBY[c.n]?NBY[c.n].t:""}</p><div class="panel card3d" id="flip"><div>${c.f}</div></div>
+    <div class="row" style="margin-top:10px;justify-content:center"><button class="btn bad" data-r="0" hidden>Je ne savais pas</button><button class="btn ok" data-r="1" hidden>Je savais</button><span class="small muted" data-h>Touche la carte pour voir la réponse</span></div>`;
+    const fl=$("#flip",cz);fl.onclick=()=>{fl.innerHTML=`<div><div class="small muted">${c.f}</div><div style="margin-top:10px;font-size:1.15rem">${c.b}</div></div>`;typeset(fl);cz.querySelectorAll("[data-r]").forEach(b=>b.hidden=false);$("[data-h]",cz).hidden=true};
+    cz.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{const ok=b.dataset.r==="1";let nb=ok?Math.min(5,box+1):1;const d=new Date();d.setDate(d.getDate()+(ok?INTV[nb]:1));
+      S.cards[i]={box:nb,due:d.toISOString().slice(0,10)};if(!ok)logErr("Carte",c.f,"formule non sue");save();k++;show()});typeset(cz)};
+  show()}
+
+/* ================= Examen blanc ================= */
+let BL=null;
+function randomBlanc(){const big=pick(["gamma","normale"]),med=pick(["pieces","densite2a","bernoulli","pieces","densite2a"]),sm=pick(["discretp","cartes","unif01","linearite","mgf"]);
+  return{id:"alea",an:"Sujet aléatoire",s:"façon prof",d:"1h30",parts:[[big,"10 pts",""],[med,"6 pts",""],[sm,"4 pts",""]]}}
+function startBlanc(e){BL={exam:e,start:null,elapsed:0,running:false,phase:"sujet",marks:{}};}
+function vBlanc(m){
+  if(!BL){m.innerHTML=`<h2>Examen blanc</h2><p class="lede">1h30, sans notes, sur papier. À la fin, tu corriges avec les barèmes : la note est enregistrée et met à jour ta prévision.</p>
+    <div class="grid" style="margin-top:12px"><div class="panel"><b>Sujet aléatoire façon prof</b><p class="small muted">Un gros exercice (Gamma ou Normale, 10 pts), un moyen (6 pts), un petit (4 pts), tirés selon les fréquences des annales.</p><button class="btn" id="b1">Générer et commencer</button></div>
+    <div class="panel"><b>Un vrai sujet</b><p class="small muted">Choisis l'un des 11 sujets.</p><select id="bsel">${EXAMS.map(e=>`<option value="${e.id}">${e.an} · ${e.s}</option>`).join("")}</select> <button class="btn ghost" id="b2">Commencer</button></div></div>
+    ${S.blanc.length?`<h3>Historique</h3><div class="tablewrap"><table class="t"><tr><th>Date</th><th>Sujet</th><th>Note</th><th>Durée</th></tr>${S.blanc.map(b=>`<tr><td>${b.d}</td><td>${esc(b.name)}</td><td class="num">${b.score.toFixed(1)}/20</td><td class="num">${b.min} min</td></tr>`).join("")}</table></div>`:""}`;
+    $("#b1",m).onclick=()=>{startBlanc(randomBlanc());render()};$("#b2",m).onclick=()=>{startBlanc(EXAMS.find(e=>e.id===$("#bsel",m).value));render()};return}
+  const e=BL.exam;
+  const fmt=s=>{const mm=Math.floor(s/60),ss=s%60;return String(mm).padStart(2,"0")+":"+String(ss).padStart(2,"0")};
+  const lim=e.d==="2h"?7200:5400;
+  m.innerHTML=`<div class="row" style="justify-content:space-between"><h2>${e.an} · ${e.s}</h2><div class="row"><span class="timer" id="tm">${fmt(Math.max(0,lim-BL.elapsed))}</span>${BL.phase==="sujet"?`<button class="btn small" id="tgo">${BL.running?"Pause":"Démarrer"}</button><button class="btn small ghost" id="tend">J'ai fini, corriger</button>`:""}<button class="btn small ghost" id="tquit">Quitter</button></div></div>
+  <p class="small muted">Durée ${e.d}. Écris sur papier. ${BL.phase==="sujet"?"Le corrigé s'affiche quand tu termines.":"Coche, pour chaque question, les étapes présentes dans ta copie."}</p><div id="bz"></div>`;
+  const bz=$("#bz",m);
+  e.parts.forEach(([id,pts,note],pi)=>{const x=XBY[id];const d=document.createElement("div");d.className="panel read";d.style.marginTop="12px";
+    d.innerHTML=`<div class="row" style="justify-content:space-between"><b>Exercice ${pi+1}</b><span class="chip">${pts}</span></div>${note?`<p class="small muted">${note}</p>`:""}${x.enonce}${x.qs.map((q,qi)=>`<div style="margin-top:8px">${q.q}</div>${BL.phase==="corr"?`<div class="box ok">${q.corr}</div>${q.bar.map((s,k)=>`<label class="check"><input type="checkbox" id="bl_${pi}_${qi}_${k}" data-m="${pi}_${qi}_${k}" ${BL.marks[pi+"_"+qi+"_"+k]?"checked":""}><span>${s}</span></label>`).join("")}`:""}`).join("")}`;
+    bz.appendChild(d)});
+  if(BL.phase==="corr"){const r=document.createElement("div");r.className="panel";r.style.marginTop="12px";r.innerHTML=`<b>Note : <span id="bnote" class="num"></span></b><p class="small muted">Chaque exercice vaut ses points × (étapes cochées / étapes du barème).</p><button class="btn" id="bsave">Enregistrer la note</button>`;bz.appendChild(r);
+    const calc=()=>{let tot=0;const parts=e.parts.map(([id,pts],pi)=>{const x=XBY[id];let ok=0,all=0;x.qs.forEach((q,qi)=>q.bar.forEach((s,k)=>{all++;if(BL.marks[pi+"_"+qi+"_"+k])ok++}));tot+=ptsNum(pts)*(all?ok/all:0);return{id,ok,tot:all,pts:ptsNum(pts)}});
+      const sc=20*tot/e.parts.reduce((a,p)=>a+ptsNum(p[1]),0);$("#bnote",m).textContent=sc.toFixed(1)+"/20";return{sc,parts}};
+    bz.querySelectorAll("[data-m]").forEach(c=>c.onchange=()=>{BL.marks[c.dataset.m]=c.checked;calc()});calc();
+    $("#bsave",m).onclick=()=>{const{sc,parts}=calc();S.blanc.push({d:today(),name:e.an+" "+e.s,score:sc,min:Math.round(BL.elapsed/60),parts});
+      e.parts.forEach(([id],pi)=>XBY[id].qs.forEach((q,qi)=>q.bar.forEach((s,k)=>{if(!BL.marks[pi+"_"+qi+"_"+k])logErr("Examen blanc · "+XBY[id].t,s,"étape manquée")})));
+      save();toast("Note enregistrée : "+sc.toFixed(1)+"/20");BL=null;render()}}
+  const tick=()=>{if(!BL||!BL.running)return;BL.elapsed=Math.floor((Date.now()-BL.start)/1000)+BL.base;const t=$("#tm");if(t)t.textContent=fmt(Math.max(0,lim-BL.elapsed))};
+  clearInterval(vBlanc._iv);vBlanc._iv=setInterval(tick,1000);
+  const tg=$("#tgo",m);if(tg)tg.onclick=()=>{if(BL.running){tick();BL.running=false}else{BL.running=true;BL.start=Date.now();BL.base=BL.elapsed}tg.textContent=BL.running?"Pause":"Reprendre"};
+  const te=$("#tend",m);if(te)te.onclick=()=>{tick();BL.running=false;BL.phase="corr";render()};
+  $("#tquit",m).onclick=()=>{BL=null;clearInterval(vBlanc._iv);render()};
+}
+
+/* ================= Formulaire ================= */
+function vFormulaire(m){
+  let h=`<h2>Formulaire</h2><p class="lede">Toutes les formules du module, rangées par notion. C'est le contenu des cartes, à relire la veille de l'examen.</p>`;
+  NOTIONS.forEach(n=>{const cs=CARDS.filter(c=>c.n===n.id);if(!cs.length)return;h+=`<h3>${n.t}</h3><div class="tablewrap"><table class="t" style="text-align:left">${cs.map(c=>`<tr><td style="text-align:left">${c.f}</td><td style="text-align:left">${c.b}</td></tr>`).join("")}</table></div>`});
+  m.innerHTML=h}
+
+/* ================= Table N(0,1) ================= */
+function vTable(m){
+  let rows="";for(let i=0;i<=34;i++){const z=i/10;rows+=`<tr><th>${z.toFixed(1).replace(".",",")}</th>`;for(let j=0;j<10;j++)rows+=`<td>${PhiT(z+j/100).toFixed(4).replace(".",",")}</td>`;rows+="</tr>"}
+  m.innerHTML=`<h2>Table de la loi normale centrée réduite</h2><p class="lede">$\\Phi(u)=P(U\\le u)$ pour $u\\ge0$. Ligne = unité et dixième, colonne = centième. Pour $u<0$ : $\\Phi(-u)=1-\\Phi(u)$.</p>
+  <div class="panel row" style="margin:12px 0"><label class="small">$u$ <input type="text" id="tz" value="1,96" style="width:80px"></label><span class="num" id="tzo"></span><label class="small">probabilité $p$ <input type="text" id="tp" value="0,95" style="width:80px"></label><span class="num" id="tpo"></span></div>
+  <div class="tablewrap"><table class="t ntable num"><tr><th>u</th>${[0,1,2,3,4,5,6,7,8,9].map(j=>`<th>0,0${j}</th>`).join("")}</tr>${rows}</table></div>`;
+  const z=()=>{const v=parseFloat($("#tz").value.replace(",","."));$("#tzo").textContent=isNaN(v)?"":"Φ = "+PhiT(v).toFixed(4).replace(".",",")};
+  const p=()=>{const v=parseFloat($("#tp").value.replace(",","."));if(isNaN(v)||v<=0||v>=1){$("#tpo").textContent="";return}let lo=-5,hi=5;for(let k=0;k<60;k++){const mid=(lo+hi)/2;if(Phi(mid)<v)lo=mid;else hi=mid}$("#tpo").textContent="u tel que Φ(u)=p : "+lo.toFixed(2).replace(".",",")};
+  $("#tz").oninput=z;$("#tp").oninput=p;z();p()}
+
+/* ================= Suivi ================= */
+function summaryText(){const L=[];L.push("RÉSUMÉ PROBAS S3 — "+today());
+  L.push("Note prévue (moyenne sur les 11 sujets) : "+predicted().toFixed(1)+"/20");
+  const mins=Object.values(S.time).reduce((a,b)=>a+b,0);L.push("Temps total : "+mins+" min sur "+Object.keys(S.time).length+" jour(s)");
+  L.push("Notions (statut, meilleur test) :");NOTIONS.forEach(n=>{const s=S.notions[n.id];L.push("- "+n.t+" : "+(nStatus(n.id)==="ok"?"validée":s&&s.read?"lue":"non vue")+(s&&s.best!=null?" ("+Math.round(s.best*100)+" %, "+s.tries+" essai(s))":""))});
+  L.push("Exercices-types (maîtrise d'après barème) :");EXOS.forEach(x=>L.push("- "+x.t+" : "+Math.round(exoMastery(x.id)*100)+" %"));
+  if(S.blanc.length){L.push("Examens blancs :");S.blanc.forEach(b=>L.push("- "+b.d+" "+b.name+" : "+b.score.toFixed(1)+"/20 en "+b.min+" min"))}
+  const g=Object.entries(S.gen).filter(([k,v])=>v.tot);if(g.length){L.push("Calculs générés :");g.forEach(([k,v])=>L.push("- "+GENS.find(x=>x.id===k).t+" : "+v.ok+"/"+v.tot))}
+  const open=S.errs.filter(e=>!e.done).slice(0,15);if(open.length){L.push("Dernières erreurs non revues :");open.forEach(e=>L.push("- ["+e.where+"] "+e.q.replace(/\s+/g," ").slice(0,140)+" — "+e.note))}
+  if(S.signals.length){L.push("Signaux du prof :");S.signals.forEach(s=>L.push("- "+s.d+" : "+s.t))}
+  return L.join("\n")}
+function vSuivi(m){
+  m.innerHTML=`<h2>Suivi</h2><p class="lede">Ta progression reste dans ce navigateur. Pour que je mette à jour ton fichier de suivi, copie le résumé et colle-le dans la conversation du projet.</p>
+  <div class="grid" style="margin-top:12px"><div class="panel"><b>Résumé à envoyer à Claude</b><textarea id="sum" readonly style="min-height:160px;font-family:var(--f-mono);font-size:.8rem">${esc(summaryText())}</textarea><button class="btn small" id="cp">Copier</button></div>
+  <div class="panel"><b>Signal du prof</b><p class="small muted">La prof insiste sur un point, annonce un exercice, corrige une convention ? Note-le ici, il partira dans le résumé.</p><textarea id="sig" placeholder="ex. « elle a dit que la loi Gamma tombera encore »"></textarea><button class="btn small" id="addsig">Ajouter</button>
+  ${S.signals.length?`<ul class="small">${S.signals.map(s=>`<li>${s.d} : ${esc(s.t)}</li>`).join("")}</ul>`:""}</div></div>
+  <h3>Carnet d'erreurs (${S.errs.filter(e=>!e.done).length} à revoir)</h3><div id="errs"></div>
+  <h3>Sauvegarde</h3><div class="panel"><p class="small muted">Change d'appareil ou de navigateur ? Copie ce code et colle-le de l'autre côté.</p><textarea id="bk" style="font-family:var(--f-mono);font-size:.75rem"></textarea>
+  <div class="row"><button class="btn small ghost" id="bkout">Afficher ma sauvegarde</button><button class="btn small ghost" id="bkin">Restaurer depuis le code collé</button><button class="btn small bad" id="rst">Tout effacer</button><span id="rstc"></span></div></div>`;
+  $("#cp",m).onclick=()=>{const t=$("#sum",m);navigator.clipboard.writeText(t.value).then(()=>toast("Résumé copié"),()=>{t.select();toast("Sélectionné : fais Ctrl+C")})};
+  $("#addsig",m).onclick=()=>{const v=$("#sig",m).value.trim();if(!v)return;S.signals.push({d:today(),t:v});save();render()};
+  const ez=$("#errs",m);const list=S.errs;
+  ez.innerHTML=list.length?`<div class="notionlist">${list.slice(0,60).map((e,i)=>`<div class="nitem" style="cursor:default;${e.done?"opacity:.55":""}"><input type="checkbox" id="err${i}" data-e="${i}" ${e.done?"checked":""} title="Revu"><span><span class="small muted">${e.d} · ${esc(e.where)}</span><br>${e.q}<br><span class="small" style="color:var(--bad)">${esc(e.note)}</span></span><span></span></div>`).join("")}</div>`:`<p class="muted">Aucune erreur enregistrée pour l'instant.</p>`;
+  ez.querySelectorAll("[data-e]").forEach(c=>c.onchange=()=>{S.errs[+c.dataset.e].done=c.checked;save();toast(c.checked?"Marquée comme revue":"Remise à revoir")});
+  $("#bkout",m).onclick=()=>{$("#bk",m).value=JSON.stringify(S)};
+  $("#bkin",m).onclick=()=>{try{const o=JSON.parse($("#bk",m).value);S=Object.assign(JSON.parse(JSON.stringify(DEF)),o);save();toast("Progression restaurée");render()}catch(e){toast("Code invalide : colle tout le texte de la sauvegarde")}};
+  $("#rst",m).onclick=()=>{$("#rstc",m).innerHTML=`<span class="small">Sûr ? </span><button class="btn small bad" id="rst2">Oui, tout effacer</button>`;$("#rst2",m).onclick=()=>{S=JSON.parse(JSON.stringify(DEF));S.started=today();save();toast("Progression effacée");render()}};
+}
+
+/* ================= Démarrage ================= */
+(function(){const h=(location.hash||"").replace("#","");if(TABS.includes(h))cur.tab=h;document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===cur.tab));render()})();
+</script>
+
+</body></html>
