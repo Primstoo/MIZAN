@@ -67,6 +67,7 @@ details{margin:4px 0}summary{cursor:pointer;font-weight:600;color:var(--acc2)}de
 .tuM.a{background:var(--bg);align-self:flex-start}.tuM.u{background:color-mix(in srgb,var(--acc2) 22%,transparent);align-self:flex-end}
 .tuQuick{display:flex;gap:6px;flex-wrap:wrap;padding:6px 12px}.tuQuick button{font:600 12px var(--body);border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:4px 9px;cursor:pointer}
 .tuBody{flex:1;display:flex;flex-direction:column;min-height:0}.tuNote{padding:0 12px 8px;margin:0}.tuTh{border:1px solid var(--line);border-radius:8px;padding:6px 8px}.tuTh summary{color:var(--ink);font-weight:600}.tuTh .tuM{margin:6px 0}
+.tuDeepL{display:flex;align-items:center;gap:4px;font:600 12px var(--body);color:var(--mute);white-space:nowrap;text-transform:none;letter-spacing:0;margin:0}.tuDeepL input{width:auto}.tuDeepBtn{align-self:flex-start;font:600 12px var(--body);border:1px solid var(--acc2);color:var(--acc2);background:transparent;border-radius:999px;padding:4px 10px;cursor:pointer}
 .tuF{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
 </style>
 
@@ -995,7 +996,7 @@ renderEval('td1');renderFailles();
 <div id="tuPan" class="tuPan" hidden><div class="tuHead"><b>Tuteur</b><span class="expl" id="tuCtx"></span><button class="btn alt" id="tuHist" style="margin:0">Historique</button><button class="btn alt" id="tuX" style="margin:0">Fermer</button></div>
 <div id="tuChat" class="tuBody"><div id="tuLog" class="tuLog"></div>
 <div class="tuQuick"><button data-p="Réexplique cette notion autrement, plus simplement, avec une analogie.">Explique autrement</button><button data-p="Donne-moi UN exercice nouveau sur cette notion, sans la solution. Je répondrai et tu me corrigeras.">Un exercice</button><button data-p="À partir de mes questions ratées, explique mes erreurs probables et donne un mini-exercice ciblé.">Mes failles</button><button data-p="Qu'est-ce qui tombe le plus à l'examen sur cette notion et comment rédiger pour avoir tous les points ?">Examen</button><button data-new="1">Nouvelle discussion</button></div>
-<form id="tuF" class="tuF"><input id="tuIn" autocomplete="off" placeholder="Ta question ou ta réponse…"><button class="btn" style="margin:0">Envoyer</button></form>
+<form id="tuF" class="tuF"><input id="tuIn" autocomplete="off" placeholder="Ta question ou ta réponse…"><label class="tuDeepL" title="Modèle plus puissant : réponse plus longue et plus détaillée, consomme davantage"><input type="checkbox" id="tuDeep"> Approfondi</label><button class="btn" style="margin:0">Envoyer</button></form>
 <p class="expl tuNote" id="tuNote"></p></div>
 <div id="tuHistV" class="tuBody" hidden><div class="tuF"><input id="tuSearch" placeholder="Chercher dans toutes mes anciennes questions…" autocomplete="off"></div><div id="tuList" class="tuLog"></div></div></div>`);
  let sample=null,db=null,uid=null,TH=[],cur=null,busy=false;
@@ -1014,12 +1015,12 @@ renderEval('td1');renderFailles();
    try{const q=await db.collection('data/users/'+uid+'/tutor').get();const remote=q.docs.map(x=>({id:x.id,...x.data()}));
     const map={};for(const t of [...TH,...remote])if(!map[t.id]||(t.msgs||[]).length>(map[t.id].msgs||[]).length)map[t.id]=t;
     TH=Object.values(map).sort((a,b)=>a.date<b.date?-1:1);saveLocal();if(!$('tuHistV').hidden)renderList()}catch(e){}})}
- function note(){$('tuNote').textContent=sample?'Avant de poser une question, regarde « Historique » : si tu l\'as déjà posée, la réponse y est gratuitement.':'Le tuteur n\'est disponible que dans l\'application Claude, après avoir accepté la demande d\'autorisation. L\'historique reste consultable.'}
+ function note(){$('tuNote').textContent=sample?'Mode rapide par défaut (économe). Coche « Approfondi » ou clique « Approfondir cette réponse » pour une explication plus poussée (modèle supérieur). Avant de poser une question, regarde « Historique » : si tu l\'as déjà posée, la réponse y est gratuitement.':'Le tuteur n\'est disponible que dans l\'application Claude, après avoir accepté la demande d\'autorisation. L\'historique reste consultable.'}
  function threadsOf(k){return TH.filter(t=>t.sec===k)}
  function openSec(){const k=sec();$('tuCtx').textContent=' · '+nm(k);const ts=threadsOf(k);cur=ts.length?ts[ts.length-1]:null;renderLog()}
  function renderLog(){const log=$('tuLog');log.innerHTML='';
   if(!cur||!cur.msgs.length){log.innerHTML=`<div class="tuM a">Pose ta question sur « ${esc(nm(sec()))} » : une phrase de la leçon, un calcul à vérifier… Tes discussions sont enregistrées par notion. Tu les retrouveras dans « Historique ».</div>`;return}
-  for(const m of cur.msgs){const d=document.createElement('div');d.className='tuM '+(m.r==='u'?'u':'a');d.textContent=m.t;log.appendChild(d)}log.scrollTop=1e9}
+  cur.msgs.forEach((m,i)=>{const d=document.createElement('div');d.className='tuM '+(m.r==='u'?'u':'a');d.textContent=(m.d?'[Réponse approfondie]\n':'')+m.t;log.appendChild(d);if(m.r==='a'&&i===cur.msgs.length-1&&!m.d){const b=document.createElement('button');b.className='tuDeepBtn';b.textContent='Approfondir cette réponse';b.onclick=()=>ask('Approfondis ta réponse précédente : explique plus en détail, avec un exemple complet et les pièges.',true);log.appendChild(b)}});log.scrollTop=1e9}
  $('tuBtn').onclick=()=>{$('tuPan').hidden=false;$('tuBtn').hidden=true;showChat();openSec();note();$('tuIn').focus()};
  $('tuX').onclick=()=>{$('tuPan').hidden=true;$('tuBtn').hidden=false};
  function showChat(){$('tuChat').hidden=false;$('tuHistV').hidden=true;$('tuHist').textContent='Historique'}
@@ -1030,17 +1031,17 @@ renderEval('td1');renderFailles();
   if(!ts.length){box.innerHTML='<div class="tuM a">'+(TH.length?'Aucune discussion ne contient ce mot.':'Aucune discussion pour l\'instant.')+'</div>';return}
   box.innerHTML=ts.map(t=>`<details class="tuTh"><summary><span class="chip">${esc(nm(t.sec))}</span> ${esc(t.title)} <span class="expl">· ${esc(t.date.slice(0,10))}</span></summary>${t.msgs.map(m=>`<div class="tuM ${m.r==='u'?'u':'a'}">${esc(m.t)}</div>`).join('')}<button class="btn alt" data-cont="${t.id}">Continuer cette discussion</button></details>`).join('')}
  $('tuList').onclick=e=>{const id=e.target.dataset&&e.target.dataset.cont;if(!id)return;cur=TH.find(t=>t.id===id);show(cur.sec);showChat();$('tuCtx').textContent=' · '+nm(cur.sec);renderLog()};
- async function ask(q){q=q.trim();if(busy||!q)return;if(!sample){note();return}busy=true;const k=sec();
+ async function ask(q,deep){deep=deep||$('tuDeep').checked;q=q.trim();if(busy||!q)return;if(!sample){note();return}busy=true;const k=sec();
   if(!cur||cur.sec!==k){cur={id:'t'+Date.now().toString(36),sec:k,date:new Date().toISOString(),title:q.slice(0,70),msgs:[]};TH.push(cur)}
-  cur.msgs.push({r:'u',t:q});renderLog();const out=document.createElement('div');out.className='tuM a';out.textContent='…';$('tuLog').appendChild(out);
+  cur.msgs.push({r:'u',t:q});renderLog();const out=document.createElement('div');out.className='tuM a';out.textContent=deep?'Réflexion approfondie…':'…';$('tuLog').appendChild(out);
   // ÉCONOMIE : leçon raccourcie, seulement les 4 derniers messages, modèle rapide, réponses courtes
-  const lesson=(L[k]||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').slice(0,3500);
+  const lesson=(L[k]||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').slice(0,deep?9000:3500);
   const fails=PR[k]&&PR[k].wrong.length?'Questions ratées : '+PR[k].wrong.slice(0,4).join(' | '):'';
-  const sys=`Tu es le tuteur de cryptographie de Patrick (L3 FSABM, débutant, cours du Pr Farchane). Réponds en français simple, en 120 mots maximum, texte brut avec tirets et étapes chiffrées. Conventions du cours : A=0…Z=25, Playfair sans W (remplacé par V), LFSR où s0 sort en premier. Si c'est une réponse à un exercice, corrige étape par étape et pointe l'erreur. Notion : ${nm(k)}. Extrait de la leçon : ${lesson} ${fails}`;
-  const recent=cur.msgs.slice(-5,-1).map(m=>({role:m.r==='u'?'user':'assistant',content:m.t}));
+  const sys=`Tu es le tuteur de cryptographie de Patrick (L3 FSABM, débutant, cours du Pr Farchane). Réponds en français simple, en texte brut (tirets, étapes numérotées, pas de markdown lourd). ${deep?'Réponse APPROFONDIE (400 à 700 mots) : 1) l\'intuition avec une analogie, 2) l\'explication détaillée pas à pas, 3) pourquoi ça marche, 4) un exemple complet chiffré, 5) les pièges fréquents et ce qui tombe à l\'examen, 6) une question pour vérifier la compréhension.':'Réponse EXPLICATIVE (150 à 250 mots) : 1) l\'idée en une phrase, 2) l\'explication pas à pas, 3) un petit exemple chiffré, 4) une question courte pour vérifier.'} Conventions du cours : A=0…Z=25, Playfair sans W (remplacé par V), LFSR où s0 sort en premier. Si c'est une réponse à un exercice, corrige étape par étape et pointe l'erreur. Notion : ${nm(k)}. Extrait de la leçon : ${lesson} ${fails}`;
+  const recent=cur.msgs.slice(deep?-9:-5,-1).map(m=>({role:m.r==='u'?'user':'assistant',content:m.t}));
   while(recent.length&&recent[0].role!=='user')recent.shift();
   const msgs=[...recent,{role:'user',content:q}];msgs[0]={role:'user',content:sys+'\n\n---\n'+msgs[0].content};
-  try{const r=await sample(msgs,{modelTier:'quick',cache:false,onText:({text})=>{out.textContent=text;$('tuLog').scrollTop=1e9}});out.textContent=r.text;cur.msgs.push({r:'a',t:r.text});await saveThread(cur)}
+  try{const r=await sample(msgs,{modelTier:deep?'complex':'quick',cache:false,onText:({text})=>{out.textContent=text;$('tuLog').scrollTop=1e9}});cur.msgs.push({r:'a',t:r.text,d:!!deep});renderLog();await saveThread(cur)}
   catch(e){cur.msgs.pop();if(!cur.msgs.length)TH=TH.filter(t=>t!==cur);out.textContent=e&&e.code==='rate_limited'?'Trop de questions d\'un coup. Attends une minute.':e&&e.code==='not_granted'?'Le tuteur n\'a pas été autorisé. Recharge la page et accepte la demande.':'Le tuteur n\'a pas pu répondre. Réessaie.'}
   busy=false}
  $('tuF').onsubmit=e=>{e.preventDefault();const v=$('tuIn').value;$('tuIn').value='';ask(v)};
