@@ -85,3 +85,12 @@ Chaque choix : ce qu'on a pris, les alternatives, et pourquoi on les a écartée
 
 ## D10. Commits au nom du développeur, sans mention automatique de l'IA
 Choix de présentation, assumé : le développeur pilote le projet (vision, cahier des charges, tests, décisions) et utilise l'IA comme outil. En entretien, il présente honnêtement cet usage (voir NOTES.md).
+
+## D11. Un tuteur commun, en bouton flottant, pour tous les modules (`tutor/mizan-tutor.js`)
+**Alternatives :** garder un tuteur différent par module ; un onglet « Tuteur » séparé (comme dans le module Réseaux d'origine).
+**Pourquoi :**
+- Un seul code à maintenir : une amélioration du tuteur profite à tous les modules.
+- Le bouton est disponible sur chaque section, sans changer d'onglet ; l'extrait envoyé au tuteur est la section que l'élève lit (ou l'exercice de TD qu'il a ouvert).
+- Reprend les fonctions du tuteur Réseaux : mémoire des difficultés (ligne MÉMO cachée), photo du brouillon, bouton Arrêter, relances rapides, historique consultable avec recherche.
+**Économie :** modèle rapide par défaut avec réponses explicatives (150-250 mots) ; modèle supérieur seulement à la demande (case « Approfondi » ou bouton « Approfondir cette réponse »), avec plus de contexte.
+**Pourquoi pas un onglet séparé :** il oblige à quitter le cours et à re-choisir manuellement l'extrait ; l'élève pose moins de questions.
