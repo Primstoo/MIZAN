@@ -33,3 +33,27 @@ label{font-size:13px;font-weight:600;color:var(--mute)}
 .module{display:flex;flex-direction:column;height:100%}
 .back{text-decoration:none;color:var(--acc);font-weight:600}
 .frame{flex:1;border:0;width:100%}
+/* ---- Connexion ---- */
+.auth{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);min-height:100%}
+.auth-brand{background:var(--acc);color:#fff;padding:32px max(24px,env(safe-area-inset-left));display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.logo.light{color:#fff}
+.auth-tag{font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.1;margin:0 0 16px;text-wrap:balance}
+.auth-tag em{font-style:normal;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+.auth-points{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;font-size:16px}
+.auth-points li::before{content:"✓  ";font-weight:700}
+.auth-foot{opacity:.8;margin:0}
+.auth-form{display:flex;align-items:center;justify-content:center;padding:32px 16px}
+.auth-card{width:100%;max-width:400px;display:flex;flex-direction:column;gap:10px}
+.auth-card h1{margin:0}
+.auth-card p{margin:0}
+.auth-step{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--acc)}
+.btn.big{padding:13px 16px;font-size:16px;width:100%}
+.code-input{font-size:28px;letter-spacing:.5em;text-align:center;font-variant-numeric:tabular-nums;padding:12px}
+.auth-links{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.linkbtn{background:none;border:0;color:var(--acc);font:600 14px inherit;cursor:pointer;padding:4px 0}
+.linkbtn:disabled{color:var(--mute);cursor:default}
+.alert{padding:10px 12px;border-radius:8px;font-size:14px}
+.alert.bad{background:color-mix(in srgb,var(--bad) 12%,transparent);color:var(--bad)}
+.alert.ok{background:color-mix(in srgb,var(--ok) 12%,transparent);color:var(--ok)}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media (max-width:720px){.auth{grid-template-columns:1fr}.auth-brand{padding:20px 16px;gap:12px}.auth-points,.auth-foot{display:none}.auth-tag{font-size:24px;margin:0}}

@@ -1,0 +1,16 @@
+import { NextResponse } from "next/server";
+import type { EmailOtpType } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/server";
+
+// Lien de l'e-mail : vérification par token_hash, qui marche dans n'importe quel navigateur.
+export async function GET(request: Request) {
+  const { searchParams, origin } = new URL(request.url);
+  const token_hash = searchParams.get("token_hash");
+  const type = (searchParams.get("type") as EmailOtpType | null) ?? "email";
+  if (token_hash) {
+    const supabase = createClient();
+    const { error } = await supabase.auth.verifyOtp({ token_hash, type });
+    if (!error) return NextResponse.redirect(`${origin}/app`);
+  }
+  return NextResponse.redirect(`${origin}/login?erreur=lien`);
+}
