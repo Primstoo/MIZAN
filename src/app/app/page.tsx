@@ -1,84 +1,77 @@
+import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { MODULES } from "@/lib/modules";
-import Deconnexion from "./Deconnexion";
-import { admin, estAdmin } from "@/lib/acces";
-import { creerInvitation } from "./actions";
-import Copier from "./Copier";
+import { admin } from "@/lib/acces";
+import { chargerParcours, missionDuJour } from "@/lib/parcours";
 
-// Tableau de bord : d'abord les modules commencés, le catalogue complet est replié.
-export default async function Tableau() {
-  const supabase = createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  const { data: prog } = await supabase.from("progress").select("module_slug, updated_at");
-  const db = admin();
-  const jour = new Date().toISOString().slice(0, 10);
-  const [{ data: inv }, { data: usage }] = await Promise.all([
-    db.from("invites").select("code, uses, max_uses").eq("owner", user!.id),
-    db.from("tutor_usage").select("count").eq("user_id", user!.id).eq("day", jour).maybeSingle(),
-  ]);
-  const quota = Number(process.env.TUTOR_DAILY_QUOTA || 40);
-  const restant = Math.max(0, quota - (usage?.count ?? 0));
-  const peutCreer = estAdmin(user) || (inv?.length ?? 0) < Number(process.env.INVITES_PER_MEMBER || 1);
-  const vus = new Map((prog ?? []).map((p) => [p.module_slug, p.updated_at as string]));
-  const commences = MODULES.filter((m) => vus.has(m.slug))
-    .sort((a, b) => (vus.get(b.slug)! > vus.get(a.slug)! ? 1 : -1));
-  const semestres = Array.from(new Set(MODULES.map((m) => m.semestre))).sort().reverse();
-  const prenom = (user?.email ?? "").split("@")[0].split(/[._-]/)[0];
-  const fr = (d: string) => new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+// « Aujourd'hui » : le cœur de l'appli. Mission du jour, compte à rebours, série, prochain live.
+export default async function Aujourdhui() {
+  const { data: { user } } = await createClient().auth.getUser();
+  const p = await chargerParcours(user!);
+  if (!p.profil) redirect("/app/bienvenue");
 
-  const Carte = ({ m }: { m: (typeof MODULES)[number] }) => (
-    <a href={`/app/m/${m.slug}`} className="card">
-      <span className="chip">{m.semestre}</span>
-      <h3>{m.titre}</h3>
-      {m.prof && <p className="muted small">{m.prof}</p>}
-      <p className="small">{m.resume}</p>
-      <p className="small muted foot-card">{vus.has(m.slug) ? `Dernière séance : ${fr(vus.get(m.slug)!)}` : "Pas encore commencé"}</p>
-    </a>
-  );
+  const cible = p.examens[0];
+  const mission = cible ? missionDuJour(p.profil.minutes_jour, cible.reste) : null;
+  const fait = cible ? p.faitAujourdhui.has(cible.module_slug) : false;
+  const { data: lives } = await admin().from("live_sessions").select("id, titre, starts_at, prix_dh, places")
+    .gte("starts_at", new Date().toISOString()).order("starts_at").limit(1);
+  const live = lives?.[0];
+  const heure = (iso: string) => new Date(iso).toLocaleString("fr-FR", { timeZone: "Africa/Casablanca", weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" });
 
   return (
-    <main className="page">
-      <header className="top">
-        <a href="/app" className="logo">MIZAN</a>
-        <div className="row">
-          {estAdmin(user) && <a href="/app/admin" className="btn alt small">Suivi</a>}
-          <Deconnexion />
-        </div>
+    <main className="page today">
+      <header className="row between">
+        <div><p className="eyebrow">Salut {p.profil.prenom || ""}</p><h1>Aujourd&apos;hui</h1></div>
+        {p.serie > 0 && <span className="chip amber">🔥 {p.serie} jour{p.serie > 1 ? "s" : ""}</span>}
       </header>
 
-      <section className="hello">
-        <div>
-          <h1>Bonjour{prenom ? ` ${prenom.charAt(0).toUpperCase()}${prenom.slice(1)}` : ""}.</h1>
-          <p className="muted">{commences.length ? "Reprends là où tu t'es arrêté." : "Choisis un premier module pour commencer."}</p>
-        </div>
-        <div className="stat"><strong>{restant}</strong><span className="small muted">questions au tuteur<br />restantes aujourd&apos;hui</span></div>
-      </section>
-
-      {commences.length > 0 && (
-        <section>
-          <h2>Mes modules</h2>
-          <div className="grid">{commences.map((m) => <Carte key={m.slug} m={m} />)}</div>
+      {cible && mission ? (
+        <section className="card hi">
+          <p className="k">Mission du jour · {p.profil.minutes_jour >= 120 ? "2 h" : p.profil.minutes_jour + " min"}</p>
+          <h2>{cible.module!.titre}</h2>
+          {mission.urgent && <p className="small">Examen dans moins de deux semaines : place aux conditions réelles.</p>}
+          <ul className="tasks">
+            {mission.etapes.map((e, i) => <li key={e} className={fait && i === 0 ? "done" : ""}>{e}</li>)}
+          </ul>
+          <a href={`/app/m/${cible.module_slug}`} className="btn inv">{fait ? "Continuer" : "Commencer"}</a>
+        </section>
+      ) : (
+        <section className="card">
+          <h2>Ajoute une date d&apos;examen</h2>
+          <p className="muted small">Sans date d&apos;examen, l&apos;appli ne peut pas calculer ta mission du jour.</p>
+          <a href="/app/bienvenue" className="btn">Choisir mes modules</a>
         </section>
       )}
 
-      <details className="bloc catalogue" open={commences.length === 0}>
-        <summary><h2>{commences.length ? "Ajouter un module" : "Modules disponibles"}</h2><span className="muted small">{MODULES.length} modules</span></summary>
-        {semestres.filter((s) => MODULES.some((m) => m.semestre === s && !vus.has(m.slug))).map((s) => (
-          <div key={s}>
-            <p className="eyebrow">Semestre {s.replace("S", "")}</p>
-            <div className="grid">{MODULES.filter((m) => m.semestre === s && !vus.has(m.slug)).map((m) => <Carte key={m.slug} m={m} />)}</div>
-          </div>
-        ))}
-      </details>
-
-      <section className="bloc">
-        <h2>Inviter des camarades</h2>
-        <p className="muted small">MIZAN est en bêta privée : chaque code fait entrer quelques personnes.</p>
-        {(inv ?? []).map((i) => (
-          <p key={i.code} className="row"><code className="code">{i.code}</code><span className="small muted">{i.max_uses - i.uses} place{i.max_uses - i.uses > 1 ? "s" : ""} restante{i.max_uses - i.uses > 1 ? "s" : ""}</span><Copier texte={i.code} /></p>
-        ))}
-        {peutCreer && <form action={creerInvitation}><button className="btn small">Créer un code</button></form>}
-      </section>
+      <div className="duo">
+        {cible && (
+          <section className="card">
+            <div className="row between"><span className="k">Examen dans</span><span className="chip">{cible.module!.titre.split(" (")[0]}</span></div>
+            <p className="big">{cible.reste} jour{cible.reste > 1 ? "s" : ""}</p>
+            <div className="days">
+              {p.semaine.map((j) => (
+                <i key={j.d} className={j.fait ? "on" : j.aujourdhui ? "today" : ""} title={j.d}>
+                  {["L", "M", "M", "J", "V", "S", "D"][(new Date(j.d + "T12:00:00Z").getUTCDay() + 6) % 7]}
+                </i>
+              ))}
+            </div>
+            {p.examens.length > 1 && (
+              <ul className="small muted list-plain">
+                {p.examens.slice(1).map((e) => <li key={e.module_slug}>{e.module!.titre} : J-{e.reste}</li>)}
+              </ul>
+            )}
+          </section>
+        )}
+        <section className="card">
+          <span className="k">Prochaine séance live</span>
+          {live ? (
+            <>
+              <p className="t">{live.titre}</p>
+              <p className="small muted">{heure(live.starts_at)} · {live.prix_dh} DH</p>
+              <a href="/app/live" className="btn alt small">Voir et réserver</a>
+            </>
+          ) : <p className="small muted">Aucune séance programmée pour l&apos;instant.</p>}
+        </section>
+      </div>
     </main>
   );
 }

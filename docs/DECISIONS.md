@@ -117,3 +117,10 @@ Les modules utilisent l'interface des artifacts Claude. Hors de Claude, le pont 
 
 ## D16. Page de suivi admin (`/app/admin`)
 Membres, actifs sur 7 jours, questions au tuteur, usage par module. Ce sont les chiffres qui diront si une offre payante a du sens (seuil de décision du plan commercial).
+
+## D17. Retour aux maquettes « Mizan Écrans » : parcours guidé + live
+**Constat :** la plateforme était un simple conteneur de modules, loin des maquettes validées (date d'examen, mission du jour, live).
+**Fait :** inscription guidée (prénom, modules, dates d'examen, temps par jour) ; page Aujourd'hui (mission du jour sur le module dont l'examen est le plus proche, compte à rebours, série de jours, semaine) ; Modules ; Live (réservation, paiement validé à la main par l'admin, lien visible 30 min avant pour les payés) ; Moi. Navigation en bas sur téléphone.
+**Série :** un trigger Postgres inscrit le jour de révision à chaque synchronisation de progression (aucun changement dans les modules).
+**Pas encore :** test de niveau, barres de maîtrise par chapitre, points faibles et examen blanc côté plateforme. Ils exigent que les modules exposent leurs scores dans un format commun (prochaine étape : un message standard module → plateforme). Bot Telegram plus tard.
+**Paiement :** manuel (CashPlus, virement…) avec validation admin, comme prévu dans la maquette. Instructions dans la variable `LIVE_PAIEMENT_INFO`. Un paiement en ligne (CMI) demande une entreprise enregistrée.

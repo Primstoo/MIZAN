@@ -1,0 +1,74 @@
+"use client";
+import { useState } from "react";
+import { enregistrerProfil } from "../actions";
+
+type M = { slug: string; titre: string; semestre: string };
+
+export default function Etapes({ modules, prenom, minutes, dates }: { modules: M[]; prenom: string; minutes: number; dates: Record<string, string> }) {
+  const [etape, setEtape] = useState(0);
+  const [nom, setNom] = useState(prenom);
+  const [choix, setChoix] = useState<string[]>(Object.keys(dates));
+  const [d, setD] = useState<Record<string, string>>(dates);
+  const [min, setMin] = useState(minutes);
+  const total = 3;
+  const auj = new Date().toISOString().slice(0, 10);
+  const peutSuivre = etape === 0 ? nom.trim().length > 0 : etape === 1 ? choix.length > 0 && choix.every((s) => d[s]) : true;
+
+  return (
+    <form action={enregistrerProfil} className="onb">
+      <div className="bar"><i style={{ width: `${((etape + 1) / total) * 100}%` }} /></div>
+      <p className="eyebrow">Étape {etape + 1} sur {total}</p>
+
+      {/* Les champs restent dans le formulaire même quand l'étape est masquée */}
+      <section hidden={etape !== 0}>
+        <h1>Comment tu t&apos;appelles ?</h1>
+        <p className="muted">Pour que l&apos;appli et le tuteur s&apos;adressent à toi.</p>
+        <input name="prenom" value={nom} onChange={(e) => setNom(e.target.value)} placeholder="Ton prénom" autoComplete="given-name" />
+        <input name="filiere" placeholder="Ta filière (ex. MIACSD, L3) — facultatif" />
+      </section>
+
+      <section hidden={etape !== 1}>
+        <h1>Quels modules, et c&apos;est quand l&apos;examen ?</h1>
+        <p className="muted">Coche tes modules et indique la date de chaque examen. L&apos;appli calcule ta mission du jour à partir de là.</p>
+        <div className="stack">
+          {modules.map((m) => {
+            const on = choix.includes(m.slug);
+            return (
+              <div key={m.slug} className={`opt ${on ? "sel" : ""}`}>
+                <label className="row">
+                  <input type="checkbox" name="module" value={m.slug} checked={on}
+                    onChange={() => setChoix(on ? choix.filter((x) => x !== m.slug) : [...choix, m.slug])} />
+                  <span><strong>{m.titre}</strong> <span className="muted small">· {m.semestre}</span></span>
+                </label>
+                {on && (
+                  <label className="date">Date de l&apos;examen
+                    <input type="date" name={`date_${m.slug}`} min={auj} value={d[m.slug] ?? ""} onChange={(e) => setD({ ...d, [m.slug]: e.target.value })} required />
+                  </label>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section hidden={etape !== 2}>
+        <h1>Combien de temps par jour ?</h1>
+        <p className="muted">Sois réaliste : mieux vaut 30 minutes tous les jours que 3 heures une fois par semaine.</p>
+        <input type="hidden" name="minutes" value={min} />
+        {[30, 60, 120].map((v) => (
+          <button type="button" key={v} className={`opt big-opt ${min === v ? "sel" : ""}`} onClick={() => setMin(v)}>
+            {v === 30 ? "30 minutes" : v === 60 ? "1 heure" : "2 heures et plus"}
+          </button>
+        ))}
+        <div className="card soft"><p className="small">Ensuite, ouvre ton premier module : chaque jour, la page Aujourd&apos;hui te dira quoi faire.</p></div>
+      </section>
+
+      <div className="row between onb-nav">
+        {etape > 0 ? <button type="button" className="btn alt" onClick={() => setEtape(etape - 1)}>Retour</button> : <span />}
+        {etape < total - 1
+          ? <button type="button" className="btn" disabled={!peutSuivre} onClick={() => setEtape(etape + 1)}>Continuer</button>
+          : <button type="submit" className="btn">C&apos;est parti</button>}
+      </div>
+    </form>
+  );
+}

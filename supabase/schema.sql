@@ -68,3 +68,7 @@ drop policy if exists "invites: lecture propriétaire" on public.invites;
 create policy "invites: lecture propriétaire" on public.invites for select using (auth.uid() = owner);
 drop policy if exists "members: lecture soi" on public.members;
 create policy "members: lecture soi" on public.members for select using (auth.uid() = user_id);
+
+-- ===== Parcours et séances live (voir migration « parcours_live ») =====
+-- profiles, exams, activity (alimentée par un trigger sur progress), live_sessions, live_bookings.
+-- Le script complet est dans supabase/migrations/parcours_live.sql.
