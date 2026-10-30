@@ -3,7 +3,7 @@
      id: 'crypto',                      // identifiant court du module (stockage)
      module: 'Cryptographie',           // nom affiché et donné au tuteur
      prof: 'Pr A. Farchane',
-     student: 'Patrick, L3 MIACSD à la FSABM (Béni Mellal)',
+     student:'un étudiant de licence (FSABM)',
      conventions: '…',                  // conventions du prof à respecter
      getContext: () => ({label, text})  // facultatif : extrait courant (sinon section visible)
    };

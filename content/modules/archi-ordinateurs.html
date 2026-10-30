@@ -225,7 +225,7 @@ ol.code{font:14px var(--mono);background:var(--soft);border-radius:6px;padding:1
 <div class="wrap">
   <header class="top">
     <div class="brand">
-      <div class="chipmark">MIP-S3 · 8086 · VON NEUMANN · MODULE À REPASSER</div>
+      <div class="chipmark">MIP-S3 · 8086 · VON NEUMANN</div>
       <h1>Architecture <span>des ordinateurs</span></h1>
       <p>Programme complet tiré du cours de H. Ouchitachen (CH1-CH6, mémoires, bus, processeurs, assembleur), des TD 1-5, du DM et des TP 1-5. Objectif : 17/20.</p>
     </div>
@@ -2041,7 +2041,7 @@ function renderErr(){document.getElementById('errKpis').innerHTML=CAUSES.map(c=>
   document.querySelector('#errTable tbody').innerHTML=S.errors.length?S.errors.slice().reverse().map(e=>`<tr><td class="num">${e.date}</td><td class="small">${esc(NMAP[e.n]?NMAP[e.n].t:e.n)}</td><td class="small">${esc(e.q)}</td><td class="small">${esc(e.cause)}</td></tr>`).join(''):'<tr><td colspan="4" class="muted">Aucune erreur enregistrée.</td></tr>';}
 
 /* ======================= SAUVEGARDE ======================= */
-function summary(){const L=[];L.push(`ÉTAT APP — Architecture des ordinateurs (MIP-S3, à repasser) — ${today()}`);L.push(`Temps : ${Math.floor(S.secs/60)} min · Leçons lues : ${Object.keys(S.read).length}/14 · validées : ${Object.keys(S.valid).join(', ')||'aucune'}`);
+function summary(){const L=[];L.push(`ÉTAT APP — Architecture des ordinateurs (MIP-S3) — ${today()}`);L.push(`Temps : ${Math.floor(S.secs/60)} min · Leçons lues : ${Object.keys(S.read).length}/14 · validées : ${Object.keys(S.valid).join(', ')||'aucune'}`);
   L.push('Notions (statut · réussite · essais) :');NOTIONS.forEach(n=>{const r=rate(n.id);L.push(`- ${n.id} ${n.t} : ${['⬜','🟨','🟩'][status(n.id)]} ${r==null?'—':Math.round(r*100)+'%'} (${(S.attempts[n.id]||[]).length})`);});
   L.push('Scores :');S.history.slice(-15).forEach(h=>L.push(`- ${h.date} ${h.type} : ${h.score}/${h.max} ${h.detail||''}`));
   const c={};S.errors.forEach(e=>{c[e.cause]=(c[e.cause]||0)+1;});L.push('Erreurs par cause : '+(Object.entries(c).map(([k,v])=>k+' '+v).join(', ')||'aucune'));S.errors.slice(-8).forEach(e=>L.push(`- [${e.cause}] ${e.n} : ${String(e.q).slice(0,90)}`));
@@ -2093,7 +2093,7 @@ document.getElementById('tutStop').onclick=()=>{if(TUT.ctl)TUT.ctl.abort();};
 const TUT_ERR={not_granted:'Tu n\'as pas autorisé l\'appli à utiliser Claude (menu Autorisations de l\'artifact).',sampling_disabled:'Claude n\'est pas disponible pour ce compte.',rate_limited:'Limite atteinte pour le moment. Réessaie dans un moment.',session_expired:'Session expirée : reconnecte-toi à Claude.',refused:'Claude n\'a pas pu répondre. Reformule.',prompt_too_large:'Le sujet choisi est trop long. Choisis une partie plus précise.',image_rejected:'Photo refusée (format ou taille). Essaie un JPEG ou un PNG.',images_unavailable:'Les photos ne sont pas disponibles ici.',empty_completion:'Pas de réponse : reformule.'};
 document.getElementById('tutSend').onclick=async()=>{if(TUT.busy||!SAMPLE)return;const box=document.getElementById('tutIn');const q=box.value.trim();if(!q){box.focus();return;}
   const ctx=ctxList().find(x=>x.v===TUT.ctx)||ctxList()[0];
-  const rules=`Tu es le tuteur de Patrick, étudiant en licence MIACSD à la FSABM (Béni Mellal), qui repasse le module « Architecture des ordinateurs » (MIP-S3, cours de H. Ouchitachen). Objectif : 17/20.
+  const rules=`Tu es le tuteur d'un étudiant en licence MIACSD à la FSABM (Béni Mellal), qui repasse le module « Architecture des ordinateurs » (MIP-S3, cours de H. Ouchitachen). Objectif : 17/20.
 Règles : réponds en français, clairement, en 200 mots maximum sauf s'il demande plus. Appuie-toi d'abord sur l'EXTRAIT et les conventions du cours. Si une source générale diffère du cours, signale l'écart et dis quelle version écrire à l'examen. Pour un calcul, pose chaque étape et vérifie-la (repasse en décimal). S'il se trompe, nomme précisément l'erreur. Si tu n'es pas sûr, dis-le. S'il envoie une photo, commente précisément ce qu'elle montre. Termine par UNE courte question de vérification (ou, s'il demande un exercice, donne l'énoncé sans la solution).
 Utilise sa mémoire ci-dessous pour faire des liens avec ses confusions passées, sans la réciter.
 Termine TOUJOURS par une dernière ligne « MÉMO: … » qui résume en 15 mots maximum la difficulté révélée par sa question (ou « MÉMO: rien »). Cette ligne lui est cachée.
@@ -2119,7 +2119,7 @@ go(curTab);
 
 
 <script>
-window.MZT_CONFIG={id:'archi',module:'Architecture des ordinateurs',prof:'',student:'Patrick, étudiant en L3 MIACSD (cybersécurité et science des données) à la FSABM de Béni Mellal',conventions:(typeof CONVENTIONS!=='undefined'?CONVENTIONS:'')};
+window.MZT_CONFIG={id:'archi',module:'Architecture des ordinateurs',prof:'',student:'un étudiant de licence (FSABM)',conventions:(typeof CONVENTIONS!=='undefined'?CONVENTIONS:'')};
 </script>
 <script>
 /* MIZAN · tuteur commun (bouton flottant présent sur chaque section)
@@ -2127,7 +2127,7 @@ window.MZT_CONFIG={id:'archi',module:'Architecture des ordinateurs',prof:'',stud
      id: 'crypto',                      // identifiant court du module (stockage)
      module: 'Cryptographie',           // nom affiché et donné au tuteur
      prof: 'Pr A. Farchane',
-     student: 'Patrick, L3 MIACSD à la FSABM (Béni Mellal)',
+     student:'un étudiant de licence (FSABM)',
      conventions: '…',                  // conventions du prof à respecter
      getContext: () => ({label, text})  // facultatif : extrait courant (sinon section visible)
    };

@@ -1560,7 +1560,7 @@ const TD=[
   {id:'6.3',n:'n25',q:'Par quel moyen fait-on la correspondance entre l\'adresse IP d\'un serveur et son nom sur Internet ?',c:'Par le <b>DNS</b> (Domain Name System) : une base de données distribuée et hiérarchique qui associe les noms de domaine aux adresses IP (port 53).'},
   {id:'6.4',n:'n25',q:'Définition et rôle de SMTP.',c:'<b>SMTP</b> (Simple Mail Transfer Protocol) : protocole application qui assure l\'<b>envoi</b> du courrier, du client expéditeur vers son serveur de messagerie, puis entre serveurs de messagerie (MTA). Port TCP 25.'},
   {id:'6.5',n:'n25',q:'Définition et rôle de POP.',c:'<b>POP3</b> (Post Office Protocol v3) : protocole application qui permet au client de <b>récupérer</b> (télécharger) son courrier depuis le serveur de messagerie. Port TCP 110. (IMAP fait la même chose en laissant les messages sur le serveur.)'},
-  {id:'6.6',n:'n25',q:'Syntaxe générale d\'une adresse e-mail.',c:'<b>nom_utilisateur@nom_de_domaine</b>, par exemple patrick@fpbm.ma. La partie avant le @ désigne la boîte aux lettres ; la partie après le @ désigne le domaine du serveur de messagerie.'},
+  {id:'6.6',n:'n25',q:'Syntaxe générale d\'une adresse e-mail.',c:'<b>nom_utilisateur@nom_de_domaine</b>, par exemple etudiant@fpbm.ma. La partie avant le @ désigne la boîte aux lettres ; la partie après le @ désigne le domaine du serveur de messagerie.'},
   {id:'6.7',n:'n13',q:'Citer 4 possibilités d\'accès à un fournisseur d\'accès Internet.',c:'Au choix : <b>ADSL</b> (ligne téléphonique) ; <b>fibre optique</b> ; <b>réseau mobile 3G/4G/5G</b> ; <b>RNIS</b> (cité dans l\'énoncé) ; modem RTC (bas débit) ; <b>satellite</b> ; câble ; liaison louée / spécialisée ; WiMAX.'},
   {id:'6.8',n:'n25',q:'Compléter le schéma entre le client et le serveur de courrier : « Réception du courrier par … » / « Envoi du courrier par … ».',c:'<b>Envoi</b> du courrier par <b>SMTP</b> (client → serveur).\n<b>Réception</b> du courrier par <b>POP3</b> (ou IMAP) (serveur → client).'}]},
  {ex:'Exercice 7 · Couches, encapsulation et ports',items:[
@@ -1762,7 +1762,7 @@ document.getElementById('tutStop').onclick=()=>{if(TUT.ctl)TUT.ctl.abort();};
 const TUT_ERR={not_granted:'Tu n\'as pas autorisé l\'appli à utiliser Claude. Tu peux changer ça dans le menu Autorisations de l\'artifact.',sampling_disabled:'Claude n\'est pas disponible pour ce compte.',rate_limited:'Trop de questions d\'un coup, ou limite d\'usage atteinte. Réessaie dans un moment.',session_expired:'Ta session a expiré : reconnecte-toi à Claude.',refused:'Claude n\'a pas pu répondre à cette demande. Reformule ta question.',prompt_too_large:'L\'extrait est trop long. Choisis une partie plus précise.',image_rejected:'Cette photo n\'est pas acceptée (format ou taille). Essaie un JPEG ou un PNG.',images_unavailable:'Les photos ne sont pas disponibles ici : pose ta question en texte.',empty_completion:'Pas de réponse : reformule ta question.'};
 document.getElementById('tutSend').onclick=async()=>{if(TUT.busy||!SAMPLE)return;const box=document.getElementById('tutIn');const q=box.value.trim();if(!q){box.focus();return;}
   const ctx=ctxList().find(x=>x.v===TUT.ctx)||ctxList()[0];
-  const rules=`Tu es le tuteur de Patrick, étudiant en 3e année de licence MIACSD à la FSABM (Béni Mellal), pour le module M351 Réseaux informatiques du Pr A. Darif. Son objectif est 16/20.
+  const rules=`Tu es le tuteur d'un étudiant en 3e année de licence MIACSD à la FSABM (Béni Mellal), pour le module M351 Réseaux informatiques du Pr A. Darif. Son objectif est 16/20.
 Règles : réponds en français, clairement et sans jargon inutile, en 200 mots maximum sauf s'il demande plus. Appuie-toi d'abord sur l'EXTRAIT ci-dessous et sur les conventions du prof. Si une source générale diffère du cours, signale l'écart et dis quelle version utiliser à l'examen (celle du prof). Pour un calcul, pose chaque étape et vérifie-la. S'il fait une erreur de raisonnement, nomme-la explicitement. Si tu n'es pas sûr, dis-le. S'il envoie une photo, lis-la et commente précisément ce qu'elle montre. Termine par UNE courte question de vérification pour qu'il teste sa compréhension (sauf s'il demande un mini-exercice : donne alors l'exercice sans la solution).
 Utilise sa mémoire ci-dessous pour faire des liens (« c'est la même confusion que pour… ») et insister sur ses points faibles, sans la réciter.
 Termine TOUJOURS ta réponse par une dernière ligne séparée, au format exact « MÉMO: … », qui résume en 15 mots maximum la difficulté ou l'erreur de compréhension que révèle sa question (ou « MÉMO: rien » s'il n'y en a pas). Cette ligne lui est cachée.
@@ -1866,7 +1866,7 @@ go(curTab);
 
 
 <script>
-window.MZT_CONFIG={id:'reseau',module:'M351 Réseaux informatiques',prof:'Pr A. Darif',student:'Patrick, étudiant en L3 MIACSD (cybersécurité et science des données) à la FSABM de Béni Mellal',conventions:(typeof CONVENTIONS!=='undefined'?CONVENTIONS:'')};
+window.MZT_CONFIG={id:'reseau',module:'M351 Réseaux informatiques',prof:'Pr A. Darif',student:'un étudiant de licence (FSABM)',conventions:(typeof CONVENTIONS!=='undefined'?CONVENTIONS:'')};
 </script>
 <script>
 /* MIZAN · tuteur commun (bouton flottant présent sur chaque section)
@@ -1874,7 +1874,7 @@ window.MZT_CONFIG={id:'reseau',module:'M351 Réseaux informatiques',prof:'Pr A. 
      id: 'crypto',                      // identifiant court du module (stockage)
      module: 'Cryptographie',           // nom affiché et donné au tuteur
      prof: 'Pr A. Farchane',
-     student: 'Patrick, L3 MIACSD à la FSABM (Béni Mellal)',
+     student:'un étudiant de licence (FSABM)',
      conventions: '…',                  // conventions du prof à respecter
      getContext: () => ({label, text})  // facultatif : extrait courant (sinon section visible)
    };
