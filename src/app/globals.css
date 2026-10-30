@@ -65,3 +65,29 @@ input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(-
 .tab th,.tab td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
 .kpi strong{display:block;font-size:28px}
+/* ---- Accueil public et tableau de bord ---- */
+.land .page{max-width:1040px}
+.top.nob{border:0;margin:0 auto}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin:18px 0 8px}
+.land .hero{padding:40px max(16px,env(safe-area-inset-left)) 48px}
+.land .hero h1{font-size:clamp(32px,6vw,56px);max-width:18ch}
+.cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:24px}
+.btn.big-inline{padding:13px 22px;font-size:16px}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.feats article{background:var(--panel);padding:22px}
+.feats h3{margin:6px 0;font-size:17px}.feats p{margin:0;color:var(--mute);font-size:15px}
+.num{font:700 13px ui-monospace,monospace;color:var(--acc2)}
+.steps{padding-top:40px}.steps ol{padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:17px}
+.foot{padding-top:40px;padding-bottom:32px;border-top:1px solid var(--line);margin-top:40px}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.hello{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:8px 0 24px}
+.hello h1{margin:0}.hello p{margin:4px 0 0}
+.stat{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.stat strong{font-size:28px;color:var(--acc)}
+.card h3{margin:4px 0;font-size:17px}
+.foot-card{margin-top:auto!important;padding-top:8px}
+.catalogue summary{display:flex;align-items:baseline;gap:10px;cursor:pointer;list-style:none}
+.catalogue summary::-webkit-details-marker{display:none}
+.catalogue summary h2::before{content:"＋ ";color:var(--acc)}
+.catalogue[open] summary h2::before{content:"－ "}
+.module{height:100dvh}

@@ -20,7 +20,16 @@ export async function GET(_req: Request, { params }: { params: { file: string } 
   if (!(await estMembre(user))) return new NextResponse("Invitation requise", { status: 403 });
 
   const html = await readFile(path.join(process.cwd(), "content", "modules", m.fichier), "utf8");
-  const bridge = '<script src="/mizan-bridge.js"></script>';
+  // Pont + correctifs mobile communs à tous les modules :
+  // - police 16 px dans les champs : sinon iOS zoome dès qu'on touche la zone de texte ;
+  // - tuteur en plein écran sur téléphone, bouton Envoyer ramené à l'écran quand le clavier s'ouvre.
+  const bridge = `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="/mizan-bridge.js"></script>
+<style>@media (max-width:700px){input,textarea,select{font-size:16px!important}
+.mzt-pan{inset:0!important;width:100%!important;height:100%!important;max-height:none!important;border-radius:0!important}
+.mzt-f textarea{min-height:44px!important}}</style>
+<script>document.addEventListener("focusin",function(e){var t=e.target;if(!t||!/^(TEXTAREA|INPUT)$/.test(t.tagName)||innerWidth>700)return;
+setTimeout(function(){var f=t.closest("form");(f||t).scrollIntoView({block:"end",behavior:"smooth"});},350);});</script>`;
   const out = /<head[^>]*>/i.test(html)
     ? html.replace(/<head[^>]*>/i, (h) => `${h}\n${bridge}`)
     : bridge + html;
