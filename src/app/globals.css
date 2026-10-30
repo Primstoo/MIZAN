@@ -57,3 +57,4 @@ label{font-size:13px;font-weight:600;color:var(--mute)}
 .alert.ok{background:color-mix(in srgb,var(--ok) 12%,transparent);color:var(--ok)}
 input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 @media (max-width:720px){.auth{grid-template-columns:1fr}.auth-brand{padding:20px 16px;gap:12px}.auth-points,.auth-foot{display:none}.auth-tag{font-size:24px;margin:0}}
+.sync{margin:0;padding:4px 12px;font-size:13px;opacity:.75}

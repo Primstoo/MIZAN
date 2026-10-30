@@ -57,7 +57,7 @@ Chaque choix : ce qu'on a pris, les alternatives, et pourquoi on les a écartée
 **Pourquoi l'iframe :**
 - Les 6 modules existent déjà et fonctionnent. Les réécrire prendrait plusieurs semaines.
 - L'iframe isole chaque module : un bug dans un module ne casse pas le reste du site.
-- Un petit script « pont » (jour 2) leur donne accès au compte et au tuteur sans les réécrire.
+- Un petit script « pont » leur donne accès au compte et au tuteur sans les réécrire.
 **Pourquoi pas les autres (pour l'instant) :**
 - Réécriture React : la solution propre à long terme, mais trop lente pour le pilote.
 - Moteur JSON commun : c'est la cible pour générer des modules automatiquement (vision MIZAN), mais ça demande d'abord de stabiliser le format.
@@ -94,3 +94,17 @@ Choix de présentation, assumé : le développeur pilote le projet (vision, cahi
 - Reprend les fonctions du tuteur Réseaux : mémoire des difficultés (ligne MÉMO cachée), photo du brouillon, bouton Arrêter, relances rapides, historique consultable avec recherche.
 **Économie :** modèle rapide par défaut avec réponses explicatives (150-250 mots) ; modèle supérieur seulement à la demande (case « Approfondi » ou bouton « Approfondir cette réponse »), avec plus de contexte.
 **Pourquoi pas un onglet séparé :** il oblige à quitter le cours et à re-choisir manuellement l'extrait ; l'élève pose moins de questions.
+
+## D12. Modules servis derrière la connexion (`content/modules` + `/app/modules/[file]`)
+**Avant :** fichiers dans `public/modules`, donc lisibles par n'importe qui sans compte (fuite du contenu des profs).
+**Maintenant :** fichiers hors de `public`, lus par une route serveur qui vérifie la session et injecte `mizan-bridge.js`.
+**Alternative écartée :** stocker les modules dans Supabase Storage (plus de complexité pour 6 fichiers).
+
+## D13. Progression : synchronisation du localStorage par la page parente
+**Pourquoi :** les modules sauvegardent déjà dans le localStorage ; l'iframe est sur le même domaine, donc la page parente (`ModuleFrame`) lit et écrit ces mêmes clés. Aucun module à réécrire.
+**Fonctionnement :** au chargement, la sauvegarde Supabase est posée si elle est plus récente, puis le module s'affiche ; envoi toutes les 20 s, à la mise en arrière-plan et à la fermeture. Clés listées dans `modules.ts` (`cles`).
+**Alternative écartée :** réécrire chaque module pour appeler Supabase (6 modules à modifier et à maintenir).
+**Limite :** dernier écrit gagne si deux appareils sont ouverts en même temps.
+
+## D14. Pont `window.claude` (`public/mizan-bridge.js`)
+Les modules utilisent l'interface des artifacts Claude. Hors de Claude, le pont fournit `sample` (appelle `/api/tutor`) et renvoie `null` pour `db`/`user`, ce qui active le repli localStorage déjà prévu dans les modules.

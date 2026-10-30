@@ -19,7 +19,7 @@ npm run dev
 - `supabase/schema.sql` : tables et règles de sécurité
 
 ## Feuille de route
-- [x] Jour 1 : squelette, connexion (Google + lien magique), schéma Supabase, catalogue
-- [ ] Jour 2 : pont modules ↔ plateforme (progression synchronisée)
-- [ ] Jour 3 : tuteur côté serveur (Gemini, Groq en secours), quotas
-- [ ] Jour 4-5 : tableau de bord d'usage, invitations
+- [x] squelette, connexion (Google + lien magique), schéma Supabase, catalogue
+- [x] pont modules ↔ plateforme (progression synchronisée, modules servis derrière la connexion)
+- [x] tuteur côté serveur (Gemini, Groq en secours), quotas — à tester avec les vraies clés
+- [ ] tableau de bord d'usage, invitations

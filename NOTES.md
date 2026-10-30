@@ -12,4 +12,4 @@
 - RLS : la base elle-même refuse qu'un élève lise les données d'un autre (`auth.uid() = user_id`).
 
 ## Pourquoi les modules sont dans des iframes ?
-- Les modules existants sont des pages HTML complètes. Les afficher tels quels évite de tout réécrire ; un petit script « pont » leur donne accès au compte (jour 2).
+- Les modules existants sont des pages HTML complètes. Les afficher tels quels évite de tout réécrire ; un petit script « pont » leur donne accès au compte.

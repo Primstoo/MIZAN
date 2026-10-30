@@ -1545,7 +1545,7 @@ EXTRAIT (${c.label}) :
 ${c.text.slice(0, deep ? 9000 : 3500)}`;
     const recent = cur.msgs.slice(deep ? -9 : -5, -1).map((m) => ({ role: m.r === 'u' ? 'user' : 'assistant', content: m.t }));
     while (recent.length && recent[0].role !== 'user') recent.shift();
-    const msgs = [...recent, { role: 'user', content: q }]; msgs[0] = { role: 'user', content: rules + '\n\n---\nQuestion : ' + msgs[0].content };
+    const msgs = [...recent.filter((m) => m.content && m.content.trim()), { role: 'user', content: q }]; while (msgs.length > 1 && msgs[0].role !== 'user') msgs.shift(); msgs[0] = { role: 'user', content: rules + '\n\n---\nQuestion : ' + msgs[0].content };
     ctl = new AbortController();
     const opts = { modelTier: deep ? 'complex' : 'quick', cache: false, signal: ctl.signal, onText: ({ text }) => { out.textContent = visible(text); $('#mztLog').scrollTop = 1e9; } };
     if (img) opts.images = [img];
@@ -1590,8 +1590,8 @@ ${c.text.slice(0, deep ? 9000 : 3500)}`;
     Promise.all([W.use('db'), W.use('user')]).then(async ([d, u]) => {
       if (!d || !u) return; const id = await u.id(); if (!id) return; db = d; base = 'data/users/' + id + '/mzt_' + C.id;
       try {
-        const m = await db.doc(base).get(); if (m.exists) { const v = m.data() || {}; if (Array.isArray(v.memos)) ST.memos = v.memos; }
-        const q = await db.collection(base + '/threads').get(); const remote = q.docs.map((x) => Object.assign({ id: x.id }, x.data()));
+        const m = await db.doc(base).get(); if (m.exists) { const v = m.data() || {}; if (Array.isArray(v.memos)) ST.memos = JSON.parse(JSON.stringify(v.memos)); }
+        const q = await db.collection(base + '/threads').get(); const remote = q.docs.map((x) => Object.assign({ id: x.id }, JSON.parse(JSON.stringify(x.data() || {}))));
         const map = {}; [...ST.threads, ...remote].forEach((t) => { if (!map[t.id] || (t.msgs || []).length > (map[t.id].msgs || []).length) map[t.id] = t; });
         ST.threads = Object.values(map).sort((a, b) => parseInt(a.id.slice(1), 36) - parseInt(b.id.slice(1), 36)); saveLocal();
       } catch (e) {}

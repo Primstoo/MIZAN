@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import { getModule } from "@/lib/modules";
+import ModuleFrame from "@/components/ModuleFrame";
 
 // Le module d'origine (HTML autonome) est affiché en plein écran.
-// Le pont (public/mizan-bridge.js, jour 2) lui fournit tuteur et sauvegarde.
+// ModuleFrame synchronise sa progression ; le pont (public/mizan-bridge.js) lui fournit le tuteur.
 export default function ModulePage({ params }: { params: { slug: string } }) {
   const m = getModule(params.slug);
   if (!m) notFound();
@@ -12,7 +13,7 @@ export default function ModulePage({ params }: { params: { slug: string } }) {
         <a href="/app" className="back">← Mes modules</a>
         <strong>{m.titre}</strong>
       </header>
-      <iframe src={`/modules/${m.fichier}?slug=${m.slug}`} title={m.titre} className="frame" />
+      <ModuleFrame slug={m.slug} fichier={m.fichier} titre={m.titre} cles={m.cles} />
     </main>
   );
 }
