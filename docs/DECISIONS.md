@@ -68,9 +68,9 @@ Chaque choix : ce qu'on a pris, les alternatives, et pourquoi on les a écartée
 **Pourquoi jsonb :** chaque module a sa propre structure de progression. Un champ JSON accepte toutes les structures sans modifier la base à chaque module.
 **Inconvénient accepté :** statistiques fines un peu plus compliquées. On créera des tables dédiées quand on saura quoi mesurer.
 
-## D7. Région des serveurs : Europe (Paris ou Francfort)
+## D7. Région des serveurs : Europe (projet créé en Irlande, eu-west-1)
 **Alternatives :** États-Unis, Asie.
-**Pourquoi :** Supabase ne propose pas de serveurs en Afrique. L'Europe de l'Ouest est la plus proche du Maroc, donc les pages répondent plus vite.
+**Pourquoi :** Supabase ne propose pas de serveurs en Afrique. L'Europe de l'Ouest est la plus proche du Maroc, donc les pages répondent plus vite. L'Irlande ajoute quelques dizaines de millisecondes par rapport à Paris : négligeable, pas de raison de recréer le projet.
 
 ## D8. Tuteur : Gemini Flash, Groq en secours, appelés côté serveur
 **Alternatives :** l'API Claude ou OpenAI (payantes) ; un modèle libre auto-hébergé ; appeler l'IA directement depuis le navigateur.

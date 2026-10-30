@@ -1,4 +1,5 @@
--- MIZAN : schéma de base (à exécuter dans Supabase > SQL Editor)
+-- MIZAN : schéma de base (à exécuter dans Supabase > SQL Editor).
+-- Ré-exécutable sans risque : rien n'est effacé, les règles sont recréées à l'identique.
 
 -- Progression d'un élève par module (scores, failles, état des onglets…)
 create table if not exists public.progress (
@@ -35,10 +36,13 @@ alter table public.progress enable row level security;
 alter table public.tutor_threads enable row level security;
 alter table public.tutor_usage enable row level security;
 
+drop policy if exists "progress: propriétaire" on public.progress;
 create policy "progress: propriétaire" on public.progress
   for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+drop policy if exists "threads: propriétaire" on public.tutor_threads;
 create policy "threads: propriétaire" on public.tutor_threads
   for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+drop policy if exists "usage: lecture propriétaire" on public.tutor_usage;
 create policy "usage: lecture propriétaire" on public.tutor_usage
   for select using (auth.uid() = user_id);
 
@@ -60,5 +64,7 @@ create table if not exists public.members (
 alter table public.invites enable row level security;
 alter table public.members enable row level security;
 -- Lecture de ses propres lignes ; toutes les écritures passent par le serveur (clé service).
+drop policy if exists "invites: lecture propriétaire" on public.invites;
 create policy "invites: lecture propriétaire" on public.invites for select using (auth.uid() = owner);
+drop policy if exists "members: lecture soi" on public.members;
 create policy "members: lecture soi" on public.members for select using (auth.uid() = user_id);
