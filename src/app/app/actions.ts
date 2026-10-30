@@ -128,3 +128,10 @@ function heureMarocVersUTC(local: string) {
   const vu = Date.parse(`${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}:00Z`);
   return new Date(naif - (vu - naif)).toISOString();
 }
+
+export async function declarerPaiement(form: FormData): Promise<void> {
+  const u = await moi();
+  await admin().from("live_bookings").update({ ref_paiement: String(form.get("ref") || "").trim().slice(0, 120) || null })
+    .eq("session_id", String(form.get("session"))).eq("user_id", u.id).eq("statut", "en_attente");
+  revalidatePath("/app/live"); revalidatePath("/app/admin");
+}
