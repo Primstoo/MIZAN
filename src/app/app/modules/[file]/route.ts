@@ -3,6 +3,7 @@ import path from "node:path";
 import { NextResponse } from "next/server";
 import { MODULES } from "@/lib/modules";
 import { createClient } from "@/lib/supabase/server";
+import { estMembre } from "@/lib/acces";
 
 // Sert un module depuis content/modules (dossier non public).
 // Sous /app, donc déjà protégé par le middleware ; on revérifie la session ici
@@ -16,6 +17,7 @@ export async function GET(_req: Request, { params }: { params: { file: string } 
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return new NextResponse("Connexion requise", { status: 401 });
+  if (!(await estMembre(user))) return new NextResponse("Invitation requise", { status: 403 });
 
   const html = await readFile(path.join(process.cwd(), "content", "modules", m.fichier), "utf8");
   const bridge = '<script src="/mizan-bridge.js"></script>';

@@ -108,3 +108,12 @@ Choix de présentation, assumé : le développeur pilote le projet (vision, cahi
 
 ## D14. Pont `window.claude` (`public/mizan-bridge.js`)
 Les modules utilisent l'interface des artifacts Claude. Hors de Claude, le pont fournit `sample` (appelle `/api/tutor`) et renvoie `null` pour `db`/`user`, ce qui active le repli localStorage déjà prévu dans les modules.
+
+## D15. Bêta fermée sur invitation (codes de parrainage)
+**Alternatives :** inscription libre ; liste d'e-mails autorisés tenue à la main.
+**Pourquoi :** les quotas gratuits de l'IA sont limités, et le contenu des profs ne doit pas circuler hors du groupe test. Les codes (3 places par membre, 10 pour l'admin) font grandir le groupe par le bouche-à-oreille, et la page Suivi montre qui a invité qui.
+**Pourquoi pas une liste d'e-mails :** chaque entrée passerait par l'admin, donc pas de croissance sans lui.
+**Mise en place :** `members` et `invites` (schema.sql), vérification dans `/app` (layout), `/app/modules/[file]` et `/api/tutor`. Admins : variable `ADMIN_EMAILS`.
+
+## D16. Page de suivi admin (`/app/admin`)
+Membres, actifs sur 7 jours, questions au tuteur, usage par module. Ce sont les chiffres qui diront si une offre payante a du sens (seuil de décision du plan commercial).

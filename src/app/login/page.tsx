@@ -17,6 +17,9 @@ export default function Login() {
 
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
+    // Lien d'invitation : on garde le code pour pré-remplir l'écran d'entrée après connexion.
+    const inv = p.get("code");
+    if (inv) try { localStorage.setItem("mizan-invite", inv); } catch {}
     if (p.get("erreur")) setMsg({ type: "bad", texte: "Ce lien de connexion n’a pas fonctionné (il a peut-être expiré). Demande un nouveau code ci-dessous." });
   }, []);
   useEffect(() => {

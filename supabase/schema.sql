@@ -41,3 +41,24 @@ create policy "threads: propriétaire" on public.tutor_threads
   for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
 create policy "usage: lecture propriétaire" on public.tutor_usage
   for select using (auth.uid() = user_id);
+
+-- ===== Accès sur invitation (bêta fermée) =====
+-- Un compte n'accède à /app qu'une fois membre. Les admins (ADMIN_EMAILS) le sont d'office.
+create table if not exists public.invites (
+  code text primary key,
+  owner uuid references auth.users(id) on delete cascade,
+  max_uses int not null default 3,
+  uses int not null default 0,
+  created_at timestamptz not null default now()
+);
+create table if not exists public.members (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  email text,
+  invite_code text references public.invites(code),
+  joined_at timestamptz not null default now()
+);
+alter table public.invites enable row level security;
+alter table public.members enable row level security;
+-- Lecture de ses propres lignes ; toutes les écritures passent par le serveur (clé service).
+create policy "invites: lecture propriétaire" on public.invites for select using (auth.uid() = owner);
+create policy "members: lecture soi" on public.members for select using (auth.uid() = user_id);

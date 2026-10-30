@@ -22,4 +22,4 @@ npm run dev
 - [x] squelette, connexion (Google + lien magique), schéma Supabase, catalogue
 - [x] pont modules ↔ plateforme (progression synchronisée, modules servis derrière la connexion)
 - [x] tuteur côté serveur (Gemini, Groq en secours), quotas — à tester avec les vraies clés
-- [ ] tableau de bord d'usage, invitations
+- [x] bêta fermée sur invitation, tableau de bord élève, page de suivi admin

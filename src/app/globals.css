@@ -58,3 +58,10 @@ label{font-size:13px;font-weight:600;color:var(--mute)}
 input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 @media (max-width:720px){.auth{grid-template-columns:1fr}.auth-brand{padding:20px 16px;gap:12px}.auth-points,.auth-foot{display:none}.auth-tag{font-size:24px;margin:0}}
 .sync{margin:0;padding:4px 12px;font-size:13px;opacity:.75}
+.bloc{margin-top:28px;padding-top:16px;border-top:1px solid var(--line)}
+.code{font:600 15px ui-monospace,monospace;padding:2px 6px;border:1px solid var(--line);border-radius:6px}
+.erreur{color:#c0392b}
+.tab{width:100%;border-collapse:collapse;font-size:14px}
+.tab th,.tab td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi strong{display:block;font-size:28px}

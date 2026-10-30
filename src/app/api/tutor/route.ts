@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { createClient as createAdmin } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
+import { admin as serviceClient, estMembre } from "@/lib/acces";
 
 // Tuteur côté serveur (décision D8) : clés IA jamais dans le navigateur.
 // Gemini d'abord, Groq en secours. Quota quotidien par élève dans tutor_usage.
@@ -69,6 +69,7 @@ export async function POST(req: Request) {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return err("unauthorized", "Connecte-toi pour utiliser le tuteur", 401);
+  if (!(await estMembre(user))) return err("forbidden", "Invitation requise", 403);
 
   let body: { messages?: Msg[]; images?: Img[] };
   try { body = await req.json(); } catch { return err("invalid_request", "Requête illisible", 400); }
@@ -83,9 +84,7 @@ export async function POST(req: Request) {
   const images = (body.images ?? []).slice(0, 1);
 
   // Quota : la table n'est modifiable que par la clé service (RLS en lecture seule pour l'élève).
-  const admin = createAdmin(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
-    auth: { persistSession: false },
-  });
+  const admin = serviceClient();
   const day = new Date().toISOString().slice(0, 10);
   const { data: u } = await admin.from("tutor_usage").select("count").eq("user_id", user.id).eq("day", day).maybeSingle();
   const used = u?.count ?? 0;
