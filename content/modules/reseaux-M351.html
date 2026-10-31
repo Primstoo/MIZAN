@@ -2123,6 +2123,286 @@ ${c.text.slice(0, deep ? 9000 : 3500)}`;
 window.openTutor=function(v){var c=null;try{c=ctxList().find(function(x){return x.v===v})}catch(e){}MZT.open(c&&c.v!=='libre'?{label:c.label,text:c.text}:null);};
 var _go=window.go;window.go=function(k){if(k==='tuteur'){return window.openTutor(TUT&&TUT.ctx);}return _go.apply(this,arguments);};})();
 </script>
+<div id="xplus" hidden>
+
+<!-- ===================== 1 ===================== -->
+<div data-for="s1">
+  <div class="ana"><b>L'analogie</b>Un réseau, c'est une ville avec des routes. Les maisons (les ordinateurs, l'imprimante, le serveur) sont reliées par des routes (les câbles, le Wi-Fi). Sans routes, chaque maison doit tout avoir chez elle. Avec des routes, on partage : une seule imprimante pour tout le bureau, un seul serveur de fichiers pour toute la fac.</div>
+  <p>Retiens la définition du prof mot pour mot : un réseau informatique est un <b>ensemble d'appareils reliés entre eux</b> pour <b>transférer des informations électroniques</b>, et donc <b>communiquer</b> et <b>partager des ressources</b> matérielles (imprimante, disque) et logicielles (une base de données, une application).</p>
+  <div class="fig">
+    <svg viewBox="0 0 560 150" style="width:100%;min-width:420px" role="img" aria-label="Sans réseau / avec réseau">
+      <text x="120" y="16" text-anchor="middle" class="mt">Sans réseau : une imprimante par poste</text>
+      <rect x="20" y="40" width="50" height="34" rx="4" fill="var(--soft)" stroke="var(--line)"/><text x="45" y="61" text-anchor="middle">PC</text>
+      <rect x="95" y="40" width="50" height="34" rx="4" fill="var(--soft)" stroke="var(--line)"/><text x="120" y="61" text-anchor="middle">PC</text>
+      <rect x="170" y="40" width="50" height="34" rx="4" fill="var(--soft)" stroke="var(--line)"/><text x="195" y="61" text-anchor="middle">PC</text>
+      <rect x="25" y="100" width="40" height="26" rx="4" fill="var(--badbg)" stroke="var(--bad)"/><text x="45" y="117" text-anchor="middle" class="mt">impr.</text>
+      <rect x="100" y="100" width="40" height="26" rx="4" fill="var(--badbg)" stroke="var(--bad)"/><text x="120" y="117" text-anchor="middle" class="mt">impr.</text>
+      <rect x="175" y="100" width="40" height="26" rx="4" fill="var(--badbg)" stroke="var(--bad)"/><text x="195" y="117" text-anchor="middle" class="mt">impr.</text>
+      <line x1="45" y1="74" x2="45" y2="100" class="st"/><line x1="120" y1="74" x2="120" y2="100" class="st"/><line x1="195" y1="74" x2="195" y2="100" class="st"/>
+      <text x="420" y="16" text-anchor="middle" class="mt">Avec réseau : une seule, partagée</text>
+      <rect x="320" y="40" width="50" height="34" rx="4" fill="var(--soft)" stroke="var(--line)"/><text x="345" y="61" text-anchor="middle">PC</text>
+      <rect x="395" y="40" width="50" height="34" rx="4" fill="var(--soft)" stroke="var(--line)"/><text x="420" y="61" text-anchor="middle">PC</text>
+      <rect x="470" y="40" width="50" height="34" rx="4" fill="var(--soft)" stroke="var(--line)"/><text x="495" y="61" text-anchor="middle">PC</text>
+      <line x1="345" y1="74" x2="420" y2="100" class="st"/><line x1="420" y1="74" x2="420" y2="100" class="st"/><line x1="495" y1="74" x2="420" y2="100" class="st"/>
+      <rect x="395" y="100" width="50" height="26" rx="4" fill="var(--panel)" stroke="var(--blue)"/><text x="420" y="117" text-anchor="middle" class="mt">impr.</text>
+    </svg>
+    <p class="cap">Partager une ressource coûte moins cher : c'est l'argument « réduction des coûts » du cours.</p>
+  </div>
+  <p>Les utilités se rangent en deux colonnes. Pour les <b>entreprises</b> : partage des ressources, <b>fiabilité</b> (si un serveur tombe, une copie prend le relais : c'est la « duplication »), réduction des coûts, outils de communication, commerce électronique. Pour les <b>particuliers</b> : accès à l'information, communication, achats en ligne.</p>
+  <div class="trap"><b>Piège</b> « Réseau » ne veut pas dire seulement Internet. Le cours cite aussi les réseaux de communication (téléphone, radio, TV), de transport, sociaux, biologiques. Si on te demande des catégories, donne-les toutes.</div>
+  <details class="check"><summary>À toi : 3 questions éclair sur la section 1</summary><ol>
+    <li>Donne deux ressources matérielles et une ressource logicielle qu'un réseau permet de partager. <i>Réponse : imprimante, disque ou scanner ; une base de données ou une application.</i></li>
+    <li>Pourquoi un réseau améliore-t-il la fiabilité d'une entreprise ? <i>Réponse : les données et services peuvent être dupliqués sur plusieurs machines ; si l'une tombe, une autre prend le relais.</i></li>
+    <li>Cite trois catégories de réseaux qui ne sont pas informatiques. <i>Réponse : téléphone/radio/TV, transport, social, biologique.</i></li>
+  </ol></details>
+</div>
+
+<!-- ===================== 2 ===================== -->
+<div data-for="s2">
+  <div class="ana"><b>L'analogie</b>Un appel téléphonique suit des règles qu'on ne remarque même plus : on dit qui on est, on parle la même langue, on ne parle pas trop vite, et on vérifie « tu m'as bien entendu ? ». Un protocole, c'est exactement ça, écrit noir sur blanc pour des machines.</div>
+  <p>Les <b>5 règles</b> du cours se retrouvent dans cet appel :</p>
+  <div class="fig"><table class="tab" style="min-width:420px"><thead><tr><th>Règle du cours</th><th>Dans un appel</th><th>Sur le réseau</th></tr></thead><tbody>
+    <tr><td>1. Identifier expéditeur et destinataire</td><td>« Allô, c'est Awa »</td><td>adresses IP, MAC, ports</td></tr>
+    <tr><td>2. Méthode convenue</td><td>appel, pas lettre</td><td>TCP ou UDP, câble ou Wi-Fi</td></tr>
+    <tr><td>3. Langue et syntaxe communes</td><td>on parle français</td><td>format du message (HTTP…)</td></tr>
+    <tr><td>4. Vitesse et rythme</td><td>on ne parle pas trop vite</td><td>contrôle de flux (fenêtre TCP)</td></tr>
+    <tr><td>5. Confirmation de réception</td><td>« tu m'as entendu ? »</td><td>accusés de réception (ACK)</td></tr>
+  </tbody></table></div>
+  <p><b>Segmentation et multiplexage</b> : au lieu d'envoyer une vidéo de 1 Go d'un seul bloc (qui bloquerait le câble pour tout le monde), on la découpe en petits morceaux <b>étiquetés</b>. Les morceaux de plusieurs conversations s'entremêlent sur le même câble (multiplexage), puis sont remis dans l'ordre à l'arrivée grâce à leur étiquette.</p>
+  <div class="fig"><div class="mono">Conversation A : A1 A2 A3        Conversation B : B1 B2
+Sur le câble    : A1 B1 A2 B2 A3   (multiplexage)
+À l'arrivée     : A1 A2 A3 | B1 B2 (réassemblage grâce aux étiquettes)
+A2 perdu ?      : on ne renvoie QUE A2, pas tout le fichier</div></div>
+  <div class="trap"><b>Piège</b> L'inconvénient de la segmentation n'est <strong>pas</strong> une perte de fiabilité (elle l'augmente : seules les parties perdues sont renvoyées). L'inconvénient, c'est la <strong>complexité</strong> ajoutée. C'est une question classique.</div>
+  <div class="key"><b>Les éléments d'une communication</b> : émetteur → coupleur (la carte réseau, qui transforme les données en signal) → médium (câble, air, fibre) → coupleur → récepteur. Et un <b>réseau convergent</b>, c'est un seul réseau qui transporte à la fois téléphone, TV, radio et données (ta box Internet à la maison).</div>
+  <details class="check"><summary>À toi : 3 questions éclair sur la section 2</summary><ol>
+    <li>Quelle règle de communication l'ACK de TCP met-il en œuvre ? <i>Réponse : la 5e, la demande de confirmation ou de reçu.</i></li>
+    <li>Pourquoi la segmentation rend-elle le réseau plus fiable ? <i>Réponse : les morceaux peuvent prendre des chemins différents, et seuls les morceaux perdus sont retransmis.</i></li>
+    <li>Cite deux facteurs externes qui dégradent la qualité d'une communication. <i>Réponse : qualité du chemin, nombre de changements de forme, de redirections, de messages simultanés, délai alloué.</i></li>
+  </ol></details>
+</div>
+
+<!-- ===================== 3 ===================== -->
+<div data-for="s3">
+  <div class="ana"><b>L'analogie</b>La Poste : les <b>clients</b> qui envoient et reçoivent des lettres (les hôtes), les <b>centres de tri</b> qui font passer le courrier (switchs et routeurs), les <b>lettres</b> (les messages), les <b>routes et camions</b> (les supports) et le <b>règlement</b> qui dit comment écrire une adresse (les protocoles). Ce sont les 5 éléments de base du cours.</div>
+  <div class="fig">
+    <svg viewBox="0 0 600 120" style="width:100%;min-width:480px" role="img" aria-label="Les composants d'un réseau">
+      <rect x="10" y="40" width="80" height="40" rx="6" fill="var(--soft)" stroke="var(--line)"/><text x="50" y="58" text-anchor="middle">Hôte</text><text x="50" y="72" text-anchor="middle" class="mt">client</text>
+      <rect x="10" y="92" width="80" height="24" rx="4" fill="var(--warnbg)" stroke="var(--orange)"/><text x="50" y="108" text-anchor="middle" class="mt">imprimante</text>
+      <line x1="50" y1="80" x2="50" y2="92" class="st"/>
+      <line x1="90" y1="60" x2="170" y2="60" class="st"/><text x="130" y="52" text-anchor="middle" class="mt">câble</text>
+      <rect x="170" y="40" width="80" height="40" rx="6" fill="var(--panel)" stroke="var(--blue)"/><text x="210" y="58" text-anchor="middle">Switch</text><text x="210" y="72" text-anchor="middle" class="mt">même réseau</text>
+      <line x1="250" y1="60" x2="330" y2="60" class="st"/>
+      <rect x="330" y="40" width="80" height="40" rx="6" fill="var(--panel)" stroke="var(--blue)"/><text x="370" y="58" text-anchor="middle">Routeur</text><text x="370" y="72" text-anchor="middle" class="mt">entre réseaux</text>
+      <line x1="410" y1="60" x2="500" y2="60" class="st" stroke-dasharray="5 4"/><text x="455" y="52" text-anchor="middle" class="mt">Internet</text>
+      <rect x="500" y="40" width="90" height="40" rx="6" fill="var(--soft)" stroke="var(--line)"/><text x="545" y="58" text-anchor="middle">Hôte</text><text x="545" y="72" text-anchor="middle" class="mt">serveur Web</text>
+      <text x="210" y="105" text-anchor="middle" class="mt">nœuds intermédiaires</text>
+    </svg>
+    <p class="cap">L'imprimante branchée sur le PC est un <b>périphérique partagé</b> : elle n'est pas sur le réseau elle-même, elle y accède à travers l'hôte.</p>
+  </div>
+  <p>Distingue bien <b>client</b> et <b>serveur</b> : ce sont tous deux des hôtes. Le serveur <b>fournit</b> un service (pages Web, DNS, DHCP), le client <b>le demande</b> et affiche le résultat. Ton navigateur est un client, www.fpbm.ma tourne sur un serveur.</p>
+  <p>Les <b>supports</b> : cuivre (signal électrique), fibre (lumière), sans fil (ondes radio). On choisit selon 4 critères : <b>distance</b>, <b>environnement</b> (perturbations électriques, extérieur), <b>quantité de données et débit</b>, <b>coût</b>.</p>
+  <div class="key"><b>La pile du cours, du haut vers le bas</b> : HTTP (la page) → TCP (la livraison fiable) → IP (l'adresse et la route) → Ethernet (le câble). Et les <b>normes</b> : l'IEEE pour le matériel (802.3 Ethernet, 802.11 Wi-Fi), l'IETF pour Internet, publiées en <b>RFC</b>.</div>
+  <div class="trap"><b>Piège</b> Switch (ou hub) = hôtes d'un <strong>même</strong> segment. Routeur = relie des segments, des réseaux <strong>différents</strong>. L'inverse est l'erreur la plus fréquente.</div>
+  <details class="check"><summary>À toi : 3 questions éclair sur la section 3</summary><ol>
+    <li>Une webcam branchée en USB sur un PC du réseau : hôte ou périphérique partagé ? <i>Réponse : périphérique partagé, elle passe par l'hôte.</i></li>
+    <li>Quel équipement relie le réseau de la fac à Internet ? <i>Réponse : un routeur, car ce sont deux réseaux différents.</i></li>
+    <li>Quel organisme publie la norme du Wi-Fi, et sous quel numéro ? <i>Réponse : l'IEEE, 802.11.</i></li>
+  </ol></details>
+</div>
+
+<!-- ===================== 4 ===================== -->
+<div data-for="s4">
+  <div class="ana"><b>L'analogie</b>Classe les réseaux comme des distances de déplacement : ta chambre (PAN), ton bâtiment ou ton campus (LAN), ta ville (MAN), le pays ou le monde (WAN).</div>
+  <div class="fig">
+    <svg viewBox="0 0 600 170" style="width:100%;min-width:460px" role="img" aria-label="PAN, LAN, MAN, WAN emboîtés">
+      <rect x="4" y="4" width="592" height="162" rx="14" fill="none" stroke="var(--bad)" stroke-dasharray="6 4"/><text x="580" y="22" text-anchor="end">WAN · pays, monde</text>
+      <rect x="20" y="30" width="420" height="126" rx="12" fill="none" stroke="var(--orange)"/><text x="428" y="48" text-anchor="end">MAN · une ville (dizaines de km)</text>
+      <rect x="36" y="58" width="250" height="88" rx="10" fill="var(--soft)" stroke="var(--blue)"/><text x="276" y="76" text-anchor="end">LAN · campus, entreprise</text>
+      <rect x="52" y="86" width="110" height="48" rx="8" fill="var(--panel)" stroke="var(--line)"/><text x="107" y="106" text-anchor="middle">PAN</text><text x="107" y="122" text-anchor="middle" class="mt">≈ 1 m², Bluetooth</text>
+      <text x="470" y="100" class="mt">ex. : les agences</text><text x="470" y="116" class="mt">d'une banque entre</text><text x="470" y="132" class="mt">Casa et Béni Mellal</text>
+    </svg>
+  </div>
+  <p>Ce qui distingue un <b>LAN</b> : <b>un seul propriétaire</b> (même contrôle administratif), débits très élevés, Ethernet ou Wi-Fi. Un <b>MAN</b> relie plusieurs LAN proches, souvent en fibre, et ils fonctionnent comme un seul grand LAN. Un <b>WAN</b> relie des LAN éloignés, avec d'autres technologies (PPP, HDLC, relais de trames, ATM, MPLS…).</p>
+  <div class="key"><b>Méthode pour classer un exemple à l'examen</b> : 1) quelle distance ? 2) un seul propriétaire ou des opérateurs ? 3) quelle technologie ? Puis cite <b>deux caractéristiques</b> du type choisi : c'est ce qui rapporte les points.</div>
+  <div class="trap"><b>Piège</b> La couverture n'est qu'<strong>un</strong> des 8 critères de classification. Les autres : topologie, architecture (poste-à-poste ou client-serveur), technique de transfert, débit, ouverture (privé/public), méthode d'accès (CSMA/CD, CSMA/CA, jeton), QoS.</div>
+  <details class="check"><summary>À toi : 3 questions éclair sur la section 4</summary><ol>
+    <li>Ta souris et ton clavier sans fil reliés au PC ? <i>Réponse : PAN (Bluetooth, environ 1 m²).</i></li>
+    <li>Tous les bâtiments de la FSABM reliés entre eux ? <i>Réponse : LAN (une zone, un seul contrôle administratif).</i></li>
+    <li>Les facultés de l'USMS réparties dans plusieurs villes ? <i>Réponse : WAN, des LAN éloignés géographiquement.</i></li>
+  </ol></details>
+</div>
+
+<!-- ===================== 5 ===================== -->
+<div data-for="s5">
+  <div class="ana"><b>L'analogie</b>La topologie, c'est le plan des routes. <b>Bus</b> : une seule avenue, toutes les maisons dessus (une route coupée, tout le quartier est isolé). <b>Étoile</b> : un rond-point central (une rue bouchée ne gêne que sa maison, mais si le rond-point est fermé, plus personne ne passe). <b>Maillée</b> : une route directe entre chaque paire de maisons (aucune coupure ne bloque, mais il faut énormément de routes).</div>
+  <p>Distingue <b>physique</b> (où sont posés les câbles et les appareils) et <b>logique</b> (comment circulent les données, avec quels ports et quelles adresses IP). Un réseau peut être câblé en étoile et fonctionner logiquement comme un bus.</p>
+  <div class="fig">
+    <p class="t" style="margin:0 0 6px">Calculateur de maillage complet</p>
+    <p class="small" style="margin:0 0 8px">Chaque hôte est relié à tous les autres. Change N et regarde le nombre de câbles exploser.</p>
+    <label class="small">N (nombre d'hôtes) <input type="text" id="xMeshN" value="5" inputmode="numeric" style="max-width:90px"></label>
+    <div class="out" id="xMeshOut"></div>
+  </div>
+  <div class="key"><b>Pourquoi N(N−1)/2 ?</b> Chacun des N hôtes a un câble vers les N−1 autres : N(N−1) extrémités. Mais chaque câble relie <b>deux</b> hôtes, on l'a donc compté deux fois : on divise par 2. Avec 5 hôtes : 5 × 4 / 2 = 10.</div>
+  <div class="trap"><b>Piège</b> Question inverse (« 45 liaisons, combien d'hôtes ? ») : cherche deux entiers consécutifs dont le produit vaut 2 × 45 = 90. 10 × 9 = 90, donc N = 10. Et l'étoile étendue est la topologie <strong>la plus utilisée</strong> : c'est souvent la réponse attendue « dans la pratique ».</div>
+  <details class="check"><summary>À toi : 3 questions éclair sur la section 5</summary><ol>
+    <li>Dans une étoile, le switch central tombe en panne. Que se passe-t-il ? <i>Réponse : tout le réseau tombe ; la panne d'un poste, elle, n'affecte que lui.</i></li>
+    <li>Combien de liaisons pour un maillage complet de 8 hôtes ? <i>Réponse : 8 × 7 / 2 = 28.</i></li>
+    <li>Quelle topologie utilise un jeton qui circule dans un sens ? <i>Réponse : l'anneau (Token Ring) ; le FDDI est un double anneau.</i></li>
+  </ol></details>
+</div>
+
+<!-- ===================== 6 ===================== -->
+<div data-for="s6">
+  <div class="ana"><b>L'analogie</b><b>Commutation de circuits</b> : tu réserves une voie d'autoroute rien que pour toi du départ à l'arrivée. Personne ne te gêne, mais la voie reste réservée même quand tu ne roules pas. <b>Commutation de paquets</b> : ta marchandise part en plusieurs petits colis sur l'autoroute partagée par tout le monde. Chaque colis peut prendre une route différente, et la route sert à tous en permanence.</div>
+  <div class="fig">
+    <svg viewBox="0 0 600 150" style="width:100%;min-width:460px" role="img" aria-label="Circuits et paquets">
+      <text x="140" y="16" text-anchor="middle" class="mt">Circuits : un chemin réservé</text>
+      <circle cx="30" cy="70" r="16" fill="var(--soft)" stroke="var(--line)"/><text x="30" y="74" text-anchor="middle">A</text>
+      <circle cx="250" cy="70" r="16" fill="var(--soft)" stroke="var(--line)"/><text x="250" y="74" text-anchor="middle">B</text>
+      <line x1="46" y1="70" x2="234" y2="70" stroke="var(--blue)" stroke-width="6"/>
+      <text x="140" y="104" text-anchor="middle" class="mt">réservé même en silence</text>
+      <text x="450" y="16" text-anchor="middle" class="mt">Paquets : chemins partagés</text>
+      <circle cx="330" cy="70" r="16" fill="var(--soft)" stroke="var(--line)"/><text x="330" y="74" text-anchor="middle">A</text>
+      <circle cx="570" cy="70" r="16" fill="var(--soft)" stroke="var(--line)"/><text x="570" y="74" text-anchor="middle">B</text>
+      <circle cx="450" cy="35" r="10" fill="var(--panel)" stroke="var(--blue)"/><circle cx="450" cy="105" r="10" fill="var(--panel)" stroke="var(--blue)"/>
+      <path d="M346 64 L440 38 M460 38 L554 64 M346 76 L440 102 M460 102 L554 76" class="st"/>
+      <rect x="388" y="40" width="14" height="10" fill="var(--orange)"/><rect x="498" y="44" width="14" height="10" fill="var(--orange)"/><rect x="390" y="86" width="14" height="10" fill="var(--orange)"/>
+      <text x="450" y="140" text-anchor="middle" class="mt">si une route tombe, les paquets passent par l'autre</text>
+    </svg>
+  </div>
+  <p>Internet fonctionne en <b>paquets</b>, l'ancien téléphone en <b>circuits</b>. Le tableau du cours se retient en 4 oppositions : dédié/partagé, QoS garantie/paquets, support gaspillé/bien utilisé, chemin unique/redondance.</p>
+  <div class="key"><b>Les 4 caractéristiques d'une bonne architecture</b> (moyen mnémotechnique : <b>T-E-Q-S</b>) : <b>T</b>olérance aux pannes, <b>É</b>volutivité (ajouter des utilisateurs sans tout casser), <b>Q</b>ualité de service (prioriser la voix sur le téléchargement), <b>S</b>écurité.</div>
+  <details class="check"><summary>À toi : 3 questions éclair sur la section 6</summary><ol>
+    <li>Pourquoi la commutation de paquets tolère-t-elle mieux les pannes ? <i>Réponse : il y a plusieurs chemins possibles (redondance) ; les paquets contournent la panne.</i></li>
+    <li>Quel est l'avantage principal de la commutation de circuits ? <i>Réponse : la bande passante est garantie (QoS).</i></li>
+    <li>Ajouter 500 étudiants sans dégrader le réseau : quelle caractéristique ? <i>Réponse : l'évolutivité.</i></li>
+  </ol></details>
+</div>
+
+<!-- ===================== 7 ===================== -->
+<div data-for="s7">
+  <div class="ana"><b>L'analogie</b>Internet n'est pas <b>un</b> réseau, c'est un accord entre des milliers de réseaux (ceux des opérateurs, des universités, des entreprises) qui acceptent de faire passer le trafic des autres, à condition que tout le monde parle <b>TCP/IP</b>. C'est le « réseau des réseaux ».</div>
+  <p>Les 4 familles de services du cours, avec un exemple que tu utilises déjà :</p>
+  <div class="fig"><table class="tab" style="min-width:420px"><thead><tr><th>Famille</th><th>Exemples</th><th>Protocoles</th></tr></thead><tbody>
+    <tr><td>Messagerie</td><td>e-mail, listes, forums</td><td>SMTP, POP3</td></tr>
+    <tr><td>Traitement à distance</td><td>VPN, transfert de fichiers</td><td>SSH, FTP</td></tr>
+    <tr><td>Publication et information</td><td>sites Web, Moodle de la fac</td><td>HTTP, HTTPS</td></tr>
+    <tr><td>Communication directe</td><td>WhatsApp, visio, pair-à-pair</td><td>souvent UDP</td></tr>
+  </tbody></table></div>
+  <div class="key"><b>L'idée à retenir</b> : ces services étaient autrefois des logiciels séparés ; aujourd'hui ils sont <b>fusionnés sur le Web</b> (Gmail dans ton navigateur, visio dans ton navigateur…).</div>
+  <details class="check"><summary>À toi : 3 questions éclair sur la section 7</summary><ol>
+    <li>Quelle pile de protocoles tous les réseaux d'Internet ont-ils en commun ? <i>Réponse : TCP/IP.</i></li>
+    <li>Dans quelle famille ranger une connexion VPN ? <i>Réponse : traitement informatique (connexion à distance).</i></li>
+    <li>Que veut dire « réseau des réseaux » ? <i>Réponse : Internet interconnecte des réseaux internationaux, régionaux et locaux.</i></li>
+  </ol></details>
+</div>
+
+<!-- ===================== 8 ===================== -->
+<div data-for="s8">
+  <div class="ana"><b>L'analogie</b>La <b>bande passante</b>, c'est la largeur du tuyau : le maximum d'eau qui peut passer par seconde. Le <b>débit</b>, c'est l'eau qui passe vraiment à cet instant : moins si les voisins arrosent leur jardin en même temps (les autres utilisateurs), si le robinet est petit (ta machine) ou si le tuyau fuit (les pannes).</div>
+  <div class="fig">
+    <p class="t" style="margin:0 0 6px">Calculateur de temps de téléchargement (conventions du prof)</p>
+    <div class="row" style="flex-wrap:wrap;gap:8px;align-items:flex-end">
+      <label class="small">Taille <input type="text" id="xDlT" value="1" inputmode="decimal" style="max-width:80px"></label>
+      <label class="small">Unité <select id="xDlU"><option value="1024">Ko (×1024)</option><option value="1048576">Mo (×1024²)</option><option value="1073741824" selected>Go (×1024³)</option><option value="1000000">millions d'octets (×10⁶)</option></select></label>
+      <label class="small">Débit <input type="text" id="xDlD" value="3" inputmode="decimal" style="max-width:80px"></label>
+      <label class="small">Unité <select id="xDlV"><option value="1000">kbit/s (×10³)</option><option value="1000000" selected>Mbit/s (×10⁶)</option><option value="1000000000">Gbit/s (×10⁹)</option></select></label>
+    </div>
+    <div class="mono" id="xDlOut" style="margin-top:10px"></div>
+    <p class="cap">Avec 1 Go et 3 Mbit/s, tu dois retrouver l'exemple du cours : 47 min 43 s.</p>
+  </div>
+  <div class="key"><b>La recette en 4 lignes, à écrire sur la copie</b> : 1) taille en bits (×1024… puis ×8) ; 2) débit en bit/s (×1000…) ; 3) T = taille / débit ; 4) conversion en h, min, s. Chaque ligne rapporte des points même si le résultat final est faux.</div>
+  <div class="trap"><b>Piège</b> Débit physique &gt; débit applicatif : sur 100 Mbit/s de câble, ton application en reçoit moins, car les couches 2, 3 et 4 ajoutent leurs en-têtes. Le débit utile, c'est ce qui reste une fois ces « emballages » retirés.</div>
+  <details class="check"><summary>À toi : 3 questions éclair sur la section 8</summary><ol>
+    <li>500 Mo à 10 Mbit/s : taille en bits ? <i>Réponse : 500 × 1024² × 8 = 4 194 304 000 bits.</i></li>
+    <li>Et le temps ? <i>Réponse : 4 194 304 000 / 10 000 000 ≈ 419 s = 6 min 59 s.</i></li>
+    <li>Pourquoi le temps réel est-il souvent plus long que le temps théorique ? <i>Réponse : le débit réel est inférieur à la bande passante (autres utilisateurs, charge, machines, pannes).</i></li>
+  </ol></details>
+</div>
+
+<!-- ===================== 9 ===================== -->
+<div data-for="s9">
+  <div class="ana"><b>L'analogie</b>Envoyer un cadeau par la poste. Tu écris la carte (Application), tu la mets dans une boîte avec un numéro de suivi (Transport → segment), la Poste colle l'adresse de la ville de destination (Réseau → paquet), le livreur ajoute l'étiquette du prochain dépôt et un scellé (Liaison → trame), puis le camion roule (Physique → bits). À l'arrivée, on déballe dans l'ordre inverse : c'est la <b>désencapsulation</b>.</div>
+  <div class="fig">
+    <svg viewBox="0 0 600 190" style="width:100%;min-width:480px" role="img" aria-label="Encapsulation">
+      <text x="10" y="22">Application</text><rect x="250" y="8" width="120" height="22" fill="var(--panel)" stroke="var(--line)"/><text x="310" y="23" text-anchor="middle">Données</text>
+      <text x="10" y="58">Transport</text><rect x="200" y="44" width="50" height="22" fill="var(--soft)" stroke="var(--blue)"/><text x="225" y="59" text-anchor="middle">TCP</text><rect x="250" y="44" width="120" height="22" fill="var(--panel)" stroke="var(--line)"/><text x="310" y="59" text-anchor="middle">Données</text><text x="590" y="59" text-anchor="end" class="mt">= Segment</text>
+      <text x="10" y="94">Réseau / Internet</text><rect x="150" y="80" width="50" height="22" fill="var(--warnbg)" stroke="var(--orange)"/><text x="175" y="95" text-anchor="middle">IP</text><rect x="200" y="80" width="170" height="22" fill="var(--soft)" stroke="var(--blue)"/><text x="285" y="95" text-anchor="middle">Segment</text><text x="590" y="95" text-anchor="end" class="mt">= Paquet</text>
+      <text x="10" y="130">Liaison</text><rect x="100" y="116" width="50" height="22" fill="var(--badbg)" stroke="var(--bad)"/><text x="125" y="131" text-anchor="middle">Eth</text><rect x="150" y="116" width="220" height="22" fill="var(--warnbg)" stroke="var(--orange)"/><text x="260" y="131" text-anchor="middle">Paquet</text><rect x="370" y="116" width="50" height="22" fill="var(--badbg)" stroke="var(--bad)"/><text x="395" y="131" text-anchor="middle">FCS</text><text x="590" y="131" text-anchor="end" class="mt">= Trame</text>
+      <text x="10" y="166">Physique</text><text x="260" y="166" text-anchor="middle" style="font-family:var(--mono)">0110100101110010…</text><text x="590" y="166" text-anchor="end" class="mt">= Bits</text>
+      <path d="M470 30 L470 150" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#xarr)"/><defs><marker id="xarr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--muted)"/></marker></defs>
+    </svg>
+    <p class="cap">Chaque couche ajoute son en-tête devant ; seule la couche 2 ajoute aussi une queue (le FCS).</p>
+  </div>
+  <div class="key"><b>Mnémotechnique OSI de 7 à 1</b> : « <b>A</b>près <b>P</b>lusieurs <b>S</b>emaines, <b>T</b>out <b>R</b>espire la <b>L</b>iberté <b>P</b>rofonde » = Application, Présentation, Session, Transport, Réseau, Liaison, Physique. Et pour TCP/IP <b>dans la numérotation du prof</b> : 1 Accès réseau, 2 Internet, 3 Transport, 4 Application.</div>
+  <div class="trap"><b>Piège</b> Présentation (codage, compression, chiffrement) et Session (contrôle du dialogue) n'ont <strong>pas</strong> de couche à elles dans TCP/IP : elles sont absorbées par la couche Application. OSI = modèle de <strong>référence théorique</strong> (ISO) ; TCP/IP = modèle <strong>opérationnel</strong> d'Internet (ARPANET, standard en 1983).</div>
+  <details class="check"><summary>À toi : 3 questions éclair sur la section 9</summary><ol>
+    <li>Quelle PDU à la couche Transport ? Et à la couche Réseau ? <i>Réponse : segment ; paquet.</i></li>
+    <li>À quelle couche TCP/IP (numéro du prof) se trouve IP ? <i>Réponse : la couche 2, Internet.</i></li>
+    <li>À la réception, dans quel sens circulent les données ? <i>Réponse : elles remontent, de la couche Physique à la couche Application (désencapsulation).</i></li>
+  </ol></details>
+</div>
+
+<!-- ===================== 10 ===================== -->
+<div data-for="s10">
+  <div class="ana"><b>L'analogie</b>L'adresse IP, c'est l'adresse de l'immeuble ; le <b>port</b>, c'est le numéro de l'appartement. Le paquet arrive au bon serveur grâce à l'IP, puis le port dit à quelle application le remettre : 80 pour le serveur Web, 25 pour le courrier, 53 pour le DNS.</div>
+  <div class="key"><b>Retenir les ports par paires</b> : FTP 20/21 (20 données, 21 contrôle) · SSH 22, Telnet 23 (même rôle, mais SSH est chiffré) · SMTP 25 (envoyer) et POP3 110 (récupérer) · DNS 53 · DHCP 67 · HTTP 80 et HTTPS 443. Les ports réservés vont de 0 à 1023.</div>
+  <p><b>TCP ou UDP ?</b> TCP, c'est le recommandé avec accusé de réception : on établit la connexion (SYN, SYN-ACK, ACK), on numérote, on renvoie ce qui manque. UDP, c'est la carte postale : rapide, sans garantie. On prend UDP quand un retard est pire qu'une perte (voix, vidéo en direct) ou pour des échanges très courts (DNS, DHCP).</p>
+  <div class="fig">
+    <p class="t" style="margin:0 0 6px">Calculateur de segmentation (TD ex. 5)</p>
+    <div class="row" style="flex-wrap:wrap;gap:8px;align-items:flex-end">
+      <label class="small">Données (octets) <input type="text" id="xSgD" value="4000" inputmode="numeric" style="max-width:100px"></label>
+      <label class="small">MTU <input type="text" id="xSgM" value="1500" inputmode="numeric" style="max-width:80px"></label>
+      <label class="small">En-têtes par paquet <select id="xSgH"><option value="40" selected>40 o (IP + TCP, cours)</option><option value="20">20 o (au total)</option></select></label>
+    </div>
+    <div class="mono" id="xSgOut" style="margin-top:10px"></div>
+  </div>
+  <div class="trap"><b>Piège</b> Le numéro d'<strong>ACK</strong> est le numéro du <strong>prochain octet attendu</strong>, pas du dernier reçu : octets 1 à 500 reçus → ACK 501. Et la fermeture TCP se fait en <strong>4 temps</strong> (FIN, ACK, FIN, ACK), pas en 3 comme l'ouverture.</div>
+  <details class="check"><summary>À toi : 3 questions éclair sur la section 10</summary><ol>
+    <li>Quel protocole et quel port pour envoyer un e-mail ? Pour le récupérer ? <i>Réponse : SMTP, port 25 ; POP3, port 110.</i></li>
+    <li>MTU 1500, en-têtes IP + TCP : quel MSS ? <i>Réponse : 1500 − 40 = 1460 octets.</i></li>
+    <li>Pourquoi le DNS utilise-t-il couramment UDP ? <i>Réponse : la requête et la réponse sont très courtes ; inutile d'ouvrir une connexion TCP.</i></li>
+  </ol></details>
+</div>
+
+</div>
+<script>
+/* Interactions des explications illustrées (sections 5, 8, 10). */
+(function(){
+  function $(i){return document.getElementById(i);}
+  function num(v){return parseFloat(String(v).replace(/\s/g,'').replace(',','.'));}
+  function fr(n){return Math.round(n).toLocaleString('fr-FR');}
+  function hms(s){s=Math.round(s);var h=Math.floor(s/3600),m=Math.floor(s%3600/60),r=s%60;return (h?h+' h ':'')+(h||m?m+' min ':'')+r+' s';}
+  function mesh(){var n=Math.floor(num($('xMeshN').value));var o=$('xMeshOut');if(!(n>=2&&n<=1000)){o.textContent='Entre un nombre entre 2 et 1000.';return;}
+    o.innerHTML='<b>'+n+' × '+(n-1)+' / 2 = '+fr(n*(n-1)/2)+' liaisons</b>, et chaque hôte a besoin de '+(n-1)+' ports.';}
+  function dl(){var t=num($('xDlT').value),u=+$('xDlU').value,d=num($('xDlD').value),v=+$('xDlV').value,o=$('xDlOut');
+    if(!(t>0&&d>0)){o.textContent='Entre une taille et un débit positifs.';return;}
+    var bits=t*u*8,bps=d*v,s=bits/bps;
+    o.textContent='Taille = '+t+' × '+fr(u)+' × 8 = '+fr(bits)+' bits\nDébit = '+d+' × '+fr(v)+' = '+fr(bps)+' bit/s\nT = '+fr(bits)+' / '+fr(bps)+' ≈ '+fr(s)+' s = '+hms(s);}
+  function sg(){var D=Math.floor(num($('xSgD').value)),M=Math.floor(num($('xSgM').value)),H=+$('xSgH').value,o=$('xSgOut');
+    if(!(D>0&&M>H)){o.textContent='Vérifie les valeurs (MTU plus grand que les en-têtes).';return;}
+    var utile=M-H,n=Math.ceil(D/utile),reste=D-(n-1)*utile;
+    o.textContent='Données utiles par paquet = '+M+' − '+H+' = '+utile+' o\nNombre de segments = ⌈'+D+' / '+utile+'⌉ = '+n+'\n'+(n>1?(n-1)+' segment(s) plein(s) de '+M+' o\n':'')+'Dernier = '+reste+' + '+H+' = '+(reste+H)+' o';}
+  [['xMeshN',mesh],['xDlT',dl],['xDlU',dl],['xDlD',dl],['xDlV',dl],['xSgD',sg],['xSgM',sg],['xSgH',sg]].forEach(function(p){var e=$(p[0]);if(e){e.addEventListener('input',p[1]);e.addEventListener('change',p[1]);}});
+  if($('xMeshN')){mesh();dl();sg();}
+})();
+</script>
+
+<script>
+/* MIZAN : explications illustrées des sections 1 à 10, placées en tête de chaque section du cours. */
+(function(){
+  document.querySelectorAll('#xplus [data-for]').forEach(function(d){
+    var sec=document.getElementById(d.dataset.for); if(!sec) return;
+    var box=document.createElement('div'); box.className='xz xin';
+    box.innerHTML='<p class="xlab">Comprendre, en clair</p>';
+    while(d.firstChild) box.appendChild(d.firstChild);
+    sec.querySelector('h3').after(box);
+    var lab=document.createElement('p'); lab.className='fichelab'; lab.textContent='La fiche du cours (à retenir)'; box.after(lab);
+  });
+  var x=document.getElementById('xplus'); if(x) x.remove();
+})();
+</script>
 <script>
 /* MIZAN : les explications illustrées (sections 11 à 13) sont intégrées directement dans le cours,
    en tête de leur section, au lieu d'un onglet séparé. Les éléments sont déplacés (pas copiés),
