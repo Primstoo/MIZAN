@@ -28,6 +28,17 @@
     });
   }
 
+  // Les modules affichent la réponse en texte brut : on retire la mise en forme Markdown
+  // (**gras**, # titres, `code`) que les modèles ajoutent parfois, et les puces « * » deviennent « • ».
+  function brut(t) {
+    return t
+      .replace(/\*\*([^*\n]+)\*\*/g, "$1").replace(/__([^_\n]+)__/g, "$1")
+      .replace(/^#{1,6}\s+/gm, "").replace(/^(\s*)[*-]\s+/gm, "$1• ")
+      .replace(/`{3}[a-z]*\n?/gi, "").replace(/`([^`\n]+)`/g, "$1")
+      .replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,;:!?]|$)/g, "$1$2")
+      .replace(/\*\*/g, "");
+  }
+
   async function sample(input, opts) {
     opts = opts || {};
     if (typeof input === "string") input = [{ role: "user", content: input }];
@@ -72,13 +83,13 @@
         if (!l.trim()) continue;
         let o; try { o = JSON.parse(l); } catch (e) { continue; }
         if (o.erreur) throw fail(o.erreur, o.message);
-        if (o.d) { text += o.d; if (typeof opts.onText === "function") { try { opts.onText({ text: text, delta: o.d }); } catch (e) {} } }
+        if (o.d) { text += o.d; if (typeof opts.onText === "function") { try { opts.onText({ text: brut(text), delta: o.d }); } catch (e) {} } }
         if (o.fin) fin = o;
       }
     }
     if (!text.trim()) throw fail("empty_completion", "Réponse vide");
     const body = fin;
-    return { text: text, truncated: !!body.truncated, modelTierApplied: opts.modelTier || "default" };
+    return { text: brut(text), truncated: !!body.truncated, modelTierApplied: opts.modelTier || "default" };
   }
   sample.limits = async function () { return LIMITS; };
   sample.json = async function (input, opts) {

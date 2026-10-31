@@ -97,7 +97,7 @@ export async function POST(req: Request) {
   try { body = await req.json(); } catch { return err("invalid_request", "Requête illisible", 400); }
 
   const all = (body.messages ?? []).map((m) => ({ role: m.role, text: texte(m.content) }));
-  const system = all.filter((m) => m.role === "system").map((m) => m.text).join("\n\n");
+  const system = all.filter((m) => m.role === "system").map((m) => m.text).join("\n\n") + "\n\nFormat : texte brut uniquement, sans Markdown (pas d'astérisques, de dièses ni d'accents graves). Pour une liste, commence les lignes par « • ».";
   let msgs = all.filter((m) => m.role !== "system" && m.text.trim());
   while (msgs.length && msgs[0].role !== "user") msgs = msgs.slice(1);
   if (!msgs.length) return err("invalid_request", "Question vide", 400);
