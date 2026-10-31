@@ -144,3 +144,68 @@ drop policy if exists "activity: soi" on public.activity;
 create policy "activity: soi" on public.activity for select using ((select auth.uid()) = user_id);
 drop policy if exists "bookings: soi" on public.live_bookings;
 create policy "bookings: soi" on public.live_bookings for select using ((select auth.uid()) = user_id);
+
+-- ===== Ajouts du 31/10/2026 (soir) =====
+-- Test de niveau et examens blancs : dernier résultat par notion
+create table if not exists public.niveau (
+  user_id uuid not null references auth.users(id) on delete cascade,
+  module_slug text not null, notion text not null, ok boolean not null,
+  created_at timestamptz not null default now(),
+  primary key (user_id, module_slug, notion)
+);
+create table if not exists public.blancs (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  module_slug text not null, note numeric(4,1) not null, nb_questions int not null, duree_s int,
+  created_at timestamptz not null default now()
+);
+create index if not exists blancs_user_idx on public.blancs(user_id, module_slug);
+create table if not exists public.notes_reelles (
+  user_id uuid not null references auth.users(id) on delete cascade,
+  module_slug text not null,
+  note numeric(4,2) not null check (note >= 0 and note <= 20),
+  note_prevue numeric(4,1),
+  created_at timestamptz not null default now(),
+  primary key (user_id, module_slug)
+);
+-- Documents envoyés par les élèves (fichiers dans le stockage privé « documents »)
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('documents', 'documents', false, 15728640, array['application/pdf','image/jpeg','image/png','image/webp','image/heic'])
+on conflict (id) do nothing;
+drop policy if exists "documents: dépôt dans son dossier" on storage.objects;
+create policy "documents: dépôt dans son dossier" on storage.objects for insert to authenticated
+  with check (bucket_id = 'documents' and (storage.foldername(name))[1] = (select auth.uid())::text);
+drop policy if exists "documents: lecture de ses fichiers" on storage.objects;
+create policy "documents: lecture de ses fichiers" on storage.objects for select to authenticated
+  using (bucket_id = 'documents' and (storage.foldername(name))[1] = (select auth.uid())::text);
+create table if not exists public.documents (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  email text, module_slug text, module_libre text,
+  type text not null check (type in ('cours','td','annale','autre')),
+  etablissement text, chemin text not null, nom_fichier text,
+  statut text not null default 'recu' check (statut in ('recu','accepte','refuse')),
+  note text, created_at timestamptz not null default now()
+);
+create index if not exists documents_user_idx on public.documents(user_id);
+-- Bot Telegram
+create table if not exists public.telegram_links (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  jeton text unique, chat_id bigint unique,
+  actif boolean not null default true, relie_le timestamptz
+);
+alter table public.niveau enable row level security;
+alter table public.blancs enable row level security;
+alter table public.notes_reelles enable row level security;
+alter table public.documents enable row level security;
+alter table public.telegram_links enable row level security;
+drop policy if exists "niveau: soi" on public.niveau;
+create policy "niveau: soi" on public.niveau for select using ((select auth.uid()) = user_id);
+drop policy if exists "blancs: soi" on public.blancs;
+create policy "blancs: soi" on public.blancs for select using ((select auth.uid()) = user_id);
+drop policy if exists "notes: soi" on public.notes_reelles;
+create policy "notes: soi" on public.notes_reelles for select using ((select auth.uid()) = user_id);
+drop policy if exists "documents: soi" on public.documents;
+create policy "documents: soi" on public.documents for select using ((select auth.uid()) = user_id);
+drop policy if exists "telegram: soi" on public.telegram_links;
+create policy "telegram: soi" on public.telegram_links for select using ((select auth.uid()) = user_id);
