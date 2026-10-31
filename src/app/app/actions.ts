@@ -199,3 +199,28 @@ export async function statutDocument(form: FormData): Promise<void> {
   await admin().from("documents").update({ statut, note: String(form.get("note") || "").trim().slice(0, 200) || null }).eq("id", String(form.get("id")));
   revalidatePath("/app/admin"); revalidatePath("/app/contribuer");
 }
+
+// ---------- Telegram ----------
+export async function lienTelegram(): Promise<string> {
+  const u = await moi();
+  const jeton = nouveauCode().replace("MZ-", "") + Math.random().toString(36).slice(2, 8);
+  await admin().from("telegram_links").upsert({ user_id: u.id, jeton });
+  return `https://t.me/${process.env.TELEGRAM_BOT_USERNAME}?start=${jeton}`;
+}
+
+export async function activerWebhook(): Promise<string> {
+  await chef();
+  const site = process.env.SITE_URL || "https://mizan-five-iota.vercel.app";
+  const r = await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/setWebhook`, {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url: `${site}/api/telegram/webhook`, secret_token: process.env.TELEGRAM_WEBHOOK_SECRET, allowed_updates: ["message"] }),
+  });
+  const j = await r.json().catch(() => ({}));
+  if (j.ok) {
+    await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/setMyCommands`, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ commands: [{ command: "mission", description: "Ma mission du jour" }, { command: "stop", description: "Arrêter les rappels" }, { command: "reprendre", description: "Réactiver les rappels" }] }),
+    });
+  }
+  return j.ok ? "Bot activé ✓" : "Échec : " + (j.description || "réponse inconnue");
+}

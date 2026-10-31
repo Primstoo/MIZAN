@@ -159,3 +159,9 @@ Relecture complète du code, test de chaque écran sur téléphone et ordinateur
 Les élèves envoient cours, TD et annales (PDF ou photos, 15 Mo max) dans un espace de stockage privé Supabase (dossier par élève, règles RLS). L'admin vérifie dans Suivi (lien temporaire d'une heure) et accepte ou refuse. Récompense : questions au tuteur en plus chaque jour (annale +10, TD +5, cours +5, plafond +30), calculée à partir des documents acceptés.
 **Pourquoi cette récompense :** elle ne coûte presque rien (offres gratuites d'IA) et récompense l'usage, alors qu'un accès payant offert ferait perdre des ventes.
 **Droit d'auteur :** les documents ne sont jamais publiés tels quels ; seul un contenu retravaillé l'est.
+
+## D25. Bot Telegram (rappel du matin)
+Chaque élève relie son compte depuis « Moi » (lien t.me/<bot>?start=<jeton> à usage unique). Chaque matin, une tâche planifiée Vercel (`vercel.json`, 7 h 30 UTC) envoie la mission du jour personnalisée, le compte à rebours, la série et le prochain live, avec un bouton qui ouvre directement le bon module. Commandes : /mission, /stop, /reprendre.
+**Pourquoi Telegram :** déjà utilisé par les étudiants, gratuit, sans coût par message (contrairement aux SMS ou à WhatsApp Business).
+**Sécurité :** le webhook vérifie l'en-tête secret de Telegram ; la tâche du matin exige CRON_SECRET.
+**Limite :** sur le plan gratuit de Vercel, la tâche quotidienne peut partir n'importe quand dans l'heure prévue.

@@ -42,3 +42,13 @@ Après toute modification de variable : Vercel → Deployments → Redeploy.
 
 ## Usage commercial
 La formule Vercel gratuite (Hobby) est réservée à un usage non commercial : passer au plan Pro dès que les lives payants démarrent.
+
+## Bot Telegram (rappels du matin)
+1. Dans Telegram, écrire à **@BotFather** → `/newbot` → nom « MIZAN » → identifiant terminé par `bot` (ex. `MizanRevisionBot`). Copier le jeton donné.
+2. Dans Vercel → Environment Variables :
+   - `TELEGRAM_BOT_TOKEN` : le jeton de BotFather
+   - `TELEGRAM_BOT_USERNAME` : l'identifiant du bot, sans @
+   - `TELEGRAM_WEBHOOK_SECRET` : une longue suite de lettres et chiffres au hasard
+   - `CRON_SECRET` : une autre suite au hasard (Vercel l'utilise pour la tâche du matin)
+3. Redeploy, puis dans MIZAN → Suivi → « Activer / réparer le bot ».
+4. Tester : Moi → « Recevoir mes rappels sur Telegram » → Démarrer → taper /mission.

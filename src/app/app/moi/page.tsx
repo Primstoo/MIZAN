@@ -5,6 +5,8 @@ import { creerInvitation } from "../actions";
 import Copier from "../Copier";
 import Deconnexion from "../Deconnexion";
 import { bonusTuteur } from "@/lib/bonus";
+import { botActif } from "@/lib/telegram";
+import Telegram from "./Telegram";
 
 export const metadata = { title: "Mon compte" };
 
@@ -17,6 +19,7 @@ export default async function Moi() {
     db.from("tutor_usage").select("count").eq("user_id", user!.id).eq("day", jourMaroc()).maybeSingle(),
   ]);
   const bonus = await bonusTuteur(user!.id);
+  const { data: tg } = await db.from("telegram_links").select("chat_id, actif").eq("user_id", user!.id).maybeSingle();
   const quota = Number(process.env.TUTOR_DAILY_QUOTA || 40) + bonus;
   const restant = Math.max(0, quota - (usage?.count ?? 0));
   const peutCreer = estAdmin(user) || (inv?.length ?? 0) < Number(process.env.INVITES_PER_MEMBER || 1);
@@ -42,6 +45,14 @@ export default async function Moi() {
           <ul className="list-plain">{p.examens.map((e) => <li key={e.module_slug}><strong>{e.module!.titre}</strong> · {new Date(e.exam_date + "T12:00:00Z").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })} <span className="muted">(J-{e.reste}{e.estimee ? ", estimée" : ""})</span></li>)}</ul>
         ) : <p className="muted small">Aucune date d&apos;examen. Ajoute-en une pour avoir ta mission du jour.</p>}
       </section>
+
+      {botActif() && (
+        <section className="bloc">
+          <h2>Rappels Telegram</h2>
+          <p className="muted small">{tg?.chat_id ? (tg.actif ? "✓ Relié : tu reçois ta mission chaque matin vers 8 h. Tape /stop dans Telegram pour arrêter." : "Relié, mais les rappels sont en pause : tape /reprendre dans Telegram.") : "Reçois chaque matin ta mission du jour, ton compte à rebours et les lives, là où tu es déjà."}</p>
+          <Telegram relie={!!tg?.chat_id} />
+        </section>
+      )}
 
       <section className="bloc">
         <div className="row between"><h2>Partager mes cours</h2><a href="/app/contribuer" className="btn small">Envoyer un document</a></div>

@@ -41,5 +41,5 @@ npm run dev
 - [x] Scores des modules remontés vers la plateforme (mission personnalisée, maîtrise par chapitre, points faibles)
 - [x] Test de niveau à l'inscription
 - [x] Envoi de documents par les élèves (récompense : questions au tuteur en plus)
-- [ ] Bot Telegram (rappels, liens des lives)
+- [x] Bot Telegram (mission du matin, série, prochain live) · à activer avec le jeton du bot
 - [ ] Nom de domaine + e-mails via Resend

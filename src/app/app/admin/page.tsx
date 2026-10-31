@@ -3,6 +3,8 @@ import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin } from "@/lib/acces";
 import { MODULES } from "@/lib/modules";
 import { jourMaroc } from "@/lib/parcours";
+import { botActif } from "@/lib/telegram";
+import Webhook from "./Webhook";
 import { creerSession, statutReservation, majLien, majDateModule, statutDocument } from "../actions";
 
 // Suivi du pilote, réservé aux admins (ADMIN_EMAILS) : qui est entré, qui révise quoi,
@@ -27,6 +29,7 @@ export default async function Suivi() {
     db.from("live_bookings").select("session_id, user_id, email, statut, ref_paiement, created_at").order("created_at", { ascending: false }),
   ]);
   const S = sessions ?? [], R = resas ?? [];
+  const { data: tgs } = await db.from("telegram_links").select("chat_id");
   const { data: docs } = await db.from("documents").select("id, email, type, module_slug, module_libre, etablissement, chemin, nom_fichier, statut, created_at").order("created_at", { ascending: false }).limit(50);
   const liens = new Map<string, string>();
   for (const d of (docs ?? []).filter((x) => x.statut === "recu")) {
@@ -99,6 +102,11 @@ export default async function Suivi() {
             </tr>
           ))}
         </tbody></table></div>
+      </section>
+
+      <section className="bloc">
+        <h2>Bot Telegram</h2>
+        {botActif() ? <><p className="small muted">{(tgs ?? []).filter((t) => t.chat_id).length} élève(s) relié(s). Rappel envoyé chaque jour vers 8 h (heure du Maroc).</p><Webhook /></> : <p className="small muted">Pas encore configuré : ajoute TELEGRAM_BOT_TOKEN, TELEGRAM_BOT_USERNAME, TELEGRAM_WEBHOOK_SECRET et CRON_SECRET dans Vercel (voir docs/DEPLOIEMENT.md).</p>}
       </section>
 
       <section className="bloc">
