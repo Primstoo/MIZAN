@@ -35,6 +35,10 @@ export default async function Modules() {
           <div className="grid">{autres.map((m) => <CarteModule key={m.slug} m={m} />)}</div>
         </details>
       )}
+      <div className="card soft bloc">
+        <p className="small"><strong>Ton module n&apos;est pas là ?</strong> Envoie les cours, TD et annales de ton prof : c&apos;est comme ça que les nouveaux modules sont créés.</p>
+        <a href="/app/contribuer" className="btn small">Partager mes cours</a>
+      </div>
     </main>
   );
 }

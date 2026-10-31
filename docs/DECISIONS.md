@@ -154,3 +154,8 @@ Relecture complète du code, test de chaque écran sur téléphone et ordinateur
 
 ## D23. Test de niveau (3 min) à l'inscription
 8 questions par module, choisies automatiquement dans les banques de QCM des modules (une par notion, les plus importantes d'abord ; `src/lib/niveau.json`, généré par `scripts/extraire-notions.cjs`). Proposé juste après l'inscription, sur le module dont l'examen est le plus proche, et depuis « Ma progression » pour les autres. Une erreur classe la notion « à retravailler » : la mission du jour est donc personnalisée dès le premier jour. Une bonne réponse ne suffit pas à déclarer une notion maîtrisée (une seule question). Table `niveau`.
+
+## D24. Envoi de documents par les élèves (« Partager mes cours »)
+Les élèves envoient cours, TD et annales (PDF ou photos, 15 Mo max) dans un espace de stockage privé Supabase (dossier par élève, règles RLS). L'admin vérifie dans Suivi (lien temporaire d'une heure) et accepte ou refuse. Récompense : questions au tuteur en plus chaque jour (annale +10, TD +5, cours +5, plafond +30), calculée à partir des documents acceptés.
+**Pourquoi cette récompense :** elle ne coûte presque rien (offres gratuites d'IA) et récompense l'usage, alors qu'un accès payant offert ferait perdre des ventes.
+**Droit d'auteur :** les documents ne sont jamais publiés tels quels ; seul un contenu retravaillé l'est.

@@ -175,3 +175,27 @@ export async function enregistrerNiveau(slug: string, reponses: { n: string; ok:
   if (lignes.length) await admin().from("niveau").upsert(lignes);
   revalidatePath("/app"); revalidatePath("/app/progres");
 }
+
+// ---------- Documents envoyés par les élèves ----------
+export async function declarerDocument(meta: { chemin: string; nom: string; type: string; module: string; moduleLibre: string; etablissement: string }): Promise<string> {
+  const u = await moi();
+  if (!meta.chemin.startsWith(u.id + "/")) return "Fichier invalide.";
+  if (!["cours", "td", "annale", "autre"].includes(meta.type)) return "Type invalide.";
+  const slug = MODULES.some((m) => m.slug === meta.module) ? meta.module : null;
+  const { error } = await admin().from("documents").insert({
+    user_id: u.id, email: u.email, chemin: meta.chemin, nom_fichier: meta.nom.slice(0, 120), type: meta.type,
+    module_slug: slug, module_libre: slug ? null : meta.moduleLibre.trim().slice(0, 80) || null,
+    etablissement: meta.etablissement.trim().slice(0, 80) || null,
+  });
+  if (error) return "Enregistrement impossible (" + error.code + ").";
+  revalidatePath("/app/contribuer"); revalidatePath("/app/admin");
+  return "";
+}
+
+export async function statutDocument(form: FormData): Promise<void> {
+  await chef();
+  const statut = String(form.get("statut"));
+  if (!["accepte", "refuse", "recu"].includes(statut)) return;
+  await admin().from("documents").update({ statut, note: String(form.get("note") || "").trim().slice(0, 200) || null }).eq("id", String(form.get("id")));
+  revalidatePath("/app/admin"); revalidatePath("/app/contribuer");
+}

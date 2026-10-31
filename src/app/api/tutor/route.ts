@@ -2,13 +2,14 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { admin as serviceClient, estMembre } from "@/lib/acces";
 import { jourMaroc } from "@/lib/parcours";
+import { bonusTuteur } from "@/lib/bonus";
 
 // Tuteur côté serveur (décision D8) : clés IA jamais dans le navigateur.
 // Gemini d'abord, Groq en secours. Quota quotidien par élève dans tutor_usage.
 export const dynamic = "force-dynamic";
 export const maxDuration = 60; // secondes : plusieurs modèles peuvent être essayés à la suite
 
-const QUOTA = Number(process.env.TUTOR_DAILY_QUOTA || 40);
+const QUOTA_BASE = Number(process.env.TUTOR_DAILY_QUOTA || 40);
 // Les modèles gratuits sont souvent retirés (gemini-2.5-flash fermé le 16/10/2026,
 // llama-3.3-70b chez Groq le 16/08/2026). On essaie donc une liste, alias « latest » d'abord.
 const liste = (v: string | undefined, def: string[]) => (v ? v.split(",").map((x) => x.trim()).filter(Boolean) : def);
@@ -109,6 +110,7 @@ export async function POST(req: Request) {
   const day = jourMaroc();
   const { data: u } = await admin.from("tutor_usage").select("count").eq("user_id", user.id).eq("day", day).maybeSingle();
   const used = u?.count ?? 0;
+  const QUOTA = QUOTA_BASE + (await bonusTuteur(user.id));
   if (used >= QUOTA) return err("rate_limited", `Quota du jour atteint (${QUOTA} questions). Reviens demain.`, 429);
 
   // Essai des modèles dans l'ordre ; on passe au suivant tant qu'aucun mot n'a été envoyé.

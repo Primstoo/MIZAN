@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin } from "@/lib/acces";
 import { MODULES } from "@/lib/modules";
 import { jourMaroc } from "@/lib/parcours";
-import { creerSession, statutReservation, majLien, majDateModule } from "../actions";
+import { creerSession, statutReservation, majLien, majDateModule, statutDocument } from "../actions";
 
 // Suivi du pilote, réservé aux admins (ADMIN_EMAILS) : qui est entré, qui révise quoi,
 // combien coûte le tuteur. Ce sont les chiffres à montrer avant de lancer une offre payante.
@@ -27,6 +27,12 @@ export default async function Suivi() {
     db.from("live_bookings").select("session_id, user_id, email, statut, ref_paiement, created_at").order("created_at", { ascending: false }),
   ]);
   const S = sessions ?? [], R = resas ?? [];
+  const { data: docs } = await db.from("documents").select("id, email, type, module_slug, module_libre, etablissement, chemin, nom_fichier, statut, created_at").order("created_at", { ascending: false }).limit(50);
+  const liens = new Map<string, string>();
+  for (const d of (docs ?? []).filter((x) => x.statut === "recu")) {
+    const { data: u } = await db.storage.from("documents").createSignedUrl(d.chemin, 3600);
+    if (u?.signedUrl) liens.set(d.id, u.signedUrl);
+  }
   const encaisse = R.filter((r) => r.statut === "payee").reduce((t, r) => t + (S.find((s) => s.id === r.session_id)?.prix_dh ?? 0), 0);
   const attente = R.filter((r) => r.statut === "en_attente");
   const M = membres ?? [], P = prog ?? [], U = usage ?? [], I = invites ?? [];
@@ -55,6 +61,7 @@ export default async function Suivi() {
         <div className="card kpi"><strong>{questions(30)}</strong>questions sur 30 jours</div>
         <div className="card kpi"><strong>{encaisse} DH</strong>encaissés (lives)</div>
         <div className="card kpi"><strong>{attente.length}</strong>paiements à valider</div>
+        <div className="card kpi"><strong>{(docs ?? []).filter((d) => d.statut === "recu").length}</strong>documents à vérifier</div>
       </div>
 
       <section className="bloc">
@@ -92,6 +99,24 @@ export default async function Suivi() {
             </tr>
           ))}
         </tbody></table></div>
+      </section>
+
+      <section className="bloc">
+        <h2>Documents reçus</h2>
+        {!(docs ?? []).some((d) => d.statut === "recu") && <p className="muted small">Rien à vérifier.</p>}
+        <ul className="list-plain">
+          {(docs ?? []).filter((d) => d.statut === "recu").map((d) => (
+            <li key={d.id} className="card">
+              <div className="row between"><a href={liens.get(d.id)} target="_blank" rel="noopener noreferrer" className="t">{d.nom_fichier}</a><span className="chip">{d.type}</span></div>
+              <span className="small muted">{d.email} · {MODULES.find((m) => m.slug === d.module_slug)?.titre ?? d.module_libre ?? "—"} · {d.etablissement ?? ""}</span>
+              <div className="row">
+                <form action={statutDocument}><input type="hidden" name="id" value={d.id} /><input type="hidden" name="statut" value="accepte" /><button className="btn small">Accepter</button></form>
+                <form action={statutDocument} className="row"><input type="hidden" name="id" value={d.id} /><input type="hidden" name="statut" value="refuse" /><input name="note" placeholder="Raison (facultatif)" /><button className="btn alt small">Refuser</button></form>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p className="small muted">{(docs ?? []).filter((d) => d.statut === "accepte").length} accepté(s) au total.</p>
       </section>
 
       <section className="bloc">

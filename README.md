@@ -40,6 +40,6 @@ npm run dev
 - [x] Explications illustrées intégrées au cours de chaque module
 - [x] Scores des modules remontés vers la plateforme (mission personnalisée, maîtrise par chapitre, points faibles)
 - [x] Test de niveau à l'inscription
-- [ ] Envoi de documents par les élèves
+- [x] Envoi de documents par les élèves (récompense : questions au tuteur en plus)
 - [ ] Bot Telegram (rappels, liens des lives)
 - [ ] Nom de domaine + e-mails via Resend
