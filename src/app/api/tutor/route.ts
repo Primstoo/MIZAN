@@ -36,49 +36,53 @@ async function appel(url: string, init: RequestInit) {
   finally { clearTimeout(t); }
 }
 
-async function gemini(model: string, system: string, msgs: { role: string; text: string }[], images: Img[]) {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) throw new Error("GEMINI_API_KEY absente");
+// ---------- Réponse en continu (le texte s'affiche pendant qu'il s'écrit) ----------
+type Flux = AsyncGenerator<string, { truncated: boolean }>;
+
+async function* lignesSSE(r: Response): AsyncGenerator<string> {
+  const dec = new TextDecoder(); const rd = r.body!.getReader(); let buf = "";
+  for (;;) {
+    const { value, done } = await rd.read(); if (done) break;
+    buf += dec.decode(value, { stream: true });
+    let i; while ((i = buf.indexOf("\n")) >= 0) { const l = buf.slice(0, i).trim(); buf = buf.slice(i + 1); if (l.startsWith("data:")) yield l.slice(5).trim(); }
+  }
+}
+
+async function* geminiFlux(model: string, system: string, msgs: { role: string; text: string }[], images: Img[]): Flux {
+  const key = process.env.GEMINI_API_KEY; if (!key) throw new Error("GEMINI_API_KEY absente");
   const contents = msgs.map((m, i) => {
     const parts: Part[] = [{ text: m.text }];
     if (i === msgs.length - 1) images.forEach((im) => parts.push({ inline_data: { mime_type: im.mime, data: im.data } }));
     return { role: m.role === "assistant" ? "model" : "user", parts };
   });
-  const corps = (rapide: boolean) => JSON.stringify({
-    contents,
-    ...(system ? { systemInstruction: { parts: [{ text: system }] } } : {}),
-    // Sans « réflexion » interne : réponse en quelques secondes au lieu de 20 à 40.
-    generationConfig: { maxOutputTokens: 1500, ...(rapide ? { thinkingConfig: { thinkingBudget: 0 } } : {}) },
-  });
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+  const corps = (rapide: boolean) => JSON.stringify({ contents, ...(system ? { systemInstruction: { parts: [{ text: system }] } } : {}),
+    generationConfig: { maxOutputTokens: 1500, ...(rapide ? { thinkingConfig: { thinkingBudget: 0 } } : {}) } });
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`;
   const init = (rapide: boolean): RequestInit => ({ method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": key }, body: corps(rapide) });
   let r = await appel(url, init(true));
-  if (r.status === 400) r = await appel(url, init(false)); // modèle qui refuse le réglage de réflexion
+  if (r.status === 400) r = await appel(url, init(false));
   if (!r.ok) throw new Error(`Gemini ${model} ${r.status} ${(await r.text()).slice(0, 200)}`);
-  const j = await r.json();
-  const cand = j.candidates?.[0];
-  return {
-    text: (cand?.content?.parts ?? []).map((p: Part) => p.text ?? "").join(""),
-    truncated: cand?.finishReason === "MAX_TOKENS",
-  };
+  let truncated = false;
+  for await (const d of lignesSSE(r)) {
+    try { const j = JSON.parse(d); const c = j.candidates?.[0]; if (c?.finishReason === "MAX_TOKENS") truncated = true;
+      const t = (c?.content?.parts ?? []).map((p: Part) => p.text ?? "").join(""); if (t) yield t; } catch {}
+  }
+  return { truncated };
 }
 
-async function groq(model: string, system: string, msgs: { role: string; text: string }[]) {
-  const key = process.env.GROQ_API_KEY;
-  if (!key) throw new Error("GROQ_API_KEY absente");
-  const r = await appel("https://api.groq.com/openai/v1/chat/completions", {
-    method: "POST",
+async function* groqFlux(model: string, system: string, msgs: { role: string; text: string }[]): Flux {
+  const key = process.env.GROQ_API_KEY; if (!key) throw new Error("GROQ_API_KEY absente");
+  const r = await appel("https://api.groq.com/openai/v1/chat/completions", { method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
-    body: JSON.stringify({
-      model,
-      max_tokens: 1500,
-      messages: [...(system ? [{ role: "system", content: system }] : []),
-        ...msgs.map((m) => ({ role: m.role === "assistant" ? "assistant" : "user", content: m.text }))],
-    }),
-  });
+    body: JSON.stringify({ model, stream: true, max_tokens: 1500, messages: [...(system ? [{ role: "system", content: system }] : []),
+      ...msgs.map((m) => ({ role: m.role === "assistant" ? "assistant" : "user", content: m.text }))] }) });
   if (!r.ok) throw new Error(`Groq ${model} ${r.status} ${(await r.text()).slice(0, 200)}`);
-  const j = await r.json();
-  return { text: j.choices?.[0]?.message?.content ?? "", truncated: j.choices?.[0]?.finish_reason === "length" };
+  let truncated = false;
+  for await (const d of lignesSSE(r)) {
+    if (d === "[DONE]") break;
+    try { const j = JSON.parse(d); const c = j.choices?.[0]; if (c?.finish_reason === "length") truncated = true; const t = c?.delta?.content; if (t) yield t; } catch {}
+  }
+  return { truncated };
 }
 
 export async function POST(req: Request) {
@@ -106,22 +110,42 @@ export async function POST(req: Request) {
   const used = u?.count ?? 0;
   if (used >= QUOTA) return err("rate_limited", `Quota du jour atteint (${QUOTA} questions). Reviens demain.`, 429);
 
-  let out: { text: string; truncated: boolean } | null = null;
-  const errors: string[] = [];
+  // Essai des modèles dans l'ordre ; on passe au suivant tant qu'aucun mot n'a été envoyé.
+  const candidats: (() => Flux)[] = [
+    ...GEMINI_MODELS.map((m) => () => geminiFlux(m, system, msgs, images)),
+    ...GROQ_MODELS.map((m) => () => groqFlux(m, system, msgs)),
+  ];
+  const noms = [...GEMINI_MODELS, ...GROQ_MODELS];
+  const enc = new TextEncoder();
   const t0 = Date.now();
-  let source = "";
-  for (const m of GEMINI_MODELS) {
-    if (out?.text) break;
-    try { out = await gemini(m, system, msgs, images); if (out?.text) source = m; } catch (e) { errors.push(String((e as Error).message)); }
-  }
-  for (const m of GROQ_MODELS) {
-    if (out?.text) break;
-    try { out = await groq(m, system, msgs); if (out?.text) source = m; } catch (e) { errors.push(String((e as Error).message)); }
-  }
-  console.log(`[tutor] ${out?.text ? "ok" : "échec"} · ${source || "aucun modèle"} · ${Date.now() - t0} ms · ${msgs.length} messages`);
-  if (errors.length) console.error("[tutor]", errors.join(" | "));
-  if (!out?.text) return err("upstream_error", "Tuteur indisponible : " + errors.map((x) => x.slice(0, 60)).join(" / "), 502);
-
-  await admin.from("tutor_usage").upsert({ user_id: user.id, day, count: used + 1 }, { onConflict: "user_id,day" });
-  return NextResponse.json({ text: out.text, truncated: out.truncated, restant: QUOTA - used - 1 });
+  const flux = new ReadableStream({
+    async start(ctl) {
+      const envoi = (o: object) => ctl.enqueue(enc.encode(JSON.stringify(o) + "\n"));
+      const errors: string[] = [];
+      for (let k = 0; k < candidats.length; k++) {
+        let recu = 0;
+        try {
+          const g = candidats[k]();
+          let r = await g.next();
+          while (!r.done) {
+            if (!recu) await admin.from("tutor_usage").upsert({ user_id: user.id, day, count: used + 1 }, { onConflict: "user_id,day" });
+            recu += r.value.length; envoi({ d: r.value }); r = await g.next();
+          }
+          if (recu) {
+            console.log(`[tutor] ok · ${noms[k]} · ${Date.now() - t0} ms · ${msgs.length} messages`);
+            if (errors.length) console.error("[tutor]", errors.join(" | "));
+            envoi({ fin: true, truncated: r.value.truncated, restant: QUOTA - used - 1 }); ctl.close(); return;
+          }
+          errors.push(`${noms[k]} : réponse vide`);
+        } catch (e) {
+          errors.push(String((e as Error).message));
+          if (recu) { envoi({ fin: true, truncated: true }); ctl.close(); return; }
+        }
+      }
+      console.error("[tutor] échec ·", errors.join(" | "));
+      envoi({ erreur: "upstream_error", message: "Tuteur indisponible : " + errors.map((x) => x.slice(0, 60)).join(" / ") });
+      ctl.close();
+    },
+  });
+  return new Response(flux, { headers: { "Content-Type": "application/x-ndjson; charset=utf-8", "Cache-Control": "no-store" } });
 }

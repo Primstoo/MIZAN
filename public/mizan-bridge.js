@@ -53,13 +53,32 @@
       if (opts.signal && opts.signal.aborted) throw fail("cancelled", "Arrêté");
       throw fail("upstream_error", "Connexion impossible au tuteur");
     }
-    let body = {};
-    try { body = await res.json(); } catch (e) {}
-    if (!res.ok) throw fail(body.code || "upstream_error", body.message || "Erreur " + res.status);
-    const text = String(body.text || "");
+    if (!res.ok) {
+      let body = {};
+      try { body = await res.json(); } catch (e) {}
+      throw fail(body.code || "upstream_error", body.message || "Erreur " + res.status);
+    }
+    // Réponse en continu : une ligne JSON par morceau de texte.
+    const rd = res.body.getReader(), dec = new TextDecoder();
+    let buf = "", text = "", fin = {};
+    for (;;) {
+      let r;
+      try { r = await rd.read(); } catch (e) { if (opts.signal && opts.signal.aborted) throw fail("cancelled", "Arrêté"); throw fail("upstream_error", "Connexion coupée"); }
+      if (r.done) break;
+      buf += dec.decode(r.value, { stream: true });
+      let i;
+      while ((i = buf.indexOf("\n")) >= 0) {
+        const l = buf.slice(0, i); buf = buf.slice(i + 1);
+        if (!l.trim()) continue;
+        let o; try { o = JSON.parse(l); } catch (e) { continue; }
+        if (o.erreur) throw fail(o.erreur, o.message);
+        if (o.d) { text += o.d; if (typeof opts.onText === "function") { try { opts.onText({ text: text, delta: o.d }); } catch (e) {} } }
+        if (o.fin) fin = o;
+      }
+    }
     if (!text.trim()) throw fail("empty_completion", "Réponse vide");
-    if (typeof opts.onText === "function") { try { opts.onText({ text: text, delta: text }); } catch (e) {} }
-    return { text: text, truncated: !!body.truncated, modelTierApplied: body.tier || opts.modelTier || "default" };
+    const body = fin;
+    return { text: text, truncated: !!body.truncated, modelTierApplied: opts.modelTier || "default" };
   }
   sample.limits = async function () { return LIMITS; };
   sample.json = async function (input, opts) {
