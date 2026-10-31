@@ -35,12 +35,14 @@ const ADAPT: Record<string, (d: Brut, id: string) => [Statut, number | null]> = 
   uml: (d, id) => parScore(lire(d, "umlp_scores")?.[id], 8, 10),
 };
 
-export function calculerMaitrise(slug: string, data: Brut | null | undefined): Maitrise | null {
+export function calculerMaitrise(slug: string, data: Brut | null | undefined, niveau: Record<string, boolean> = {}): Maitrise | null {
   const cat = CAT[slug], f = ADAPT[slug];
   if (!cat || !f) return null;
   const d = data ?? {};
   const items: Item[] = cat.items.map((n) => {
-    const [statut, score] = f(d, n.id);
+    let [statut, score] = f(d, n.id);
+    // Test de niveau : une erreur sur une notion jamais travaillée la classe « à revoir ».
+    if (statut === "jamais" && niveau[n.id] === false) { statut = "fragile"; score = 0; }
     return { ...n, statut, score };
   });
   const groupes = cat.groupes

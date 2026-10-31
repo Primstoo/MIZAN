@@ -39,7 +39,7 @@ npm run dev
 - [x] Modules protégés, progression synchronisée, tuteur serveur en continu
 - [x] Explications illustrées intégrées au cours de chaque module
 - [x] Scores des modules remontés vers la plateforme (mission personnalisée, maîtrise par chapitre, points faibles)
-- [ ] Test de niveau à l'inscription
+- [x] Test de niveau à l'inscription
 - [ ] Envoi de documents par les élèves
 - [ ] Bot Telegram (rappels, liens des lives)
 - [ ] Nom de domaine + e-mails via Resend

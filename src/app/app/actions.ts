@@ -69,7 +69,10 @@ export async function enregistrerProfil(form: FormData): Promise<void> {
   const aRetirer = (avant ?? []).map((x) => x.module_slug as string).filter((s) => !choisis.includes(s));
   if (aRetirer.length && form.get("complet") === "1") await db.from("exams").delete().eq("user_id", u.id).in("module_slug", aRetirer);
   revalidatePath("/app");
-  redirect("/app");
+  // Première inscription : test de niveau sur le module dont l'examen est le plus proche.
+  const { data: dejaTeste } = await db.from("niveau").select("notion").eq("user_id", u.id).limit(1);
+  const premier = [...lignes].sort((a, b) => a.exam_date.localeCompare(b.exam_date))[0];
+  redirect(!dejaTeste?.length && premier ? `/app/niveau/${premier.module_slug}?premier=1` : "/app");
 }
 
 export async function reserverLive(form: FormData): Promise<void> {
@@ -161,4 +164,14 @@ export async function majDateModule(form: FormData): Promise<void> {
   else await db.from("module_dates").upsert({ module_slug: slug, exam_date: date, officielle: form.get("officielle") === "on",
     source: String(form.get("source") || "").trim() || null, updated_at: new Date().toISOString() });
   revalidatePath("/app"); revalidatePath("/app/admin");
+}
+
+// ---------- Test de niveau ----------
+export async function enregistrerNiveau(slug: string, reponses: { n: string; ok: boolean }[]): Promise<void> {
+  const u = await moi();
+  if (!MODULES.some((m) => m.slug === slug)) return;
+  const lignes = reponses.filter((r) => typeof r.n === "string" && r.n.length < 40).slice(0, 20)
+    .map((r) => ({ user_id: u.id, module_slug: slug, notion: r.n, ok: !!r.ok }));
+  if (lignes.length) await admin().from("niveau").upsert(lignes);
+  revalidatePath("/app"); revalidatePath("/app/progres");
 }

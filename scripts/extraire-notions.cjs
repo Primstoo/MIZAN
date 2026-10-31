@@ -51,6 +51,34 @@ const dir = path.join(__dirname, "..", "content", "modules");
     items: CHAPTERS.map((c) => ({ id: c.id, t: c.t, imp: c.imp, g: "cours" })),
   }));
 
+  // ---------- Banque du test de niveau : une question par notion importante (8 max) ----------
+  const niveau = {};
+  const choisir = (cat, banque) => {
+    const ordre = [...cat.items].sort((a, b) => b.imp - a.imp);
+    const out = [];
+    for (const n of ordre) {
+      const q = banque.find((x) => x.n === n.id && x.o && x.o.length >= 3);
+      if (q) out.push({ n: n.id, q: q.q, o: q.o, a: q.a, e: q.e || "" });
+      if (out.length >= 8) break;
+    }
+    return out;
+  };
+  await ouvrir("reseaux-M351.html");
+  niveau["reseaux-m351"] = choisir(out["reseaux-m351"], await p.evaluate(() => QS.map((x) => ({ n: x.n, q: x.q, o: x.o, a: x.a, e: x.e }))));
+  await ouvrir("archi-ordinateurs.html");
+  niveau["archi"] = choisir(out["archi"], await p.evaluate(() => QCM.map((x) => ({ n: x[0], q: x[1], o: x[2], a: x[3], e: x[4] }))));
+  await ouvrir("probas-S3.html");
+  niveau["probas"] = choisir(out["probas"], await p.evaluate(() => NOTIONS.flatMap((n) => (n.quiz || []).filter((x) => x.t === "q").map((x) => ({ n: n.id, q: x.q, o: x.o, a: x.a, e: x.e })))));
+  await ouvrir("crypto-farchane.html");
+  niveau["crypto"] = choisir(out["crypto"], await p.evaluate(() => Object.entries(EV).flatMap(([k, l]) => l.filter((x) => x.o).map((x) => ({ n: k, q: x.q, o: x.o, a: x.a, e: x.e })))));
+  await ouvrir("uml.html");
+  niveau["uml"] = choisir(out["uml"], await p.evaluate(() => Object.entries(QUIZ).flatMap(([k, l]) => l.filter((x) => x.o).map((x) => ({ n: k, q: x.q, o: x.o, a: x.a, e: x.e })))));
+  // Texte brut uniquement (pas de HTML dans la plateforme)
+  const brut = (t) => String(t).replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").trim();
+  for (const k in niveau) niveau[k] = niveau[k].map((x) => ({ ...x, q: brut(x.q), o: x.o.map(brut), e: brut(x.e) }));
+  fs.writeFileSync(path.join(__dirname, "..", "src", "lib", "niveau.json"), JSON.stringify(niveau, null, 1));
+  for (const [k, v] of Object.entries(niveau)) console.log("test de niveau", k, v.length, "questions");
+
   await b.close();
   const dest = path.join(__dirname, "..", "src", "lib", "notions.json");
   fs.writeFileSync(dest, JSON.stringify(out, null, 1));

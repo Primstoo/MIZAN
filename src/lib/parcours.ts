@@ -79,11 +79,16 @@ export function dateEstimee(semestre: string, communeISO?: string) {
 
 // Maîtrise de chaque module, calculée à partir de la progression synchronisée.
 export async function chargerMaitrise(u: User): Promise<Record<string, Maitrise>> {
-  const { data } = await admin().from("progress").select("module_slug, data").eq("user_id", u.id);
+  const db = admin();
+  const [{ data }, { data: niv }] = await Promise.all([
+    db.from("progress").select("module_slug, data").eq("user_id", u.id),
+    db.from("niveau").select("module_slug, notion, ok").eq("user_id", u.id),
+  ]);
   const out: Record<string, Maitrise> = {};
   for (const m of MODULES) {
     const row = (data ?? []).find((r) => r.module_slug === m.slug);
-    const x = calculerMaitrise(m.slug, (row?.data ?? {}) as Record<string, string>);
+    const n = Object.fromEntries((niv ?? []).filter((x) => x.module_slug === m.slug).map((x) => [x.notion as string, !!x.ok]));
+    const x = calculerMaitrise(m.slug, (row?.data ?? {}) as Record<string, string>, n);
     if (x) out[m.slug] = x;
   }
   return out;

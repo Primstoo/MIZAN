@@ -151,3 +151,6 @@ Relecture complète du code, test de chaque écran sur téléphone et ordinateur
 **Utilisé par :** page « Ma progression » (maîtrise par chapitre, points faibles), cartes des modules, mission du jour (elle commence par les notions ratées, puis les notions importantes jamais testées).
 **Alternative écartée :** modifier les 5 modules pour qu'ils envoient leurs scores (plus de code à maintenir, risque de casser les modules).
 **Limite :** si un module change sa façon de stocker la progression, il faut adapter l'adaptateur et relancer l'extraction.
+
+## D23. Test de niveau (3 min) à l'inscription
+8 questions par module, choisies automatiquement dans les banques de QCM des modules (une par notion, les plus importantes d'abord ; `src/lib/niveau.json`, généré par `scripts/extraire-notions.cjs`). Proposé juste après l'inscription, sur le module dont l'examen est le plus proche, et depuis « Ma progression » pour les autres. Une erreur classe la notion « à retravailler » : la mission du jour est donc personnalisée dès le premier jour. Une bonne réponse ne suffit pas à déclarer une notion maîtrisée (une seule question). Table `niveau`.

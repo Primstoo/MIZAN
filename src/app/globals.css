@@ -176,3 +176,8 @@ button,input,select,textarea{font-family:inherit}
 .chap li{margin-top:8px}
 .faibles .card{padding:10px 12px;gap:2px}
 .mbar{margin-top:6px}
+/* ---- Test de niveau ---- */
+.test{display:flex;flex-direction:column;gap:12px;padding-top:16px}
+.test h1{margin:0}.tq{font-size:19px;line-height:1.35;margin:4px 0}
+.opt.bon{border-color:var(--ok);background:var(--goodsoft)}.opt.faux{border-color:var(--bad);background:var(--badsoft)}
+.opt:disabled{cursor:default;color:var(--ink)}
