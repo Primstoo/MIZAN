@@ -9,12 +9,12 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   return { title: `Examen blanc · ${getModule(params.slug)?.titre ?? ""}` };
 }
 
-type Q = { n: string; q: string; o: string[]; a: number; e: string };
+type Q = { id: number; n: string; q: string; o: string[]; a: number; e: string };
 const melanger = <T,>(a: T[]) => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
 
 // Sujet tiré au hasard : une question par notion, les notions importantes d'abord, puis complété au hasard.
 function sujet(slug: string, nb: number): Q[] {
-  const banque = (BANQUE as Record<string, Q[]>)[slug] ?? [];
+  const banque = ((BANQUE as unknown as Record<string, Omit<Q, "id">[]>)[slug] ?? []).map((q, id) => ({ ...q, id }));
   const imp = new Map(((CATALOGUE as Record<string, { items: { id: string; imp: number }[] }>)[slug]?.items ?? []).map((i) => [i.id, i.imp]));
   const parNotion = new Map<string, Q[]>();
   melanger(banque).forEach((q) => parNotion.set(q.n, [...(parNotion.get(q.n) ?? []), q]));

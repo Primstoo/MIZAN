@@ -2,11 +2,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { declarerDocument } from "../actions";
+import { declarerDocument, preparerEnvoi } from "../actions";
 
 const MAX = 15 * 1024 * 1024;
 
-export default function Envoi({ uid, modules }: { uid: string; modules: { slug: string; titre: string }[] }) {
+export default function Envoi({ modules }: { modules: { slug: string; titre: string }[] }) {
   const router = useRouter();
   const [type, setType] = useState("cours");
   const [module, setModule] = useState(modules[0]?.slug ?? "");
@@ -25,9 +25,10 @@ export default function Envoi({ uid, modules }: { uid: string; modules: { slug: 
     let ok = 0;
     for (const f of fichiers) {
       if (f.size > MAX) { setEtat({ t: "bad", m: `« ${f.name} » dépasse 15 Mo.` }); continue; }
-      const propre = f.name.normalize("NFD").replace(/[^\w.-]+/g, "_").slice(-80);
-      const chemin = `${uid}/${Date.now()}-${propre}`;
-      const { error } = await sb.storage.from("documents").upload(chemin, f, { contentType: f.type || undefined });
+      const p = await preparerEnvoi(f.name);
+      if ("erreur" in p) { setEtat({ t: "bad", m: p.erreur }); break; }
+      const chemin = p.chemin;
+      const { error } = await sb.storage.from("documents").uploadToSignedUrl(chemin, p.jeton, f, { contentType: f.type || undefined });
       if (error) { setEtat({ t: "bad", m: `Envoi de « ${f.name} » impossible : ${error.message}` }); continue; }
       const msg = await declarerDocument({ chemin, nom: f.name, type, module, moduleLibre: libre, etablissement: etab });
       if (msg) setEtat({ t: "bad", m: msg }); else ok++;

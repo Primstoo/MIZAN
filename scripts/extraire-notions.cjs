@@ -81,6 +81,8 @@ const dir = path.join(__dirname, "..", "content", "modules");
   for (const k in niveau) niveau[k] = niveau[k].map((x) => ({ ...x, q: brut(x.q), o: x.o.map(brut), e: brut(x.e) }));
   fs.writeFileSync(path.join(__dirname, "..", "src", "lib", "niveau.json"), JSON.stringify(niveau, null, 1));
   // Banque complète (QCM uniquement) pour les examens blancs de la plateforme
+  // Questions du TD1 de crypto rattachées à leur notion (sinon elles ne comptent pas dans la maîtrise).
+  (banques.crypto || []).forEach((q) => { if (q.n === "td1") q.n = /transposition/i.test(q.q) ? "trans" : "lfsr"; });
   fs.writeFileSync(path.join(__dirname, "..", "src", "lib", "banque.json"), JSON.stringify(banques));
   for (const [k, v] of Object.entries(banques)) console.log("banque", k, v.length, "QCM");
   for (const [k, v] of Object.entries(niveau)) console.log("test de niveau", k, v.length, "questions");

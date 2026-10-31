@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { createHash, timingSafeEqual } from "node:crypto";
 import type { User } from "@supabase/supabase-js";
 import { admin } from "@/lib/acces";
 import { MODULES } from "@/lib/modules";
@@ -9,6 +9,12 @@ export const botActif = () => !!process.env.TELEGRAM_BOT_TOKEN;
 // Telegram n'accepte que lettres, chiffres, « _ » et « - » dans le secret : on en dérive une version sûre
 // (empreinte SHA-256), quel que soit le texte saisi dans TELEGRAM_WEBHOOK_SECRET.
 export const secretWebhook = () => createHash("sha256").update(process.env.TELEGRAM_WEBHOOK_SECRET || "").digest("hex");
+// Comparaison à temps constant (évite de deviner un secret caractère par caractère).
+export const memeSecret = (recu: string | null, attendu: string) => {
+  if (!recu || !attendu) return false;
+  const a = Buffer.from(recu), b = Buffer.from(attendu);
+  return a.length === b.length && timingSafeEqual(a, b);
+};
 export const nomBot = () => process.env.TELEGRAM_BOT_USERNAME || "";
 const site = () => process.env.SITE_URL || "https://mizan-five-iota.vercel.app";
 
@@ -20,6 +26,8 @@ export async function envoyer(chatId: number | string, texte: string, bouton?: {
       ...(bouton ? { reply_markup: { inline_keyboard: [[{ text: bouton.t, url: bouton.url }]] } } : {}),
     }),
   });
+  // 403 : l'élève a bloqué le bot. On arrête alors de lui écrire.
+  if (r.status === 403) await admin().from("telegram_links").update({ actif: false }).eq("chat_id", chatId);
   return r.ok;
 }
 
@@ -33,7 +41,7 @@ export async function messageDuMatin(userId: string) {
   const cible = p.examens[0];
   const l: string[] = [`☀️ Bonjour ${esc(p.profil.prenom || "")} !`];
   if (cible?.module) {
-    const m = missionPerso(p.profil.minutes_jour, cible.reste, maitrise[cible.module_slug]);
+    const m = missionPerso(p.profil.minutes_jour, cible.reste, maitrise[cible.module_slug], cible.module_slug);
     l.push(`\n<b>Mission du jour · ${esc(cible.module.titre)}</b>`);
     m.etapes.forEach((e) => l.push(`• ${esc(e)}`));
     l.push(`\n⏳ Examen dans <b>${cible.reste} jour${cible.reste > 1 ? "s" : ""}</b>${cible.estimee ? " (date estimée)" : ""}.`);

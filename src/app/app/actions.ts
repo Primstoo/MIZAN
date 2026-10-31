@@ -6,6 +6,17 @@ import { admin, estAdmin, estMembre, nouveauCode } from "@/lib/acces";
 import { MODULES } from "@/lib/modules";
 import { dateEstimee, jourMaroc } from "@/lib/parcours";
 import { secretWebhook } from "@/lib/telegram";
+import { randomBytes } from "node:crypto";
+import NIVEAU from "@/lib/niveau.json";
+import BANQUE from "@/lib/banque.json";
+import { notePrevue } from "@/lib/maitrise";
+import { chargerMaitrise } from "@/lib/parcours";
+
+type QCM = { n: string; a: number };
+const estSlug = (s: unknown): s is string => typeof s === "string" && MODULES.some((m) => m.slug === s);
+const estDate = (s: string) => /^\d{4}-\d{2}-\d{2}$/.test(s) && !Number.isNaN(Date.parse(s + "T00:00:00Z"));
+// Lien saisi par l'admin (visio, etc.) : uniquement http(s), pour qu'aucun « javascript: » n'arrive chez les élèves.
+const lienSur = (v: FormDataEntryValue | null) => { const t = String(v || "").trim(); return /^https?:\/\/\S+$/i.test(t) ? t.slice(0, 500) : null; };
 
 export async function rejoindre(_prev: string, form: FormData): Promise<string> {
   const code = String(form.get("code") || "").trim().toUpperCase();
@@ -47,7 +58,8 @@ async function moi() {
 export async function enregistrerProfil(form: FormData): Promise<void> {
   const u = await moi();
   const db = admin();
-  const minutes = Math.min(240, Math.max(15, Number(form.get("minutes") || 60)));
+  const brut = Number(form.get("minutes"));
+  const minutes = Math.min(240, Math.max(15, Number.isFinite(brut) ? Math.round(brut) : 60));
   await db.from("profiles").upsert({
     user_id: u.id,
     prenom: String(form.get("prenom") || "").trim().slice(0, 40) || null,
@@ -63,7 +75,7 @@ export async function enregistrerProfil(form: FormData): Promise<void> {
     const m = MODULES.find((x) => x.slug === slug);
     const date = inconnue ? dateEstimee(m?.semestre ?? "S1", commune.get(slug)) : String(form.get("date_" + slug) || "");
     return { user_id: u.id, module_slug: slug, exam_date: date, estimee: inconnue };
-  }).filter((x) => /^\d{4}-\d{2}-\d{2}$/.test(x.exam_date) && x.exam_date >= auj);
+  }).filter((x) => estDate(x.exam_date) && x.exam_date >= auj);
   if (lignes.length) await db.from("exams").upsert(lignes);
   // Modules décochés : on retire leur date
   const { data: avant } = await db.from("exams").select("module_slug").eq("user_id", u.id);
@@ -85,6 +97,9 @@ export async function reserverLive(form: FormData): Promise<void> {
   const { count } = await db.from("live_bookings").select("user_id", { count: "exact", head: true })
     .eq("session_id", id).neq("statut", "annulee");
   if ((count ?? 0) >= s.places) return;
+  // Une réservation déjà en cours ou payée n'est jamais écrasée (sinon un double clic repasserait « payée » en « en attente »).
+  const { data: deja } = await db.from("live_bookings").select("statut").eq("session_id", id).eq("user_id", u.id).maybeSingle();
+  if (deja && deja.statut !== "annulee") return;
   await db.from("live_bookings").upsert({
     session_id: id, user_id: u.id, email: u.email, statut: "en_attente",
     ref_paiement: String(form.get("ref") || "").trim().slice(0, 80) || null,
@@ -113,13 +128,13 @@ export async function creerSession(form: FormData): Promise<void> {
   const n = (k: string, def: number) => { const v = Math.round(Number(form.get(k))); return Number.isFinite(v) && v > 0 ? v : def; };
   await admin().from("live_sessions").insert({
     titre,
-    module_slug: String(form.get("module") || "") || null,
+    module_slug: estSlug(form.get("module")) ? String(form.get("module")) : null,
     starts_at: heureMarocVersUTC(quand),
     duree_min: n("duree", 90),
     prix_dh: n("prix", 25),
     places: n("places", 15),
-    animateurs: String(form.get("animateurs") || "").trim() || null,
-    lien: String(form.get("lien") || "").trim() || null,
+    animateurs: String(form.get("animateurs") || "").trim().slice(0, 120) || null,
+    lien: lienSur(form.get("lien")),
   });
   revalidatePath("/app/admin"); revalidatePath("/app/live");
 }
@@ -135,7 +150,7 @@ export async function statutReservation(form: FormData): Promise<void> {
 
 export async function majLien(form: FormData): Promise<void> {
   await chef();
-  await admin().from("live_sessions").update({ lien: String(form.get("lien") || "").trim() || null }).eq("id", String(form.get("session")));
+  await admin().from("live_sessions").update({ lien: lienSur(form.get("lien")) }).eq("id", String(form.get("session")));
   revalidatePath("/app/admin"); revalidatePath("/app/live");
 }
 
@@ -160,35 +175,61 @@ export async function majDateModule(form: FormData): Promise<void> {
   await chef();
   const slug = String(form.get("module"));
   const date = String(form.get("date") || "");
+  if (!estSlug(slug) || (date && !estDate(date))) return;
   const db = admin();
   if (!date) { await db.from("module_dates").delete().eq("module_slug", slug); }
   else await db.from("module_dates").upsert({ module_slug: slug, exam_date: date, officielle: form.get("officielle") === "on",
-    source: String(form.get("source") || "").trim() || null, updated_at: new Date().toISOString() });
+    source: String(form.get("source") || "").trim().slice(0, 120) || null, updated_at: new Date().toISOString() });
   revalidatePath("/app"); revalidatePath("/app/admin");
 }
 
 // ---------- Test de niveau ----------
-export async function enregistrerNiveau(slug: string, reponses: { n: string; ok: boolean }[]): Promise<void> {
+// L'élève envoie ses choix ; la correction se fait ici, à partir de la banque (le navigateur ne décide pas du résultat).
+export async function enregistrerNiveau(slug: string, choix: (number | null)[]): Promise<void> {
   const u = await moi();
-  if (!MODULES.some((m) => m.slug === slug)) return;
-  const lignes = reponses.filter((r) => typeof r.n === "string" && r.n.length < 40).slice(0, 20)
-    .map((r) => ({ user_id: u.id, module_slug: slug, notion: r.n, ok: !!r.ok }));
+  const qs = (NIVEAU as Record<string, QCM[]>)[slug];
+  if (!estSlug(slug) || !qs || !Array.isArray(choix)) return;
+  const parNotion = new Map<string, boolean>();
+  qs.forEach((q, k) => { if (k < choix.length) parNotion.set(q.n, (parNotion.get(q.n) ?? true) && choix[k] === q.a); });
+  const lignes = Array.from(parNotion.entries()).map(([notion, ok]) => ({ user_id: u.id, module_slug: slug, notion, ok, created_at: new Date().toISOString() }));
   if (lignes.length) await admin().from("niveau").upsert(lignes);
   revalidatePath("/app"); revalidatePath("/app/progres");
 }
 
 // ---------- Documents envoyés par les élèves ----------
+const MAX_DOCS_JOUR = 20;
+// Étape 1 : le serveur vérifie que l'élève est membre puis lui donne une autorisation d'envoi
+// valable pour un seul fichier, dans son propre dossier. Personne ne peut déposer de fichier sans passer par ici.
+export async function preparerEnvoi(nom: string): Promise<{ chemin: string; jeton: string } | { erreur: string }> {
+  const u = await moi();
+  const db = admin();
+  const { count } = await db.from("documents").select("id", { count: "exact", head: true })
+    .eq("user_id", u.id).gte("created_at", new Date(Date.now() - 864e5).toISOString());
+  if ((count ?? 0) >= MAX_DOCS_JOUR) return { erreur: `Limite de ${MAX_DOCS_JOUR} documents par jour atteinte. Merci, reviens demain !` };
+  const propre = String(nom || "fichier").normalize("NFD").replace(/[^\w.-]+/g, "_").replace(/^\.+/, "").slice(-80) || "fichier";
+  const chemin = `${u.id}/${Date.now()}-${randomBytes(4).toString("hex")}-${propre}`;
+  const { data, error } = await db.storage.from("documents").createSignedUploadUrl(chemin);
+  if (error || !data) return { erreur: "Envoi impossible pour l'instant." };
+  return { chemin, jeton: data.token };
+}
+
+// Étape 2 : une fois le fichier déposé, on l'enregistre (après avoir vérifié qu'il existe bien).
 export async function declarerDocument(meta: { chemin: string; nom: string; type: string; module: string; moduleLibre: string; etablissement: string }): Promise<string> {
   const u = await moi();
-  if (!meta.chemin.startsWith(u.id + "/")) return "Fichier invalide.";
+  const chemin = String(meta.chemin || "");
+  if (!chemin.startsWith(u.id + "/") || chemin.includes("..") || chemin.split("/").length !== 2) return "Fichier invalide.";
   if (!["cours", "td", "annale", "autre"].includes(meta.type)) return "Type invalide.";
-  const slug = MODULES.some((m) => m.slug === meta.module) ? meta.module : null;
-  const { error } = await admin().from("documents").insert({
-    user_id: u.id, email: u.email, chemin: meta.chemin, nom_fichier: meta.nom.slice(0, 120), type: meta.type,
-    module_slug: slug, module_libre: slug ? null : meta.moduleLibre.trim().slice(0, 80) || null,
-    etablissement: meta.etablissement.trim().slice(0, 80) || null,
+  const db = admin();
+  const nomObjet = chemin.split("/")[1];
+  const { data: present } = await db.storage.from("documents").list(u.id, { search: nomObjet, limit: 1 });
+  if (!present?.some((f) => f.name === nomObjet)) return "Fichier introuvable : renvoie-le.";
+  const slug = estSlug(meta.module) ? meta.module : null;
+  const { error } = await db.from("documents").insert({
+    user_id: u.id, email: u.email, chemin, nom_fichier: String(meta.nom || "").slice(0, 120), type: meta.type,
+    module_slug: slug, module_libre: slug ? null : String(meta.moduleLibre || "").trim().slice(0, 80) || null,
+    etablissement: String(meta.etablissement || "").trim().slice(0, 80) || null,
   });
-  if (error) return "Enregistrement impossible (" + error.code + ").";
+  if (error) return error.code === "23505" ? "Document déjà enregistré." : "Enregistrement impossible (" + error.code + ").";
   revalidatePath("/app/contribuer"); revalidatePath("/app/admin");
   return "";
 }
@@ -204,8 +245,8 @@ export async function statutDocument(form: FormData): Promise<void> {
 // ---------- Telegram ----------
 export async function lienTelegram(): Promise<string> {
   const u = await moi();
-  const jeton = nouveauCode().replace("MZ-", "") + Math.random().toString(36).slice(2, 8);
-  await admin().from("telegram_links").upsert({ user_id: u.id, jeton });
+  const jeton = randomBytes(12).toString("base64url"); // 16 caractères imprévisibles, acceptés par Telegram
+  await admin().from("telegram_links").upsert({ user_id: u.id, jeton, jeton_le: new Date().toISOString() });
   return `https://t.me/${process.env.TELEGRAM_BOT_USERNAME}?start=${jeton}`;
 }
 
@@ -227,15 +268,26 @@ export async function activerWebhook(): Promise<string> {
 }
 
 // ---------- Examen blanc et note réelle ----------
-export async function enregistrerBlanc(slug: string, reponses: { n: string; ok: boolean }[], dureeS: number): Promise<void> {
+// Même principe que le test de niveau : le navigateur envoie les choix, le serveur corrige.
+export async function enregistrerBlanc(slug: string, copie: { id: number; c: number | null }[], dureeS: number): Promise<void> {
   const u = await moi();
-  if (!MODULES.some((m) => m.slug === slug) || !reponses.length || reponses.length > 40) return;
+  const banque = (BANQUE as Record<string, QCM[]>)[slug];
+  if (!estSlug(slug) || !banque || !Array.isArray(copie) || !copie.length || copie.length > 40) return;
+  const vues = new Set<number>();
+  const notees = copie.filter((x) => Number.isInteger(x?.id) && x.id >= 0 && x.id < banque.length && !vues.has(x.id) && vues.add(x.id))
+    .map((x) => ({ n: banque[x.id].n, ok: x.c === banque[x.id].a }));
+  if (notees.length < 5) return;
   const db = admin();
-  const bons = reponses.filter((r) => r.ok).length;
-  await db.from("blancs").insert({ user_id: u.id, module_slug: slug, note: Math.round((bons / reponses.length) * 200) / 10, nb_questions: reponses.length, duree_s: Math.round(dureeS) });
+  // Une copie rendue deux fois (chrono + bouton au même moment) n'est comptée qu'une fois.
+  const { count } = await db.from("blancs").select("id", { count: "exact", head: true })
+    .eq("user_id", u.id).eq("module_slug", slug).gte("created_at", new Date(Date.now() - 30e3).toISOString());
+  if (count) return;
+  const bons = notees.filter((r) => r.ok).length;
+  const duree = Number.isFinite(dureeS) ? Math.min(7200, Math.max(0, Math.round(dureeS))) : 0;
+  await db.from("blancs").insert({ user_id: u.id, module_slug: slug, note: Math.round((bons / notees.length) * 200) / 10, nb_questions: notees.length, duree_s: duree });
   // Dernier résultat par notion (une notion ratée remonte dans « À retravailler »)
   const parNotion = new Map<string, boolean>();
-  reponses.forEach((r) => parNotion.set(r.n, (parNotion.get(r.n) ?? true) && r.ok));
+  notees.forEach((r) => parNotion.set(r.n, (parNotion.get(r.n) ?? true) && r.ok));
   await db.from("niveau").upsert(Array.from(parNotion.entries()).map(([n, ok]) => ({ user_id: u.id, module_slug: slug, notion: n, ok, created_at: new Date().toISOString() })));
   revalidatePath("/app/progres"); revalidatePath("/app");
 }
@@ -244,8 +296,13 @@ export async function enregistrerNoteReelle(form: FormData): Promise<void> {
   const u = await moi();
   const slug = String(form.get("module"));
   const note = Number(String(form.get("note") || "").replace(",", "."));
-  if (!MODULES.some((m) => m.slug === slug) || !Number.isFinite(note) || note < 0 || note > 20) return;
-  const prevue = Number(form.get("prevue"));
-  await admin().from("notes_reelles").upsert({ user_id: u.id, module_slug: slug, note, note_prevue: Number.isFinite(prevue) ? prevue : null, created_at: new Date().toISOString() });
+  if (!estSlug(slug) || !Number.isFinite(note) || note < 0 || note > 20) return;
+  const db = admin();
+  // Note prévue recalculée ici (jamais reçue du navigateur) et figée à la première saisie :
+  // c'est elle qu'on compare à la note réelle.
+  const { data: avant } = await db.from("notes_reelles").select("note_prevue").eq("user_id", u.id).eq("module_slug", slug).maybeSingle();
+  let prevue = avant?.note_prevue ?? null;
+  if (prevue === null) { const m = (await chargerMaitrise(u))[slug]; prevue = m ? notePrevue(m).note : null; }
+  await db.from("notes_reelles").upsert({ user_id: u.id, module_slug: slug, note: Math.round(note * 100) / 100, note_prevue: prevue, created_at: new Date().toISOString() });
   revalidatePath("/app/progres"); revalidatePath("/app/admin");
 }

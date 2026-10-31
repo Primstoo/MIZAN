@@ -20,7 +20,7 @@ export default async function Contribuer() {
       <div className="card soft">
         <p className="small"><strong>Ta récompense :</strong> chaque document accepté te donne des questions au tuteur en plus, chaque jour : annale +{BONUS_PAR_TYPE.annale}, TD +{BONUS_PAR_TYPE.td}, cours +{BONUS_PAR_TYPE.cours} (jusqu&apos;à +{BONUS_MAX}). Les annales sont les plus précieuses.</p>
       </div>
-      <Envoi uid={user!.id} modules={MODULES.map((m) => ({ slug: m.slug, titre: m.titre }))} />
+      <Envoi modules={MODULES.map((m) => ({ slug: m.slug, titre: m.titre }))} />
       <section className="bloc">
         <h2>Mes envois</h2>
         {docs?.length ? (

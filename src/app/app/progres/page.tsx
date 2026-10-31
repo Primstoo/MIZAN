@@ -39,7 +39,9 @@ export default async function Progres() {
             </div>
             <div className="row between small"><span>Maîtrise globale</span><strong>{x.pct} %</strong></div>
             <div className={`bar ${couleur(x.pct / 100)}`}><i style={{ width: `${x.pct}%` }} /></div>
-            <div className="np"><span className="small">Note prévue</span><strong>≈ {String(np.note).replace(".", ",")}/20</strong><span className="small muted">fiabilité {np.fiabilite} ({np.couverture} % du programme testé)</span></div>
+            {np.couverture >= 30
+              ? <div className="np"><span className="small">Note prévue</span><strong>≈ {String(np.note).replace(".", ",")}/20</strong><span className="small muted">fiabilité {np.fiabilite} ({np.couverture} % du programme testé)</span></div>
+              : <div className="np"><span className="small">Note prévue</span><span className="small muted">Teste-toi sur au moins 30 % du programme pour la voir ({np.couverture} % pour l&apos;instant).</span></div>}
             {dernierBlanc && <p className="small">Dernier examen blanc : <strong>{String(dernierBlanc.note).replace(".", ",")}/20</strong> ({new Date(dernierBlanc.created_at).toLocaleDateString("fr-FR")})</p>}
             <p className="small muted">{x.testes} {x.unite}{x.testes > 1 ? "s" : ""} testé{x.unite === "notion" ? "e" : ""}{x.testes > 1 ? "s" : ""} sur {x.items.length}</p>
 
@@ -86,7 +88,7 @@ export default async function Progres() {
             <details className="chap">
               <summary>{reelle ? `Ta note réelle : ${String(reelle.note).replace(".", ",")}/20` : "J'ai eu ma note à l'examen"}</summary>
               <form action={enregistrerNoteReelle} className="row" style={{ marginTop: 8 }}>
-                <input type="hidden" name="module" value={m.slug} /><input type="hidden" name="prevue" value={np.note} />
+                <input type="hidden" name="module" value={m.slug} />
                 <input name="note" inputMode="decimal" placeholder="Note sur 20" defaultValue={reelle ? String(reelle.note) : ""} style={{ maxWidth: 120 }} required />
                 <button className="btn small">Enregistrer</button>
               </form>

@@ -173,8 +173,7 @@ insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_typ
 values ('documents', 'documents', false, 15728640, array['application/pdf','image/jpeg','image/png','image/webp','image/heic'])
 on conflict (id) do nothing;
 drop policy if exists "documents: dépôt dans son dossier" on storage.objects;
-create policy "documents: dépôt dans son dossier" on storage.objects for insert to authenticated
-  with check (bucket_id = 'documents' and (storage.foldername(name))[1] = (select auth.uid())::text);
+-- (pas de politique d'insertion : le dépôt passe par une URL signée délivrée par le serveur aux membres)
 drop policy if exists "documents: lecture de ses fichiers" on storage.objects;
 create policy "documents: lecture de ses fichiers" on storage.objects for select to authenticated
   using (bucket_id = 'documents' and (storage.foldername(name))[1] = (select auth.uid())::text);
@@ -209,3 +208,25 @@ drop policy if exists "documents: soi" on public.documents;
 create policy "documents: soi" on public.documents for select using ((select auth.uid()) = user_id);
 drop policy if exists "telegram: soi" on public.telegram_links;
 create policy "telegram: soi" on public.telegram_links for select using ((select auth.uid()) = user_id);
+
+-- ---------- Audit du 31/10 (soir) ----------
+alter table public.telegram_links add column if not exists jeton_le timestamptz;
+create or replace function public.reserver_question(p_user uuid, p_day date, p_quota int)
+returns int language plpgsql security definer set search_path = '' as $$
+declare n int;
+begin
+  insert into public.tutor_usage as t (user_id, day, count) values (p_user, p_day, 1)
+  on conflict (user_id, day) do update set count = t.count + 1 where t.count < p_quota
+  returning count into n;
+  return n;
+end $$;
+create or replace function public.rendre_question(p_user uuid, p_day date)
+returns void language sql security definer set search_path = '' as $$
+  update public.tutor_usage set count = greatest(count - 1, 0) where user_id = p_user and day = p_day;
+$$;
+revoke all on function public.reserver_question(uuid, date, int) from public, anon, authenticated;
+revoke all on function public.rendre_question(uuid, date) from public, anon, authenticated;
+drop policy if exists "documents: dépôt dans son dossier" on storage.objects; -- dépôt via URL signée (serveur) uniquement
+create unique index if not exists documents_chemin_unique on public.documents (chemin);
+alter table public.progress drop constraint if exists progress_taille;
+alter table public.progress add constraint progress_taille check (pg_column_size(data) < 2000000) not valid;

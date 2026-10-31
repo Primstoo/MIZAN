@@ -14,7 +14,7 @@ export default async function Aujourdhui() {
 
   const cible = p.examens[0];
   const mc = cible ? maitrise[cible.module_slug] : undefined;
-  const mission = cible ? missionPerso(p.profil.minutes_jour, cible.reste, mc) : null;
+  const mission = cible ? missionPerso(p.profil.minutes_jour, cible.reste, mc, cible.module_slug) : null;
   const fait = cible ? p.faitAujourdhui.has(cible.module_slug) : false;
   const { data: lives } = await admin().from("live_sessions").select("id, titre, starts_at, prix_dh, places")
     .gte("starts_at", new Date().toISOString()).order("starts_at").limit(1);

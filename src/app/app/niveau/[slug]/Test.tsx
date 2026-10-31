@@ -23,7 +23,7 @@ function useMaths(dep: unknown) {
 export default function Test({ slug, titre, questions, premier }: { slug: string; titre: string; questions: Q[]; premier: boolean }) {
   const [i, setI] = useState(-1); // -1 = écran d'accueil
   const [choix, setChoix] = useState<number | null>(null);
-  const [rep, setRep] = useState<{ n: string; ok: boolean }[]>([]);
+  const [rep, setRep] = useState<{ n: string; ok: boolean; c: number | null }[]>([]);
   const [envoi, setEnvoi] = useState(false);
   const fini = i >= questions.length;
   const ref = useMaths(`${i}-${choix}`);
@@ -31,9 +31,9 @@ export default function Test({ slug, titre, questions, premier }: { slug: string
   const bons = rep.filter((r) => r.ok).length;
 
   async function suivant() {
-    const r = [...rep, { n: q.n, ok: choix === q.a }];
+    const r = [...rep, { n: q.n, ok: choix === q.a, c: choix }];
     setRep(r); setChoix(null);
-    if (i + 1 >= questions.length) { setEnvoi(true); await enregistrerNiveau(slug, r); setEnvoi(false); }
+    if (i + 1 >= questions.length) { setEnvoi(true); await enregistrerNiveau(slug, r.map((x) => x.c)); setEnvoi(false); }
     setI(i + 1);
   }
 

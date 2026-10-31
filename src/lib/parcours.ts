@@ -52,16 +52,27 @@ export async function chargerParcours(u: User) {
 }
 
 // Mission du jour : le module dont l'examen est le plus proche, séance calibrée sur le temps dispo.
-export function missionDuJour(minutes: number, reste: number) {
-  const urgent = reste <= 14;
-  const etapes =
-    minutes <= 30
-      ? ["Revoir 5 flashcards en retard", "Lire une section du cours", "Quiz de 5 questions"]
-      : minutes <= 60
-      ? ["Revoir 5 flashcards en retard", "Une section du cours (lis d'abord « Comprendre, en clair »)", "3 questions en Rédaction", "10 calculs ou exercices"]
-      : ["Revoir les flashcards en retard", "Deux sections du cours", "3 questions en Rédaction", "10 calculs ou exercices", "Un TD inédit en conditions réelles"];
-  if (urgent) etapes.splice(1, 1, "Examen blanc ou TD inédit chronométré");
-  return { etapes, urgent };
+// Le vocabulaire suit les onglets réels de chaque module (tous n'ont pas de « Rédaction » ni de « TD inédit »).
+type Etape = { k: "rev" | "lec" | "ecr" | "ent" | "gros"; t: string };
+const VOCAB: Record<string, Record<Etape["k"], string>> = {
+  "reseaux-m351": { rev: "Revoir tes flashcards en retard", lec: "Une section du cours", ecr: "3 questions en Rédaction", ent: "10 calculs (onglet Calculs)", gros: "Le TD inédit, en conditions réelles" },
+  archi: { rev: "Revoir tes cartes", lec: "Une section du cours", ecr: "Un exercice de l'Atelier", ent: "Un exercice du TD / TP", gros: "L'examen blanc du module, chronométré" },
+  probas: { rev: "Revoir tes cartes", lec: "Une notion du cours", ecr: "Un exercice-type", ent: "10 calculs (onglet Calculs)", gros: "Une annale, en conditions réelles" },
+  crypto: { rev: "Revoir tes cartes", lec: "Un chapitre du cours, en entier", ecr: "Le quiz de fin de chapitre", ent: "Les exercices du chapitre (chiffrer, déchiffrer)", gros: "L'examen blanc MIZAN (20 min)" },
+  uml: { rev: "Revoir tes cartes", lec: "Un chapitre du cours", ecr: "Le diagramme d'exercice du chapitre", ent: "Refaire un diagramme sans regarder le corrigé", gros: "L'examen blanc du module, chronométré" },
+};
+const VOCAB_DEFAUT = { rev: "Revoir tes cartes", lec: "Une section du cours", ecr: "Le quiz de la section", ent: "Une série d'exercices", gros: "L'examen blanc MIZAN (20 min)" };
+
+function etapesDuJour(minutes: number, reste: number, slug?: string): Etape[] {
+  const v = (slug && VOCAB[slug]) || VOCAB_DEFAUT;
+  const ks: Etape["k"][] = minutes <= 30 ? ["rev", "lec", "ecr"] : minutes <= 60 ? ["rev", "lec", "ecr", "ent"] : ["rev", "lec", "ecr", "ent", "gros"];
+  // À deux semaines de l'examen, on s'entraîne en conditions réelles plutôt que de découvrir le cours.
+  if (reste <= 14) ks.splice(1, 1, "gros");
+  return Array.from(new Set(ks)).map((k) => ({ k, t: v[k] }));
+}
+
+export function missionDuJour(minutes: number, reste: number, slug?: string) {
+  return { etapes: etapesDuJour(minutes, reste, slug).map((e) => e.t), urgent: reste <= 14 };
 }
 
 // Estimation quand la date n'est pas annoncée : sessions habituelles de fin de semestre
@@ -95,19 +106,20 @@ export async function chargerMaitrise(u: User): Promise<Record<string, Maitrise>
 }
 
 // Mission du jour personnalisée : on commence par les notions ratées, puis les notions
-// importantes jamais testées ; le reste de la séance complète selon le temps disponible.
-export function missionPerso(minutes: number, reste: number, m?: Maitrise) {
-  const base = missionDuJour(minutes, reste);
-  if (!m) return { ...base, cibles: [] as string[] };
+// importantes jamais testées ; elles remplacent la lecture « générique » du cours.
+export function missionPerso(minutes: number, reste: number, m?: Maitrise, slug?: string) {
+  const urgent = reste <= 14;
+  const base = etapesDuJour(minutes, reste, slug ?? m?.slug);
+  const sansCibles = { etapes: base.map((e) => e.t), urgent, cibles: [] as string[] };
+  if (!m) return sansCibles;
   const nb = minutes <= 30 ? 1 : minutes <= 60 ? 2 : 3;
   const ratees = m.faibles.filter((i) => i.statut === "fragile").slice(0, nb);
   const neuves = m.faibles.filter((i) => i.statut === "jamais").slice(0, nb - ratees.length);
   const cibles = [
-    ...ratees.map((i) => `Retravailler « ${i.t} »${i.score !== null ? ` (${Math.round(i.score * 100)} % de réussite)` : ""}`),
+    ...ratees.map((i) => `Retravailler « ${i.t} »${i.score ? ` (${Math.round(i.score * 100)} % de réussite)` : ""}`),
     ...neuves.map((i) => `Découvrir et te tester sur « ${i.t} » (importance ${i.imp}/5)`),
   ];
-  if (!cibles.length) return { ...base, cibles };
-  // Les cibles remplacent les étapes génériques « section du cours » ; on garde la révision et l'entraînement.
-  const etapes = [...cibles, ...base.etapes.filter((e) => !/section|Deux sections/.test(e)).slice(0, Math.max(1, base.etapes.length - cibles.length))];
-  return { ...base, etapes, cibles };
+  if (!cibles.length) return sansCibles;
+  const reste_ = base.filter((e) => e.k !== "lec").slice(0, Math.max(1, base.length - cibles.length)).map((e) => e.t);
+  return { etapes: [...cibles, ...reste_], urgent, cibles };
 }

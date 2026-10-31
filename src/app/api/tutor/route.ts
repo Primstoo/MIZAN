@@ -96,22 +96,26 @@ export async function POST(req: Request) {
   let body: { messages?: Msg[]; images?: Img[] };
   try { body = await req.json(); } catch { return err("invalid_request", "Requête illisible", 400); }
 
-  const all = (body.messages ?? []).map((m) => ({ role: m.role, text: texte(m.content) }));
+  const all = (Array.isArray(body.messages) ? body.messages : []).slice(-60).map((m) => ({ role: m.role, text: texte(m.content) }));
   const system = all.filter((m) => m.role === "system").map((m) => m.text).join("\n\n") + "\n\nFormat : texte brut uniquement, sans Markdown (pas d'astérisques, de dièses ni d'accents graves). Pour une liste, commence les lignes par « • ».";
   let msgs = all.filter((m) => m.role !== "system" && m.text.trim());
   while (msgs.length && msgs[0].role !== "user") msgs = msgs.slice(1);
   if (!msgs.length) return err("invalid_request", "Question vide", 400);
   if (JSON.stringify(msgs).length + system.length > MAX_CHARS)
     return err("prompt_too_large", "Conversation trop longue : ouvre une nouvelle discussion", 413);
-  const images = (body.images ?? []).slice(0, 1);
+  // Photo : un seul fichier, format image courant, 5 Mo maximum (≈ 7 Mo en base64).
+  const images = (Array.isArray(body.images) ? body.images : []).slice(0, 1)
+    .filter((im) => typeof im?.data === "string" && im.data.length < 7_000_000 && /^image\/(jpeg|png|webp)$/.test(String(im.mime)));
 
   // Quota : la table n'est modifiable que par la clé service (RLS en lecture seule pour l'élève).
   const admin = serviceClient();
   const day = jourMaroc();
-  const { data: u } = await admin.from("tutor_usage").select("count").eq("user_id", user.id).eq("day", day).maybeSingle();
-  const used = u?.count ?? 0;
   const QUOTA = QUOTA_BASE + (await bonusTuteur(user.id));
-  if (used >= QUOTA) return err("rate_limited", `Quota du jour atteint (${QUOTA} questions). Reviens demain.`, 429);
+  // Réservation atomique d'une question : même avec 50 requêtes simultanées, le quota tient.
+  const { data: compte, error: eq } = await admin.rpc("reserver_question", { p_user: user.id, p_day: day, p_quota: QUOTA });
+  if (eq) { console.error("[tutor] quota", eq.message); return err("upstream_error", "Tuteur momentanément indisponible", 503); }
+  if (compte === null) return err("rate_limited", `Quota du jour atteint (${QUOTA} questions). Reviens demain.`, 429);
+  const used = Number(compte) - 1;
 
   // Essai des modèles dans l'ordre ; on passe au suivant tant qu'aucun mot n'a été envoyé.
   const candidats: (() => Flux)[] = [
@@ -131,7 +135,6 @@ export async function POST(req: Request) {
           const g = candidats[k]();
           let r = await g.next();
           while (!r.done) {
-            if (!recu) await admin.from("tutor_usage").upsert({ user_id: user.id, day, count: used + 1 }, { onConflict: "user_id,day" });
             recu += r.value.length; envoi({ d: r.value }); r = await g.next();
           }
           if (recu) {
@@ -146,7 +149,8 @@ export async function POST(req: Request) {
         }
       }
       console.error("[tutor] échec ·", errors.join(" | "));
-      envoi({ erreur: "upstream_error", message: "Tuteur indisponible : " + errors.map((x) => x.slice(0, 60)).join(" / ") });
+      await admin.rpc("rendre_question", { p_user: user.id, p_day: day }); // aucune réponse : la question n'est pas décomptée
+      envoi({ erreur: "upstream_error", message: "Le tuteur est momentanément indisponible. Réessaie dans une minute (cette question n'a pas été décomptée)." });
       ctl.close();
     },
   });

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { enregistrerBlanc } from "../../actions";
 
-type Q = { n: string; q: string; o: string[]; a: number; e: string };
+type Q = { id: number; n: string; q: string; o: string[]; a: number; e: string };
 type Win = Window & { renderMathInElement?: (el: Element, o: object) => void };
 
 function maths(el: HTMLElement | null) {
@@ -39,10 +39,12 @@ export default function Blanc({ slug, titre, questions, minutes }: { slug: strin
   }, [phase]);
 
   const repRef = useRef(rep); repRef.current = rep;
+  const rendue = useRef(false);
   async function terminer() {
+    if (rendue.current) return; // chrono et bouton au même instant : une seule copie
+    rendue.current = true;
     setPhase("fin");
-    const r = questions.map((q, k) => ({ n: q.n, ok: repRef.current[k] === q.a }));
-    await enregistrerBlanc(slug, r, (Date.now() - debut.current) / 1000);
+    await enregistrerBlanc(slug, questions.map((q, k) => ({ id: q.id, c: repRef.current[k] })), (Date.now() - debut.current) / 1000);
   }
 
   const bons = questions.filter((q, k) => rep[k] === q.a).length;
