@@ -1,11 +1,11 @@
 import type { Module } from "@/lib/modules";
 
-export default function CarteModule({ m, info, reste }: { m: Module; info?: string; reste?: number }) {
+export default function CarteModule({ m, info, reste, estimee }: { m: Module; info?: string; reste?: number; estimee?: boolean }) {
   return (
     <a href={`/app/m/${m.slug}`} className="card">
       <div className="row between">
         <span className="chip">{m.semestre}</span>
-        {reste !== undefined && <span className={`chip ${reste <= 14 ? "bad" : reste <= 30 ? "amber" : ""}`}>Examen J-{reste}</span>}
+        {reste !== undefined && <span className={`chip ${reste <= 14 ? "bad" : reste <= 30 ? "amber" : ""}`}>Examen {estimee ? "≈ " : ""}J-{reste}</span>}
       </div>
       <h3>{m.titre}</h3>
       {m.prof && <p className="muted small">{m.prof}</p>}

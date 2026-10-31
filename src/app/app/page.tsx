@@ -46,7 +46,8 @@ export default async function Aujourdhui() {
         {cible && (
           <section className="card">
             <div className="row between"><span className="k">Examen dans</span><span className="chip">{cible.module!.titre.split(" (")[0]}</span></div>
-            <p className="big">{cible.reste} jour{cible.reste > 1 ? "s" : ""}</p>
+            <p className="big">{cible.estimee ? "≈ " : ""}{cible.reste} jour{cible.reste > 1 ? "s" : ""}</p>
+            {cible.estimee && <p className="small muted">Date estimée : pas encore annoncée. <a href="/app/bienvenue">Mettre à jour</a></p>}
             <div className="days">
               {p.semaine.map((j) => (
                 <i key={j.d} className={j.fait ? "on" : j.aujourdhui ? "today" : ""} title={j.d}>
@@ -56,7 +57,7 @@ export default async function Aujourdhui() {
             </div>
             {p.examens.length > 1 && (
               <ul className="small muted list-plain">
-                {p.examens.slice(1).map((e) => <li key={e.module_slug}>{e.module!.titre} : J-{e.reste}</li>)}
+                {p.examens.slice(1).map((e) => <li key={e.module_slug}>{e.module!.titre} : J-{e.reste}{e.estimee ? " (estimé)" : ""}</li>)}
               </ul>
             )}
           </section>

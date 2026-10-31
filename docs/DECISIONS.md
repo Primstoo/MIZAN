@@ -124,3 +124,8 @@ Membres, actifs sur 7 jours, questions au tuteur, usage par module. Ce sont les 
 **Série :** un trigger Postgres inscrit le jour de révision à chaque synchronisation de progression (aucun changement dans les modules).
 **Pas encore :** test de niveau, barres de maîtrise par chapitre, points faibles et examen blanc côté plateforme. Ils exigent que les modules exposent leurs scores dans un format commun (prochaine étape : un message standard module → plateforme). Bot Telegram plus tard.
 **Paiement :** manuel (CashPlus, virement…) avec validation admin, comme prévu dans la maquette. Instructions dans la variable `LIVE_PAIEMENT_INFO`. Un paiement en ligne (CMI) demande une entreprise enregistrée.
+
+## D18. Dates d'examen inconnues : estimation, puis date commune
+**Problème :** la plupart des profs n'annoncent pas la date exacte en début de semestre.
+**Solution :** case « Date pas encore annoncée » → estimation fin de semestre (impairs : mi-janvier, pairs : mi-juin), affichée « ≈ » et « estimée ». L'admin renseigne une date commune par module dès qu'elle est connue ; elle remplace l'estimation chez tous ceux qui n'avaient pas de date.
+**Alternatives écartées :** date obligatoire (l'élève invente) ; pas de date (plus de mission du jour ni de compte à rebours).

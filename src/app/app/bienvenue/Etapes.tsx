@@ -4,18 +4,21 @@ import { enregistrerProfil } from "../actions";
 
 type M = { slug: string; titre: string; semestre: string };
 
-export default function Etapes({ modules, prenom, minutes, dates }: { modules: M[]; prenom: string; minutes: number; dates: Record<string, string> }) {
+export default function Etapes({ modules, prenom, minutes, dates, inconnues, communes }: { modules: M[]; prenom: string; minutes: number; dates: Record<string, string>; inconnues: string[]; communes: Record<string, { date: string; officielle: boolean }> }) {
   const [etape, setEtape] = useState(0);
   const [nom, setNom] = useState(prenom);
-  const [choix, setChoix] = useState<string[]>(Object.keys(dates));
+  const [choix, setChoix] = useState<string[]>([...Object.keys(dates), ...inconnues]);
   const [d, setD] = useState<Record<string, string>>(dates);
   const [min, setMin] = useState(minutes);
+  const [inc, setInc] = useState<string[]>(inconnues);
+  const frDate = (x: string) => new Date(x + "T12:00:00Z").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
   const total = 3;
   const auj = new Date().toISOString().slice(0, 10);
-  const peutSuivre = etape === 0 ? nom.trim().length > 0 : etape === 1 ? choix.length > 0 && choix.every((s) => d[s]) : true;
+  const peutSuivre = etape === 0 ? nom.trim().length > 0 : etape === 1 ? choix.length > 0 && choix.every((s) => d[s] || inc.includes(s)) : true;
 
   return (
     <form action={enregistrerProfil} className="onb">
+      <input type="hidden" name="complet" value="1" />
       <div className="bar"><i style={{ width: `${((etape + 1) / total) * 100}%` }} /></div>
       <p className="eyebrow">Étape {etape + 1} sur {total}</p>
 
@@ -29,7 +32,7 @@ export default function Etapes({ modules, prenom, minutes, dates }: { modules: M
 
       <section hidden={etape !== 1}>
         <h1>Quels modules, et c&apos;est quand l&apos;examen ?</h1>
-        <p className="muted">Coche tes modules et indique la date de chaque examen. L&apos;appli calcule ta mission du jour à partir de là.</p>
+        <p className="muted">Coche tes modules. Si la date n&apos;est pas encore annoncée, pas de souci : on part d&apos;une estimation, mise à jour pour tout le monde dès que la date officielle tombe.</p>
         <div className="stack">
           {modules.map((m) => {
             const on = choix.includes(m.slug);
@@ -37,14 +40,34 @@ export default function Etapes({ modules, prenom, minutes, dates }: { modules: M
               <div key={m.slug} className={`opt ${on ? "sel" : ""}`}>
                 <label className="row">
                   <input type="checkbox" name="module" value={m.slug} checked={on}
-                    onChange={() => setChoix(on ? choix.filter((x) => x !== m.slug) : [...choix, m.slug])} />
+                    onChange={() => {
+                      setChoix(on ? choix.filter((x) => x !== m.slug) : [...choix, m.slug]);
+                      // Date officielle connue : on la propose d'office
+                      if (!on && communes[m.slug]?.officielle && !inc.includes(m.slug)) setInc([...inc, m.slug]);
+                    }} />
                   <span><strong>{m.titre}</strong> <span className="muted small">· {m.semestre}</span></span>
                 </label>
-                {on && (
-                  <label className="date">Date de l&apos;examen
-                    <input type="date" name={`date_${m.slug}`} min={auj} value={d[m.slug] ?? ""} onChange={(e) => setD({ ...d, [m.slug]: e.target.value })} required />
-                  </label>
-                )}
+                {on && (() => {
+                  const c = communes[m.slug];
+                  const x = inc.includes(m.slug);
+                  return (
+                    <>
+                      {c?.officielle && <p className="small ok">Date officielle : {frDate(c.date)}</p>}
+                      <label className="row small inc">
+                        <input type="checkbox" name={`inconnue_${m.slug}`} value="1" checked={x}
+                          onChange={() => setInc(x ? inc.filter((y) => y !== m.slug) : [...inc, m.slug])} />
+                        {c?.officielle ? "Utiliser la date officielle" : "Date pas encore annoncée"}
+                      </label>
+                      {x ? (
+                        <p className="small muted">{c ? `On part sur le ${frDate(c.date)}${c.officielle ? "" : " (estimation)"}.` : `On part sur une estimation : fin de semestre (${m.semestre.replace(/\D/g, "") && Number(m.semestre.replace(/\D/g, "")) % 2 ? "mi-janvier" : "mi-juin"}). Elle sera remplacée dès que la date est connue.`}</p>
+                      ) : (
+                        <label className="date">Date de l&apos;examen
+                          <input type="date" name={`date_${m.slug}`} min={auj} value={d[m.slug] ?? ""} onChange={(e) => setD({ ...d, [m.slug]: e.target.value })} required />
+                        </label>
+                      )}
+                    </>
+                  );
+                })()}
               </div>
             );
           })}

@@ -3,6 +3,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin, estMembre, nouveauCode } from "@/lib/acces";
+import { MODULES } from "@/lib/modules";
+import { dateEstimee } from "@/lib/parcours";
 
 export async function rejoindre(_prev: string, form: FormData): Promise<string> {
   const code = String(form.get("code") || "").trim().toUpperCase();
@@ -50,11 +52,20 @@ export async function enregistrerProfil(form: FormData): Promise<void> {
     filiere: String(form.get("filiere") || "").trim().slice(0, 60) || null,
     minutes_jour: minutes,
   });
-  const lignes = form.getAll("module").map(String).map((slug) => ({ slug, date: String(form.get("date_" + slug) || "") }))
-    .filter((x) => /^\d{4}-\d{2}-\d{2}$/.test(x.date));
-  if (lignes.length) {
-    await db.from("exams").upsert(lignes.map((x) => ({ user_id: u.id, module_slug: x.slug, exam_date: x.date })));
-  }
+  const { data: communes } = await db.from("module_dates").select("module_slug, exam_date");
+  const commune = new Map((communes ?? []).map((c) => [c.module_slug as string, c.exam_date as string]));
+  const choisis = form.getAll("module").map(String);
+  const lignes = choisis.map((slug) => {
+    const inconnue = form.get("inconnue_" + slug) === "1";
+    const m = MODULES.find((x) => x.slug === slug);
+    const date = inconnue ? dateEstimee(m?.semestre ?? "S1", commune.get(slug)) : String(form.get("date_" + slug) || "");
+    return { user_id: u.id, module_slug: slug, exam_date: date, estimee: inconnue };
+  }).filter((x) => /^\d{4}-\d{2}-\d{2}$/.test(x.exam_date));
+  if (lignes.length) await db.from("exams").upsert(lignes);
+  // Modules décochés : on retire leur date
+  const { data: avant } = await db.from("exams").select("module_slug").eq("user_id", u.id);
+  const aRetirer = (avant ?? []).map((x) => x.module_slug as string).filter((s) => !choisis.includes(s));
+  if (aRetirer.length && form.get("complet") === "1") await db.from("exams").delete().eq("user_id", u.id).in("module_slug", aRetirer);
   const retirer = form.getAll("retirer").map(String);
   if (retirer.length) await db.from("exams").delete().eq("user_id", u.id).in("module_slug", retirer);
   revalidatePath("/app");
@@ -134,4 +145,15 @@ export async function declarerPaiement(form: FormData): Promise<void> {
   await admin().from("live_bookings").update({ ref_paiement: String(form.get("ref") || "").trim().slice(0, 120) || null })
     .eq("session_id", String(form.get("session"))).eq("user_id", u.id).eq("statut", "en_attente");
   revalidatePath("/app/live"); revalidatePath("/app/admin");
+}
+
+export async function majDateModule(form: FormData): Promise<void> {
+  await chef();
+  const slug = String(form.get("module"));
+  const date = String(form.get("date") || "");
+  const db = admin();
+  if (!date) { await db.from("module_dates").delete().eq("module_slug", slug); }
+  else await db.from("module_dates").upsert({ module_slug: slug, exam_date: date, officielle: form.get("officielle") === "on",
+    source: String(form.get("source") || "").trim() || null, updated_at: new Date().toISOString() });
+  revalidatePath("/app"); revalidatePath("/app/admin");
 }

@@ -13,11 +13,13 @@ export const joursEntre = (de: string, a: string) =>
 
 export async function chargerParcours(u: User) {
   const db = admin();
-  const [{ data: profil }, { data: exams }, { data: act }] = await Promise.all([
+  const [{ data: profil }, { data: exams }, { data: act }, { data: communes }] = await Promise.all([
     db.from("profiles").select("prenom, filiere, minutes_jour").eq("user_id", u.id).maybeSingle(),
-    db.from("exams").select("module_slug, exam_date").eq("user_id", u.id),
+    db.from("exams").select("module_slug, exam_date, estimee").eq("user_id", u.id),
     db.from("activity").select("day, module_slug").eq("user_id", u.id).gte("day", jourMaroc(new Date(Date.now() - 60 * 864e5))),
+    db.from("module_dates").select("module_slug, exam_date, officielle"),
   ]);
+  const commune = new Map((communes ?? []).map((c) => [c.module_slug as string, c]));
   const auj = jourMaroc();
   const jours = new Set((act ?? []).map((a) => a.day as string));
 
@@ -33,8 +35,14 @@ export async function chargerParcours(u: User) {
     return { d, fait: jours.has(d), aujourdhui: d === auj, futur: d > auj };
   });
 
+  // Date estimée : remplacée par la date commune du module dès que l'admin la renseigne.
   const examens = (exams ?? [])
-    .map((e) => ({ ...e, module: MODULES.find((m) => m.slug === e.module_slug), reste: joursEntre(auj, e.exam_date as string) }))
+    .map((e) => {
+      const c = e.estimee ? commune.get(e.module_slug as string) : undefined;
+      const date = (c?.exam_date ?? e.exam_date) as string;
+      const estimee = !!e.estimee && !c?.officielle;
+      return { module_slug: e.module_slug as string, exam_date: date, estimee, module: MODULES.find((m) => m.slug === e.module_slug), reste: joursEntre(auj, date) };
+    })
     .filter((e) => e.module && e.reste >= 0)
     .sort((a, b) => a.reste - b.reste);
 
@@ -53,4 +61,17 @@ export function missionDuJour(minutes: number, reste: number) {
       : ["Revoir les flashcards en retard", "Deux sections du cours", "3 questions en Rédaction", "10 calculs ou exercices", "Un TD inédit en conditions réelles"];
   if (urgent) etapes.splice(1, 1, "Examen blanc ou TD inédit chronométré");
   return { etapes, urgent };
+}
+
+// Estimation quand la date n'est pas annoncée : sessions habituelles de fin de semestre
+// (semestres impairs : mi-janvier ; pairs : mi-juin). À remplacer dès que la date est connue.
+export function dateEstimee(semestre: string, communeISO?: string) {
+  if (communeISO) return communeISO;
+  const n = Number(semestre.replace(/\D/g, "")) || 1;
+  const auj = jourMaroc();
+  const an = Number(auj.slice(0, 4));
+  const mois = n % 2 ? "01-15" : "06-15";
+  let d = `${an}-${mois}`;
+  if (d <= auj) d = `${an + 1}-${mois}`;
+  return d;
 }

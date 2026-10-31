@@ -10,6 +10,7 @@ export default async function Modules() {
   const [{ data: prog }, p] = await Promise.all([supabase.from("progress").select("module_slug, updated_at"), chargerParcours(user!)]);
   const vus = new Map((prog ?? []).map((x) => [x.module_slug, x.updated_at as string]));
   const restes = new Map(p.examens.map((e) => [e.module_slug, e.reste]));
+  const estimees = new Set(p.examens.filter((e) => e.estimee).map((e) => e.module_slug));
   const miens = MODULES.filter((m) => vus.has(m.slug) || restes.has(m.slug))
     .sort((a, b) => (restes.get(a.slug) ?? 999) - (restes.get(b.slug) ?? 999));
   const autres = MODULES.filter((m) => !miens.includes(m));
@@ -22,7 +23,7 @@ export default async function Modules() {
         <section>
           <h2>Mes modules</h2>
           <div className="grid">
-            {miens.map((m) => <CarteModule key={m.slug} m={m} reste={restes.get(m.slug)} info={vus.has(m.slug) ? `Dernière séance : ${fr(vus.get(m.slug)!)}` : "Pas encore commencé"} />)}
+            {miens.map((m) => <CarteModule key={m.slug} m={m} reste={restes.get(m.slug)} estimee={estimees.has(m.slug)} info={vus.has(m.slug) ? `Dernière séance : ${fr(vus.get(m.slug)!)}` : "Pas encore commencé"} />)}
           </div>
         </section>
       )}

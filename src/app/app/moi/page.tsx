@@ -35,7 +35,7 @@ export default async function Moi() {
       <section className="bloc">
         <div className="row between"><h2>Mes examens</h2><a href="/app/bienvenue" className="btn alt small">Modifier</a></div>
         {p.examens.length ? (
-          <ul className="list-plain">{p.examens.map((e) => <li key={e.module_slug}><strong>{e.module!.titre}</strong> · {new Date(e.exam_date + "T12:00:00Z").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })} <span className="muted">(J-{e.reste})</span></li>)}</ul>
+          <ul className="list-plain">{p.examens.map((e) => <li key={e.module_slug}><strong>{e.module!.titre}</strong> · {new Date(e.exam_date + "T12:00:00Z").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })} <span className="muted">(J-{e.reste}{e.estimee ? ", estimée" : ""})</span></li>)}</ul>
         ) : <p className="muted small">Aucune date d&apos;examen. Ajoute-en une pour avoir ta mission du jour.</p>}
       </section>
 

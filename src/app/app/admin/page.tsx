@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin } from "@/lib/acces";
 import { MODULES } from "@/lib/modules";
-import { creerSession, statutReservation, majLien } from "../actions";
+import { creerSession, statutReservation, majLien, majDateModule } from "../actions";
 
 // Suivi du pilote, réservé aux admins (ADMIN_EMAILS) : qui est entré, qui révise quoi,
 // combien coûte le tuteur. Ce sont les chiffres à montrer avant de lancer une offre payante.
@@ -14,11 +14,12 @@ export default async function Suivi() {
   const { data: { user } } = await createClient().auth.getUser();
   if (!estAdmin(user)) notFound();
   const db = admin();
-  const [{ data: membres }, { data: prog }, { data: usage }, { data: invites }, { data: sessions }, { data: resas }] = await Promise.all([
+  const [{ data: membres }, { data: prog }, { data: usage }, { data: invites }, { data: dates }, { data: sessions }, { data: resas }] = await Promise.all([
     db.from("members").select("user_id, email, invite_code, joined_at").order("joined_at", { ascending: false }),
     db.from("progress").select("user_id, module_slug, updated_at"),
     db.from("tutor_usage").select("user_id, day, count").gte("day", jourMoins(29)),
     db.from("invites").select("code, owner, uses, max_uses"),
+    db.from("module_dates").select("module_slug, exam_date, officielle, source"),
     db.from("live_sessions").select("id, titre, starts_at, prix_dh, places, lien").order("starts_at", { ascending: false }).limit(20),
     db.from("live_bookings").select("session_id, user_id, email, statut, ref_paiement, created_at").order("created_at", { ascending: false }),
   ]);
@@ -52,6 +53,27 @@ export default async function Suivi() {
         <div className="card kpi"><strong>{encaisse} DH</strong>encaissés (lives)</div>
         <div className="card kpi"><strong>{attente.length}</strong>paiements à valider</div>
       </div>
+
+      <section className="bloc">
+        <h2>Dates d&apos;examen par module</h2>
+        <p className="muted small">Dès qu&apos;une date est connue (calendrier de la fac, annonce du prof), renseigne-la ici : elle remplace l&apos;estimation chez tous les élèves qui n&apos;avaient pas de date.</p>
+        <table className="tab"><tbody>
+          {MODULES.map((m) => {
+            const d = (dates ?? []).find((x) => x.module_slug === m.slug);
+            return (
+              <tr key={m.slug}><td>{m.titre}</td><td>
+                <form action={majDateModule} className="row">
+                  <input type="hidden" name="module" value={m.slug} />
+                  <input type="date" name="date" defaultValue={d?.exam_date ?? ""} />
+                  <label className="row small"><input type="checkbox" name="officielle" defaultChecked={!!d?.officielle} /> officielle</label>
+                  <input name="source" defaultValue={d?.source ?? ""} placeholder="Source (ex. affichage fac)" />
+                  <button className="btn alt small">OK</button>
+                </form>
+              </td></tr>
+            );
+          })}
+        </tbody></table>
+      </section>
 
       <section className="bloc">
         <h2>Paiements à valider</h2>

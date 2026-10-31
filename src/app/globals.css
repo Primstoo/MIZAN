@@ -152,3 +152,4 @@ select{font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px;
   .tab{display:block;overflow-x:auto}
 }
 [hidden]{display:none!important}
+.inc{font-weight:500;color:var(--ink);cursor:pointer}.inc input{width:18px;height:18px;accent-color:var(--acc)}
