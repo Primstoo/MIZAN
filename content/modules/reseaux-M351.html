@@ -107,37 +107,40 @@ textarea{width:100%;min-height:110px;font-family:var(--mono);font-size:12.5px}
 @media (prefers-reduced-motion:no-preference){.opt,.btn,nav.tabs button{transition:border-color .15s,background .15s}}
 
 /* ===== onglet Comprendre ===== */
-#tab-expl h1{font-family:var(--display);font-stretch:80%;font-weight:800;font-size:clamp(28px,6vw,42px);line-height:1.05;margin:0 0 6px;text-wrap:balance}
-#tab-expl h2{font-family:var(--display);font-stretch:82%;font-weight:800;font-size:28px;margin:44px 0 4px;padding-top:14px;border-top:3px solid var(--ink);text-wrap:balance}
-#tab-expl h3{font-family:var(--display);font-stretch:90%;font-weight:700;font-size:20px;margin:30px 0 6px;text-wrap:balance}
-#tab-expl p,#tab-expl li{max-width:68ch}
-#tab-expl .lead{color:var(--muted);font-size:17px}
-#tab-expl .toc{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
-#tab-expl .toc a{font-family:var(--display);font-stretch:88%;font-weight:700;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);padding:6px 12px;border-radius:6px}
-#tab-expl .layer{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
-#tab-expl .ana{border-left:4px solid var(--orange);background:var(--warnbg);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
-#tab-expl .ana b:first-child{font-family:var(--display);font-stretch:90%;text-transform:uppercase;letter-spacing:.07em;font-size:12px;display:block;color:var(--warn)}
-#tab-expl .key{border-left:4px solid var(--blue);background:var(--soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
-#tab-expl .trap{border-left:4px solid var(--bad);background:var(--badbg);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
-#tab-expl .fig{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;margin:14px 0;overflow-x:auto}
-#tab-expl .fig .cap{font-size:13px;color:var(--muted);margin-top:8px}
-#tab-expl .mono{font-family:var(--mono);font-size:14px;white-space:pre;overflow-x:auto;background:var(--soft);border-radius:6px;padding:10px 12px;line-height:1.45}
-#tab-expl svg text{fill:var(--ink);font:12px var(--body)} svg .mt{fill:var(--muted)} svg .st{stroke:var(--muted);fill:none;stroke-width:1.5}
-#tab-expl svg .sig{stroke:var(--blue);stroke-width:2.2;fill:none;stroke-linejoin:round} svg .grid{stroke:var(--line);stroke-dasharray:3 3} svg .axis{stroke:var(--muted);stroke-width:1} svg .tx{fill:var(--ink);font:11px var(--body)}
-#tab-expl .bits{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
-#tab-expl .bit{font-family:var(--mono);font-size:16px;width:34px;height:40px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
-#tab-expl .bit small{font-size:9px;color:var(--muted);margin-top:3px;font-family:var(--body)}
-#tab-expl .bit.c{background:var(--soft)} .bit.flip{border-color:var(--bad);background:var(--badbg);color:var(--bad)} .bit.ins{border-color:var(--orange);background:var(--warnbg)}
-#tab-expl .bit.err{outline:2px solid var(--bad);outline-offset:2px}
-#tab-expl .out{margin-top:10px;font-size:15px}
-#tab-expl .ok{color:var(--good);font-weight:700}.ko{color:var(--bad);font-weight:700}
-#tab-expl input[type=text]{font-family:var(--mono);font-size:15px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:7px 10px;width:100%;max-width:300px}
-#tab-expl .grid7 td{font-family:var(--mono);text-align:center;padding:4px;cursor:pointer;width:34px}
-#tab-expl .grid7 td.p{background:var(--soft);cursor:default}.grid7 td.flag{background:var(--badbg);color:var(--bad);font-weight:700}
-#tab-expl .grid7 td.x{outline:2px solid var(--bad);outline-offset:-2px}
-#tab-expl details.check{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:12px 0}
-#tab-expl details.check summary{cursor:pointer;font-weight:700}
-#tab-expl .pill{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:10px;background:var(--soft)}
+.xz h1{font-family:var(--display);font-stretch:80%;font-weight:800;font-size:clamp(28px,6vw,42px);line-height:1.05;margin:0 0 6px;text-wrap:balance}
+.xz h2{font-family:var(--display);font-stretch:82%;font-weight:800;font-size:28px;margin:44px 0 4px;padding-top:14px;border-top:3px solid var(--ink);text-wrap:balance}
+.xin{margin:10px 0 22px;padding:4px 0 10px;border-bottom:2px dashed var(--line)}
+.xin>.xlab{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:8px 0 2px}
+.fichelab{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:4px 0}
+.xz h3{font-family:var(--display);font-stretch:90%;font-weight:700;font-size:20px;margin:30px 0 6px;text-wrap:balance}
+.xz p,.xz li{max-width:68ch}
+.xz .lead{color:var(--muted);font-size:17px}
+.xz .toc{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.xz .toc a{font-family:var(--display);font-stretch:88%;font-weight:700;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);padding:6px 12px;border-radius:6px}
+.xz .layer{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+.xz .ana{border-left:4px solid var(--orange);background:var(--warnbg);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.xz .ana b:first-child{font-family:var(--display);font-stretch:90%;text-transform:uppercase;letter-spacing:.07em;font-size:12px;display:block;color:var(--warn)}
+.xz .key{border-left:4px solid var(--blue);background:var(--soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.xz .trap{border-left:4px solid var(--bad);background:var(--badbg);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.xz .fig{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;margin:14px 0;overflow-x:auto}
+.xz .fig .cap{font-size:13px;color:var(--muted);margin-top:8px}
+.xz .mono{font-family:var(--mono);font-size:14px;white-space:pre;overflow-x:auto;background:var(--soft);border-radius:6px;padding:10px 12px;line-height:1.45}
+.xz svg text{fill:var(--ink);font:12px var(--body)} svg .mt{fill:var(--muted)} svg .st{stroke:var(--muted);fill:none;stroke-width:1.5}
+.xz svg .sig{stroke:var(--blue);stroke-width:2.2;fill:none;stroke-linejoin:round} svg .grid{stroke:var(--line);stroke-dasharray:3 3} svg .axis{stroke:var(--muted);stroke-width:1} svg .tx{fill:var(--ink);font:11px var(--body)}
+.xz .bits{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.xz .bit{font-family:var(--mono);font-size:16px;width:34px;height:40px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.xz .bit small{font-size:9px;color:var(--muted);margin-top:3px;font-family:var(--body)}
+.xz .bit.c{background:var(--soft)} .bit.flip{border-color:var(--bad);background:var(--badbg);color:var(--bad)} .bit.ins{border-color:var(--orange);background:var(--warnbg)}
+.xz .bit.err{outline:2px solid var(--bad);outline-offset:2px}
+.xz .out{margin-top:10px;font-size:15px}
+.xz .ok{color:var(--good);font-weight:700}.ko{color:var(--bad);font-weight:700}
+.xz input[type=text]{font-family:var(--mono);font-size:15px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:7px 10px;width:100%;max-width:300px}
+.xz .grid7 td{font-family:var(--mono);text-align:center;padding:4px;cursor:pointer;width:34px}
+.xz .grid7 td.p{background:var(--soft);cursor:default}.grid7 td.flag{background:var(--badbg);color:var(--bad);font-weight:700}
+.xz .grid7 td.x{outline:2px solid var(--bad);outline-offset:-2px}
+.xz details.check{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:12px 0}
+.xz details.check summary{cursor:pointer;font-weight:700}
+.xz .pill{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:10px;background:var(--soft)}
 </style>
 
 <div class="wrap">
@@ -236,7 +239,7 @@ textarea{width:100%;min-height:110px;font-family:var(--mono);font-size:12.5px}
 
 
   <!-- COMPRENDRE -->
-  <section data-tab="expl" id="tab-expl" hidden>
+  <section data-tab="expl" id="tab-expl" class="xz" hidden>
 
   
   <h2 style="border:0;margin-top:0;padding-top:0">Comprendre les couches 1 à 3</h2>
@@ -1124,7 +1127,7 @@ function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor
 const fmt=n=>n.toLocaleString('fr-FR',{maximumFractionDigits:2});
 
 /* ======================= ONGLETS ======================= */
-const TABS=[['bord','Tableau de bord'],['cours','Cours'],['expl','Comprendre'],['tuteur','Tuteur'],['cartes','Flashcards'],['quiz','Quiz'],['redac','Rédaction'],['calc','Calculs'],['td','TD 1'],['tp','TP 1'],['tdx','TD inédit'],['erreurs','Erreurs'],['etat','Sauvegarde']];
+const TABS=[['bord','Tableau de bord'],['cours','Cours'],['tuteur','Tuteur'],['cartes','Flashcards'],['quiz','Quiz'],['redac','Rédaction'],['calc','Calculs'],['td','TD 1'],['tp','TP 1'],['tdx','TD inédit'],['erreurs','Erreurs'],['etat','Sauvegarde']];
 const tabsEl=document.getElementById('tabs');
 function dueCards(){const t=dayNum(today());return CARDS.filter((c,i)=>{const st=S.cards[i];return !st||dayNum(st.due)<=t;});}
 function renderTabs(cur){tabsEl.innerHTML=TABS.map(([k,l])=>{let b='';if(k==='cartes'){const d=dueCards().length;if(d)b=`<span class="badge">${d}</span>`;}if(k==='erreurs'&&S.errors.length)b=`<span class="badge">${S.errors.length}</span>`;return `<button role="tab" aria-selected="${k===cur}" data-k="${k}"><span class="port"></span>${l}${b}</button>`;}).join('');}
@@ -1407,9 +1410,9 @@ Réception 1011000 : C'0 ok ; C'1 faux (+2) ; C'2 faux (+4) → bit n° 6 erron�
   <div class="exam"><b>Entraîne-toi</b>Onglet Rédaction → « Reconstituer un en-tête » : tu remplis les champs dans l'ordre, de mémoire. Fais-le jusqu'à 100 %, puis refais-le à J+1, J+3 et J+7.</div>`},
 ];
 document.getElementById('toc').innerHTML=COURSE.map(c=>`<a href="#${c.id}" data-sec="${c.id}">${c.t}</a>`).join('');
-document.getElementById('courseBody').innerHTML=COURSE.map(c=>`<section id="${c.id}"><h3 style="margin-top:6px">${c.t}</h3>${c.h}<p class="row"><button class="btn ghost sm" data-testsec="${c.id}">Me tester sur cette section</button>${({s11:'c11',s12:'c12',s13:'c13'})[c.id]?`<button class="btn ghost sm" data-explgo="${({s11:'c11',s12:'c12',s13:'c13'})[c.id]}">Explication illustrée</button>`:''}<button class="btn ghost sm" data-asksec="${c.id}">Poser une question sur cette section</button></p></section>`).join('');
+document.getElementById('courseBody').innerHTML=COURSE.map(c=>`<section id="${c.id}"><h3 style="margin-top:6px">${c.t}</h3>${c.h}<p class="row"><button class="btn ghost sm" data-testsec="${c.id}">Me tester sur cette section</button>${({s11:'c11',s12:'c12',s13:'c13'})[c.id]?`<button class="btn ghost sm" data-explgo="${({s11:'c11',s12:'c12',s13:'c13'})[c.id]}">Revoir l'explication illustrée</button>`:''}<button class="btn ghost sm" data-asksec="${c.id}">Poser une question sur cette section</button></p></section>`).join('');
 document.getElementById('toc').addEventListener('click',e=>{const a=e.target.closest('a[data-sec]');if(!a)return;e.preventDefault();document.getElementById(a.dataset.sec).scrollIntoView();});
-document.getElementById('courseBody').addEventListener('click',e=>{const x=e.target.closest('[data-explgo]');if(x){go('expl');setTimeout(()=>{const el=document.getElementById(x.dataset.explgo);if(el)el.scrollIntoView();},30);return;}const a=e.target.closest('[data-asksec]');if(a){openTutor('sec:'+a.dataset.asksec);return;}const b=e.target.closest('[data-testsec]');if(!b)return;go('quiz');startQuiz('sec:'+b.dataset.testsec);});
+document.getElementById('courseBody').addEventListener('click',e=>{const x=e.target.closest('[data-explgo]');if(x){setTimeout(()=>{const el=document.getElementById(x.dataset.explgo);if(el)el.scrollIntoView();},30);return;}const a=e.target.closest('[data-asksec]');if(a){openTutor('sec:'+a.dataset.asksec);return;}const b=e.target.closest('[data-testsec]');if(!b)return;go('quiz');startQuiz('sec:'+b.dataset.testsec);});
 
 /* ======================= FLASHCARDS ======================= */
 const fcF=document.getElementById('fcFilter');
@@ -2119,5 +2122,27 @@ ${c.text.slice(0, deep ? 9000 : 3500)}`;
 (function(){try{var i=TABS.findIndex(function(t){return t[0]==='tuteur'});if(i>=0){TABS.splice(i,1);renderTabs();}}catch(e){}
 window.openTutor=function(v){var c=null;try{c=ctxList().find(function(x){return x.v===v})}catch(e){}MZT.open(c&&c.v!=='libre'?{label:c.label,text:c.text}:null);};
 var _go=window.go;window.go=function(k){if(k==='tuteur'){return window.openTutor(TUT&&TUT.ctx);}return _go.apply(this,arguments);};})();
+</script>
+<script>
+/* MIZAN : les explications illustrées (sections 11 à 13) sont intégrées directement dans le cours,
+   en tête de leur section, au lieu d'un onglet séparé. Les éléments sont déplacés (pas copiés),
+   donc les bits cliquables et autres interactions continuent de fonctionner. */
+(function(){
+  var tab=document.getElementById('tab-expl'); if(!tab) return;
+  var fil=tab.querySelector(':scope > .key');
+  [['c11','s11'],['c12','s12'],['c13','s13']].forEach(function(p,i){
+    var h=document.getElementById(p[0]), sec=document.getElementById(p[1]); if(!h||!sec) return;
+    var box=document.createElement('div'); box.className='xz xin'; box.id=p[0];
+    box.innerHTML='<p class="xlab">Comprendre, en clair</p>';
+    if(i===0&&fil) box.appendChild(fil);
+    var n=h.nextElementSibling;
+    while(n && !(n.tagName==='H2' && /^c1[0-9]$/.test(n.id||'')) && !(n.classList.contains('key') && /Et maintenant/.test(n.textContent))){
+      var nx=n.nextElementSibling; box.appendChild(n); n=nx;
+    }
+    h.removeAttribute('id');
+    var titre=sec.querySelector('h3'); titre.after(box);
+    var lab=document.createElement('p'); lab.className='fichelab'; lab.textContent='La fiche du cours (à retenir)'; box.after(lab);
+  });
+})();
 </script>
 </body></html>

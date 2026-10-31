@@ -129,3 +129,6 @@ Membres, actifs sur 7 jours, questions au tuteur, usage par module. Ce sont les 
 **Problème :** la plupart des profs n'annoncent pas la date exacte en début de semestre.
 **Solution :** case « Date pas encore annoncée » → estimation fin de semestre (impairs : mi-janvier, pairs : mi-juin), affichée « ≈ » et « estimée ». L'admin renseigne une date commune par module dès qu'elle est connue ; elle remplace l'estimation chez tous ceux qui n'avaient pas de date.
 **Alternatives écartées :** date obligatoire (l'élève invente) ; pas de date (plus de mission du jour ni de compte à rebours).
+
+## D19. Explications illustrées intégrées au cours (fin du module « Couches 1 à 3 »)
+Les explications « en clair » des couches 1 à 3 ne sont pas un sujet à part : elles sont désormais en tête des sections 11, 12 et 13 du cours Réseaux (« Comprendre, en clair », puis « La fiche du cours »). L'onglet Comprendre et le module séparé « Réseaux : couches 1 à 3 » sont supprimés. Règle pour tous les modules : une notion = son explication illustrée + sa fiche, au même endroit.
