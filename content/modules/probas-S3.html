@@ -1,4 +1,12 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}.xpl{margin:12px 0 18px;padding-bottom:12px;border-bottom:2px dashed var(--line)}
+.xlab,.fichelab{font:700 11px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;margin:10px 0 4px}
+.xlab{color:var(--accent)}.fichelab{color:var(--muted)}
+.box.xana{border-color:var(--warn);background:var(--warn-soft)}
+.xfig{background:var(--panel,transparent);border:1px solid var(--line);border-radius:8px;padding:12px;margin:10px 0;overflow-x:auto}
+.xtab{border-collapse:collapse;font-size:14px}.xtab th,.xtab td{border:1px solid var(--line);padding:5px 10px;text-align:center}.xtab .m{font-weight:700;background:var(--accent-soft)}
+.xmono{font-family:ui-monospace,monospace;font-size:13.5px;white-space:pre;line-height:1.5}
+.xchk{border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:10px 0}.xchk summary{cursor:pointer;font-weight:700}.xchk i{color:var(--muted)}
+</style></head><body>
 <title>Probas S3 · Révision</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -124,6 +132,156 @@ mjx-container[display="true"]{margin:8px 0!important}
 </header>
 <main class="wrap" id="main"></main>
 <div class="toast" id="toast" hidden></div>
+<script>
+/* MIZAN : explications illustrées « Comprendre, en clair » des 21 notions, affichées en tête de chaque notion du cours. */
+const XQ=(a)=>`<details class="xchk"><summary>À toi : 3 questions éclair</summary><ol>${a.map(([q,r])=>`<li>${q} <i>Réponse : ${r}</i></li>`).join("")}</ol></details>`;
+const XSVG=(inner,h=150,aria="schéma")=>`<div class="xfig"><svg viewBox="0 0 520 ${h}" role="img" aria-label="${aria}" style="width:100%;max-width:560px">${inner}</svg></div>`;
+const XPL={
+denombrement:String.raw`
+<div class="box xana"><b>L'analogie</b> Compter, c'est choisir une tenue. Si tu choisis « un t-shirt PUIS un pantalon », l'ordre des étapes ne change rien au nombre de tenues : tu multiplies. Si tu choisis « 2 t-shirts parmi 7 pour la valise », l'ordre n'a pas de sens ({rouge, bleu} = {bleu, rouge}) : c'est une combinaison.</div>
+<div class="xfig"><table class="xtab"><tr><th></th><th>avec ordre</th><th>sans ordre</th></tr><tr><th>sans remise</th><td>$A_n^p$ (podium)</td><td>$C_n^p$ (main de cartes)</td></tr><tr><th>avec remise</th><td>$n^p$ (code PIN)</td><td><span class="muted">hors programme</span></td></tr></table></div>
+<div class="box">Le lien à retenir : $A_n^p = p!\times C_n^p$. Un arrangement, c'est une combinaison qu'on range ensuite dans les $p!$ ordres possibles.</div>
+${XQ([["Code de cadenas à 3 chiffres : combien de codes ?","$10^3=1000$ (ordre + remise)."],["Élire un président et un secrétaire parmi 8 : combien de possibilités ?","$A_8^2=8\\times7=56$ (ordre, sans remise)."],["Choisir 3 délégués parmi 8 ?","$C_8^3=56$."]])}`,
+
+probas:String.raw`
+<div class="box xana"><b>L'analogie</b> Une probabilité conditionnelle, c'est <b>changer de salle</b>. $P(A)$ se calcule dans tout l'amphi ; $P(A\mid B)$ se calcule uniquement dans la salle B : on oublie tout ce qui n'est pas B, et B devient le nouvel « univers ».</div>
+${XSVG(`<rect x="10" y="10" width="500" height="130" rx="10" fill="none" stroke="currentColor" opacity=".4"/><text x="20" y="30" font-size="13" fill="currentColor">Ω</text><circle cx="210" cy="78" r="58" fill="#1f5fbf" fill-opacity=".15" stroke="#1f5fbf"/><circle cx="300" cy="78" r="58" fill="#b5791c" fill-opacity=".15" stroke="#b5791c"/><text x="170" y="82" font-size="14" fill="currentColor">A</text><text x="330" y="82" font-size="14" fill="currentColor">B</text><text x="255" y="82" font-size="12" text-anchor="middle" fill="currentColor">A∩B</text><text x="390" y="125" font-size="12" fill="currentColor">P(A|B) = aire(A∩B) / aire(B)</text>`,150,"A sachant B")}
+<div class="box">Bayes, c'est remonter le temps : on connaît $P(\text{symptôme}\mid\text{cause})$ et on veut $P(\text{cause}\mid\text{symptôme})$. On passe toujours par la formule des probabilités totales au dénominateur. Un arbre pondéré évite 90 % des erreurs.</div>
+<div class="box trap"><b>Piège.</b> $P(A\mid B)\neq P(B\mid A)$. « 90 % des malades ont un test positif » ne veut pas dire « 90 % des tests positifs sont des malades ».</div>
+${XQ([["$P(A\\cap B)=0{,}2$ et $P(B)=0{,}5$. Calcule $P(A\\mid B)$.","$0{,}2/0{,}5=0{,}4$."],["Dans un arbre, que vaut la somme des branches qui partent d'un même nœud ?","1."],["Quelle formule donne le dénominateur de Bayes ?","Les probabilités totales : $P(B)=\\sum_i P(B\\mid A_i)P(A_i)$."]])}`,
+
+independance:String.raw`
+<div class="box xana"><b>L'analogie</b> Deux événements sont indépendants quand savoir l'un <b>ne t'apprend rien</b> sur l'autre. Qu'il pleuve à Béni Mellal ne change rien au résultat d'un dé lancé à Casa.</div>
+<div class="box">Traduction : $P(A\mid B)=P(A)$, ce qui revient à $P(A\cap B)=P(A)\,P(B)$. C'est cette deuxième forme qu'on vérifie à l'examen : on calcule les deux côtés et on compare.</div>
+<div class="box trap"><b>Piège.</b> Indépendants ≠ incompatibles. Deux événements incompatibles ($A\cap B=\varnothing$) de probabilités non nulles sont au contraire <b>très dépendants</b> : si A arrive, B ne peut pas arriver.</div>
+${XQ([["$P(A)=0{,}3$, $P(B)=0{,}5$, $P(A\\cap B)=0{,}15$. Indépendants ?","Oui : $0{,}3\\times0{,}5=0{,}15$."],["A et B incompatibles, $P(A)=0{,}2$, $P(B)=0{,}4$. Indépendants ?","Non : $P(A\\cap B)=0\\neq0{,}08$."],["Si A et B sont indépendants, $\\bar A$ et $B$ le sont-ils ?","Oui (les complémentaires conservent l'indépendance)."]])}`,
+
+vad:String.raw`
+<div class="box xana"><b>L'analogie</b> Une variable aléatoire, c'est la <b>règle du jeu</b> qui transforme un résultat en gains : « pile, je gagne 2 DH ; face, je perds 1 DH ». La loi, c'est le tableau des gains avec leurs probabilités. L'espérance, c'est le gain moyen si tu joues des milliers de fois. La variance mesure à quel point les gains s'écartent de cette moyenne.</div>
+${XSVG(`<line x1="40" y1="120" x2="480" y2="120" stroke="currentColor" opacity=".5"/>${[[0,.1],[1,.3],[2,.4],[3,.2]].map(([x,p],i)=>`<rect x="${80+i*100}" y="${120-p*220}" width="40" height="${p*220}" fill="#1f5fbf" fill-opacity=".6"/><text x="${100+i*100}" y="138" text-anchor="middle" font-size="12" fill="currentColor">${x}</text><text x="${100+i*100}" y="${112-p*220}" text-anchor="middle" font-size="11" fill="currentColor">${p}</text>`).join("")}<line x1="267" y1="20" x2="267" y2="120" stroke="#b3261e" stroke-dasharray="4 3"/><text x="272" y="30" font-size="12" fill="#b3261e">E(X) = 1,7</text>`,150,"diagramme en bâtons")}
+<div class="box">L'espérance est le <b>point d'équilibre</b> du diagramme en bâtons : $E(X)=\sum x_i\,p_i$. Pour la variance, utilise toujours $V(X)=E(X^2)-E(X)^2$ (Koenig), plus rapide.</div>
+<div class="box trap"><b>Piège.</b> $V(aX+b)=a^2V(X)$ : le $b$ disparaît et le $a$ passe au carré. Donc $V(-3X+1)=9V(X)$, jamais $-3V(X)$.</div>
+${XQ([["Loi : 0 (0,1) ; 1 (0,3) ; 2 (0,4) ; 3 (0,2). Calcule $E(X)$.","$0+0{,}3+0{,}8+0{,}6=1{,}7$."],["Que doit vérifier la somme des $p_i$ ?","Elle vaut 1."],["$V(X)=2$. Calcule $V(-3X+1)$.","$9\\times2=18$."]])}`,
+
+linearite:String.raw`
+<div class="box xana"><b>L'analogie</b> La moyenne d'une somme, c'est la somme des moyennes : si tu gagnes en moyenne 50 DH au restaurant et 30 DH en cours particuliers, tu gagnes en moyenne 80 DH. Toujours vrai, que les deux soient liés ou non. Pour un <b>produit</b>, c'est différent : $E(XY)=E(X)E(Y)$ seulement si $X$ et $Y$ sont indépendantes.</div>
+<div class="box">Plan type de la preuve (discret) : 1) écrire $E(X+Y)=\sum_{i,j}(x_i+y_j)\,p_{ij}$ ; 2) couper en deux sommes ; 3) reconnaître les lois marginales $\sum_j p_{ij}=p_{i\cdot}$. Pour $E(XY)$ : remplacer $p_{ij}$ par $p_{i\cdot}\,p_{\cdot j}$ grâce à l'indépendance, puis factoriser.</div>
+<div class="box trap"><b>Piège.</b> Le correcteur attend l'endroit précis où l'indépendance sert. Écris-le : « par indépendance, $p_{ij}=p_{i\cdot}p_{\cdot j}$ ».</div>
+${XQ([["$E(X)=2$, $E(Y)=5$. Calcule $E(3X-Y)$.","$6-5=1$."],["$E(XY)=E(X)E(Y)$ sans hypothèse ?","Non, il faut l'indépendance (ou au moins une covariance nulle)."],["Quelle propriété des marginales utilise-t-on dans la preuve de $E(X+Y)$ ?","$\\sum_j p_{ij}=P(X=x_i)$."]])}`,
+
+couple:String.raw`
+<div class="box xana"><b>L'analogie</b> Le tableau d'un couple, c'est un <b>tableau à double entrée</b> comme les résultats d'un sondage croisé (filière × note). Les lois marginales, ce sont les <b>totaux</b> des lignes et des colonnes, qu'on écrit dans la marge (d'où leur nom).</div>
+<div class="xfig"><table class="xtab"><tr><th>X \ Y</th><th>0</th><th>1</th><th class="m">P(X=x)</th></tr><tr><th>0</th><td>0,1</td><td>0,3</td><td class="m">0,4</td></tr><tr><th>1</th><td>0,2</td><td>0,4</td><td class="m">0,6</td></tr><tr><th class="m">P(Y=y)</th><td class="m">0,3</td><td class="m">0,7</td><td class="m">1</td></tr></table></div>
+<div class="box">Méthode covariance en 3 lignes : $E(X)$, $E(Y)$ avec les marges ; $E(XY)=\sum x_iy_j\,p_{ij}$ (seules les cases où $x_iy_j\neq0$ comptent) ; $\text{Cov}=E(XY)-E(X)E(Y)$. Ici : $E(X)=0{,}6$, $E(Y)=0{,}7$, $E(XY)=0{,}4$, donc $\text{Cov}=0{,}4-0{,}42=-0{,}02$.</div>
+<div class="box trap"><b>Piège.</b> Indépendance = <b>chaque</b> case égale au produit de ses marges. Une seule case qui ne colle pas suffit à dire « non indépendantes » (ici $0{,}1\neq0{,}4\times0{,}3$).</div>
+${XQ([["Dans le tableau ci-dessus, $P(X=1)$ ?","$0{,}2+0{,}4=0{,}6$."],["Une case vaut 0 alors que ses deux marges sont non nulles. Conclusion ?","X et Y ne sont pas indépendantes."],["Formule de $V(X+Y)$ ?","$V(X)+V(Y)+2\\,\\text{Cov}(X,Y)$."]])}`,
+
+covnulle:String.raw`
+<div class="box xana"><b>L'analogie</b> La covariance ne voit que les liens <b>en ligne droite</b>. Imagine une balle qu'on lance : sa hauteur dépend totalement du temps, mais elle monte puis redescend. En moyenne, aucune tendance « linéaire » : covariance nulle, et pourtant dépendance totale.</div>
+${XSVG(`<line x1="260" y1="10" x2="260" y2="140" stroke="currentColor" opacity=".3"/><line x1="40" y1="130" x2="480" y2="130" stroke="currentColor" opacity=".3"/><path d="M60 20 Q260 240 460 20" fill="none" stroke="#1f5fbf" stroke-width="2.5"/><text x="300" y="40" font-size="12" fill="currentColor">T = Z² : dépend totalement de Z</text><text x="300" y="58" font-size="12" fill="currentColor">mais Cov(Z, Z²) = E(Z³) = 0</text>`,150,"parabole")}
+<div class="box">Le sens qui marche toujours : indépendantes ⇒ $\text{Cov}=0$. La réciproque est <b>fausse</b> en général (contre-exemple $Z$ et $Z^2$), mais vraie pour deux variables de Bernoulli, l'exercice classique.</div>
+${XQ([["$X,Y$ indépendantes. Que vaut $\\text{Cov}(X,Y)$ ?","0."],["Pourquoi $E(Z^3)=0$ si $Z\\sim\\mathcal N(0,1)$ ?","La loi est symétrique autour de 0 et $z^3$ est impaire."],["Pour deux Bernoulli, $\\text{Cov}=0$ entraîne-t-il l'indépendance ?","Oui : c'est le cas particulier où la réciproque est vraie."]])}`,
+
+densite:String.raw`
+<div class="box xana"><b>L'analogie</b> Une densité, c'est une <b>carte de densité de population</b>. Un seul point n'a « personne » ($P(X=a)=0$), mais une zone a une population égale à l'<b>aire</b> sous la courbe. La fonction de répartition $F(x)$, c'est le nombre cumulé d'habitants à gauche de $x$.</div>
+${XSVG(`<line x1="30" y1="130" x2="490" y2="130" stroke="currentColor" opacity=".5"/><path d="M60 130 L60 20 L380 130" fill="none" stroke="#1f5fbf" stroke-width="2.5"/><path d="M140 130 L140 47.5 L260 88.75 L260 130 Z" fill="#1f5fbf" fill-opacity=".25"/><text x="200" y="120" text-anchor="middle" font-size="12" fill="currentColor">P(x₁ ≤ X ≤ x₂)</text><text x="60" y="145" text-anchor="middle" font-size="11" fill="currentColor">0</text><text x="380" y="145" text-anchor="middle" font-size="11" fill="currentColor">a</text><text x="140" y="145" text-anchor="middle" font-size="11" fill="currentColor">x₁</text><text x="260" y="145" text-anchor="middle" font-size="11" fill="currentColor">x₂</text><text x="390" y="40" font-size="12" fill="currentColor">f(x) = 2/a (1 − x/a)</text>`,150,"densité triangulaire")}
+<div class="box">Les 3 vérifications d'une densité : $f\ge0$, $\int f=1$, et le support (où $f$ est non nulle). Puis $F(x)=\int_{-\infty}^x f$, en <b>découpant les cas</b> : avant le support ($F=0$), dedans, après ($F=1$).</div>
+<div class="box trap"><b>Piège.</b> Oublier les morceaux « $F(x)=0$ si $x&lt;0$ » et « $F(x)=1$ si $x&gt;a$ » coûte des points à chaque examen. Et $P(X\le a)=P(X&lt;a)$ en continu.</div>
+${XQ([["$f(x)=2x$ sur $[0,1]$. Calcule $F(x)$ pour $x\\in[0,1]$.","$F(x)=x^2$."],["Même $f$ : $P(0{,}5\\le X\\le1)$ ?","$1-0{,}25=0{,}75$."],["Que vaut $P(X=0{,}5)$ ?","0 (variable continue)."]])}`,
+
+momentsc:String.raw`
+<div class="box xana"><b>L'analogie</b> L'espérance d'une densité, c'est le <b>point d'équilibre</b> de la plaque découpée selon la courbe : posée sur une pointe en $E(X)$, elle tient en équilibre. La variance mesure si la masse est concentrée près de ce point ou étalée.</div>
+<div class="box">Même recette qu'en discret, on remplace $\sum$ par $\int$ : $E(X)=\int x f(x)\,dx$, $E(X^2)=\int x^2 f(x)\,dx$, puis $V=E(X^2)-E(X)^2$. Intègre seulement <b>sur le support</b>.</div>
+<div class="box trap"><b>Piège.</b> Avec $f(x)=\frac2a(1-\frac xa)$, développe d'abord : $x f(x)=\frac2a x-\frac{2}{a^2}x^2$, puis intègre terme à terme. Résultat à connaître : $E(X)=a/3$.</div>
+${XQ([["$X\\sim\\mathcal U[0,1]$ : $E(X)$ ?","$1/2$."],["Toujours $\\mathcal U[0,1]$ : $V(X)$ ?","$E(X^2)=1/3$, donc $V=1/3-1/4=1/12$."],["Sur quel intervalle intègre-t-on ?","Sur le support, là où $f\\neq0$."]])}`,
+
+transfo:String.raw`
+<div class="box xana"><b>L'analogie</b> Pour connaître la loi de $Y=g(X)$, on ne devine pas : on <b>traduit la question</b>. « $Y\le y$ » se réécrit en une condition sur $X$, dont on connaît déjà la loi. C'est un changement de langue, pas un nouveau calcul.</div>
+<div class="xfig"><div class="xmono">1. G(y) = P(Y ≤ y)
+2. = P(g(X) ≤ y)          ← on traduit
+3. = P(X ≤ g⁻¹(y))        (si g croissante)
+4. = F(g⁻¹(y))
+5. densité : g(y) = G'(y)  ← dériver (règle de la chaîne)</div></div>
+<div class="box trap"><b>Piège.</b> Si $g$ est décroissante, l'inégalité <b>se retourne</b> : $P(-X\le y)=P(X\ge-y)=1-F(-y)$. Et pour $Y=X^2$ : $P(X^2\le y)=P(-\sqrt y\le X\le\sqrt y)$, deux bornes.</div>
+${XQ([["$Y=2X+1$, $X$ de répartition $F$. $G(y)$ ?","$F\\big((y-1)/2\\big)$."],["$Y=-X$. $G(y)$ ?","$1-F(-y)$."],["Comment passer de $G$ à la densité de $Y$ ?","En dérivant : $g=G'$."]])}`,
+
+minmax:String.raw`
+<div class="box xana"><b>L'analogie</b> Le <b>max</b> de n notes est ≤ 12 seulement si <b>toutes</b> les notes sont ≤ 12. Le <b>min</b> est &gt; 12 seulement si <b>toutes</b> sont &gt; 12. Ce « toutes » se transforme en produit grâce à l'indépendance.</div>
+<div class="xfig"><div class="xmono">Max : P(M ≤ x) = P(X₁ ≤ x)…P(Xₙ ≤ x) = F(x)ⁿ
+Min : P(m > x) = P(X₁ > x)…P(Xₙ > x) = (1 − F(x))ⁿ
+      donc  P(m ≤ x) = 1 − (1 − F(x))ⁿ
+Cas U[0,1] : F_M(x) = xⁿ ,  F_m(x) = 1 − (1 − x)ⁿ</div></div>
+<div class="box trap"><b>Piège.</b> Pour le min, on passe <b>toujours</b> par $P(m&gt;x)$ : $P(m\le x)$ ne se factorise pas directement. Et n'oublie pas de dériver pour la densité : $f_M=nF^{n-1}f$.</div>
+${XQ([["3 variables $\\mathcal U[0,1]$ indépendantes : $P(M\\le0{,}5)$ ?","$0{,}5^3=0{,}125$."],["Même cas : $P(m>0{,}5)$ ?","$0{,}5^3=0{,}125$."],["Densité du max de $n$ variables $\\mathcal U[0,1]$ ?","$nx^{n-1}$ sur $[0,1]$."]])}`,
+
+couplec:String.raw`
+<div class="box xana"><b>L'analogie</b> Une densité de couple, c'est un <b>relief</b> au-dessus d'un terrain : la probabilité d'une zone, c'est le <b>volume</b> sous le relief. Le terrain, c'est le support, souvent un triangle ou un carré. Tout se joue sur les bornes d'intégration.</div>
+${XSVG(`<line x1="60" y1="130" x2="300" y2="130" stroke="currentColor" opacity=".5"/><line x1="60" y1="130" x2="60" y2="10" stroke="currentColor" opacity=".5"/><path d="M60 130 L260 130 L260 30 Z" fill="#1f5fbf" fill-opacity=".2" stroke="#1f5fbf"/><line x1="180" y1="130" x2="180" y2="70" stroke="#b3261e" stroke-width="2"/><text x="185" y="100" font-size="11" fill="#b3261e">x fixé : y de 0 à x</text><text x="265" y="145" font-size="11" fill="currentColor">x = 2</text><text x="330" y="60" font-size="12" fill="currentColor">Support 0 ≤ y ≤ x ≤ 2</text><text x="330" y="80" font-size="12" fill="currentColor">f_X(x) = ∫₀ˣ f(x,y) dy</text>`,150,"support triangulaire")}
+<div class="box">Méthode : <b>dessine toujours le support</b>. Pour la marginale de $X$, fixe $x$ et regarde où va $y$ (trait rouge). Pour celle de $Y$, fixe $y$ : ici $x$ va de $y$ à 2.</div>
+${XQ([["$f(x,y)=k(x+y)$ sur $[0,1]^2$ : comment trouver $k$ ?","$\\iint f=1$ donne $k=1$."],["Support $0\\le y\\le x\\le2$ : bornes de $x$ pour la marginale de $Y$ ?","$x$ de $y$ à 2."],["Condition d'indépendance avec les densités ?","$f(x,y)=f_X(x)f_Y(y)$ partout (et support rectangulaire)."]])}`,
+
+mgf:String.raw`
+<div class="box xana"><b>L'analogie</b> La fonction génératrice $M_X(t)=E(e^{tX})$ est une <b>carte d'identité</b> de la loi : deux variables qui ont la même fonction génératrice ont la même loi. Et elle « range » tous les moments dans ses dérivées en 0.</div>
+<div class="xfig"><div class="xmono">M(0) = 1          (toujours : vérification gratuite)
+M'(0) = E(X)
+M''(0) = E(X²)  →  V(X) = M''(0) − M'(0)²
+Somme de v.a indépendantes : M_(X+Y)(t) = M_X(t) · M_Y(t)</div></div>
+<div class="box trap"><b>Piège.</b> On dérive par rapport à $t$, <b>puis</b> on remplace $t$ par 0. Faire l'inverse donne une constante dont la dérivée est nulle.</div>
+${XQ([["Que vaut toujours $M_X(0)$ ?","1."],["$M(t)=e^{2t+t^2}$ : $E(X)$ ?","$M'(t)=(2+2t)M(t)$, donc $M'(0)=2$."],["$X$ et $Y$ indépendantes : $M_{X+Y}$ ?","$M_X\\cdot M_Y$."]])}`,
+
+binomiale:String.raw`
+<div class="box xana"><b>L'analogie</b> Bernoulli, c'est <b>un seul</b> lancer de pièce truquée (succès avec probabilité $p$). La binomiale, c'est le <b>nombre de succès</b> en $n$ lancers identiques et indépendants : combien de fois tu as eu « pile » sur 10 lancers.</div>
+<div class="box">Pour reconnaître une binomiale, vérifie à voix haute les 3 mots : <b>répétition</b> ($n$ fois la même épreuve), <b>indépendance</b>, <b>deux issues</b>. Puis $P(X=k)=C_n^k p^k(1-p)^{n-k}$, $E=np$, $V=np(1-p)$.</div>
+<div class="box trap"><b>Piège.</b> Tirages <b>sans</b> remise dans une urne : ce n'est plus une binomiale (les épreuves ne sont plus indépendantes), c'est une hypergéométrique.</div>
+${XQ([["10 lancers d'une pièce équilibrée : $E(X)$ et $V(X)$ ?","$5$ et $2{,}5$."],["$\\mathcal B(4;0{,}5)$ : $P(X=2)$ ?","$C_4^2/16=6/16=0{,}375$."],["Tirage de 3 boules sans remise : binomiale ?","Non, hypergéométrique."]])}`,
+
+poisson:String.raw`
+<div class="box xana"><b>L'analogie</b> Poisson compte des <b>événements rares sur une période</b> : le nombre de clients qui entrent au restaurant en 10 minutes, le nombre d'appels reçus en une heure. Un seul paramètre $\lambda$, qui est à la fois la moyenne et la variance.</div>
+<div class="box">À savoir par cœur : $P(X=k)=e^{-\lambda}\frac{\lambda^k}{k!}$, $E=V=\lambda$, et la <b>somme de deux Poisson indépendantes</b> est une Poisson de paramètre $\lambda_1+\lambda_2$. La loi de $X$ sachant $X+Y=s$ est alors une binomiale $\mathcal B\!\left(s,\frac{\lambda_1}{\lambda_1+\lambda_2}\right)$, l'exercice classique.</div>
+${XQ([["$X\\sim\\mathcal P(2)$ : $P(X=0)$ ?","$e^{-2}\\approx0{,}135$."],["$X\\sim\\mathcal P(3)$, $Y\\sim\\mathcal P(1)$ indépendantes : loi de $X+Y$ ?","$\\mathcal P(4)$."],["Même cas : loi de $X$ sachant $X+Y=4$ ?","$\\mathcal B(4;3/4)$."]])}`,
+
+geometrique:String.raw`
+<div class="box xana"><b>L'analogie</b> La loi géométrique, c'est <b>le rang du premier succès</b> : combien de fois tu dois tirer une carte (avec remise) avant d'obtenir le premier as. « Il faut $k$ essais » = $k-1$ échecs puis un succès.</div>
+<div class="xfig"><div class="xmono">P(X = k) = (1 − p)^(k−1) · p        k = 1, 2, 3…
+E(X) = 1/p      V(X) = (1 − p)/p²
+P(X > k) = (1 − p)^k   (k échecs de suite)</div></div>
+<div class="box trap"><b>Piège.</b> Vérifie la convention de l'énoncé : rang du premier succès (commence à 1, celle du cours) ou nombre d'échecs avant le succès (commence à 0). Les formules changent.</div>
+${XQ([["Pièce équilibrée : nombre moyen de lancers pour le premier pile ?","$1/0{,}5=2$."],["Dé : $P(\\text{premier 6 au 3e lancer})$ ?","$(5/6)^2\\times1/6=25/216$."],["$P(X>3)$ avec $p=0{,}2$ ?","$0{,}8^3=0{,}512$."]])}`,
+
+autresdiscretes:String.raw`
+<div class="box xana"><b>L'analogie</b> Trois questions pour choisir la bonne loi discrète : <b>combien d'essais</b> (fixé ou jusqu'à un succès) ? <b>avec ou sans remise</b> ? <b>on compte quoi</b> (succès, rang) ?</div>
+<div class="xfig"><table class="xtab"><tr><th>Situation</th><th>Loi</th></tr><tr><td>n essais fixés, avec remise, on compte les succès</td><td>Binomiale</td></tr><tr><td>n tirages sans remise dans N objets dont r « bons »</td><td>Hypergéométrique</td></tr><tr><td>on répète jusqu'au 1er succès</td><td>Géométrique</td></tr><tr><td>on répète jusqu'au r-ième succès</td><td>Binomiale négative (Pascal)</td></tr><tr><td>événements rares sur une période</td><td>Poisson</td></tr></table></div>
+${XQ([["Choisir 3 représentants parmi 10 garçons et 8 filles, nombre de filles ?","Hypergéométrique."],["Nombre de lancers pour obtenir 3 fois « 6 » ?","Binomiale négative."],["Hypergéométrique avec N très grand devant n ?","Elle se rapproche d'une binomiale."]])}`,
+
+uniexpo:String.raw`
+<div class="box xana"><b>L'analogie</b> L'<b>uniforme</b>, c'est l'arrivée d'un bus dont tu sais seulement qu'il passe entre 8 h et 8 h 20 : toutes les minutes se valent. L'<b>exponentielle</b>, c'est la durée de vie d'une ampoule qui ne vieillit pas : qu'elle ait déjà tenu 100 heures ne change pas ses chances de tenir une heure de plus (absence de mémoire).</div>
+${XSVG(`<line x1="20" y1="130" x2="250" y2="130" stroke="currentColor" opacity=".5"/><rect x="60" y="60" width="140" height="70" fill="#1f5fbf" fill-opacity=".2" stroke="#1f5fbf"/><text x="130" y="50" text-anchor="middle" font-size="12" fill="currentColor">U[a, b] : 1/(b − a)</text><line x1="270" y1="130" x2="500" y2="130" stroke="currentColor" opacity=".5"/><path d="M280 25 Q320 110 490 125" fill="none" stroke="#b5791c" stroke-width="2.5"/><text x="390" y="50" font-size="12" fill="currentColor">Exp(λ) : λe^(−λx)</text>`,150,"uniforme et exponentielle")}
+<div class="box">Uniforme : $P(x_1\le X\le x_2)=\frac{x_2-x_1}{b-a}$ (longueur / longueur totale). Exponentielle : $P(X&gt;x)=e^{-\lambda x}$, $E=1/\lambda$. Le <b>taux de hasard</b> $g=\frac{f}{1-F}$ est constant égal à $\lambda$ pour l'exponentielle : c'est l'absence de mémoire.</div>
+${XQ([["$X\\sim\\mathcal U[0,1]$ : $P(0{,}2\\le X\\le0{,}5)$ ?","$0{,}3$."],["$X\\sim\\mathcal E(2)$ : $P(X>1)$ ?","$e^{-2}\\approx0{,}135$."],["Taux de hasard d'une exponentielle de paramètre $\\lambda$ ?","Constant, égal à $\\lambda$."]])}`,
+
+normale:String.raw`
+<div class="box xana"><b>L'analogie</b> La loi normale, c'est la <b>répartition des tailles</b> dans un amphi : beaucoup de monde autour de la moyenne, de moins en moins vers les extrêmes, symétrique. Centrer-réduire, c'est convertir n'importe quelle taille en « nombre d'écarts-types au-dessus de la moyenne » pour pouvoir lire une <b>seule</b> table.</div>
+${XSVG(`<line x1="30" y1="130" x2="490" y2="130" stroke="currentColor" opacity=".5"/><path d="M40 129 C150 128 190 20 260 20 C330 20 370 128 480 129" fill="none" stroke="#1f5fbf" stroke-width="2.5"/><path d="M40 129 C150 128 190 20 260 20 L260 130 L40 130 Z" fill="#1f5fbf" fill-opacity=".15"/><line x1="260" y1="20" x2="260" y2="130" stroke="currentColor" stroke-dasharray="4 3"/><text x="260" y="145" text-anchor="middle" font-size="11" fill="currentColor">m</text><text x="200" y="120" text-anchor="middle" font-size="12" fill="currentColor">P(X ≤ m) = 0,5</text><text x="380" y="40" font-size="12" fill="currentColor">Z = (X − m) / σ ~ N(0, 1)</text>`,150,"courbe en cloche")}
+<div class="box">Recette : $P(X\le x)=\Phi\!\left(\frac{x-m}{\sigma}\right)$. Pour une valeur négative, la symétrie : $\Phi(-z)=1-\Phi(z)$. Pour retrouver $m$ et $\sigma$ à partir de deux probabilités, lis deux $z$ dans la table et résous un système de 2 équations.</div>
+<div class="box trap"><b>Piège.</b> Le cours note $\mathcal N(m,\sigma)$ avec l'<b>écart-type</b>, pas la variance. Vérifie la notation de l'énoncé avant de diviser.</div>
+${XQ([["$X\\sim\\mathcal N(10,2)$ : quel $z$ pour $x=14$ ?","$(14-10)/2=2$."],["$\\Phi(1{,}96)\\approx0{,}975$ : $P(Z\\le-1{,}96)$ ?","$0{,}025$."],["$Y=3X+1$ avec $X\\sim\\mathcal N(m,\\sigma)$ : loi de $Y$ ?","$\\mathcal N(3m+1,\\,3\\sigma)$."]])}`,
+
+gamma:String.raw`
+<div class="box xana"><b>L'analogie</b> Si l'exponentielle est le temps d'attente du <b>premier</b> bus, la loi Gamma $\Gamma(n,\lambda)$ est le temps d'attente du <b>n-ième</b> bus : la somme de $n$ attentes exponentielles indépendantes.</div>
+<div class="box">À reconnaître dans un intégrale : $\int_0^{+\infty}x^{a-1}e^{-x}dx=\Gamma(a)$, avec $\Gamma(n)=(n-1)!$ et $\Gamma(1/2)=\sqrt\pi$. Ce réflexe transforme une intégrale qui fait peur en une factorielle. $E=a/\lambda$, $V=a/\lambda^2$.</div>
+<div class="box trap"><b>Piège.</b> Vérifie la paramétrisation de l'énoncé ($\lambda$ taux ou $\theta=1/\lambda$ échelle) : l'espérance devient $a\theta$ au lieu de $a/\lambda$.</div>
+${XQ([["$\\Gamma(5)$ ?","$4!=24$."],["Somme de 3 exponentielles $\\mathcal E(\\lambda)$ indépendantes ?","$\\Gamma(3,\\lambda)$."],["$\\int_0^{\\infty}x^3e^{-x}dx$ ?","$\\Gamma(4)=6$."]])}`,
+
+khideux:String.raw`
+<div class="box xana"><b>L'analogie</b> Le Khi-deux, c'est l'<b>énergie totale</b> de plusieurs erreurs normales : on prend $n$ erreurs $Z_i\sim\mathcal N(0,1)$ indépendantes, on les met au carré (plus de signe) et on additionne. C'est la base des tests statistiques.</div>
+<div class="xfig"><div class="xmono">Z ~ N(0, 1)            ⇒  Z² ~ χ²(1) = Γ(1/2, 1/2)
+Z₁² + … + Zₙ² (indép.)  ⇒  χ²(n) = Γ(n/2, 1/2)
+E(χ²(n)) = n       V(χ²(n)) = 2n</div></div>
+<div class="box trap"><b>Piège.</b> Pour montrer que $Z^2$ suit un $\chi^2(1)$, utilise la méthode de la fonction de répartition avec <b>deux bornes</b> : $P(Z^2\le y)=P(-\sqrt y\le Z\le\sqrt y)=2\Phi(\sqrt y)-1$, puis dérive.</div>
+${XQ([["Espérance d'un $\\chi^2(5)$ ?","5."],["$Z_1,Z_2$ normales centrées réduites indépendantes : loi de $Z_1^2+Z_2^2$ ?","$\\chi^2(2)$, c'est-à-dire une exponentielle de paramètre $1/2$."],["Quelle loi Gamma correspond à $\\chi^2(n)$ ?","$\\Gamma(n/2,\\,1/2)$."]])}`
+};
+
+</script>
 <script>
 const CHAPS={A:"Bases de probabilité",B:"Variables aléatoires discrètes",C:"Variables aléatoires continues",D:"Lois usuelles discrètes",E:"Lois usuelles continues"};
 const NOTIONS=[
@@ -1164,7 +1322,7 @@ function vNotion(m,n){
   const i=NOTIONS.indexOf(n);const st=S.notions[n.id]||{};const ex=EXOS.filter(x=>x.notion===n.id);
   m.innerHTML=`<div class="row small"><a href="#" data-go="cours">← Toutes les notions</a><span class="muted">${CHAPS[n.ch]}</span></div>
   <h2 style="margin-top:8px">${n.t}</h2><div class="row"><span class="chip warn">${"★".repeat(n.imp)} examen</span><span class="small muted">${n.src}</span></div>
-  <article class="read" style="margin-top:10px">${n.body}</article>
+  ${XPL[n.id]?`<section class="xpl"><p class="xlab">Comprendre, en clair</p>${XPL[n.id]}</section><p class="fichelab">La notion du cours</p>`:""}<article class="read" style="margin-top:10px">${n.body}</article>
   ${ex.length?`<div class="box">Exercice${ex.length>1?"s":""}-type${ex.length>1?"s":""} lié${ex.length>1?"s":""} : ${ex.map(x=>`<a href="#" data-go="exos:${x.id}">${x.t}</a>`).join(" · ")}</div>`:""}
   <div class="panel" style="margin-top:16px" id="qzone"></div>
   <div class="row" style="justify-content:space-between;margin-top:16px">${i>0?`<a href="#" data-go="cours:${NOTIONS[i-1].id}">← ${NOTIONS[i-1].t}</a>`:"<span></span>"}${i<NOTIONS.length-1?`<a href="#" data-go="cours:${NOTIONS[i+1].id}">${NOTIONS[i+1].t} →</a>`:""}</div>`;
