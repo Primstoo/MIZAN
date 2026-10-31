@@ -2112,7 +2112,7 @@ ${ctx.text.slice(0,9000)}`;
     const memo=mm?mm[1].trim():'';if(memo&&!/^rien/i.test(memo)){MEM.memos.push({date:today(),text:memo.slice(0,160)});if(MEM.memos.length>30)MEM.memos.shift();S.tutMemos=MEM.memos;save();if(DB){try{await DB.doc(UBASE+'/memoire').set({memos:MEM.memos,updated:Date.now()});}catch(e){}}}}
   catch(e){const last=TUT.turns[TUT.turns.length-1];const kept=e&&e.text;last.content=e&&e.code==='cancelled'?(kept||'')+'\n(Arrêté.)':(kept?kept+'\n\n':'')+(TUT_ERR[e&&e.code]||'Problème de connexion. Réessaie dans un instant.');}
   finally{TUT.busy=false;TUT.img=null;document.getElementById('tutImg').value='';document.getElementById('tutImgName').textContent='';document.getElementById('tutSend').disabled=false;document.getElementById('tutStop').hidden=true;renderTutor();}};
-document.getElementById('tutIn').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();document.getElementById('tutSend').click();}});
+document.getElementById('tutIn').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();document.getElementById('tutSend').click();}});
 
 go(curTab);
 </script>
@@ -2207,7 +2207,7 @@ window.MZT_CONFIG={id:'archi',module:'Architecture des ordinateurs',prof:'',stud
   <div class="mzt-log" id="mztLog"></div>
   <div class="mzt-chips" id="mztChips"></div>
   <form class="mzt-f" id="mztF">
-   <textarea id="mztIn" placeholder="Ta question, ou ta réponse à vérifier… (Ctrl+Entrée pour envoyer)"></textarea>
+   <textarea id="mztIn" placeholder="Ta question, ou ta réponse à vérifier… (Entrée pour envoyer, Maj+Entrée pour aller à la ligne)"></textarea>
    <div class="mzt-row">
     <button class="mzt-pri" id="mztSend" type="submit">Envoyer</button>
     <button type="button" id="mztStop" hidden>Arrêter</button>
@@ -2345,7 +2345,7 @@ ${c.text.slice(0, deep ? 9000 : 3500)}`;
   $('#mztStop').onclick = () => { if (ctl) ctl.abort(); };
   $('#mztImg').onchange = (e) => { img = e.target.files[0] || null; $('#mztImgN').textContent = img ? 'Photo : ' + img.name : ''; };
   $('#mztF').onsubmit = (e) => { e.preventDefault(); const v = $('#mztIn').value; $('#mztIn').value = ''; ask(v); };
-  $('#mztIn').addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); $('#mztF').requestSubmit(); } });
+  $('#mztIn').addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('#mztF').requestSubmit(); } });
 
   // ---------- capacités (facultatives) ----------
   const W = window.claude;

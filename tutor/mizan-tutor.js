@@ -83,7 +83,7 @@
   <div class="mzt-log" id="mztLog"></div>
   <div class="mzt-chips" id="mztChips"></div>
   <form class="mzt-f" id="mztF">
-   <textarea id="mztIn" placeholder="Ta question, ou ta réponse à vérifier… (Ctrl+Entrée pour envoyer)"></textarea>
+   <textarea id="mztIn" placeholder="Ta question, ou ta réponse à vérifier… (Entrée pour envoyer, Maj+Entrée pour aller à la ligne)"></textarea>
    <div class="mzt-row">
     <button class="mzt-pri" id="mztSend" type="submit">Envoyer</button>
     <button type="button" id="mztStop" hidden>Arrêter</button>
@@ -221,7 +221,7 @@ ${c.text.slice(0, deep ? 9000 : 3500)}`;
   $('#mztStop').onclick = () => { if (ctl) ctl.abort(); };
   $('#mztImg').onchange = (e) => { img = e.target.files[0] || null; $('#mztImgN').textContent = img ? 'Photo : ' + img.name : ''; };
   $('#mztF').onsubmit = (e) => { e.preventDefault(); const v = $('#mztIn').value; $('#mztIn').value = ''; ask(v); };
-  $('#mztIn').addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); $('#mztF').requestSubmit(); } });
+  $('#mztIn').addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('#mztF').requestSubmit(); } });
 
   // ---------- capacités (facultatives) ----------
   const W = window.claude;
