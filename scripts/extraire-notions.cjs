@@ -53,6 +53,9 @@ const dir = path.join(__dirname, "..", "content", "modules");
 
   // ---------- Banque du test de niveau : une question par notion importante (8 max) ----------
   const niveau = {};
+  const banques = {};
+  const brut0 = (t) => String(t).replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").trim();
+  const garder = (k, b) => { banques[k] = b.filter((x) => x.o && x.o.length >= 2 && Number.isInteger(x.a)).map((x) => ({ n: x.n, q: brut0(x.q), o: x.o.map(brut0), a: x.a, e: brut0(x.e || "") })); return b; };
   const choisir = (cat, banque) => {
     const ordre = [...cat.items].sort((a, b) => b.imp - a.imp);
     const out = [];
@@ -64,19 +67,22 @@ const dir = path.join(__dirname, "..", "content", "modules");
     return out;
   };
   await ouvrir("reseaux-M351.html");
-  niveau["reseaux-m351"] = choisir(out["reseaux-m351"], await p.evaluate(() => QS.map((x) => ({ n: x.n, q: x.q, o: x.o, a: x.a, e: x.e }))));
+  niveau["reseaux-m351"] = choisir(out["reseaux-m351"], garder("reseaux-m351", await p.evaluate(() => QS.map((x) => ({ n: x.n, q: x.q, o: x.o, a: x.a, e: x.e })))));
   await ouvrir("archi-ordinateurs.html");
-  niveau["archi"] = choisir(out["archi"], await p.evaluate(() => QCM.map((x) => ({ n: x[0], q: x[1], o: x[2], a: x[3], e: x[4] }))));
+  niveau["archi"] = choisir(out["archi"], garder("archi", await p.evaluate(() => QCM.map((x) => ({ n: x[0], q: x[1], o: x[2], a: x[3], e: x[4] })))));
   await ouvrir("probas-S3.html");
-  niveau["probas"] = choisir(out["probas"], await p.evaluate(() => NOTIONS.flatMap((n) => (n.quiz || []).filter((x) => x.t === "q").map((x) => ({ n: n.id, q: x.q, o: x.o, a: x.a, e: x.e })))));
+  niveau["probas"] = choisir(out["probas"], garder("probas", await p.evaluate(() => NOTIONS.flatMap((n) => (n.quiz || []).filter((x) => x.t === "q").map((x) => ({ n: n.id, q: x.q, o: x.o, a: x.a, e: x.e }))))));
   await ouvrir("crypto-farchane.html");
-  niveau["crypto"] = choisir(out["crypto"], await p.evaluate(() => Object.entries(EV).flatMap(([k, l]) => l.filter((x) => x.o).map((x) => ({ n: k, q: x.q, o: x.o, a: x.a, e: x.e })))));
+  niveau["crypto"] = choisir(out["crypto"], garder("crypto", await p.evaluate(() => Object.entries(EV).flatMap(([k, l]) => l.filter((x) => x.o).map((x) => ({ n: k, q: x.q, o: x.o, a: x.a, e: x.e }))))));
   await ouvrir("uml.html");
-  niveau["uml"] = choisir(out["uml"], await p.evaluate(() => Object.entries(QUIZ).flatMap(([k, l]) => l.filter((x) => x.o).map((x) => ({ n: k, q: x.q, o: x.o, a: x.a, e: x.e })))));
+  niveau["uml"] = choisir(out["uml"], garder("uml", await p.evaluate(() => Object.entries(QUIZ).flatMap(([k, l]) => l.filter((x) => x.o).map((x) => ({ n: k, q: x.q, o: x.o, a: x.a, e: x.e }))))));
   // Texte brut uniquement (pas de HTML dans la plateforme)
   const brut = (t) => String(t).replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").trim();
   for (const k in niveau) niveau[k] = niveau[k].map((x) => ({ ...x, q: brut(x.q), o: x.o.map(brut), e: brut(x.e) }));
   fs.writeFileSync(path.join(__dirname, "..", "src", "lib", "niveau.json"), JSON.stringify(niveau, null, 1));
+  // Banque complète (QCM uniquement) pour les examens blancs de la plateforme
+  fs.writeFileSync(path.join(__dirname, "..", "src", "lib", "banque.json"), JSON.stringify(banques));
+  for (const [k, v] of Object.entries(banques)) console.log("banque", k, v.length, "QCM");
   for (const [k, v] of Object.entries(niveau)) console.log("test de niveau", k, v.length, "questions");
 
   await b.close();

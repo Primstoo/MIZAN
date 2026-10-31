@@ -165,3 +165,9 @@ Chaque élève relie son compte depuis « Moi » (lien t.me/<bot>?start=<jeton> 
 **Pourquoi Telegram :** déjà utilisé par les étudiants, gratuit, sans coût par message (contrairement aux SMS ou à WhatsApp Business).
 **Sécurité :** le webhook vérifie l'en-tête secret de Telegram ; la tâche du matin exige CRON_SECRET.
 **Limite :** sur le plan gratuit de Vercel, la tâche quotidienne peut partir n'importe quand dans l'heure prévue.
+
+## D26. Examen blanc de la plateforme, note prévue et note réelle
+- **Examen blanc** (`/app/blanc/[slug]`) : 15 QCM tirés au hasard dans la banque du module (une question par notion, les plus importantes d'abord), 20 minutes, sans correction pendant l'épreuve, note sur 20 et corrigé à la fin. Les notions ratées remontent dans « À retravailler ». Banque : `src/lib/banque.json` (311 QCM, extraits des modules).
+- **Note prévue** : moyenne pondérée par l'importance des notions (maîtrisée = 1, ratée = son taux de réussite, jamais testée = 0,3), avec une fiabilité qui dépend de la part du programme testée.
+- **Note réelle** : saisie par l'élève après l'examen ; Suivi affiche l'écart moyen prévu / réel, l'indicateur clé du pilote.
+**Limite assumée :** un QCM ne mesure pas la rédaction ; la note est présentée comme un thermomètre, pas comme une prédiction exacte.

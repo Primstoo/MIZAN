@@ -11,7 +11,7 @@ const LIENS = [
 
 export default function Nav() {
   const p = usePathname();
-  if (p.startsWith("/app/m/") || p === "/app/bienvenue" || p.startsWith("/app/niveau/")) return null;
+  if (p.startsWith("/app/m/") || p === "/app/bienvenue" || p.startsWith("/app/niveau/") || p.startsWith("/app/blanc/")) return null;
   return (
     <nav className="nav" aria-label="Navigation">
       <a href="/app" className="logo nav-logo">MIZAN</a>

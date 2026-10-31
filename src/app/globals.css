@@ -182,3 +182,11 @@ button,input,select,textarea{font-family:inherit}
 .opt.bon{border-color:var(--ok);background:var(--goodsoft)}.opt.faux{border-color:var(--bad);background:var(--badsoft)}
 .opt:disabled{cursor:default;color:var(--ink)}
 form.stack label{display:flex;flex-direction:column;gap:4px}
+/* ---- Examen blanc ---- */
+.timer{font:700 26px "IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}.timer.bad{color:var(--bad)}
+.qn{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:5px}
+.qn button{height:32px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:500 12px "IBM Plex Mono",monospace;cursor:pointer}
+.qn button.ok{background:var(--accsoft);border-color:var(--acc)}.qn button.cur{background:var(--acc);color:#fff;border-color:var(--acc)}
+.corrige{padding-left:20px;display:flex;flex-direction:column;gap:10px}.corrige p{margin:2px 0}
+.corrige li.bon::marker{color:var(--ok)}.corrige li.faux::marker{color:var(--bad)}
+.np{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.np strong{font:800 26px "Bricolage Grotesque",sans-serif}

@@ -42,4 +42,5 @@ npm run dev
 - [x] Test de niveau à l'inscription
 - [x] Envoi de documents par les élèves (récompense : questions au tuteur en plus)
 - [x] Bot Telegram (mission du matin, série, prochain live) · à activer avec le jeton du bot
+- [x] Examen blanc chronométré, note prévue et comparaison avec la note réelle
 - [ ] Nom de domaine + e-mails via Resend

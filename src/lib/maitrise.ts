@@ -66,3 +66,16 @@ export function calculerMaitrise(slug: string, data: Brut | null | undefined, ni
   };
 }
 
+
+// Note prévue sur 20 : moyenne pondérée par l'importance des notions à l'examen.
+// Notion maîtrisée = 1, ratée = son taux de réussite, jamais testée = 0,3 (hypothèse prudente).
+// La fiabilité dépend de la part des notions (pondérée) déjà testées.
+export function notePrevue(m: Maitrise) {
+  let num = 0, den = 0, couv = 0;
+  for (const i of m.items) {
+    const v = i.statut === "ok" ? 1 : i.statut === "fragile" ? i.score ?? 0 : 0.3;
+    num += i.imp * v; den += i.imp; if (i.statut !== "jamais") couv += i.imp;
+  }
+  const c = den ? couv / den : 0;
+  return { note: den ? Math.round((num / den) * 200) / 10 : 0, fiabilite: c >= 0.6 ? "bonne" : c >= 0.3 ? "moyenne" : "faible", couverture: Math.round(c * 100) };
+}

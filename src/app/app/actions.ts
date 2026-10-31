@@ -224,3 +224,27 @@ export async function activerWebhook(): Promise<string> {
   }
   return j.ok ? "Bot activé ✓" : "Échec : " + (j.description || "réponse inconnue");
 }
+
+// ---------- Examen blanc et note réelle ----------
+export async function enregistrerBlanc(slug: string, reponses: { n: string; ok: boolean }[], dureeS: number): Promise<void> {
+  const u = await moi();
+  if (!MODULES.some((m) => m.slug === slug) || !reponses.length || reponses.length > 40) return;
+  const db = admin();
+  const bons = reponses.filter((r) => r.ok).length;
+  await db.from("blancs").insert({ user_id: u.id, module_slug: slug, note: Math.round((bons / reponses.length) * 200) / 10, nb_questions: reponses.length, duree_s: Math.round(dureeS) });
+  // Dernier résultat par notion (une notion ratée remonte dans « À retravailler »)
+  const parNotion = new Map<string, boolean>();
+  reponses.forEach((r) => parNotion.set(r.n, (parNotion.get(r.n) ?? true) && r.ok));
+  await db.from("niveau").upsert(Array.from(parNotion.entries()).map(([n, ok]) => ({ user_id: u.id, module_slug: slug, notion: n, ok, created_at: new Date().toISOString() })));
+  revalidatePath("/app/progres"); revalidatePath("/app");
+}
+
+export async function enregistrerNoteReelle(form: FormData): Promise<void> {
+  const u = await moi();
+  const slug = String(form.get("module"));
+  const note = Number(String(form.get("note") || "").replace(",", "."));
+  if (!MODULES.some((m) => m.slug === slug) || !Number.isFinite(note) || note < 0 || note > 20) return;
+  const prevue = Number(form.get("prevue"));
+  await admin().from("notes_reelles").upsert({ user_id: u.id, module_slug: slug, note, note_prevue: Number.isFinite(prevue) ? prevue : null, created_at: new Date().toISOString() });
+  revalidatePath("/app/progres"); revalidatePath("/app/admin");
+}

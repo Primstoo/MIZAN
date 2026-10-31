@@ -30,6 +30,9 @@ export default async function Suivi() {
   ]);
   const S = sessions ?? [], R = resas ?? [];
   const { data: tgs } = await db.from("telegram_links").select("chat_id");
+  const { data: notes } = await db.from("notes_reelles").select("user_id, module_slug, note, note_prevue");
+  const N = (notes ?? []).filter((n) => n.note_prevue !== null);
+  const ecart = N.length ? Math.round((N.reduce((t, n) => t + Math.abs(Number(n.note) - Number(n.note_prevue)), 0) / N.length) * 10) / 10 : null;
   const { data: docs } = await db.from("documents").select("id, email, type, module_slug, module_libre, etablissement, chemin, nom_fichier, statut, created_at").order("created_at", { ascending: false }).limit(50);
   const liens = new Map<string, string>();
   for (const d of (docs ?? []).filter((x) => x.statut === "recu")) {
@@ -102,6 +105,19 @@ export default async function Suivi() {
             </tr>
           ))}
         </tbody></table></div>
+      </section>
+
+      <section className="bloc">
+        <h2>Note prévue ou note réelle</h2>
+        <p className="small muted">L&apos;indicateur clé du pilote : la note prévue par MIZAN est-elle proche de la vraie ?</p>
+        {N.length ? (
+          <>
+            <p><strong>Écart moyen : {String(ecart).replace(".", ",")} point{ecart !== 1 ? "s" : ""}</strong> sur {N.length} note{N.length > 1 ? "s" : ""}.</p>
+            <div className="tabw"><table className="tab"><thead><tr><th>Élève</th><th>Module</th><th>Prévue</th><th>Réelle</th></tr></thead><tbody>
+              {N.map((n) => <tr key={n.user_id + n.module_slug}><td>{emailDe.get(n.user_id) ?? "toi"}</td><td>{MODULES.find((m) => m.slug === n.module_slug)?.titre}</td><td>{String(n.note_prevue)}</td><td>{String(n.note)}</td></tr>)}
+            </tbody></table></div>
+          </>
+        ) : <p className="small muted">Aucune note réelle saisie pour l&apos;instant. Les élèves la saisissent dans « Ma progression » après leur examen.</p>}
       </section>
 
       <section className="bloc">
