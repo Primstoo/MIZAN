@@ -1,18 +1,20 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { admin } from "@/lib/acces";
-import { chargerParcours, missionDuJour } from "@/lib/parcours";
+import { MODULES } from "@/lib/modules";
+import { chargerParcours, chargerMaitrise, missionPerso } from "@/lib/parcours";
 
 // « Aujourd'hui » : le cœur de l'appli. Mission du jour, compte à rebours, série, prochain live.
 export const metadata = { title: "Aujourd’hui" };
 
 export default async function Aujourdhui() {
   const { data: { user } } = await createClient().auth.getUser();
-  const p = await chargerParcours(user!);
+  const [p, maitrise] = await Promise.all([chargerParcours(user!), chargerMaitrise(user!)]);
   if (!p.profil) redirect("/app/bienvenue");
 
   const cible = p.examens[0];
-  const mission = cible ? missionDuJour(p.profil.minutes_jour, cible.reste) : null;
+  const mc = cible ? maitrise[cible.module_slug] : undefined;
+  const mission = cible ? missionPerso(p.profil.minutes_jour, cible.reste, mc) : null;
   const fait = cible ? p.faitAujourdhui.has(cible.module_slug) : false;
   const { data: lives } = await admin().from("live_sessions").select("id, titre, starts_at, prix_dh, places")
     .gte("starts_at", new Date().toISOString()).order("starts_at").limit(1);
@@ -32,6 +34,7 @@ export default async function Aujourdhui() {
           <h2>{cible.module!.titre}</h2>
           {fait && <p className="badge-ok">✓ Tu as déjà révisé ce module aujourd&apos;hui</p>}
           {mission.urgent && <p className="small">Examen dans moins de deux semaines : place aux conditions réelles.</p>}
+          {mc && <p className="small">Maîtrise du module : <strong>{mc.pct} %</strong>{mission.cibles.length ? " · la séance commence par tes points faibles" : ""}</p>}
           <ul className="tasks">
             {mission.etapes.map((e) => <li key={e}>{e}</li>)}
           </ul>
@@ -65,6 +68,17 @@ export default async function Aujourdhui() {
             )}
           </section>
         )}
+        <section className="card">
+          <span className="k">Ma progression</span>
+          {MODULES.filter((m) => maitrise[m.slug]?.testes).length ? (
+            <ul className="list-plain small">
+              {MODULES.filter((m) => maitrise[m.slug]?.testes).map((m) => (
+                <li key={m.slug}><div className="row between"><span>{m.titre.split(" (")[0]}</span><strong>{maitrise[m.slug].pct} %</strong></div><div className="bar"><i style={{ width: `${maitrise[m.slug].pct}%` }} /></div></li>
+              ))}
+            </ul>
+          ) : <p className="small muted">Fais un premier quiz dans un module : ta maîtrise et tes points faibles apparaîtront ici.</p>}
+          <a href="/app/progres" className="btn alt small">Voir le détail et mes points faibles</a>
+        </section>
         <section className="card">
           <span className="k">Prochaine séance live</span>
           {live ? (

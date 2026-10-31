@@ -168,3 +168,11 @@ button,input,select,textarea{font-family:inherit}
 .err-page{max-width:520px;margin:0 auto;padding:64px 16px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
 @media (max-width:720px){.auth{min-height:100dvh;grid-template-rows:auto 1fr}.auth-form{align-items:flex-start;padding-top:28px}}
 @media (max-width:700px){.tabw .tab.dates{min-width:0}.tab.dates tr{display:block;padding:10px 0;border-bottom:1px solid var(--line)}.tab.dates td{display:block;border:0;padding:3px 0}}
+/* ---- Progression ---- */
+.bar.warn i{background:var(--amb)}.bar.bad i{background:var(--bad)}
+.prog h2{margin:0}
+.prog .bar{margin:4px 0}
+.chap{margin:8px 0}.chap summary{cursor:pointer;color:var(--acc);font-weight:600;font-size:14px}
+.chap li{margin-top:8px}
+.faibles .card{padding:10px 12px;gap:2px}
+.mbar{margin-top:6px}

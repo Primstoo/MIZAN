@@ -1,6 +1,7 @@
 import type { User } from "@supabase/supabase-js";
 import { admin } from "@/lib/acces";
 import { MODULES } from "@/lib/modules";
+import { calculerMaitrise, type Maitrise } from "@/lib/maitrise";
 
 // Données du parcours de l'élève (profil, examens, série, mission du jour).
 // Lues côté serveur avec la clé service, toujours filtrées sur l'élève connecté.
@@ -74,4 +75,34 @@ export function dateEstimee(semestre: string, communeISO?: string) {
   let d = `${an}-${mois}`;
   if (d <= auj) d = `${an + 1}-${mois}`;
   return d;
+}
+
+// Maîtrise de chaque module, calculée à partir de la progression synchronisée.
+export async function chargerMaitrise(u: User): Promise<Record<string, Maitrise>> {
+  const { data } = await admin().from("progress").select("module_slug, data").eq("user_id", u.id);
+  const out: Record<string, Maitrise> = {};
+  for (const m of MODULES) {
+    const row = (data ?? []).find((r) => r.module_slug === m.slug);
+    const x = calculerMaitrise(m.slug, (row?.data ?? {}) as Record<string, string>);
+    if (x) out[m.slug] = x;
+  }
+  return out;
+}
+
+// Mission du jour personnalisée : on commence par les notions ratées, puis les notions
+// importantes jamais testées ; le reste de la séance complète selon le temps disponible.
+export function missionPerso(minutes: number, reste: number, m?: Maitrise) {
+  const base = missionDuJour(minutes, reste);
+  if (!m) return { ...base, cibles: [] as string[] };
+  const nb = minutes <= 30 ? 1 : minutes <= 60 ? 2 : 3;
+  const ratees = m.faibles.filter((i) => i.statut === "fragile").slice(0, nb);
+  const neuves = m.faibles.filter((i) => i.statut === "jamais").slice(0, nb - ratees.length);
+  const cibles = [
+    ...ratees.map((i) => `Retravailler « ${i.t} »${i.score !== null ? ` (${Math.round(i.score * 100)} % de réussite)` : ""}`),
+    ...neuves.map((i) => `Découvrir et te tester sur « ${i.t} » (importance ${i.imp}/5)`),
+  ];
+  if (!cibles.length) return { ...base, cibles };
+  // Les cibles remplacent les étapes génériques « section du cours » ; on garde la révision et l'entraînement.
+  const etapes = [...cibles, ...base.etapes.filter((e) => !/section|Deux sections/.test(e)).slice(0, Math.max(1, base.etapes.length - cibles.length))];
+  return { ...base, etapes, cibles };
 }

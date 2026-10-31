@@ -8,7 +8,8 @@ Plateforme de révision pour les étudiants de la FSABM (Béni Mellal). Chaque m
 - **Connexion sans mot de passe** : code à 6 chiffres ou lien par e-mail.
 - **Bêta privée** : codes d'invitation (3 places par membre, 10 pour l'admin).
 - **Inscription guidée** : prénom, modules, dates d'examen (ou estimation si non annoncée), temps disponible par jour.
-- **Aujourd'hui** : mission du jour, compte à rebours, série de jours, prochain live.
+- **Aujourd'hui** : mission du jour personnalisée (elle commence par tes points faibles), compte à rebours, série de jours, prochain live.
+- **Ma progression** : maîtrise par module et par chapitre, notions à retravailler.
 - **Modules** : 5 modules (Réseaux M351, Cryptographie, Architecture, UML, Probabilités S3), servis uniquement aux membres connectés, progression synchronisée entre appareils.
 - **Tuteur IA** : Gemini puis Groq en secours, côté serveur, réponse en continu, quota quotidien par élève.
 - **Live** : réservation, paiement par virement CIH ou CashPlus validé par l'admin, lien visio visible 30 min avant pour les élèves qui ont payé.
@@ -37,7 +38,7 @@ npm run dev
 - [x] Connexion, invitations, inscription guidée, Aujourd'hui, Live, Moi, Suivi admin
 - [x] Modules protégés, progression synchronisée, tuteur serveur en continu
 - [x] Explications illustrées intégrées au cours de chaque module
-- [ ] Scores des modules remontés vers la plateforme (mission personnalisée, maîtrise par chapitre, points faibles)
+- [x] Scores des modules remontés vers la plateforme (mission personnalisée, maîtrise par chapitre, points faibles)
 - [ ] Test de niveau à l'inscription
 - [ ] Envoi de documents par les élèves
 - [ ] Bot Telegram (rappels, liens des lives)

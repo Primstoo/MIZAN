@@ -144,3 +144,10 @@ Les explications « en clair » des couches 1 à 3 ne sont pas un sujet à part 
 
 ## D21. Audit qualité du 31/10/2026
 Relecture complète du code, test de chaque écran sur téléphone et ordinateur (copie locale avec base factice), contrôle des 5 modules (erreurs, débordements sur mobile). Corrections : police des boutons, textes trompeurs (« réservé 24 h », « onglet Comprendre »), redirection ouverte supprimée, validations côté serveur (live, dates, statuts), code d'invitation non consommé si déjà membre, pages d'erreur et 404 en français, icône et installation sur téléphone, tableaux admin lisibles sur mobile, débordements horizontaux des modules Réseaux, Crypto et UML.
+
+## D22. Maîtrise et points faibles sans modifier les modules
+**Problème :** chaque module range sa progression à sa façon (essais par notion, meilleur score, pourcentage par thème, note sur 10 par chapitre).
+**Solution :** la plateforme lit la progression déjà synchronisée et la traduit par un petit adaptateur par module (`src/lib/maitrise.ts`) vers un format commun : maîtrisée / fragile / jamais testée. Le catalogue des notions est extrait automatiquement des modules (`scripts/extraire-notions.cjs` → `src/lib/notions.json`).
+**Utilisé par :** page « Ma progression » (maîtrise par chapitre, points faibles), cartes des modules, mission du jour (elle commence par les notions ratées, puis les notions importantes jamais testées).
+**Alternative écartée :** modifier les 5 modules pour qu'ils envoient leurs scores (plus de code à maintenir, risque de casser les modules).
+**Limite :** si un module change sa façon de stocker la progression, il faut adapter l'adaptateur et relancer l'extraction.

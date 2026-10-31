@@ -1,0 +1,801 @@
+{
+ "reseaux-m351": {
+  "unite": "notion",
+  "groupes": [
+   {
+    "id": "s1",
+    "t": "1. Introduction générale"
+   },
+   {
+    "id": "s2",
+    "t": "2. Communication sur un réseau"
+   },
+   {
+    "id": "s3",
+    "t": "3. Composants de base"
+   },
+   {
+    "id": "s4",
+    "t": "4. Classification : couverture"
+   },
+   {
+    "id": "s5",
+    "t": "5. Topologies"
+   },
+   {
+    "id": "s6",
+    "t": "6. Architecture et transfert"
+   },
+   {
+    "id": "s7",
+    "t": "7. Le réseau Internet"
+   },
+   {
+    "id": "s8",
+    "t": "8. Bande passante, débit, temps"
+   },
+   {
+    "id": "s9",
+    "t": "9. Ch2 · Modèles OSI et TCP/IP"
+   },
+   {
+    "id": "s10",
+    "t": "10. Ch2 · Protocoles, ports, MTU"
+   },
+   {
+    "id": "s11",
+    "t": "11. Ch2 · Couche liaison et contrôle d'erreurs"
+   },
+   {
+    "id": "s12",
+    "t": "12. Ch2 · Couche physique"
+   },
+   {
+    "id": "s13",
+    "t": "13. Ch2 · Couche réseau et ICMP"
+   },
+   {
+    "id": "s14",
+    "t": "14. En-têtes IP, TCP et UDP (à mémoriser)"
+   }
+  ],
+  "items": [
+   {
+    "id": "n1",
+    "t": "Réseau informatique : définition et utilités",
+    "imp": 2,
+    "g": "s1"
+   },
+   {
+    "id": "n2",
+    "t": "Protocole : définition et règles de communication",
+    "imp": 4,
+    "g": "s2"
+   },
+   {
+    "id": "n3",
+    "t": "Qualité : facteurs internes / externes",
+    "imp": 3,
+    "g": "s2"
+   },
+   {
+    "id": "n4",
+    "t": "Éléments de communication (émetteur, médium, coupleur)",
+    "imp": 3,
+    "g": "s2"
+   },
+   {
+    "id": "n5",
+    "t": "Segmentation, multiplexage, étiquetage",
+    "imp": 4,
+    "g": "s2"
+   },
+   {
+    "id": "n6",
+    "t": "Réseau convergent",
+    "imp": 2,
+    "g": "s2"
+   },
+   {
+    "id": "n7",
+    "t": "Les 5 composants de base",
+    "imp": 4,
+    "g": "s3"
+   },
+   {
+    "id": "n8",
+    "t": "Hôtes, périphériques partagés, client/serveur",
+    "imp": 3,
+    "g": "s3"
+   },
+   {
+    "id": "n9",
+    "t": "Nœuds intermédiaires : hub/switch vs routeur",
+    "imp": 4,
+    "g": "s3"
+   },
+   {
+    "id": "n10",
+    "t": "Supports de transmission et critères de choix",
+    "imp": 3,
+    "g": "s3"
+   },
+   {
+    "id": "n11",
+    "t": "Pile de protocoles web, normes IEEE / IETF",
+    "imp": 4,
+    "g": "s3"
+   },
+   {
+    "id": "n12",
+    "t": "Critères de classification des réseaux",
+    "imp": 3,
+    "g": "s4"
+   },
+   {
+    "id": "n13",
+    "t": "PAN / LAN / MAN / WAN",
+    "imp": 5,
+    "g": "s4"
+   },
+   {
+    "id": "n14",
+    "t": "Topologie logique vs physique",
+    "imp": 3,
+    "g": "s5"
+   },
+   {
+    "id": "n15",
+    "t": "Topologies physiques (bus, anneau, étoile…)",
+    "imp": 5,
+    "g": "s5"
+   },
+   {
+    "id": "n16",
+    "t": "Maillage complet : N(N−1)/2",
+    "imp": 5,
+    "g": "s5"
+   },
+   {
+    "id": "n17",
+    "t": "Architecture : 4 caractéristiques",
+    "imp": 4,
+    "g": "s6"
+   },
+   {
+    "id": "n18",
+    "t": "Commutation de circuits vs de paquets",
+    "imp": 5,
+    "g": "s6"
+   },
+   {
+    "id": "n19",
+    "t": "Internet : réseau des réseaux, services",
+    "imp": 2,
+    "g": "s7"
+   },
+   {
+    "id": "n20",
+    "t": "Bande passante, débit physique / applicatif",
+    "imp": 5,
+    "g": "s8"
+   },
+   {
+    "id": "n21",
+    "t": "Calcul du temps de téléchargement",
+    "imp": 5,
+    "g": "s8"
+   },
+   {
+    "id": "n22",
+    "t": "Ch2 · Modèle OSI : 7 couches et rôles",
+    "imp": 5,
+    "g": "s9"
+   },
+   {
+    "id": "n23",
+    "t": "Ch2 · Modèle TCP/IP et correspondance OSI",
+    "imp": 5,
+    "g": "s9"
+   },
+   {
+    "id": "n24",
+    "t": "Ch2 · PDU, encapsulation / désencapsulation",
+    "imp": 5,
+    "g": "s9"
+   },
+   {
+    "id": "n25",
+    "t": "Ch2 · Protocoles application (HTTP, DNS, SMTP, POP, FTP, Telnet, DHCP), URL",
+    "imp": 5,
+    "g": "s10"
+   },
+   {
+    "id": "n26",
+    "t": "Ch2 · Ports et TCP vs UDP",
+    "imp": 5,
+    "g": "s10"
+   },
+   {
+    "id": "n27",
+    "t": "Ch2 · MTU, MSS et segmentation",
+    "imp": 4,
+    "g": "s10"
+   },
+   {
+    "id": "n28",
+    "t": "Équipements : carte réseau, répéteur, adresse IP/MAC",
+    "imp": 3,
+    "g": "s10"
+   },
+   {
+    "id": "n36",
+    "t": "Ch2 · Liaison : délimitation, fanion, bit de transparence",
+    "imp": 4,
+    "g": "s11"
+   },
+   {
+    "id": "n37",
+    "t": "Ch2 · Liaison : services, LLC/MAC, accès au support, contrôle de flux",
+    "imp": 4,
+    "g": "s11"
+   },
+   {
+    "id": "n29",
+    "t": "Ch2 · Parité (VRC / LRC)",
+    "imp": 5,
+    "g": "s11"
+   },
+   {
+    "id": "n30",
+    "t": "Ch2 · CRC (division polynomiale)",
+    "imp": 5,
+    "g": "s11"
+   },
+   {
+    "id": "n31",
+    "t": "Ch2 · Code de Hamming (7,4)",
+    "imp": 5,
+    "g": "s11"
+   },
+   {
+    "id": "n32",
+    "t": "Ch2 · Physique : codages NRZ, RZ, Manchester, Miller…",
+    "imp": 5,
+    "g": "s12"
+   },
+   {
+    "id": "n33",
+    "t": "Ch2 · Physique : modes de transmission, câbles, sans fil",
+    "imp": 4,
+    "g": "s12"
+   },
+   {
+    "id": "n34",
+    "t": "Ch2 · Réseau : IPv4, routage, passerelle, diffusion, ICMP",
+    "imp": 4,
+    "g": "s13"
+   },
+   {
+    "id": "n35",
+    "t": "Ch2 · Transport (fenêtre, FIN) et messages HTTP",
+    "imp": 3,
+    "g": "s13"
+   },
+   {
+    "id": "n38",
+    "t": "En-tête IPv4 : les 12 champs fixes (signal du prof)",
+    "imp": 5,
+    "g": "s14"
+   },
+   {
+    "id": "n39",
+    "t": "En-tête TCP : champs et drapeaux (signal du prof)",
+    "imp": 5,
+    "g": "s14"
+   },
+   {
+    "id": "n40",
+    "t": "En-tête UDP (signal du prof)",
+    "imp": 4,
+    "g": "s14"
+   }
+  ]
+ },
+ "archi": {
+  "unite": "notion",
+  "groupes": [
+   {
+    "id": "L1",
+    "t": "Introduction et architecture de Von Neumann"
+   },
+   {
+    "id": "L2",
+    "t": "Unités, bases et conversions"
+   },
+   {
+    "id": "L3",
+    "t": "Opérations dans les bases 2, 8 et 16"
+   },
+   {
+    "id": "L4",
+    "t": "Nombres négatifs : S/VA, Ca1, Ca2"
+   },
+   {
+    "id": "L5",
+    "t": "Nombres réels : virgule fixe et IEEE 754"
+   },
+   {
+    "id": "L6",
+    "t": "Algèbre de Boole, portes et logigrammes"
+   },
+   {
+    "id": "L7",
+    "t": "Formes canoniques et simplification algébrique"
+   },
+   {
+    "id": "L8",
+    "t": "Tableaux de Karnaugh"
+   },
+   {
+    "id": "L9",
+    "t": "Circuits combinatoires : additionneur, décodeur, codeur, MUX, DEMUX"
+   },
+   {
+    "id": "L10",
+    "t": "Circuits séquentiels, bascules et registres"
+   },
+   {
+    "id": "L11",
+    "t": "Mémoire, bus et segmentation"
+   },
+   {
+    "id": "L12",
+    "t": "Le processeur et le 8086"
+   },
+   {
+    "id": "L13",
+    "t": "Assembleur 8086 (1) : variables, modes d'adressage, MOV, arithmétique"
+   },
+   {
+    "id": "L14",
+    "t": "Assembleur 8086 (2) : logique, décalages, sauts, boucles, pile"
+   }
+  ],
+  "items": [
+   {
+    "id": "n1",
+    "t": "Architecture, Von Neumann / Harvard, définitions",
+    "imp": 3,
+    "g": "L1"
+   },
+   {
+    "id": "n2",
+    "t": "Unités, nombre de valeurs sur n bits, capacité",
+    "imp": 4,
+    "g": "L2"
+   },
+   {
+    "id": "n3",
+    "t": "Conversions entières entre bases",
+    "imp": 5,
+    "g": "L2"
+   },
+   {
+    "id": "n4",
+    "t": "Conversions de nombres à virgule",
+    "imp": 4,
+    "g": "L2"
+   },
+   {
+    "id": "n5",
+    "t": "Opérations en binaire, octal, hexa",
+    "imp": 4,
+    "g": "L3"
+   },
+   {
+    "id": "n6",
+    "t": "S/VA, Ca1, Ca2 : coder et décoder",
+    "imp": 5,
+    "g": "L4"
+   },
+   {
+    "id": "n7",
+    "t": "Soustraction en Ca2, dépassement",
+    "imp": 4,
+    "g": "L4"
+   },
+   {
+    "id": "n8",
+    "t": "IEEE 754 simple précision",
+    "imp": 5,
+    "g": "L5"
+   },
+   {
+    "id": "n9",
+    "t": "Lois de Boole, De Morgan, dualité",
+    "imp": 4,
+    "g": "L6"
+   },
+   {
+    "id": "n10",
+    "t": "Portes, logigrammes, NAND/NOR",
+    "imp": 4,
+    "g": "L6"
+   },
+   {
+    "id": "n11",
+    "t": "Table de vérité et formes canoniques",
+    "imp": 5,
+    "g": "L7"
+   },
+   {
+    "id": "n12",
+    "t": "Simplification algébrique",
+    "imp": 3,
+    "g": "L7"
+   },
+   {
+    "id": "n13",
+    "t": "Tableaux de Karnaugh",
+    "imp": 5,
+    "g": "L8"
+   },
+   {
+    "id": "n14",
+    "t": "Additionneur, décodeur, codeur",
+    "imp": 4,
+    "g": "L9"
+   },
+   {
+    "id": "n15",
+    "t": "MUX / DEMUX et réalisation de fonctions",
+    "imp": 5,
+    "g": "L9"
+   },
+   {
+    "id": "n16",
+    "t": "Circuits séquentiels et bascules",
+    "imp": 4,
+    "g": "L10"
+   },
+   {
+    "id": "n17",
+    "t": "Registres",
+    "imp": 2,
+    "g": "L10"
+   },
+   {
+    "id": "n18",
+    "t": "Mémoire : hiérarchie, stockage, boutisme",
+    "imp": 3,
+    "g": "L11"
+   },
+   {
+    "id": "n19",
+    "t": "Bus : largeur, débit, échanges",
+    "imp": 4,
+    "g": "L11"
+   },
+   {
+    "id": "n20",
+    "t": "Segmentation, adresse physique",
+    "imp": 4,
+    "g": "L11"
+   },
+   {
+    "id": "n21",
+    "t": "Processeur : cycle, CO/RI, CISC/RISC, cache",
+    "imp": 4,
+    "g": "L12"
+   },
+   {
+    "id": "n22",
+    "t": "8086 : registres et drapeaux",
+    "imp": 4,
+    "g": "L12"
+   },
+   {
+    "id": "n23",
+    "t": "Assembleur : variables, modes d'adressage",
+    "imp": 5,
+    "g": "L13"
+   },
+   {
+    "id": "n24",
+    "t": "MOV, ADD, SUB, MUL, DIV",
+    "imp": 5,
+    "g": "L13"
+   },
+   {
+    "id": "n25",
+    "t": "Logique, décalages, rotations",
+    "imp": 4,
+    "g": "L14"
+   },
+   {
+    "id": "n26",
+    "t": "Sauts, boucles, pile, INT 21h",
+    "imp": 4,
+    "g": "L14"
+   }
+  ]
+ },
+ "probas": {
+  "unite": "notion",
+  "groupes": [
+   {
+    "id": "A",
+    "t": "Chapitre 1 · Bases de probabilité"
+   },
+   {
+    "id": "B",
+    "t": "Chapitre 2 · Variables aléatoires discrètes"
+   },
+   {
+    "id": "C",
+    "t": "Chapitre 2 (suite) · Variables aléatoires continues"
+   },
+   {
+    "id": "D",
+    "t": "Chapitre 3 · Lois usuelles discrètes"
+   },
+   {
+    "id": "E",
+    "t": "Chapitre 4 · Lois usuelles continues"
+   }
+  ],
+  "items": [
+   {
+    "id": "denombrement",
+    "t": "Dénombrement : compter les cas",
+    "imp": 2,
+    "g": "A"
+   },
+   {
+    "id": "probas",
+    "t": "Probabilité, conditionnelle, Bayes",
+    "imp": 2,
+    "g": "A"
+   },
+   {
+    "id": "independance",
+    "t": "Indépendance d'événements",
+    "imp": 2,
+    "g": "A"
+   },
+   {
+    "id": "vad",
+    "t": "V.a discrète : loi, espérance, variance",
+    "imp": 4,
+    "g": "B"
+   },
+   {
+    "id": "linearite",
+    "t": "Preuves : E(X+Y) et E(XY)",
+    "imp": 3,
+    "g": "B"
+   },
+   {
+    "id": "couple",
+    "t": "Couple discret : tableau, marginales, covariance",
+    "imp": 5,
+    "g": "B"
+   },
+   {
+    "id": "covnulle",
+    "t": "Covariance nulle et indépendance",
+    "imp": 4,
+    "g": "B"
+   },
+   {
+    "id": "densite",
+    "t": "Densité, fonction de répartition, probabilités",
+    "imp": 5,
+    "g": "C"
+   },
+   {
+    "id": "momentsc",
+    "t": "Espérance et variance (cas continu)",
+    "imp": 5,
+    "g": "C"
+   },
+   {
+    "id": "transfo",
+    "t": "Loi de Y = g(X) : la méthode de la fonction de répartition",
+    "imp": 5,
+    "g": "C"
+   },
+   {
+    "id": "minmax",
+    "t": "Min et max de n variables indépendantes",
+    "imp": 5,
+    "g": "C"
+   },
+   {
+    "id": "couplec",
+    "t": "Couple de v.a continues",
+    "imp": 2,
+    "g": "C"
+   },
+   {
+    "id": "mgf",
+    "t": "Fonction génératrice des moments",
+    "imp": 3,
+    "g": "C"
+   },
+   {
+    "id": "binomiale",
+    "t": "Bernoulli, binomiale (et uniforme, Dirac)",
+    "imp": 3,
+    "g": "D"
+   },
+   {
+    "id": "poisson",
+    "t": "Loi de Poisson et loi conditionnelle",
+    "imp": 3,
+    "g": "D"
+   },
+   {
+    "id": "geometrique",
+    "t": "Loi géométrique (de Pascal)",
+    "imp": 3,
+    "g": "D"
+   },
+   {
+    "id": "autresdiscretes",
+    "t": "Binomiale négative, hypergéométrique, différences",
+    "imp": 2,
+    "g": "D"
+   },
+   {
+    "id": "uniexpo",
+    "t": "Uniforme et exponentielle (et taux de hasard)",
+    "imp": 3,
+    "g": "E"
+   },
+   {
+    "id": "normale",
+    "t": "Loi normale : transformations et table",
+    "imp": 5,
+    "g": "E"
+   },
+   {
+    "id": "gamma",
+    "t": "Loi Gamma",
+    "imp": 5,
+    "g": "E"
+   },
+   {
+    "id": "khideux",
+    "t": "Loi du Khi-deux et liens Normale-Gamma",
+    "imp": 5,
+    "g": "E"
+   }
+  ]
+ },
+ "crypto": {
+  "unite": "thème",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Partie 1"
+   }
+  ],
+  "items": [
+   {
+    "id": "bases",
+    "t": "Bases",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "cesar",
+    "t": "César & affine",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "vig",
+    "t": "Vigenère",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "play",
+    "t": "Playfair",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "trans",
+    "t": "Transposition",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "crypta",
+    "t": "Cryptanalyse",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "arith",
+    "t": "Arithmétique",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "lfsr",
+    "t": "LFSR",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "modes",
+    "t": "Modes",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "des",
+    "t": "DES",
+    "imp": 3,
+    "g": "cours"
+   }
+  ]
+ },
+ "uml": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "ch1",
+    "t": "Introduction et approche objet",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "ch2",
+    "t": "Diagramme de classes",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ch3",
+    "t": "Diagramme d’objets",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "ch4",
+    "t": "Cas d’utilisation",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ch5",
+    "t": "Diagramme de séquence",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ch6",
+    "t": "Diagramme de collaboration",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "ch7",
+    "t": "Diagramme d’activités",
+    "imp": 4,
+    "g": "cours"
+   }
+  ]
+ }
+}

@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { MODULES } from "@/lib/modules";
-import { chargerParcours } from "@/lib/parcours";
+import { chargerParcours, chargerMaitrise } from "@/lib/parcours";
 import CarteModule from "@/components/CarteModule";
 
 // Mes modules (avec date d'examen ou déjà commencés), puis le reste du catalogue replié.
@@ -9,7 +9,7 @@ export const metadata = { title: "Modules" };
 export default async function Modules() {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  const [{ data: prog }, p] = await Promise.all([supabase.from("progress").select("module_slug, updated_at"), chargerParcours(user!)]);
+  const [{ data: prog }, p, maitrise] = await Promise.all([supabase.from("progress").select("module_slug, updated_at"), chargerParcours(user!), chargerMaitrise(user!)]);
   const vus = new Map((prog ?? []).map((x) => [x.module_slug, x.updated_at as string]));
   const restes = new Map(p.examens.map((e) => [e.module_slug, e.reste]));
   const estimees = new Set(p.examens.filter((e) => e.estimee).map((e) => e.module_slug));
@@ -20,12 +20,12 @@ export default async function Modules() {
 
   return (
     <main className="page">
-      <header className="row between"><h1>Modules</h1><a href="/app/bienvenue" className="btn alt small">Mes examens</a></header>
+      <header className="row between"><h1>Modules</h1><div className="row"><a href="/app/progres" className="btn alt small">Ma progression</a><a href="/app/bienvenue" className="btn alt small">Mes examens</a></div></header>
       {miens.length > 0 && (
         <section>
           <h2>Mes modules</h2>
           <div className="grid">
-            {miens.map((m) => <CarteModule key={m.slug} m={m} reste={restes.get(m.slug)} estimee={estimees.has(m.slug)} info={vus.has(m.slug) ? `Dernière séance : ${fr(vus.get(m.slug)!)}` : "Pas encore commencé"} />)}
+            {miens.map((m) => <CarteModule key={m.slug} m={m} reste={restes.get(m.slug)} estimee={estimees.has(m.slug)} pct={maitrise[m.slug]?.testes ? maitrise[m.slug].pct : undefined} info={vus.has(m.slug) ? `Dernière séance : ${fr(vus.get(m.slug)!)}` : "Pas encore commencé"} />)}
           </div>
         </section>
       )}
