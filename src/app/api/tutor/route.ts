@@ -11,7 +11,7 @@ const QUOTA = Number(process.env.TUTOR_DAILY_QUOTA || 40);
 // Les modèles gratuits sont souvent retirés (gemini-2.5-flash fermé le 16/10/2026,
 // llama-3.3-70b chez Groq le 16/08/2026). On essaie donc une liste, alias « latest » d'abord.
 const liste = (v: string | undefined, def: string[]) => (v ? v.split(",").map((x) => x.trim()).filter(Boolean) : def);
-const GEMINI_MODELS = liste(process.env.GEMINI_MODEL, ["gemini-flash-latest", "gemini-3.1-flash-lite", "gemini-3-flash-preview"]);
+const GEMINI_MODELS = liste(process.env.GEMINI_MODEL, ["gemini-3.1-flash-lite", "gemini-flash-latest"]);
 const GROQ_MODELS = liste(process.env.GROQ_MODEL, ["openai/gpt-oss-120b", "openai/gpt-oss-20b"]);
 const MAX_CHARS = 60000;
 
@@ -27,7 +27,7 @@ const texte = (c: unknown): string =>
 const err = (code: string, message: string, status: number) =>
   NextResponse.json({ code, message }, { status });
 
-const DELAI = Number(process.env.TUTOR_TIMEOUT_MS || 25000);
+const DELAI = Number(process.env.TUTOR_TIMEOUT_MS || 15000);
 async function appel(url: string, init: RequestInit) {
   const ctl = new AbortController();
   const t = setTimeout(() => ctl.abort(), DELAI);
