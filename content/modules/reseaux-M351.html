@@ -2403,6 +2403,54 @@ A2 perdu ?      : on ne renvoie QUE A2, pas tout le fichier</div></div>
   var x=document.getElementById('xplus'); if(x) x.remove();
 })();
 </script>
+<div id="xplus14" hidden><div data-for="s14">
+  <div class="ana"><b>L'analogie</b>Un paquet qui part sur le réseau, c'est une lettre glissée dans plusieurs enveloppes. L'enveloppe <b>IP</b> porte l'adresse de la ville et de l'immeuble (IP source et destination) et un compteur de relais postaux autorisés (le <b>TTL</b>). À l'intérieur, l'enveloppe <b>TCP</b> porte le numéro d'appartement (le <b>port</b>) et un bordereau de suivi : « colis n° 1001, j'attends le n° 1501 » (séquence et acquittement). <b>UDP</b>, c'est la carte postale : juste les deux numéros d'appartement, la longueur et un contrôle. Rien pour le suivi.</div>
+  <div class="key"><b>Pourquoi chaque champ existe (c'est ce qui aide à mémoriser)</b><br>
+  <b>IP</b> : Version (IPv4 ou v6 ?) · IHL (où finit l'en-tête ?) · Type de service (priorité) · Longueur totale (où finit le paquet ?) · Identification, Flags, Fragment (recoller un paquet découpé en route) · TTL (tuer les paquets qui tournent en rond) · Protocole (à qui donner le contenu : TCP, UDP, ICMP ?) · Checksum (l'en-tête est-il abîmé ?) · Source, Destination.<br>
+  <b>TCP</b> : Ports (quelle application ?) · Séquence et Acquittement (rien ne se perd, tout reste dans l'ordre) · Longueur d'en-tête · Drapeaux (SYN ouvre, FIN ferme, ACK acquitte, RST coupe net…) · Fenêtre (pas trop vite) · Checksum · Urgent.</div>
+  <div class="fig">
+    <p class="t" style="margin:0 0 6px">Lire une vraie capture (Wireshark, TP 1)</p>
+    <div class="mono">IPv4 : Version 4 · IHL 5 (×4 = 20 o) · Longueur totale 60
+      Identification 0x1c46 · Flags DF · Fragment 0
+      TTL 128 · Protocole 6 (TCP) · Checksum 0xb1e6
+      Source 192.168.1.10 → Destination 41.214.180.5
+TCP  : Port source 50432 → Port destination 80 (HTTP)
+      Séquence 0 · Acquittement 0
+      Longueur 10 (×4 = 40 o) · Drapeaux SYN · Fenêtre 64240</div>
+    <p class="cap">C'est le premier paquet d'une connexion vers un serveur Web : drapeau SYN seul, séquence 0 (relative), port 80. Le protocole 6 dit à IP que le contenu est du TCP.</p>
+  </div>
+  <div class="fig">
+    <p class="t" style="margin:0 0 6px">Jeu : dans quel en-tête est ce champ ?</p>
+    <p class="small" id="xHq" style="margin:0 0 8px"></p>
+    <div class="row" style="flex-wrap:wrap;gap:6px" id="xHbtn"><button class="btn ghost sm" data-h="IP">IP</button><button class="btn ghost sm" data-h="TCP">TCP</button><button class="btn ghost sm" data-h="UDP">UDP</button><button class="btn ghost sm" data-h="TCP et UDP">TCP et UDP</button><button class="btn ghost sm" data-h="Ethernet">Ethernet (couche 2)</button></div>
+    <div class="out" id="xHout"></div>
+  </div>
+  <div class="trap"><b>Piège</b> Trois confusions coûtent cher : les <strong>adresses IP</strong> ne sont pas dans TCP ; les <strong>ports</strong> ne sont pas dans IP ; les <strong>adresses MAC</strong> ne sont dans aucun des deux (couche 2, trame Ethernet). Et l'en-tête minimal fait <strong>20 octets</strong> pour IP comme pour TCP, mais <strong>8</strong> pour UDP.</div>
+  <details class="check"><summary>À toi : 3 questions éclair sur la section 14</summary><ol>
+    <li>IHL = 5 : quelle taille d'en-tête ? <i>Réponse : 5 × 32 bits = 160 bits = 20 octets.</i></li>
+    <li>Un paquet arrive avec TTL = 1 sur un routeur. Que se passe-t-il ? <i>Réponse : le routeur le décrémente à 0, le détruit et renvoie un message ICMP « Time Exceeded » (c'est ce qu'utilise tracert).</i></li>
+    <li>Quels drapeaux TCP dans les 3 paquets de l'ouverture de connexion ? <i>Réponse : SYN, puis SYN + ACK, puis ACK.</i></li>
+  </ol></details>
+</div></div>
+<script>
+(function(){
+  var Q=[['TTL','IP'],['Port destination','TCP et UDP'],['Numéro de séquence','TCP'],['Adresse MAC source','Ethernet'],['Protocole (6 = TCP)','IP'],['Fenêtre','TCP'],['Longueur (en-tête + données, 16 bits)','UDP'],['Drapeaux SYN/ACK/FIN','TCP'],['Adresse IP destination','IP'],['Identification et Fragment','IP'],['FCS (CRC)','Ethernet'],['Acquittement','TCP'],['IHL','IP'],['Port source','TCP et UDP']];
+  var i=Math.floor(Math.random()*Q.length),ok=0,n=0;
+  function show(){var q=document.getElementById('xHq');if(q)q.innerHTML='Champ : <b>'+Q[i][0]+'</b> · score '+ok+'/'+n;}
+  var b=document.getElementById('xHbtn');if(!b)return;
+  b.addEventListener('click',function(e){var t=e.target.closest('[data-h]');if(!t)return;n++;var bon=t.dataset.h===Q[i][1];if(bon)ok++;
+    document.getElementById('xHout').innerHTML=(bon?'<span class="ok">Juste.</span> ':'<span class="ko">Non :</span> ')+Q[i][0]+' → <b>'+Q[i][1]+'</b>';
+    i=(i+1+Math.floor(Math.random()*(Q.length-1)))%Q.length;show();});
+  show();
+})();
+document.querySelectorAll('#xplus14 [data-for]').forEach(function(d){
+  var sec=document.getElementById(d.dataset.for);if(!sec)return;
+  var box=document.createElement('div');box.className='xz xin';box.innerHTML='<p class="xlab">Comprendre, en clair</p>';
+  while(d.firstChild)box.appendChild(d.firstChild);sec.querySelector('h3').after(box);
+  var lab=document.createElement('p');lab.className='fichelab';lab.textContent='La fiche du cours (à retenir)';box.after(lab);
+});
+(function(){var x=document.getElementById('xplus14');if(x)x.remove();})();
+</script>
 <script>
 /* MIZAN : les explications illustrées (sections 11 à 13) sont intégrées directement dans le cours,
    en tête de leur section, au lieu d'un onglet séparé. Les éléments sont déplacés (pas copiés),
