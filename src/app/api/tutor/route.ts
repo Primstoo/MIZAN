@@ -5,6 +5,7 @@ import { admin as serviceClient, estMembre } from "@/lib/acces";
 // Tuteur côté serveur (décision D8) : clés IA jamais dans le navigateur.
 // Gemini d'abord, Groq en secours. Quota quotidien par élève dans tutor_usage.
 export const dynamic = "force-dynamic";
+export const maxDuration = 60; // secondes : plusieurs modèles peuvent être essayés à la suite
 
 const QUOTA = Number(process.env.TUTOR_DAILY_QUOTA || 40);
 // Les modèles gratuits sont souvent retirés (gemini-2.5-flash fermé le 16/10/2026,
@@ -26,6 +27,15 @@ const texte = (c: unknown): string =>
 const err = (code: string, message: string, status: number) =>
   NextResponse.json({ code, message }, { status });
 
+const DELAI = Number(process.env.TUTOR_TIMEOUT_MS || 25000);
+async function appel(url: string, init: RequestInit) {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), DELAI);
+  try { return await fetch(url, { ...init, signal: ctl.signal }); }
+  catch (e) { throw new Error((e as Error).name === "AbortError" ? `délai dépassé (${DELAI / 1000} s)` : String(e)); }
+  finally { clearTimeout(t); }
+}
+
 async function gemini(model: string, system: string, msgs: { role: string; text: string }[], images: Img[]) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error("GEMINI_API_KEY absente");
@@ -34,14 +44,16 @@ async function gemini(model: string, system: string, msgs: { role: string; text:
     if (i === msgs.length - 1) images.forEach((im) => parts.push({ inline_data: { mime_type: im.mime, data: im.data } }));
     return { role: m.role === "assistant" ? "model" : "user", parts };
   });
-  const r = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-      body: JSON.stringify({ contents, ...(system ? { systemInstruction: { parts: [{ text: system }] } } : {}) }),
-    }
-  );
+  const corps = (rapide: boolean) => JSON.stringify({
+    contents,
+    ...(system ? { systemInstruction: { parts: [{ text: system }] } } : {}),
+    // Sans « réflexion » interne : réponse en quelques secondes au lieu de 20 à 40.
+    generationConfig: { maxOutputTokens: 1500, ...(rapide ? { thinkingConfig: { thinkingBudget: 0 } } : {}) },
+  });
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+  const init = (rapide: boolean): RequestInit => ({ method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": key }, body: corps(rapide) });
+  let r = await appel(url, init(true));
+  if (r.status === 400) r = await appel(url, init(false)); // modèle qui refuse le réglage de réflexion
   if (!r.ok) throw new Error(`Gemini ${model} ${r.status} ${(await r.text()).slice(0, 200)}`);
   const j = await r.json();
   const cand = j.candidates?.[0];
@@ -54,11 +66,12 @@ async function gemini(model: string, system: string, msgs: { role: string; text:
 async function groq(model: string, system: string, msgs: { role: string; text: string }[]) {
   const key = process.env.GROQ_API_KEY;
   if (!key) throw new Error("GROQ_API_KEY absente");
-  const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+  const r = await appel("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
     body: JSON.stringify({
       model,
+      max_tokens: 1500,
       messages: [...(system ? [{ role: "system", content: system }] : []),
         ...msgs.map((m) => ({ role: m.role === "assistant" ? "assistant" : "user", content: m.text }))],
     }),
@@ -95,14 +108,17 @@ export async function POST(req: Request) {
 
   let out: { text: string; truncated: boolean } | null = null;
   const errors: string[] = [];
+  const t0 = Date.now();
+  let source = "";
   for (const m of GEMINI_MODELS) {
     if (out?.text) break;
-    try { out = await gemini(m, system, msgs, images); } catch (e) { errors.push(String((e as Error).message)); }
+    try { out = await gemini(m, system, msgs, images); if (out?.text) source = m; } catch (e) { errors.push(String((e as Error).message)); }
   }
   for (const m of GROQ_MODELS) {
     if (out?.text) break;
-    try { out = await groq(m, system, msgs); } catch (e) { errors.push(String((e as Error).message)); }
+    try { out = await groq(m, system, msgs); if (out?.text) source = m; } catch (e) { errors.push(String((e as Error).message)); }
   }
+  console.log(`[tutor] ${out?.text ? "ok" : "échec"} · ${source || "aucun modèle"} · ${Date.now() - t0} ms · ${msgs.length} messages`);
   if (errors.length) console.error("[tutor]", errors.join(" | "));
   if (!out?.text) return err("upstream_error", "Tuteur indisponible : " + errors.map((x) => x.slice(0, 60)).join(" / "), 502);
 
