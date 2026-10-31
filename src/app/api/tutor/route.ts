@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { admin as serviceClient, estMembre } from "@/lib/acces";
+import { jourMaroc } from "@/lib/parcours";
 
 // Tuteur côté serveur (décision D8) : clés IA jamais dans le navigateur.
 // Gemini d'abord, Groq en secours. Quota quotidien par élève dans tutor_usage.
@@ -105,7 +106,7 @@ export async function POST(req: Request) {
 
   // Quota : la table n'est modifiable que par la clé service (RLS en lecture seule pour l'élève).
   const admin = serviceClient();
-  const day = new Date().toISOString().slice(0, 10);
+  const day = jourMaroc();
   const { data: u } = await admin.from("tutor_usage").select("count").eq("user_id", user.id).eq("day", day).maybeSingle();
   const used = u?.count ?? 0;
   if (used >= QUOTA) return err("rate_limited", `Quota du jour atteint (${QUOTA} questions). Reviens demain.`, 429);

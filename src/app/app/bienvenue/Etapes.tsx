@@ -25,7 +25,7 @@ export default function Etapes({ modules, prenom, minutes, dates, inconnues, com
       {/* Les champs restent dans le formulaire même quand l'étape est masquée */}
       <section hidden={etape !== 0}>
         <h1>Comment tu t&apos;appelles ?</h1>
-        <p className="muted">Pour que l&apos;appli et le tuteur s&apos;adressent à toi.</p>
+        <p className="muted">Pour que l&apos;appli s&apos;adresse à toi.</p>
         <input name="prenom" value={nom} onChange={(e) => setNom(e.target.value)} placeholder="Ton prénom" autoComplete="given-name" />
         <input name="filiere" placeholder="Ta filière (ex. MIACSD, L3) — facultatif" />
       </section>

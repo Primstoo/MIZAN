@@ -2,13 +2,16 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin } from "@/lib/acces";
 import { MODULES } from "@/lib/modules";
+import { jourMaroc } from "@/lib/parcours";
 import { creerSession, statutReservation, majLien, majDateModule } from "../actions";
 
 // Suivi du pilote, réservé aux admins (ADMIN_EMAILS) : qui est entré, qui révise quoi,
 // combien coûte le tuteur. Ce sont les chiffres à montrer avant de lancer une offre payante.
 export const dynamic = "force-dynamic";
 
-const jourMoins = (n: number) => new Date(Date.now() - n * 864e5).toISOString().slice(0, 10);
+const jourMoins = (n: number) => jourMaroc(new Date(Date.now() - n * 864e5));
+
+export const metadata = { title: "Suivi du pilote" };
 
 export default async function Suivi() {
   const { data: { user } } = await createClient().auth.getUser();
@@ -44,7 +47,7 @@ export default async function Suivi() {
 
   return (
     <main className="page">
-      <header className="top slim"><a href="/app" className="back">← Mes modules</a><strong>Suivi du pilote</strong></header>
+      <h1 className="page-title">Suivi du pilote</h1>
       <div className="kpis">
         <div className="card kpi"><strong>{M.length}</strong>membres</div>
         <div className="card kpi"><strong>{actifs7.size}</strong>actifs sur 7 jours</div>
@@ -57,12 +60,12 @@ export default async function Suivi() {
       <section className="bloc">
         <h2>Dates d&apos;examen par module</h2>
         <p className="muted small">Dès qu&apos;une date est connue (calendrier de la fac, annonce du prof), renseigne-la ici : elle remplace l&apos;estimation chez tous les élèves qui n&apos;avaient pas de date.</p>
-        <table className="tab"><tbody>
+        <div className="tabw"><table className="tab dates"><tbody>
           {MODULES.map((m) => {
             const d = (dates ?? []).find((x) => x.module_slug === m.slug);
             return (
               <tr key={m.slug}><td>{m.titre}</td><td>
-                <form action={majDateModule} className="row">
+                <form action={majDateModule} className="dates-form">
                   <input type="hidden" name="module" value={m.slug} />
                   <input type="date" name="date" defaultValue={d?.exam_date ?? ""} />
                   <label className="row small"><input type="checkbox" name="officielle" defaultChecked={!!d?.officielle} /> officielle</label>
@@ -72,13 +75,13 @@ export default async function Suivi() {
               </td></tr>
             );
           })}
-        </tbody></table>
+        </tbody></table></div>
       </section>
 
       <section className="bloc">
         <h2>Paiements à valider</h2>
         {!attente.length && <p className="muted small">Rien en attente.</p>}
-        <table className="tab"><tbody>
+        <div className="tabw"><table className="tab"><tbody>
           {attente.map((r) => (
             <tr key={r.session_id + r.user_id}>
               <td>{r.email}</td><td>{S.find((s) => s.id === r.session_id)?.titre}</td><td>{r.ref_paiement ?? ""}</td>
@@ -88,12 +91,12 @@ export default async function Suivi() {
               </td>
             </tr>
           ))}
-        </tbody></table>
+        </tbody></table></div>
       </section>
 
       <section className="bloc">
         <h2>Séances live</h2>
-        <table className="tab"><thead><tr><th>Séance</th><th>Date</th><th>Payés / places</th><th>Lien visio</th></tr></thead><tbody>
+        <div className="tabw"><table className="tab"><thead><tr><th>Séance</th><th>Date</th><th>Payés / places</th><th>Lien visio</th></tr></thead><tbody>
           {S.map((s) => (
             <tr key={s.id}>
               <td>{s.titre}</td>
@@ -102,7 +105,7 @@ export default async function Suivi() {
               <td><form action={majLien} className="row"><input type="hidden" name="session" value={s.id} /><input name="lien" defaultValue={s.lien ?? ""} placeholder="https://meet.google.com/…" /><button className="btn alt small">OK</button></form></td>
             </tr>
           ))}
-        </tbody></table>
+        </tbody></table></div>
         <details className="bloc">
           <summary><strong>Programmer une séance</strong></summary>
           <form action={creerSession} className="stack form-grid">
@@ -121,29 +124,29 @@ export default async function Suivi() {
 
       <section className="bloc">
         <h2>Modules</h2>
-        <table className="tab"><thead><tr><th>Module</th><th>Élèves</th><th>Actifs 7 j</th></tr></thead><tbody>
+        <div className="tabw"><table className="tab"><thead><tr><th>Module</th><th>Élèves</th><th>Actifs 7 j</th></tr></thead><tbody>
           {MODULES.map((m) => {
             const l = P.filter((p) => p.module_slug === m.slug);
             return <tr key={m.slug}><td>{m.titre}</td><td>{l.length}</td><td>{l.filter((p) => p.updated_at >= jourMoins(6)).length}</td></tr>;
           })}
-        </tbody></table>
+        </tbody></table></div>
       </section>
 
       <section className="bloc">
         <h2>Membres</h2>
-        <table className="tab"><thead><tr><th>E-mail</th><th>Entré le</th><th>Code</th><th>Modules</th><th>Dernière activité</th><th>Questions 30 j</th></tr></thead><tbody>
+        <div className="tabw"><table className="tab"><thead><tr><th>E-mail</th><th>Entré le</th><th>Code</th><th>Modules</th><th>Dernière activité</th><th>Questions 30 j</th></tr></thead><tbody>
           {M.map((m) => {
             const x = parUser.get(m.user_id);
             return <tr key={m.user_id}><td>{m.email}</td><td>{fr(m.joined_at)}</td><td>{m.invite_code}</td><td>{x?.modules ?? 0}</td><td>{fr(x?.derniere ?? "")}</td><td>{x?.q ?? 0}</td></tr>;
           })}
-        </tbody></table>
+        </tbody></table></div>
       </section>
 
       <section className="bloc">
         <h2>Codes d&apos;invitation</h2>
-        <table className="tab"><thead><tr><th>Code</th><th>Créé par</th><th>Utilisations</th></tr></thead><tbody>
-          {I.map((i) => <tr key={i.code}><td><code className="code">{i.code}</code></td><td>{emailDe.get(i.owner) ?? "admin"}</td><td>{i.uses} / {i.max_uses}</td></tr>)}
-        </tbody></table>
+        <div className="tabw"><table className="tab"><thead><tr><th>Code</th><th>Créé par</th><th>Utilisations</th></tr></thead><tbody>
+          {I.map((i) => <tr key={i.code}><td><code className="code">{i.code}</code></td><td>{i.owner === user!.id ? "toi" : emailDe.get(i.owner) ?? "—"}</td><td>{i.uses} / {i.max_uses}</td></tr>)}
+        </tbody></table></div>
       </section>
     </main>
   );

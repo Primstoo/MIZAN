@@ -1,10 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MIZAN",
-  description: "Plateforme de révision pour les étudiants de la FSABM.",
+  title: { default: "MIZAN · Révise le cours de ton prof", template: "%s · MIZAN" },
+  description: "Plateforme de révision pour les étudiants de la FSABM : le cours de ton prof expliqué, des exercices corrigés, un tuteur IA et ta progression mesurée.",
+  applicationName: "MIZAN",
+  openGraph: { title: "MIZAN", description: "Révise le cours de ton prof, pas un cours générique.", locale: "fr_MA", type: "website" },
 };
+
+export const viewport: Viewport = { themeColor: "#0e6e6a", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

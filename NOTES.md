@@ -3,8 +3,8 @@
 À compléter avec mes propres mots au fur et à mesure (préparation aux entretiens).
 
 ## Comment marche la connexion ?
-- L'utilisateur clique « Continuer avec Google » ou reçoit un lien par e-mail (Supabase Auth).
-- Au retour, `/auth/callback` échange le code contre une session stockée dans un cookie.
+- L'utilisateur entre son e-mail et reçoit un code à 6 chiffres et un lien (Supabase Auth, sans mot de passe).
+- Le code est vérifié directement sur la page de connexion ; le lien passe par `/auth/hash`, qui pose la session dans un cookie.
 - `src/middleware.ts` vérifie la session à chaque visite de `/app` et renvoie vers `/login` si on n'est pas connecté.
 
 ## Pourquoi Supabase ?

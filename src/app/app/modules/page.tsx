@@ -4,6 +4,8 @@ import { chargerParcours } from "@/lib/parcours";
 import CarteModule from "@/components/CarteModule";
 
 // Mes modules (avec date d'examen ou déjà commencés), puis le reste du catalogue replié.
+export const metadata = { title: "Modules" };
+
 export default async function Modules() {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();

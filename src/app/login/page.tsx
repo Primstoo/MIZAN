@@ -83,18 +83,17 @@ export default function Login() {
           {etape === "email" ? (
             <>
               <h1>Connexion</h1>
-              <p className="muted">Entre ton adresse e-mail : tu vas recevoir un lien de connexion. Pas de mot de passe à retenir. Si tu n’as pas encore de compte, il est créé automatiquement.</p>
+              <p className="muted">Entre ton adresse e-mail : tu reçois un e-mail de connexion. Pas de mot de passe à retenir. Si tu n’as pas encore de compte, il est créé automatiquement.</p>
               <form onSubmit={envoyer} className="stack">
                 <label htmlFor="email">Adresse e-mail</label>
                 <input id="email" type="email" required autoComplete="email" inputMode="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="toi@exemple.com" />
-                <button className="btn big" disabled={charge || !email}>{charge ? "Envoi…" : "Recevoir mon lien"}</button>
+                <button className="btn big" disabled={charge || !email}>{charge ? "Envoi…" : "Recevoir l’e-mail de connexion"}</button>
               </form>
             </>
           ) : (
             <>
               <h1>Ouvre ton e-mail</h1>
-              <p className="muted">Un e-mail de connexion a été envoyé à <strong>{email}</strong> (regarde aussi dans les spams). Clique sur le lien : tu seras connecté sur l’appareil où tu l’ouvres. Si tu l’ouvres sur ce même navigateur, cette page s’actualise toute seule.</p>
-              <p className="small muted">Si ton e-mail contient un code à 6 chiffres, tu peux aussi l’entrer ici :</p>
+              <p className="muted">Un e-mail a été envoyé à <strong>{email}</strong> (regarde aussi dans les spams). S’il contient un code à 6 chiffres, tape-le ici : c’est le plus sûr. Sinon, clique sur le lien : tu seras connecté dans le navigateur où il s’ouvre.</p>
               <form onSubmit={verifier} className="stack">
                 <label htmlFor="code">Code à 6 chiffres</label>
                 <input

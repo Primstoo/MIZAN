@@ -4,6 +4,10 @@ import ModuleFrame from "@/components/ModuleFrame";
 
 // Le module d'origine (HTML autonome) est affiché en plein écran.
 // ModuleFrame synchronise sa progression ; le pont (public/mizan-bridge.js) lui fournit le tuteur.
+export function generateMetadata({ params }: { params: { slug: string } }) {
+  return { title: getModule(params.slug)?.titre ?? "Module" };
+}
+
 export default function ModulePage({ params }: { params: { slug: string } }) {
   const m = getModule(params.slug);
   if (!m) notFound();

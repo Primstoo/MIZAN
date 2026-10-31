@@ -50,7 +50,8 @@ Chaque choix : ce qu'on a pris, les alternatives, et pourquoi on les a écartée
 - Mot de passe : oublis fréquents, réinitialisations, sécurité à gérer.
 - SMS : payant par message.
 - Sans compte : la progression ne suivrait pas l'élève entre téléphone et PC, ce qui est l'objectif même de la version B.
-**Limite :** l'envoi d'e-mails intégré de Supabase est plafonné à quelques messages par heure. Suffisant pour 10 testeurs ; au-delà, brancher un service d'e-mail gratuit (Resend, Brevo).
+**Limite :** l'envoi d'e-mails intégré de Supabase est plafonné à quelques messages par heure (et réservé à l'équipe du projet). Il faut un SMTP : Gmail en attendant, Resend une fois le domaine acheté.
+**État au 31/10/2026 :** la connexion Google n'est pas encore configurée (réglage Google Cloud à faire) ; la connexion se fait par e-mail, avec lien ou code à 6 chiffres. Le code évite le piège du lien ouvert dans le navigateur intégré de Gmail.
 
 ## D5. Intégrer les modules tels quels dans des iframes
 **Alternatives :** réécrire chaque module en composants React ; convertir le contenu en données (JSON) affichées par un moteur commun.
@@ -77,6 +78,7 @@ Chaque choix : ce qu'on a pris, les alternatives, et pourquoi on les a écartée
 **Pourquoi :** offres gratuites suffisantes pour le pilote ; un deuxième fournisseur garantit que le tuteur répond même si un quota est épuisé.
 **Pourquoi pas les autres :** API payantes sans revenus ; auto-hébergement = serveur avec carte graphique, hors budget ; appel depuis le navigateur = clé volable par n'importe qui.
 **Côté serveur obligatoire :** la clé reste dans les variables d'environnement de Vercel, jamais dans le code ni dans le navigateur.
+**Modèles (31/10/2026) :** Gemini 3.1 Flash-Lite d'abord (le plus rapide), puis l'alias « dernier Flash », puis Groq gpt-oss-120b et gpt-oss-20b. Réflexion interne désactivée, délai de 15 s par modèle, réponse envoyée en continu (mot à mot). Les modèles gratuits sont souvent retirés (gemini-2.5-flash fermé le 16/10/2026, llama-3.3-70b le 16/08/2026) : liste réglable par `GEMINI_MODEL` et `GROQ_MODEL` sans toucher au code.
 **À revérifier :** les conditions des offres gratuites changent souvent, et certaines autorisent le fournisseur à utiliser les requêtes gratuites pour entraîner ses modèles. Ne jamais envoyer de données personnelles au tuteur.
 
 ## D9. Dépôt GitHub privé
@@ -139,3 +141,6 @@ Les explications « en clair » des couches 1 à 3 ne sont pas un sujet à part 
 - UML : en tête des 7 chapitres, un diagramme complet par type, fil rouge « bibliothèque de la fac ».
 - Crypto : les leçons « Étape 1 · Comprendre » existaient déjà ; ajout de schémas (Alice/Bob/Oscar, César, Vigenère, LFSR, ECB/CBC, Feistel).
 - Archi : déjà conforme (parcours visuel + fiche complète dans chaque leçon), inchangé.
+
+## D21. Audit qualité du 31/10/2026
+Relecture complète du code, test de chaque écran sur téléphone et ordinateur (copie locale avec base factice), contrôle des 5 modules (erreurs, débordements sur mobile). Corrections : police des boutons, textes trompeurs (« réservé 24 h », « onglet Comprendre »), redirection ouverte supprimée, validations côté serveur (live, dates, statuts), code d'invitation non consommé si déjà membre, pages d'erreur et 404 en français, icône et installation sur téléphone, tableaux admin lisibles sur mobile, débordements horizontaux des modules Réseaux, Crypto et UML.

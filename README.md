@@ -1,25 +1,44 @@
 # MIZAN
 
-Plateforme de révision pour les étudiants de la FSABM (Béni Mellal) : chaque module suit le cours du prof, avec leçons, exercices corrigés, évaluations et un tuteur IA.
+Plateforme de révision pour les étudiants de la FSABM (Béni Mellal). Chaque module suit le cours **du prof** : explications illustrées, fiche à retenir, exercices corrigés, évaluations, et un tuteur IA présent sur chaque page. L'appli calcule une mission du jour à partir de la date d'examen de l'élève, et propose des séances live payantes.
+
+**En ligne :** https://mizan-five-iota.vercel.app (bêta privée, sur invitation)
+
+## Fonctionnalités
+- **Connexion sans mot de passe** : code à 6 chiffres ou lien par e-mail.
+- **Bêta privée** : codes d'invitation (3 places par membre, 10 pour l'admin).
+- **Inscription guidée** : prénom, modules, dates d'examen (ou estimation si non annoncée), temps disponible par jour.
+- **Aujourd'hui** : mission du jour, compte à rebours, série de jours, prochain live.
+- **Modules** : 5 modules (Réseaux M351, Cryptographie, Architecture, UML, Probabilités S3), servis uniquement aux membres connectés, progression synchronisée entre appareils.
+- **Tuteur IA** : Gemini puis Groq en secours, côté serveur, réponse en continu, quota quotidien par élève.
+- **Live** : réservation, paiement par virement CIH ou CashPlus validé par l'admin, lien visio visible 30 min avant pour les élèves qui ont payé.
+- **Suivi admin** : membres, activité, questions au tuteur, paiements à valider, dates d'examen communes, programmation des lives.
 
 ## Stack
-Next.js 14 (App Router, TypeScript) · Supabase (auth, Postgres, RLS) · Vercel.
+Next.js 14 (App Router, TypeScript) · Supabase (auth, Postgres, RLS) · Vercel (région Dublin, proche de la base en Irlande).
+
+## Structure
+- `src/app/` : pages (accueil public, connexion, espace `/app`, API du tuteur)
+- `src/lib/` : catalogue des modules, accès et invitations, parcours (examens, série, mission)
+- `content/modules/` : les modules (pages HTML autonomes), non publics, servis par `/app/modules/[file]`
+- `public/mizan-bridge.js` : pont entre un module et la plateforme (tuteur)
+- `supabase/` : schéma et migrations (RLS sur toutes les tables)
+- `docs/DECISIONS.md` : chaque choix, ses alternatives et pourquoi elles sont écartées
+- `docs/DEPLOIEMENT.md` : mise en ligne pas à pas
 
 ## Démarrer en local
 ```bash
-cp .env.example .env.local   # remplir les clés Supabase
+cp .env.example .env.local   # remplir les clés
 npm install
 npm run dev
 ```
 
-## Structure
-- `src/lib/modules.ts` : catalogue des modules
-- `public/modules/` : modules (HTML autonomes)
-- `src/app/app/` : espace connecté (tableau de bord, lecteur de module)
-- `supabase/schema.sql` : tables et règles de sécurité
-
 ## Feuille de route
-- [x] squelette, connexion (Google + lien magique), schéma Supabase, catalogue
-- [x] pont modules ↔ plateforme (progression synchronisée, modules servis derrière la connexion)
-- [x] tuteur côté serveur (Gemini, Groq en secours), quotas — à tester avec les vraies clés
-- [x] bêta fermée sur invitation, tableau de bord élève, page de suivi admin
+- [x] Connexion, invitations, inscription guidée, Aujourd'hui, Live, Moi, Suivi admin
+- [x] Modules protégés, progression synchronisée, tuteur serveur en continu
+- [x] Explications illustrées intégrées au cours de chaque module
+- [ ] Scores des modules remontés vers la plateforme (mission personnalisée, maîtrise par chapitre, points faibles)
+- [ ] Test de niveau à l'inscription
+- [ ] Envoi de documents par les élèves
+- [ ] Bot Telegram (rappels, liens des lives)
+- [ ] Nom de domaine + e-mails via Resend

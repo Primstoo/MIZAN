@@ -20,3 +20,25 @@
 ## Réglages optionnels (Vercel → Environment Variables)
 `TUTOR_DAILY_QUOTA` (40), `INVITE_USES` (3), `INVITES_PER_MEMBER` (1), `GEMINI_MODEL`, `GROQ_MODEL`.
 Après toute modification de variable : Deployments → … → Redeploy.
+
+## E-mails de connexion (obligatoire avant d'inviter)
+Le service d'e-mail intégré de Supabase n'envoie qu'à l'équipe du projet et quelques messages par heure.
+- **En attendant le domaine : Gmail.** Compte Google → Sécurité → validation en 2 étapes → « Mots de passe des applications » → en créer un « MIZAN ». Puis Supabase → Authentication → Emails → SMTP Settings : hôte `smtp.gmail.com`, port `465`, utilisateur et expéditeur = l'adresse Gmail, mot de passe = le code de 16 lettres, nom d'expéditeur `MIZAN`. Authentication → Rate Limits : 30 e-mails par heure.
+- **Avec le domaine : Resend** (même écran SMTP, hôte `smtp.resend.com`, port `465`, utilisateur `resend`, mot de passe = clé API `re_…`).
+- **Modèles d'e-mail** (Authentication → Emails → Templates → « Magic Link » et « Confirm signup ») : ajouter le code `{{ .Token }}` en grand, en plus du lien `{{ .ConfirmationURL }}`.
+- **Adresse du site** (Authentication → URL Configuration) : Site URL et Redirect URLs `https://<domaine>/**`.
+
+## Variables Vercel
+| Variable | Rôle |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` | connexion à Supabase |
+| `SUPABASE_SERVICE_ROLE_KEY` | serveur uniquement (invitations, quotas, admin) |
+| `GEMINI_API_KEY`, `GROQ_API_KEY` | tuteur |
+| `ADMIN_EMAILS` | accès à la page Suivi |
+| `LIVE_PAIEMENT_CIH`, `LIVE_PAIEMENT_CASHPLUS` | instructions de paiement des lives |
+| facultatives | `TUTOR_DAILY_QUOTA`, `INVITE_USES`, `INVITES_PER_MEMBER`, `GEMINI_MODEL`, `GROQ_MODEL`, `TUTOR_TIMEOUT_MS` |
+
+Après toute modification de variable : Vercel → Deployments → Redeploy.
+
+## Usage commercial
+La formule Vercel gratuite (Hobby) est réservée à un usage non commercial : passer au plan Pro dès que les lives payants démarrent.

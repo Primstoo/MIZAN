@@ -5,13 +5,15 @@ import { creerInvitation } from "../actions";
 import Copier from "../Copier";
 import Deconnexion from "../Deconnexion";
 
+export const metadata = { title: "Mon compte" };
+
 export default async function Moi() {
   const { data: { user } } = await createClient().auth.getUser();
   const db = admin();
   const [p, { data: inv }, { data: usage }] = await Promise.all([
     chargerParcours(user!),
     db.from("invites").select("code, uses, max_uses").eq("owner", user!.id),
-    db.from("tutor_usage").select("count").eq("user_id", user!.id).eq("day", new Date().toISOString().slice(0, 10)).maybeSingle(),
+    db.from("tutor_usage").select("count").eq("user_id", user!.id).eq("day", jourMaroc()).maybeSingle(),
   ]);
   const quota = Number(process.env.TUTOR_DAILY_QUOTA || 40);
   const restant = Math.max(0, quota - (usage?.count ?? 0));
@@ -47,7 +49,6 @@ export default async function Moi() {
         ))}
         {peutCreer && <form action={creerInvitation}><button className="btn small">Créer un code</button></form>}
       </section>
-      <p className="small muted bloc">Données à jour au {jourMaroc()}.</p>
     </main>
   );
 }

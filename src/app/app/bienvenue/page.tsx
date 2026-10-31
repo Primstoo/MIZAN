@@ -5,6 +5,8 @@ import { admin } from "@/lib/acces";
 import Etapes from "./Etapes";
 
 // Inscription guidée (une seule fois) : prénom, modules, dates d'examen, temps par jour.
+export const metadata = { title: "Bienvenue" };
+
 export default async function Bienvenue() {
   const { data: { user } } = await createClient().auth.getUser();
   const { profil, examens } = await chargerParcours(user!);

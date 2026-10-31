@@ -4,13 +4,14 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin, estMembre, nouveauCode } from "@/lib/acces";
 import { MODULES } from "@/lib/modules";
-import { dateEstimee } from "@/lib/parcours";
+import { dateEstimee, jourMaroc } from "@/lib/parcours";
 
 export async function rejoindre(_prev: string, form: FormData): Promise<string> {
   const code = String(form.get("code") || "").trim().toUpperCase();
   const { data: { user } } = await createClient().auth.getUser();
   if (!user) return "Connecte-toi d'abord.";
   if (!code) return "Entre ton code.";
+  if (await estMembre(user)) redirect("/app"); // déjà membre : on ne consomme pas de place
   const db = admin();
   const { data: inv } = await db.from("invites").select("code, uses, max_uses").eq("code", code).maybeSingle();
   if (!inv) return "Code inconnu. Vérifie l'orthographe (ex. MZ-AB12CD).";
@@ -32,7 +33,7 @@ export async function creerInvitation(): Promise<void> {
   const chef = estAdmin(user); // l'admin crée autant de codes qu'il veut, de 10 places
   if (!chef && (count ?? 0) >= Number(process.env.INVITES_PER_MEMBER || 1)) return;
   await db.from("invites").insert({ code: nouveauCode(), owner: user!.id, max_uses: chef ? 10 : Number(process.env.INVITE_USES || 3) });
-  revalidatePath("/app");
+  revalidatePath("/app/moi");
 }
 
 // ---------- Parcours ----------
@@ -54,22 +55,21 @@ export async function enregistrerProfil(form: FormData): Promise<void> {
   });
   const { data: communes } = await db.from("module_dates").select("module_slug, exam_date");
   const commune = new Map((communes ?? []).map((c) => [c.module_slug as string, c.exam_date as string]));
-  const choisis = form.getAll("module").map(String);
+  const auj = jourMaroc();
+  const choisis = form.getAll("module").map(String).filter((s) => MODULES.some((m) => m.slug === s));
   const lignes = choisis.map((slug) => {
     const inconnue = form.get("inconnue_" + slug) === "1";
     const m = MODULES.find((x) => x.slug === slug);
     const date = inconnue ? dateEstimee(m?.semestre ?? "S1", commune.get(slug)) : String(form.get("date_" + slug) || "");
     return { user_id: u.id, module_slug: slug, exam_date: date, estimee: inconnue };
-  }).filter((x) => /^\d{4}-\d{2}-\d{2}$/.test(x.exam_date));
+  }).filter((x) => /^\d{4}-\d{2}-\d{2}$/.test(x.exam_date) && x.exam_date >= auj);
   if (lignes.length) await db.from("exams").upsert(lignes);
   // Modules décochés : on retire leur date
   const { data: avant } = await db.from("exams").select("module_slug").eq("user_id", u.id);
   const aRetirer = (avant ?? []).map((x) => x.module_slug as string).filter((s) => !choisis.includes(s));
   if (aRetirer.length && form.get("complet") === "1") await db.from("exams").delete().eq("user_id", u.id).in("module_slug", aRetirer);
-  const retirer = form.getAll("retirer").map(String);
-  if (retirer.length) await db.from("exams").delete().eq("user_id", u.id).in("module_slug", retirer);
   revalidatePath("/app");
-  redirect(String(form.get("retour") || "/app"));
+  redirect("/app");
 }
 
 export async function reserverLive(form: FormData): Promise<void> {
@@ -104,13 +104,16 @@ async function chef() {
 export async function creerSession(form: FormData): Promise<void> {
   await chef();
   const quand = String(form.get("quand") || ""); // AAAA-MM-JJTHH:MM saisi en heure du Maroc
+  const titre = String(form.get("titre") || "").trim();
+  if (!titre || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(quand)) return;
+  const n = (k: string, def: number) => { const v = Math.round(Number(form.get(k))); return Number.isFinite(v) && v > 0 ? v : def; };
   await admin().from("live_sessions").insert({
-    titre: String(form.get("titre") || "").trim(),
+    titre,
     module_slug: String(form.get("module") || "") || null,
     starts_at: heureMarocVersUTC(quand),
-    duree_min: Number(form.get("duree") || 90),
-    prix_dh: Number(form.get("prix") || 25),
-    places: Number(form.get("places") || 15),
+    duree_min: n("duree", 90),
+    prix_dh: n("prix", 25),
+    places: n("places", 15),
     animateurs: String(form.get("animateurs") || "").trim() || null,
     lien: String(form.get("lien") || "").trim() || null,
   });
@@ -119,7 +122,9 @@ export async function creerSession(form: FormData): Promise<void> {
 
 export async function statutReservation(form: FormData): Promise<void> {
   await chef();
-  await admin().from("live_bookings").update({ statut: String(form.get("statut")) })
+  const statut = String(form.get("statut"));
+  if (!["payee", "annulee", "en_attente"].includes(statut)) return;
+  await admin().from("live_bookings").update({ statut })
     .eq("session_id", String(form.get("session"))).eq("user_id", String(form.get("user")));
   revalidatePath("/app/admin"); revalidatePath("/app/live");
 }

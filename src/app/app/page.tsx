@@ -4,6 +4,8 @@ import { admin } from "@/lib/acces";
 import { chargerParcours, missionDuJour } from "@/lib/parcours";
 
 // « Aujourd'hui » : le cœur de l'appli. Mission du jour, compte à rebours, série, prochain live.
+export const metadata = { title: "Aujourd’hui" };
+
 export default async function Aujourdhui() {
   const { data: { user } } = await createClient().auth.getUser();
   const p = await chargerParcours(user!);
@@ -20,7 +22,7 @@ export default async function Aujourdhui() {
   return (
     <main className="page today">
       <header className="row between">
-        <div><p className="eyebrow">Salut {p.profil.prenom || ""}</p><h1>Aujourd&apos;hui</h1></div>
+        <div><p className="eyebrow">{p.profil.prenom ? `Salut ${p.profil.prenom}` : "Salut"}</p><h1>Aujourd&apos;hui</h1></div>
         {p.serie > 0 && <span className="chip amber">🔥 {p.serie} jour{p.serie > 1 ? "s" : ""}</span>}
       </header>
 
@@ -28,9 +30,10 @@ export default async function Aujourdhui() {
         <section className="card hi">
           <p className="k">Mission du jour · {p.profil.minutes_jour >= 120 ? "2 h" : p.profil.minutes_jour + " min"}</p>
           <h2>{cible.module!.titre}</h2>
+          {fait && <p className="badge-ok">✓ Tu as déjà révisé ce module aujourd&apos;hui</p>}
           {mission.urgent && <p className="small">Examen dans moins de deux semaines : place aux conditions réelles.</p>}
           <ul className="tasks">
-            {mission.etapes.map((e, i) => <li key={e} className={fait && i === 0 ? "done" : ""}>{e}</li>)}
+            {mission.etapes.map((e) => <li key={e}>{e}</li>)}
           </ul>
           <a href={`/app/m/${cible.module_slug}`} className="btn inv">{fait ? "Continuer" : "Commencer"}</a>
         </section>

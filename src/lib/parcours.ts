@@ -57,7 +57,7 @@ export function missionDuJour(minutes: number, reste: number) {
     minutes <= 30
       ? ["Revoir 5 flashcards en retard", "Lire une section du cours", "Quiz de 5 questions"]
       : minutes <= 60
-      ? ["Revoir 5 flashcards en retard", "Une section du cours (onglet Comprendre si besoin)", "3 questions en Rédaction", "10 calculs ou exercices"]
+      ? ["Revoir 5 flashcards en retard", "Une section du cours (lis d'abord « Comprendre, en clair »)", "3 questions en Rédaction", "10 calculs ou exercices"]
       : ["Revoir les flashcards en retard", "Deux sections du cours", "3 questions en Rédaction", "10 calculs ou exercices", "Un TD inédit en conditions réelles"];
   if (urgent) etapes.splice(1, 1, "Examen blanc ou TD inédit chronométré");
   return { etapes, urgent };

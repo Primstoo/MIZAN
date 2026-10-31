@@ -4,6 +4,8 @@ import { reserverLive, annulerReservation, declarerPaiement } from "../actions";
 
 // Séances live : réservation, paiement validé à la main par l'admin, lien visible
 // uniquement pour les réservations payées, 30 minutes avant le début.
+export const metadata = { title: "Séances live" };
+
 export default async function Live() {
   const { data: { user } } = await createClient().auth.getUser();
   const db = admin();
@@ -21,7 +23,7 @@ export default async function Live() {
 
   return (
     <main className="page">
-      <h1>Séances live</h1>
+      <h1 className="page-title">Séances live</h1>
       <p className="muted">Révision en groupe sur visio, avec des étudiants qui ont validé le module. Places limitées.</p>
       {!(sessions ?? []).length && <div className="card"><p className="muted">Aucune séance programmée pour l&apos;instant. Elles apparaîtront ici.</p></div>}
       <div className="stack">
@@ -50,7 +52,7 @@ export default async function Live() {
               )}
               {mienne?.statut === "en_attente" && (
                 <div className="stack">
-                  <p className="small"><strong>Place réservée pour 24 h, en attente de paiement de {s.prix_dh} DH.</strong></p>
+                  <p className="small"><strong>Place réservée, en attente de ton paiement de {s.prix_dh} DH.</strong> Elle est confirmée dès que le paiement est validé.</p>
                   {moyens.length ? (
                     <ul className="list-plain small">{moyens.map((m) => <li key={m.nom}><strong>{m.nom} :</strong> {m.info}</li>)}</ul>
                   ) : <p className="small muted">Les instructions de paiement arrivent bientôt.</p>}
@@ -65,7 +67,7 @@ export default async function Live() {
               )}
               {mienne?.statut === "payee" && (
                 lienVisible && s.lien
-                  ? <a className="btn inv" href={s.lien} target="_blank" rel="noopener">Rejoindre la séance</a>
+                  ? <a className="btn inv" href={s.lien} target="_blank" rel="noopener noreferrer">Rejoindre la séance</a>
                   : <p className="small">Paiement validé ✓ Le lien apparaît ici 30 minutes avant le début.</p>
               )}
             </section>
