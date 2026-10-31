@@ -132,3 +132,10 @@ Membres, actifs sur 7 jours, questions au tuteur, usage par module. Ce sont les 
 
 ## D19. Explications illustrées intégrées au cours (fin du module « Couches 1 à 3 »)
 Les explications « en clair » des couches 1 à 3 ne sont pas un sujet à part : elles sont désormais en tête des sections 11, 12 et 13 du cours Réseaux (« Comprendre, en clair », puis « La fiche du cours »). L'onglet Comprendre et le module séparé « Réseaux : couches 1 à 3 » sont supprimés. Règle pour tous les modules : une notion = son explication illustrée + sa fiche, au même endroit.
+
+## D20. Règle « explication + fiche au même endroit » appliquée à tous les modules
+- Réseaux : sections 1 à 14 (calculateurs maillage, téléchargement, segmentation ; jeu des champs d'en-tête).
+- Probas : bloc « Comprendre, en clair » en tête des 21 notions (analogie, schéma, piège, 3 questions).
+- UML : en tête des 7 chapitres, un diagramme complet par type, fil rouge « bibliothèque de la fac ».
+- Crypto : les leçons « Étape 1 · Comprendre » existaient déjà ; ajout de schémas (Alice/Bob/Oscar, César, Vigenère, LFSR, ECB/CBC, Feistel).
+- Archi : déjà conforme (parcours visuel + fiche complète dans chaque leçon), inchangé.
