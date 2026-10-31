@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { admin } from "@/lib/acces";
-import { envoyer, messageDuMatin } from "@/lib/telegram";
+import { envoyer, messageDuMatin, secretWebhook } from "@/lib/telegram";
 
 // Messages reçus par le bot. Telegram signe chaque appel avec TELEGRAM_WEBHOOK_SECRET.
 export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
-  if (req.headers.get("x-telegram-bot-api-secret-token") !== process.env.TELEGRAM_WEBHOOK_SECRET) return new NextResponse("refusé", { status: 401 });
+  if (!process.env.TELEGRAM_WEBHOOK_SECRET || req.headers.get("x-telegram-bot-api-secret-token") !== secretWebhook()) return new NextResponse("refusé", { status: 401 });
   const up = await req.json().catch(() => null);
   const msg = up?.message;
   if (!msg?.chat?.id || typeof msg.text !== "string") return NextResponse.json({ ok: true });

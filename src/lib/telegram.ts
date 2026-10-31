@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import type { User } from "@supabase/supabase-js";
 import { admin } from "@/lib/acces";
 import { MODULES } from "@/lib/modules";
@@ -5,6 +6,9 @@ import { chargerMaitrise, chargerParcours, missionPerso } from "@/lib/parcours";
 
 // Bot Telegram : rappel du matin (mission du jour), liens des lives. Clé dans TELEGRAM_BOT_TOKEN.
 export const botActif = () => !!process.env.TELEGRAM_BOT_TOKEN;
+// Telegram n'accepte que lettres, chiffres, « _ » et « - » dans le secret : on en dérive une version sûre
+// (empreinte SHA-256), quel que soit le texte saisi dans TELEGRAM_WEBHOOK_SECRET.
+export const secretWebhook = () => createHash("sha256").update(process.env.TELEGRAM_WEBHOOK_SECRET || "").digest("hex");
 export const nomBot = () => process.env.TELEGRAM_BOT_USERNAME || "";
 const site = () => process.env.SITE_URL || "https://mizan-five-iota.vercel.app";
 

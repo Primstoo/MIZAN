@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin, estMembre, nouveauCode } from "@/lib/acces";
 import { MODULES } from "@/lib/modules";
 import { dateEstimee, jourMaroc } from "@/lib/parcours";
+import { secretWebhook } from "@/lib/telegram";
 
 export async function rejoindre(_prev: string, form: FormData): Promise<string> {
   const code = String(form.get("code") || "").trim().toUpperCase();
@@ -213,7 +214,7 @@ export async function activerWebhook(): Promise<string> {
   const site = process.env.SITE_URL || "https://mizan-five-iota.vercel.app";
   const r = await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/setWebhook`, {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ url: `${site}/api/telegram/webhook`, secret_token: process.env.TELEGRAM_WEBHOOK_SECRET, allowed_updates: ["message"] }),
+    body: JSON.stringify({ url: `${site}/api/telegram/webhook`, secret_token: secretWebhook(), allowed_updates: ["message"] }),
   });
   const j = await r.json().catch(() => ({}));
   if (j.ok) {
