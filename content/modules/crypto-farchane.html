@@ -78,6 +78,22 @@ details{margin:4px 0}summary{cursor:pointer;font-weight:600;color:var(--acc2)}de
 .tuF{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
 .cfig{margin:0 0 14px;border:1px solid var(--line);border-radius:8px;padding:10px;overflow-x:auto;background:var(--panel)}
 @media (max-width:640px){select{max-width:100%}.f{white-space:normal;overflow-wrap:anywhere}.src{overflow-wrap:anywhere}.card{overflow-wrap:break-word}}
+
+/* Révision active : cartes, examen blanc, carnet d'erreurs */
+.mini{font-size:12.5px;color:var(--mute)}
+.fc{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:20px;margin:12px 0;min-height:150px;cursor:pointer}
+.fc .fk{font-size:12px;color:var(--mute);margin-bottom:8px}.fc .fq{font-size:18px;font-weight:600;overflow-wrap:anywhere}
+.fc .fa{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);overflow-wrap:anywhere}.fc .tap{margin-top:14px;font-size:13px;color:var(--mute)}
+.btn.ko{background:var(--bad);border-color:var(--bad);color:#fff}.btn.good{background:var(--ok);border-color:var(--ok);color:#fff}
+.part{margin:18px 0 8px;font-weight:700;color:var(--acc)}
+.ex-q{position:relative;border:1px solid var(--line);border-radius:10px;padding:12px 12px 12px;margin-bottom:10px;background:var(--panel)}
+.ex-q.right{border-color:var(--ok)}.ex-q.wrong{border-color:var(--bad)}.ex-q .pts{float:right;font-size:12px;color:var(--mute);margin-left:8px}
+.ex-q input{width:100%;box-sizing:border-box}.opt.sel{border-color:var(--acc)}
+#exTimer{font:700 22px var(--mono);margin-left:10px}#exTimer.hot{color:var(--bad)}
+.cause-ask{font-size:13px;margin-top:8px;color:var(--mute)}.causes{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.causes button{font:600 12px system-ui,sans-serif;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:4px 10px;cursor:pointer}
+.causes button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}.kp .card b{display:block;font-size:20px;overflow-wrap:anywhere}.kp .card span{font-size:12.5px;color:var(--mute)}
 </style>
 
 <div class="wrap">
@@ -354,6 +370,29 @@ details{margin:4px 0}summary{cursor:pointer;font-weight:600;color:var(--acc2)}de
 <p class="sub">À faire après avoir parcouru les onglets. Réponds sans tes notes et envoie-moi les numéros ratés : on les reprend.</p>
 <div id="quiz"></div>
 <div class="card"><span class="score" id="qScore">0 / 15</span> <span id="qMsg" class="expl"></span></div>
+</section>
+
+<section data-tab="cartes" data-name="Cartes" hidden>
+<h2>Cartes à répétition espacée</h2>
+<p class="sub">86 cartes tirées des leçons, avec les conventions du prof. Lis la question, réponds à voix haute, puis retourne la carte. Une carte réussie revient après 1, 3, 7, 14 puis 30 jours ; une carte ratée revient dès demain. Au plus 15 cartes neuves par jour, pour que ça reste tenable.</p>
+<div class="card">
+<div class="row"><select id="fcSel" aria-label="Notion"></select><select id="fcMode" aria-label="Paquet"><option value="due">À réviser aujourd'hui</option><option value="all">Toutes (en avance)</option><option value="ko">Celles que j'ai ratées</option></select></div>
+<p class="mini" id="fcCount"></p>
+<div class="fc" id="fcBox"></div>
+<div class="row" id="fcBtns"></div>
+</div>
+</section>
+<section data-tab="blanc" data-name="Examen blanc" hidden>
+<h2>Examen blanc</h2>
+<p class="sub">Un sujet neuf à chaque fois : 6 questions de cours (1 point), 4 calculs (2 points) et 3 questions de méthode (2 points), soit 20 points en 1 h 30. Fais-le sans notes. La correction vient à la fin, question par question.</p>
+<div class="card"><button type="button" class="btn" id="exStart">Nouveau sujet</button><span id="exTimer">1:30:00</span> <button type="button" class="btn alt" id="exRendre" disabled>Rendre la copie</button><p class="expl" id="exNote">Clique sur « Nouveau sujet » pour lancer le minuteur.</p></div>
+<div id="exBody"></div>
+<div id="exHist"></div>
+</section>
+<section data-tab="carnet" data-name="Carnet d'erreurs" hidden>
+<h2>Carnet d'erreurs</h2>
+<p class="sub">Chaque réponse ratée se range ici avec sa cause. Ce n'est pas un journal pour se faire du mal : c'est ce qui dit quoi corriger.</p>
+<div id="carnet"></div>
 </section>
 </div>
 
@@ -1011,6 +1050,259 @@ renderEval('td1');renderFailles();
  $('ppD').onclick=()=>{const k=perm();if(!okp(k))return;const b=app(inv(k),up($('ppM').value));$('ppO').textContent='Avec K⁻¹ = ['+inv(k)+'] : '+b.join(' | ')+'\nM = '+b.join('')};
  $('ppI').onclick=()=>{const k=perm();if(!okp(k))return;$('ppO').textContent=k.map((v,i)=>`K[${i+1}] = ${v}  →  K⁻¹[${v}] = ${i+1}`).join('\n')+'\nK⁻¹ = ['+inv(k)+']'};$('ppE').click();
  $('xrG').onclick=()=>{const a=$('xr1').value.trim(),b=$('xr2').value.trim();if(!/^[01]+$/.test(a+b)||a.length!==b.length){$('xrO').textContent='Deux suites de bits de même longueur.';return}$('xrO').textContent=`${a}\n${b}\n${'-'.repeat(a.length)}\n${[...a].map((x,i)=>x^b[i]).join('')}`};$('xrG').click();
+})();
+
+</script>
+<script>
+/* ===== Révision active : cartes espacées, carnet d'erreurs, examen blanc (clé localStorage « cryptoPlus », synchronisée) ===== */
+const PLUS_LS='cryptoPlus';
+let S2={cards:{},err:[],exams:[],nd:{},n:0};
+try{S2=Object.assign(S2,JSON.parse(localStorage.getItem(PLUS_LS)||'{}'))}catch(e){}
+const saveS2=()=>{try{localStorage.setItem(PLUS_LS,JSON.stringify(S2))}catch(e){}};
+const iso=()=>new Date().toISOString().slice(0,10);
+const dayAdd=(d,n)=>{const x=new Date(d+'T12:00:00Z');x.setUTCDate(x.getUTCDate()+n);return x.toISOString().slice(0,10)};
+const frD=d=>{const p=String(d).split('-');return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:String(d)};
+const E2=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const plain=s=>String(s).replace(/<[^>]+>/g,'').replace(/^\d+\.\s*/,'');
+const NM=k=>NAMES[k]||(k==='td1'?'TD1':k);
+const CAUSES=['Méthode','Calcul','Inattention','Pas encore revu','Convention du prof'];
+const CARDS=[
+['bases','Les 4 buts de la cryptographie ?','Confidentialité, authentification, intégrité, non-répudiation.'],
+['bases','Déchiffrer ou décrypter : quelle différence ?','Déchiffrer = retrouver le clair AVEC la clé (destinataire légitime). Décrypter = y arriver SANS la clé (l\'attaquant).'],
+['bases','Chiffrement symétrique et asymétrique, en une phrase chacun ?','Symétrique : une seule clé secrète, partagée. Asymétrique : clé publique pour chiffrer, clé privée pour déchiffrer.'],
+['bases','La convention de numérotation de ce cours ?','A = 0, B = 1, … Z = 25, et tous les calculs se font modulo 26.'],
+['bases','Combien vaut −5 mod 26 ?','21. On ajoute le module jusqu\'à retomber entre 0 et n − 1.'],
+['bases','Que veut dire a ≡ b (mod n) ?','a et b ont le même reste dans la division par n ; autrement dit n divise a − b.'],
+['bases','Oscar modifie le montant d\'un virement : quel but est attaqué ?','L\'intégrité.'],
+['bases','Un client nie avoir passé commande : quel but manquait ?','La non-répudiation.'],
+['cesar','Formule de César, dans les deux sens ?','c = (p + k) mod 26 ; p = (c − k) mod 26.'],
+['cesar','Pourquoi César est-il indéfendable ?','Il n\'y a que 26 clés : la force brute se fait à la main en quelques minutes (bouton « Force brute » de la machine).'],
+['cesar','Formule du chiffre affine, avec sa condition ?','c = (k1·p + k2) mod 26, avec pgcd(k1, 26) = 1.'],
+['cesar','Déchiffrement affine ?','p = k1⁻¹·(c − k2) mod 26. On multiplie par l\'inverse ; on ne divise JAMAIS par k1.'],
+['cesar','Les valeurs possibles de k1 modulo 26 ?','1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25 : les 12 nombres premiers avec 26.'],
+['cesar','Nombre total de clés de l\'affine modulo 26 ?','12 × 26 = 312.'],
+['cesar','Pourquoi k1 = 13 est-il interdit ?','pgcd(13, 26) = 13 ≠ 1 : 13 n\'a pas d\'inverse modulo 26, donc le chiffrement n\'est pas réversible.'],
+['cesar','3⁻¹ mod 26 = ?','9, car 3 × 9 = 27 ≡ 1 (mod 26).'],
+['cesar','Comment casse-t-on un affine par les fréquences ?','Lettre la plus fréquente du chiffré → E (4), la deuxième → S (18) ou A. Deux équations k1·p + k2 ≡ c, on soustrait et on résout.'],
+['vig','Formule de Vigenère ?','cᵢ = (pᵢ + k indice i mod L) mod 26, où L est la longueur de la clé.'],
+['vig','Pourquoi l\'analyse de fréquences simple échoue-t-elle sur Vigenère ?','Un même E clair devient des lettres différentes selon sa position : le profil des fréquences est aplati.'],
+['vig','Qu\'est-ce que Vernam (masque jetable) ?','Un Vigenère dont la clé est aléatoire, aussi longue que le message et jamais réutilisée. Seul système inconditionnellement sûr.'],
+['vig','Les deux limites pratiques de Vernam ?','Produire et distribuer d\'énormes clés vraiment aléatoires.'],
+['vig','Les 3 étapes pour casser Vigenère ?','1) trouver la longueur L de la clé (indice de coïncidence, test de Friedman) ; 2) couper le texte en L colonnes ; 3) chaque colonne est un simple César → fréquences.'],
+['vig','Formule de l\'indice de coïncidence ?','IC = Σ nᵢ(nᵢ − 1) / (N(N − 1)).'],
+['vig','Les valeurs repères de l\'IC ?','Français ≈ 0,078 ; texte aléatoire ≈ 0,038. Le bon L est celui qui donne l\'IC le plus élevé.'],
+['vig','Clé inverse de Vigenère ?','k⁻¹ = 26 − k lettre par lettre (A reste A) : déchiffrer revient alors à chiffrer avec k⁻¹.'],
+['play','Comment remplit-on la grille Playfair ?','Le mot-clé sans doublons, puis le reste de l\'alphabet. Version du prof : le W est supprimé et remplacé par V (25 lettres).'],
+['play','Deux lettres identiques dans une paire ?','On insère un X entre elles. Idem pour une lettre seule en fin de message.'],
+['play','Playfair, même ligne ?','Chaque lettre est remplacée par celle à sa droite (on boucle en fin de ligne).'],
+['play','Playfair, même colonne ?','Chaque lettre est remplacée par celle en dessous (on boucle en bas).'],
+['play','Playfair, ni même ligne ni même colonne ?','Coins opposés du rectangle, en restant sur la ligne de chaque lettre.'],
+['play','Comment déchiffre-t-on en Playfair ?','Gauche, dessus, et la même règle du rectangle ; puis on retire les X de remplissage.'],
+['play','Pourquoi Playfair est-il plus solide que César ?','Il chiffre des digrammes : 25² = 625 paires possibles au lieu de 26 lettres.'],
+['trans','Principe de la transposition ?','On ne change pas les lettres, on change leur ordre : le chiffré est une anagramme du clair.'],
+['trans','Transposition simple ?','On écrit le message en lignes dans une grille, puis on lit en colonnes, de gauche à droite.'],
+['trans','Transposition à clé ?','La clé numérote ses colonnes selon l\'ordre alphabétique de ses lettres (à lettres égales, de gauche à droite), puis on lit les colonnes dans l\'ordre 1, 2, 3…'],
+['trans','Numérotation de DELIVRANCE ?','D3 E4 L7 I6 V10 R9 A1 N8 C2 E5.'],
+['trans','Qu\'est-ce qu\'une transposition conserve ?','Les lettres elles-mêmes et leur nombre, donc les fréquences. Seul l\'ordre change.'],
+['trans','Convention de permutation du TD1 ?','c_j = m_K[j] : la j-ème lettre du bloc chiffré est la lettre n° K[j] du bloc clair.'],
+['trans','Comment trouve-t-on la clé inverse d\'une permutation ?','Si K[i] = v, alors K⁻¹[v] = i.'],
+['trans','Les lettres de remplissage de la dernière ligne sont-elles imposées ?','Non, elles sont libres : le prof met des lettres arbitraires, des X marchent aussi. Précise ton choix sur la copie.'],
+['crypta','Les 4 types d\'attaques sur le texte ?','Chiffré connu, clair connu, clair choisi, chiffré choisi.'],
+['crypta','Attaque passive ou active ?','Passive : Oscar écoute sans modifier (menace la confidentialité). Active : il modifie (menace l\'intégrité et l\'authentification).'],
+['crypta','Clair connu ou clair choisi ?','Clair connu : il possède des couples clair/chiffré mais ne les a pas choisis. Clair choisi : il fait chiffrer les messages qu\'il veut.'],
+['crypta','Que casse l\'analyse de fréquences ?','Toute substitution mono-alphabétique (César, affine, alphabet-clé) : une même lettre claire donne toujours la même lettre chiffrée.'],
+['crypta','26! clés et pourtant cassable : pourquoi ?','Parce qu\'on n\'attaque pas par force brute mais par fréquences. La taille de l\'espace des clés ne protège de rien ici.'],
+['crypta','À quoi sert le test de Friedman ?','À estimer la longueur de la clé d\'un Vigenère : on calcule l\'IC moyen des sous-textes pour chaque L et on garde le L au plus haut IC.'],
+['arith','Algorithme d\'Euclide ?','pgcd(a, b) = pgcd(b, a mod b), jusqu\'à un reste nul. Le dernier reste non nul est le pgcd.'],
+['arith','Que donne Euclide étendu (Bézout) ?','u et v tels que a·u + b·v = pgcd(a, b). Si pgcd = 1, alors b⁻¹ ≡ v (mod a).'],
+['arith','Quand b est-il inversible modulo n ?','Exactement quand pgcd(b, n) = 1.'],
+['arith','φ(p) pour p premier ?','p − 1.'],
+['arith','φ(pᵉ) ?','pᵉ − pᵉ⁻¹.'],
+['arith','φ(n·m) quand n et m sont premiers entre eux ?','φ(n) · φ(m).'],
+['arith','Théorème d\'Euler, et ce qu\'il permet ?','Si pgcd(a, n) = 1 : a^φ(n) ≡ 1 (mod n). Donc on réduit l\'exposant modulo φ(n).'],
+['arith','Petit théorème de Fermat, forme du cours ?','p premier : aᵖ ≡ a (mod p) ; et si pgcd(a, p) = 1, alors a^(p−1) ≡ 1 (mod p).'],
+['arith','La méthode pour a^x mod M avec x énorme ?','1) réduire la base modulo M ; 2) réduire l\'exposant modulo φ(M) si pgcd(a, M) = 1 ; 3) carrés successifs.'],
+['arith','51447²¹ mod 17 = ? (exemple du prof, diapo 75)','14. 51447 ≡ 5 ; φ(17) = 16 et 21 ≡ 5 ; donc 5⁵ mod 17 = 14.'],
+['arith','Pourquoi cet onglet est-il le plus rentable ?','RSA, ElGamal et Diffie-Hellman (partie 2) ne sont que des exponentiations modulaires : inverse modulo φ(n) et exponentiation rapide y servent partout.'],
+['lfsr','Formule du chiffrement par flot ?','cᵢ = mᵢ ⊕ zᵢ, et mᵢ = cᵢ ⊕ zᵢ : le XOR se défait par lui-même.'],
+['lfsr','Fonctionnement d\'un LFSR de degré m ?','À chaque top : s₀ sort, tout se décale, et le nouveau bit vaut sₘ = Σ pⱼ·sⱼ mod 2.'],
+['lfsr','Période maximale d\'un LFSR de degré m ?','2^m − 1, soit 15 pour m = 4.'],
+['lfsr','Polynôme de rétroaction ?','P(x) = xᵐ + p(m−1)·x^(m−1) + … + p₁·x + p₀.'],
+['lfsr','La faiblesse fondamentale du LFSR ?','Il est linéaire : avec 2m bits de sortie, Berlekamp-Massey retrouve le polynôme, donc tout le flot.'],
+['lfsr','Comment casse-t-on cette linéarité en pratique ?','On combine plusieurs LFSR par une fonction non linéaire. A5/1 : 3 registres et une fonction majorité.'],
+['lfsr','Diapo 95 : (1,1,0,0) contre (1,1,1,1) ?','(1,1,0,0) donne la période maximale 15 ; (1,1,1,1) seulement 5. Tous les polynômes ne se valent pas.'],
+['modes','ECB, dans les deux sens ?','cᵢ = E(mᵢ) ; mᵢ = D(cᵢ). Défaut : deux blocs clairs égaux donnent deux chiffrés égaux.'],
+['modes','CBC ?','cᵢ = E(mᵢ ⊕ cᵢ₋₁) avec c₋₁ = IV ; mᵢ = D(cᵢ) ⊕ cᵢ₋₁. Il a besoin de D.'],
+['modes','CFB ?','cᵢ = mᵢ ⊕ E(cᵢ₋₁) ; mᵢ = cᵢ ⊕ E(cᵢ₋₁). Pas besoin de D.'],
+['modes','OFB ?','zᵢ = E(zᵢ₋₁) puis cᵢ = mᵢ ⊕ zᵢ ; mᵢ = cᵢ ⊕ zᵢ.'],
+['modes','CTR ?','cᵢ = mᵢ ⊕ E(T + 1 + i) ; mᵢ = cᵢ ⊕ E(T + 1 + i). Parallélisable.'],
+['modes','L\'astuce qui évite de se tromper entre E et D ?','Dès que le message est XORé avec un E(…), le déchiffrement utilise aussi E, jamais D : CFB, OFB, CTR.'],
+['modes','Quel mode n\'utilise ni IV ni compteur ?','ECB. C\'est pour ça qu\'il est déterministe, donc inutilisable en pratique.'],
+['des','Les paramètres de DES ?','Bloc 64 bits, clé 56 bits utiles (64 avec parité), 16 tours, sous-clés de 48 bits.'],
+['des','Formule d\'un tour de Feistel ?','Lᵢ = Rᵢ₋₁ et Rᵢ = Lᵢ₋₁ ⊕ f(Rᵢ₋₁, kᵢ).'],
+['des','De quoi est faite la fonction f ?','f(R, k) = P(S(E(R) ⊕ k)) : E étend 32 → 48 bits, 8 S-box font 6 → 4 bits, P permute 32 bits.'],
+['des','Structure générale de DES ?','IP → 16 tours → échange final de L et R → IP⁻¹.'],
+['des','Comment lit-on une S-box ?','Les bits 1 et 6 donnent la ligne, les bits 2 à 5 la colonne ; la valeur lue s\'écrit sur 4 bits.'],
+['des','Calcul des sous-clés ?','PC-1, puis rotations à gauche (1 aux tours 1, 2, 9 et 16, sinon 2), puis PC-2 qui sort 48 bits.'],
+['des','Comment déchiffre-t-on avec DES ?','Même algorithme, sous-clés dans l\'ordre inverse : k16 → k1.'],
+['des','Pourquoi f n\'a-t-elle pas besoin d\'être inversible ?','Parce que f(R, k) ⊕ f(R, k) = 0 : la structure de Feistel s\'annule d\'elle-même au déchiffrement.'],
+['des','La critique principale de DES ?','Clé de 56 bits trop courte : cassée en 22 h 15 en 1999. Remplacée par AES.'],
+['des','Combien de S-box, et quelle transformation ?','8 S-box (S1 à S8), chacune 6 bits → 4 bits.'],
+['td1','Substitution par alphabet-clé : principe ?','La clé est un alphabet complet mélangé : sa 1re lettre remplace A, la 2e remplace B, etc. 26! clés, mais les fréquences la cassent.'],
+['td1','Protocole XOR à trois passes : pourquoi est-il cassé ?','C₁ ⊕ C₂ = L donne la clé de Bob, puis C₃ ⊕ L = M. Ou directement C₁ ⊕ C₂ ⊕ C₃ = M. Le XOR est linéaire.'],
+['td1','Les 3 règles du XOR pour rédiger une démonstration ?','K ⊕ K = 0 ; X ⊕ 0 = X ; il est commutatif et associatif.'],
+['td1','Clé inverse de Vigenère pour SECURITE ?','IWYGJSHW. Le corrigé manuscrit qui circule écrit F au lieu de H : c\'est faux, T = 19 donne 26 − 19 = 7 = H.'],
+['td1','Substitution et transposition, en une phrase ?','La substitution change les lettres mais garde leur position ; la transposition garde les lettres mais change leur position.']
+];
+const BOXES=[1,3,7,14,30],NEW_PER_DAY=15;
+const newToday=()=>S2.nd&&S2.nd.d===iso()?(S2.nd.n||0):0;
+/* À réviser = toutes les cartes déjà vues et échues + un quota de cartes neuves par jour (un paquet de 86 le premier jour finit en abandon) */
+function dueList(k){const vues=[],neuves=[];
+ CARDS.forEach((c,i)=>{if(k&&c[0]!==k)return;const s=S2.cards[i];
+  if(!s)neuves.push(i);else if(!s.due||s.due<=iso())vues.push(i)});
+ return vues.concat(neuves.slice(0,Math.max(0,NEW_PER_DAY-newToday())))}
+
+/* ---------- cartes ---------- */
+let fcQueue=[],fcAt=0,fcShown=false;
+function fcFill(){
+ const sel=$('fcSel');if(!sel)return;
+ if(!sel.options.length)sel.innerHTML='<option value="">Toutes les notions</option>'+[...new Set(CARDS.map(c=>c[0]))].map(k=>`<option value="${k}">${E2(NM(k))}</option>`).join('');
+ const k=sel.value,mode=$('fcMode').value;
+ let list=mode==='due'?dueList(k):CARDS.map((c,i)=>i).filter(i=>!k||CARDS[i][0]===k);
+ if(mode==='ko')list=list.filter(i=>(S2.cards[i]||{}).ko);
+ fcQueue=list.sort(()=>Math.random()-.5);fcAt=0;fcShown=false;fcPaint()}
+function fcPaint(){
+ const box=$('fcBox'),btns=$('fcBtns'),cnt=$('fcCount');if(!box)return;
+ cnt.textContent=`${Object.keys(S2.cards).length} / ${CARDS.length} cartes déjà vues · ${dueList().length} à réviser aujourd'hui · ${fcQueue.length} dans ce paquet`;
+ if(!fcQueue.length||fcAt>=fcQueue.length){
+  box.onclick=null;
+  box.innerHTML=`<div class="fq">${fcAt&&fcAt>=fcQueue.length?'Paquet terminé. Reviens demain : les cartes réussies reviendront plus tard, celles que tu as ratées dès demain.':'Aucune carte dans ce paquet. Change le filtre, ou choisis « Toutes » pour travailler en avance.'}</div>`;
+  btns.innerHTML='<button class="btn alt" id="fcAgain">Refaire un paquet</button>';$('fcAgain').onclick=fcFill;return}
+ const i=fcQueue[fcAt],c=CARDS[i],st=S2.cards[i];
+ box.innerHTML=`<div class="fk">${E2(NM(c[0]))}${st?' · revue '+(st.seen||1)+' fois':' · nouvelle carte'}</div><div class="fq">${E2(c[1])}</div>`+
+  (fcShown?`<div class="fa">${E2(c[2])}</div>`:'<div class="tap">Réponds à voix haute, puis retourne la carte.</div>');
+ box.onclick=()=>{if(!fcShown){fcShown=true;fcPaint()}};
+ btns.innerHTML=fcShown
+  ?'<button class="btn ko" id="fcKo">Raté</button><button class="btn good" id="fcOk">Je savais</button><button class="btn alt" id="fcSkip">Passer</button>'
+  :'<button class="btn" id="fcShow">Voir la réponse</button><button class="btn alt" id="fcSkip">Passer</button>';
+ if($('fcShow'))$('fcShow').onclick=()=>{fcShown=true;fcPaint()};
+ $('fcSkip').onclick=()=>{fcAt++;fcShown=false;fcPaint()};
+ if($('fcOk'))$('fcOk').onclick=()=>fcGrade(i,true);
+ if($('fcKo'))$('fcKo').onclick=()=>fcGrade(i,false)}
+function fcGrade(i,good){
+ const neuve=!S2.cards[i],c=S2.cards[i]||{b:-1,seen:0,ko:0};
+ c.seen=(c.seen||0)+1;
+ if(neuve)S2.nd={d:iso(),n:newToday()+1};
+ if(good){c.b=Math.min(c.b<0?0:c.b+1,BOXES.length-1);c.due=dayAdd(iso(),BOXES[c.b])}
+ else{c.b=0;c.ko=(c.ko||0)+1;c.due=dayAdd(iso(),1);logErr(CARDS[i][0],'Carte : '+CARDS[i][1],'')}
+ S2.cards[i]=c;saveS2();fcAt++;fcShown=false;fcPaint()}
+
+/* ---------- carnet d'erreurs ---------- */
+function logErr(k,q,cause){
+ S2.n=(S2.n||0)+1;
+ S2.err.unshift({i:S2.n,d:iso(),k,q:plain(q).slice(0,200),c:cause||''});
+ S2.err=S2.err.slice(0,150);saveS2();return S2.n}
+const causeHTML=id=>`<div class="cause-ask">Pourquoi tu t'es trompé ? Range l'erreur, elle se retrouvera dans ton carnet.<div class="causes" data-err="${id}">${CAUSES.map(c=>`<button type="button" data-c="${c}">${c}</button>`).join('')}</div></div>`;
+document.addEventListener('click',e=>{
+ const b=e.target.closest('.causes button');if(!b)return;
+ const id=+b.parentNode.dataset.err,it=S2.err.find(x=>x.i===id);
+ if(it){it.c=b.dataset.c;saveS2()}
+ b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+ if(document.getElementById('carnet')&&!document.querySelector('section[data-tab="carnet"]').hidden)renderCarnet()});
+function renderCarnet(){
+ const box=$('carnet');if(!box)return;
+ if(!S2.err.length){box.innerHTML='<p class="mini">Vide pour l\'instant. Chaque réponse ratée (évaluation, carte, examen blanc) viendra s\'y ranger, avec la cause que tu choisis.</p>';return}
+ const byC={},byK={};S2.err.forEach(e=>{const c=e.c||'Non classée';byC[c]=(byC[c]||0)+1;byK[e.k]=(byK[e.k]||0)+1});
+ const topC=Object.entries(byC).sort((a,b)=>b[1]-a[1])[0],topK=Object.entries(byK).sort((a,b)=>b[1]-a[1])[0];
+ box.innerHTML=`<div class="kp"><div class="card"><b>${S2.err.length}</b><span>erreurs enregistrées</span></div><div class="card"><b>${E2(topC[0])}</b><span>cause la plus fréquente</span></div><div class="card"><b>${E2(NM(topK[0]))}</b><span>notion la plus fautive (${topK[1]})</span></div></div>
+ <p class="mini">Une erreur de « calcul » ne se soigne pas comme une erreur de « méthode » : regarde quelle colonne grossit. Méthode : relis la leçon. Calcul : fais 10 questions d'entraînement. Convention du prof : revois la carte correspondante.</p>
+ <div class="scroll"><table class="t"><thead><tr><th>Date</th><th>Notion</th><th>Question</th><th>Cause</th></tr></thead><tbody>${S2.err.slice(0,40).map(e=>`<tr><td>${frD(e.d)}</td><td>${E2(NM(e.k))}</td><td>${E2(e.q)}</td><td><div class="causes" data-err="${e.i}">${CAUSES.map(c=>`<button type="button" data-c="${c}" class="${e.c===c?'on':''}">${c}</button>`).join('')}</div></td></tr>`).join('')}</tbody></table></div>
+ <button class="btn alt" id="errClear" type="button">Vider le carnet</button>`;
+ $('errClear').onclick=()=>{S2.err=[];saveS2();renderCarnet()}}
+
+/* erreurs des évaluations de chaque notion : on se branche sur le code existant sans le modifier */
+const _re=renderEval;
+renderEval=function(k){
+ _re(k);const box=$('ev-'+k);if(!box||box.dataset.hooked)return;
+ box.dataset.hooked=1;
+ box.addEventListener('click',()=>{setTimeout(()=>{
+  box.querySelectorAll('.q[data-done]').forEach(qd=>{
+   if(qd.dataset.plus)return;
+   const ex=qd.querySelector('.expl');if(!ex||ex.hidden)return;
+   qd.dataset.plus=1;if(!/Raté/.test(ex.textContent))return;
+   const p=qd.querySelector('p'),id=logErr(k,p?p.textContent:'(question)','');
+   ex.insertAdjacentHTML('afterend',causeHTML(id))})},0)})};
+for(const k in EV){if($('ev-'+k))renderEval(k)}
+
+/* ---------- examen blanc : 20 points, 1 h 30 ---------- */
+let EX=null,exT=null,exLeft=0;
+function mkExam(){
+ const used=new Set(),pool=[];for(const k in EV)(EV[k]||[]).forEach(q=>pool.push({k,q}));
+ const take=(f,n)=>{const r=[],c=pool.filter(f).sort(()=>Math.random()-.5);
+  for(const it of c){if(r.length>=n)break;if(used.has(it.q.q))continue;used.add(it.q.q);r.push(it)}return r};
+ const A=take(it=>it.q.o,6).map(it=>({kind:'mcq',k:it.k,txt:it.q.q,opts:it.q.o,ans:it.q.a,exp:it.q.e,pts:1}));
+ const B=['cesar',pick(['vig','trans','play']),'arith',pick(['lfsr','modes','des'])].map(k=>{const g=GEN[k]();return{kind:'txt',k,txt:g.q,ans:g.a,exp:g.e,pts:2}});
+ const C=take(it=>!it.q.o&&['arith','lfsr','modes','des','trans','vig','cesar'].indexOf(it.k)>=0,3)
+  .map(it=>({kind:'txt',k:it.k,txt:it.q.q,ans:it.q.t,tol:it.q.n,exp:it.q.e,pts:2}));
+ const all=[].concat(A,B,C);
+ return{parts:[['Partie A · questions de cours',A],['Partie B · calculs (montre ta démarche sur la copie)',B],['Partie C · formules et méthodes',C]],all,total:all.reduce((s,q)=>s+q.pts,0)}}
+/* comparaison exacte : un nombre doit être exact (ou dans la tolérance du sujet), jamais « contenu dans » la réponse */
+function exAns(q,v){
+ if(q.kind==='mcq')return v!==''&&v!=null&&+v===q.ans;
+ const nv=norm(v||'');if(!nv)return false;
+ if(q.tol!=null){const a=parseFloat(nv),b=parseFloat(String(q.ans));return isFinite(a)&&Math.abs(a-b)<=q.tol}
+ return nv===norm(String(q.ans))}
+function exPaint(){
+ let n=0;
+ $('exBody').innerHTML=EX.parts.map(([t,qs])=>`<div class="part">${t}</div>`+qs.map(q=>{const i=n++;
+  return `<div class="ex-q" id="exq${i}"><span class="pts">${q.pts} pt${q.pts>1?'s':''}</span><p style="margin:0 0 8px"><b>${i+1}.</b> ${E2(q.txt)}</p>`+
+   (q.kind==='mcq'?q.opts.map((o,j)=>`<button type="button" class="opt" data-ex="${i}" data-j="${j}">${o}</button>`).join(''):`<input id="exi${i}" autocomplete="off" placeholder="Ta réponse">`)+
+   `<div class="expl" id="exe${i}" hidden></div></div>`}).join('')).join('')
+  +'<div class="card"><button type="button" class="btn" id="exRendre2">Rendre ma copie</button> <span class="mini">La correction s\'affiche question par question, avec le barème.</span></div>';
+ $('exRendre2').onclick=exSubmit}
+function exTick(){
+ exLeft--;const h=Math.floor(exLeft/3600),m=Math.floor((exLeft%3600)/60),s=exLeft%60,el=$('exTimer');
+ el.textContent=`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;el.classList.toggle('hot',exLeft<600);
+ if(exLeft<=0){clearInterval(exT);exSubmit()}}
+function exStart(){
+ EX=mkExam();EX.done=false;exPaint();
+ $('exRendre').disabled=false;$('exNote').innerHTML=`Sujet sur <b>${EX.total}</b> points, ${EX.all.length} questions, 1 h 30 sans notes. Le minuteur tourne.`;
+ exLeft=90*60;clearInterval(exT);exT=setInterval(exTick,1000);exTick()}
+function exSubmit(){
+ if(!EX||EX.done)return;EX.done=true;clearInterval(exT);
+ let got=0;
+ EX.all.forEach((q,i)=>{
+  const v=q.kind==='mcq'?(q.pick==null?'':q.pick):($('exi'+i)?$('exi'+i).value:'');
+  const ok=exAns(q,v);if(ok)got+=q.pts;
+  $('exq'+i).classList.add(ok?'right':'wrong');
+  const ex=$('exe'+i);ex.hidden=false;
+  const bonne=q.kind==='mcq'?q.opts[q.ans]:q.ans;
+  ex.innerHTML=(ok?`<b style="color:var(--ok)">Juste. +${q.pts}</b> `:`<b style="color:var(--bad)">Raté. 0 / ${q.pts}</b> Réponse : <b>${E2(bonne)}</b>. `)+(q.exp||'');
+  if(q.kind==='mcq')document.querySelectorAll(`[data-ex="${i}"]`).forEach(x=>{x.disabled=true;if(+x.dataset.j===q.ans)x.classList.add('good');else if(+x.dataset.j===q.pick)x.classList.add('wrong')});
+  if($('exi'+i)){$('exi'+i).disabled=true;$('exi'+i).style.borderColor=ok?'var(--ok)':'var(--bad)'}
+  if(!ok){const id=logErr(q.k,q.txt,'');ex.insertAdjacentHTML('afterend',causeHTML(id))}});
+ const note=Math.round(got*10)/10;
+ S2.exams.unshift({d:iso(),s:note,t:EX.total});S2.exams=S2.exams.slice(0,20);saveS2();
+ const pc=Math.round(100*got/EX.total);
+ $('exNote').innerHTML=`<b style="font-size:18px">${note} / ${EX.total}</b> (${pc} %). `+
+  (pc>=80?'Au niveau de ton objectif de 16/20. Refais un sujet dans quelques jours pour confirmer.'
+   :pc>=60?'Il manque surtout les points de méthode : ouvre ton carnet d\'erreurs et range chaque faute par cause.'
+   :'Reprends les notions faibles dans « Mes failles » avant de refaire un sujet : un examen blanc raté ne sert que s\'il est corrigé.');
+ $('exRendre').disabled=true;exHist()}
+function exHist(){
+ const h=$('exHist');if(!h)return;
+ h.innerHTML=S2.exams.length?'<h3>Mes examens blancs</h3><ul>'+S2.exams.slice(0,8).map(e=>`<li>${frD(e.d)} : <b>${e.s} / ${e.t}</b></li>`).join('')+'</ul>':''}
+
+/* ---------- branchements ---------- */
+(function(){
+ if($('fcSel')){$('fcSel').onchange=fcFill;$('fcMode').onchange=fcFill;fcFill()}
+ if($('exRendre')){$('exStart').onclick=exStart;$('exRendre').onclick=exSubmit;
+  $('exBody').addEventListener('click',e=>{const b=e.target.closest('[data-ex]');if(!b||!EX||EX.done)return;
+   const i=+b.dataset.ex;EX.all[i].pick=+b.dataset.j;document.querySelectorAll(`[data-ex="${i}"]`).forEach(x=>x.classList.toggle('sel',x===b))});
+  exHist()}
+ renderCarnet();
+ /* les onglets se rafraîchissent à l'ouverture */
+ nav.addEventListener('click',()=>setTimeout(()=>{renderCarnet();if(!document.querySelector('section[data-tab="cartes"]').hidden)fcFill()},0));
 })();
 
 </script>
