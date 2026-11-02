@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}@media (max-width:640px){select{max-width:100%}.f{white-space:normal;overflow-wrap:anywhere}.src{overflow-wrap:anywhere}}
-</style></head><body>
+</style><style>@media(max-width:780px){p,li,td,th,.out,.f,.formula{overflow-wrap:anywhere}}</style></head><body>
 <title>M351 Réseaux · Révision</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1651,7 +1651,8 @@ function normTxt(s){return String(s).toLowerCase().normalize('NFD').replace(/[̀
 function gradeCalc(c,raw){if(typeof c.ans==='string'){const v=normTxt(raw).replace(/[^a-z0-9]/g,'');if(!v)return null;if(c.type==='signal'&&v==='toutourien')return c.ans==='tor';return v===c.ans;}
   const v=parseFloat(String(raw).replace(/\s/g,'').replace(',','.'));if(isNaN(v))return null;return c.tol?Math.abs(v-c.ans)/c.ans<=c.tol:Math.round(v)===c.ans;}
 function calcNid(c){return c.nid||(c.type.startsWith('mesh')?'n16':c.type==='mtu'?'n27':'n21');}
-function gradeOpen(item,txt){const t=normTxt(txt);const res=item.k.map(g=>g.some(s=>t.includes(normTxt(s))));const sc=res.filter(Boolean).length/res.length;return {res,sc,ok:sc>=0.6};}
+function hasKw(t,s){s=normTxt(s);return /^\d+$/.test(s)?new RegExp('(^|\\D)'+s+'(\\D|$)').test(t):t.includes(s);}
+function gradeOpen(item,txt){const t=normTxt(txt);const res=item.k.map(g=>g.some(s=>hasKw(t,s)));const sc=res.filter(Boolean).length/res.length;return {res,sc,ok:sc>=0.6};}
 function openFeedback(item,g){return `<div class="expl"><span class="${g.ok?'ok-t':'ko-t'}">${g.ok?'Validé':'Insuffisant'} · ${Math.round(g.sc*100)} % des idées attendues</span><ul style="margin:6px 0;padding-left:18px">${item.k.map((grp,i)=>`<li class="${g.res[i]?'hit':'miss'}">${g.res[i]?'✓':'✗'} ${esc(grp[0])}</li>`).join('')}</ul><b>Réponse modèle :</b> ${esc(item.m)}</div>`;}
 
 /* ======================= RÉDACTION ======================= */
@@ -1840,7 +1841,7 @@ function renderHdrDrill(){const box=document.getElementById('hdrDrill');if(!box)
   box.innerHTML=`<p class="small muted">Remplis chaque champ dans l'ordre (ligne 1 de gauche à droite, puis ligne 2…) : son nom et sa taille en bits.</p>`+H.rows.map((r,ri)=>`<div class="row" style="margin:6px 0;align-items:flex-start"><span class="label" style="min-width:58px">Ligne ${ri+1}</span>${r.map(f=>{const j=i++;return `<span style="display:inline-flex;gap:4px;align-items:center"><input type="text" id="hd-n-${j}" placeholder="champ ${j+1}" style="max-width:150px;font-family:var(--body)" aria-label="Nom du champ ${j+1}"><input type="text" id="hd-b-${j}" placeholder="bits" style="max-width:56px" inputmode="numeric" aria-label="Taille du champ ${j+1}"></span>`;}).join('')}</div>`).join('')+`<div class="row" style="margin-top:8px"><button class="btn" id="hdCheck">Corriger</button><button class="btn ghost" id="hdShow">Voir la solution</button><span class="small" id="hdScore"></span></div>`;}
 document.addEventListener('click',e=>{const t=e.target;if(t.matches&&t.matches('[data-hd]')){HD=t.dataset.hd;document.querySelectorAll('[data-hd]').forEach(b=>b.classList.toggle('ghost',b.dataset.hd!==HD));renderHdrDrill();return;}
   if(t.id==='hdCheck'||t.id==='hdShow'){const fl=HDR[HD].rows.flat();let ok=0;fl.forEach((f,j)=>{const n=document.getElementById('hd-n-'+j),b=document.getElementById('hd-b-'+j);if(t.id==='hdShow'){n.value=f[0];b.value=f[1];return;}
-    const key=normTxt(f[0]);const syn=HSYN[key]||[key];const v=normTxt(n.value);const gn=v&&syn.some(s=>v.includes(normTxt(s)));const gb=parseInt(b.value,10)===f[1];n.classList.toggle('good',!!gn);n.classList.toggle('bad',!gn);b.classList.toggle('good',gb);b.classList.toggle('bad',!gb);if(!gn)n.title='Attendu : '+f[0];if(!gb)b.title='Attendu : '+f[1];if(gn&&gb)ok++;});
+    const key=normTxt(f[0]);const syn=HSYN[key]||[key];const v=normTxt(n.value);const gn=v&&syn.some(s=>hasKw(v,s));const gb=parseInt(b.value,10)===f[1];n.classList.toggle('good',!!gn);n.classList.toggle('bad',!gn);b.classList.toggle('good',gb);b.classList.toggle('bad',!gb);if(!gn)n.title='Attendu : '+f[0];if(!gb)b.title='Attendu : '+f[1];if(gn&&gb)ok++;});
    if(t.id==='hdCheck'){const sc=ok/fl.length;document.getElementById('hdScore').innerHTML=`<b>${ok}/${fl.length}</b> champs justes (nom + taille)${sc<1?' · survole une case rouge pour voir la réponse':' · parfait !'}`;const nid={ip:'n38',tcp:'n39',udp:'n40'}[HD];record(nid,sc>=0.85);S.history.push({date:today(),type:'En-tête '+HDR[HD].t,score:ok,max:fl.length,det:''});save();}}});
 
 /* ======================= ERREURS ======================= */
@@ -1921,17 +1922,17 @@ window.MZT_CONFIG={id:'reseau',module:'M351 Réseaux informatiques',prof:'Pr A. 
   // ---------- interface ----------
   const css = `
 .mzt-btn{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9999;font:700 15px system-ui,sans-serif;background:#1f5fbf;color:#fff;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
-.mzt-pan{--b:#fff;--s:#f1f4f8;--i:#14213a;--m:#5a6782;--l:#d5dbe6;--a:#1f5fbf;--w:#b5791c;--bad:#b3261e;position:fixed;right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:9999;width:min(440px,calc(100vw - 20px));height:min(680px,calc(100vh - 70px));background:var(--b);color:var(--i);border:1px solid var(--l);border-radius:12px;display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(0,0,0,.3);font:14px/1.5 system-ui,sans-serif}
+.mzt-pan{--b:#fff;--s:#f1f4f8;--i:#14213a;--m:#5a6782;--l:#d5dbe6;--a:#1f5fbf;--w:#b5791c;--bad:#b3261e;position:fixed;right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:9999;width:min(440px,calc(100vw - 20px));height:min(680px,calc(100vh - 70px));height:min(680px,calc(100dvh - 70px));max-height:calc(100vh - 20px);max-height:calc(100dvh - 20px);background:var(--b);color:var(--i);border:1px solid var(--l);border-radius:12px;display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(0,0,0,.3);font:14px/1.5 system-ui,sans-serif}
 @media (prefers-color-scheme:dark){.mzt-pan{--b:#161f33;--s:#0e1524;--i:#e6ebf5;--m:#93a0bb;--l:#2a3652;--a:#7aa7f0;--w:#e0a447;--bad:#f08a80}}
 .mzt-pan *{box-sizing:border-box}
-.mzt-h{display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid var(--l)}
-.mzt-h b{flex:0 0 auto}.mzt-h .mzt-ctx{flex:1;min-width:0;color:var(--m);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mzt-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:8px 10px;border-bottom:1px solid var(--l)}
+.mzt-h b{flex:0 0 auto}.mzt-h .mzt-ctx{flex:1 1 90px;min-width:0;color:var(--m);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mzt-pan button{font:600 12px system-ui,sans-serif;border:1px solid var(--l);background:var(--s);color:var(--i);border-radius:999px;padding:4px 10px;cursor:pointer}
 .mzt-pan button.mzt-pri{background:var(--a);color:#fff;border-color:var(--a)}
 .mzt-pan button:disabled{opacity:.5}
 .mzt-body{flex:1;min-height:0;display:flex;flex-direction:column}
 .mzt-log{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
-.mzt-m{padding:8px 11px;border-radius:10px;max-width:92%;white-space:pre-wrap;word-wrap:break-word}
+.mzt-m{padding:8px 11px;border-radius:10px;max-width:92%;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere}
 .mzt-m.a{background:var(--s);align-self:flex-start}.mzt-m.u{background:color-mix(in srgb,var(--a) 22%,transparent);align-self:flex-end}
 .mzt-m .mzt-tag{display:block;font-size:11px;color:var(--w);font-weight:700}
 .mzt-deepbtn{align-self:flex-start;border-color:var(--w)!important;color:var(--w)!important;background:transparent!important}
@@ -1947,7 +1948,15 @@ window.MZT_CONFIG={id:'reseau',module:'M351 Réseaux informatiques',prof:'Pr A. 
 .mzt-item{border:1px solid var(--l);border-radius:8px;padding:8px}
 .mzt-item .mzt-meta{font-size:11px;color:var(--m)}
 .mzt-pan input[type=search]{width:100%;font:14px system-ui,sans-serif;padding:7px;border:1px solid var(--l);border-radius:8px;background:var(--s);color:var(--i)}
-.mzt-pan input[type=checkbox]{width:auto}`;
+.mzt-pan input[type=checkbox]{width:auto}
+.mzt-pan[hidden],.mzt-btn[hidden],.mzt-pan [hidden]{display:none!important}
+.mzt-h button{flex:0 0 auto;white-space:nowrap}
+.mzt-pan #mztX{background:var(--bad);border-color:var(--bad);color:#fff}
+.mzt-m.a{white-space:normal}.mzt-m.a p{margin:0 0 6px}.mzt-m.a p:last-child{margin-bottom:0}
+.mzt-m.a ul,.mzt-m.a ol{margin:4px 0 6px;padding-left:20px}.mzt-m.a li{margin:2px 0}
+.mzt-m code{font:12.5px ui-monospace,Menlo,Consolas,monospace;background:color-mix(in srgb,var(--i) 10%,transparent);padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
+.mzt-m pre{margin:6px 0;padding:8px;overflow-x:auto;background:color-mix(in srgb,var(--i) 10%,transparent);border-radius:6px;font:12.5px ui-monospace,Menlo,Consolas,monospace;white-space:pre}
+.mzt-m pre code{background:none;padding:0}`;
   const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
   document.body.insertAdjacentHTML('beforeend', `
 <button class="mzt-btn" id="mztBtn" type="button">Tuteur</button>
@@ -2008,7 +2017,7 @@ window.MZT_CONFIG={id:'reseau',module:'M351 Réseaux informatiques',prof:'Pr A. 
     cur.msgs.forEach((m, i) => {
       const d = document.createElement('div'); d.className = 'mzt-m ' + (m.r === 'u' ? 'u' : 'a');
       if (m.d) d.innerHTML = '<span class="mzt-tag">Réponse approfondie</span>';
-      d.appendChild(document.createTextNode(m.t)); log.appendChild(d);
+      if (m.r === 'u') d.appendChild(document.createTextNode(m.t)); else d.insertAdjacentHTML('beforeend', md(m.t)); log.appendChild(d);
       if (m.r === 'a' && i === cur.msgs.length - 1 && !m.d && !busy) {
         const b = document.createElement('button'); b.type = 'button'; b.className = 'mzt-deepbtn'; b.textContent = 'Approfondir cette réponse';
         b.onclick = () => ask('Approfondis ta réponse précédente : explique plus en détail, avec un exemple complet et les pièges.', true); log.appendChild(b);
@@ -2018,7 +2027,7 @@ window.MZT_CONFIG={id:'reseau',module:'M351 Réseaux informatiques',prof:'Pr A. 
   }
   function renderList() {
     const q = norm($('#mztQ').value || ''); const ts = [...ST.threads].reverse().filter((t) => !q || norm(t.msgs.map((m) => m.t).join(' ')).includes(q));
-    $('#mztList').innerHTML = ts.length ? ts.map((t) => `<details class="mzt-item"><summary>${esc(t.title)}</summary><div class="mzt-meta">${esc(t.sec)} · ${esc(t.date)}</div>${t.msgs.map((m) => `<div class="mzt-m ${m.r === 'u' ? 'u' : 'a'}" style="margin:6px 0">${esc(m.t)}</div>`).join('')}<button type="button" data-cont="${esc(t.id)}">Continuer cette discussion</button></details>`).join('')
+    $('#mztList').innerHTML = ts.length ? ts.map((t) => `<details class="mzt-item"><summary>${esc(t.title)}</summary><div class="mzt-meta">${esc(t.sec)} · ${esc(t.date)}</div>${t.msgs.map((m) => `<div class="mzt-m ${m.r === 'u' ? 'u' : 'a'}" style="margin:6px 0">${m.r === 'u' ? esc(m.t) : md(m.t)}</div>`).join('')}<button type="button" data-cont="${esc(t.id)}">Continuer cette discussion</button></details>`).join('')
       : `<p class="mzt-note">${ST.threads.length ? 'Aucune discussion ne contient ce mot.' : 'Aucune discussion pour l\'instant.'}</p>`;
   }
   function renderMem() {
@@ -2035,7 +2044,32 @@ window.MZT_CONFIG={id:'reseau',module:'M351 Réseaux informatiques',prof:'Pr A. 
 
   // ---------- appel au tuteur ----------
   const ERR = { sampling_disabled: 'Claude n\'est pas disponible pour ton compte depuis cette page (code sampling_disabled).', session_expired: 'Ta session Claude a expiré : reconnecte-toi puis recharge la page.', capability_disabled: 'Le tuteur est désactivé dans cette vue : ouvre l\'appli directement dans Claude (pas via le lien public dans un navigateur).', not_declared: 'Le tuteur n\'est pas activé sur cette version de la page.', empty_completion: 'Pas de réponse : reformule ta question.', not_granted: 'Tu n\'as pas autorisé la page à utiliser Claude. Recharge-la et accepte la demande, ou change-le dans le menu Autorisations de l\'artifact.', rate_limited: 'Trop de questions d\'un coup, ou limite d\'usage atteinte. Réessaie dans un moment.', prompt_too_large: 'L\'extrait est trop long : ouvre une partie plus précise du cours.', image_rejected: 'Cette photo n\'est pas acceptée. Essaie un JPEG ou un PNG plus léger.', refused: 'Claude n\'a pas pu répondre à cette demande. Reformule ta question.' };
-  const visible = (t) => t.split(/\n?\s*M[ÉE]MO\s*:/i)[0].trim();
+  const visible = (t) => {
+    const L = String(t).split('\n');
+    for (let i = L.length - 1; i >= Math.max(0, L.length - 3); i--) if (/^\s*M[ÉE]MO\s*:/i.test(L[i])) return L.slice(0, i).join('\n').trim();
+    return String(t).trim();
+  };
+  // rendu léger : on échappe le HTML d'abord, puis gras, italique, code, titres, puces et blocs de code
+  const inl = (s) => {
+    const p = s.split('`'); if (p.length % 2 === 0) { const last = p.pop(); p[p.length - 1] += '`' + last; }
+    return p.map((x, i) => i % 2 ? '<code>' + esc(x) + '</code>' : esc(x).replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*\w])\*([^*\n]+)\*(?![*\w])/g, '$1<em>$2</em>')).join('');
+  };
+  const md = (t) => {
+    const out = []; let list = null, code = null;
+    const flush = () => { if (list) { out.push('</' + list + '>'); list = null; } };
+    String(t).split('\n').forEach((raw) => {
+      if (/^\s*```/.test(raw)) { if (code === null) { flush(); code = []; } else { out.push('<pre>' + esc(code.join('\n')) + '</pre>'); code = null; } return; }
+      if (code !== null) { code.push(raw); return; }
+      let m;
+      if ((m = raw.match(/^\s*#{1,6}\s+(.*)$/))) { flush(); out.push('<p><strong>' + inl(m[1]) + '</strong></p>'); }
+      else if ((m = raw.match(/^\s*[-*•]\s+(.*)$/))) { if (list !== 'ul') { flush(); out.push('<ul>'); list = 'ul'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if ((m = raw.match(/^\s*\d+[.)]\s+(.*)$/))) { if (list !== 'ol') { flush(); out.push('<ol>'); list = 'ol'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if (!raw.trim()) flush();
+      else { flush(); out.push('<p>' + inl(raw) + '</p>'); }
+    });
+    if (code !== null) out.push('<pre>' + esc(code.join('\n')) + '</pre>');
+    flush(); return out.join('');
+  };
   async function ask(q, deep) {
     q = (q || '').trim(); deep = deep || $('#mztDeep').checked;
     if (busy || !q) return; if (!sample) { note(); return; }
@@ -2053,7 +2087,7 @@ window.MZT_CONFIG={id:'reseau',module:'M351 Réseaux informatiques',prof:'Pr A. 
     const lastQ = ST.threads.flatMap((t) => t.msgs.filter((m) => m.r === 'u').map((m) => `[${t.sec}] ${m.t.slice(0, 100)}`)).slice(-6);
     if (lastQ.length) mem.push('SES DERNIÈRES QUESTIONS :\n' + lastQ.map((x) => '- ' + x).join('\n'));
     const rules = `Tu es le tuteur de ${C.student}, pour le module ${C.module}${C.prof ? ' du ' + C.prof : ''}. Il apprend souvent la notion pour la première fois.
-Règles : réponds en français simple, en texte brut (tirets, étapes numérotées, pas de tableaux markdown). ${style} Appuie-toi d'abord sur l'EXTRAIT ci-dessous et sur les conventions du prof ; si une source générale diffère du cours, signale l'écart et dis quelle version utiliser à l'examen (celle du prof). Pour un calcul, pose chaque étape et vérifie-la. S'il envoie une réponse ou une photo de brouillon, corrige étape par étape et nomme précisément l'erreur. Si tu n'es pas sûr, dis-le. S'il demande un mini-exercice, donne l'exercice sans la solution.
+Règles : réponds en français simple, en Markdown léger (**gras** pour les termes clés, tirets, étapes numérotées, formules et calculs entre accents graves ; pas de tableaux). ${style} Appuie-toi d'abord sur l'EXTRAIT ci-dessous et sur les conventions du prof ; si une source générale diffère du cours, signale l'écart et dis quelle version utiliser à l'examen (celle du prof). Pour un calcul, pose chaque étape et vérifie-la. S'il envoie une réponse ou une photo de brouillon, corrige étape par étape et nomme précisément l'erreur. Si tu n'es pas sûr, dis-le. S'il demande un mini-exercice, donne l'exercice sans la solution.
 Utilise sa mémoire pour faire des liens avec ses confusions passées, sans la réciter.
 Termine TOUJOURS par une dernière ligne séparée au format exact « MÉMO: … » qui résume en 15 mots maximum la difficulté révélée par sa question (ou « MÉMO: rien »). Cette ligne lui est cachée.
 ${C.conventions ? 'CONVENTIONS DU PROF : ' + C.conventions + '\n' : ''}MÉMOIRE DE L'ÉLÈVE :
@@ -2064,11 +2098,11 @@ ${c.text.slice(0, deep ? 9000 : 3500)}`;
     while (recent.length && recent[0].role !== 'user') recent.shift();
     const msgs = [...recent.filter((m) => m.content && m.content.trim()), { role: 'user', content: q }]; while (msgs.length > 1 && msgs[0].role !== 'user') msgs.shift(); msgs[0] = { role: 'user', content: rules + '\n\n---\nQuestion : ' + msgs[0].content };
     ctl = new AbortController();
-    const opts = { modelTier: deep ? 'complex' : 'quick', cache: false, signal: ctl.signal, onText: ({ text }) => { out.textContent = visible(text); $('#mztLog').scrollTop = 1e9; } };
+    const opts = { modelTier: deep ? 'complex' : 'quick', cache: false, signal: ctl.signal, onText: ({ text }) => { out.innerHTML = md(visible(text)); $('#mztLog').scrollTop = 1e9; } };
     if (img) opts.images = [img];
     try {
       const r = await sample(msgs, opts);
-      const mm = r.text.match(/M[ÉE]MO\s*:\s*(.+)\s*$/i);
+      const mm = r.text.match(/(?:^|\n)\s*M[ÉE]MO\s*:\s*(.+)\s*$/i);
       cur.msgs.push({ r: 'a', t: visible(r.text) + (r.truncated ? '\n\n(Réponse coupée : pose une question plus ciblée.)' : ''), d: !!deep });
       if (mm && !/^\s*rien/i.test(mm[1])) { ST.memos.push({ date: today(), text: mm[1].trim().slice(0, 160) }); if (ST.memos.length > 30) ST.memos.shift(); saveMemos(); }
       await saveThread(cur);
@@ -2086,6 +2120,7 @@ ${c.text.slice(0, deep ? 9000 : 3500)}`;
   // ---------- événements ----------
   $('#mztBtn').onclick = () => openPanel(null);
   $('#mztX').onclick = closePanel;
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#mztPan').hidden) closePanel(); });
   $('#mztTabH').onclick = () => view($('#mztHist').hidden ? 'hist' : 'chat');
   $('#mztTabM').onclick = () => view($('#mztMem').hidden ? 'mem' : 'chat');
   $('#mztQ').oninput = renderList;

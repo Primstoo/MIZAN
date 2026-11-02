@@ -6,7 +6,7 @@
 .xtab{border-collapse:collapse;font-size:14px}.xtab th,.xtab td{border:1px solid var(--line);padding:5px 10px;text-align:center}.xtab .m{font-weight:700;background:var(--accent-soft)}
 .xmono{font-family:ui-monospace,monospace;font-size:13.5px;white-space:pre;line-height:1.5}
 .xchk{border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:10px 0}.xchk summary{cursor:pointer;font-weight:700}.xchk i{color:var(--muted)}
-</style></head><body>
+</style><style>@media(max-width:780px){p,li,td,th,.out,.f,.formula{overflow-wrap:anywhere}}</style></head><body>
 <title>Probas S3 · Révision</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1562,17 +1562,17 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
   // ---------- interface ----------
   const css = `
 .mzt-btn{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9999;font:700 15px system-ui,sans-serif;background:#1f5fbf;color:#fff;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
-.mzt-pan{--b:#fff;--s:#f1f4f8;--i:#14213a;--m:#5a6782;--l:#d5dbe6;--a:#1f5fbf;--w:#b5791c;--bad:#b3261e;position:fixed;right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:9999;width:min(440px,calc(100vw - 20px));height:min(680px,calc(100vh - 70px));background:var(--b);color:var(--i);border:1px solid var(--l);border-radius:12px;display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(0,0,0,.3);font:14px/1.5 system-ui,sans-serif}
+.mzt-pan{--b:#fff;--s:#f1f4f8;--i:#14213a;--m:#5a6782;--l:#d5dbe6;--a:#1f5fbf;--w:#b5791c;--bad:#b3261e;position:fixed;right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:9999;width:min(440px,calc(100vw - 20px));height:min(680px,calc(100vh - 70px));height:min(680px,calc(100dvh - 70px));max-height:calc(100vh - 20px);max-height:calc(100dvh - 20px);background:var(--b);color:var(--i);border:1px solid var(--l);border-radius:12px;display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(0,0,0,.3);font:14px/1.5 system-ui,sans-serif}
 @media (prefers-color-scheme:dark){.mzt-pan{--b:#161f33;--s:#0e1524;--i:#e6ebf5;--m:#93a0bb;--l:#2a3652;--a:#7aa7f0;--w:#e0a447;--bad:#f08a80}}
 .mzt-pan *{box-sizing:border-box}
-.mzt-h{display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid var(--l)}
-.mzt-h b{flex:0 0 auto}.mzt-h .mzt-ctx{flex:1;min-width:0;color:var(--m);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mzt-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:8px 10px;border-bottom:1px solid var(--l)}
+.mzt-h b{flex:0 0 auto}.mzt-h .mzt-ctx{flex:1 1 90px;min-width:0;color:var(--m);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mzt-pan button{font:600 12px system-ui,sans-serif;border:1px solid var(--l);background:var(--s);color:var(--i);border-radius:999px;padding:4px 10px;cursor:pointer}
 .mzt-pan button.mzt-pri{background:var(--a);color:#fff;border-color:var(--a)}
 .mzt-pan button:disabled{opacity:.5}
 .mzt-body{flex:1;min-height:0;display:flex;flex-direction:column}
 .mzt-log{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
-.mzt-m{padding:8px 11px;border-radius:10px;max-width:92%;white-space:pre-wrap;word-wrap:break-word}
+.mzt-m{padding:8px 11px;border-radius:10px;max-width:92%;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere}
 .mzt-m.a{background:var(--s);align-self:flex-start}.mzt-m.u{background:color-mix(in srgb,var(--a) 22%,transparent);align-self:flex-end}
 .mzt-m .mzt-tag{display:block;font-size:11px;color:var(--w);font-weight:700}
 .mzt-deepbtn{align-self:flex-start;border-color:var(--w)!important;color:var(--w)!important;background:transparent!important}
@@ -1588,7 +1588,15 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
 .mzt-item{border:1px solid var(--l);border-radius:8px;padding:8px}
 .mzt-item .mzt-meta{font-size:11px;color:var(--m)}
 .mzt-pan input[type=search]{width:100%;font:14px system-ui,sans-serif;padding:7px;border:1px solid var(--l);border-radius:8px;background:var(--s);color:var(--i)}
-.mzt-pan input[type=checkbox]{width:auto}`;
+.mzt-pan input[type=checkbox]{width:auto}
+.mzt-pan[hidden],.mzt-btn[hidden],.mzt-pan [hidden]{display:none!important}
+.mzt-h button{flex:0 0 auto;white-space:nowrap}
+.mzt-pan #mztX{background:var(--bad);border-color:var(--bad);color:#fff}
+.mzt-m.a{white-space:normal}.mzt-m.a p{margin:0 0 6px}.mzt-m.a p:last-child{margin-bottom:0}
+.mzt-m.a ul,.mzt-m.a ol{margin:4px 0 6px;padding-left:20px}.mzt-m.a li{margin:2px 0}
+.mzt-m code{font:12.5px ui-monospace,Menlo,Consolas,monospace;background:color-mix(in srgb,var(--i) 10%,transparent);padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
+.mzt-m pre{margin:6px 0;padding:8px;overflow-x:auto;background:color-mix(in srgb,var(--i) 10%,transparent);border-radius:6px;font:12.5px ui-monospace,Menlo,Consolas,monospace;white-space:pre}
+.mzt-m pre code{background:none;padding:0}`;
   const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
   document.body.insertAdjacentHTML('beforeend', `
 <button class="mzt-btn" id="mztBtn" type="button">Tuteur</button>
@@ -1649,7 +1657,7 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
     cur.msgs.forEach((m, i) => {
       const d = document.createElement('div'); d.className = 'mzt-m ' + (m.r === 'u' ? 'u' : 'a');
       if (m.d) d.innerHTML = '<span class="mzt-tag">Réponse approfondie</span>';
-      d.appendChild(document.createTextNode(m.t)); log.appendChild(d);
+      if (m.r === 'u') d.appendChild(document.createTextNode(m.t)); else d.insertAdjacentHTML('beforeend', md(m.t)); log.appendChild(d);
       if (m.r === 'a' && i === cur.msgs.length - 1 && !m.d && !busy) {
         const b = document.createElement('button'); b.type = 'button'; b.className = 'mzt-deepbtn'; b.textContent = 'Approfondir cette réponse';
         b.onclick = () => ask('Approfondis ta réponse précédente : explique plus en détail, avec un exemple complet et les pièges.', true); log.appendChild(b);
@@ -1659,7 +1667,7 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
   }
   function renderList() {
     const q = norm($('#mztQ').value || ''); const ts = [...ST.threads].reverse().filter((t) => !q || norm(t.msgs.map((m) => m.t).join(' ')).includes(q));
-    $('#mztList').innerHTML = ts.length ? ts.map((t) => `<details class="mzt-item"><summary>${esc(t.title)}</summary><div class="mzt-meta">${esc(t.sec)} · ${esc(t.date)}</div>${t.msgs.map((m) => `<div class="mzt-m ${m.r === 'u' ? 'u' : 'a'}" style="margin:6px 0">${esc(m.t)}</div>`).join('')}<button type="button" data-cont="${esc(t.id)}">Continuer cette discussion</button></details>`).join('')
+    $('#mztList').innerHTML = ts.length ? ts.map((t) => `<details class="mzt-item"><summary>${esc(t.title)}</summary><div class="mzt-meta">${esc(t.sec)} · ${esc(t.date)}</div>${t.msgs.map((m) => `<div class="mzt-m ${m.r === 'u' ? 'u' : 'a'}" style="margin:6px 0">${m.r === 'u' ? esc(m.t) : md(m.t)}</div>`).join('')}<button type="button" data-cont="${esc(t.id)}">Continuer cette discussion</button></details>`).join('')
       : `<p class="mzt-note">${ST.threads.length ? 'Aucune discussion ne contient ce mot.' : 'Aucune discussion pour l\'instant.'}</p>`;
   }
   function renderMem() {
@@ -1676,7 +1684,32 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
 
   // ---------- appel au tuteur ----------
   const ERR = { not_granted: 'Tu n\'as pas autorisé la page à utiliser Claude. Recharge-la et accepte la demande, ou change-le dans le menu Autorisations de l\'artifact.', rate_limited: 'Trop de questions d\'un coup, ou limite d\'usage atteinte. Réessaie dans un moment.', prompt_too_large: 'L\'extrait est trop long : ouvre une partie plus précise du cours.', image_rejected: 'Cette photo n\'est pas acceptée. Essaie un JPEG ou un PNG plus léger.', refused: 'Claude n\'a pas pu répondre à cette demande. Reformule ta question.' };
-  const visible = (t) => t.split(/\n?\s*M[ÉE]MO\s*:/i)[0].trim();
+  const visible = (t) => {
+    const L = String(t).split('\n');
+    for (let i = L.length - 1; i >= Math.max(0, L.length - 3); i--) if (/^\s*M[ÉE]MO\s*:/i.test(L[i])) return L.slice(0, i).join('\n').trim();
+    return String(t).trim();
+  };
+  // rendu léger : on échappe le HTML d'abord, puis gras, italique, code, titres, puces et blocs de code
+  const inl = (s) => {
+    const p = s.split('`'); if (p.length % 2 === 0) { const last = p.pop(); p[p.length - 1] += '`' + last; }
+    return p.map((x, i) => i % 2 ? '<code>' + esc(x) + '</code>' : esc(x).replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*\w])\*([^*\n]+)\*(?![*\w])/g, '$1<em>$2</em>')).join('');
+  };
+  const md = (t) => {
+    const out = []; let list = null, code = null;
+    const flush = () => { if (list) { out.push('</' + list + '>'); list = null; } };
+    String(t).split('\n').forEach((raw) => {
+      if (/^\s*```/.test(raw)) { if (code === null) { flush(); code = []; } else { out.push('<pre>' + esc(code.join('\n')) + '</pre>'); code = null; } return; }
+      if (code !== null) { code.push(raw); return; }
+      let m;
+      if ((m = raw.match(/^\s*#{1,6}\s+(.*)$/))) { flush(); out.push('<p><strong>' + inl(m[1]) + '</strong></p>'); }
+      else if ((m = raw.match(/^\s*[-*•]\s+(.*)$/))) { if (list !== 'ul') { flush(); out.push('<ul>'); list = 'ul'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if ((m = raw.match(/^\s*\d+[.)]\s+(.*)$/))) { if (list !== 'ol') { flush(); out.push('<ol>'); list = 'ol'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if (!raw.trim()) flush();
+      else { flush(); out.push('<p>' + inl(raw) + '</p>'); }
+    });
+    if (code !== null) out.push('<pre>' + esc(code.join('\n')) + '</pre>');
+    flush(); return out.join('');
+  };
   async function ask(q, deep) {
     q = (q || '').trim(); deep = deep || $('#mztDeep').checked;
     if (busy || !q) return; if (!sample) { note(); return; }
@@ -1694,7 +1727,7 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
     const lastQ = ST.threads.flatMap((t) => t.msgs.filter((m) => m.r === 'u').map((m) => `[${t.sec}] ${m.t.slice(0, 100)}`)).slice(-6);
     if (lastQ.length) mem.push('SES DERNIÈRES QUESTIONS :\n' + lastQ.map((x) => '- ' + x).join('\n'));
     const rules = `Tu es le tuteur de ${C.student}, pour le module ${C.module}${C.prof ? ' du ' + C.prof : ''}. Il apprend souvent la notion pour la première fois.
-Règles : réponds en français simple, en texte brut (tirets, étapes numérotées, pas de tableaux markdown). ${style} Appuie-toi d'abord sur l'EXTRAIT ci-dessous et sur les conventions du prof ; si une source générale diffère du cours, signale l'écart et dis quelle version utiliser à l'examen (celle du prof). Pour un calcul, pose chaque étape et vérifie-la. S'il envoie une réponse ou une photo de brouillon, corrige étape par étape et nomme précisément l'erreur. Si tu n'es pas sûr, dis-le. S'il demande un mini-exercice, donne l'exercice sans la solution.
+Règles : réponds en français simple, en Markdown léger (**gras** pour les termes clés, tirets, étapes numérotées, formules et calculs entre accents graves ; pas de tableaux). ${style} Appuie-toi d'abord sur l'EXTRAIT ci-dessous et sur les conventions du prof ; si une source générale diffère du cours, signale l'écart et dis quelle version utiliser à l'examen (celle du prof). Pour un calcul, pose chaque étape et vérifie-la. S'il envoie une réponse ou une photo de brouillon, corrige étape par étape et nomme précisément l'erreur. Si tu n'es pas sûr, dis-le. S'il demande un mini-exercice, donne l'exercice sans la solution.
 Utilise sa mémoire pour faire des liens avec ses confusions passées, sans la réciter.
 Termine TOUJOURS par une dernière ligne séparée au format exact « MÉMO: … » qui résume en 15 mots maximum la difficulté révélée par sa question (ou « MÉMO: rien »). Cette ligne lui est cachée.
 ${C.conventions ? 'CONVENTIONS DU PROF : ' + C.conventions + '\n' : ''}MÉMOIRE DE L'ÉLÈVE :
@@ -1705,11 +1738,11 @@ ${c.text.slice(0, deep ? 9000 : 3500)}`;
     while (recent.length && recent[0].role !== 'user') recent.shift();
     const msgs = [...recent.filter((m) => m.content && m.content.trim()), { role: 'user', content: q }]; while (msgs.length > 1 && msgs[0].role !== 'user') msgs.shift(); msgs[0] = { role: 'user', content: rules + '\n\n---\nQuestion : ' + msgs[0].content };
     ctl = new AbortController();
-    const opts = { modelTier: deep ? 'complex' : 'quick', cache: false, signal: ctl.signal, onText: ({ text }) => { out.textContent = visible(text); $('#mztLog').scrollTop = 1e9; } };
+    const opts = { modelTier: deep ? 'complex' : 'quick', cache: false, signal: ctl.signal, onText: ({ text }) => { out.innerHTML = md(visible(text)); $('#mztLog').scrollTop = 1e9; } };
     if (img) opts.images = [img];
     try {
       const r = await sample(msgs, opts);
-      const mm = r.text.match(/M[ÉE]MO\s*:\s*(.+)\s*$/i);
+      const mm = r.text.match(/(?:^|\n)\s*M[ÉE]MO\s*:\s*(.+)\s*$/i);
       cur.msgs.push({ r: 'a', t: visible(r.text) + (r.truncated ? '\n\n(Réponse coupée : pose une question plus ciblée.)' : ''), d: !!deep });
       if (mm && !/^\s*rien/i.test(mm[1])) { ST.memos.push({ date: today(), text: mm[1].trim().slice(0, 160) }); if (ST.memos.length > 30) ST.memos.shift(); saveMemos(); }
       await saveThread(cur);
@@ -1727,6 +1760,7 @@ ${c.text.slice(0, deep ? 9000 : 3500)}`;
   // ---------- événements ----------
   $('#mztBtn').onclick = () => openPanel(null);
   $('#mztX').onclick = closePanel;
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#mztPan').hidden) closePanel(); });
   $('#mztTabH').onclick = () => view($('#mztHist').hidden ? 'hist' : 'chat');
   $('#mztTabM').onclick = () => view($('#mztMem').hidden ? 'mem' : 'chat');
   $('#mztQ').oninput = renderList;
