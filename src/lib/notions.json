@@ -299,6 +299,24 @@
     "t": "En-tête UDP (signal du prof)",
     "imp": 4,
     "g": "s14"
+   },
+   {
+    "id": "n41",
+    "t": "Ch2 · Trame Ethernet : champs et décodage",
+    "imp": 4,
+    "g": "s11"
+   },
+   {
+    "id": "n42",
+    "t": "Ch2 · TCP : Seq, ACK cumulatif, fenêtres (rwnd, cwnd)",
+    "imp": 5,
+    "g": "s10"
+   },
+   {
+    "id": "n43",
+    "t": "Domaines de collision et de diffusion",
+    "imp": 4,
+    "g": "s3"
    }
   ]
  },
