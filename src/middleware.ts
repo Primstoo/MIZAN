@@ -21,17 +21,18 @@ export async function middleware(request: NextRequest) {
     }
   );
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user && request.nextUrl.pathname.startsWith("/app")) {
+  // Une redirection doit garder les cookies posés par Supabase (session rafraîchie, ou session expirée effacée) :
+  // sans ça, un vieux jeton reste dans le navigateur et chaque requête refait l'erreur « refresh token not found ».
+  const vers = (chemin: string) => {
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    return NextResponse.redirect(url);
-  }
-  if (user && request.nextUrl.pathname === "/login") {
-    const url = request.nextUrl.clone();
-    url.pathname = "/app";
-    url.search = "";
-    return NextResponse.redirect(url);
-  }
+    url.pathname = chemin;
+    if (chemin === "/app") url.search = "";
+    const r = NextResponse.redirect(url);
+    response.cookies.getAll().forEach((c) => r.cookies.set(c));
+    return r;
+  };
+  if (!user && request.nextUrl.pathname.startsWith("/app")) return vers("/login");
+  if (user && request.nextUrl.pathname === "/login") return vers("/app");
   return response;
 }
 

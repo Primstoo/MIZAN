@@ -41,10 +41,16 @@ async function appel(url: string, init: RequestInit) {
 // ---------- Réponse en continu (le texte s'affiche pendant qu'il s'écrit) ----------
 type Flux = AsyncGenerator<string, { truncated: boolean }>;
 
+// Un flux qui s'arrête au milieu (aucun octet pendant DELAI) est coupé : sinon la fonction attend jusqu'à maxDuration.
 async function* lignesSSE(r: Response): AsyncGenerator<string> {
   const dec = new TextDecoder(); const rd = r.body!.getReader(); let buf = "";
   for (;;) {
-    const { value, done } = await rd.read(); if (done) break;
+    let t: ReturnType<typeof setTimeout> | undefined;
+    const { value, done } = await Promise.race([
+      rd.read(),
+      new Promise<never>((_, ko) => { t = setTimeout(() => { ko(new Error(`flux interrompu (${DELAI / 1000} s sans données)`)); rd.cancel().catch(() => {}); }, DELAI); }),
+    ]).finally(() => clearTimeout(t));
+    if (done) break;
     buf += dec.decode(value, { stream: true });
     let i; while ((i = buf.indexOf("\n")) >= 0) { const l = buf.slice(0, i).trim(); buf = buf.slice(i + 1); if (l.startsWith("data:")) yield l.slice(5).trim(); }
   }
@@ -130,6 +136,8 @@ export async function POST(req: Request) {
       const envoi = (o: object) => ctl.enqueue(enc.encode(JSON.stringify(o) + "\n"));
       const errors: string[] = [];
       for (let k = 0; k < candidats.length; k++) {
+        // Budget global : au-delà, Vercel couperait la fonction (maxDuration) sans message clair pour l'élève.
+        if (Date.now() - t0 > (maxDuration - 20) * 1000) { errors.push("budget de temps épuisé"); break; }
         let recu = 0;
         try {
           const g = candidats[k]();
@@ -139,7 +147,7 @@ export async function POST(req: Request) {
           }
           if (recu) {
             console.log(`[tutor] ok · ${noms[k]} · ${Date.now() - t0} ms · ${msgs.length} messages`);
-            if (errors.length) console.error("[tutor]", errors.join(" | "));
+            if (errors.length) console.warn("[tutor] secours utilisé ·", errors.join(" | ")); // la réponse est bien partie : simple avertissement
             envoi({ fin: true, truncated: r.value.truncated, restant: QUOTA - used - 1 }); ctl.close(); return;
           }
           errors.push(`${noms[k]} : réponse vide`);
