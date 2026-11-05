@@ -1,4 +1,4 @@
-/* MIZAN · pont entre un module (page HTML autonome) et la plateforme.
+/* ToumaiLearn · pont entre un module (page HTML autonome) et la plateforme.
    Chargé en tout premier dans chaque module. Hors de Claude, il fournit
    window.claude.use(...) avec la même interface que les artifacts Claude :
    - "sample" : le tuteur, appelé via /api/tutor (clé IA côté serveur, quota par élève) ;

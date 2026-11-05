@@ -61,7 +61,7 @@ export default async function Moi() {
 
       <section className="bloc">
         <h2>Inviter des camarades</h2>
-        <p className="muted small">MIZAN est en bêta privée : chaque code fait entrer quelques personnes.</p>
+        <p className="muted small">ToumaiLearn est en bêta privée : chaque code fait entrer quelques personnes.</p>
         {(inv ?? []).map((i) => (
           <p key={i.code} className="row"><code className="code">{i.code}</code><span className="small muted">{i.max_uses - i.uses} place{i.max_uses - i.uses > 1 ? "s" : ""} restante{i.max_uses - i.uses > 1 ? "s" : ""}</span><Copier texte={i.code} /></p>
         ))}

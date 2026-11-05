@@ -397,7 +397,7 @@ details{margin:4px 0}summary{cursor:pointer;font-weight:600;color:var(--acc2)}de
 </div>
 
 <script>
-/* MIZAN : schémas en tête de chaque leçon (Étape 1 · Comprendre). */
+/* ToumaiLearn : schémas en tête de chaque leçon (Étape 1 · Comprendre). */
 let CFN=0;const CFS=(inner,h,aria)=>{const id='cfA'+(++CFN);return `<figure class="cfig"><svg viewBox="0 0 640 ${h}" role="img" aria-label="${aria}" style="width:100%;min-width:480px;color:var(--ink)" font-family="var(--body),system-ui,sans-serif" font-size="12"><defs><marker id="${id}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/></marker></defs>${inner.replace(/#cfA\)/g,'#'+id+')')}</svg></figure>`};
 const box=(x,y,w,h,t,sub,fill)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6" fill="${fill||'var(--panel)'}" stroke="currentColor"/><text x="${x+w/2}" y="${y+(sub?h/2-2:h/2+4)}" text-anchor="middle" font-weight="700">${t}</text>${sub?`<text x="${x+w/2}" y="${y+h/2+13}" text-anchor="middle" font-size="11">${sub}</text>`:''}`;
 const arr=(x1,y1,x2,y2,dash)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="currentColor" ${dash?'stroke-dasharray="5 4"':''} marker-end="url(#cfA)"/>`;
@@ -1311,7 +1311,7 @@ function exHist(){
 window.MZT_CONFIG={id:'crypto',module:'Cryptographie (partie 1)',prof:'Pr A. Farchane',student:'un étudiant de licence (FSABM)',conventions:'A=0…Z=25, calculs modulo 26 ; Playfair : W supprimé et remplacé par V ; LFSR : s0 sort en premier, nouveau bit = somme des p_j·s_j mod 2 ; transposition par permutation (TD1) : c_j = m_K[j] par blocs ; clé inverse de Vigenère = 26 − k.',getContext:function(){var s=[].slice.call(document.querySelectorAll('section[data-tab]')).find(function(x){return !x.hidden});var k=s?s.dataset.tab:'carte';var t=(typeof L!=='undefined'&&L[k])?L[k].replace(/<[^>]+>/g,' ').replace(/\s+/g,' '):'';var f=(typeof PR!=='undefined'&&PR[k]&&PR[k].wrong&&PR[k].wrong.length)?' QUESTIONS RATÉES À SON ÉVALUATION : '+PR[k].wrong.join(' | '):'';return t?{label:(typeof NAMES!=='undefined'&&NAMES[k])||k,text:t+f}:null}};
 </script>
 <script>
-/* MIZAN · tuteur commun (bouton flottant présent sur chaque section)
+/* ToumaiLearn · tuteur commun (bouton flottant présent sur chaque section)
    Configuration attendue avant ce script : window.MZT_CONFIG = {
      id: 'crypto',                      // identifiant court du module (stockage)
      module: 'Cryptographie',           // nom affiché et donné au tuteur

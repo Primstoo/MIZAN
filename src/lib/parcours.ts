@@ -58,10 +58,10 @@ const VOCAB: Record<string, Record<Etape["k"], string>> = {
   "reseaux-m351": { rev: "Revoir tes flashcards en retard", lec: "Une section du cours", ecr: "3 questions en Rédaction", ent: "10 calculs (onglet Calculs)", gros: "Le TD inédit, en conditions réelles" },
   archi: { rev: "Revoir tes cartes", lec: "Une section du cours", ecr: "Un exercice de l'Atelier", ent: "Un exercice du TD / TP", gros: "L'examen blanc du module, chronométré" },
   probas: { rev: "Revoir tes cartes", lec: "Une notion du cours", ecr: "Un exercice-type", ent: "10 calculs (onglet Calculs)", gros: "Une annale, en conditions réelles" },
-  crypto: { rev: "Revoir tes cartes", lec: "Un chapitre du cours, en entier", ecr: "Le quiz de fin de chapitre", ent: "Les exercices du chapitre (chiffrer, déchiffrer)", gros: "L'examen blanc MIZAN (20 min)" },
+  crypto: { rev: "Revoir tes cartes", lec: "Un chapitre du cours, en entier", ecr: "Le quiz de fin de chapitre", ent: "Les exercices du chapitre (chiffrer, déchiffrer)", gros: "L'examen blanc ToumaiLearn (20 min)" },
   uml: { rev: "Revoir tes cartes", lec: "Un chapitre du cours", ecr: "Le diagramme d'exercice du chapitre", ent: "Refaire un diagramme sans regarder le corrigé", gros: "L'examen blanc du module, chronométré" },
 };
-const VOCAB_DEFAUT = { rev: "Revoir tes cartes", lec: "Une section du cours", ecr: "Le quiz de la section", ent: "Une série d'exercices", gros: "L'examen blanc MIZAN (20 min)" };
+const VOCAB_DEFAUT = { rev: "Revoir tes cartes", lec: "Une section du cours", ecr: "Le quiz de la section", ent: "Une série d'exercices", gros: "L'examen blanc ToumaiLearn (20 min)" };
 
 function etapesDuJour(minutes: number, reste: number, slug?: string): Etape[] {
   const v = (slug && VOCAB[slug]) || VOCAB_DEFAUT;

@@ -1,9 +1,9 @@
-// Page publique : présente MIZAN sans dévoiler le catalogue (réservé aux membres).
+// Page publique : présente ToumaiLearn sans dévoiler le catalogue (réservé aux membres).
 export default function Accueil() {
   return (
     <main className="land">
       <header className="page top nob">
-        <span className="logo">MIZAN</span>
+        <span className="logo">ToumaiLearn</span>
         <a href="/login" className="btn small">Se connecter</a>
       </header>
 
@@ -35,7 +35,7 @@ export default function Accueil() {
         </ol>
       </section>
 
-      <footer className="page foot muted small">MIZAN · conçu à Béni Mellal par un étudiant de la FSABM</footer>
+      <footer className="page foot muted small">ToumaiLearn · conçu à Béni Mellal par un étudiant de la FSABM</footer>
     </main>
   );
 }

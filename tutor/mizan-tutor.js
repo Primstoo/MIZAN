@@ -1,4 +1,4 @@
-/* MIZAN · tuteur commun (bouton flottant présent sur chaque section)
+/* ToumaiLearn · tuteur commun (bouton flottant présent sur chaque section)
    Configuration attendue avant ce script : window.MZT_CONFIG = {
      id: 'crypto',                      // identifiant court du module (stockage)
      module: 'Cryptographie',           // nom affiché et donné au tuteur

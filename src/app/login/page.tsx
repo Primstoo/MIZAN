@@ -65,7 +65,7 @@ export default function Login() {
   return (
     <main className="auth">
       <section className="auth-brand">
-        <a href="/" className="logo light">MIZAN</a>
+        <a href="/" className="logo light">ToumaiLearn</a>
         <div>
           <p className="auth-tag">Réviser le cours de <em>ton</em> prof.</p>
           <ul className="auth-points">

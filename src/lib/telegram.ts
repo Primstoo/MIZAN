@@ -16,7 +16,7 @@ export const memeSecret = (recu: string | null, attendu: string) => {
   return a.length === b.length && timingSafeEqual(a, b);
 };
 export const nomBot = () => process.env.TELEGRAM_BOT_USERNAME || "";
-const site = () => process.env.SITE_URL || "https://mizan-five-iota.vercel.app";
+const site = () => process.env.SITE_URL || "https://toumailearn.app";
 
 export async function envoyer(chatId: number | string, texte: string, bouton?: { t: string; url: string }) {
   const r = await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`, {

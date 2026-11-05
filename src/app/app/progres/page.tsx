@@ -92,7 +92,7 @@ export default async function Progres() {
                 <input name="note" inputMode="decimal" placeholder="Note sur 20" defaultValue={reelle ? String(reelle.note) : ""} style={{ maxWidth: 120 }} required />
                 <button className="btn small">Enregistrer</button>
               </form>
-              <p className="small muted">Elle sert à vérifier si la note prévue par MIZAN est juste.</p>
+              <p className="small muted">Elle sert à vérifier si la note prévue par ToumaiLearn est juste.</p>
             </details>
           </section>
         );

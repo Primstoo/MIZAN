@@ -2,10 +2,10 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "MIZAN · Révise le cours de ton prof", template: "%s · MIZAN" },
+  title: { default: "ToumaiLearn · Révise le cours de ton prof", template: "%s · ToumaiLearn" },
   description: "Plateforme de révision pour les étudiants de la FSABM : le cours de ton prof expliqué, des exercices corrigés, un tuteur IA et ta progression mesurée.",
-  applicationName: "MIZAN",
-  openGraph: { title: "MIZAN", description: "Révise le cours de ton prof, pas un cours générique.", locale: "fr_MA", type: "website" },
+  applicationName: "ToumaiLearn",
+  openGraph: { title: "ToumaiLearn", description: "Révise le cours de ton prof, pas un cours générique.", locale: "fr_MA", type: "website" },
 };
 
 export const viewport: Viewport = { themeColor: "#0e6e6a", width: "device-width", initialScale: 1 };

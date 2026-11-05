@@ -252,7 +252,7 @@ export async function lienTelegram(): Promise<string> {
 
 export async function activerWebhook(): Promise<string> {
   await chef();
-  const site = process.env.SITE_URL || "https://mizan-five-iota.vercel.app";
+  const site = process.env.SITE_URL || "https://toumailearn.app";
   const r = await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/setWebhook`, {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ url: `${site}/api/telegram/webhook`, secret_token: secretWebhook(), allowed_updates: ["message"] }),

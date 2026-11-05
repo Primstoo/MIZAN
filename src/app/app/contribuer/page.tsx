@@ -35,7 +35,7 @@ export default async function Contribuer() {
           </ul>
         ) : <p className="small muted">Aucun envoi pour l&apos;instant.</p>}
       </section>
-      <p className="small muted bloc">Les documents restent privés : seule l&apos;équipe MIZAN les voit. Ils ne sont jamais publiés tels quels ; seul un contenu de révision retravaillé est proposé aux élèves.</p>
+      <p className="small muted bloc">Les documents restent privés : seule l&apos;équipe ToumaiLearn les voit. Ils ne sont jamais publiés tels quels ; seul un contenu de révision retravaillé est proposé aux élèves.</p>
     </main>
   );
 }

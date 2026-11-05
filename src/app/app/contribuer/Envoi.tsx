@@ -50,7 +50,7 @@ export default function Envoi({ modules }: { modules: { slug: string; titre: str
       <label>Module
         <select value={module} onChange={(e) => setModule(e.target.value)}>
           {modules.map((m) => <option key={m.slug} value={m.slug}>{m.titre}</option>)}
-          <option value="autre">Un autre module (pas encore sur MIZAN)</option>
+          <option value="autre">Un autre module (pas encore sur ToumaiLearn)</option>
         </select>
       </label>
       {module === "autre" && <input value={libre} onChange={(e) => setLibre(e.target.value)} placeholder="Nom du module et du prof (ex. Analyse 2, Pr X)" />}

@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
 
-// Permet d'« installer » MIZAN sur l'écran d'accueil du téléphone, comme une appli.
+// Permet d'« installer » ToumaiLearn sur l'écran d'accueil du téléphone, comme une appli.
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "MIZAN · Révision",
-    short_name: "MIZAN",
+    name: "ToumaiLearn",
+    short_name: "ToumaiLearn",
     description: "Révise le cours de ton prof : leçons expliquées, exercices corrigés, tuteur IA.",
     start_url: "/app",
     display: "standalone",

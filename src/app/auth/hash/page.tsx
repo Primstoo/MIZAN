@@ -16,7 +16,7 @@ export default function Hash() {
   }, []);
   return (
     <main className="page narrow" style={{ paddingTop: 48 }}>
-      <a href="/" className="logo">MIZAN</a>
+      <a href="/" className="logo">ToumaiLearn</a>
       {erreur ? (
         <>
           <h1>Lien expiré</h1>

@@ -16,10 +16,10 @@ export default function Rejoindre({ email }: { email?: string }) {
   useEffect(() => { try { setCode(localStorage.getItem("mizan-invite") || ""); } catch {} }, []);
   return (
     <main className="gate">
-      <a href="/" className="logo">MIZAN</a>
+      <a href="/" className="logo">ToumaiLearn</a>
       <p className="eyebrow">Bêta privée</p>
       <h1>Entre ton code d&apos;invitation</h1>
-      <p className="muted">MIZAN est ouvert sur invitation. Demande un code à un camarade déjà inscrit : il le trouve dans l&apos;onglet « Moi ».</p>
+      <p className="muted">ToumaiLearn est ouvert sur invitation. Demande un code à un camarade déjà inscrit : il le trouve dans l&apos;onglet « Moi ».</p>
       <form action={action} className="stack">
         <label htmlFor="code">Code d&apos;invitation</label>
         <input id="code" name="code" placeholder="MZ-XXXXXX" autoComplete="off" autoCapitalize="characters" required value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} />

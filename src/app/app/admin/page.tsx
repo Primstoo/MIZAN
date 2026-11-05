@@ -109,7 +109,7 @@ export default async function Suivi() {
 
       <section className="bloc">
         <h2>Note prévue ou note réelle</h2>
-        <p className="small muted">L&apos;indicateur clé du pilote : la note prévue par MIZAN est-elle proche de la vraie ?</p>
+        <p className="small muted">L&apos;indicateur clé du pilote : la note prévue par ToumaiLearn est-elle proche de la vraie ?</p>
         {N.length ? (
           <>
             <p><strong>Écart moyen : {String(ecart).replace(".", ",")} point{ecart !== 1 ? "s" : ""}</strong> sur {N.length} note{N.length > 1 ? "s" : ""}.</p>
