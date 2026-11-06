@@ -1,5 +1,6 @@
-:root{--bg:#eef1f4;--panel:#fff;--ink:#18212c;--mute:#56616e;--line:#d3dae2;--acc:#0e6e6a;--acc2:#b8741a;--ok:#1d7a46;--bad:#b23a3a;color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--bg:#10161d;--panel:#18212b;--ink:#e6ebf0;--mute:#9aa6b3;--line:#2a3542;--acc:#4fc2bb;--acc2:#e0a450;--ok:#5bc489;--bad:#e07a7a;color-scheme:dark}}
+:root{--bg:#F4EDE1;--panel:#FBF7F0;--ink:#1E2433;--mute:#5C5346;--line:#DCCFBA;--acc:#B4532A;--acc2:#D9A44A;--ok:#2F5A73;--bad:#A23B2A;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#141922;--panel:#1E2532;--ink:#EDE6D9;--mute:#A9A094;--line:#343D4D;--acc:#E8906A;--acc2:#E4C48A;--ok:#7FB3CF;--bad:#E58A7A;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#141922;--panel:#1E2532;--ink:#EDE6D9;--mute:#A9A094;--line:#343D4D;--acc:#E8906A;--acc2:#E4C48A;--ok:#7FB3CF;--bad:#E58A7A;color-scheme:dark}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
 body{background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -11,11 +12,11 @@ h2{font-size:18px;margin:6px 0}
 .narrow{max-width:420px}
 .top{display:flex;align-items:center;gap:12px;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:16px}
 .top.slim{margin:0;padding:8px 16px;background:var(--panel)}
-.logo{font-weight:800;letter-spacing:.08em;color:var(--acc);text-decoration:none;font-size:20px}
+.logo{font-weight:700;letter-spacing:-.01em;color:var(--acc);text-decoration:none;font-size:20px}
 .muted{color:var(--mute)}.small{font-size:13px}
 .lead{font-size:18px;max-width:60ch}
 .hero{padding:24px 0 32px}
-.btn{display:inline-block;background:var(--acc);color:#fff;border:0;border-radius:8px;padding:10px 16px;font-family:inherit;font-weight:600;font-size:15px;line-height:1.3;text-decoration:none;cursor:pointer;text-align:center}
+.btn{display:inline-block;background:var(--ink);color:var(--bg);border:0;border-radius:8px;padding:10px 16px;font-family:inherit;font-weight:600;font-size:15px;line-height:1.3;text-decoration:none;cursor:pointer;text-align:center}
 .btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
 .btn.small{padding:6px 12px;font-size:13px}
 .btn:disabled{opacity:.6}
@@ -91,30 +92,31 @@ input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(-
 .catalogue summary h2::before{content:"＋ ";color:var(--acc)}
 .catalogue[open] summary h2::before{content:"－ "}
 .module{height:100dvh}
-/* ---- Identité des maquettes (Bricolage + IBM Plex) ---- */
-:root{--accsoft:#d6ecea;--ambsoft:#f6e7d1;--amb:#9a5f12;--badsoft:#f7dede;--goodsoft:#ddf1e3}
-@media (prefers-color-scheme:dark){:root{--accsoft:#16373a;--ambsoft:#3a2c18;--amb:#e0a450;--badsoft:#3d1d1d;--goodsoft:#173524}}
-body{font-family:"IBM Plex Sans",system-ui,sans-serif}
-h1,h2,h3,.logo,.big{font-family:"Bricolage Grotesque",system-ui,sans-serif;letter-spacing:-.01em}
-.eyebrow,.k,.chip,.num{font-family:"IBM Plex Mono",ui-monospace,monospace}
+/* ---- Identité « carnet du Sahel » (Fraunces + Inter) ---- */
+:root{--accsoft:#F3E2CF;--ambsoft:#F3E7CC;--amb:#8A5A12;--badsoft:#F4DDD6;--goodsoft:#DCE7EE}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--accsoft:#4A2F1E;--ambsoft:#3A2E18;--amb:#E4C48A;--badsoft:#4A2420;--goodsoft:#1E3340}}
+:root[data-theme=dark]{--accsoft:#4A2F1E;--ambsoft:#3A2E18;--amb:#E4C48A;--badsoft:#4A2420;--goodsoft:#1E3340}
+body{font-family:Inter,system-ui,sans-serif}
+h1,h2,h3,.logo,.big{font-family:Fraunces,Georgia,serif;letter-spacing:-.01em}
+.eyebrow,.k,.chip,.num{font-family:Inter,system-ui,sans-serif}
 .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);font-weight:500}
 .t{font-weight:600;margin:0}
 .big{font-size:32px;font-weight:800;line-height:1.05;margin:2px 0}
 .between{justify-content:space-between}
 .chip{border:0;background:var(--accsoft);color:var(--acc);border-radius:5px;padding:2px 8px;font-weight:500}
 .chip.amber{background:var(--ambsoft);color:var(--amb)}.chip.bad{background:var(--badsoft);color:var(--bad)}.chip.good{background:var(--goodsoft);color:var(--ok)}
-.card.hi{background:var(--acc);border-color:var(--acc);color:#fff}
+.card.hi{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 .card.hi .k,.card.hi .muted{color:inherit;opacity:.85}
 .card.hi h2{font-size:22px;margin:2px 0 6px}
-.btn.inv{background:#fff;color:var(--acc);align-self:flex-start}
+.btn.inv{background:var(--bg);color:var(--ink);align-self:flex-start}
 .card.soft{background:var(--accsoft);border-color:transparent}
 .tasks{list-style:none;padding:0;margin:4px 0 10px;display:flex;flex-direction:column;gap:8px}
 .tasks li{display:flex;gap:10px;align-items:flex-start}
 .tasks li::before{content:"";flex:none;width:17px;height:17px;border-radius:50%;border:1.8px solid currentColor;margin-top:3px}
 .tasks li.done{opacity:.7;text-decoration:line-through}.tasks li.done::before{background:currentColor}
 .days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:6px}
-.days i{height:26px;border-radius:6px;background:var(--line);font:500 11px "IBM Plex Mono",monospace;font-style:normal;display:flex;align-items:center;justify-content:center;color:var(--mute)}
-.days i.on{background:var(--acc);color:#fff}
+.days i{height:26px;border-radius:6px;background:var(--line);font:500 11px Inter,system-ui,sans-serif;font-style:normal;display:flex;align-items:center;justify-content:center;color:var(--mute)}
+.days i.on{background:var(--acc);color:var(--bg)}
 .days i.today{outline:2px solid var(--acc);outline-offset:1px;background:var(--panel);color:var(--acc)}
 .today{display:flex;flex-direction:column;gap:16px}
 .today header h1{margin:0}
@@ -183,10 +185,35 @@ button,input,select,textarea{font-family:inherit}
 .opt:disabled{cursor:default;color:var(--ink)}
 form.stack label{display:flex;flex-direction:column;gap:4px}
 /* ---- Examen blanc ---- */
-.timer{font:700 26px "IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}.timer.bad{color:var(--bad)}
+.timer{font:700 26px Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums}.timer.bad{color:var(--bad)}
 .qn{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:5px}
-.qn button{height:32px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:500 12px "IBM Plex Mono",monospace;cursor:pointer}
+.qn button{height:32px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:500 12px Inter,system-ui,sans-serif;cursor:pointer}
 .qn button.ok{background:var(--accsoft);border-color:var(--acc)}.qn button.cur{background:var(--acc);color:#fff;border-color:var(--acc)}
 .corrige{padding-left:20px;display:flex;flex-direction:column;gap:10px}.corrige p{margin:2px 0}
 .corrige li.bon::marker{color:var(--ok)}.corrige li.faux::marker{color:var(--bad)}
-.np{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.np strong{font:800 26px "Bricolage Grotesque",sans-serif}
+.np{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.np strong{font:700 26px Fraunces,Georgia,serif}
+
+/* ---- Carnet du Sahel : mascottes, squelette, tuteur, réglages ---- */
+:root{--os-ok:#D8A46A;--os-fragile:#E9C27E;--os-vide:#E4D8C4;--os-trait:#8E6A45}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--os-vide:#3A4252;--os-trait:#C9A06A}}
+:root[data-theme=dark]{--os-vide:#3A4252;--os-trait:#C9A06A}
+.mascotte{flex:none}
+.salut{display:flex;align-items:center;gap:12px}
+.dit{display:flex;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px}
+.squel{display:flex;gap:14px;align-items:center}
+.squel ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:13px;flex:1}
+.squel li{display:flex;justify-content:space-between;gap:8px}.squel li span:last-child{color:var(--mute);text-align:right}
+.legende{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mute)}
+.legende i{display:inline-block;width:18px;height:6px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.mascottes{display:flex;gap:10px}
+.mascottes label{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 6px;border:1px solid var(--line);border-radius:14px;background:var(--panel);cursor:pointer;font:700 16px Fraunces,Georgia,serif;color:var(--ink)}
+.mascottes input{position:absolute;opacity:0;pointer-events:none}
+.mascottes label:has(input:checked){border:2px solid var(--acc)}
+.mascottes label:has(input:focus-visible){outline:2px solid var(--acc);outline-offset:2px}
+.segm{display:flex;background:var(--line);border-radius:10px;padding:3px;gap:2px}
+.segm button{flex:1;min-height:40px;border:0;border-radius:8px;background:transparent;color:var(--ink);font:500 14px Inter,system-ui,sans-serif;cursor:pointer}
+.segm button[aria-pressed=true]{background:var(--panel);font-weight:600}
+.offres{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0}
+.offre{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.offre.reco{border:2px solid var(--acc)}
+.offre h2{margin:0}.offre ul{margin:0;padding-left:18px;font-size:14px;color:var(--mute);display:flex;flex-direction:column;gap:2px}

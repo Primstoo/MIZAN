@@ -1,4 +1,5 @@
 "use server";
+import { estMascotte } from "@/components/Mascotte";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
@@ -63,12 +64,16 @@ export async function enregistrerProfil(form: FormData): Promise<void> {
   const db = admin();
   const brut = Number(form.get("minutes"));
   const minutes = Math.min(240, Math.max(15, Number.isFinite(brut) ? Math.round(brut) : 60));
-  await db.from("profiles").upsert({
+  const ligne = {
     user_id: u.id,
     prenom: String(form.get("prenom") || "").trim().slice(0, 40) || null,
     filiere: String(form.get("filiere") || "").trim().slice(0, 60) || null,
     minutes_jour: minutes,
-  });
+  };
+  const masc = form.get("mascotte");
+  // La colonne « mascotte » arrive avec la migration de la refonte : si elle manque encore, on enregistre sans.
+  const { error } = await db.from("profiles").upsert(estMascotte(masc) ? { ...ligne, mascotte: masc } : ligne);
+  if (error) await db.from("profiles").upsert(ligne);
   const { data: communes } = await db.from("module_dates").select("module_slug, exam_date");
   const commune = new Map((communes ?? []).map((c) => [c.module_slug as string, c.exam_date as string]));
   const auj = jourMaroc();
@@ -362,4 +367,13 @@ export async function accorderOffreAdmin(_prev: string, form: FormData): Promise
   if (error) return "Erreur (" + error.code + ").";
   revalidatePath("/app/admin");
   return `✓ ${plan === "premium" ? "Premium" : "Essentiel"} jusqu'au ${new Date(fin as string).toLocaleDateString("fr-FR")} pour ${email}.`;
+}
+
+// Changer de guide (mascotte) depuis « Moi ».
+export async function changerMascotte(form: FormData): Promise<void> {
+  const u = await moi();
+  const m = form.get("mascotte");
+  if (!estMascotte(m)) return;
+  await admin().from("profiles").update({ mascotte: m }).eq("user_id", u.id);
+  revalidatePath("/app", "layout");
 }

@@ -1,7 +1,9 @@
 import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin } from "@/lib/acces";
 import { chargerParcours, jourMaroc } from "@/lib/parcours";
-import { creerInvitation } from "../actions";
+import { changerMascotte, creerInvitation } from "../actions";
+import Mascotte, { estMascotte, MASCOTTES } from "@/components/Mascotte";
+import Theme from "./Theme";
 import Copier from "../Copier";
 import Deconnexion from "../Deconnexion";
 import { bonusTuteur } from "@/lib/bonus";
@@ -30,12 +32,11 @@ export default async function Moi() {
   return (
     <main className="page">
       <header className="row between">
-        <div><h1>{p.profil?.prenom || "Mon compte"}</h1><p className="muted small">{user?.email}{p.profil?.filiere ? ` · ${p.profil.filiere}` : ""}</p></div>
+        <div className="salut"><Mascotte id={estMascotte(p.profil?.mascotte) ? p.profil.mascotte : "toumai"} taille={48} /><div><h1>{p.profil?.prenom || "Mon compte"}</h1><p className="muted small">{user?.email}{p.profil?.filiere ? ` · ${p.profil.filiere}` : ""}</p></div></div>
         <div className="row">{estAdmin(user) && <a href="/app/admin" className="btn alt small">Suivi admin</a>}<Deconnexion /></div>
       </header>
 
       <div className="kpis">
-        <div className="card"><span className="k">Série</span><span className="big">{p.serie}</span><span className="small muted">jour{p.serie > 1 ? "s" : ""} d&apos;affilée</span></div>
         <div className="card"><span className="k">Cette semaine</span><span className="big">{actifs}/7</span><span className="small muted">jours de révision</span></div>
         <div className="card"><span className="k">Tuteur</span><span className="big">{restant}</span><span className="small muted">questions restantes aujourd&apos;hui</span></div>
         <div className="card"><span className="k">Temps prévu</span><span className="big">{p.profil?.minutes_jour ?? 60}</span><span className="small muted">minutes par jour</span></div>
@@ -44,6 +45,11 @@ export default async function Moi() {
       <section className="bloc">
         <div className="row between"><h2>Mon offre : {NOMS[offre.plan]}</h2><a href="/app/offres" className="btn small">{offre.plan === "premium" ? "Voir" : "Voir les offres"}</a></div>
         <p className="muted small">{offre.fin ? `Active jusqu'au ${dateFr(offre.fin)}.` : "Fiches, quiz et tuteur de base. Tu as un code ? Active-le sur la page des offres."}</p>
+      </section>
+
+      <section className="bloc">
+        <div className="row between"><h2>Ma progression</h2><a href="/app/progres" className="btn alt small">Voir</a></div>
+        <p className="muted small">Ton squelette, ta note prévue et tes points faibles. Visible uniquement par toi.</p>
       </section>
 
       <section className="bloc">
@@ -73,6 +79,24 @@ export default async function Moi() {
           <p key={i.code} className="row"><code className="code">{i.code}</code><span className="small muted">{i.max_uses - i.uses} place{i.max_uses - i.uses > 1 ? "s" : ""} restante{i.max_uses - i.uses > 1 ? "s" : ""}</span><Copier texte={i.code} /></p>
         ))}
         {peutCreer && <form action={creerInvitation}><button className="btn small">Créer un code</button></form>}
+      </section>
+      <section className="bloc">
+        <h2>Réglages</h2>
+        <p className="k">Thème</p>
+        <Theme />
+        <form action={changerMascotte} className="stack" style={{ marginTop: 12 }}>
+          <p className="k">Ton guide</p>
+          <div className="mascottes" role="radiogroup" aria-label="Choix du guide">
+            {MASCOTTES.map((m) => (
+              <label key={m.id}>
+                <input type="radio" name="mascotte" value={m.id} defaultChecked={m.id === (estMascotte(p.profil?.mascotte) ? p.profil.mascotte : "toumai")} />
+                <Mascotte id={m.id} taille={52} decor />
+                {m.nom}
+              </label>
+            ))}
+          </div>
+          <button className="btn alt small" style={{ alignSelf: "flex-start" }}>Enregistrer le guide</button>
+        </form>
       </section>
     </main>
   );

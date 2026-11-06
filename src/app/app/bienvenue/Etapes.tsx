@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
 import { enregistrerProfil } from "../actions";
+import Mascotte, { MASCOTTES, type MascotteId } from "@/components/Mascotte";
 
 type M = { slug: string; titre: string; semestre: string };
 
-export default function Etapes({ modules, prenom, minutes, dates, inconnues, communes }: { modules: M[]; prenom: string; minutes: number; dates: Record<string, string>; inconnues: string[]; communes: Record<string, { date: string; officielle: boolean }> }) {
+export default function Etapes({ modules, prenom, minutes, dates, inconnues, communes, mascotte }: { mascotte: MascotteId; modules: M[]; prenom: string; minutes: number; dates: Record<string, string>; inconnues: string[]; communes: Record<string, { date: string; officielle: boolean }> }) {
   const [etape, setEtape] = useState(0);
   const [nom, setNom] = useState(prenom);
   const [choix, setChoix] = useState<string[]>([...Object.keys(dates), ...inconnues]);
@@ -28,6 +29,16 @@ export default function Etapes({ modules, prenom, minutes, dates, inconnues, com
         <p className="muted">Pour que l&apos;appli s&apos;adresse à toi.</p>
         <input name="prenom" value={nom} onChange={(e) => setNom(e.target.value)} placeholder="Ton prénom" autoComplete="given-name" />
         <input name="filiere" placeholder="Ta filière (ex. MIACSD, L3) — facultatif" />
+        <p className="eyebrow">Ton guide (tu pourras changer plus tard)</p>
+        <div className="mascottes" role="radiogroup" aria-label="Choix du guide">
+          {MASCOTTES.map((m) => (
+            <label key={m.id}>
+              <input type="radio" name="mascotte" value={m.id} defaultChecked={m.id === mascotte} />
+              <Mascotte id={m.id} taille={64} decor />
+              {m.nom}
+            </label>
+          ))}
+        </div>
       </section>
 
       <section hidden={etape !== 1}>

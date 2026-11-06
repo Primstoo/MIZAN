@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { createClient as createRawClient } from "@supabase/supabase-js";
+import Mascotte from "@/components/Mascotte";
 
 // Connexion sans mot de passe : lien par e-mail (flux implicite, marche dans tout navigateur),
 // et saisie d'un code à 6 chiffres quand l'e-mail en contient un (après configuration d'un SMTP).
@@ -67,6 +68,7 @@ export default function Login() {
       <section className="auth-brand">
         <a href="/" className="logo light">ToumaiLearn</a>
         <div>
+          <Mascotte id="toumai" taille={88} />
           <p className="auth-tag">Réviser le cours de <em>ton</em> prof.</p>
           <ul className="auth-points">
             <li>Leçons qui partent de zéro</li>

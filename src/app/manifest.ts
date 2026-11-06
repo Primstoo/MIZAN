@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Révise le cours de ton prof : leçons expliquées, exercices corrigés, tuteur IA.",
     start_url: "/app",
     display: "standalone",
-    background_color: "#eef1f4",
-    theme_color: "#0e6e6a",
+    background_color: "#F4EDE1",
+    theme_color: "#B4532A",
     lang: "fr",
     icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
   };

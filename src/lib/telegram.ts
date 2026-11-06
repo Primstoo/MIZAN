@@ -46,7 +46,7 @@ export async function messageDuMatin(userId: string) {
     m.etapes.forEach((e) => l.push(`• ${esc(e)}`));
     l.push(`\n⏳ Examen dans <b>${cible.reste} jour${cible.reste > 1 ? "s" : ""}</b>${cible.estimee ? " (date estimée)" : ""}.`);
   } else l.push("Ajoute une date d'examen dans l'appli pour recevoir ta mission du jour.");
-  if (p.serie > 0) l.push(`🔥 Série : ${p.serie} jour${p.serie > 1 ? "s" : ""} d'affilée. Ne la casse pas !`);
+  if (p.serie > 1) l.push(`${p.serie} jours de révision d'affilée.`);
   const { data: lives } = await admin().from("live_sessions").select("titre, starts_at").gte("starts_at", new Date().toISOString()).order("starts_at").limit(1);
   if (lives?.[0]) l.push(`🎥 Prochain live : ${esc(lives[0].titre)}, ${new Date(lives[0].starts_at).toLocaleString("fr-FR", { timeZone: "Africa/Casablanca", weekday: "long", hour: "2-digit", minute: "2-digit" })}.`);
   return { texte: l.join("\n"), url: cible ? `${site()}/app/m/${cible.module_slug}` : `${site()}/app` };

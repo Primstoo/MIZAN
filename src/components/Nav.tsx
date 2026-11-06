@@ -14,7 +14,7 @@ export default function Nav() {
   if (p.startsWith("/app/m/") || p === "/app/bienvenue" || p.startsWith("/app/niveau/") || p.startsWith("/app/blanc/")) return null;
   return (
     <nav className="nav" aria-label="Navigation">
-      <a href="/app" className="logo nav-logo">ToumaiLearn</a>
+      <a href="/app" className="logo nav-logo">{/* eslint-disable-next-line @next/next/no-img-element */}<img src="/icon.svg" alt="" width={26} height={26} style={{ verticalAlign: "middle", marginRight: 8, borderRadius: 6 }} />ToumaiLearn</a>
       {LIENS.map((l) => {
         const on = l.href === "/app" ? p === "/app" : p.startsWith(l.href);
         return (

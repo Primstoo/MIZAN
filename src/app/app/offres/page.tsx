@@ -12,13 +12,10 @@ export default async function Offres() {
   const { data: { user } } = await createClient().auth.getUser();
   const o = await offreDe(user!.id);
   const chef = estAdmin(user);
-  const lignes: [string, string, string, string][] = [
-    ["Fiches et quiz des modules", "✓ (5 quiz / chapitre)", "✓ illimités", "✓ illimités"],
-    ["Questions au tuteur par jour", String(QUOTA_TUTEUR.free), String(QUOTA_TUTEUR.essentiel), "Sans limite pratique"],
-    ["Mode « Approfondi » du tuteur", "—", "✓", "✓"],
-    ["Photo de ton brouillon au tuteur", "—", "—", "✓"],
-    ["Examen blanc chronométré", "—", "—", "✓"],
-    ["Live mensuel", "—", "—", "✓"],
+  const offres: { id: "free" | "essentiel" | "premium"; nom: string; prix: string; points: string[] }[] = [
+    { id: "free", nom: "Gratuit", prix: "0 DH", points: [`${QUOTA_TUTEUR.free} questions au tuteur par jour`, "5 quiz par chapitre, squelette de base"] },
+    { id: "essentiel", nom: "Essentiel", prix: prix(process.env.PRIX_ESSENTIEL, "19 DH / mois · 49 DH / semestre"), points: [`${QUOTA_TUTEUR.essentiel} questions par jour, mode Approfondi`, "Quiz illimités, annales corrigées", "Squelette complet"] },
+    { id: "premium", nom: "Premium", prix: prix(process.env.PRIX_PREMIUM, "39 DH / mois · 99 DH / semestre"), points: ["Tuteur sans limite pratique, photo de ton brouillon", "Examen blanc chronométré, live mensuel", "Squelette complet + pièces rares"] },
   ];
   return (
     <main className="page">
@@ -32,20 +29,18 @@ export default async function Offres() {
         {!offresActives() && <p className="alert ok small">Bêta : toutes les fonctions restent ouvertes pour l&apos;instant{chef ? " (OFFRES_ACTIVES n'est pas à 1)" : ""}.</p>}
       </header>
 
-      <section className="bloc">
-        <h2>Les offres</h2>
-        <div className="tabw">
-          <table className="tab">
-            <thead><tr><th></th><th>Gratuit</th><th>Essentiel</th><th>Premium</th></tr></thead>
-            <tbody>
-              {lignes.map((l) => <tr key={l[0]}><td>{l[0]}</td><td>{l[1]}</td><td>{l[2]}</td><td>{l[3]}</td></tr>)}
-              <tr><td><strong>Prix</strong></td><td>0 DH</td>
-                <td>{prix(process.env.PRIX_ESSENTIEL, "19 DH / mois · 49 DH / semestre")}</td>
-                <td>{prix(process.env.PRIX_PREMIUM, "39 DH / mois · 99 DH / semestre")}</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <div className="offres">
+        {offres.map((x) => (
+          <section key={x.id} className={`offre ${x.id === "premium" ? "reco" : ""}`}>
+            <div className="row between">
+              <h2>{x.nom}</h2>
+              {o.plan === x.id ? <span className="chip">Ton offre</span> : x.id === "premium" ? <span className="chip amber">Conseillé</span> : null}
+            </div>
+            <p className="t">{x.prix}</p>
+            <ul>{x.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>
+          </section>
+        ))}
+      </div>
 
       <section className="bloc">
         <h2>Comment payer</h2>
