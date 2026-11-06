@@ -54,6 +54,7 @@ create table if not exists public.profiles (
   minutes_jour int not null default 60,
   created_at timestamptz not null default now()
 );
+alter table public.profiles add column if not exists mascotte text not null default 'toumai'; -- refonte nov. 2026
 create table if not exists public.exams (
   user_id uuid not null references auth.users(id) on delete cascade,
   module_slug text not null,

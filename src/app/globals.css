@@ -192,3 +192,24 @@ form.stack label{display:flex;flex-direction:column;gap:4px}
 .corrige{padding-left:20px;display:flex;flex-direction:column;gap:10px}.corrige p{margin:2px 0}
 .corrige li.bon::marker{color:var(--ok)}.corrige li.faux::marker{color:var(--bad)}
 .np{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.np strong{font:700 26px Fraunces,Georgia,serif}
+
+/* ---- Carnet du Sahel : mascottes, squelette, tuteur, réglages ---- */
+:root{--os-ok:#D8A46A;--os-fragile:#E9C27E;--os-vide:#E4D8C4;--os-trait:#8E6A45}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--os-vide:#3A4252;--os-trait:#C9A06A}}
+:root[data-theme=dark]{--os-vide:#3A4252;--os-trait:#C9A06A}
+.mascotte{flex:none}
+.salut{display:flex;align-items:center;gap:12px}
+.dit{display:flex;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px}
+.squel{display:flex;gap:14px;align-items:center}
+.squel ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:13px;flex:1}
+.squel li{display:flex;justify-content:space-between;gap:8px}.squel li span:last-child{color:var(--mute);text-align:right}
+.legende{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mute)}
+.legende i{display:inline-block;width:18px;height:6px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.mascottes{display:flex;gap:10px}
+.mascottes label{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 6px;border:1px solid var(--line);border-radius:14px;background:var(--panel);cursor:pointer;font:700 16px Fraunces,Georgia,serif;color:var(--ink)}
+.mascottes input{position:absolute;opacity:0;pointer-events:none}
+.mascottes label:has(input:checked){border:2px solid var(--acc)}
+.mascottes label:has(input:focus-visible){outline:2px solid var(--acc);outline-offset:2px}
+.segm{display:flex;background:var(--line);border-radius:10px;padding:3px;gap:2px}
+.segm button{flex:1;min-height:40px;border:0;border-radius:8px;background:transparent;color:var(--ink);font:500 14px Inter,system-ui,sans-serif;cursor:pointer}
+.segm button[aria-pressed=true]{background:var(--panel);font-weight:600}

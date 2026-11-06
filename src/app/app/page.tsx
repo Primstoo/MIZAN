@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { admin } from "@/lib/acces";
-import { MODULES } from "@/lib/modules";
 import { chargerParcours, chargerMaitrise, missionPerso } from "@/lib/parcours";
+import Mascotte, { estMascotte } from "@/components/Mascotte";
+import Squelette, { osMaitrises } from "@/components/Squelette";
 
 // « Aujourd'hui » : le cœur de l'appli. Mission du jour, compte à rebours, série, prochain live.
 export const metadata = { title: "Aujourd’hui" };
@@ -24,8 +25,11 @@ export default async function Aujourdhui() {
   return (
     <main className="page today">
       <header className="row between">
-        <div><p className="eyebrow">{p.profil.prenom ? `Salut ${p.profil.prenom}` : "Salut"}</p><h1>Aujourd&apos;hui</h1></div>
-        {p.serie > 0 && <span className="chip amber">🔥 {p.serie} jour{p.serie > 1 ? "s" : ""}</span>}
+        <div className="salut">
+          <Mascotte id={estMascotte(p.profil.mascotte) ? p.profil.mascotte : "toumai"} taille={52} />
+          <div><p className="eyebrow">{p.profil.prenom ? `Salut ${p.profil.prenom}` : "Salut"}</p><h1>Aujourd&apos;hui</h1></div>
+        </div>
+        {p.serie > 1 && <span className="chip">{p.serie} jours de révision d&apos;affilée</span>}
       </header>
 
       {cible && mission ? (
@@ -69,15 +73,17 @@ export default async function Aujourdhui() {
           </section>
         )}
         <section className="card">
-          <span className="k">Ma progression</span>
-          {MODULES.filter((m) => maitrise[m.slug]?.testes).length ? (
-            <ul className="list-plain small">
-              {MODULES.filter((m) => maitrise[m.slug]?.testes).map((m) => (
-                <li key={m.slug}><div className="row between"><span>{m.titre.split(" (")[0]}</span><strong>{maitrise[m.slug].pct} %</strong></div><div className="bar"><i style={{ width: `${maitrise[m.slug].pct}%` }} /></div></li>
-              ))}
-            </ul>
-          ) : <p className="small muted">Fais un premier quiz dans un module : ta maîtrise et tes points faibles apparaîtront ici.</p>}
-          <a href="/app/progres" className="btn alt small">Voir le détail et mes points faibles</a>
+          <span className="k">Ton squelette</span>
+          {mc && cible ? (
+            <a href="/app/progres" className="squel" style={{ textDecoration: "none", color: "inherit" }}>
+              <Squelette groupes={mc.groupes} taille={64} titre={cible.module!.titre} />
+              <div>
+                <p className="t">{cible.module!.titre.split(" (")[0]} · {osMaitrises(mc.groupes)} / 5 os</p>
+                <p className="small muted">Chaque os s&apos;assemble quand tu maîtrises ses chapitres.</p>
+              </div>
+            </a>
+          ) : <p className="small muted">Fais un premier quiz dans un module : ton squelette commence à s&apos;assembler.</p>}
+          <a href="/app/progres" className="btn alt small">Ma progression</a>
         </section>
         <section className="card">
           <span className="k">Prochaine séance live</span>

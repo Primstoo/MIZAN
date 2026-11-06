@@ -15,7 +15,7 @@ export const joursEntre = (de: string, a: string) =>
 export async function chargerParcours(u: User) {
   const db = admin();
   const [{ data: profil }, { data: exams }, { data: act }, { data: communes }] = await Promise.all([
-    db.from("profiles").select("prenom, filiere, minutes_jour").eq("user_id", u.id).maybeSingle(),
+    db.from("profiles").select("*").eq("user_id", u.id).maybeSingle(),
     db.from("exams").select("module_slug, exam_date, estimee").eq("user_id", u.id),
     db.from("activity").select("day, module_slug").eq("user_id", u.id).gte("day", jourMaroc(new Date(Date.now() - 60 * 864e5))),
     db.from("module_dates").select("module_slug, exam_date, officielle"),

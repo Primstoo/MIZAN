@@ -4,6 +4,8 @@ import { chargerMaitrise, chargerParcours } from "@/lib/parcours";
 import { notePrevue } from "@/lib/maitrise";
 import { admin } from "@/lib/acces";
 import { enregistrerNoteReelle } from "../actions";
+import Squelette, { etatsOs, OS } from "@/components/Squelette";
+import { offreDe, offresActives } from "@/lib/offres";
 
 export const metadata = { title: "Ma progression" };
 
@@ -16,6 +18,7 @@ export default async function Progres() {
     db.from("blancs").select("module_slug, note, created_at").eq("user_id", user!.id).order("created_at", { ascending: false }),
     db.from("notes_reelles").select("module_slug, note, note_prevue").eq("user_id", user!.id),
   ]);
+  const gratuit = offresActives() && (await offreDe(user!.id)).plan === "free";
   const restes = new Map(p.examens.map((e) => [e.module_slug, e.reste]));
   const ordre = [...MODULES].sort((a, b) => (restes.get(a.slug) ?? 999) - (restes.get(b.slug) ?? 999));
   const couleur = (x: number) => (x >= 0.7 ? "" : x >= 0.35 ? "warn" : "bad");
@@ -23,6 +26,7 @@ export default async function Progres() {
   return (
     <main className="page">
       <h1 className="page-title">Ma progression</h1>
+      <p className="legende"><span><i style={{ background: "var(--os-ok)" }} />Maîtrisé</span><span><i style={{ background: "var(--os-fragile)" }} />Fragile</span><span><i style={{ background: "var(--os-vide)" }} />À découvrir</span><span>· Visible uniquement par toi</span></p>
       <p className="muted">Une notion est <b>maîtrisée</b> quand tu réussis au moins 80 % de ses questions, sur au moins 3 essais. Relire le cours ne suffit pas : il faut te tester dans le module.</p>
       {ordre.map((m) => {
         const x = maitrise[m.slug];
@@ -37,6 +41,11 @@ export default async function Progres() {
               <h2>{m.titre}</h2>
               {r !== undefined && <span className={`chip ${r <= 14 ? "bad" : r <= 30 ? "amber" : ""}`}>Examen J-{r}</span>}
             </div>
+            <div className="squel">
+              <Squelette groupes={x.groupes} taille={96} titre={m.titre} />
+              <ul>{etatsOs(x.groupes).map((o, i) => <li key={OS[i]}><span>{OS[i]}</span><span>{o.chapitres.length ? o.chapitres.join(", ") : "—"}</span></li>)}</ul>
+            </div>
+            {gratuit && <p className="small muted">Mains, pieds et pièces rares : avec une offre payante. <a href="/app/offres">Voir les offres</a></p>}
             <div className="row between small"><span>Maîtrise globale</span><strong>{x.pct} %</strong></div>
             <div className={`bar ${couleur(x.pct / 100)}`}><i style={{ width: `${x.pct}%` }} /></div>
             {np.couverture >= 30

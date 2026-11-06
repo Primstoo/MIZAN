@@ -3,6 +3,7 @@ import { MODULES } from "@/lib/modules";
 import { chargerParcours } from "@/lib/parcours";
 import { admin } from "@/lib/acces";
 import Etapes from "./Etapes";
+import { estMascotte } from "@/components/Mascotte";
 
 // Inscription guidée (une seule fois) : prénom, modules, dates d'examen, temps par jour.
 export const metadata = { title: "Bienvenue" };
@@ -16,6 +17,7 @@ export default async function Bienvenue() {
       <Etapes
         modules={MODULES.map((m) => ({ slug: m.slug, titre: m.titre, semestre: m.semestre }))}
         prenom={profil?.prenom ?? ""}
+        mascotte={estMascotte(profil?.mascotte) ? profil.mascotte : "toumai"}
         minutes={profil?.minutes_jour ?? 60}
         dates={Object.fromEntries(examens.filter((e) => !e.estimee).map((e) => [e.module_slug, e.exam_date]))}
         inconnues={examens.filter((e) => e.estimee).map((e) => e.module_slug)}
