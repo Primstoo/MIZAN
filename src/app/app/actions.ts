@@ -11,6 +11,7 @@ import NIVEAU from "@/lib/niveau.json";
 import BANQUE from "@/lib/banque.json";
 import { notePrevue } from "@/lib/maitrise";
 import { chargerMaitrise } from "@/lib/parcours";
+import { nouveauCodeOffre, offresActives, offreDe, rangEffectif, type Plan } from "@/lib/offres";
 
 type QCM = { n: string; a: number };
 const estSlug = (s: unknown): s is string => typeof s === "string" && MODULES.some((m) => m.slug === s);
@@ -25,7 +26,7 @@ export async function rejoindre(_prev: string, form: FormData): Promise<string> 
   if (!code) return "Entre ton code.";
   if (await estMembre(user)) redirect("/app"); // déjà membre : on ne consomme pas de place
   const db = admin();
-  const { data: inv } = await db.from("invites").select("code, uses, max_uses").eq("code", code).maybeSingle();
+  const { data: inv } = await db.from("invites").select("code, owner, uses, max_uses").eq("code", code).maybeSingle();
   if (!inv) return "Code inconnu. Vérifie l'orthographe (ex. MZ-AB12CD).";
   if (inv.uses >= inv.max_uses) return "Ce code a déjà été utilisé le nombre de fois prévu.";
   // Mise à jour conditionnelle : évite qu'un code soit consommé deux fois en même temps.
@@ -34,6 +35,8 @@ export async function rejoindre(_prev: string, form: FormData): Promise<string> 
   if (!ok?.length) return "Réessaie dans un instant.";
   const { error } = await db.from("members").insert({ user_id: user.id, email: user.email, invite_code: code });
   if (error && error.code !== "23505") return "Erreur (" + error.code + ").";
+  // Essai de 7 jours au niveau de l'invitant (s'il a une offre payée) et lien de parrainage.
+  if (!error && inv.owner) await db.rpc("essai_invitation", { p_user: user.id, p_parrain: inv.owner });
   redirect("/app");
 }
 
@@ -238,7 +241,15 @@ export async function statutDocument(form: FormData): Promise<void> {
   await chef();
   const statut = String(form.get("statut"));
   if (!["accepte", "refuse", "recu"].includes(statut)) return;
-  await admin().from("documents").update({ statut, note: String(form.get("note") || "").trim().slice(0, 200) || null }).eq("id", String(form.get("id")));
+  const db = admin();
+  const id = String(form.get("id"));
+  const { data: avant } = await db.from("documents").select("user_id, type, statut").eq("id", id).maybeSingle();
+  await db.from("documents").update({ statut, note: String(form.get("note") || "").trim().slice(0, 200) || null }).eq("id", id);
+  // Offres actives : une annale acceptée = 7 jours offerts (prolonge l'offre payée en cours, sinon Premium).
+  if (offresActives() && avant && avant.type === "annale" && avant.statut !== "accepte" && statut === "accepte") {
+    const o = await offreDe(avant.user_id);
+    await db.rpc("accorder_offre", { p_user: avant.user_id, p_plan: o.base !== "free" ? o.base : "premium", p_jours: 7, p_source: "recompense" });
+  }
   revalidatePath("/app/admin"); revalidatePath("/app/contribuer");
 }
 
@@ -273,6 +284,7 @@ export async function enregistrerBlanc(slug: string, copie: { id: number; c: num
   const u = await moi();
   const banque = (BANQUE as Record<string, QCM[]>)[slug];
   if (!estSlug(slug) || !banque || !Array.isArray(copie) || !copie.length || copie.length > 40) return;
+  if ((await rangEffectif(u.id, estAdmin(u))) < 3) return; // examen blanc : offre Premium
   const vues = new Set<number>();
   const notees = copie.filter((x) => Number.isInteger(x?.id) && x.id >= 0 && x.id < banque.length && !vues.has(x.id) && vues.add(x.id))
     .map((x) => ({ n: banque[x.id].n, ok: x.c === banque[x.id].a }));
@@ -305,4 +317,49 @@ export async function enregistrerNoteReelle(form: FormData): Promise<void> {
   if (prevue === null) { const m = (await chargerMaitrise(u))[slug]; prevue = m ? notePrevue(m).note : null; }
   await db.from("notes_reelles").upsert({ user_id: u.id, module_slug: slug, note: Math.round(note * 100) / 100, note_prevue: prevue, created_at: new Date().toISOString() });
   revalidatePath("/app/progres"); revalidatePath("/app/admin");
+}
+
+// ---------- Offres : codes d'activation ----------
+export async function activerCode(_prev: string, form: FormData): Promise<string> {
+  const u = await moi();
+  const code = String(form.get("code") || "").trim().toUpperCase();
+  if (!code) return "Entre ton code.";
+  const { data, error } = await admin().rpc("utiliser_code", { p_user: u.id, p_code: code });
+  if (error) return "Activation impossible pour l'instant.";
+  const r = data as { ok: boolean; message?: string; plan?: Plan; fin?: string };
+  revalidatePath("/app/moi"); revalidatePath("/app/offres");
+  if (!r.ok) return r.message || "Code refusé.";
+  const nom = r.plan === "premium" ? "Premium" : "Essentiel";
+  return `✓ Offre ${nom} activée jusqu'au ${new Date(r.fin!).toLocaleDateString("fr-FR")}.`;
+}
+
+const PLANS_PAYANTS = ["essentiel", "premium"];
+
+export async function genererCodes(_prev: string, form: FormData): Promise<string> {
+  await chef();
+  const plan = String(form.get("plan"));
+  const jours = Math.round(Number(form.get("jours")));
+  const nombre = Math.round(Number(form.get("nombre")));
+  if (!PLANS_PAYANTS.includes(plan) || !(jours >= 1 && jours <= 400) || !(nombre >= 1 && nombre <= 50)) return "Paramètres invalides.";
+  const lot = String(form.get("lot") || "").trim().slice(0, 60) || null;
+  const codes = Array.from({ length: nombre }, () => nouveauCodeOffre());
+  const { error } = await admin().from("codes_offre").insert(codes.map((code) => ({ code, plan, jours, lot })));
+  if (error) return "Erreur (" + error.code + "), réessaie.";
+  revalidatePath("/app/admin");
+  return codes.join("\n");
+}
+
+export async function accorderOffreAdmin(_prev: string, form: FormData): Promise<string> {
+  await chef();
+  const email = String(form.get("email") || "").trim().toLowerCase();
+  const plan = String(form.get("plan"));
+  const jours = Math.round(Number(form.get("jours")));
+  if (!email || !PLANS_PAYANTS.includes(plan) || !(jours >= 1 && jours <= 400)) return "Paramètres invalides.";
+  const db = admin();
+  const { data: m } = await db.from("members").select("user_id").ilike("email", email.replace(/[%_\\]/g, (c) => "\\" + c)).maybeSingle();
+  if (!m) return "Aucun membre avec cet e-mail.";
+  const { data: fin, error } = await db.rpc("accorder_offre", { p_user: m.user_id, p_plan: plan, p_jours: jours, p_source: "paid" });
+  if (error) return "Erreur (" + error.code + ").";
+  revalidatePath("/app/admin");
+  return `✓ ${plan === "premium" ? "Premium" : "Essentiel"} jusqu'au ${new Date(fin as string).toLocaleDateString("fr-FR")} pour ${email}.`;
 }

@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { admin as serviceClient, estMembre } from "@/lib/acces";
+import { admin as serviceClient, estAdmin, estMembre } from "@/lib/acces";
 import { jourMaroc } from "@/lib/parcours";
 import { bonusTuteur } from "@/lib/bonus";
+import { offresActives, offreDe, QUOTA_TUTEUR, RANG } from "@/lib/offres";
 
 // Tuteur côté serveur (décision D8) : clés IA jamais dans le navigateur.
 // Gemini d'abord, Groq en secours. Quota quotidien par élève dans tutor_usage.
@@ -99,7 +100,7 @@ export async function POST(req: Request) {
   if (!user) return err("unauthorized", "Connecte-toi pour utiliser le tuteur", 401);
   if (!(await estMembre(user))) return err("forbidden", "Invitation requise", 403);
 
-  let body: { messages?: Msg[]; images?: Img[] };
+  let body: { messages?: Msg[]; images?: Img[]; tier?: string };
   try { body = await req.json(); } catch { return err("invalid_request", "Requête illisible", 400); }
 
   const all = (Array.isArray(body.messages) ? body.messages : []).slice(-60).map((m) => ({ role: m.role, text: texte(m.content) }));
@@ -116,11 +117,20 @@ export async function POST(req: Request) {
   // Quota : la table n'est modifiable que par la clé service (RLS en lecture seule pour l'élève).
   const admin = serviceClient();
   const day = jourMaroc();
-  const QUOTA = QUOTA_BASE + (await bonusTuteur(user.id));
+  // Offres (OFFRES_ACTIVES=1) : quota et options selon Gratuit / Essentiel / Premium. Sinon : règle de la bêta.
+  let QUOTA = QUOTA_BASE + (await bonusTuteur(user.id));
+  if (offresActives() && !estAdmin(user)) {
+    const { plan } = await offreDe(user.id);
+    if (body.tier === "complex" && RANG[plan] < 2)
+      return err("forbidden", "Le mode Approfondi est inclus dans les offres Essentiel et Premium (voir Moi > Mon offre).", 403);
+    if (images.length && RANG[plan] < 3)
+      return err("forbidden", "L'envoi de photos au tuteur est inclus dans l'offre Premium (voir Moi > Mon offre).", 403);
+    QUOTA = QUOTA_TUTEUR[plan];
+  }
   // Réservation atomique d'une question : même avec 50 requêtes simultanées, le quota tient.
   const { data: compte, error: eq } = await admin.rpc("reserver_question", { p_user: user.id, p_day: day, p_quota: QUOTA });
   if (eq) { console.error("[tutor] quota", eq.message); return err("upstream_error", "Tuteur momentanément indisponible", 503); }
-  if (compte === null) return err("rate_limited", `Quota du jour atteint (${QUOTA} questions). Reviens demain.`, 429);
+  if (compte === null) return err("rate_limited", `Quota du jour atteint (${QUOTA} questions). Reviens demain${offresActives() ? ", ou passe à une offre supérieure (Moi > Mon offre)" : ""}.`, 429);
   const used = Number(compte) - 1;
 
   // Essai des modèles dans l'ordre ; on passe au suivant tant qu'aucun mot n'a été envoyé.

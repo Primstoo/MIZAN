@@ -230,3 +230,123 @@ drop policy if exists "documents: dépôt dans son dossier" on storage.objects; 
 create unique index if not exists documents_chemin_unique on public.documents (chemin);
 alter table public.progress drop constraint if exists progress_taille;
 alter table public.progress add constraint progress_taille check (pg_column_size(data) < 2000000) not valid;
+
+-- ---------- Offres (06/11/2026) : Gratuit / Essentiel / Premium, codes d'activation, essais par invitation ----------
+-- Toutes les écritures passent par le serveur (clé service) : aucune fonction n'est appelable par un élève.
+create table if not exists public.abonnements (    -- une ligne par élève ayant eu une offre, un essai ou un parrainage
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  plan text not null default 'free' check (plan in ('free','essentiel','premium')),
+  plan_until timestamptz,
+  plan_source text not null default 'paid' check (plan_source in ('paid','invite','recompense')),
+  bonus_plan text check (bonus_plan in ('essentiel','premium')),
+  bonus_until timestamptz,
+  trial_used boolean not null default false,
+  referred_by uuid references auth.users(id) on delete set null,
+  referral_rewarded boolean not null default false,
+  updated_at timestamptz not null default now()
+);
+alter table public.abonnements enable row level security;
+drop policy if exists "abonnements: soi" on public.abonnements;
+create policy "abonnements: soi" on public.abonnements for select using ((select auth.uid()) = user_id);
+
+create table if not exists public.codes_offre (
+  code text primary key,
+  plan text not null check (plan in ('essentiel','premium')),
+  jours int not null check (jours between 1 and 400),
+  lot text,
+  created_at timestamptz not null default now(),
+  used_by uuid references auth.users(id) on delete set null,
+  used_at timestamptz
+);
+create table if not exists public.essais_code (       -- anti force brute : 5 essais ratés par heure
+  id bigserial primary key,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  ok boolean not null,
+  at timestamptz not null default now()
+);
+create index if not exists essais_code_user_idx on public.essais_code(user_id, at);
+alter table public.codes_offre enable row level security;   -- aucune politique : serveur uniquement
+alter table public.essais_code enable row level security;
+
+-- Ajoute des jours à une offre : prolonge si la même offre est en cours, sinon la remplace.
+create or replace function public.accorder_offre(p_user uuid, p_plan text, p_jours int, p_source text default 'paid')
+returns timestamptz language plpgsql security definer set search_path = '' as $$
+declare v public.abonnements; fin timestamptz;
+begin
+  insert into public.abonnements (user_id) values (p_user) on conflict (user_id) do nothing;
+  select * into v from public.abonnements where user_id = p_user for update;
+  if v.plan = p_plan and v.plan_until > now() then
+    fin := v.plan_until + make_interval(days => p_jours);
+    if v.plan_source = 'paid' then p_source := 'paid'; end if;
+  else
+    fin := now() + make_interval(days => p_jours);
+  end if;
+  update public.abonnements set plan = p_plan, plan_until = fin, plan_source = p_source where user_id = p_user;
+  return fin;
+end $$;
+
+-- Parrainage : 7 jours au niveau supérieur (gratuit → essentiel → premium), le plan payé reste intact.
+create or replace function public.recompense_superieure(p_user uuid, p_jours int)
+returns void language plpgsql security definer set search_path = '' as $$
+declare v public.abonnements; base int; cible text;
+begin
+  insert into public.abonnements (user_id) values (p_user) on conflict (user_id) do nothing;
+  select * into v from public.abonnements where user_id = p_user for update;
+  base := case when v.plan_until is null or v.plan_until <= now() or v.plan = 'free' then 1
+               when v.plan = 'essentiel' then 2 else 3 end;
+  if base = 3 then perform public.accorder_offre(p_user, 'premium', p_jours, 'recompense'); return; end if;
+  cible := case when base = 1 then 'essentiel' else 'premium' end;
+  if v.bonus_plan = cible and v.bonus_until > now() then
+    update public.abonnements set bonus_until = v.bonus_until + make_interval(days => p_jours) where user_id = p_user;
+  else
+    update public.abonnements set bonus_plan = cible, bonus_until = now() + make_interval(days => p_jours) where user_id = p_user;
+  end if;
+end $$;
+
+-- Utilisation d'un code d'activation par un élève.
+create or replace function public.utiliser_code(p_user uuid, p_code text)
+returns json language plpgsql security definer set search_path = '' as $$
+declare c public.codes_offre; rates int; fin timestamptz; parrain uuid;
+begin
+  select count(*) into rates from public.essais_code where user_id = p_user and not ok and at > now() - interval '1 hour';
+  if rates >= 5 then return json_build_object('ok', false, 'message', 'Trop d''essais. Réessaie dans une heure.'); end if;
+  select * into c from public.codes_offre where code = upper(trim(p_code)) and used_by is null for update;
+  if not found then
+    insert into public.essais_code (user_id, ok) values (p_user, false);
+    return json_build_object('ok', false, 'message', 'Code invalide ou déjà utilisé.');
+  end if;
+  update public.codes_offre set used_by = p_user, used_at = now() where code = c.code;
+  insert into public.essais_code (user_id, ok) values (p_user, true);
+  fin := public.accorder_offre(p_user, c.plan, c.jours, 'paid');
+  -- premier paiement d'un invité : récompense pour celui qui l'a invité
+  select referred_by into parrain from public.abonnements where user_id = p_user and not referral_rewarded;
+  if parrain is not null then
+    perform public.recompense_superieure(parrain, 7);
+    update public.abonnements set referral_rewarded = true where user_id = p_user;
+  end if;
+  return json_build_object('ok', true, 'plan', c.plan, 'fin', fin);
+end $$;
+
+-- Essai de 7 jours au niveau de l'invitant (seulement si son offre est payée et en cours).
+create or replace function public.essai_invitation(p_user uuid, p_parrain uuid)
+returns text language plpgsql security definer set search_path = '' as $$
+declare moi public.abonnements; lui public.abonnements; niveau text := 'free';
+begin
+  if p_parrain is null or p_parrain = p_user then return 'free'; end if;
+  insert into public.abonnements (user_id) values (p_user) on conflict (user_id) do nothing;
+  select * into moi from public.abonnements where user_id = p_user for update;
+  if moi.trial_used or moi.referred_by is not null then return 'free'; end if;
+  select * into lui from public.abonnements where user_id = p_parrain;
+  if found and lui.plan <> 'free' and lui.plan_until > now() and lui.plan_source = 'paid' then niveau := lui.plan; end if;
+  update public.abonnements set trial_used = true, referred_by = p_parrain where user_id = p_user;
+  if niveau <> 'free' and not (moi.plan <> 'free' and moi.plan_until > now()) then
+    perform public.accorder_offre(p_user, niveau, 7, 'invite');
+    return niveau;
+  end if;
+  return 'free';
+end $$;
+
+revoke all on function public.accorder_offre(uuid, text, int, text) from public, anon, authenticated;
+revoke all on function public.recompense_superieure(uuid, int) from public, anon, authenticated;
+revoke all on function public.utiliser_code(uuid, text) from public, anon, authenticated;
+revoke all on function public.essai_invitation(uuid, uuid) from public, anon, authenticated;

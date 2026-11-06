@@ -171,3 +171,14 @@ Chaque élève relie son compte depuis « Moi » (lien t.me/<bot>?start=<jeton> 
 - **Note prévue** : moyenne pondérée par l'importance des notions (maîtrisée = 1, ratée = son taux de réussite, jamais testée = 0,3), avec une fiabilité qui dépend de la part du programme testée.
 - **Note réelle** : saisie par l'élève après l'examen ; Suivi affiche l'écart moyen prévu / réel, l'indicateur clé du pilote.
 **Limite assumée :** un QCM ne mesure pas la rédaction ; la note est présentée comme un thermomètre, pas comme une prédiction exacte.
+
+## D27. Offres Gratuit / Essentiel / Premium (06/11/2026)
+**Quoi :** table `abonnements` (offre, date de fin, origine payée / invitation / récompense, bonus temporaire de parrainage), codes d'activation `TOUMAI-XXXX-XXXX` (table `codes_offre`, 5 essais ratés par heure), page « Mon offre » (`/app/offres`), section Offres dans Suivi (générer des codes, activer un élève par e-mail, abonnés en cours).
+**Droits :** tuteur 5 / 20 / 100 questions par jour (`TUTOR_QUOTA_*`), mode Approfondi dès Essentiel, photo au tuteur et examen blanc en Premium.
+**Invitations :** le code MZ- existant donne en plus 7 jours d'essai au niveau de l'invitant, seulement si son offre est payée et en cours (pas de chaîne d'essais). Quand l'invité paie, l'invitant gagne 7 jours au niveau supérieur ; son offre payée reste intacte (bonus stocké à part).
+**Annale acceptée :** 7 jours offerts (prolonge l'offre payée en cours, sinon Premium), à la place des questions bonus.
+**Paiement :** manuel (CashPlus, Orange Money, virement) puis code envoyé par WhatsApp. Pas de paiement en ligne : il faudrait une entreprise enregistrée (CMI) et Stripe n'est pas disponible au Maroc pour un particulier.
+**Interrupteur :** tant que `OFFRES_ACTIVES` n'est pas à 1, rien ne change pour les élèves de la bêta (quota historique, tout ouvert). Les codes et activations fonctionnent déjà.
+**Table séparée plutôt que `profiles` :** une ligne `profiles` créée au moment d'une invitation ferait sauter l'inscription guidée (la page Aujourd'hui considère qu'un profil existant = inscription faite).
+**Pas encore :** bibliothèque commune visible selon l'offre (les documents envoyés ne sont pas encore transformés en fiches), mode visiteur sans compte (bêta fermée, D15), mode J-7, PDF hors ligne, annonces Miroir Darija.
+**⚠️ Rappel D3 :** dès le premier paiement, l'offre gratuite de Vercel (usage non commercial) ne convient plus : passer au plan payant ou migrer vers Cloudflare.
