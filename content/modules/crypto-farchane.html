@@ -773,7 +773,13 @@ modes:`
 <h3>5. CTR (CounTeR)</h3>
 <p>On chiffre un compteur T+1+i :<br><span class="f">cᵢ = mᵢ ⊕ E_k(T + 1 + i)</span>, <span class="f">mᵢ = cᵢ ⊕ E_k(T + 1 + i)</span>.<br>Chaque bloc est indépendant des autres, donc le mode est <b>parallélisable</b> (on peut chiffrer tous les blocs en même temps). Un même bloc n'est jamais chiffré pareil deux fois. Sécurité équivalente à CFB.</p>
 <div class="tip"><b>Moyen mnémotechnique :</b> si la formule contient « mᵢ ⊕ E_k(…) » (CFB, OFB, CTR), le déchiffrement utilise aussi E_k. Seuls ECB et CBC utilisent D_k.</div>
-<p><b>Exemple guidé avec le chiffre jouet de la machine</b>, E(x) = (5x + 3) mod 16, IV = 9, m₀ = 7.<br>ECB : E(7) = 38 mod 16 = 6.<br>CBC : 7 ⊕ 9 en binaire : 0111 ⊕ 1001 = 1110 = 14, puis E(14) = 73 mod 16 = <b>9</b>.</p>`,
+<p><b>Exemple guidé avec le chiffre jouet de la machine</b>, E(x) = (5x + 3) mod 16, IV = 9, m₀ = 7.<br>ECB : E(7) = 38 mod 16 = 6.<br>CBC : 7 ⊕ 9 en binaire : 0111 ⊕ 1001 = 1110 = 14, puis E(14) = 73 mod 16 = <b>9</b>.</p>
+<h3>Le chiffre de Hill (utilisé dans le TD2)</h3>
+<p>Le TD2 applique les modes opératoires au <b>chiffre de Hill</b>, un chiffrement par blocs de 2 lettres. On numérote A=0…Z=25 et on multiplie le bloc (ligne) par une matrice clé A, modulo 26.</p>
+<p>Avec <span class="f">A = (2 1 / 1 1)</span> : <span class="f">E(x₁, x₂) = (2x₁ + x₂, x₁ + x₂) mod 26</span>.<br>Exemple : BA = (1, 0) → (2·1 + 0, 1 + 0) = (2, 1) = <b>CB</b>.</p>
+<p><b>Déchiffrer</b> : on multiplie par la matrice inverse. Ici det(A) = 2·1 − 1·1 = 1, donc <span class="f">A⁻¹ = (1 −1 / −1 2)</span> et <span class="f">D(y₁, y₂) = (y₁ − y₂, −y₁ + 2y₂) mod 26</span>. Exemple : CB = (2, 1) → (1, 0) = BA ✓.</p>
+<p><b>Le XOR sur des lettres</b> : dans le TD, « LETTRE ⊕ LETTRE » se calcule sur les numéros écrits en binaire. Exemple : X ⊕ B = 23 ⊕ 1 = 10111 ⊕ 00001 = 10110 = 22 = W.</p>
+<div class="trap"><b>Piège repéré dans le TD2 (mode CFB) :</b> un XOR de deux numéros peut dépasser 25 (ex. 15 ⊕ 19 = 28). Le corrigé de classe écrit 28 mod 26 = 2 (C), mais alors le déchiffrement ne redonne plus le message (on retrouve AN au lieu de AT). Signale-le sur ta copie et demande au prof quelle convention il veut ; en ECB, CBC et OFB, les valeurs de ce TD restent sous 26 et tout se déchiffre correctement.</div>`,
 
 des:`
 <h3>Qu'est-ce que DES</h3>
@@ -796,7 +802,13 @@ des:`
 <ol><li>On retire les 8 bits de parité et on applique <b>PC-1</b> : il reste 56 bits, coupés en C₀ (28 bits) et D₀ (28 bits).</li><li>À chaque tour i, on fait une <b>rotation circulaire à gauche</b> de C et D : 1 position aux tours 1, 2, 9 et 16, sinon 2 positions. Au total, 28 positions, donc C16 = C0.</li><li>kᵢ = <b>PC-2</b>(Cᵢ Dᵢ) : on choisit 48 des 56 bits.</li></ol>
 <p>Pour déchiffrer, on produit les sous-clés à l'envers avec des rotations à <b>droite</b> : k16 sans décalage, puis 1 position aux tours 2, 9 et 16 du déchiffrement, 2 positions sinon.</p>
 <h3>Critique</h3>
-<p>Une clé de 56 bits est trop courte : 2⁵⁶ ≈ 7,2 × 10¹⁶ possibilités, à la portée d'une machine spécialisée. En janvier 1999, une machine de 250 000 $ a trouvé une clé DES en <b>22 h 15 min</b>. DES a été remplacé par <b>AES</b> (partie 2).</p>`
+<p>Une clé de 56 bits est trop courte : 2⁵⁶ ≈ 7,2 × 10¹⁶ possibilités, à la portée d'une machine spécialisée. En janvier 1999, une machine de 250 000 $ a trouvé une clé DES en <b>22 h 15 min</b>. DES a été remplacé par <b>AES</b> (partie 2).</p>
+<h3>Feistel à deux rondes (TD2, exercice 5)</h3>
+<p>Même principe que DES, en miniature : bloc de 8 bits coupé en L (4 bits) et R (4 bits), clé de 8 bits coupée en K₁ (4 premiers bits) et K₂ (4 derniers). À chaque ronde : <span class="f">Lᵢ = Rᵢ₋₁</span>, <span class="f">Rᵢ = Lᵢ₋₁ ⊕ f(Rᵢ₋₁, Kᵢ)</span>. Dans f, « u₁u'₄ » est un ET (produit) entre bits et ⊕ un XOR.</p>
+<div class="trap"><b>Convention à vérifier avec le prof :</b> le TD ne dit pas s'il faut un échange final des moitiés comme dans DES. Les corrigés ci-dessous donnent C = (L₂, R₂), sans échange. Avec échange, on écrit R₂L₂.</div>
+<h3>MiniDES (TD2, exercice 6)</h3>
+<p>Bloc de 16 bits (L et R de 8 bits), clé de 12 bits coupée en deux moitiés de 6 bits. Les sous-clés : décalage circulaire à gauche des deux moitiés (1 position aux rondes 1, 2, 9, 16, sinon 2), puis la permutation PC (8 7 1 4 10 5 3 9 2 12 6 11). f(R, K) = P(S(E(R) ⊕ K)), avec E (8 1 2 3 4 5 4 5 6 7 8 1) qui passe R de 8 à 12 bits.</p>
+<div class="trap"><b>Il manque les S-boxes du MiniDES</b> dans le document du TD : sans elles, on ne peut pas aller jusqu'au chiffré final. Demande-les au prof ; les étapes calculables sont corrigées dans les exercices ci-dessous.</div>`
 };
 
 const EV={
@@ -863,14 +875,25 @@ lfsr:[
 {q:'Exemple du prof : s(i+3) = s(i+1) + s(i) mod 2, départ s₂s₁s₀ = 100. Donne les 7 premiers bits de sortie.',t:'0010111',e:'Voir le tableau de la leçon : 0, 0, 1, 0, 1, 1, 1.'},
 {q:'Polynôme du LFSR de coefficients (p₃, p₂, p₁, p₀) = (0, 0, 1, 1) :',o:['x⁴ + x³ + 1','x⁴ + x + 1','x³ + x + 1','x⁴ + 1'],a:1,e:'On garde x⁴ et les termes dont le coefficient vaut 1 : x (p₁) et 1 (p₀).'},
 {q:'Pourquoi n\'utilise-t-on pas un LFSR seul ?',o:['Il est trop lent','Il est prévisible : 2m bits suffisent pour retrouver ses coefficients','Il n\'a pas de période','Il faut une clé publique'],a:1,e:'Berlekamp-Massey retrouve les coefficients à partir de 2m bits.'},
-{q:'A5/1 est utilisé dans :',o:['le Bluetooth','le Wi-Fi','le GSM','SSL'],a:2,e:'RC4 : SSL et Wi-Fi ; E0 : Bluetooth ; A5 : GSM.'}],
+{q:'A5/1 est utilisé dans :',o:['le Bluetooth','le Wi-Fi','le GSM','SSL'],a:2,e:'RC4 : SSL et Wi-Fi ; E0 : Bluetooth ; A5 : GSM.'},
+{q:"TD2 : LFSR x⁴ + x + 1, état s₃s₂s₁s₀ = 1000. Donne les 8 premiers bits de sortie.",t:"00010011",e:"Nouveau bit = s₀ ⊕ s₁, le bit sortant est s₀. Flux complet : 000100110101111."},
+{q:"Chiffrement par flot : M = 1001 et le flux vaut S = 0001. Que vaut C ?",t:"1000",e:"C = M ⊕ S = 1001 ⊕ 0001 = 1000."},
+{q:"Attaque à clair connu : M = 1001, C = 1011. Que vaut le flux S ?",t:"0010",e:"S = M ⊕ C = 0010 : connaître le clair donne directement le flux."},
+{q:"Le flux récupéré se répète tous les 7 bits. Degré m du LFSR (période maximale) ?",t:"3",e:"2ᵐ − 1 = 7, donc m = 3."}
+],
 modes:[
 {q:'Défaut majeur de ECB :',o:['Il est lent','Deux blocs clairs identiques donnent deux chiffrés identiques','Il exige un IV','Il n\'est pas réversible'],a:1,e:'La structure du message reste visible.'},
 {q:'Formule de chiffrement de CBC :',o:['cᵢ = E_k(mᵢ)','cᵢ = E_k(mᵢ ⊕ cᵢ₋₁)','cᵢ = mᵢ ⊕ E_k(cᵢ₋₁)','cᵢ = mᵢ ⊕ E_k(T+1+i)'],a:1,e:'Les autres formules correspondent à ECB, CFB et CTR.'},
 {q:'Quel mode est facilement parallélisable ?',o:['CBC','CFB','CTR','OFB'],a:2,e:'CTR : chaque bloc ne dépend que du compteur.'},
 {q:'Pour déchiffrer en CFB, on utilise :',o:['D_k','E_k','les deux','aucune fonction'],a:1,e:'mᵢ = cᵢ ⊕ E_k(cᵢ₋₁).'},
 {q:'Chiffre jouet E(x) = (5x + 3) mod 16. Mode ECB, bloc m = 2. Que vaut c ?',t:'13',e:'5×2 + 3 = 13.'},
-{q:'Même chiffre, mode CBC, IV = 9, m₀ = 7. Que vaut c₀ ?',t:'9',e:'7 ⊕ 9 = 0111 ⊕ 1001 = 1110 = 14 ; E(14) = 73 mod 16 = 9.'}],
+{q:'Même chiffre, mode CBC, IV = 9, m₀ = 7. Que vaut c₀ ?',t:'9',e:'7 ⊕ 9 = 0111 ⊕ 1001 = 1110 = 14 ; E(14) = 73 mod 16 = 9.'},
+{q:"TD2, Hill A = (2 1 / 1 1) : chiffre le bloc AT.",t:"TT",e:"AT = (0, 19) → (2·0 + 19, 0 + 19) = (19, 19) = TT."},
+{q:"Même matrice : chiffre le bloc ED.",t:"LH",e:"ED = (4, 3) → (8 + 3, 4 + 3) = (11, 7) = LH."},
+{q:"Inverse de A = (2 1 / 1 1) modulo 26 :",o:["(1 −1 / −1 2)", "(2 −1 / −1 1)", "(1 1 / 1 2)", "A n'a pas d'inverse"],a:0,e:"det(A) = 2 − 1 = 1, donc A⁻¹ = (1 −1 / −1 2)."},
+{q:"TD2 Ex. 4 : S₁ : 00→11, 10→10, 01→00, 11→01, K = 10. Que vaut E_K(11) ?",t:"00",e:"11 ⊕ 10 = 01, puis S₁(01) = 00."},
+{q:"En CFB, pourquoi le TD2 pose problème avec le bloc AT ?",o:["Hill n'a pas d'inverse", "15 ⊕ 19 = 28 dépasse 25 et la réduction mod 26 empêche de retrouver le clair", "Il manque l'IV", "Le mode CFB n'existe pas pour Hill"],a:1,e:"28 ramené à 2 : au déchiffrement on trouve AN au lieu de AT."}
+],
 des:[
 {q:'Taille d\'un bloc DES (en bits) :',t:'64',e:'Blocs de 64 bits.'},
 {q:'Taille effective de la clé DES (en bits) :',t:'56',e:'64 bits dont 8 de parité.'},
@@ -879,7 +902,12 @@ des:[
 {q:'La fonction f doit-elle être inversible pour que le déchiffrement marche ?',o:['Oui, toujours','Non, grâce au XOR de Feistel','Seulement au dernier tour','Oui, sinon pas de S-box'],a:1,e:'f ⊕ f = 0, donc on n\'a jamais besoin d\'inverser f.'},
 {q:'S1, entrée 011011 : quelle sortie sur 4 bits ? (la table S1 est dans la machine)',t:'0101',e:'Ligne 01 = 1, colonne 1101 = 13, S1[1][13] = 5 = 0101.'},
 {q:'Pour déchiffrer, DES utilise les sous-clés :',o:['dans le même ordre','dans l\'ordre inverse k16 → k1','une seule sous-clé','la clé publique'],a:1,e:'Même algorithme, sous-clés dans l\'ordre inverse.'},
-{q:'L\'expansion E fait passer R de 32 bits à :',t:'48',e:'Pour avoir la même taille que la sous-clé.'}]
+{q:'L\'expansion E fait passer R de 32 bits à :',t:'48',e:'Pour avoir la même taille que la sous-clé.'},
+{q:"TD2 Ex. 5 : K = 10110010. Que vaut la sous-clé K₁ (4 bits) ?",t:"1011",e:"K₁ = les 4 premiers bits de K, K₂ = les 4 derniers (0010)."},
+{q:"TD2 Ex. 5 : avec R₀ = 0111 et K₁ = 1011, que vaut f(R₀, K₁) ?",t:"0101",e:"v₁ = 0⊕1⊕1 = 0, v₂ = 0⊕1 = 1, v₃ = 0⊕0 = 0, v₄ = 1⊕0 = 1."},
+{q:"Même exemple : L₀ = 0100. Que vaut R₁ = L₀ ⊕ f(R₀, K₁) ?",t:"0001",e:"0100 ⊕ 0101 = 0001."},
+{q:"MiniDES : de combien de positions décale-t-on les moitiés de clé à la ronde 1 ?",o:["1", "2", "3", "4"],a:0,e:"1 position aux rondes 1, 2, 9 et 16, sinon 2."}
+]
 };
 
 // ---- progression (localStorage, facultatif) ----
@@ -947,15 +975,33 @@ arith:[
 lfsr:[
 ['Reproduis l\'exemple de la leçon : coefficients 1 1 0, état 0 0 1.','p₀ = 1 et p₁ = 1 signifient : nouveau bit = s₀ ⊕ s₁. L\'état s₀ s₁ s₂ = 0 0 1 correspond à s₂ = 1.','Sortie <b>0010111</b>, période 7 (maximale pour m = 3).'],
 ['Exercice 1 de la diapo 95 : (p₀, p₁, p₂, p₃) = (1, 1, 0, 0), état 0 0 0 1. Fais le tableau d\'états sur papier, puis vérifie.','Nouveau bit = s₀ ⊕ s₁.','Période <b>15</b> = 2⁴ − 1, donc maximale. Polynôme x⁴ + x + 1.'],
-['Exercice 2 de la diapo 95 : coefficients 1 1 1 1, état 0 0 0 1.','Nouveau bit = s₀ ⊕ s₁ ⊕ s₂ ⊕ s₃.','Période <b>5</b>, loin du maximum de 15. Tous les polynômes ne se valent pas.']],
+['Exercice 2 de la diapo 95 : coefficients 1 1 1 1, état 0 0 0 1.','Nouveau bit = s₀ ⊕ s₁ ⊕ s₂ ⊕ s₃.','Période <b>5</b>, loin du maximum de 15. Tous les polynômes ne se valent pas.'],
+["<b>TD2 · Ex. 1 Q1.</b> LFSR de polynôme P(x) = x⁴ + x + 1, initialisé à s₃=1, s₂=0, s₁=0, s₀=0. Décris complètement le flux de sortie.","P(x) = x⁴ + 0·x³ + 0·x² + 1·x + 1, donc p₃=0, p₂=0, p₁=1, p₀=1 : nouveau bit = s₀ ⊕ s₁. Le bit qui sort est s₀. Dans la machine : coefficients « 1 1 0 0 », état « 0 0 0 1 ».","Sortie : <b>000100110101111</b>, puis ça recommence (000100…). Période <b>15 = 2⁴ − 1</b> : période maximale, le polynôme est primitif. Fais le tableau d'états sur papier (tops 0 à 15) : l'état 1000 revient au top 15."],
+["<b>TD2 · Ex. 1 Q2.</b> Chiffre M = 100111010010100 avec ce LFSR, germe 1000 (même état initial).","Chiffrement par flot : C = M ⊕ S, bit par bit, avec les 15 premiers bits de S.","M = 100111010010100<br>S = 000100110101111<br>C = <b>100011100111011</b> (corrigé de classe juste)."],
+["<b>TD2 · Ex. 1 Q3.</b> Déchiffre C = 111100001010100, chiffré avec le même LFSR et le germe 0100 (s₃=0, s₂=1, s₁=0, s₀=0).","Nouveau germe, donc nouveau flux : machine avec coefficients « 1 1 0 0 », état « 0 0 1 0 ». Puis M = C ⊕ S.","S = 001001101011110<br>M = C ⊕ S = <b>110101100001010</b>. Remarque : c'est le même flux qu'en Q1, décalé de 2 bits (le germe 0100 apparaît au top 2)."],
+["<b>TD2 · Ex. 2 Q1-Q2 (attaque à clair connu).</b> M = 1001 0010 0110 1101 1001 0010 0110 et on observe C = 1011 1100 0011 0001 0010 1011 0001. Trouve le degré m du LFSR et le vecteur d'initialisation.","Avec le clair et le chiffré, on récupère le flux : S = M ⊕ C. Cherche ensuite au bout de combien de bits S se répète.","S = M ⊕ C = 0010111 0010111 0010111 0010111 : période 7. Un LFSR de période maximale a une période 2ᵐ − 1 : 2ᵐ − 1 = 7, donc <b>m = 3</b>.<br>Vecteur d'initialisation = les 3 premiers bits de S : s₀=0, s₁=0, s₂=1, soit <b>(s₂, s₁, s₀) = (1, 0, 0)</b>."],
+["<b>TD2 · Ex. 2 Q3-Q4.</b> Détermine les coefficients de rétroaction, puis vérifie la sortie.","Écris s₃ = p₀s₀ ⊕ p₁s₁ ⊕ p₂s₂, puis s₄ et s₅ de la même façon, et remplace par les bits connus de S.","s₃ = p₂ (car s₀=s₁=0, s₂=1) = 0, donc p₂ = 0.<br>s₄ = p₁·s₂ = p₁ = 1, donc p₁ = 1.<br>s₅ = p₀·s₂ = p₀ = 1, donc p₀ = 1.<br><b>P(x) = x³ + x + 1</b> (nouveau bit = s₀ ⊕ s₁).<br>Vérification dans la machine : coefficients « 1 1 0 », état « 0 0 1 » → sortie 0010111, période 7 ✓."]
+],
 modes:[
 ['Laisse les blocs 7 7 7 2 et clique « Comparer ». Que remarques-tu sur la ligne ECB ?','Compare les trois premiers chiffrés ECB.','ECB donne trois fois le même chiffré pour les trois 7 : la répétition se voit. Les autres modes donnent des valeurs différentes.'],
 ['Calcule à la main le premier bloc CBC (IV = 9, m₀ = 7, E(x) = 5x + 3 mod 16).','Calcule d\'abord m₀ ⊕ IV en binaire sur 4 bits, puis applique E.','0111 ⊕ 1001 = 1110 = 14 ; E(14) = 73 mod 16 = <b>9</b>. Vérifie dans la ligne CBC.'],
-['Change l\'IV (par exemple 3) et compare les lignes avant et après.','Quel mode n\'utilise pas d\'IV ?','Seule la ligne ECB ne change pas : ECB n\'utilise ni IV ni compteur.']],
+['Change l\'IV (par exemple 3) et compare les lignes avant et après.','Quel mode n\'utilise pas d\'IV ?','Seule la ligne ECB ne change pas : ECB n\'utilise ni IV ni compteur.'],
+["<b>TD2 · Ex. 3 Q1a (ECB).</b> Hill avec A = (2 1 / 1 1), M = BADFATED. Chiffre en mode ECB.","Découpe en blocs de 2 : BA | DF | AT | ED. Chaque bloc : (x₁, x₂) → (2x₁ + x₂, x₁ + x₂) mod 26.","BA (1,0) → (2,1) = CB ; DF (3,5) → (11,8) = LI ; AT (0,19) → (19,19) = TT ; ED (4,3) → (11,7) = LH.<br><b>C = CBLITTLH</b>."],
+["<b>TD2 · Ex. 3 Q1b (CBC, IV = XY).</b> Chiffre BADFATED.","cᵢ = E(mᵢ ⊕ cᵢ₋₁), avec c₋₁ = IV = XY = (23, 24). Le XOR se fait sur les numéros en binaire.","XY ⊕ BA = (23⊕1, 24⊕0) = (22, 24) = WY → E = (16, 20) = <b>QU</b>.<br>QU ⊕ DF = (19, 17) = TR → E = (3, 10) = <b>DK</b>.<br>DK ⊕ AT = (3, 25) = DZ → E = (5, 2) = <b>FC</b>.<br>FC ⊕ ED = (1, 1) = BB → E = (3, 2) = <b>DC</b>.<br><b>C = XY QU DK FC DC</b> (on transmet l'IV en tête)."],
+["<b>TD2 · Ex. 3 Q1c (CFB, IV = XY).</b> Chiffre BADFATED.","cᵢ = E(cᵢ₋₁) ⊕ mᵢ, avec c₋₁ = IV. On chiffre le bloc précédent, puis on fait le XOR avec le clair.","E(XY) = SV → SV ⊕ BA = (19, 21) = <b>TV</b>.<br>E(TV) = HO → HO ⊕ DF = (4, 11) = <b>EL</b>.<br>E(EL) = TP → TP ⊕ AT = (19, 28) : 28 dépasse 25 ! Le corrigé écrit 28 mod 26 = 2, soit <b>TC</b>.<br>E(TC) = OV → OV ⊕ ED = (10, 22) = <b>KW</b>.<br>C = XY TV EL TC KW (comme le corrigé), <b>mais</b> au déchiffrement, le 3e bloc redonne AN au lieu de AT : la réduction mod 26 détruit l'information. Voir le piège dans la leçon."],
+["<b>TD2 · Ex. 3 Q1d (OFB, IV = XY).</b> Chiffre BADFATED.","z₀ = E(IV), zᵢ = E(zᵢ₋₁), puis cᵢ = mᵢ ⊕ zᵢ. Le masque ne dépend pas du message.","z₀ = E(XY) = SV → SV ⊕ BA = <b>TV</b>.<br>z₁ = E(SV) = FN → FN ⊕ DF = (6, 8) = <b>GI</b>.<br>z₂ = E(FN) = XS → XS ⊕ AT = (23, 1) = <b>XB</b>.<br>z₃ = E(XS) = MP → MP ⊕ ED = (8, 12) = <b>IM</b>.<br><b>C = XY TV GI XB IM</b> (corrigé juste)."],
+["<b>TD2 · Ex. 3 Q2.</b> Rappelle les déchiffrements des 4 modes et vérifie-les sur tes chiffrés.","Il faut d'abord A⁻¹. Ensuite : ECB mᵢ = D(cᵢ) ; CBC mᵢ = D(cᵢ) ⊕ cᵢ₋₁ ; CFB mᵢ = E(cᵢ₋₁) ⊕ cᵢ ; OFB mᵢ = cᵢ ⊕ zᵢ (mêmes zᵢ qu'au chiffrement).","A⁻¹ = (1 −1 / −1 2), donc D(y₁, y₂) = (y₁ − y₂, −y₁ + 2y₂) mod 26.<br><b>ECB</b> : D(CB) = BA, D(LI) = DF, D(TT) = AT, D(LH) = ED → BADFATED ✓.<br><b>CBC</b> : D(QU) ⊕ XY = BA, D(DK) ⊕ QU = DF, D(FC) ⊕ DK = AT, D(DC) ⊕ FC = ED → BADFATED ✓.<br><b>OFB</b> : TV ⊕ SV = BA, GI ⊕ FN = DF, XB ⊕ XS = AT, IM ⊕ MP = ED ✓.<br><b>CFB</b> : TV, EL et KW redonnent BA, DF et ED, mais TC redonne AN : c'est l'effet du 28 ramené à 2 (voir la leçon)."],
+["<b>TD2 · Ex. 4 Q1.</b> E_K(m₁, m₂) = S₁(m₁ ⊕ k₁, m₂ ⊕ k₂), avec S₁ : 00→11, 10→10, 01→00, 11→01. Chiffre M = 01 11 01 avec K = 10, en ECB puis en OFB (IV = 00).","D'abord le XOR avec la clé, puis la table S₁. En OFB : z₁ = E(IV), zᵢ = E(zᵢ₋₁), cᵢ = mᵢ ⊕ zᵢ.","<b>ECB</b> : E(01) = S₁(11) = 01 ; E(11) = S₁(01) = 00 ; E(01) = 01 → <b>C = 01 00 01</b>.<br><b>OFB</b> : z₁ = E(00) = S₁(10) = 10 → 01 ⊕ 10 = 11 ; z₂ = E(10) = S₁(00) = 11 → 11 ⊕ 11 = 00 ; z₃ = E(11) = S₁(01) = 00 → 01 ⊕ 00 = 01 → <b>C = 11 00 01</b>."],
+["<b>TD2 · Ex. 4 Q2.</b> Déchiffre C = 01 11 01 chiffré avec K = 11 (IV = 00), en CBC puis en CFB.","Il faut la table inverse S₁⁻¹ : 11→00, 10→10, 00→01, 01→11. Puis D(c) = S₁⁻¹(c) ⊕ K. CBC : mᵢ = D(cᵢ) ⊕ cᵢ₋₁. CFB : mᵢ = E(cᵢ₋₁) ⊕ cᵢ (pas besoin de D).","<b>CBC</b> : D(01) = 11 ⊕ 11 = 00 → m₁ = 00 ⊕ 00 = 00 ; D(11) = 00 ⊕ 11 = 11 → m₂ = 11 ⊕ 01 = 10 ; D(01) = 00 → m₃ = 00 ⊕ 11 = 11 → <b>M = 00 10 11</b>.<br><b>CFB</b> : E(00) = S₁(11) = 01 → m₁ = 01 ⊕ 01 = 00 ; E(01) = S₁(10) = 10 → m₂ = 10 ⊕ 11 = 01 ; E(11) = S₁(00) = 11 → m₃ = 11 ⊕ 01 = 10 → <b>M = 00 01 10</b>."]
+],
 des:[
 ['Lis S1 pour l\'entrée 101100 (exemple du prof).','Ligne = 1er et 6e bits ; colonne = bits 2 à 5.','Ligne 10 = 2, colonne 0110 = 6 → 2 = <b>0010</b>. La machine colore la case.'],
 ['Lis S1 pour 011011, à la main avec la table.','Ligne 01, colonne 1101.','Ligne 1, colonne 13 → 5 = <b>0101</b>.'],
-['Feistel jouet : clique « Chiffrer puis déchiffrer ». Vérifie à la main le tour 1.','L1 = R0 ; R1 = L0 ⊕ f(R0, k1).','La machine montre que le déchiffrement, avec les clés dans l\'ordre inverse, redonne exactement le message, alors que f n\'est pas inversible.']]
+['Feistel jouet : clique « Chiffrer puis déchiffrer ». Vérifie à la main le tour 1.','L1 = R0 ; R1 = L0 ⊕ f(R0, k1).','La machine montre que le déchiffrement, avec les clés dans l\'ordre inverse, redonne exactement le message, alors que f n\'est pas inversible.'],
+["<b>TD2 · Ex. 5 Q1.</b> Feistel à 2 rondes, K = [1,0,1,1,0,0,1,0], M = [0,1,0,0,0,1,1,1]. f(U,U') : v₁ = u₁u'₄ ⊕ u₂u'₃ ⊕ u₄u'₃ ; v₂ = u₁u'₂ ⊕ u₃u'₁ ; v₃ = u₁u'₄ ⊕ u₁u'₃ ; v₄ = u₃u'₃ ⊕ u₁u'₁ (U = moitié droite, U' = sous-clé). Calcule C.","K₁ = 1011, K₂ = 0010. L₀ = 0100, R₀ = 0111. Calcule f(R₀, K₁) bit par bit (produit = ET), puis L₁ = R₀ et R₁ = L₀ ⊕ f.","<b>Ronde 1</b> : f(0111, 1011) : v₁ = 0·1 ⊕ 1·1 ⊕ 1·1 = 0 ; v₂ = 0·0 ⊕ 1·1 = 1 ; v₃ = 0 ⊕ 0 = 0 ; v₄ = 1·1 ⊕ 0·1 = 1 → f = 0101. L₁ = 0111, R₁ = 0100 ⊕ 0101 = 0001.<br><b>Ronde 2</b> : f(0001, 0010) = 1000. L₂ = 0001, R₂ = 0111 ⊕ 1000 = 1111.<br><b>C = 0001 1111</b> (sans échange final ; avec échange : 1111 0001). Vérifié : le déchiffrement redonne M."],
+["<b>TD2 · Ex. 5 Q2.</b> Déchiffre C = [0,1,1,1,0,0,1,1] avec la même clé.","Même machine, sous-clés dans l'ordre inverse (K₂ puis K₁) : on remonte Rᵢ₋₁ = Lᵢ, puis Lᵢ₋₁ = Rᵢ ⊕ f(Lᵢ, Kᵢ).","L₂ = 0111, R₂ = 0011.<br><b>Ronde 2 inversée</b> : R₁ = L₂ = 0111 ; f(0111, K₂ = 0010) = 0001 ; L₁ = R₂ ⊕ 0001 = 0010.<br><b>Ronde 1 inversée</b> : R₀ = L₁ = 0010 ; f(0010, K₁ = 1011) = 0101 ; L₀ = R₁ ⊕ 0101 = 0111 ⊕ 0101 = 0010.<br><b>M = 0010 0010</b> (même convention sans échange final ; vérifié par calcul)."],
+["<b>TD2 · Ex. 6 (MiniDES), partie calculable.</b> K = 07E (hexa), M = A0E0. Calcule K₁, K₂ et E(R₀) ⊕ K₁.","K = 0000 0111 1110 → moitiés de 6 bits : 000001 | 111110. Ronde 1 : décalage de 1 à gauche, puis PC. Ronde 2 : encore 1. M : L₀ = A0 = 10100000, R₀ = E0 = 11100000.","Ronde 1 : 000010 | 111101 → PC → <b>K₁ = 110011010100</b> (CD4).<br>Ronde 2 : 000100 | 111011 → PC → <b>K₂ = 110100010101</b> (D15).<br>E(R₀) = 011100000001 ; E(R₀) ⊕ K₁ = <b>101111010101</b>.<br>La suite (S-boxes, puis P) est impossible sans les tables S, absentes du document : à demander au prof."]
+]
 };
 
 // ---- générateurs d'exercices aléatoires ----
