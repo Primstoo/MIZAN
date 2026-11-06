@@ -7,6 +7,7 @@ import Deconnexion from "../Deconnexion";
 import { bonusTuteur } from "@/lib/bonus";
 import { botActif } from "@/lib/telegram";
 import Telegram from "./Telegram";
+import { dateFr, NOMS, offreDe, offresActives, QUOTA_TUTEUR } from "@/lib/offres";
 
 export const metadata = { title: "Mon compte" };
 
@@ -20,7 +21,8 @@ export default async function Moi() {
   ]);
   const bonus = await bonusTuteur(user!.id);
   const { data: tg } = await db.from("telegram_links").select("chat_id, actif").eq("user_id", user!.id).maybeSingle();
-  const quota = Number(process.env.TUTOR_DAILY_QUOTA || 40) + bonus;
+  const offre = await offreDe(user!.id);
+  const quota = offresActives() && !estAdmin(user) ? QUOTA_TUTEUR[offre.plan] : Number(process.env.TUTOR_DAILY_QUOTA || 40) + bonus;
   const restant = Math.max(0, quota - (usage?.count ?? 0));
   const peutCreer = estAdmin(user) || (inv?.length ?? 0) < Number(process.env.INVITES_PER_MEMBER || 1);
   const actifs = p.semaine.filter((j) => j.fait).length;
@@ -38,6 +40,11 @@ export default async function Moi() {
         <div className="card"><span className="k">Tuteur</span><span className="big">{restant}</span><span className="small muted">questions restantes aujourd&apos;hui</span></div>
         <div className="card"><span className="k">Temps prévu</span><span className="big">{p.profil?.minutes_jour ?? 60}</span><span className="small muted">minutes par jour</span></div>
       </div>
+
+      <section className="bloc">
+        <div className="row between"><h2>Mon offre : {NOMS[offre.plan]}</h2><a href="/app/offres" className="btn small">{offre.plan === "premium" ? "Voir" : "Voir les offres"}</a></div>
+        <p className="muted small">{offre.fin ? `Active jusqu'au ${dateFr(offre.fin)}.` : "Fiches, quiz et tuteur de base. Tu as un code ? Active-le sur la page des offres."}</p>
+      </section>
 
       <section className="bloc">
         <div className="row between"><h2>Mes examens</h2><a href="/app/bienvenue" className="btn alt small">Modifier</a></div>
@@ -61,7 +68,7 @@ export default async function Moi() {
 
       <section className="bloc">
         <h2>Inviter des camarades</h2>
-        <p className="muted small">ToumaiLearn est en bêta privée : chaque code fait entrer quelques personnes.</p>
+        <p className="muted small">ToumaiLearn est en bêta privée : chaque code fait entrer quelques personnes. Si tu as une offre payée, tes invités l&apos;essaient 7 jours ; s&apos;ils s&apos;abonnent, tu gagnes 7 jours au niveau supérieur.</p>
         {(inv ?? []).map((i) => (
           <p key={i.code} className="row"><code className="code">{i.code}</code><span className="small muted">{i.max_uses - i.uses} place{i.max_uses - i.uses > 1 ? "s" : ""} restante{i.max_uses - i.uses > 1 ? "s" : ""}</span><Copier texte={i.code} /></p>
         ))}

@@ -5,6 +5,8 @@ import { MODULES } from "@/lib/modules";
 import { jourMaroc } from "@/lib/parcours";
 import { botActif } from "@/lib/telegram";
 import Webhook from "./Webhook";
+import OffresAdmin from "./Offres";
+import { offresActives } from "@/lib/offres";
 import { creerSession, statutReservation, majLien, majDateModule, statutDocument } from "../actions";
 
 // Suivi du pilote, réservé aux admins (ADMIN_EMAILS) : qui est entré, qui révise quoi,
@@ -39,6 +41,12 @@ export default async function Suivi() {
     const { data: u } = await db.storage.from("documents").createSignedUrl(d.chemin, 3600);
     if (u?.signedUrl) liens.set(d.id, u.signedUrl);
   }
+  const [{ data: abos }, { data: codesO }] = await Promise.all([
+    db.from("abonnements").select("user_id, plan, plan_until, plan_source, bonus_plan, bonus_until, referred_by"),
+    db.from("codes_offre").select("code, plan, jours, lot, created_at, used_by, used_at").order("created_at", { ascending: false }).limit(30),
+  ]);
+  const maintenant = new Date().toISOString();
+  const abosActifs = (abos ?? []).filter((a) => a.plan !== "free" && a.plan_until > maintenant);
   const encaisse = R.filter((r) => r.statut === "payee").reduce((t, r) => t + (S.find((s) => s.id === r.session_id)?.prix_dh ?? 0), 0);
   const attente = R.filter((r) => r.statut === "en_attente");
   const M = membres ?? [], P = prog ?? [], U = usage ?? [], I = invites ?? [];
@@ -188,6 +196,20 @@ export default async function Suivi() {
             const x = parUser.get(m.user_id);
             return <tr key={m.user_id}><td>{m.email}</td><td>{fr(m.joined_at)}</td><td>{m.invite_code}</td><td>{x?.modules ?? 0}</td><td>{fr(x?.derniere ?? "")}</td><td>{x?.q ?? 0}</td></tr>;
           })}
+        </tbody></table></div>
+      </section>
+
+      <section className="bloc">
+        <h2>Offres</h2>
+        <p className="muted small">{offresActives() ? "Offres actives : les limites Gratuit / Essentiel / Premium s'appliquent." : "Bêta : offres désactivées (mettre OFFRES_ACTIVES=1 dans Vercel pour appliquer les limites). Les codes et activations fonctionnent déjà."}</p>
+        <OffresAdmin />
+        <h3>Abonnés en cours ({abosActifs.length})</h3>
+        <div className="tabw"><table className="tab"><thead><tr><th>Élève</th><th>Offre</th><th>Jusqu&apos;au</th><th>Origine</th><th>Invité par</th></tr></thead><tbody>
+          {abosActifs.map((a) => <tr key={a.user_id}><td>{emailDe.get(a.user_id) ?? a.user_id.slice(0, 8)}</td><td>{a.plan}</td><td>{fr(a.plan_until)}</td><td>{a.plan_source}</td><td>{a.referred_by ? emailDe.get(a.referred_by) ?? "—" : "—"}</td></tr>)}
+        </tbody></table></div>
+        <h3>Derniers codes</h3>
+        <div className="tabw"><table className="tab"><thead><tr><th>Code</th><th>Offre</th><th>Lot</th><th>Utilisé par</th></tr></thead><tbody>
+          {(codesO ?? []).map((c) => <tr key={c.code}><td><code className="code">{c.code}</code></td><td>{c.plan} · {c.jours} j</td><td>{c.lot ?? "—"}</td><td>{c.used_by ? `${emailDe.get(c.used_by) ?? "?"} (${fr(c.used_at)})` : "libre"}</td></tr>)}
         </tbody></table></div>
       </section>
 

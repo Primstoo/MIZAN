@@ -3,6 +3,9 @@ import { getModule } from "@/lib/modules";
 import BANQUE from "@/lib/banque.json";
 import CATALOGUE from "@/lib/notions.json";
 import Blanc from "./Blanc";
+import { createClient } from "@/lib/supabase/server";
+import { estAdmin } from "@/lib/acces";
+import { rangEffectif } from "@/lib/offres";
 
 export const dynamic = "force-dynamic";
 export function generateMetadata({ params }: { params: { slug: string } }) {
@@ -25,9 +28,18 @@ function sujet(slug: string, nb: number): Q[] {
   return melanger(out);
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: { params: { slug: string } }) {
   const m = getModule(params.slug);
   if (!m) notFound();
+  const { data: { user } } = await createClient().auth.getUser();
+  if ((await rangEffectif(user!.id, estAdmin(user))) < 3) return (
+    <main className="page">
+      <p className="eyebrow">Examen blanc</p>
+      <h1>Inclus dans l&apos;offre Premium</h1>
+      <p className="muted">15 questions chronométrées, note sur 20 et corrigé détaillé, comme le jour de l&apos;examen.</p>
+      <p className="row"><a href="/app/offres" className="btn">Voir les offres</a><a href={`/app/m/${m.slug}`} className="btn alt">Retour au module</a></p>
+    </main>
+  );
   const qs = sujet(m.slug, 15);
   if (qs.length < 5) notFound();
   return <Blanc slug={m.slug} titre={m.titre} questions={qs} minutes={20} />;
