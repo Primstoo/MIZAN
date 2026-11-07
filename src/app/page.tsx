@@ -12,7 +12,7 @@ export default function Accueil() {
         <h1>Révise le cours de <em>ton</em> prof, pas un cours générique.</h1>
         <p className="lead">Chaque module est construit à partir des supports réels de ton enseignant : ses notations, ses exemples, le format de ses TD et de ses examens.</p>
         <div className="cta">
-          <a href="/login" className="btn big-inline">J&apos;ai un code d&apos;invitation</a>
+          <a href="/login?invitation" className="btn big-inline">J&apos;ai un code d&apos;invitation</a>
           <span className="muted small">Accès sur invitation d&apos;un étudiant déjà inscrit.</span>
         </div>
       </section>

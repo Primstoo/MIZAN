@@ -3,12 +3,15 @@ import { useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { createClient as createRawClient } from "@supabase/supabase-js";
 import Mascotte from "@/components/Mascotte";
+import { verifierInvitation } from "./actions";
 
 // Connexion sans mot de passe : lien par e-mail (flux implicite, marche dans tout navigateur),
 // et saisie d'un code à 6 chiffres quand l'e-mail en contient un (après configuration d'un SMTP).
 export default function Login() {
   const supabase = createClient();
-  const [etape, setEtape] = useState<"email" | "code">("email");
+  const [etape, setEtape] = useState<"invitation" | "email" | "code">("email");
+  const [invitation, setInvitation] = useState("");
+  const [etapesInvitation, setEtapesInvitation] = useState(false);
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [charge, setCharge] = useState(false);
@@ -21,6 +24,8 @@ export default function Login() {
     // Lien d'invitation : on garde le code pour pré-remplir l'écran d'entrée après connexion.
     const inv = p.get("code");
     if (inv) try { localStorage.setItem("mizan-invite", inv); } catch {}
+    // « J'ai un code d'invitation » : on saisit et vérifie le code AVANT l'e-mail.
+    else if (p.get("invitation") !== null) { setEtape("invitation"); setEtapesInvitation(true); }
     if (p.get("erreur")) setMsg({ type: "bad", texte: "Ce lien de connexion n’a pas fonctionné (il a peut-être expiré). Demande un nouveau code ci-dessous." });
   }, []);
   useEffect(() => {
@@ -63,6 +68,20 @@ export default function Login() {
     window.location.href = "/app";
   }
 
+  async function validerInvitation(e: React.FormEvent) {
+    e.preventDefault();
+    setCharge(true); setMsg(null);
+    const r = await verifierInvitation(invitation);
+    setCharge(false);
+    if (!r.ok) { setMsg({ type: "bad", texte: r.message || "Code refusé." }); return; }
+    try { localStorage.setItem("mizan-invite", invitation.trim().toUpperCase()); } catch {}
+    setMsg({ type: "ok", texte: "Code valide. Connecte-toi maintenant avec ton e-mail : ta place est gardée." });
+    setEtape("email");
+  }
+
+  const total = etapesInvitation ? 3 : 2;
+  const num = etape === "invitation" ? 1 : etape === "email" ? total - 1 : total;
+
   return (
     <main className="auth">
       <section className="auth-brand">
@@ -81,8 +100,19 @@ export default function Login() {
 
       <section className="auth-form">
         <div className="auth-card">
-          <p className="auth-step">{etape === "email" ? "Étape 1 sur 2" : "Étape 2 sur 2"}</p>
-          {etape === "email" ? (
+          <p className="auth-step">Étape {num} sur {total}</p>
+          {etape === "invitation" ? (
+            <>
+              <h1>Ton code d&apos;invitation</h1>
+              <p className="muted">Entre le code reçu d&apos;un camarade déjà inscrit. Ensuite, tu te connectes avec ton e-mail.</p>
+              <form onSubmit={validerInvitation} className="stack">
+                <label htmlFor="invitation">Code d&apos;invitation</label>
+                <input id="invitation" required autoComplete="off" autoCapitalize="characters" value={invitation} onChange={(e) => setInvitation(e.target.value.toUpperCase())} placeholder="MZ-XXXXXX" />
+                <button className="btn big" disabled={charge || invitation.trim().length < 4}>{charge ? "Vérification…" : "Continuer"}</button>
+              </form>
+              <p className="small muted">Déjà inscrit ? <button type="button" className="link" onClick={() => { setMsg(null); setEtape("email"); setEtapesInvitation(false); }}>Se connecter</button></p>
+            </>
+          ) : etape === "email" ? (
             <>
               <h1>Connexion</h1>
               <p className="muted">Entre ton adresse e-mail : tu reçois un e-mail de connexion. Pas de mot de passe à retenir. Si tu n’as pas encore de compte, il est créé automatiquement.</p>

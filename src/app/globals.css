@@ -217,3 +217,4 @@ form.stack label{display:flex;flex-direction:column;gap:4px}
 .offre{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}
 .offre.reco{border:2px solid var(--acc)}
 .offre h2{margin:0}.offre ul{margin:0;padding-left:18px;font-size:14px;color:var(--mute);display:flex;flex-direction:column;gap:2px}
+.link{background:none;border:0;padding:0;color:var(--acc);font:inherit;text-decoration:underline;cursor:pointer}
