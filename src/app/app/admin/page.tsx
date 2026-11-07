@@ -45,6 +45,12 @@ export default async function Suivi() {
     db.from("abonnements").select("user_id, plan, plan_until, plan_source, bonus_plan, bonus_until, referred_by"),
     db.from("codes_offre").select("code, plan, jours, lot, created_at, used_by, used_at").order("created_at", { ascending: false }).limit(30),
   ]);
+  const { data: lieux } = await db.from("profiles").select("etablissement, ville");
+  const parEtab = new Map<string, number>();
+  for (const l of (lieux ?? []) as { etablissement?: string | null; ville?: string | null }[]) {
+    const k = l.etablissement ? `${l.etablissement}${l.ville ? ` (${l.ville})` : ""}` : "Non renseigné";
+    parEtab.set(k, (parEtab.get(k) ?? 0) + 1);
+  }
   const maintenant = new Date().toISOString();
   const abosActifs = (abos ?? []).filter((a) => a.plan !== "free" && a.plan_until > maintenant);
   const encaisse = R.filter((r) => r.statut === "payee").reduce((t, r) => t + (S.find((s) => s.id === r.session_id)?.prix_dh ?? 0), 0);
@@ -210,6 +216,14 @@ export default async function Suivi() {
         <h3>Derniers codes</h3>
         <div className="tabw"><table className="tab"><thead><tr><th>Code</th><th>Offre</th><th>Lot</th><th>Utilisé par</th></tr></thead><tbody>
           {(codesO ?? []).map((c) => <tr key={c.code}><td><code className="code">{c.code}</code></td><td>{c.plan} · {c.jours} j</td><td>{c.lot ?? "—"}</td><td>{c.used_by ? `${emailDe.get(c.used_by) ?? "?"} (${fr(c.used_at)})` : "libre"}</td></tr>)}
+        </tbody></table></div>
+      </section>
+
+      <section className="bloc">
+        <h2>Établissements des élèves</h2>
+        <p className="muted small">Pour choisir les prochains établissements à couvrir.</p>
+        <div className="tabw"><table className="tab"><thead><tr><th>Établissement</th><th>Élèves</th></tr></thead><tbody>
+          {Array.from(parEtab).sort((a, b) => b[1] - a[1]).map(([k, n]) => <tr key={k}><td>{k}</td><td>{n}</td></tr>)}
         </tbody></table></div>
       </section>
 

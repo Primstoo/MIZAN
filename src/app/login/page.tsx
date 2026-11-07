@@ -79,6 +79,14 @@ export default function Login() {
     setEtape("email");
   }
 
+  // Connexion Google : visible dès que NEXT_PUBLIC_AUTH_GOOGLE=1 (fournisseur activé dans Supabase).
+  async function google() {
+    setCharge(true); setMsg(null);
+    const { error } = await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo: `${window.location.origin}/auth/callback` } });
+    if (error) { setCharge(false); setMsg({ type: "bad", texte: "Connexion Google indisponible pour l'instant. Utilise ton e-mail." }); }
+  }
+  const avecGoogle = process.env.NEXT_PUBLIC_AUTH_GOOGLE === "1";
+
   const total = etapesInvitation ? 3 : 2;
   const num = etape === "invitation" ? 1 : etape === "email" ? total - 1 : total;
 
@@ -121,6 +129,10 @@ export default function Login() {
                 <input id="email" type="email" required autoComplete="email" inputMode="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="toi@exemple.com" />
                 <button className="btn big" disabled={charge || !email}>{charge ? "Envoi…" : "Recevoir l’e-mail de connexion"}</button>
               </form>
+              {avecGoogle && (<>
+                <p className="small muted" style={{ textAlign: "center" }}>ou</p>
+                <button type="button" className="btn alt big" onClick={google} disabled={charge}>Continuer avec Google</button>
+              </>)}
             </>
           ) : (
             <>

@@ -351,3 +351,8 @@ revoke all on function public.accorder_offre(uuid, text, int, text) from public,
 revoke all on function public.recompense_superieure(uuid, int) from public, anon, authenticated;
 revoke all on function public.utiliser_code(uuid, text) from public, anon, authenticated;
 revoke all on function public.essai_invitation(uuid, uuid) from public, anon, authenticated;
+
+-- ---------- Établissement et ville (07/11/2026) : modules proposés selon l'établissement ----------
+alter table public.profiles
+  add column if not exists etablissement text,
+  add column if not exists ville text;
