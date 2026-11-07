@@ -182,3 +182,8 @@ Chaque élève relie son compte depuis « Moi » (lien t.me/<bot>?start=<jeton> 
 **Table séparée plutôt que `profiles` :** une ligne `profiles` créée au moment d'une invitation ferait sauter l'inscription guidée (la page Aujourd'hui considère qu'un profil existant = inscription faite).
 **Pas encore :** bibliothèque commune visible selon l'offre (les documents envoyés ne sont pas encore transformés en fiches), mode visiteur sans compte (bêta fermée, D15), mode J-7, PDF hors ligne, annonces Miroir Darija.
 **⚠️ Rappel D3 :** dès le premier paiement, l'offre gratuite de Vercel (usage non commercial) ne convient plus : passer au plan payant ou migrer vers Cloudflare.
+
+## D28. Mode visiteur et ouverture à toutes les universités (07/11/2026)
+**Quoi :** `/decouvrir` liste les modules et les ouvre sans compte (`/decouvrir/[module]`). Le fichier est servi sans le pont : pas de tuteur, pas de synchronisation, la progression reste dans le navigateur. Bouton « Essayer sans compte » sur l'accueil, pages ajoutées au sitemap.
+**Pourquoi :** décision de Patrick, l'usage de base doit être possible sans inscription. Le compte (toujours sur invitation pendant la bêta) apporte la sauvegarde, la mission du jour et le tuteur. Cela remplace la règle « catalogue réservé aux membres » de la page d'accueil.
+**Textes publics :** « FSABM » retiré de la description Google, de l'accueil et de la connexion : la plateforme vise toutes les universités du Maroc. Les modules restent ceux de la FSABM pour l'instant.
