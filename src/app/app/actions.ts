@@ -71,10 +71,17 @@ export async function enregistrerProfil(form: FormData): Promise<void> {
     minutes_jour: minutes,
   };
   const masc = form.get("mascotte");
-  // La colonne « mascotte » arrive avec la migration de la refonte : si elle manque encore, on enregistre sans.
-  const avecMascotte: Record<string, unknown> = estMascotte(masc) ? { ...ligne, mascotte: masc } : ligne;
-  const { error } = await db.from("profiles").upsert(avecMascotte);
-  if (error) await db.from("profiles").upsert(ligne);
+  const lieu = {
+    etablissement: String(form.get("etablissement") || "").trim().slice(0, 80) || null,
+    ville: String(form.get("ville") || "").trim().slice(0, 60) || null,
+  };
+  // Colonnes ajoutées par migration (mascotte, établissement, ville) : si l'une manque encore, on enregistre sans.
+  const complet: Record<string, unknown> = { ...ligne, ...lieu, ...(estMascotte(masc) ? { mascotte: masc } : {}) };
+  const { error } = await db.from("profiles").upsert(complet);
+  if (error) {
+    const { error: e2 } = await db.from("profiles").upsert((estMascotte(masc) ? { ...ligne, mascotte: masc } : ligne) as Record<string, unknown>);
+    if (e2) await db.from("profiles").upsert(ligne);
+  }
   const { data: communes } = await db.from("module_dates").select("module_slug, exam_date");
   const commune = new Map((communes ?? []).map((c) => [c.module_slug as string, c.exam_date as string]));
   const auj = jourMaroc();

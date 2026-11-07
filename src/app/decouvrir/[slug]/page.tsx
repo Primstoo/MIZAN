@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getModule, MODULES } from "@/lib/modules";
+import Inscription from "../Inscription";
 
 export function generateStaticParams() { return MODULES.map((m) => ({ slug: m.slug })); }
 export function generateMetadata({ params }: { params: { slug: string } }) {
@@ -15,7 +16,7 @@ export default function ModuleVisiteur({ params }: { params: { slug: string } })
       <header className="top slim">
         <a href="/decouvrir" className="back">← Modules</a>
         <strong>{m.titre}</strong>
-        <a href="/login?invitation" className="btn small">Sauvegarder ma progression</a>
+        <Inscription />
       </header>
       <iframe src={`/decouvrir/fichier/${m.fichier}`} title={m.titre} className="frame" />
     </main>

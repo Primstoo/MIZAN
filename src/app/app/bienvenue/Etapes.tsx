@@ -2,10 +2,11 @@
 import { useState } from "react";
 import { enregistrerProfil } from "../actions";
 import Mascotte, { MASCOTTES, type MascotteId } from "@/components/Mascotte";
+import { ETABLISSEMENTS, memeEtablissement } from "@/lib/modules";
 
-type M = { slug: string; titre: string; semestre: string };
+type M = { slug: string; titre: string; semestre: string; etablissement: string };
 
-export default function Etapes({ modules, prenom, minutes, dates, inconnues, communes, mascotte }: { mascotte: MascotteId; modules: M[]; prenom: string; minutes: number; dates: Record<string, string>; inconnues: string[]; communes: Record<string, { date: string; officielle: boolean }> }) {
+export default function Etapes({ modules, prenom, minutes, dates, inconnues, communes, mascotte, etablissement, ville, filiere }: { etablissement: string; ville: string; filiere: string; mascotte: MascotteId; modules: M[]; prenom: string; minutes: number; dates: Record<string, string>; inconnues: string[]; communes: Record<string, { date: string; officielle: boolean }> }) {
   const [etape, setEtape] = useState(0);
   const [nom, setNom] = useState(prenom);
   const [choix, setChoix] = useState<string[]>([...Object.keys(dates), ...inconnues]);
@@ -13,9 +14,19 @@ export default function Etapes({ modules, prenom, minutes, dates, inconnues, com
   const [min, setMin] = useState(minutes);
   const [inc, setInc] = useState<string[]>(inconnues);
   const frDate = (x: string) => new Date(x + "T12:00:00Z").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
-  const total = 3;
+  const [etab, setEtab] = useState(etablissement);
+  const [vil, setVil] = useState(ville);
+  const [tous, setTous] = useState(false);
+  const total = 4;
   const auj = new Date().toISOString().slice(0, 10);
-  const peutSuivre = etape === 0 ? nom.trim().length > 0 : etape === 1 ? choix.length > 0 && choix.every((s) => d[s] || inc.includes(s)) : true;
+  // Modules de son établissement d'abord ; « voir tous les modules » pour les autres facs qui veulent essayer.
+  const siens = modules.filter((m) => memeEtablissement(etab, m.etablissement));
+  const visibles = tous ? modules : siens;
+  const choixV = choix.filter((s) => visibles.some((m) => m.slug === s));
+  const peutSuivre = etape === 0 ? nom.trim().length > 0
+    : etape === 1 ? etab.trim().length > 1 && vil.trim().length > 1
+    : etape === 2 ? choixV.length === 0 ? visibles.length === 0 || siens.length === 0 : choixV.every((s) => d[s] || inc.includes(s))
+    : true;
 
   return (
     <form action={enregistrerProfil} className="onb">
@@ -28,7 +39,6 @@ export default function Etapes({ modules, prenom, minutes, dates, inconnues, com
         <h1>Comment tu t&apos;appelles ?</h1>
         <p className="muted">Pour que l&apos;appli s&apos;adresse à toi.</p>
         <input name="prenom" value={nom} onChange={(e) => setNom(e.target.value)} placeholder="Ton prénom" autoComplete="given-name" />
-        <input name="filiere" placeholder="Ta filière (ex. MIACSD, L3) — facultatif" />
         <p className="eyebrow">Ton guide (tu pourras changer plus tard)</p>
         <div className="mascottes" role="radiogroup" aria-label="Choix du guide">
           {MASCOTTES.map((m) => (
@@ -42,10 +52,30 @@ export default function Etapes({ modules, prenom, minutes, dates, inconnues, com
       </section>
 
       <section hidden={etape !== 1}>
+        <h1>Où est-ce que tu étudies ?</h1>
+        <p className="muted">On te propose les modules de ton établissement. S&apos;il n&apos;est pas encore couvert, on le note pour l&apos;ajouter.</p>
+        <label htmlFor="etab">Établissement</label>
+        <input id="etab" name="etablissement" list="etabs" value={etab} onChange={(e) => setEtab(e.target.value)} placeholder="Ex. FSABM · Béni Mellal" autoComplete="organization" />
+        <datalist id="etabs">{ETABLISSEMENTS.map((x) => <option key={x} value={x} />)}</datalist>
+        <label htmlFor="ville">Ville</label>
+        <input id="ville" name="ville" value={vil} onChange={(e) => setVil(e.target.value)} placeholder="Ex. Béni Mellal" autoComplete="address-level2" />
+        <label htmlFor="filiere">Filière et année (facultatif)</label>
+        <input id="filiere" name="filiere" defaultValue={filiere} placeholder="Ex. MIACSD, L3" />
+      </section>
+
+      <section hidden={etape !== 2}>
         <h1>Quels modules, et c&apos;est quand l&apos;examen ?</h1>
-        <p className="muted">Coche tes modules. Si la date n&apos;est pas encore annoncée, pas de souci : on part d&apos;une estimation, mise à jour pour tout le monde dès que la date officielle tombe.</p>
+        {siens.length === 0 && !tous ? (
+          <div className="card soft stack">
+            <p><strong>{etab || "Ton établissement"} n&apos;est pas encore couvert.</strong> On l&apos;a noté : les établissements les plus demandés passent en premier.</p>
+            <p className="small muted">Tu peux accélérer en partageant tes cours, TD et annales (Moi &gt; Partager mes cours). En attendant, tu peux essayer les modules déjà disponibles.</p>
+            <button type="button" className="btn alt" onClick={() => setTous(true)}>Voir les modules disponibles</button>
+          </div>
+        ) : (
+          <p className="muted">Coche tes modules. Si la date n&apos;est pas encore annoncée, pas de souci : on part d&apos;une estimation, mise à jour pour tout le monde dès que la date officielle tombe.</p>
+        )}
         <div className="stack">
-          {modules.map((m) => {
+          {visibles.map((m) => {
             const on = choix.includes(m.slug);
             return (
               <div key={m.slug} className={`opt ${on ? "sel" : ""}`}>
@@ -85,7 +115,7 @@ export default function Etapes({ modules, prenom, minutes, dates, inconnues, com
         </div>
       </section>
 
-      <section hidden={etape !== 2}>
+      <section hidden={etape !== 3}>
         <h1>Combien de temps par jour ?</h1>
         <p className="muted">Sois réaliste : mieux vaut 30 minutes tous les jours que 3 heures une fois par semaine.</p>
         <input type="hidden" name="minutes" value={min} />
