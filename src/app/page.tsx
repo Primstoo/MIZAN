@@ -1,4 +1,4 @@
-// Page publique : présente ToumaiLearn sans dévoiler le catalogue (réservé aux membres).
+// Page publique : présente ToumaiLearn ; les modules sont essayables sans compte sur /decouvrir.
 export default function Accueil() {
   return (
     <main className="land">
@@ -8,12 +8,13 @@ export default function Accueil() {
       </header>
 
       <section className="page hero">
-        <p className="eyebrow">Bêta privée · FSABM, Béni Mellal</p>
+        <p className="eyebrow">Bêta · Universités du Maroc</p>
         <h1>Révise le cours de <em>ton</em> prof, pas un cours générique.</h1>
         <p className="lead">Chaque module est construit à partir des supports réels de ton enseignant : ses notations, ses exemples, le format de ses TD et de ses examens.</p>
         <div className="cta">
           <a href="/login?invitation" className="btn big-inline">J&apos;ai un code d&apos;invitation</a>
-          <span className="muted small">Accès sur invitation d&apos;un étudiant déjà inscrit.</span>
+          <a href="/decouvrir" className="btn alt big-inline">Essayer sans compte</a>
+          <span className="muted small">Sans compte, rien n&apos;est sauvegardé. Le compte s&apos;ouvre avec le code d&apos;un étudiant déjà inscrit.</span>
         </div>
       </section>
 
@@ -35,7 +36,7 @@ export default function Accueil() {
         </ol>
       </section>
 
-      <footer className="page foot muted small">ToumaiLearn · conçu à Béni Mellal par un étudiant de la FSABM</footer>
+      <footer className="page foot muted small">ToumaiLearn · conçu au Maroc par un étudiant, pour les étudiants</footer>
     </main>
   );
 }

@@ -4,9 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://toumailearn.app"),
   alternates: { canonical: "/" },
-  keywords: ["ToumaiLearn", "Toumai Learn", "révision", "FSABM", "Béni Mellal", "cours", "examens", "étudiants Maroc"],
+  keywords: ["ToumaiLearn", "Toumai Learn", "révision", "université", "fac", "cours", "examens", "étudiants Maroc", "tuteur IA"],
   title: { default: "ToumaiLearn · Révise le cours de ton prof", template: "%s · ToumaiLearn" },
-  description: "Plateforme de révision pour les étudiants de la FSABM : le cours de ton prof expliqué, des exercices corrigés, un tuteur IA et ta progression mesurée.",
+  description: "Plateforme de révision pour les étudiants des universités du Maroc : le cours de ton prof expliqué, des exercices corrigés, un tuteur IA et ta progression mesurée.",
   applicationName: "ToumaiLearn",
   openGraph: { title: "ToumaiLearn", siteName: "ToumaiLearn", url: "https://toumailearn.app", description: "Révise le cours de ton prof, pas un cours générique.", locale: "fr_MA", type: "website" },
 };

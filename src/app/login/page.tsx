@@ -95,7 +95,7 @@ export default function Login() {
             <li>Un tuteur qui connaît ton module</li>
           </ul>
         </div>
-        <p className="small auth-foot">FSABM · Béni Mellal</p>
+        <p className="small auth-foot">Universités du Maroc</p>
       </section>
 
       <section className="auth-form">
