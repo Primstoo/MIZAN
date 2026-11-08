@@ -51,12 +51,6 @@ const dir = path.join(__dirname, "..", "content", "modules");
     items: CHAPTERS.map((c) => ({ id: c.id, t: c.t, imp: c.imp, g: "cours" })),
   }));
 
-  await ouvrir("traitement-ad.html");
-  out["traitement-ad"] = await p.evaluate(() => {
-    const imp = { ch1: 3, ch2: 4, ch3: 4, ch4: 4, ch5: 5, ch6: 5, ch7: 5, ch8: 2, ch9: 3 };
-    return { unite: "chapitre", groupes: [{ id: "cours", t: "Chapitres" }], items: CHAPS.map((c) => ({ id: c.id, t: c.t, imp: imp[c.id] || 3, g: "cours" })) };
-  });
-
   // ---------- Banque du test de niveau : une question par notion importante (8 max) ----------
   const niveau = {};
   const banques = {};
@@ -85,16 +79,17 @@ const dir = path.join(__dirname, "..", "content", "modules");
   // Texte brut uniquement (pas de HTML dans la plateforme)
   const brut = (t) => String(t).replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").trim();
   for (const k in niveau) niveau[k] = niveau[k].map((x) => ({ ...x, q: brut(x.q), o: x.o.map(brut), e: brut(x.e) }));
-  fs.writeFileSync(path.join(__dirname, "..", "src", "lib", "niveau.json"), JSON.stringify(niveau, null, 1));
+  const fus = (f, v, ind) => { const p = path.join(__dirname, "..", "src", "lib", f); const ancien = fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : {}; fs.writeFileSync(p, JSON.stringify({ ...ancien, ...v }, null, ind)); };
+  // Fusion : les modules produits par construire-module.mjs restent dans les fichiers.
+  fus("niveau.json", niveau, 1);
   // Banque complète (QCM uniquement) pour les examens blancs de la plateforme
   // Questions du TD1 de crypto rattachées à leur notion (sinon elles ne comptent pas dans la maîtrise).
   (banques.crypto || []).forEach((q) => { if (q.n === "td1") q.n = /transposition/i.test(q.q) ? "trans" : "lfsr"; });
-  fs.writeFileSync(path.join(__dirname, "..", "src", "lib", "banque.json"), JSON.stringify(banques));
+  fus("banque.json", banques);
   for (const [k, v] of Object.entries(banques)) console.log("banque", k, v.length, "QCM");
   for (const [k, v] of Object.entries(niveau)) console.log("test de niveau", k, v.length, "questions");
 
   await b.close();
-  const dest = path.join(__dirname, "..", "src", "lib", "notions.json");
-  fs.writeFileSync(dest, JSON.stringify(out, null, 1));
+  fus("notions.json", out, 1);
   for (const [k, v] of Object.entries(out)) console.log(k, v.items.length, v.unite + "s,", v.groupes.length, "groupes");
 })();

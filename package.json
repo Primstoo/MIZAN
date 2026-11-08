@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "module": "node scripts/construire-module.mjs",
+    "verifier-module": "python3 scripts/verifier-code-module.py"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.1",
@@ -21,6 +23,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
+    "marked": "^14.1.4",
     "typescript": "^5"
   }
 }

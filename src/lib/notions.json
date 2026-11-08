@@ -826,55 +826,49 @@
   ],
   "items": [
    {
-    "id": "ch1",
-    "t": "Les fonctions Python",
-    "imp": 3,
-    "g": "cours"
-   },
-   {
-    "id": "ch2",
-    "t": "Les chiffres d'un entier sans le convertir en str",
+    "id": "fonctions",
+    "t": "Les fonctions en Python",
     "imp": 4,
     "g": "cours"
    },
    {
-    "id": "ch3",
-    "t": "Les chaînes de caractères",
+    "id": "numpy-tableaux",
+    "t": "NumPy (1) · créer, indexer et transformer des tableaux",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "numpy-matrices",
+    "t": "NumPy (2) · comparaisons, ensembles et algèbre linéaire",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "numpy-random",
+    "t": "NumPy (3) · le hasard (numpy.random) et les fonctions universelles",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "pandas-bases",
+    "t": "Pandas (1) · Series, DataFrames, fichiers et inspection",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "pandas-manipulation",
+    "t": "Pandas (2) · sélectionner, modifier, trier, agréger, regrouper",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "tp-corriges",
+    "t": "TP/TD 1 et 2 corrigés pas à pas",
     "imp": 4,
     "g": "cours"
    },
    {
-    "id": "ch4",
-    "t": "Listes et vérification d'ordre",
-    "imp": 4,
-    "g": "cours"
-   },
-   {
-    "id": "ch5",
-    "t": "Matrices en Python pur et produit matriciel",
-    "imp": 5,
-    "g": "cours"
-   },
-   {
-    "id": "ch6",
-    "t": "NumPy I : les tableaux",
-    "imp": 5,
-    "g": "cours"
-   },
-   {
-    "id": "ch7",
-    "t": "NumPy II : aléatoire et algèbre linéaire",
-    "imp": 5,
-    "g": "cours"
-   },
-   {
-    "id": "ch8",
-    "t": "Ouverture : Pandas, Matplotlib, nettoyage",
-    "imp": 2,
-    "g": "cours"
-   },
-   {
-    "id": "ch9",
+    "id": "revision",
     "t": "Fiche de révision et examen blanc",
     "imp": 3,
     "g": "cours"

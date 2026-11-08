@@ -468,5 +468,103 @@
    "a": 1,
    "e": "UML est un langage de modélisation, pas une méthode : il ne fixe pas de démarche (diapo 25)."
   }
+ ],
+ "traitement-ad": [
+  {
+   "n": "numpy-tableaux",
+   "q": "Que contient np.arange(2, 10, 3) ?",
+   "o": [
+    "[2 5 8 10]",
+    "[2 5 8]",
+    "[3 6 9]",
+    "[2 4 6 8]"
+   ],
+   "a": 1,
+   "e": "De 2 à 10 exclu, par pas de 3 : 2, 5, 8."
+  },
+  {
+   "n": "numpy-matrices",
+   "q": "np.array_equal(a, b) renvoie :",
+   "o": [
+    "un tableau de booléens case par case",
+    "un seul booléen : même forme et mêmes éléments",
+    "l'intersection de a et b",
+    "le nombre de cases égales"
+   ],
+   "a": 1,
+   "e": "C'est un test global ; a == b donne le tableau de booléens."
+  },
+  {
+   "n": "numpy-random",
+   "q": "Pourquoi fixer une graine (default_rng(42)) ?",
+   "o": [
+    "Pour obtenir des nombres vraiment aléatoires",
+    "Pour reproduire exactement la même suite de tirages",
+    "Pour accélérer les calculs",
+    "Pour tirer sans remise"
+   ],
+   "a": 1,
+   "e": "La graine initialise l'algorithme : même graine, même suite. C'est la reproductibilité."
+  },
+  {
+   "n": "pandas-bases",
+   "q": "Quelle structure Pandas est une collection de Series partageant le même index ?",
+   "o": [
+    "Series",
+    "DataFrame",
+    "ndarray",
+    "Panel"
+   ],
+   "a": 1,
+   "e": "Chaque colonne d'un DataFrame est une Series ; elles partagent l'index des lignes."
+  },
+  {
+   "n": "pandas-manipulation",
+   "q": "df[[\"Age\"]] renvoie :",
+   "o": [
+    "une Series",
+    "un DataFrame d'une colonne",
+    "une liste",
+    "une erreur"
+   ],
+   "a": 1,
+   "e": "Les doubles crochets gardent le format DataFrame, même pour une seule colonne."
+  },
+  {
+   "n": "fonctions",
+   "q": "Que renvoie une fonction qui ne contient aucune instruction return ?",
+   "o": [
+    "0",
+    "Une chaîne vide",
+    "None",
+    "Une erreur"
+   ],
+   "a": 2,
+   "e": "Sans return, Python renvoie automatiquement None."
+  },
+  {
+   "n": "tp-corriges",
+   "q": "987 % 10 et 987 // 10 valent :",
+   "o": [
+    "7 et 98",
+    "98 et 7",
+    "9 et 87",
+    "7 et 98.7"
+   ],
+   "a": 0,
+   "e": "% donne le dernier chiffre, // l'enlève."
+  },
+  {
+   "n": "revision",
+   "q": "Quelle écriture inclut la borne de fin ?",
+   "o": [
+    "np.arange(0, 5)",
+    "s.iloc[0:5]",
+    "s.loc[\"a\":\"e\"]",
+    "arr[0:5]"
+   ],
+   "a": 2,
+   "e": ".loc (étiquettes) inclut la fin ; tout ce qui est positionnel l'exclut."
+  }
  ]
 }

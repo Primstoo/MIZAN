@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITRE}}</title>
+<!-- Page générée par scripts/construire-module.mjs : modifier les sources (content/sources), pas ce fichier. -->
+<style>
+:root{--bg:#faf6ef;--card:#fff;--ink:#2b2418;--mute:#7a6d5a;--line:#eadfcd;--acc:#B4532A;--acc2:#f6e7da;--h2:#2f6f8f;--h2b:#dcecf3;--ok:#2f7d55;--okb:#dff0e6;--ko:#b23a3a;--kob:#f6dddd;--code:#1f1b14}
+@media (prefers-color-scheme:dark){:root{--bg:#17140f;--card:#211c15;--ink:#efe6d8;--mute:#a8987f;--line:#3a3126;--acc:#e08a5c;--acc2:#3a2618;--h2:#7cc0de;--h2b:#18323d;--ok:#6fd3a0;--okb:#173326;--ko:#ff8a8f;--kob:#3d1c1c;--code:#0f0d0a}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:9px 16px;display:flex;gap:12px;align-items:center}
+header h1{font-size:16px;margin:0;line-height:1.25}header small{display:block;color:var(--mute);font-weight:400;font-size:12px}header .pct{margin-left:auto;font-size:13px;color:var(--mute);white-space:nowrap}
+.wrap{display:grid;grid-template-columns:270px 1fr;max-width:1180px;margin:0 auto}
+nav{padding:14px;border-right:1px solid var(--line);position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto}
+nav button{display:flex;width:100%;text-align:left;gap:8px;align-items:flex-start;background:none;border:0;color:var(--ink);padding:8px 10px;border-radius:8px;cursor:pointer;font:inherit;font-size:14px;line-height:1.35}
+nav button:hover{background:var(--acc2)}nav button.on{background:var(--acc2);font-weight:600}
+nav .sc{margin-left:auto;font-size:12px;color:var(--mute);white-space:nowrap}nav .sc.ok{color:var(--ok);font-weight:600}nav .se{display:block;font-size:11.5px;color:var(--mute);font-weight:400}
+main{padding:22px 30px 90px;min-width:0;max-width:860px}
+.seance{color:var(--acc);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+h1.t{font-size:27px;margin:.1em 0 .7em;line-height:1.25}main h2{font-size:21px;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:4px}main h3{font-size:17.5px;margin-top:1.6em}
+pre{position:relative;background:var(--code);color:#f1e7d6;padding:13px 15px;border-radius:10px;overflow:auto;font-size:13.5px;line-height:1.5}
+pre.sortie{background:var(--card);color:var(--ink);border:1px dashed var(--line);padding-top:22px}.code-tag{position:absolute;top:4px;left:12px;font:600 11px system-ui;color:var(--mute);text-transform:uppercase}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}:not(pre)>code{background:var(--acc2);padding:1px 5px;border-radius:5px}
+main>table,.enc table{border-collapse:collapse;margin:14px 0;font-size:14.5px;display:block;overflow:auto}main>table td,main>table th{border:1px solid var(--line);padding:6px 10px}main>table th{background:var(--acc2);text-align:left}
+blockquote{margin:14px 0;padding:8px 14px;border-left:4px solid var(--line);color:var(--mute)}
+.enc{margin:18px 0;padding:10px 16px;border-radius:10px;border-left:5px solid}.enc p{margin:.35em 0}.enc-t{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.enc.piege,.enc.attention{background:var(--kob);border-color:var(--ko)}.enc.piege .enc-t,.enc.attention .enc-t{color:var(--ko)}
+.enc.astuce{background:var(--h2b);border-color:var(--h2)}.enc.astuce .enc-t{color:var(--h2)}
+.enc.retenir{background:var(--okb);border-color:var(--ok)}.enc.retenir .enc-t{color:var(--ok)}
+.enc.prof{background:var(--acc2);border-color:var(--acc)}.enc.prof .enc-t{color:var(--acc)}
+figure{margin:18px 0}figcaption{font-size:13px;font-weight:600;color:var(--mute);margin-bottom:6px}
+.grille table{border-collapse:separate;border-spacing:4px}.grille td,.grille th{min-width:42px;height:38px;text-align:center;font:14px ui-monospace,Menlo,monospace;padding:4px 8px;border-radius:7px}
+.grille td{background:var(--card);border:1px solid var(--line)}.grille th{color:var(--mute);font-weight:500;font-size:12.5px}
+.grille td.h1{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:700}.grille td.h2{background:var(--h2);color:#fff;border-color:var(--h2);font-weight:700}.grille td.h0{opacity:.35}
+.flux-l{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0}.flux-b{background:var(--card);border:1.5px solid var(--acc);border-radius:9px;padding:7px 12px;font-size:14px}.flux-f{color:var(--acc);font-weight:700}
+.etapes{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}.et-t{font-weight:700;color:var(--acc);margin-bottom:4px}.et-nav{display:flex;gap:8px;justify-content:space-between;margin-top:10px}
+.qcm{margin:22px 0}.qq{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}.qq-q{font-weight:600;margin-bottom:8px}.qq-q p{margin:0}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-size:15px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default}.opt.bon{background:var(--okb);border-color:var(--ok)}.opt.faux{background:var(--kob);border-color:var(--ko)}
+.qq-e{margin-top:8px;padding:9px 12px;border-radius:8px;background:var(--acc2);font-size:14.5px}
+.b{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 13px;border-radius:9px;cursor:pointer;font:inherit;font-size:14px}.b.p{background:var(--acc);color:#fff;border-color:var(--acc)}.b:disabled{opacity:.4;cursor:default}
+.bilan{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 0;font-weight:600;margin-top:20px}
+.nx{display:flex;justify-content:space-between;margin-top:30px;gap:10px}
+#menu{display:none}
+@media (max-width:860px){.wrap{grid-template-columns:1fr}nav{display:none;position:fixed;inset:54px 0 0 0;height:auto;background:var(--bg);z-index:4;border:0}nav.open{display:block}#menu{display:inline-block}main{padding:16px 16px 90px}h1.t{font-size:23px}}
+</style>
+</head>
+<body>
+<header><button class="b" id="menu" aria-label="Chapitres">☰</button><h1>{{TITRE}}<small>{{SOUS_TITRE}}</small></h1><span class="pct" id="pct"></span></header>
+<div class="wrap"><nav id="nav"></nav><main id="main"></main></div>
+<script>
+/*{{DONNEES}}*/
+const lire = () => { try { return JSON.parse(localStorage.getItem(MODULE.cle) || "{}"); } catch (e) { return {}; } };
+const ecrire = (s) => { try { localStorage.setItem(MODULE.cle, JSON.stringify(s)); } catch (e) {} };
+const nav = document.getElementById("nav"), main = document.getElementById("main"), pct = document.getElementById("pct");
+let cur = -1, rep = {};
+function dessinerNav() {
+  const s = lire(); let ok = 0;
+  const ligne = (i, titre, sous, v) => `<button class="${cur === i ? "on" : ""}" data-go="${i}"><span>${titre}${sous ? `<span class="se">${sous}</span>` : ""}</span><span class="sc ${v >= 8 ? "ok" : ""}">${v === undefined ? "" : v + "/10"}</span></button>`;
+  nav.innerHTML = (MODULE.intro ? ligne(-1, "Avant de commencer") : "") + CHAPS.map((c, i) => { const v = s[c.id]; if (v >= 8) ok++; return ligne(i, `${i + 1}. ${c.t}`, c.seance, v); }).join("");
+  pct.textContent = `${ok}/${CHAPS.length} maîtrisés`;
+}
+function aller(i) {
+  if (i < 0 && !MODULE.intro) i = 0;
+  cur = i; rep = {}; nav.classList.remove("open");
+  try { localStorage.setItem(MODULE.cle + "_dernier", String(i)); } catch (e) {}
+  if (i < 0) main.innerHTML = `<h1 class="t">Avant de commencer</h1>${MODULE.intro}<div class="nx"><span></span><button class="b p" data-go="0">Commencer →</button></div>`;
+  else {
+    const c = CHAPS[i], n = c.qcm.length;
+    main.innerHTML = `${c.seance ? `<div class="seance">${c.seance}</div>` : ""}<h1 class="t">${c.t}</h1>${c.html}${n ? `<div class="bilan" id="bilan">QCM du chapitre : 0/${n} répondus</div>` : ""}<div class="nx">${i > 0 || MODULE.intro ? `<button class="b" data-go="${i - 1}">← Précédent</button>` : "<span></span>"}${i < CHAPS.length - 1 ? `<button class="b p" data-go="${i + 1}">Chapitre suivant →</button>` : ""}</div>`;
+  }
+  scrollTo(0, 0); dessinerNav();
+}
+document.addEventListener("click", (e) => {
+  const g = e.target.closest("[data-go]"); if (g) return aller(Number(g.dataset.go));
+  const et = e.target.closest("[data-et]");
+  if (et) { const f = et.closest(".etapes"), l = f.querySelectorAll(".etape"); let i = Math.min(l.length - 1, Math.max(0, Number(f.dataset.i) + Number(et.dataset.et))); f.dataset.i = i; l.forEach((x, j) => (x.hidden = j !== i)); return; }
+  const o = e.target.closest(".opt"); if (!o) return;
+  const qq = o.closest(".qq"), k = Number(qq.dataset.k), c = CHAPS[cur];
+  const q = c.qcm[k];
+  if (k in rep) return;
+  rep[k] = Number(o.dataset.o) === q.a ? 1 : 0;
+  qq.querySelectorAll(".opt").forEach((b, j) => { b.disabled = true; if (j === q.a) b.classList.add("bon"); else if (b === o) b.classList.add("faux"); });
+  const ex = qq.querySelector(".qq-e"); ex.innerHTML = (rep[k] ? "✔ Bonne réponse. " : "✘ Raté. ") + q.e; ex.hidden = false;
+  const fait = Object.keys(rep).length, juste = Object.values(rep).reduce((a, b) => a + b, 0), bilan = document.getElementById("bilan");
+  if (fait < c.qcm.length) { bilan.textContent = `QCM du chapitre : ${fait}/${c.qcm.length} répondus · ${juste} juste${juste > 1 ? "s" : ""}`; return; }
+  const sc = Math.round((10 * juste) / fait), s = lire();
+  s[c.id] = Math.max(sc, s[c.id] ?? 0); ecrire(s);
+  bilan.textContent = `Score : ${sc}/10 ${sc >= 8 ? "· chapitre maîtrisé ✔" : "· relis les encadrés « Piège » puis recommence (recharge le chapitre)."}`;
+  dessinerNav();
+});
+document.getElementById("menu").onclick = () => nav.classList.toggle("open");
+let depart = -1; try { depart = Number(localStorage.getItem(MODULE.cle + "_dernier") ?? -1); } catch (e) {}
+aller(depart >= -1 && depart < CHAPS.length ? depart : -1);
+</script>
+<script>
+/*{{MZT_CONFIG}}*/
+window.MZT_CONFIG.getContext = () => { const h = document.querySelector("h1.t"); return { label: h ? h.textContent : MODULE.titre, text: (document.querySelector("main").innerText || "").slice(0, 6000) }; };
+</script>
+<script>
+/*{{TUTEUR}}*/
+</script>
+</body>
+</html>

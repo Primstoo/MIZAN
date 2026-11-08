@@ -1,0 +1,21 @@
+{
+  "titre": "Traitement et analyse des données",
+  "prof": "Pr Y. Madani",
+  "semestre": "S5",
+  "etablissement": "FSABM",
+  "fichier": "traitement-ad.html",
+  "cle": "tad_scores",
+  "resume": "Fonctions Python, NumPy (tableaux, matrices, aléatoire, ufuncs) et Pandas (Series, DataFrames, groupby). Séances 1 à 6 + TP corrigés.",
+  "conventions": "Cours du Pr Y. Madani, licence MIACSD S5 à la FSA Béni Mellal. Python 3, import numpy as np, import pandas as pd. Exemples en contexte marocain (DH, FSABM, ONCF).",
+  "intro": "Ce module suit **les 6 séances du Pr Y. Madani** (octobre–novembre 2026) et corrige les TP/TD 1 et 2.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre en entier : les grilles colorées montrent ce que fait chaque instruction sur un tableau.\n2. Recopie et exécute les exemples (Google Colab ou ton PC). Lire du code ne suffit pas.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.** En dessous, relis les encadrés « Piège ».\n4. Le bouton du tuteur (en bas à droite) répond à tes questions sur le chapitre ouvert.\n\n**Ce qui est sûr** : tout le contenu vient des diapositives des séances et des fiches de TP. Les exemples de code ont été exécutés.\n**À vérifier** : le barème et le format de l'examen ne sont pas publics. Demande-les au prof.",
+  "chapitres": [
+    "01-fonctions.md",
+    "02-numpy-tableaux.md",
+    "03-numpy-ensembles-matrices.md",
+    "04-numpy-random-ufuncs.md",
+    "05-pandas-series-dataframes.md",
+    "06-pandas-manipulation.md",
+    "07-tp-corriges.md",
+    "08-revision.md"
+  ]
+}
