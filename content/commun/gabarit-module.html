@@ -50,7 +50,7 @@ main svg{max-width:100%;height:auto}
 .formula{white-space:pre-line;font-family:var(--mono);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;margin:12px 0}
 .table-wrap{overflow-x:auto;margin:12px 0}.table-wrap table{border-collapse:collapse;font-size:14.5px}.table-wrap td,.table-wrap th{border:1px solid var(--line);padding:6px 10px}.table-wrap th{background:var(--acc2)}
 .cartes-info{font-size:14px;color:var(--mute)}
-.exo h3{margin-top:1.4em}.ex{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}.ex-q p{margin:.3em 0}.ex-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.ex-h,.ex-c{margin-top:10px;padding:10px 12px;border-radius:8px}.ex-h{background:var(--h2b)}.ex-c{background:var(--okb)}.ex.fait{opacity:.75}
+.exo h3{margin-top:1.4em}.ex{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}.ex-q p{margin:.3em 0}.ex-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.ex-h,.ex-c{margin-top:10px;padding:10px 12px;border-radius:8px}.ex-h{background:var(--h2b)}.ex-c{background:var(--okb)}.ex.fait{opacity:.75}.ex-r{display:flex;gap:8px;margin-top:8px}.ex-r input{flex:1;font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink)}
 .b.ok{border-color:var(--ok);color:var(--ok)}.b.ko{border-color:var(--ko);color:var(--ko)}
 .carte{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;min-height:180px;margin:14px 0}.carte .lbl{font-size:12.5px;color:var(--mute);margin-bottom:8px}.carte .rep{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
 .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}.kpi div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.kpi b{display:block;font-size:24px}
@@ -74,15 +74,18 @@ const ecrireJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } 
 const etat = () => { const S = lireJ(MODULE.cleEtat); S.attempts = S.attempts || {}; S.cards = S.cards || {}; return S; };
 function noter(n, ok) { const S = etat(); (S.attempts[n] = S.attempts[n] || []).push(ok ? 1 : 0); if (S.attempts[n].length > 30) S.attempts[n].shift(); ecrireJ(MODULE.cleEtat, S); }
 // Maîtrisé = au moins 3 essais et 80 % de réussite sur les 5 derniers (règle commune à la plateforme).
-function statut(n) { const a = (etat().attempts[n] || []).slice(-5); if (!a.length) return ["jamais", null]; const r = a.reduce((x, y) => x + y, 0) / a.length; return [(etat().attempts[n].length >= 3 && r >= 0.8) ? "ok" : "fragile", r]; }
+function statut(n) {
+  if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[n]; return v && v.pc !== undefined ? [v.pc >= 80 ? "ok" : "fragile", v.pc / 100] : ["jamais", null]; } const a = (etat().attempts[n] || []).slice(-5); if (!a.length) return ["jamais", null]; const r = a.reduce((x, y) => x + y, 0) / a.length; return [(etat().attempts[n].length >= 3 && r >= 0.8) ? "ok" : "fragile", r]; }
 const NCH = {}; NOTIONS.forEach((n) => (NCH[n.ch] = NCH[n.ch] || []).push(n));
 function scoreChap(c) {
   if (MODULE.format === "score10") return lireJ(MODULE.cle)[c.id];
+  if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[c.id]; return v && v.pc !== undefined ? Math.round(v.pc / 10) : undefined; }
   const l = NCH[c.id] || []; if (!l.length || !l.some((n) => statut(n.id)[0] !== "jamais")) return undefined;
   return Math.round((10 * l.filter((n) => statut(n.id)[0] === "ok").length) / l.length);
 }
 // ---------- Flashcards (boîtes de Leitner, mêmes intervalles que les anciens modules) ----------
-const INTV = [0, 1, 3, 7, 14, 30];
+const CFG_C = MODULE.cartes || { champ: "box", intervalles: [0, 1, 3, 7, 14, 30], echec: 1, depart: 0 };
+const INTV = CFG_C.intervalles, CHAMP = CFG_C.champ;
 const jour = () => new Date().toISOString().slice(0, 10);
 const numJour = (d) => Math.floor(new Date(d + "T00:00:00").getTime() / 864e5);
 const dansJours = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); };
@@ -121,8 +124,20 @@ function vueCartes() {
   if (!file.length) return `<h1 class="t">Flashcards</h1><p>✔ Rien à revoir aujourd'hui. Reviens demain : les cartes réussies reviennent après 1, 3, 7, 14 puis 30 jours.</p>`;
   const i = file[0], c = CARTES[i], st = etat().cards[c.k], n = NOTIONS.find((x) => x.id === c.n);
   return `<h1 class="t">Flashcards</h1><p style="color:var(--mute)">${file.length} carte(s) à revoir aujourd'hui.</p>
-  <div class="carte"><div class="lbl">${n ? n.t : ""} · ${st ? "boîte " + st.box : "nouvelle"}</div>${c.q}${montre ? `<div class="rep">${c.r}</div>` : ""}</div>
+  <div class="carte"><div class="lbl">${n ? n.t : ""} · ${st && st[CHAMP] >= 0 ? "boîte " + st[CHAMP] : "nouvelle"}</div>${c.q}${montre ? `<div class="rep">${c.r}</div>` : ""}</div>
   <div class="ex-b">${montre ? `<button class="b ko" data-fc="0">Raté</button><button class="b ok" data-fc="1">Je savais</button>` : `<button class="b p" data-fc="voir">Retourner la carte</button>`}</div>`;
+}
+const nEval = (c) => c.qcm.length + c.ex.filter((x) => x.rep).length;
+const norm = (t) => String(t).toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "").replace(/,/g, ".");
+function bilanChap() {
+  const c = CHAPS[cur], tot = nEval(c), fait = Object.keys(rep).length, juste = Object.values(rep).reduce((a, b) => a + b, 0), bilan = document.getElementById("bilan");
+  if (!bilan) return;
+  if (fait < tot) { bilan.textContent = `Évaluation du chapitre : ${fait}/${tot} répondu(s) · ${juste} juste${juste > 1 ? "s" : ""}`; dessinerNav(); return; }
+  const sc = Math.round((10 * juste) / fait);
+  if (MODULE.format === "score10") { const s = lireJ(MODULE.cle); s[c.id] = Math.max(sc, s[c.id] ?? 0); ecrireJ(MODULE.cle, s); }
+  if (MODULE.format === "pc") { const s = lireJ(MODULE.cle); s[c.id] = { ...(s[c.id] || {}), pc: Math.round((100 * juste) / fait), date: new Date().toLocaleDateString("fr-FR") }; ecrireJ(MODULE.cle, s); }
+  bilan.textContent = `Score : ${sc}/10 ${sc >= 8 ? "· très bien ✔" : "· relis les encadrés « Piège » puis recommence (recharge le chapitre)."}`;
+  dessinerNav();
 }
 function lancerOutils() {
   main.querySelectorAll("[data-outil]").forEach((d) => {
@@ -140,8 +155,8 @@ function aller(i) {
   else if (i === VUES.cartes) { file = []; main.innerHTML = vueCartes(); }
   else if (i === VUES.intro) main.innerHTML = `<h1 class="t">Avant de commencer</h1>${MODULE.intro}<div class="nx"><span></span><button class="b p" data-go="0">Commencer →</button></div>`;
   else {
-    const c = CHAPS[i], n = c.qcm.length;
-    main.innerHTML = `${c.seance ? `<div class="seance">${c.seance}</div>` : ""}<h1 class="t">${c.t}</h1>${c.html}${n ? `<div class="bilan" id="bilan">QCM du chapitre : 0/${n} répondus</div>` : ""}<div class="nx">${i > 0 || MODULE.intro ? `<button class="b" data-go="${i > 0 ? i - 1 : VUES.intro}">← Précédent</button>` : "<span></span>"}${i < CHAPS.length - 1 ? `<button class="b p" data-go="${i + 1}">Chapitre suivant →</button>` : ""}</div>`;
+    const c = CHAPS[i], n = nEval(c);
+    main.innerHTML = `${c.seance ? `<div class="seance">${c.seance}</div>` : ""}<h1 class="t">${c.t}</h1>${c.html}${n ? `<div class="bilan" id="bilan">Évaluation du chapitre : 0/${n} répondu(s)</div>` : ""}<div class="nx">${i > 0 || MODULE.intro ? `<button class="b" data-go="${i > 0 ? i - 1 : VUES.intro}">← Précédent</button>` : "<span></span>"}${i < CHAPS.length - 1 ? `<button class="b p" data-go="${i + 1}">Chapitre suivant →</button>` : ""}</div>`;
     lancerOutils();
   }
   scrollTo(0, 0); dessinerNav();
@@ -153,31 +168,35 @@ document.addEventListener("click", (e) => {
   const fc = e.target.closest("[data-fc]");
   if (fc) {
     if (fc.dataset.fc === "voir") { montre = true; main.innerHTML = vueCartes(); return; }
-    const i = file.shift(), ok = fc.dataset.fc === "1", S = etat(), k = CARTES[i].k, st = S.cards[k] || { box: 0 };
-    st.box = ok ? Math.min(5, st.box + 1) : 1; st.due = dansJours(ok ? INTV[st.box] : 1); S.cards[k] = st; ecrireJ(MODULE.cleEtat, S);
+    const i = file.shift(), ok = fc.dataset.fc === "1", S = etat(), k = CARTES[i].k, st = S.cards[k] || { [CHAMP]: CFG_C.depart ?? 0 };
+    st[CHAMP] = ok ? Math.min(INTV.length - 1, Math.max(0, st[CHAMP] + 1)) : CFG_C.echec; st.due = dansJours(ok ? INTV[st[CHAMP]] : 1); S.cards[k] = st; ecrireJ(MODULE.cleEtat, S);
     noter(CARTES[i].n, ok); montre = false; main.innerHTML = vueCartes(); dessinerNav(); return;
   }
   const xb = e.target.closest("[data-ex]");
   if (xb) {
     const ex = xb.closest(".ex"), v = xb.dataset.ex;
     if (v === "h") ex.querySelector(".ex-h").hidden = false;
+    else if (v === "v") {
+      const k = Number(ex.dataset.x), it = CHAPS[cur].ex[k], inp = ex.querySelector("input");
+      if (!inp.value.trim() || ("x" + k) in rep) return;
+      const ok = it.tol !== null ? Math.abs(parseFloat(norm(inp.value)) - parseFloat(it.rep[0])) <= it.tol : it.rep.some((r) => norm(r) === norm(inp.value));
+      rep["x" + k] = ok ? 1 : 0; noter(it.n, ok); inp.disabled = true; xb.disabled = true;
+      inp.style.borderColor = ok ? "var(--ok)" : "var(--ko)";
+      const c = ex.querySelector(".ex-c"); c.hidden = false; c.insertAdjacentHTML("afterbegin", `<p>${ok ? "✔ Bonne réponse." : "✘ Raté."}</p>`);
+      bilanChap();
+    }
     else if (v === "c") ex.querySelector(".ex-c").hidden = false;
     else if (!ex.classList.contains("fait")) { ex.classList.add("fait"); noter(CHAPS[cur].ex[Number(ex.dataset.x)].n, v === "1"); xb.parentNode.innerHTML = v === "1" ? "✔ Noté : réussi." : "✘ Noté : à retravailler."; dessinerNav(); }
     return;
   }
   const o = e.target.closest(".opt"); if (!o) return;
   const qq = o.closest(".qq"), k = Number(qq.dataset.k), c = CHAPS[cur], q = c.qcm[k];
-  if (k in rep) return;
-  rep[k] = Number(o.dataset.o) === q.a ? 1 : 0;
-  noter(q.n, rep[k] === 1);
+  if (("q" + k) in rep) return;
+  rep["q" + k] = Number(o.dataset.o) === q.a ? 1 : 0;
+  noter(q.n, rep["q" + k] === 1);
   qq.querySelectorAll(".opt").forEach((b, j) => { b.disabled = true; if (j === q.a) b.classList.add("bon"); else if (b === o) b.classList.add("faux"); });
-  const ex = qq.querySelector(".qq-e"); ex.innerHTML = (rep[k] ? "✔ Bonne réponse. " : "✘ Raté. ") + q.e; ex.hidden = false;
-  const fait = Object.keys(rep).length, juste = Object.values(rep).reduce((a, b) => a + b, 0), bilan = document.getElementById("bilan");
-  if (fait < c.qcm.length) { bilan.textContent = `QCM du chapitre : ${fait}/${c.qcm.length} répondus · ${juste} juste${juste > 1 ? "s" : ""}`; dessinerNav(); return; }
-  const sc = Math.round((10 * juste) / fait);
-  if (MODULE.format === "score10") { const s = lireJ(MODULE.cle); s[c.id] = Math.max(sc, s[c.id] ?? 0); ecrireJ(MODULE.cle, s); }
-  bilan.textContent = `Score : ${sc}/10 ${sc >= 8 ? "· très bien ✔" : "· relis les encadrés « Piège » puis recommence (recharge le chapitre)."}`;
-  dessinerNav();
+  const ex = qq.querySelector(".qq-e"); ex.innerHTML = (rep["q" + k] ? "✔ Bonne réponse. " : "✘ Raté. ") + q.e; ex.hidden = false;
+  bilanChap();
 });
 document.getElementById("menu").onclick = () => nav.classList.toggle("open");
 let depart = MODULE.intro ? -1 : 0; try { const d = localStorage.getItem(MODULE.cleEtat + "_dernier"); if (d !== null) depart = Number(d); } catch (e) {}

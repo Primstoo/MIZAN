@@ -27,6 +27,33 @@ const ADAPTATEURS = {
       outils: "calculs générés, rédaction corrigée par le tuteur, TD inédit, journal d'erreurs",
     },
   },
+  crypto: {
+    ancien: "crypto-farchane-outils.html",
+    lire: () => {
+      const NOMS = { bases: "Bases de la cryptographie", cesar: "César et chiffrement affine", vig: "Vigenère", play: "Playfair", trans: "Transposition", crypta: "Cryptanalyse", arith: "Arithmétique modulaire", lfsr: "LFSR (registres à décalage)", modes: "Modes de chiffrement", des: "DES", td1: "TD 1 corrigé" };
+      const ids = [...ORDER, "td1"];
+      // Questions du TD1 rattachées à leur notion (comme dans l'ancienne banque d'examen blanc).
+      const nDe = (k, q) => k !== "td1" ? k : (/transposition/i.test(q.q) ? "trans" : "lfsr");
+      const cartes = document.querySelector('[data-tab="carte"]');
+      return {
+        cours: ids.map((k) => ({ id: k, t: NOMS[k] || k, h: (CF[k] || "") + L[k], seance: k === "td1" ? "Travaux dirigés" : "Partie 1",
+          lien: `🧰 [Exemples générés, outils et exercices interactifs de ce chapitre](crypto-farchane-outils.html#${k})` })),
+        notions: ids.map((k) => ({ id: k, t: NAMES[k], imp: 3, chapitre: k })),
+        cartes: CARDS,
+        qcm: ids.flatMap((k) => (EV[k] || []).filter((q) => q.o).map((q) => [nDe(k, q), q.q, q.o, q.a, q.e, k])),
+        courtes: ids.flatMap((k) => (EV[k] || []).filter((q) => !q.o).map((q) => [nDe(k, q), q.q, q.n != null ? q.t + " ~" + q.n : q.t, q.e, k])),
+        series: [], ouvertes: [], conventions: typeof MZT_CONFIG !== "undefined" ? MZT_CONFIG.conventions || "" : "",
+        intro: cartes ? cartes.innerHTML : "",
+      };
+    },
+    module: {
+      titre: "Cryptographie (partie 1 + TD1)", prof: "Pr A. Farchane", semestre: "S5", fichier: "crypto-farchane.html",
+      cle: "cryptoPR", cleEtat: "cryptoPlus", progression: "pc", tuteurId: "crypto", clesSupplementaires: ["cryptoPR*", "ct"],
+      cartes: { champ: "b", intervalles: [1, 3, 7, 14, 30], echec: 0, depart: -1 },
+      resume: "Chiffres classiques, arithmétique modulaire, LFSR, modes, DES.",
+      outils: "labos de chiffrement, exemples générés, calculettes, quiz bilan, examen blanc, carnet d'erreurs",
+    },
+  },
   archi: {
     ancien: "archi-ordinateurs-outils.html",
     lire: () => ({
@@ -63,10 +90,13 @@ const ADAPTATEURS = {
     const imps = D.notions.filter((n) => n.chapitre === c.id).map((n) => n.imp);
     let md = `---\nid: ${c.id}\ntitre: ${c.t}\nseance: ${c.seance}\nimportance: ${imps.length ? Math.max(...imps) : 3}\n---\n\n` + "```html\n" + c.h.trim() + "\n```\n\n";
     const cartes = D.cartes.map((x, k) => [x, k]).filter(([x]) => chDe[x[0]] === c.id);
-    const qs = D.qcm.filter((q) => chDe[q[0]] === c.id);
+    const qs = D.qcm.filter((q) => (q[5] || chDe[q[0]]) === c.id);
+    const courtes = (D.courtes || []).filter((q) => (q[4] || chDe[q[0]]) === c.id);
     const ouv = D.ouvertes.filter((o) => chDe[o[0]] === c.id);
     if (ouv.length) md += "## Questions de rédaction\n\n```exercice\n" + ouv.map((o) => `? {${o[0]}} ${ligne(o[1])}\n= ${ligne(o[2])}`).join("\n") + "\n```\n\n";
     if (cartes.length) md += "## Flashcards\n\n```cartes\n" + cartes.map(([x, k]) => `{${x[0]}@${k}} ${ligne(x[1])} :: ${ligne(x[2])}`).join("\n") + "\n```\n\n";
+    if (c.lien) md += c.lien + "\n\n";
+    if (courtes.length) md += "## Réponses courtes\n\n```exercice\n" + courtes.map((q) => `? {${q[0]}} ${ligne(q[1])}\nreponse: ${String(q[2]).replace(/\|/g, "/")}\n= ${ligne(q[3])}`).join("\n") + "\n```\n\n";
     if (qs.length) md += "## QCM du chapitre\n\n```qcm\n" + qs.map((q) => `? {${q[0]}} ${ligne(q[1])}\n` + q[2].map((o, j) => `${j === q[3] ? "+" : "-"} ${ligne(o)}`).join("\n") + `\n= ${ligne(q[4])}`).join("\n\n") + "\n```\n";
     ecrire(c.id, md);
   }
@@ -86,9 +116,9 @@ const ADAPTATEURS = {
   const M = A.module;
   const module = {
     titre: M.titre, prof: M.prof, semestre: M.semestre, etablissement: "FSABM", fichier: M.fichier,
-    cle: M.cle, progression: "essais", tuteurId: M.tuteurId, css: "styles.css", clesSupplementaires: M.clesSupplementaires,
+    cle: M.cle, cleEtat: M.cleEtat, progression: M.progression || "essais", cartes: M.cartes, tuteurId: M.tuteurId, css: "styles.css", clesSupplementaires: M.clesSupplementaires,
     resume: M.resume, conventions: D.conventions,
-    intro: `Le cours chapitre par chapitre, avec **QCM**, **flashcards** (révision espacée) et **TD corrigés**.\n\n- **Tableau de bord** : tes notions à consolider, les plus importantes d'abord.\n- **Flashcards** : quelques minutes par jour ; une carte réussie revient après 1, 3, 7, 14 puis 30 jours.\n- **TD** : cherche, ouvre l'indice si besoin, compare avec le corrigé et note-toi.\n- **Outils interactifs** (en bas du menu) : ${M.outils}.\n\nTa progression d'avant la nouvelle version est conservée.`,
+    intro: (D.intro ? D.intro + "\n\n" : "") + `Le cours chapitre par chapitre, avec **QCM**, **flashcards** (révision espacée) et **TD corrigés**.\n\n- **Tableau de bord** : tes notions à consolider, les plus importantes d'abord.\n- **Flashcards** : quelques minutes par jour ; une carte réussie revient après 1, 3, 7, 14 puis 30 jours.\n- **TD** : cherche, ouvre l'indice si besoin, compare avec le corrigé et note-toi.\n- **Outils interactifs** (en bas du menu) : ${M.outils}.\n\nTa progression d'avant la nouvelle version est conservée.`,
     annexes: [{ fichier: A.ancien, titre: "Outils interactifs (" + M.outils + ")" }],
     notions: D.notions, chapitres,
   };

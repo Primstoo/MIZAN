@@ -49,7 +49,9 @@ Champs facultatifs :
 | Champ | Rôle |
 |---|---|
 | `notions` | `[{"id", "t", "imp", "chapitre"}]` : suivi fin par notion (tableau de bord, page Progrès, test de niveau). Sans ce champ, une notion = un chapitre. |
-| `progression` | `"essais"` (par défaut si `notions` : 3 essais et 80 % sur les 5 derniers, comme les anciens modules) ou `"score10"` (score du QCM de chaque chapitre). |
+| `progression` | `"essais"` (par défaut si `notions` : 3 essais et 80 % sur les 5 derniers), `"score10"` (score de l'évaluation de chaque chapitre) ou `"pc"` (pourcentage par chapitre, format de l'ancien Crypto). |
+| `cleEtat` | clé des essais et des flashcards si elle diffère de `cle` |
+| `cartes` | réglage des boîtes de flashcards d'un ancien module : `{"champ", "intervalles", "echec", "depart"}` |
 | `css` | fichier CSS propre au module (styles des schémas). |
 | `annexes` | `[{"fichier", "titre"}]` : pages complémentaires accessibles depuis le menu (ex. anciens outils interactifs). |
 | `tuteurId`, `clesSupplementaires` | reprise de l'historique du tuteur et d'autres données d'un ancien module. |
@@ -81,7 +83,7 @@ Texte Markdown normal : titres ##, tableaux, **gras**, `code`...
 | ```` ```etapes Titre ```` | explication pas à pas (boutons suivant / précédent) | `Titre de l'étape :: contenu` (une ligne par étape) |
 | ```` ```qcm ```` | QCM noté (chapitre maîtrisé à 8/10) | voir ci-dessous |
 | ```` ```cartes ```` | flashcards ajoutées à la révision espacée (menu « Flashcards ») | `{notion} Question :: Réponse`, une par ligne (`\n` pour aller à la ligne) |
-| ```` ```exercice Titre ```` | exercice avec indice et corrigé ; l'élève se note | `? {notion} Énoncé`, puis `indice: ...` (facultatif), puis `= corrigé` (peut continuer sur plusieurs lignes) |
+| ```` ```exercice Titre ```` | exercice avec indice et corrigé ; l'élève se note | `? {notion} Énoncé`, puis `indice: ...` (facultatif), puis `= corrigé` (peut continuer sur plusieurs lignes). Avec `reponse: 6` (ou `reponse: A | B`, ou `reponse: 0.038 ~0.003` pour une tolérance), la réponse est saisie et vérifiée automatiquement |
 | ```` ```html ```` | HTML brut (schéma SVG, tableau spécial) | |
 | ```` ```outil ```` | petit outil interactif : HTML + `<script>` exécuté à l'ouverture du chapitre | |
 | `> [!piege]` | encadré rouge « Piège » | aussi `[!astuce]`, `[!retenir]`, `[!prof]`, `[!attention]` |
@@ -120,4 +122,5 @@ Viser **10 à 12 QCM par chapitre**, avec au moins 3 options : ils alimentent au
 | `traitement-ad` | `content/sources/traitement-ad` | 8 chapitres, 83 QCM, Pr Madani, S5 |
 | `reseaux-m351` | `content/sources/reseaux-m351` (migré) | 43 notions, 132 QCM, 152 flashcards, 126 exercices ; outils dans `reseaux-M351-outils.html` |
 | `archi` | `content/sources/archi` (migré) | 26 notions, 62 QCM, 71 flashcards, 64 exercices ; outils dans `archi-ordinateurs-outils.html` |
-| `crypto`, `uml`, `probas` | HTML écrits à la main (à migrer) | catalogue dans `MANUELS` (`src/lib/modules.ts`), notions via `scripts/extraire-notions.cjs` |
+| `crypto` | `content/sources/crypto` (migré) | 11 chapitres, 37 QCM, 54 réponses courtes vérifiées, 86 flashcards ; labos dans `crypto-farchane-outils.html` |
+| `uml`, `probas` | HTML écrits à la main (à migrer) | catalogue dans `MANUELS` (`src/lib/modules.ts`), notions via `scripts/extraire-notions.cjs` |

@@ -41,7 +41,9 @@ const ADAPT: Record<string, (d: Brut, id: string) => [Statut, number | null]> = 
 for (const m of SOURCES as { slug: string; cle: string; format?: string }[])
   ADAPT[m.slug] ??= m.format === "essais"
     ? (d, id) => parEssais(lire(d, m.cle)?.attempts?.[id])
-    : (d, id) => parScore(lire(d, m.cle)?.[id], 8, 10);
+    : m.format === "pc"
+      ? (d, id) => parScore(lire(d, m.cle)?.[id]?.pc, 80, 100)
+      : (d, id) => parScore(lire(d, m.cle)?.[id], 8, 10);
 
 export function calculerMaitrise(slug: string, data: Brut | null | undefined, niveau: Record<string, boolean> = {}): Maitrise | null {
   const cat = CAT[slug], f = ADAPT[slug];

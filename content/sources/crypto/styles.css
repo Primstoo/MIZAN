@@ -1,0 +1,10 @@
+main p,main li,main td,main th,main .out,main .f,main .formula{overflow-wrap:anywhere}
+main .f{font-family:var(--mono);background:color-mix(in srgb,var(--acc) 14%,transparent);padding:1px 6px;border-radius:4px;white-space:nowrap}
+main .tip{border-left:3px solid var(--ok);padding:6px 10px;margin:10px 0;background:color-mix(in srgb,var(--ok) 8%,transparent)}
+main .scroll{overflow-x:auto}
+main table.t{border-collapse:collapse;font:13px var(--mono);font-variant-numeric:tabular-nums;margin-top:8px}
+main table.t td,main table.t th{border:1px solid var(--line);padding:4px 7px;text-align:center}
+main table.t th{color:var(--mute);font-weight:400}
+main .hl{background:color-mix(in srgb,var(--acc) 35%,transparent);font-weight:700}
+main .cfig{margin:0 0 14px;border:1px solid var(--line);border-radius:8px;padding:10px;overflow-x:auto;background:var(--panel)}
+main .f{white-space:normal;overflow-wrap:anywhere}

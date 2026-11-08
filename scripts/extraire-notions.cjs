@@ -1,7 +1,7 @@
 // Extrait la liste des notions (ou chapitres) de chaque module, pour que la plateforme
 // puisse lire la progression des élèves dans un format commun.
 // Usage : node scripts/extraire-notions.cjs   (à relancer quand un module change)
-// Ne concerne que les modules encore écrits à la main (probas, crypto, uml). Les autres sont produits
+// Ne concerne que les modules encore écrits à la main (probas, uml). Les autres sont produits
 // par scripts/construire-module.mjs, qui écrit lui-même leurs notions, QCM et test de niveau.
 const { chromium } = require("playwright");
 const fs = require("fs");
@@ -24,13 +24,6 @@ const dir = path.join(__dirname, "..", "content", "modules");
       items: NOTIONS.map((n) => ({ id: n.id, t: n.t, imp: n.imp, g: n.ch })),
     };
   });
-
-  await ouvrir("crypto-farchane.html");
-  out["crypto"] = await p.evaluate(() => ({
-    unite: "thème",
-    groupes: [{ id: "cours", t: "Partie 1" }],
-    items: ORDER.map((k) => ({ id: k, t: NAMES[k], imp: 3, g: "cours" })),
-  }));
 
   await ouvrir("uml.html");
   out["uml"] = await p.evaluate(() => ({
@@ -56,8 +49,6 @@ const dir = path.join(__dirname, "..", "content", "modules");
   };
   await ouvrir("probas-S3.html");
   niveau["probas"] = choisir(out["probas"], garder("probas", await p.evaluate(() => NOTIONS.flatMap((n) => (n.quiz || []).filter((x) => x.t === "q").map((x) => ({ n: n.id, q: x.q, o: x.o, a: x.a, e: x.e }))))));
-  await ouvrir("crypto-farchane.html");
-  niveau["crypto"] = choisir(out["crypto"], garder("crypto", await p.evaluate(() => Object.entries(EV).flatMap(([k, l]) => l.filter((x) => x.o).map((x) => ({ n: k, q: x.q, o: x.o, a: x.a, e: x.e }))))));
   await ouvrir("uml.html");
   niveau["uml"] = choisir(out["uml"], garder("uml", await p.evaluate(() => Object.entries(QUIZ).flatMap(([k, l]) => l.filter((x) => x.o).map((x) => ({ n: k, q: x.q, o: x.o, a: x.a, e: x.e }))))));
   // Texte brut uniquement (pas de HTML dans la plateforme)
@@ -67,8 +58,6 @@ const dir = path.join(__dirname, "..", "content", "modules");
   // Fusion : les modules produits par construire-module.mjs restent dans les fichiers.
   fus("niveau.json", niveau, 1);
   // Banque complète (QCM uniquement) pour les examens blancs de la plateforme
-  // Questions du TD1 de crypto rattachées à leur notion (sinon elles ne comptent pas dans la maîtrise).
-  (banques.crypto || []).forEach((q) => { if (q.n === "td1") q.n = /transposition/i.test(q.q) ? "trans" : "lfsr"; });
   fus("banque.json", banques);
   for (const [k, v] of Object.entries(banques)) console.log("banque", k, v.length, "QCM");
   for (const [k, v] of Object.entries(niveau)) console.log("test de niveau", k, v.length, "questions");

@@ -115,9 +115,13 @@ function lireExercices(corps) {
   const items = []; let it = null, zone = null;
   for (const l of corps.split("\n")) {
     const t = l.trim();
-    if (t.startsWith("? ")) { const [n, q] = tagNotion(t.slice(2)); it = { n, q, h: "", c: "" }; items.push(it); zone = "q"; continue; }
+    if (t.startsWith("? ")) { const [n, q] = tagNotion(t.slice(2)); it = { n, q, h: "", c: "", rep: null }; items.push(it); zone = "q"; continue; }
     if (!it) { if (t) throw new Error("Exercice : ligne avant le premier « ? » : " + t); continue; }
     if (/^indice\s*:/i.test(t)) { it.h = t.replace(/^indice\s*:\s*/i, ""); zone = "h"; continue; }
+    if (/^reponse\s*:/i.test(t)) {          // « reponse: 0.038 ~0.002 » = valeur numérique avec tolérance ; « | » sépare les réponses acceptées
+      let r = t.replace(/^reponse\s*:\s*/i, ""); const m = /\s~\s*([\d.]+)\s*$/.exec(r); if (m) { it.tol = Number(m[1]); r = r.slice(0, m.index); }
+      it.rep = r.split("|").map((x) => x.trim()).filter(Boolean); zone = null; continue;
+    }
     if (t.startsWith("=")) { it.c = t.slice(1).trim(); zone = "c"; continue; }
     if (zone === "c") it.c += "\n" + l; else if (zone === "h") it.h += " " + t; else if (t) it.q += " " + t;
   }
@@ -166,8 +170,11 @@ function rendreChapitre({ meta, corps }, ctx) {
       if (l === "exercice") {
         const items = lireExercices(text);
         return `<section class="exo">${titre ? `<h3>${md.parseInline(titre)}</h3>` : ""}${items.map((it) => {
-          const k = ex.length; ex.push({ n: it.n || nDefaut });
-          return `<div class="ex" data-x="${k}"><div class="ex-q">${md.parse(it.q)}</div><div class="ex-b">${it.h ? `<button class="b" data-ex="h">Indice</button>` : ""}<button class="b p" data-ex="c">Voir le corrigé</button></div>${it.h ? `<div class="ex-h" hidden>${md.parse(it.h)}</div>` : ""}<div class="ex-c" hidden>${md.parse(it.c)}<div class="ex-b"><button class="b ok" data-ex="1">J'avais juste</button><button class="b ko" data-ex="0">J'avais faux</button></div></div></div>`;
+          const k = ex.length; ex.push({ n: it.n || nDefaut, rep: it.rep, tol: it.tol ?? null });
+          const saisie = it.rep ? `<div class="ex-r"><input type="text" placeholder="Ta réponse" autocomplete="off" spellcheck="false"><button class="b p" data-ex="v">Vérifier</button></div>` : "";
+          const boutons = it.rep ? (it.h ? `<button class="b" data-ex="h">Indice</button>` : "") : `${it.h ? `<button class="b" data-ex="h">Indice</button>` : ""}<button class="b p" data-ex="c">Voir le corrigé</button>`;
+          const auto = it.rep ? "" : `<div class="ex-b"><button class="b ok" data-ex="1">J'avais juste</button><button class="b ko" data-ex="0">J'avais faux</button></div>`;
+          return `<div class="ex" data-x="${k}"><div class="ex-q">${md.parse(it.q)}</div>${saisie}<div class="ex-b">${boutons}</div>${it.h ? `<div class="ex-h" hidden>${md.parse(it.h)}</div>` : ""}<div class="ex-c" hidden>${it.rep ? `<p><b>Réponse attendue : ${esc(it.rep[0])}</b></p>` : ""}${md.parse(it.c)}${auto}</div></div>`;
         }).join("")}</section>`;
       }
       const etiquette = l === "sortie" ? '<div class="code-tag">Sortie</div>' : "";
@@ -222,9 +229,11 @@ function construire(slug) {
 
   // Progression : « essais » (par notion, compatible avec les anciens modules Réseaux et Archi)
   // ou « score10 » (score du QCM de chaque chapitre sur 10).
+  // « pc » : pourcentage du dernier passage complet de l'évaluation du chapitre (ancien module Crypto).
   const format = mod.progression || (mod.notions ? "essais" : "score10");
+  if (!["essais", "score10", "pc"].includes(format)) throw new Error("progression inconnue : " + format);
   const cle = mod.cle || slug.replace(/[^a-z0-9]/gi, "_") + (format === "essais" ? "_etat" : "_scores");
-  const cleEtat = format === "essais" ? cle : cle + "_etat";
+  const cleEtat = mod.cleEtat || (format === "essais" ? cle : cle + "_etat");
 
   // Page HTML
   const gabarit = fs.readFileSync(path.join(RACINE, "content", "commun", "gabarit-module.html"), "utf8");
@@ -232,7 +241,7 @@ function construire(slug) {
   const css = mod.css ? fs.readFileSync(path.join(dossier, mod.css), "utf8") : "";
   const intro = mod.intro ? new Marked({ gfm: true }).parse(mod.intro) : "";
   const config = { id: mod.tuteurId || slug, module: mod.titre, prof: mod.prof || "", student: "un étudiant de licence (" + (mod.etablissement || "FSABM") + ")", conventions: mod.conventions || "" };
-  const donnees = { slug, titre: mod.titre, cle, cleEtat, format, intro, annexes: mod.annexes || [] };
+  const donnees = { slug, titre: mod.titre, cle, cleEtat, format, intro, annexes: mod.annexes || [], cartes: mod.cartes || null };
   const page = gabarit
     .replaceAll("{{TITRE}}", esc(mod.titre))
     .replace("{{SOUS_TITRE}}", esc([mod.prof, mod.semestre, mod.etablissement].filter(Boolean).join(" · ")))

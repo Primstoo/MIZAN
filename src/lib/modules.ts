@@ -16,7 +16,6 @@ export type Module = {
 };
 
 const MANUELS: Module[] = [
-  { slug: "crypto", titre: "Cryptographie (partie 1 + TD1)", prof: "Pr A. Farchane", semestre: "S5", fichier: "crypto-farchane.html", resume: "Chiffres classiques, arithmétique modulaire, LFSR, modes, DES.", cles: ["cryptoPR*", "cryptoPlus", "ct", "mzt-crypto*"] },
   { slug: "uml", titre: "UML", prof: "", semestre: "S5", fichier: "uml.html", resume: "Diagrammes et modélisation orientée objet.", cles: ["umlp_*", "mzt-uml*"] },
   { slug: "probas", titre: "Probabilités et statistiques", prof: "", semestre: "S3", fichier: "probas-S3.html", resume: "Probabilités et statistiques de S3, préparées à partir des annales 2016-2024.", cles: ["ps3_revision_v1", "mzt-probas*"] },
 ];

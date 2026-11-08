@@ -709,11 +709,51 @@
   ]
  },
  "crypto": {
-  "unite": "thème",
+  "unite": "notion",
   "groupes": [
    {
-    "id": "cours",
-    "t": "Partie 1"
+    "id": "bases",
+    "t": "Bases de la cryptographie"
+   },
+   {
+    "id": "cesar",
+    "t": "César et chiffrement affine"
+   },
+   {
+    "id": "vig",
+    "t": "Vigenère"
+   },
+   {
+    "id": "play",
+    "t": "Playfair"
+   },
+   {
+    "id": "trans",
+    "t": "Transposition"
+   },
+   {
+    "id": "crypta",
+    "t": "Cryptanalyse"
+   },
+   {
+    "id": "arith",
+    "t": "Arithmétique modulaire"
+   },
+   {
+    "id": "lfsr",
+    "t": "LFSR (registres à décalage)"
+   },
+   {
+    "id": "modes",
+    "t": "Modes de chiffrement"
+   },
+   {
+    "id": "des",
+    "t": "DES"
+   },
+   {
+    "id": "td1",
+    "t": "TD 1 corrigé"
    }
   ],
   "items": [
@@ -721,61 +761,67 @@
     "id": "bases",
     "t": "Bases",
     "imp": 3,
-    "g": "cours"
+    "g": "bases"
    },
    {
     "id": "cesar",
     "t": "César & affine",
     "imp": 3,
-    "g": "cours"
+    "g": "cesar"
    },
    {
     "id": "vig",
     "t": "Vigenère",
     "imp": 3,
-    "g": "cours"
+    "g": "vig"
    },
    {
     "id": "play",
     "t": "Playfair",
     "imp": 3,
-    "g": "cours"
+    "g": "play"
    },
    {
     "id": "trans",
     "t": "Transposition",
     "imp": 3,
-    "g": "cours"
+    "g": "trans"
    },
    {
     "id": "crypta",
     "t": "Cryptanalyse",
     "imp": 3,
-    "g": "cours"
+    "g": "crypta"
    },
    {
     "id": "arith",
     "t": "Arithmétique",
     "imp": 3,
-    "g": "cours"
+    "g": "arith"
    },
    {
     "id": "lfsr",
     "t": "LFSR",
     "imp": 3,
-    "g": "cours"
+    "g": "lfsr"
    },
    {
     "id": "modes",
     "t": "Modes",
     "imp": 3,
-    "g": "cours"
+    "g": "modes"
    },
    {
     "id": "des",
     "t": "DES",
     "imp": 3,
-    "g": "cours"
+    "g": "des"
+   },
+   {
+    "id": "td1",
+    "t": "TD1",
+    "imp": 3,
+    "g": "td1"
    }
   ]
  },
