@@ -59,6 +59,7 @@ const VOCAB: Record<string, Record<Etape["k"], string>> = {
   archi: { rev: "Revoir tes cartes", lec: "Une section du cours", ecr: "Un exercice de l'Atelier", ent: "Un exercice du TD / TP", gros: "L'examen blanc du module, chronométré" },
   probas: { rev: "Revoir tes cartes", lec: "Une notion du cours", ecr: "Un exercice-type", ent: "10 calculs (onglet Calculs)", gros: "Une annale, en conditions réelles" },
   crypto: { rev: "Revoir tes cartes", lec: "Un chapitre du cours, en entier", ecr: "Le quiz de fin de chapitre", ent: "Les exercices du chapitre (chiffrer, déchiffrer)", gros: "L'examen blanc ToumaiLearn (20 min)" },
+  "traitement-ad": { rev: "Refaire le quiz d'un chapitre déjà vu", lec: "Un chapitre du cours", ecr: "Le quiz de fin de chapitre", ent: "Refaire un exercice du TP sans regarder le corrigé", gros: "L'examen blanc du chapitre 9, en 45 min" },
   uml: { rev: "Revoir tes cartes", lec: "Un chapitre du cours", ecr: "Le diagramme d'exercice du chapitre", ent: "Refaire un diagramme sans regarder le corrigé", gros: "L'examen blanc du module, chronométré" },
 };
 const VOCAB_DEFAUT = { rev: "Revoir tes cartes", lec: "Une section du cours", ecr: "Le quiz de la section", ent: "Une série d'exercices", gros: "L'examen blanc ToumaiLearn (20 min)" };

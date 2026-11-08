@@ -33,6 +33,7 @@ const ADAPT: Record<string, (d: Brut, id: string) => [Statut, number | null]> = 
   probas: (d, id) => parScore(lire(d, "ps3_revision_v1")?.notions?.[id]?.best, 0.8, 1),
   crypto: (d, id) => parScore(lire(d, "cryptoPR")?.[id]?.pc, 80, 100),
   uml: (d, id) => parScore(lire(d, "umlp_scores")?.[id], 8, 10),
+  "traitement-ad": (d, id) => parScore(lire(d, "tad_scores")?.[id], 8, 10),
 };
 
 export function calculerMaitrise(slug: string, data: Brut | null | undefined, niveau: Record<string, boolean> = {}): Maitrise | null {

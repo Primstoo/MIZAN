@@ -51,6 +51,12 @@ const dir = path.join(__dirname, "..", "content", "modules");
     items: CHAPTERS.map((c) => ({ id: c.id, t: c.t, imp: c.imp, g: "cours" })),
   }));
 
+  await ouvrir("traitement-ad.html");
+  out["traitement-ad"] = await p.evaluate(() => {
+    const imp = { ch1: 3, ch2: 4, ch3: 4, ch4: 4, ch5: 5, ch6: 5, ch7: 5, ch8: 2, ch9: 3 };
+    return { unite: "chapitre", groupes: [{ id: "cours", t: "Chapitres" }], items: CHAPS.map((c) => ({ id: c.id, t: c.t, imp: imp[c.id] || 3, g: "cours" })) };
+  });
+
   // ---------- Banque du test de niveau : une question par notion importante (8 max) ----------
   const niveau = {};
   const banques = {};

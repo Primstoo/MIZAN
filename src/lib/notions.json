@@ -815,5 +815,70 @@
     "g": "cours"
    }
   ]
+ },
+ "traitement-ad": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "ch1",
+    "t": "Les fonctions Python",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "ch2",
+    "t": "Les chiffres d'un entier sans le convertir en str",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "ch3",
+    "t": "Les chaînes de caractères",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "ch4",
+    "t": "Listes et vérification d'ordre",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "ch5",
+    "t": "Matrices en Python pur et produit matriciel",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ch6",
+    "t": "NumPy I : les tableaux",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ch7",
+    "t": "NumPy II : aléatoire et algèbre linéaire",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ch8",
+    "t": "Ouverture : Pandas, Matplotlib, nettoyage",
+    "imp": 2,
+    "g": "cours"
+   },
+   {
+    "id": "ch9",
+    "t": "Fiche de révision et examen blanc",
+    "imp": 3,
+    "g": "cours"
+   }
+  ]
  }
 }
