@@ -6,7 +6,8 @@
 const { chromium } = require("playwright");
 const fs = require("fs"), path = require("path");
 const RACINE = path.join(__dirname, "..", "..");
-const esc = (t) => String(t).split(/(<[^>]+>)/).map((p, i) => (i % 2 ? p : p.replace(/([*_`\[\]])/g, "\\$1"))).join("");
+// Échappe le Markdown hors balises HTML et hors formules ($...$), qui sont protégées par le générateur.
+const esc = (t) => String(t).split(/(<[^>]+>|\$\$[\s\S]+?\$\$|\$[^$\n]+?\$)/).map((p, i) => (i % 2 ? p : p.replace(/([*_`\[\]])/g, "\\$1"))).join("");
 const ligne = (t) => esc(String(t ?? "").trim()).replace(/\r?\n/g, "<br>");
 
 // Chaque adaptateur lit les données de l'ancien module et renvoie un format commun.
@@ -54,6 +55,69 @@ const ADAPTATEURS = {
       outils: "labos de chiffrement, exemples générés, calculettes, quiz bilan, examen blanc, carnet d'erreurs",
     },
   },
+  probas: {
+    ancien: "probas-S3-outils.html",
+    lire: () => {
+      const titreEx = Object.fromEntries(EXOS.map((e) => [e.id, e.t]));
+      const annales = `<p>Les annales 2016-2024 et leur composition (chaque exercice est corrigé dans le chapitre « Exercices-types »).</p><div class="table-wrap"><table><thead><tr><th>Année</th><th>Session</th><th>Durée</th><th>Exercices</th></tr></thead><tbody>${EXAMS.map((x) => `<tr><td>${x.an}</td><td>${x.s}</td><td>${x.d || ""}</td><td>${x.parts.map((p) => `${titreEx[p[0]] || p[0]} (${p[1]}${p[2] ? ", " + p[2] : ""})`).join("<br>")}</td></tr>`).join("")}</tbody></table></div>`;
+      return {
+        cours: [...NOTIONS.map((n) => ({ id: n.id, t: n.t, h: (n.src ? `<p class="small muted">Source : ${n.src}</p>` : "") + n.body, seance: n.ch + " · " + CHAPS[n.ch] })),
+          { id: "annales", t: "Annales d'examen (2016-2024)", h: annales, seance: "Examens" }],
+        notions: NOTIONS.map((n) => ({ id: n.id, t: n.t, imp: n.imp, chapitre: n.id })),
+        cartes: CARDS.map((c) => [c.n, c.f, c.b]),
+        qcm: NOTIONS.flatMap((n) => (n.quiz || []).filter((q) => q.t === "q").map((q) => [n.id, q.q, q.o, q.a, q.e])),
+        courtes: NOTIONS.flatMap((n) => (n.quiz || []).filter((q) => q.t === "n").map((q) => [n.id, q.q, q.a + " ~" + (q.tol || 0), q.e])),
+        series: [["exos", "Exercices-types d'examen (corrigés et barèmes)", EXOS.map((e) => ({ ex: `${e.t} · ${e.pts}`, items: e.qs.map((q, j) => ({ id: e.id + "-" + (j + 1), n: e.notion, q: (j === 0 ? e.enonce : "") + q.q, c: q.corr + (q.bar && q.bar.length ? "<p><b>Barème (points attendus)</b></p><ul>" + q.bar.map((x) => "<li>" + x + "</li>").join("") + "</ul>" : "") })) })), "h"]],
+        ouvertes: [], conventions: typeof MZT_CONFIG !== "undefined" ? MZT_CONFIG.conventions || "" : "",
+      };
+    },
+    module: {
+      titre: "Probabilités et statistiques", prof: "", semestre: "S3", fichier: "probas-S3.html",
+      cle: "ps3_revision_v1", cleEtat: "ps3_revision_v1", progression: "best", maths: true, tuteurId: "probas", clesSupplementaires: [],
+      resume: "Probabilités et statistiques de S3, préparées à partir des annales 2016-2024.",
+      outils: "calculs générés, examen blanc chronométré, annales interactives",
+    },
+  },
+  uml: {
+    ancien: "uml-outils.html",
+    // Les diagrammes sont dessinés en JavaScript à l'affichage : on ouvre chaque page, on déplie les
+    // corrections, puis on fige le résultat (SVG) avant la lecture.
+    preparer: async () => {
+      const ids = [...document.querySelectorAll("section.view")].map((v) => v.dataset.view);
+      window.__SNAP = {};
+      for (const id of ids) {
+        location.hash = id; await new Promise((r) => setTimeout(r, 250));
+        const v = document.querySelector(`section.view[data-view="${id}"]`);
+        v.querySelectorAll("details").forEach((d) => (d.open = true));
+        await new Promise((r) => setTimeout(r, 500));
+        const c = v.cloneNode(true);
+        c.querySelectorAll("details").forEach((d) => d.removeAttribute("open"));
+        c.querySelectorAll(".q").forEach((q) => { const box = q.parentElement; if (box && box.querySelectorAll(".q").length === box.children.length - box.querySelectorAll(".score").length) box.remove(); else q.remove(); });
+        c.querySelectorAll(".score,[data-done],.row:empty").forEach((x) => x.remove());
+        c.querySelectorAll(".eyebrow,h1").forEach((x, i) => { if (i < 2) x.remove(); });
+        c.querySelectorAll("[hidden]").forEach((x) => x.removeAttribute("hidden"));
+        window.__SNAP[id] = c.innerHTML;
+      }
+    },
+    lire: () => {
+      const vues = [...CHAPTERS.map((c) => [c.id, c.t, "Cours · " + (c.src || "")]), ...PRACTICE.map((x) => [x.id, x.t, "Exercices et TD"]), ...PREP.filter((x) => x.id !== "cartes").map((x) => [x.id, x.t, "Préparer l'examen"])];
+      return {
+        cours: vues.filter(([id]) => window.__SNAP[id]).map(([id, t, seance]) => ({ id, t, h: window.__SNAP[id], seance })),
+        notions: [...CHAPTERS.map((c) => ({ id: c.id, t: c.t, imp: c.imp, chapitre: c.id })), { id: "qcours", t: "Questions de cours (rédaction)", imp: 3, chapitre: "qcours" }],
+        cartes: CARDS,
+        qcm: Object.entries(QUIZ).flatMap(([k, l]) => l.filter((q) => q.o).map((q) => [k, q.q, q.o, q.a, q.e])),
+        series: [["qcours", "Questions de cours (rédaction)", [{ ex: "Questions de cours type examen", items: QCOURS.map((q, j) => ({ id: "Q" + (j + 1), n: "qcours", q: q[0], c: q[1] })) }], "h"]],
+        ouvertes: [], conventions: typeof MZT_CONFIG !== "undefined" ? MZT_CONFIG.conventions || "" : "",
+        intro: window.__SNAP.accueil || "",
+      };
+    },
+    module: {
+      titre: "UML", prof: "", semestre: "S5", fichier: "uml.html",
+      cle: "umlp_scores", cleEtat: "umlp_etat", progression: "score10", tuteurId: "uml", clesSupplementaires: ["umlp_*"],
+      resume: "Diagrammes et modélisation orientée objet.",
+      outils: "flashcards d'origine, grille d'auto-correction de l'examen",
+    },
+  },
   archi: {
     ancien: "archi-ordinateurs-outils.html",
     lire: () => ({
@@ -77,7 +141,9 @@ const ADAPTATEURS = {
   if (!A) throw new Error("Pas d'adaptateur pour " + slug);
   const out = path.join(RACINE, "content", "sources", slug);
   const b = await chromium.launch(); const p = await b.newPage();
+  await p.setViewportSize({ width: 1200, height: 900 });
   await p.goto("file://" + path.join(RACINE, "content", "modules", A.ancien)); await p.waitForTimeout(900);
+  if (A.preparer) await p.evaluate(A.preparer);
   const D = await p.evaluate(A.lire);
   const css = await p.evaluate(() => [...document.querySelectorAll("style")].map((s) => s.textContent).join("\n"));
   await b.close();
@@ -111,12 +177,21 @@ const ADAPTATEURS = {
   ["def", "trap", "exam", "formula", "table-wrap"].forEach((k) => classes.delete(k));   // repris par le gabarit
   const regles = [...css.matchAll(/([^{}@]+)\{([^{}]*)\}/g)].filter(([, sel]) => [...classes].some((c) => new RegExp("\\." + c.replace(/[-]/g, "\\-") + "(?![\\w-])").test(sel)))
     .map(([, sel, corps]) => sel.split(",").map((x) => "main " + x.trim().replace(/^(html|body)\s+/, "")).join(",") + "{" + corps.trim() + "}");
-  fs.writeFileSync(path.join(out, "styles.css"), [...new Set(regles)].join("\n") + "\n");
+  // Variables de couleur de l'ancien module absentes du gabarit (ex. --paper), en clair et en sombre.
+  const gab = fs.readFileSync(path.join(RACINE, "content", "commun", "gabarit-module.html"), "utf8");
+  const connues = new Set([...gab.matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]));
+  const varsDe = (bloc) => [...bloc.matchAll(/(--[\w-]+)\s*:\s*([^;}]+)/g)].filter(([, k]) => !connues.has(k)).map(([, k, v]) => `${k}:${v.trim()}`);
+  const blocs = [...css.matchAll(/:root([^{]*)\{([^}]*)\}/g)].map((m) => ({ sel: m[1], corps: m[2], avant: css.slice(Math.max(0, m.index - 60), m.index) }));
+  const estSombre = (b) => /dark/.test(b.sel) || /prefers-color-scheme:\s*dark\)\s*\{\s*$/.test(b.avant);
+  const clair = blocs.filter((b) => !estSombre(b) && !/data-theme/.test(b.sel)).flatMap((b) => varsDe(b.corps));
+  const sombre = blocs.filter((b) => /prefers-color-scheme:\s*dark\)\s*\{\s*$/.test(b.avant)).flatMap((b) => varsDe(b.corps));
+  const vars = (clair.length ? `main{${[...new Set(clair)].join(";")}}\n` : "") + (sombre.length ? `@media (prefers-color-scheme:dark){main{${[...new Set(sombre)].join(";")}}}\n` : "");
+  fs.writeFileSync(path.join(out, "styles.css"), vars + [...new Set(regles)].join("\n") + "\n");
 
   const M = A.module;
   const module = {
     titre: M.titre, prof: M.prof, semestre: M.semestre, etablissement: "FSABM", fichier: M.fichier,
-    cle: M.cle, cleEtat: M.cleEtat, progression: M.progression || "essais", cartes: M.cartes, tuteurId: M.tuteurId, css: "styles.css", clesSupplementaires: M.clesSupplementaires,
+    cle: M.cle, cleEtat: M.cleEtat, progression: M.progression || "essais", cartes: M.cartes, maths: M.maths, tuteurId: M.tuteurId, css: "styles.css", clesSupplementaires: M.clesSupplementaires,
     resume: M.resume, conventions: D.conventions,
     intro: (D.intro ? D.intro + "\n\n" : "") + `Le cours chapitre par chapitre, avec **QCM**, **flashcards** (révision espacée) et **TD corrigés**.\n\n- **Tableau de bord** : tes notions à consolider, les plus importantes d'abord.\n- **Flashcards** : quelques minutes par jour ; une carte réussie revient après 1, 3, 7, 14 puis 30 jours.\n- **TD** : cherche, ouvre l'indice si besoin, compare avec le corrigé et note-toi.\n- **Outils interactifs** (en bas du menu) : ${M.outils}.\n\nTa progression d'avant la nouvelle version est conservée.`,
     annexes: [{ fichier: A.ancien, titre: "Outils interactifs (" + M.outils + ")" }],

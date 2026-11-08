@@ -43,6 +43,8 @@ for (const m of SOURCES as { slug: string; cle: string; format?: string }[])
     ? (d, id) => parEssais(lire(d, m.cle)?.attempts?.[id])
     : m.format === "pc"
       ? (d, id) => parScore(lire(d, m.cle)?.[id]?.pc, 80, 100)
+      : m.format === "best"
+      ? (d, id) => parScore(lire(d, m.cle)?.notions?.[id]?.best, 0.8, 1)
       : (d, id) => parScore(lire(d, m.cle)?.[id], 8, 10);
 
 export function calculerMaitrise(slug: string, data: Brut | null | undefined, niveau: Record<string, boolean> = {}): Maitrise | null {

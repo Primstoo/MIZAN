@@ -1,5 +1,22 @@
 [
   {
+    "slug": "probas",
+    "titre": "Probabilités et statistiques",
+    "prof": "",
+    "semestre": "S3",
+    "fichier": "probas-S3.html",
+    "resume": "Probabilités et statistiques de S3, préparées à partir des annales 2016-2024.",
+    "cles": [
+      "ps3_revision_v1",
+      "mzt-probas*"
+    ],
+    "cle": "ps3_revision_v1",
+    "format": "best",
+    "annexes": [
+      "probas-S3-outils.html"
+    ]
+  },
+  {
     "slug": "archi",
     "titre": "Architecture des ordinateurs",
     "prof": "",
@@ -70,5 +87,24 @@
     "cle": "tad_scores",
     "format": "score10",
     "annexes": []
+  },
+  {
+    "slug": "uml",
+    "titre": "UML",
+    "prof": "",
+    "semestre": "S5",
+    "fichier": "uml.html",
+    "resume": "Diagrammes et modélisation orientée objet.",
+    "cles": [
+      "umlp_scores",
+      "umlp_etat",
+      "mzt-uml*",
+      "umlp_*"
+    ],
+    "cle": "umlp_scores",
+    "format": "score10",
+    "annexes": [
+      "uml-outils.html"
+    ]
   }
 ]

@@ -559,24 +559,96 @@
   "unite": "notion",
   "groupes": [
    {
-    "id": "A",
-    "t": "Chapitre 1 · Bases de probabilité"
+    "id": "denombrement",
+    "t": "Dénombrement : compter les cas"
    },
    {
-    "id": "B",
-    "t": "Chapitre 2 · Variables aléatoires discrètes"
+    "id": "probas",
+    "t": "Probabilité, conditionnelle, Bayes"
    },
    {
-    "id": "C",
-    "t": "Chapitre 2 (suite) · Variables aléatoires continues"
+    "id": "independance",
+    "t": "Indépendance d'événements"
    },
    {
-    "id": "D",
-    "t": "Chapitre 3 · Lois usuelles discrètes"
+    "id": "vad",
+    "t": "V.a discrète : loi, espérance, variance"
    },
    {
-    "id": "E",
-    "t": "Chapitre 4 · Lois usuelles continues"
+    "id": "linearite",
+    "t": "Preuves : E(X+Y) et E(XY)"
+   },
+   {
+    "id": "couple",
+    "t": "Couple discret : tableau, marginales, covariance"
+   },
+   {
+    "id": "covnulle",
+    "t": "Covariance nulle et indépendance"
+   },
+   {
+    "id": "densite",
+    "t": "Densité, fonction de répartition, probabilités"
+   },
+   {
+    "id": "momentsc",
+    "t": "Espérance et variance (cas continu)"
+   },
+   {
+    "id": "transfo",
+    "t": "Loi de Y = g(X) : la méthode de la fonction de répartition"
+   },
+   {
+    "id": "minmax",
+    "t": "Min et max de n variables indépendantes"
+   },
+   {
+    "id": "couplec",
+    "t": "Couple de v.a continues"
+   },
+   {
+    "id": "mgf",
+    "t": "Fonction génératrice des moments"
+   },
+   {
+    "id": "binomiale",
+    "t": "Bernoulli, binomiale (et uniforme, Dirac)"
+   },
+   {
+    "id": "poisson",
+    "t": "Loi de Poisson et loi conditionnelle"
+   },
+   {
+    "id": "geometrique",
+    "t": "Loi géométrique (de Pascal)"
+   },
+   {
+    "id": "autresdiscretes",
+    "t": "Binomiale négative, hypergéométrique, différences"
+   },
+   {
+    "id": "uniexpo",
+    "t": "Uniforme et exponentielle (et taux de hasard)"
+   },
+   {
+    "id": "normale",
+    "t": "Loi normale : transformations et table"
+   },
+   {
+    "id": "gamma",
+    "t": "Loi Gamma"
+   },
+   {
+    "id": "khideux",
+    "t": "Loi du Khi-deux et liens Normale-Gamma"
+   },
+   {
+    "id": "annales",
+    "t": "Annales d'examen (2016-2024)"
+   },
+   {
+    "id": "exos",
+    "t": "Exercices-types d'examen (corrigés et barèmes)"
    }
   ],
   "items": [
@@ -584,127 +656,127 @@
     "id": "denombrement",
     "t": "Dénombrement : compter les cas",
     "imp": 2,
-    "g": "A"
+    "g": "denombrement"
    },
    {
     "id": "probas",
     "t": "Probabilité, conditionnelle, Bayes",
     "imp": 2,
-    "g": "A"
+    "g": "probas"
    },
    {
     "id": "independance",
     "t": "Indépendance d'événements",
     "imp": 2,
-    "g": "A"
+    "g": "independance"
    },
    {
     "id": "vad",
     "t": "V.a discrète : loi, espérance, variance",
     "imp": 4,
-    "g": "B"
+    "g": "vad"
    },
    {
     "id": "linearite",
     "t": "Preuves : E(X+Y) et E(XY)",
     "imp": 3,
-    "g": "B"
+    "g": "linearite"
    },
    {
     "id": "couple",
     "t": "Couple discret : tableau, marginales, covariance",
     "imp": 5,
-    "g": "B"
+    "g": "couple"
    },
    {
     "id": "covnulle",
     "t": "Covariance nulle et indépendance",
     "imp": 4,
-    "g": "B"
+    "g": "covnulle"
    },
    {
     "id": "densite",
     "t": "Densité, fonction de répartition, probabilités",
     "imp": 5,
-    "g": "C"
+    "g": "densite"
    },
    {
     "id": "momentsc",
     "t": "Espérance et variance (cas continu)",
     "imp": 5,
-    "g": "C"
+    "g": "momentsc"
    },
    {
     "id": "transfo",
     "t": "Loi de Y = g(X) : la méthode de la fonction de répartition",
     "imp": 5,
-    "g": "C"
+    "g": "transfo"
    },
    {
     "id": "minmax",
     "t": "Min et max de n variables indépendantes",
     "imp": 5,
-    "g": "C"
+    "g": "minmax"
    },
    {
     "id": "couplec",
     "t": "Couple de v.a continues",
     "imp": 2,
-    "g": "C"
+    "g": "couplec"
    },
    {
     "id": "mgf",
     "t": "Fonction génératrice des moments",
     "imp": 3,
-    "g": "C"
+    "g": "mgf"
    },
    {
     "id": "binomiale",
     "t": "Bernoulli, binomiale (et uniforme, Dirac)",
     "imp": 3,
-    "g": "D"
+    "g": "binomiale"
    },
    {
     "id": "poisson",
     "t": "Loi de Poisson et loi conditionnelle",
     "imp": 3,
-    "g": "D"
+    "g": "poisson"
    },
    {
     "id": "geometrique",
     "t": "Loi géométrique (de Pascal)",
     "imp": 3,
-    "g": "D"
+    "g": "geometrique"
    },
    {
     "id": "autresdiscretes",
     "t": "Binomiale négative, hypergéométrique, différences",
     "imp": 2,
-    "g": "D"
+    "g": "autresdiscretes"
    },
    {
     "id": "uniexpo",
     "t": "Uniforme et exponentielle (et taux de hasard)",
     "imp": 3,
-    "g": "E"
+    "g": "uniexpo"
    },
    {
     "id": "normale",
     "t": "Loi normale : transformations et table",
     "imp": 5,
-    "g": "E"
+    "g": "normale"
    },
    {
     "id": "gamma",
     "t": "Loi Gamma",
     "imp": 5,
-    "g": "E"
+    "g": "gamma"
    },
    {
     "id": "khideux",
     "t": "Loi du Khi-deux et liens Normale-Gamma",
     "imp": 5,
-    "g": "E"
+    "g": "khideux"
    }
   ]
  },
@@ -826,11 +898,67 @@
   ]
  },
  "uml": {
-  "unite": "chapitre",
+  "unite": "notion",
   "groupes": [
    {
-    "id": "cours",
-    "t": "Chapitres"
+    "id": "ch1",
+    "t": "Introduction et approche objet"
+   },
+   {
+    "id": "ch2",
+    "t": "Diagramme de classes"
+   },
+   {
+    "id": "ch3",
+    "t": "Diagramme d’objets"
+   },
+   {
+    "id": "ch4",
+    "t": "Cas d’utilisation"
+   },
+   {
+    "id": "ch5",
+    "t": "Diagramme de séquence"
+   },
+   {
+    "id": "ch6",
+    "t": "Diagramme de collaboration"
+   },
+   {
+    "id": "ch7",
+    "t": "Diagramme d’activités"
+   },
+   {
+    "id": "exos",
+    "t": "Exercices du cours"
+   },
+   {
+    "id": "td1",
+    "t": "TD1 · statiques"
+   },
+   {
+    "id": "td2",
+    "t": "TD2 · dynamiques"
+   },
+   {
+    "id": "tp1",
+    "t": "TP1 · analyse"
+   },
+   {
+    "id": "tp2",
+    "t": "TP2 · dynamiques"
+   },
+   {
+    "id": "methode",
+    "t": "Méthode et synthèse"
+   },
+   {
+    "id": "examen",
+    "t": "Examen blanc"
+   },
+   {
+    "id": "qcours",
+    "t": "Questions de cours (rédaction)"
    }
   ],
   "items": [
@@ -838,43 +966,49 @@
     "id": "ch1",
     "t": "Introduction et approche objet",
     "imp": 3,
-    "g": "cours"
+    "g": "ch1"
    },
    {
     "id": "ch2",
     "t": "Diagramme de classes",
     "imp": 5,
-    "g": "cours"
+    "g": "ch2"
    },
    {
     "id": "ch3",
     "t": "Diagramme d’objets",
     "imp": 4,
-    "g": "cours"
+    "g": "ch3"
    },
    {
     "id": "ch4",
     "t": "Cas d’utilisation",
     "imp": 5,
-    "g": "cours"
+    "g": "ch4"
    },
    {
     "id": "ch5",
     "t": "Diagramme de séquence",
     "imp": 5,
-    "g": "cours"
+    "g": "ch5"
    },
    {
     "id": "ch6",
     "t": "Diagramme de collaboration",
     "imp": 4,
-    "g": "cours"
+    "g": "ch6"
    },
    {
     "id": "ch7",
     "t": "Diagramme d’activités",
     "imp": 4,
-    "g": "cours"
+    "g": "ch7"
+   },
+   {
+    "id": "qcours",
+    "t": "Questions de cours (rédaction)",
+    "imp": 3,
+    "g": "qcours"
    }
   ]
  },

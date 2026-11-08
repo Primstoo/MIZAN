@@ -49,7 +49,8 @@ Champs facultatifs :
 | Champ | Rôle |
 |---|---|
 | `notions` | `[{"id", "t", "imp", "chapitre"}]` : suivi fin par notion (tableau de bord, page Progrès, test de niveau). Sans ce champ, une notion = un chapitre. |
-| `progression` | `"essais"` (par défaut si `notions` : 3 essais et 80 % sur les 5 derniers), `"score10"` (score de l'évaluation de chaque chapitre) ou `"pc"` (pourcentage par chapitre, format de l'ancien Crypto). |
+| `progression` | `"essais"` (par défaut si `notions` : 3 essais et 80 % sur les 5 derniers), `"score10"` (score de l'évaluation de chaque chapitre), `"pc"` (pourcentage par chapitre, ancien Crypto) ou `"best"` (meilleur score par notion, ancien Probas). |
+| `maths` | `true` : formules `$...$` et `$$...$$` rendues par MathJax (protégées du Markdown). |
 | `cleEtat` | clé des essais et des flashcards si elle diffère de `cle` |
 | `cartes` | réglage des boîtes de flashcards d'un ancien module : `{"champ", "intervalles", "echec", "depart"}` |
 | `css` | fichier CSS propre au module (styles des schémas). |
@@ -113,7 +114,7 @@ Viser **10 à 12 QCM par chapitre**, avec au moins 3 options : ils alimentent au
 
 ## Migrer un ancien module
 
-`scripts/migration/convertir-ancien-module.cjs <slug>` lit l'ancien HTML (renommé `<nom>-outils.html`) et écrit ses sources : cours d'origine, notions, QCM, flashcards (même emplacement de sauvegarde grâce à `{notion@n}`), TD/TP. La progression des élèves est conservée (même clé, même format). L'ancien fichier reste accessible dans le menu pour les outils non encore portés.
+`scripts/migration/convertir-ancien-module.cjs <slug>` (un adaptateur par module, à lancer avec Playwright) lit l'ancien HTML (renommé `<nom>-outils.html`) et écrit ses sources : cours d'origine, notions, QCM, flashcards (même emplacement de sauvegarde grâce à `{notion@n}`), TD/TP. La progression des élèves est conservée (même clé, même format). L'ancien fichier reste accessible dans le menu pour les outils non encore portés.
 
 ## Modules existants
 
@@ -123,4 +124,7 @@ Viser **10 à 12 QCM par chapitre**, avec au moins 3 options : ils alimentent au
 | `reseaux-m351` | `content/sources/reseaux-m351` (migré) | 43 notions, 132 QCM, 152 flashcards, 126 exercices ; outils dans `reseaux-M351-outils.html` |
 | `archi` | `content/sources/archi` (migré) | 26 notions, 62 QCM, 71 flashcards, 64 exercices ; outils dans `archi-ordinateurs-outils.html` |
 | `crypto` | `content/sources/crypto` (migré) | 11 chapitres, 37 QCM, 54 réponses courtes vérifiées, 86 flashcards ; labos dans `crypto-farchane-outils.html` |
-| `uml`, `probas` | HTML écrits à la main (à migrer) | catalogue dans `MANUELS` (`src/lib/modules.ts`), notions via `scripts/extraire-notions.cjs` |
+| `probas` | `content/sources/probas` (migré) | 21 notions + exercices-types + annales, formules MathJax, 32 QCM, 55 réponses numériques, 63 flashcards ; calculs générés et examen blanc dans `probas-S3-outils.html` |
+| `uml` | `content/sources/uml` (migré) | 7 chapitres + exercices/TD/TP/méthode/examen, 55 diagrammes figés en SVG, 68 QCM, 43 flashcards, 16 questions de cours ; ancienne page dans `uml-outils.html` |
+
+Tous les modules passent désormais par le générateur : `scripts/extraire-notions.cjs` (ancien système) a été supprimé.

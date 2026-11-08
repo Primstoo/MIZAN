@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{TITRE}}</title>
+<!--{{MATHS}}-->
 <!-- Page générée par scripts/construire-module.mjs : modifier les sources (content/sources), pas ce fichier. -->
 <style>
 :root{--bg:#faf6ef;--card:#fff;--ink:#2b2418;--mute:#7a6d5a;--line:#eadfcd;--acc:#B4532A;--acc2:#f6e7da;--h2:#2f6f8f;--h2b:#dcecf3;--ok:#2f7d55;--okb:#dff0e6;--ko:#b23a3a;--kob:#f6dddd;--code:#1f1b14}
@@ -75,11 +76,14 @@ const etat = () => { const S = lireJ(MODULE.cleEtat); S.attempts = S.attempts ||
 function noter(n, ok) { const S = etat(); (S.attempts[n] = S.attempts[n] || []).push(ok ? 1 : 0); if (S.attempts[n].length > 30) S.attempts[n].shift(); ecrireJ(MODULE.cleEtat, S); }
 // Maîtrisé = au moins 3 essais et 80 % de réussite sur les 5 derniers (règle commune à la plateforme).
 function statut(n) {
+  if (MODULE.format === "score10") { const v = lireJ(MODULE.cle)[n]; if (v !== undefined) return [v >= 8 ? "ok" : "fragile", v / 10]; }
+  if (MODULE.format === "best") { const v = (lireJ(MODULE.cle).notions || {})[n]; return v && v.best != null ? [v.best >= 0.8 ? "ok" : "fragile", v.best] : ["jamais", null]; }
   if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[n]; return v && v.pc !== undefined ? [v.pc >= 80 ? "ok" : "fragile", v.pc / 100] : ["jamais", null]; } const a = (etat().attempts[n] || []).slice(-5); if (!a.length) return ["jamais", null]; const r = a.reduce((x, y) => x + y, 0) / a.length; return [(etat().attempts[n].length >= 3 && r >= 0.8) ? "ok" : "fragile", r]; }
 const NCH = {}; NOTIONS.forEach((n) => (NCH[n.ch] = NCH[n.ch] || []).push(n));
 function scoreChap(c) {
   if (MODULE.format === "score10") return lireJ(MODULE.cle)[c.id];
   if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[c.id]; return v && v.pc !== undefined ? Math.round(v.pc / 10) : undefined; }
+  if (MODULE.format === "best") { const v = (lireJ(MODULE.cle).notions || {})[c.id]; return v && v.best != null ? Math.round(v.best * 10) : undefined; }
   const l = NCH[c.id] || []; if (!l.length || !l.some((n) => statut(n.id)[0] !== "jamais")) return undefined;
   return Math.round((10 * l.filter((n) => statut(n.id)[0] === "ok").length) / l.length);
 }
@@ -127,15 +131,18 @@ function vueCartes() {
   <div class="carte"><div class="lbl">${n ? n.t : ""} · ${st && st[CHAMP] >= 0 ? "boîte " + st[CHAMP] : "nouvelle"}</div>${c.q}${montre ? `<div class="rep">${c.r}</div>` : ""}</div>
   <div class="ex-b">${montre ? `<button class="b ko" data-fc="0">Raté</button><button class="b ok" data-fc="1">Je savais</button>` : `<button class="b p" data-fc="voir">Retourner la carte</button>`}</div>`;
 }
+window.typeset = () => { if (MODULE.maths && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([main]).catch(() => {}); };
 const nEval = (c) => c.qcm.length + c.ex.filter((x) => x.rep).length;
 const norm = (t) => String(t).toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "").replace(/,/g, ".");
 function bilanChap() {
+  typeset();
   const c = CHAPS[cur], tot = nEval(c), fait = Object.keys(rep).length, juste = Object.values(rep).reduce((a, b) => a + b, 0), bilan = document.getElementById("bilan");
   if (!bilan) return;
   if (fait < tot) { bilan.textContent = `Évaluation du chapitre : ${fait}/${tot} répondu(s) · ${juste} juste${juste > 1 ? "s" : ""}`; dessinerNav(); return; }
   const sc = Math.round((10 * juste) / fait);
   if (MODULE.format === "score10") { const s = lireJ(MODULE.cle); s[c.id] = Math.max(sc, s[c.id] ?? 0); ecrireJ(MODULE.cle, s); }
   if (MODULE.format === "pc") { const s = lireJ(MODULE.cle); s[c.id] = { ...(s[c.id] || {}), pc: Math.round((100 * juste) / fait), date: new Date().toLocaleDateString("fr-FR") }; ecrireJ(MODULE.cle, s); }
+  if (MODULE.format === "best") { const S = etat(); S.notions = S.notions || {}; const st = S.notions[c.id] = { ...(S.notions[c.id] || {}), read: true }; st.last = juste / fait; st.best = Math.max(st.best || 0, st.last); st.tries = (st.tries || 0) + 1; ecrireJ(MODULE.cle, S); }
   bilan.textContent = `Score : ${sc}/10 ${sc >= 8 ? "· très bien ✔" : "· relis les encadrés « Piège » puis recommence (recharge le chapitre)."}`;
   dessinerNav();
 }
@@ -159,7 +166,7 @@ function aller(i) {
     main.innerHTML = `${c.seance ? `<div class="seance">${c.seance}</div>` : ""}<h1 class="t">${c.t}</h1>${c.html}${n ? `<div class="bilan" id="bilan">Évaluation du chapitre : 0/${n} répondu(s)</div>` : ""}<div class="nx">${i > 0 || MODULE.intro ? `<button class="b" data-go="${i > 0 ? i - 1 : VUES.intro}">← Précédent</button>` : "<span></span>"}${i < CHAPS.length - 1 ? `<button class="b p" data-go="${i + 1}">Chapitre suivant →</button>` : ""}</div>`;
     lancerOutils();
   }
-  scrollTo(0, 0); dessinerNav();
+  scrollTo(0, 0); dessinerNav(); typeset();
 }
 document.addEventListener("click", (e) => {
   const g = e.target.closest("[data-go]"); if (g) return aller(Number(g.dataset.go));
@@ -167,10 +174,10 @@ document.addEventListener("click", (e) => {
   if (et) { const f = et.closest(".etapes"), l = f.querySelectorAll(".etape"); let i = Math.min(l.length - 1, Math.max(0, Number(f.dataset.i) + Number(et.dataset.et))); f.dataset.i = i; l.forEach((x, j) => (x.hidden = j !== i)); return; }
   const fc = e.target.closest("[data-fc]");
   if (fc) {
-    if (fc.dataset.fc === "voir") { montre = true; main.innerHTML = vueCartes(); return; }
+    if (fc.dataset.fc === "voir") { montre = true; main.innerHTML = vueCartes(); typeset(); return; }
     const i = file.shift(), ok = fc.dataset.fc === "1", S = etat(), k = CARTES[i].k, st = S.cards[k] || { [CHAMP]: CFG_C.depart ?? 0 };
     st[CHAMP] = ok ? Math.min(INTV.length - 1, Math.max(0, st[CHAMP] + 1)) : CFG_C.echec; st.due = dansJours(ok ? INTV[st[CHAMP]] : 1); S.cards[k] = st; ecrireJ(MODULE.cleEtat, S);
-    noter(CARTES[i].n, ok); montre = false; main.innerHTML = vueCartes(); dessinerNav(); return;
+    noter(CARTES[i].n, ok); montre = false; main.innerHTML = vueCartes(); dessinerNav(); typeset(); return;
   }
   const xb = e.target.closest("[data-ex]");
   if (xb) {

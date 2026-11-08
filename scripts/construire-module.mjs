@@ -130,6 +130,14 @@ function lireExercices(corps) {
 
 const tagNotion = (t) => { const m = /^\{([\w.-]+)(?:@(\d+))?\}\s*/.exec(t); return m ? [m[1], t.slice(m[0].length), m[2] === undefined ? null : Number(m[2])] : [null, t, null]; };
 
+// ---------- Formules ($...$, $$...$$) : protégées du Markdown, rendues par MathJax dans la page ----------
+const RE_MATH = /\$\$[\s\S]+?\$\$|\$[^$\n]+?\$/g;
+function protegerMaths(corps, store) {
+  // Les blocs ```html sont laissés tels quels (déjà en HTML, MathJax les lit directement).
+  return corps.split(/(```html\n[\s\S]*?\n```)/).map((part, i) => (i % 2 ? part : part.replace(RE_MATH, (m) => `MTHZ${store.push(m) - 1}ZZ`))).join("");
+}
+const restaurerMaths = (t, store) => typeof t === "string" ? t.replace(/MTHZ(\d+)ZZ/g, (m, i) => esc(store[Number(i)])) : t;
+
 // ---------- Lecture d'un chapitre ----------
 function lireChapitre(fichier) {
   const src = fs.readFileSync(fichier, "utf8").replace(/\r\n/g, "\n");
@@ -189,10 +197,14 @@ function rendreChapitre({ meta, corps }, ctx) {
     },
   };
   md.use({ renderer: rendu });
-  const html = md.parse(corps);
+  const maths = [], nbCartes = ctx.cartes.length;
+  if (ctx.maths) corps = protegerMaths(corps, maths);
+  const R = (t) => restaurerMaths(t, maths);
+  const html = R(md.parse(corps));
+  for (const c of ctx.cartes.slice(nbCartes)) { c.q = R(c.q); c.r = R(c.r); }
   return {
     id: meta.id, t: meta.titre, seance: meta.seance || "", imp: Number(meta.importance || 3), html, ex,
-    qcm: qcm.map((q) => ({ n: q.n, q: md.parseInline(q.q), o: q.o.map((o) => md.parseInline(o)), a: q.a, e: md.parseInline(q.e) })),
+    qcm: qcm.map((q) => ({ n: q.n, q: R(md.parseInline(q.q)), o: q.o.map((o) => R(md.parseInline(o))), a: q.a, e: R(md.parseInline(q.e)) })),
   };
 }
 
@@ -203,7 +215,7 @@ function construire(slug) {
   if (!mod) throw new Error("content/sources/" + slug + "/module.json introuvable");
   mod.slug = slug;
   mod.fichier = mod.fichier || slug + ".html";
-  const ctx = { cartes: [], outils: [] };
+  const ctx = { cartes: [], outils: [], maths: !!mod.maths };
   const ids = new Set();
   const chapitres = mod.chapitres.map((f) => {
     const c = rendreChapitre(lireChapitre(path.join(dossier, f)), ctx);
@@ -231,7 +243,7 @@ function construire(slug) {
   // ou « score10 » (score du QCM de chaque chapitre sur 10).
   // « pc » : pourcentage du dernier passage complet de l'évaluation du chapitre (ancien module Crypto).
   const format = mod.progression || (mod.notions ? "essais" : "score10");
-  if (!["essais", "score10", "pc"].includes(format)) throw new Error("progression inconnue : " + format);
+  if (!["essais", "score10", "pc", "best"].includes(format)) throw new Error("progression inconnue : " + format);
   const cle = mod.cle || slug.replace(/[^a-z0-9]/gi, "_") + (format === "essais" ? "_etat" : "_scores");
   const cleEtat = mod.cleEtat || (format === "essais" ? cle : cle + "_etat");
 
@@ -241,11 +253,12 @@ function construire(slug) {
   const css = mod.css ? fs.readFileSync(path.join(dossier, mod.css), "utf8") : "";
   const intro = mod.intro ? new Marked({ gfm: true }).parse(mod.intro) : "";
   const config = { id: mod.tuteurId || slug, module: mod.titre, prof: mod.prof || "", student: "un étudiant de licence (" + (mod.etablissement || "FSABM") + ")", conventions: mod.conventions || "" };
-  const donnees = { slug, titre: mod.titre, cle, cleEtat, format, intro, annexes: mod.annexes || [], cartes: mod.cartes || null };
+  const donnees = { slug, titre: mod.titre, cle, cleEtat, format, intro, annexes: mod.annexes || [], cartes: mod.cartes || null, maths: !!mod.maths };
   const page = gabarit
     .replaceAll("{{TITRE}}", esc(mod.titre))
     .replace("{{SOUS_TITRE}}", esc([mod.prof, mod.semestre, mod.etablissement].filter(Boolean).join(" · ")))
     .replace("/*{{CSS_MODULE}}*/", () => css)
+    .replace("<!--{{MATHS}}-->", () => mod.maths ? `<script>window.MathJax={tex:{inlineMath:[["$","$"]],displayMath:[["$$","$$"]]},svg:{fontCache:"global"},startup:{typeset:false,pageReady:()=>MathJax.startup.defaultPageReady().then(()=>window.typeset&&typeset())}};</script>\n<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js" async></script>` : "")
     .replace("/*{{DONNEES}}*/", () => `const MODULE=${JSON.stringify(donnees)};\nconst CHAPS=${JSON.stringify(chapitres)};\nconst NOTIONS=${JSON.stringify(notions)};\nconst CARTES=${JSON.stringify(ctx.cartes)};\nconst OUTILS=${JSON.stringify(ctx.outils)};`)
     .replace("/*{{MZT_CONFIG}}*/", () => `window.MZT_CONFIG=${JSON.stringify(config)};`)
     .replace("/*{{TUTEUR}}*/", () => tuteur);

@@ -1,3 +1,4 @@
+main{--disp:"Bricolage Grotesque",system-ui,sans-serif}
 main p,main li,main td,main th,main .out,main .f,main .formula{overflow-wrap:anywhere}
 main .f{font-family:var(--mono);background:color-mix(in srgb,var(--acc) 14%,transparent);padding:1px 6px;border-radius:4px;white-space:nowrap}
 main .tip{border-left:3px solid var(--ok);padding:6px 10px;margin:10px 0;background:color-mix(in srgb,var(--ok) 8%,transparent)}

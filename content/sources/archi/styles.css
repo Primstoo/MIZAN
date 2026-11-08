@@ -1,3 +1,5 @@
+main{--copper:#a95a1f;--pcb:#1e6b52;--silk:#2556a3;--amber:#b07a00;--nonebg:#e9eeec;--k0:#c0602a;--k1:#2a63b8;--k2:#1f8a5b;--k3:#8a3fb0;--k4:#b8892a;--k5:#c23b6a;--lit:#f2b33d}
+@media (prefers-color-scheme:dark){main{--copper:#e2894a;--pcb:#4cb68e;--silk:#78a6ef;--amber:#e0b13f;--nonebg:#202a26;--k0:#ec8a52;--k1:#79a8f2;--k2:#58c992;--k3:#c08ae0;--k4:#e3bb5c;--k5:#ee7aa2;--lit:#f6c35a}}
 main .label{font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:11px;font-weight:600;color:var(--muted)}
 main .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 main td.num,main .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
