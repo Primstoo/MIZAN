@@ -1,5 +1,41 @@
 [
   {
+    "slug": "archi",
+    "titre": "Architecture des ordinateurs",
+    "prof": "",
+    "semestre": "S5",
+    "fichier": "archi-ordinateurs.html",
+    "resume": "Représentation de l'information, algèbre de Boole, circuits, mémoires, processeur et assembleur 8086.",
+    "cles": [
+      "ao-revision-v1",
+      "mzt-archi*",
+      "ao-cmode",
+      "ao-vpos"
+    ],
+    "cle": "ao-revision-v1",
+    "format": "essais",
+    "annexes": [
+      "archi-ordinateurs-outils.html"
+    ]
+  },
+  {
+    "slug": "reseaux-m351",
+    "titre": "Réseaux informatiques (M351)",
+    "prof": "Pr A. Darif",
+    "semestre": "S5",
+    "fichier": "reseaux-M351.html",
+    "resume": "Introduction aux réseaux, topologies, débit, modèles OSI et TCP/IP.",
+    "cles": [
+      "m351-revision-v1",
+      "mzt-reseau*"
+    ],
+    "cle": "m351-revision-v1",
+    "format": "essais",
+    "annexes": [
+      "reseaux-M351-outils.html"
+    ]
+  },
+  {
     "slug": "traitement-ad",
     "titre": "Traitement et analyse des données",
     "prof": "Pr Y. Madani",
@@ -8,8 +44,11 @@
     "resume": "Fonctions Python, NumPy (tableaux, matrices, aléatoire, ufuncs) et Pandas (Series, DataFrames, groupby). Séances 1 à 6 + TP corrigés.",
     "cles": [
       "tad_scores",
+      "tad_scores_etat",
       "mzt-traitement-ad*"
     ],
-    "cle": "tad_scores"
+    "cle": "tad_scores",
+    "format": "score10",
+    "annexes": []
   }
 ]

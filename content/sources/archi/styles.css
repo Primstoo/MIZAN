@@ -1,0 +1,27 @@
+main .label{font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:11px;font-weight:600;color:var(--muted)}
+main .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+main td.num,main .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+main .ov{text-decoration:overline;text-decoration-thickness:1.5px}
+main details.ex{border:1px solid var(--line);border-radius:6px;background:var(--panel);margin:12px 0}
+main details.ex>summary{cursor:pointer;padding:9px 12px;font-weight:700;list-style:none}
+main details.ex>summary::before{content:"▸ ";color:var(--copper)}
+main details.ex[open]>summary::before{content:"▾ "}
+main details.ex>div{padding:0 12px 12px}
+main .steps{font-family:var(--mono);font-size:13.5px;white-space:pre-wrap;background:var(--soft);border-radius:5px;padding:10px 12px;margin-top:10px;overflow-x:auto}
+main .svgbox{overflow-x:auto;margin:10px 0}
+main svg .w{stroke:var(--ink);stroke-width:1.6;fill:none}
+main svg .g{stroke:var(--ink);stroke-width:1.6;fill:var(--panel)}
+main svg .hl{stroke:var(--copper);stroke-width:2.2;fill:none}
+main svg .bl{stroke:var(--silk);stroke-width:2.2;fill:none}
+main /* Karnaugh */
+.kmap{border-collapse:collapse;font-family:var(--mono);width:auto;margin:8px 0}
+main .kmap td,main .kmap th{border:1px solid var(--line);text-align:center;padding:6px 10px;min-width:38px}
+main .kmap td.one{background:var(--goodbg);color:var(--good);font-weight:700}
+main .kmap td.x{background:var(--warnbg);color:var(--amber);font-weight:700}
+main .kmap th{background:var(--soft);font-size:12px}
+main .muted{color:var(--muted)}
+main .small{font-size:13.5px}
+main .bulb .w{font:600 11px var(--mono);color:var(--muted)}
+main .readout.one{flex-direction:column;gap:6px}
+main .brow .small{min-width:150px}
+main .bits i.one{background:var(--lit);color:#1a1405}

@@ -4,59 +4,71 @@
   "groupes": [
    {
     "id": "s1",
-    "t": "1. Introduction générale"
+    "t": "Introduction générale"
    },
    {
     "id": "s2",
-    "t": "2. Communication sur un réseau"
+    "t": "Communication sur un réseau"
    },
    {
     "id": "s3",
-    "t": "3. Composants de base"
+    "t": "Composants de base"
    },
    {
     "id": "s4",
-    "t": "4. Classification : couverture"
+    "t": "Classification : couverture"
    },
    {
     "id": "s5",
-    "t": "5. Topologies"
+    "t": "Topologies"
    },
    {
     "id": "s6",
-    "t": "6. Architecture et transfert"
+    "t": "Architecture et transfert"
    },
    {
     "id": "s7",
-    "t": "7. Le réseau Internet"
+    "t": "Le réseau Internet"
    },
    {
     "id": "s8",
-    "t": "8. Bande passante, débit, temps"
+    "t": "Bande passante, débit, temps"
    },
    {
     "id": "s9",
-    "t": "9. Ch2 · Modèles OSI et TCP/IP"
+    "t": "Ch2 · Modèles OSI et TCP/IP"
    },
    {
     "id": "s10",
-    "t": "10. Ch2 · Protocoles, ports, MTU"
+    "t": "Ch2 · Protocoles, ports, MTU"
    },
    {
     "id": "s11",
-    "t": "11. Ch2 · Couche liaison et contrôle d'erreurs"
+    "t": "Ch2 · Couche liaison et contrôle d'erreurs"
    },
    {
     "id": "s12",
-    "t": "12. Ch2 · Couche physique"
+    "t": "Ch2 · Couche physique"
    },
    {
     "id": "s13",
-    "t": "13. Ch2 · Couche réseau et ICMP"
+    "t": "Ch2 · Couche réseau et ICMP"
    },
    {
     "id": "s14",
-    "t": "14. En-têtes IP, TCP et UDP (à mémoriser)"
+    "t": "En-têtes IP, TCP et UDP (à mémoriser)"
+   },
+   {
+    "id": "td",
+    "t": "TD corrigés (séries 1 à 3)"
+   },
+   {
+    "id": "tp1",
+    "t": "TP 1 · ping, tracert, DNS, HTTP (Wireshark)"
+   },
+   {
+    "id": "tp2",
+    "t": "TP 2 · Packet Tracer"
    }
   ],
   "items": [
@@ -378,6 +390,10 @@
    {
     "id": "L14",
     "t": "Assembleur 8086 (2) : logique, décalages, sauts, boucles, pile"
+   },
+   {
+    "id": "td",
+    "t": "TD corrigés (TD 1 à 11)"
    }
   ],
   "items": [

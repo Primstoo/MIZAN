@@ -43,6 +43,21 @@ figure{margin:18px 0}figcaption{font-size:13px;font-weight:600;color:var(--mute)
 .bilan{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 0;font-weight:600;margin-top:20px}
 .nx{display:flex;justify-content:space-between;margin-top:30px;gap:10px}
 #menu{display:none}
+/* compatibilité : variables et classes des anciens modules convertis */
+:root{--panel:var(--card);--muted:var(--mute);--soft:var(--acc2);--blue:var(--h2);--orange:var(--acc);--green:var(--ok);--bad:var(--ko);--badbg:var(--kob);--good:var(--ok);--goodbg:var(--okb);--warnbg:var(--acc2);--warn:var(--acc);--mono:ui-monospace,Menlo,Consolas,monospace;--body:system-ui,sans-serif;--display:system-ui,sans-serif}
+main svg{max-width:100%;height:auto}
+.def,.trap,.exam{padding:10px 16px;border-radius:10px;border-left:5px solid;margin:16px 0}.def{background:var(--h2b);border-color:var(--h2)}.trap{background:var(--kob);border-color:var(--ko)}.exam{background:var(--acc2);border-color:var(--acc)}
+.formula{white-space:pre-line;font-family:var(--mono);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;margin:12px 0}
+.table-wrap{overflow-x:auto;margin:12px 0}.table-wrap table{border-collapse:collapse;font-size:14.5px}.table-wrap td,.table-wrap th{border:1px solid var(--line);padding:6px 10px}.table-wrap th{background:var(--acc2)}
+.cartes-info{font-size:14px;color:var(--mute)}
+.exo h3{margin-top:1.4em}.ex{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}.ex-q p{margin:.3em 0}.ex-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.ex-h,.ex-c{margin-top:10px;padding:10px 12px;border-radius:8px}.ex-h{background:var(--h2b)}.ex-c{background:var(--okb)}.ex.fait{opacity:.75}
+.b.ok{border-color:var(--ok);color:var(--ok)}.b.ko{border-color:var(--ko);color:var(--ko)}
+.carte{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;min-height:180px;margin:14px 0}.carte .lbl{font-size:12.5px;color:var(--mute);margin-bottom:8px}.carte .rep{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}.kpi div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.kpi b{display:block;font-size:24px}
+.barre{height:8px;background:var(--line);border-radius:6px;overflow:hidden}.barre i{display:block;height:100%;background:var(--ok)}
+.liste-n{list-style:none;padding:0}.liste-n li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.liste-n button{background:none;border:0;color:var(--acc);cursor:pointer;font:inherit;padding:0;text-align:left}
+nav .sep{border-top:1px solid var(--line);margin:8px 0}nav a{display:block;padding:8px 10px;color:var(--ink);font-size:14px;text-decoration:none;border-radius:8px}nav a:hover{background:var(--acc2)}
+/*{{CSS_MODULE}}*/
 @media (max-width:860px){.wrap{grid-template-columns:1fr}nav{display:none;position:fixed;inset:54px 0 0 0;height:auto;background:var(--bg);z-index:4;border:0}nav.open{display:block}#menu{display:inline-block}main{padding:16px 16px 90px}h1.t{font-size:23px}}
 </style>
 </head>
@@ -51,24 +66,83 @@ figure{margin:18px 0}figcaption{font-size:13px;font-weight:600;color:var(--mute)
 <div class="wrap"><nav id="nav"></nav><main id="main"></main></div>
 <script>
 /*{{DONNEES}}*/
-const lire = () => { try { return JSON.parse(localStorage.getItem(MODULE.cle) || "{}"); } catch (e) { return {}; } };
-const ecrire = (s) => { try { localStorage.setItem(MODULE.cle, JSON.stringify(s)); } catch (e) {} };
+// ---------- Sauvegarde ----------
+// Format « essais » : un objet partagé avec l'ancien module (attempts par notion, cards par indice) ; on ne touche qu'à ces deux champs.
+// Format « score10 » : scores des chapitres dans MODULE.cle, essais et cartes dans MODULE.cleEtat.
+const lireJ = (k) => { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } };
+const ecrireJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const etat = () => { const S = lireJ(MODULE.cleEtat); S.attempts = S.attempts || {}; S.cards = S.cards || {}; return S; };
+function noter(n, ok) { const S = etat(); (S.attempts[n] = S.attempts[n] || []).push(ok ? 1 : 0); if (S.attempts[n].length > 30) S.attempts[n].shift(); ecrireJ(MODULE.cleEtat, S); }
+// Maîtrisé = au moins 3 essais et 80 % de réussite sur les 5 derniers (règle commune à la plateforme).
+function statut(n) { const a = (etat().attempts[n] || []).slice(-5); if (!a.length) return ["jamais", null]; const r = a.reduce((x, y) => x + y, 0) / a.length; return [(etat().attempts[n].length >= 3 && r >= 0.8) ? "ok" : "fragile", r]; }
+const NCH = {}; NOTIONS.forEach((n) => (NCH[n.ch] = NCH[n.ch] || []).push(n));
+function scoreChap(c) {
+  if (MODULE.format === "score10") return lireJ(MODULE.cle)[c.id];
+  const l = NCH[c.id] || []; if (!l.length || !l.some((n) => statut(n.id)[0] !== "jamais")) return undefined;
+  return Math.round((10 * l.filter((n) => statut(n.id)[0] === "ok").length) / l.length);
+}
+// ---------- Flashcards (boîtes de Leitner, mêmes intervalles que les anciens modules) ----------
+const INTV = [0, 1, 3, 7, 14, 30];
+const jour = () => new Date().toISOString().slice(0, 10);
+const numJour = (d) => Math.floor(new Date(d + "T00:00:00").getTime() / 864e5);
+const dansJours = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); };
+const aRevoir = () => { const S = etat(), t = numJour(jour()); return CARTES.map((_, i) => i).filter((i) => { const st = S.cards[CARTES[i].k]; return !st || numJour(st.due) <= t; }); };
+let file = [], montre = false;
+
 const nav = document.getElementById("nav"), main = document.getElementById("main"), pct = document.getElementById("pct");
 let cur = -1, rep = {};
+const VUES = { bord: -3, cartes: -2, intro: -1 };
 function dessinerNav() {
-  const s = lire(); let ok = 0;
+  let ok = 0;
   const ligne = (i, titre, sous, v) => `<button class="${cur === i ? "on" : ""}" data-go="${i}"><span>${titre}${sous ? `<span class="se">${sous}</span>` : ""}</span><span class="sc ${v >= 8 ? "ok" : ""}">${v === undefined ? "" : v + "/10"}</span></button>`;
-  nav.innerHTML = (MODULE.intro ? ligne(-1, "Avant de commencer") : "") + CHAPS.map((c, i) => { const v = s[c.id]; if (v >= 8) ok++; return ligne(i, `${i + 1}. ${c.t}`, c.seance, v); }).join("");
+  const dues = CARTES.length ? aRevoir().length : 0;
+  let h = ligne(VUES.bord, "📊 Tableau de bord");
+  if (CARTES.length) h += ligne(VUES.cartes, `🃏 Flashcards${dues ? ` <b>(${dues})</b>` : ""}`);
+  if (MODULE.intro) h += ligne(VUES.intro, "Avant de commencer");
+  h += '<div class="sep"></div>' + CHAPS.map((c, i) => { const v = scoreChap(c); if (v >= 8) ok++; return ligne(i, `${i + 1}. ${c.t}`, c.seance, v); }).join("");
+  if (MODULE.annexes.length) h += '<div class="sep"></div>' + MODULE.annexes.map((a) => `<a href="${a.fichier}${a.ancre ? "#" + a.ancre : ""}">🧰 ${a.titre}</a>`).join("");
+  nav.innerHTML = h;
   pct.textContent = `${ok}/${CHAPS.length} maîtrisés`;
 }
+function vueBord() {
+  const st = NOTIONS.map((n) => ({ ...n, s: statut(n.id) }));
+  const okN = st.filter((n) => n.s[0] === "ok").length, fr = st.filter((n) => n.s[0] === "fragile"), jam = st.filter((n) => n.s[0] === "jamais");
+  const chapDe = (id) => CHAPS.findIndex((c) => c.id === id);
+  const li = (n) => `<li><button data-go="${chapDe(n.ch)}">${n.t}</button><span>${n.s[1] === null ? "jamais testé" : Math.round(100 * n.s[1]) + " %"}</span></li>`;
+  return `<h1 class="t">Tableau de bord</h1>
+  <div class="kpi"><div><b>${okN}/${NOTIONS.length}</b>${MODULE.format === "essais" ? "notions" : "chapitres"} maîtrisé(e)s</div><div><b>${fr.length}</b>à consolider</div><div><b>${CARTES.length ? aRevoir().length : 0}</b>flashcards à revoir aujourd'hui</div></div>
+  <div class="barre"><i style="width:${NOTIONS.length ? (100 * okN) / NOTIONS.length : 0}%"></i></div>
+  ${fr.length ? `<h2>À consolider en priorité</h2><ul class="liste-n">${fr.sort((a, b) => b.imp - a.imp || a.s[1] - b.s[1]).slice(0, 10).map(li).join("")}</ul>` : ""}
+  ${jam.length ? `<h2>Pas encore travaillé (les plus importants d'abord)</h2><ul class="liste-n">${jam.sort((a, b) => b.imp - a.imp).slice(0, 10).map(li).join("")}</ul>` : ""}
+  <p style="color:var(--mute);font-size:14px">Une ${MODULE.format === "essais" ? "notion" : "partie"} est maîtrisée après au moins 3 essais (QCM, exercices, flashcards) avec 80 % de réussite sur les 5 derniers.</p>`;
+}
+function vueCartes() {
+  if (!file.length) { file = aRevoir(); montre = false; }
+  if (!file.length) return `<h1 class="t">Flashcards</h1><p>✔ Rien à revoir aujourd'hui. Reviens demain : les cartes réussies reviennent après 1, 3, 7, 14 puis 30 jours.</p>`;
+  const i = file[0], c = CARTES[i], st = etat().cards[c.k], n = NOTIONS.find((x) => x.id === c.n);
+  return `<h1 class="t">Flashcards</h1><p style="color:var(--mute)">${file.length} carte(s) à revoir aujourd'hui.</p>
+  <div class="carte"><div class="lbl">${n ? n.t : ""} · ${st ? "boîte " + st.box : "nouvelle"}</div>${c.q}${montre ? `<div class="rep">${c.r}</div>` : ""}</div>
+  <div class="ex-b">${montre ? `<button class="b ko" data-fc="0">Raté</button><button class="b ok" data-fc="1">Je savais</button>` : `<button class="b p" data-fc="voir">Retourner la carte</button>`}</div>`;
+}
+function lancerOutils() {
+  main.querySelectorAll("[data-outil]").forEach((d) => {
+    const tmp = document.createElement("div"); tmp.innerHTML = OUTILS[Number(d.dataset.outil)];
+    tmp.querySelectorAll("script").forEach((sc) => { const n = document.createElement("script"); n.textContent = sc.textContent; sc.replaceWith(n); });
+    d.replaceWith(...tmp.childNodes);
+  });
+}
 function aller(i) {
-  if (i < 0 && !MODULE.intro) i = 0;
+  if (i === VUES.intro && !MODULE.intro) i = 0;
+  if (i === VUES.cartes && !CARTES.length) i = 0;
   cur = i; rep = {}; nav.classList.remove("open");
-  try { localStorage.setItem(MODULE.cle + "_dernier", String(i)); } catch (e) {}
-  if (i < 0) main.innerHTML = `<h1 class="t">Avant de commencer</h1>${MODULE.intro}<div class="nx"><span></span><button class="b p" data-go="0">Commencer →</button></div>`;
+  try { localStorage.setItem(MODULE.cleEtat + "_dernier", String(i)); } catch (e) {}
+  if (i === VUES.bord) main.innerHTML = vueBord();
+  else if (i === VUES.cartes) { file = []; main.innerHTML = vueCartes(); }
+  else if (i === VUES.intro) main.innerHTML = `<h1 class="t">Avant de commencer</h1>${MODULE.intro}<div class="nx"><span></span><button class="b p" data-go="0">Commencer →</button></div>`;
   else {
     const c = CHAPS[i], n = c.qcm.length;
-    main.innerHTML = `${c.seance ? `<div class="seance">${c.seance}</div>` : ""}<h1 class="t">${c.t}</h1>${c.html}${n ? `<div class="bilan" id="bilan">QCM du chapitre : 0/${n} répondus</div>` : ""}<div class="nx">${i > 0 || MODULE.intro ? `<button class="b" data-go="${i - 1}">← Précédent</button>` : "<span></span>"}${i < CHAPS.length - 1 ? `<button class="b p" data-go="${i + 1}">Chapitre suivant →</button>` : ""}</div>`;
+    main.innerHTML = `${c.seance ? `<div class="seance">${c.seance}</div>` : ""}<h1 class="t">${c.t}</h1>${c.html}${n ? `<div class="bilan" id="bilan">QCM du chapitre : 0/${n} répondus</div>` : ""}<div class="nx">${i > 0 || MODULE.intro ? `<button class="b" data-go="${i > 0 ? i - 1 : VUES.intro}">← Précédent</button>` : "<span></span>"}${i < CHAPS.length - 1 ? `<button class="b p" data-go="${i + 1}">Chapitre suivant →</button>` : ""}</div>`;
+    lancerOutils();
   }
   scrollTo(0, 0); dessinerNav();
 }
@@ -76,23 +150,38 @@ document.addEventListener("click", (e) => {
   const g = e.target.closest("[data-go]"); if (g) return aller(Number(g.dataset.go));
   const et = e.target.closest("[data-et]");
   if (et) { const f = et.closest(".etapes"), l = f.querySelectorAll(".etape"); let i = Math.min(l.length - 1, Math.max(0, Number(f.dataset.i) + Number(et.dataset.et))); f.dataset.i = i; l.forEach((x, j) => (x.hidden = j !== i)); return; }
+  const fc = e.target.closest("[data-fc]");
+  if (fc) {
+    if (fc.dataset.fc === "voir") { montre = true; main.innerHTML = vueCartes(); return; }
+    const i = file.shift(), ok = fc.dataset.fc === "1", S = etat(), k = CARTES[i].k, st = S.cards[k] || { box: 0 };
+    st.box = ok ? Math.min(5, st.box + 1) : 1; st.due = dansJours(ok ? INTV[st.box] : 1); S.cards[k] = st; ecrireJ(MODULE.cleEtat, S);
+    noter(CARTES[i].n, ok); montre = false; main.innerHTML = vueCartes(); dessinerNav(); return;
+  }
+  const xb = e.target.closest("[data-ex]");
+  if (xb) {
+    const ex = xb.closest(".ex"), v = xb.dataset.ex;
+    if (v === "h") ex.querySelector(".ex-h").hidden = false;
+    else if (v === "c") ex.querySelector(".ex-c").hidden = false;
+    else if (!ex.classList.contains("fait")) { ex.classList.add("fait"); noter(CHAPS[cur].ex[Number(ex.dataset.x)].n, v === "1"); xb.parentNode.innerHTML = v === "1" ? "✔ Noté : réussi." : "✘ Noté : à retravailler."; dessinerNav(); }
+    return;
+  }
   const o = e.target.closest(".opt"); if (!o) return;
-  const qq = o.closest(".qq"), k = Number(qq.dataset.k), c = CHAPS[cur];
-  const q = c.qcm[k];
+  const qq = o.closest(".qq"), k = Number(qq.dataset.k), c = CHAPS[cur], q = c.qcm[k];
   if (k in rep) return;
   rep[k] = Number(o.dataset.o) === q.a ? 1 : 0;
+  noter(q.n, rep[k] === 1);
   qq.querySelectorAll(".opt").forEach((b, j) => { b.disabled = true; if (j === q.a) b.classList.add("bon"); else if (b === o) b.classList.add("faux"); });
   const ex = qq.querySelector(".qq-e"); ex.innerHTML = (rep[k] ? "✔ Bonne réponse. " : "✘ Raté. ") + q.e; ex.hidden = false;
   const fait = Object.keys(rep).length, juste = Object.values(rep).reduce((a, b) => a + b, 0), bilan = document.getElementById("bilan");
-  if (fait < c.qcm.length) { bilan.textContent = `QCM du chapitre : ${fait}/${c.qcm.length} répondus · ${juste} juste${juste > 1 ? "s" : ""}`; return; }
-  const sc = Math.round((10 * juste) / fait), s = lire();
-  s[c.id] = Math.max(sc, s[c.id] ?? 0); ecrire(s);
-  bilan.textContent = `Score : ${sc}/10 ${sc >= 8 ? "· chapitre maîtrisé ✔" : "· relis les encadrés « Piège » puis recommence (recharge le chapitre)."}`;
+  if (fait < c.qcm.length) { bilan.textContent = `QCM du chapitre : ${fait}/${c.qcm.length} répondus · ${juste} juste${juste > 1 ? "s" : ""}`; dessinerNav(); return; }
+  const sc = Math.round((10 * juste) / fait);
+  if (MODULE.format === "score10") { const s = lireJ(MODULE.cle); s[c.id] = Math.max(sc, s[c.id] ?? 0); ecrireJ(MODULE.cle, s); }
+  bilan.textContent = `Score : ${sc}/10 ${sc >= 8 ? "· très bien ✔" : "· relis les encadrés « Piège » puis recommence (recharge le chapitre)."}`;
   dessinerNav();
 });
 document.getElementById("menu").onclick = () => nav.classList.toggle("open");
-let depart = -1; try { depart = Number(localStorage.getItem(MODULE.cle + "_dernier") ?? -1); } catch (e) {}
-aller(depart >= -1 && depart < CHAPS.length ? depart : -1);
+let depart = MODULE.intro ? -1 : 0; try { const d = localStorage.getItem(MODULE.cleEtat + "_dernier"); if (d !== null) depart = Number(d); } catch (e) {}
+aller(depart >= -3 && depart < CHAPS.length ? depart : 0);
 </script>
 <script>
 /*{{MZT_CONFIG}}*/

@@ -36,9 +36,12 @@ const ADAPT: Record<string, (d: Brut, id: string) => [Statut, number | null]> = 
   uml: (d, id) => parScore(lire(d, "umlp_scores")?.[id], 8, 10),
 };
 
-// Modules produits par le générateur : score du QCM de chaque chapitre sur 10, maîtrisé à 8.
-for (const m of SOURCES as { slug: string; cle: string }[])
-  ADAPT[m.slug] ??= (d, id) => parScore(lire(d, m.cle)?.[id], 8, 10);
+// Modules produits par le générateur.
+// Format « essais » : même règle que les anciens modules (3 essais, 80 % sur les 5 derniers).
+for (const m of SOURCES as { slug: string; cle: string; format?: string }[])
+  ADAPT[m.slug] ??= m.format === "essais"
+    ? (d, id) => parEssais(lire(d, m.cle)?.attempts?.[id])
+    : (d, id) => parScore(lire(d, m.cle)?.[id], 8, 10);
 
 export function calculerMaitrise(slug: string, data: Brut | null | undefined, niveau: Record<string, boolean> = {}): Maitrise | null {
   const cat = CAT[slug], f = ADAPT[slug];

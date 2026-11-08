@@ -1,6 +1,8 @@
 // Extrait la liste des notions (ou chapitres) de chaque module, pour que la plateforme
 // puisse lire la progression des élèves dans un format commun.
 // Usage : node scripts/extraire-notions.cjs   (à relancer quand un module change)
+// Ne concerne que les modules encore écrits à la main (probas, crypto, uml). Les autres sont produits
+// par scripts/construire-module.mjs, qui écrit lui-même leurs notions, QCM et test de niveau.
 const { chromium } = require("playwright");
 const fs = require("fs");
 const path = require("path");
@@ -11,20 +13,6 @@ const dir = path.join(__dirname, "..", "content", "modules");
   const p = await b.newPage();
   const out = {};
   const ouvrir = async (f) => { await p.goto("file://" + path.join(dir, f)); await p.waitForTimeout(600); };
-
-  await ouvrir("reseaux-M351.html");
-  out["reseaux-m351"] = await p.evaluate(() => ({
-    unite: "notion",
-    groupes: COURSE.map((c) => ({ id: c.id, t: c.t })),
-    items: NOTIONS.map((n) => ({ id: n.id, t: n.t, imp: n.imp, g: n.sec })),
-  }));
-
-  await ouvrir("archi-ordinateurs.html");
-  out["archi"] = await p.evaluate(() => ({
-    unite: "notion",
-    groupes: COURSE.map((c) => ({ id: c.id, t: c.t })),
-    items: NOTIONS.map((n) => ({ id: n.id, t: n.t, imp: n.imp, g: n.L })),
-  }));
 
   await ouvrir("probas-S3.html");
   out["probas"] = await p.evaluate(() => {
@@ -66,10 +54,6 @@ const dir = path.join(__dirname, "..", "content", "modules");
     }
     return out;
   };
-  await ouvrir("reseaux-M351.html");
-  niveau["reseaux-m351"] = choisir(out["reseaux-m351"], garder("reseaux-m351", await p.evaluate(() => QS.map((x) => ({ n: x.n, q: x.q, o: x.o, a: x.a, e: x.e })))));
-  await ouvrir("archi-ordinateurs.html");
-  niveau["archi"] = choisir(out["archi"], garder("archi", await p.evaluate(() => QCM.map((x) => ({ n: x[0], q: x[1], o: x[2], a: x[3], e: x[4] })))));
   await ouvrir("probas-S3.html");
   niveau["probas"] = choisir(out["probas"], garder("probas", await p.evaluate(() => NOTIONS.flatMap((n) => (n.quiz || []).filter((x) => x.t === "q").map((x) => ({ n: n.id, q: x.q, o: x.o, a: x.a, e: x.e }))))));
   await ouvrir("crypto-farchane.html");

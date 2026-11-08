@@ -44,6 +44,16 @@ Aucune modification de `modules.ts`, `maitrise.ts` ou `parcours.ts` n'est néces
 }
 ```
 
+Champs facultatifs :
+
+| Champ | Rôle |
+|---|---|
+| `notions` | `[{"id", "t", "imp", "chapitre"}]` : suivi fin par notion (tableau de bord, page Progrès, test de niveau). Sans ce champ, une notion = un chapitre. |
+| `progression` | `"essais"` (par défaut si `notions` : 3 essais et 80 % sur les 5 derniers, comme les anciens modules) ou `"score10"` (score du QCM de chaque chapitre). |
+| `css` | fichier CSS propre au module (styles des schémas). |
+| `annexes` | `[{"fichier", "titre"}]` : pages complémentaires accessibles depuis le menu (ex. anciens outils interactifs). |
+| `tuteurId`, `clesSupplementaires` | reprise de l'historique du tuteur et d'autres données d'un ancien module. |
+
 `cle` est facultatif (par défaut `<slug>_scores`) : c'est la clé où la progression est enregistrée. **Ne jamais la changer** une fois le module en ligne, sinon les élèves perdent leurs scores.
 
 ## Format d'un chapitre
@@ -70,7 +80,13 @@ Texte Markdown normal : titres ##, tableaux, **gras**, `code`...
 | ```` ```flux Titre ```` | schéma en chaîne | `A -> B -> C` |
 | ```` ```etapes Titre ```` | explication pas à pas (boutons suivant / précédent) | `Titre de l'étape :: contenu` (une ligne par étape) |
 | ```` ```qcm ```` | QCM noté (chapitre maîtrisé à 8/10) | voir ci-dessous |
+| ```` ```cartes ```` | flashcards ajoutées à la révision espacée (menu « Flashcards ») | `{notion} Question :: Réponse`, une par ligne (`\n` pour aller à la ligne) |
+| ```` ```exercice Titre ```` | exercice avec indice et corrigé ; l'élève se note | `? {notion} Énoncé`, puis `indice: ...` (facultatif), puis `= corrigé` (peut continuer sur plusieurs lignes) |
+| ```` ```html ```` | HTML brut (schéma SVG, tableau spécial) | |
+| ```` ```outil ```` | petit outil interactif : HTML + `<script>` exécuté à l'ouverture du chapitre | |
 | `> [!piege]` | encadré rouge « Piège » | aussi `[!astuce]`, `[!retenir]`, `[!prof]`, `[!attention]` |
+
+`{notion}` (dans les QCM, cartes et exercices) rattache l'élément à une notion déclarée dans `module.json`. Sans notion déclarée, l'élément compte pour le chapitre.
 
 QCM :
 
@@ -93,9 +109,15 @@ Viser **10 à 12 QCM par chapitre**, avec au moins 3 options : ils alimentent au
 - Exemples en contexte marocain quand le prof en utilise (DH, villes, FSABM).
 - Les supports du prof ne sont **pas** publiés tels quels (droit d'auteur) : on publie notre propre rédaction.
 
+## Migrer un ancien module
+
+`scripts/migration/convertir-ancien-module.cjs <slug>` lit l'ancien HTML (renommé `<nom>-outils.html`) et écrit ses sources : cours d'origine, notions, QCM, flashcards (même emplacement de sauvegarde grâce à `{notion@n}`), TD/TP. La progression des élèves est conservée (même clé, même format). L'ancien fichier reste accessible dans le menu pour les outils non encore portés.
+
 ## Modules existants
 
 | slug | Sources | Remarque |
 |---|---|---|
 | `traitement-ad` | `content/sources/traitement-ad` | 8 chapitres, 83 QCM, Pr Madani, S5 |
-| `reseaux-m351`, `crypto`, `archi`, `uml`, `probas` | HTML écrits à la main | catalogue dans `MANUELS` (`src/lib/modules.ts`), notions via `scripts/extraire-notions.cjs` |
+| `reseaux-m351` | `content/sources/reseaux-m351` (migré) | 43 notions, 132 QCM, 152 flashcards, 126 exercices ; outils dans `reseaux-M351-outils.html` |
+| `archi` | `content/sources/archi` (migré) | 26 notions, 62 QCM, 71 flashcards, 64 exercices ; outils dans `archi-ordinateurs-outils.html` |
+| `crypto`, `uml`, `probas` | HTML écrits à la main (à migrer) | catalogue dans `MANUELS` (`src/lib/modules.ts`), notions via `scripts/extraire-notions.cjs` |

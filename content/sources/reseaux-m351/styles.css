@@ -1,0 +1,19 @@
+main .grid{display:grid;gap:12px}
+main td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+main .topos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}
+main .topo{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px;text-align:center;font-size:13px}
+main .topo svg{width:100%;height:auto;max-width:150px}
+main .topo b{display:block;font-family:var(--display);font-stretch:90%}
+main svg .ln{stroke:var(--muted);stroke-width:2;fill:none}
+main svg .sig{stroke:var(--blue);stroke-width:2.2;fill:none;stroke-linejoin:round}
+main svg .grid{stroke:var(--line);stroke-dasharray:3 3}
+main svg .axis{stroke:var(--muted);stroke-width:1}
+main svg .nd{fill:var(--blue)}
+main svg .hub{fill:var(--orange)}
+main svg .rt{fill:var(--green)}
+main svg .tx{fill:var(--ink);font:11px var(--body)}
+main .flow{overflow-x:auto}
+main .expl{background:var(--soft);border-radius:6px;padding:10px 12px;margin-top:8px}
+main .muted{color:var(--muted)}
+main .small{font-size:13px}
+main .xz svg .sig{stroke:var(--blue);stroke-width:2.2;fill:none;stroke-linejoin:round}

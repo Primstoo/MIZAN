@@ -11,7 +11,8 @@ import { estMembre } from "@/lib/acces";
 export const dynamic = "force-dynamic";
 
 export async function GET(_req: Request, { params }: { params: { file: string } }) {
-  const m = MODULES.find((x) => x.fichier === params.file);
+  // Un module peut avoir des fichiers annexes (ex. anciens outils interactifs conservés) : même contrôle d'accès.
+  const m = MODULES.find((x) => x.fichier === params.file || x.annexes?.includes(params.file));
   if (!m) return new NextResponse("Module introuvable", { status: 404 });
 
   const supabase = createClient();
@@ -19,7 +20,7 @@ export async function GET(_req: Request, { params }: { params: { file: string } 
   if (!user) return new NextResponse("Connexion requise", { status: 401 });
   if (!(await estMembre(user))) return new NextResponse("Invitation requise", { status: 403 });
 
-  const html = await readFile(path.join(process.cwd(), "content", "modules", m.fichier), "utf8");
+  const html = await readFile(path.join(process.cwd(), "content", "modules", params.file), "utf8");
   // Pont + correctifs mobile communs à tous les modules :
   // - police 16 px dans les champs : sinon iOS zoome dès qu'on touche la zone de texte ;
   // - tuteur en plein écran sur téléphone, bouton Envoyer ramené à l'écran quand le clavier s'ouvre.
