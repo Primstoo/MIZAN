@@ -50,6 +50,7 @@ main svg{max-width:100%;height:auto}
 .def,.trap,.exam{padding:10px 16px;border-radius:10px;border-left:5px solid;margin:16px 0}.def{background:var(--h2b);border-color:var(--h2)}.trap{background:var(--kob);border-color:var(--ko)}.exam{background:var(--acc2);border-color:var(--acc)}
 .formula{white-space:pre-line;font-family:var(--mono);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;margin:12px 0}
 .table-wrap{overflow-x:auto;margin:12px 0}.table-wrap table{border-collapse:collapse;font-size:14.5px}.table-wrap td,.table-wrap th{border:1px solid var(--line);padding:6px 10px}.table-wrap th{background:var(--acc2)}
+.integre{margin:16px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}.integre iframe{display:block;width:100%;border:0;min-height:120px}.integre-att{padding:16px;color:var(--mute);font-size:14px}
 .cartes-info{font-size:14px;color:var(--mute)}
 .exo h3{margin-top:1.4em}.ex{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}.ex-q p{margin:.3em 0}.ex-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.ex-h,.ex-c{margin-top:10px;padding:10px 12px;border-radius:8px}.ex-h{background:var(--h2b)}.ex-c{background:var(--okb)}.ex.fait{opacity:.75}.ex-r{display:flex;gap:8px;margin-top:8px}.ex-r input{flex:1;font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink)}
 .b.ok{border-color:var(--ok);color:var(--ok)}.b.ko{border-color:var(--ko);color:var(--ko)}
@@ -107,7 +108,6 @@ function dessinerNav() {
   if (CARTES.length) h += ligne(VUES.cartes, `🃏 Flashcards${dues ? ` <b>(${dues})</b>` : ""}`);
   if (MODULE.intro) h += ligne(VUES.intro, "Avant de commencer");
   h += '<div class="sep"></div>' + CHAPS.map((c, i) => { const v = scoreChap(c); if (v >= 8) ok++; return ligne(i, `${i + 1}. ${c.t}`, c.seance, v); }).join("");
-  if (MODULE.annexes.length) h += '<div class="sep"></div>' + MODULE.annexes.map((a) => `<a href="${a.fichier}${a.ancre ? "#" + a.ancre : ""}">🧰 ${a.titre}</a>`).join("");
   nav.innerHTML = h;
   pct.textContent = `${ok}/${CHAPS.length} maîtrisés`;
 }
@@ -146,7 +146,39 @@ function bilanChap() {
   bilan.textContent = `Score : ${sc}/10 ${sc >= 8 ? "· très bien ✔" : "· relis les encadrés « Piège » puis recommence (recharge le chapitre)."}`;
   dessinerNav();
 }
+// Outils d'origine affichés dans le chapitre : même origine, on masque tout sauf l'outil visé.
+const vueIntegre = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { vueIntegre.unobserve(e.target); chargerIntegre(e.target); } }), { rootMargin: "400px" });
+function chargerIntegre(box) {
+  const f = document.createElement("iframe");
+  f.title = "Outil interactif"; f.loading = "lazy";
+  f.src = box.dataset.src + (box.dataset.ancre ? "#" + box.dataset.ancre : "");
+  f.onload = () => {
+    let d; try { d = f.contentDocument; } catch (e) { return; }
+    if (!d) return;
+    const st = d.createElement("style");
+    st.textContent = "#mztBtn,#mztPan,.toast{display:none!important}html,body{background:transparent!important;margin:0!important;padding:0!important;min-height:0!important}";
+    d.head.appendChild(st);
+    const appliquer = () => {
+      const cible = d.querySelector(box.dataset.cible);
+      if (!cible) return;
+      let e = cible;
+      while (e && e !== d.body) {
+        e.hidden = false; e.style.display = e.style.display === "none" ? "" : e.style.display;
+        e.style.margin = "0"; e.style.padding = e === cible ? "8px 14px" : "0"; e.style.maxWidth = "none";
+        for (const sib of e.parentElement.children) if (sib !== e && !/^(SCRIPT|STYLE|LINK|META|TITLE)$/.test(sib.tagName)) sib.style.display = "none";
+        e = e.parentElement;
+      }
+      if (box.dataset.garder) for (const c of cible.children) c.style.display = c.matches(box.dataset.garder) ? "" : "none";
+    };
+    appliquer(); setTimeout(appliquer, 400);
+    const ajuster = () => { const h = Math.max(d.body.scrollHeight, d.documentElement.scrollHeight); if (h && Math.abs(f.offsetHeight - h) > 4) f.style.height = h + "px"; };
+    ajuster(); new ResizeObserver(ajuster).observe(d.body); setInterval(ajuster, 1500);
+    const att = box.querySelector(".integre-att"); if (att) att.remove();
+  };
+  box.appendChild(f);
+}
 function lancerOutils() {
+  main.querySelectorAll(".integre").forEach((b) => vueIntegre.observe(b));
   main.querySelectorAll("[data-outil]").forEach((d) => {
     const tmp = document.createElement("div"); tmp.innerHTML = OUTILS[Number(d.dataset.outil)];
     tmp.querySelectorAll("script").forEach((sc) => { const n = document.createElement("script"); n.textContent = sc.textContent; sc.replaceWith(n); });

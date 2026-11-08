@@ -27,6 +27,13 @@ importance: 3
 <p><b>Déchiffrer</b> : nombre de lignes = longueur du message ÷ longueur de la clé. On découpe le chiffré en morceaux de cette taille, on place le 1er morceau dans la colonne n°1, le 2e dans la colonne n°2…, puis on lit en lignes.</p>
 ```
 
+## S'exercer : exercices guidés et labo
+
+```integre crypto-farchane-outils.html#trans
+cible: [data-tab="trans"]
+garder: .guided,.bench
+```
+
 ## Flashcards
 
 ```cartes
@@ -39,8 +46,6 @@ importance: 3
 {trans@38} Comment trouve-t-on la clé inverse d'une permutation ? :: Si K\[i\] = v, alors K⁻¹\[v\] = i.
 {trans@39} Les lettres de remplissage de la dernière ligne sont-elles imposées ? :: Non, elles sont libres : le prof met des lettres arbitraires, des X marchent aussi. Précise ton choix sur la copie.
 ```
-
-🧰 [Exemples générés, outils et exercices interactifs de ce chapitre](crypto-farchane-outils.html#trans)
 
 ## Réponses courtes
 

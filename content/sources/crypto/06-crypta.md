@@ -24,6 +24,13 @@ importance: 3
 <p><b>Indice de coïncidence et test de Friedman</b> : servent à trouver la longueur de clé d'un Vigenère (voir l'onglet Vigenère). À retenir : IC du français ≈ 0,07-0,08 ; IC d'un texte aléatoire ≈ 0,038. Exemple du prof : « Un enfant n'a pas d'aversion pour la laideur de sa mère », N = 43, IC = 0,070.</p>
 ```
 
+## S'exercer : exercices guidés et labo
+
+```integre crypto-farchane-outils.html#crypta
+cible: [data-tab="crypta"]
+garder: .guided,.bench
+```
+
 ## Flashcards
 
 ```cartes
@@ -34,8 +41,6 @@ importance: 3
 {crypta@44} 26! clés et pourtant cassable : pourquoi ? :: Parce qu'on n'attaque pas par force brute mais par fréquences. La taille de l'espace des clés ne protège de rien ici.
 {crypta@45} À quoi sert le test de Friedman ? :: À estimer la longueur de la clé d'un Vigenère : on calcule l'IC moyen des sous-textes pour chaque L et on garde le L au plus haut IC.
 ```
-
-🧰 [Exemples générés, outils et exercices interactifs de ce chapitre](crypto-farchane-outils.html#crypta)
 
 ## Réponses courtes
 

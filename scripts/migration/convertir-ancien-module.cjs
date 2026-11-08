@@ -26,6 +26,11 @@ const ADAPTATEURS = {
       cle: "m351-revision-v1", tuteurId: "reseau", clesSupplementaires: ["mzt-reseau*"],
       resume: "Introduction aux réseaux, topologies, débit, modèles OSI et TCP/IP.",
       outils: "calculs générés, rédaction corrigée par le tuteur, TD inédit, journal d'erreurs",
+      chapitreOutils: { id: "entrainement", titre: "Entraînement : calculs, rédaction, TD inédit", liste: [
+        ["Calculs générés", "Débits, temps de transfert, délais : de nouveaux nombres à chaque fois, corrigés en détail.", "calc", '[data-tab="calc"]'],
+        ["Rédaction corrigée", "Réponds comme à l'examen ; le tuteur corrige ta rédaction.", "redac", '[data-tab="redac"]'],
+        ["TD inédit", "Un TD jamais vu, en conditions réelles.", "tdx", '[data-tab="tdx"]'],
+        ["Journal d'erreurs", "Tes erreurs passées, pour les retravailler.", "erreurs", '[data-tab="erreurs"]']] },
     },
   },
   crypto: {
@@ -37,8 +42,7 @@ const ADAPTATEURS = {
       const nDe = (k, q) => k !== "td1" ? k : (/transposition/i.test(q.q) ? "trans" : "lfsr");
       const cartes = document.querySelector('[data-tab="carte"]');
       return {
-        cours: ids.map((k) => ({ id: k, t: NOMS[k] || k, h: (CF[k] || "") + L[k], seance: k === "td1" ? "Travaux dirigés" : "Partie 1",
-          lien: `🧰 [Exemples générés, outils et exercices interactifs de ce chapitre](crypto-farchane-outils.html#${k})` })),
+        cours: ids.map((k) => ({ id: k, t: NOMS[k] || k, h: (CF[k] || "") + L[k], seance: k === "td1" ? "Travaux dirigés" : "Partie 1" })),
         notions: ids.map((k) => ({ id: k, t: NAMES[k], imp: 3, chapitre: k })),
         cartes: CARDS,
         qcm: ids.flatMap((k) => (EV[k] || []).filter((q) => q.o).map((q) => [nDe(k, q), q.q, q.o, q.a, q.e, k])),
@@ -53,6 +57,12 @@ const ADAPTATEURS = {
       cartes: { champ: "b", intervalles: [1, 3, 7, 14, 30], echec: 0, depart: -1 },
       resume: "Chiffres classiques, arithmétique modulaire, LFSR, modes, DES.",
       outils: "labos de chiffrement, exemples générés, calculettes, quiz bilan, examen blanc, carnet d'erreurs",
+      parChapitre: { titre: "S'exercer : exercices guidés et labo", garder: ".guided,.bench" },
+      chapitreOutils: { id: "entrainement", titre: "Bilan : failles, quiz, examen blanc", liste: [
+        ["Mes failles", "Les notions où tu perds des points, d'après tes réponses.", "failles", '[data-tab="failles"]'],
+        ["Quiz bilan", "Toutes les notions mélangées.", "quiz", '[data-tab="quiz"]'],
+        ["Examen blanc", "Un sujet complet en temps limité.", "blanc", '[data-tab="blanc"]'],
+        ["Carnet d'erreurs", "Tes erreurs passées, pour les retravailler.", "carnet", '[data-tab="carnet"]']] },
     },
   },
   probas: {
@@ -76,6 +86,12 @@ const ADAPTATEURS = {
       cle: "ps3_revision_v1", cleEtat: "ps3_revision_v1", progression: "best", maths: true, tuteurId: "probas", clesSupplementaires: [],
       resume: "Probabilités et statistiques de S3, préparées à partir des annales 2016-2024.",
       outils: "calculs générés, examen blanc chronométré, annales interactives",
+      chapitreOutils: { id: "entrainement", titre: "Entraînement : calculs, formulaire, examen blanc", liste: [
+        ["Calculs générés", "Les mêmes exercices que la prof, avec d'autres nombres.", "calc", "main#main"],
+        ["Formulaire", "Toutes les formules du module, par notion.", "formulaire", "main#main"],
+        ["Table de la loi normale", "Φ(u) = P(U ≤ u).", "table", "main#main"],
+        ["Examen blanc", "1 h 30, sans notes, corrigé avec les barèmes.", "blanc", "main#main"]] },
+      remplacer: { annales: ["annales", "main#main"] },
     },
   },
   uml: {
@@ -115,7 +131,8 @@ const ADAPTATEURS = {
       titre: "UML", prof: "", semestre: "S5", fichier: "uml.html",
       cle: "umlp_scores", cleEtat: "umlp_etat", progression: "score10", tuteurId: "uml", clesSupplementaires: ["umlp_*"],
       resume: "Diagrammes et modélisation orientée objet.",
-      outils: "flashcards d'origine, grille d'auto-correction de l'examen",
+      outils: "grille d'auto-correction de l'examen",
+      remplacer: { methode: ["methode", '[data-view="methode"]'], examen: ["examen", '[data-view="examen"]'] },
     },
   },
   archi: {
@@ -132,6 +149,10 @@ const ADAPTATEURS = {
       cle: "ao-revision-v1", tuteurId: "archi", clesSupplementaires: ["ao-cmode", "ao-vpos", "mzt-archi*"],
       resume: "Représentation de l'information, algèbre de Boole, circuits, mémoires, processeur et assembleur 8086.",
       outils: "atelier de circuits et d'assembleur, examen blanc chronométré, journal d'erreurs",
+      chapitreOutils: { id: "entrainement", titre: "Atelier, examen blanc et erreurs", liste: [
+        ["Atelier", "Conversions, circuits logiques et assembleur 8086 : manipule et vérifie.", "atelier", '[data-tab="atelier"]'],
+        ["Examen blanc chronométré", "Un sujet complet dans les conditions de l'examen.", "exam", '[data-tab="exam"]'],
+        ["Journal d'erreurs", "Tes erreurs passées, pour les retravailler.", "erreurs", '[data-tab="erreurs"]']] },
     },
   },
 };
@@ -154,14 +175,16 @@ const ADAPTATEURS = {
   const ecrire = (id, md) => { const f = `${String(chapitres.length + 1).padStart(2, "0")}-${id}.md`; fs.writeFileSync(path.join(out, f), md); chapitres.push(f); };
   for (const c of D.cours) {
     const imps = D.notions.filter((n) => n.chapitre === c.id).map((n) => n.imp);
-    let md = `---\nid: ${c.id}\ntitre: ${c.t}\nseance: ${c.seance}\nimportance: ${imps.length ? Math.max(...imps) : 3}\n---\n\n` + "```html\n" + c.h.trim() + "\n```\n\n";
+    const M0 = A.module, rempl = (M0.remplacer || {})[c.id];
+    const integre = (ancre, cible, garder) => "```integre " + A.ancien + "#" + ancre + "\ncible: " + cible + (garder ? "\ngarder: " + garder : "") + "\n```\n\n";
+    let md = `---\nid: ${c.id}\ntitre: ${c.t}\nseance: ${c.seance}\nimportance: ${imps.length ? Math.max(...imps) : 3}\n---\n\n` + (rempl ? integre(rempl[0], rempl[1]) : "```html\n" + c.h.trim() + "\n```\n\n");
+    if (M0.parChapitre) md += `## ${M0.parChapitre.titre}\n\n` + integre(c.id, `[data-tab="${c.id}"]`, M0.parChapitre.garder);
     const cartes = D.cartes.map((x, k) => [x, k]).filter(([x]) => chDe[x[0]] === c.id);
     const qs = D.qcm.filter((q) => (q[5] || chDe[q[0]]) === c.id);
     const courtes = (D.courtes || []).filter((q) => (q[4] || chDe[q[0]]) === c.id);
     const ouv = D.ouvertes.filter((o) => chDe[o[0]] === c.id);
     if (ouv.length) md += "## Questions de rédaction\n\n```exercice\n" + ouv.map((o) => `? {${o[0]}} ${ligne(o[1])}\n= ${ligne(o[2])}`).join("\n") + "\n```\n\n";
     if (cartes.length) md += "## Flashcards\n\n```cartes\n" + cartes.map(([x, k]) => `{${x[0]}@${k}} ${ligne(x[1])} :: ${ligne(x[2])}`).join("\n") + "\n```\n\n";
-    if (c.lien) md += c.lien + "\n\n";
     if (courtes.length) md += "## Réponses courtes\n\n```exercice\n" + courtes.map((q) => `? {${q[0]}} ${ligne(q[1])}\nreponse: ${String(q[2]).replace(/\|/g, "/")}\n= ${ligne(q[3])}`).join("\n") + "\n```\n\n";
     if (qs.length) md += "## QCM du chapitre\n\n```qcm\n" + qs.map((q) => `? {${q[0]}} ${ligne(q[1])}\n` + q[2].map((o, j) => `${j === q[3] ? "+" : "-"} ${ligne(o)}`).join("\n") + `\n= ${ligne(q[4])}`).join("\n\n") + "\n```\n";
     ecrire(c.id, md);
@@ -170,6 +193,11 @@ const ADAPTATEURS = {
     let md = `---\nid: ${id}\ntitre: ${titre}\nseance: Travaux dirigés et pratiques\nimportance: 4\n---\n\n> [!astuce] Cherche d'abord seul, ouvre l'indice si tu bloques, puis compare avec le corrigé et note-toi honnêtement : ta réponse compte dans la maîtrise de la notion.\n\n`;
     for (const s of series) md += "```exercice " + ligne(s.ex) + "\n" + s.items.map((it) => `? {${it.n}} **${ligne(it.id)}.** ${ligne(it.q)}` + (it[cleIndice] ? `\nindice: ${ligne(it[cleIndice])}` : "") + `\n= ${ligne(it.c)}`).join("\n") + "\n```\n\n";
     ecrire(id, md);
+  }
+
+  if (A.module.chapitreOutils) {
+    const T = A.module.chapitreOutils;
+    ecrire(T.id, `---\nid: ${T.id}\ntitre: ${T.titre}\nseance: Outils interactifs\nimportance: 3\n---\n\n` + T.liste.map(([t, txt, ancre, cible]) => `## ${t}\n\n${txt}\n\n` + "```integre " + A.ancien + "#" + ancre + "\ncible: " + cible + "\n```\n").join("\n"));
   }
 
   // Styles des schémas d'origine : uniquement les classes utilisées par le cours, limitées à <main>.
@@ -193,8 +221,8 @@ const ADAPTATEURS = {
     titre: M.titre, prof: M.prof, semestre: M.semestre, etablissement: "FSABM", fichier: M.fichier,
     cle: M.cle, cleEtat: M.cleEtat, progression: M.progression || "essais", cartes: M.cartes, maths: M.maths, tuteurId: M.tuteurId, css: "styles.css", clesSupplementaires: M.clesSupplementaires,
     resume: M.resume, conventions: D.conventions,
-    intro: (D.intro ? D.intro + "\n\n" : "") + `Le cours chapitre par chapitre, avec **QCM**, **flashcards** (révision espacée) et **TD corrigés**.\n\n- **Tableau de bord** : tes notions à consolider, les plus importantes d'abord.\n- **Flashcards** : quelques minutes par jour ; une carte réussie revient après 1, 3, 7, 14 puis 30 jours.\n- **TD** : cherche, ouvre l'indice si besoin, compare avec le corrigé et note-toi.\n- **Outils interactifs** (en bas du menu) : ${M.outils}.\n\nTa progression d'avant la nouvelle version est conservée.`,
-    annexes: [{ fichier: A.ancien, titre: "Outils interactifs (" + M.outils + ")" }],
+    intro: (D.intro ? D.intro + "\n\n" : "") + `Le cours chapitre par chapitre, avec **QCM**, **flashcards** (révision espacée) et **TD corrigés**.\n\n- **Tableau de bord** : tes notions à consolider, les plus importantes d'abord.\n- **Flashcards** : quelques minutes par jour ; une carte réussie revient après 1, 3, 7, 14 puis 30 jours.\n- **TD** : cherche, ouvre l'indice si besoin, compare avec le corrigé et note-toi.\n- **Outils interactifs** (${M.outils}) : directement dans les chapitres.\n\nTa progression d'avant la nouvelle version est conservée.`,
+    annexes: [{ fichier: A.ancien, titre: "Outils d'origine intégrés aux chapitres" }],
     notions: D.notions, chapitres,
   };
   fs.writeFileSync(path.join(out, "module.json"), JSON.stringify(module, null, 2) + "\n");

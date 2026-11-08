@@ -161,6 +161,12 @@ function rendreChapitre({ meta, corps }, ctx) {
       if (l === "flux") return flux(titre, text, md);
       if (l === "etapes") return etapes(titre, text, md);
       if (l === "html") return text;                       // HTML brut (schémas SVG, tableaux spéciaux)
+      if (l === "integre") {                             // outil d'une page annexe affiché dans le chapitre
+        const [fichier, ancre = ""] = (opts[0] || "").split("#");
+        const o = Object.fromEntries(text.split("\n").map((x) => x.trim()).filter(Boolean).map((x) => { const i = x.indexOf(":"); return [x.slice(0, i).trim(), x.slice(i + 1).trim()]; }));
+        ctx.integres.push(fichier);
+        return `<div class="integre" data-src="${esc(fichier)}" data-ancre="${esc(ancre)}" data-cible="${esc(o.cible || "body")}" data-garder="${esc(o.garder || "")}"><div class="integre-att">Chargement de l'outil…</div></div>`;
+      }
       if (l === "outil") {                                 // HTML + <script> exécuté à l'affichage du chapitre
         const k = ctx.outils.length; ctx.outils.push(text);
         return `<div class="outil" data-outil="${k}"></div>`;
@@ -215,13 +221,16 @@ function construire(slug) {
   if (!mod) throw new Error("content/sources/" + slug + "/module.json introuvable");
   mod.slug = slug;
   mod.fichier = mod.fichier || slug + ".html";
-  const ctx = { cartes: [], outils: [], maths: !!mod.maths };
+  const ctx = { cartes: [], outils: [], integres: [], maths: !!mod.maths };
   const ids = new Set();
   const chapitres = mod.chapitres.map((f) => {
     const c = rendreChapitre(lireChapitre(path.join(dossier, f)), ctx);
     if (ids.has(c.id)) throw new Error("id de chapitre en double : " + c.id);
     ids.add(c.id); return c;
   });
+
+  const permis = new Set((mod.annexes || []).map((a) => a.fichier));
+  for (const f of ctx.integres) if (!permis.has(f)) throw new Error(`bloc integre : « ${f} » doit être déclaré dans annexes (module.json)`);
 
   // Emplacement de sauvegarde de chaque carte : fixé par {n@k} (reprise d'un ancien module), sinon à la suite.
   const pris = new Set();

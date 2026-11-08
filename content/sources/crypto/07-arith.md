@@ -39,6 +39,13 @@ importance: 3
 <p>Une fonction est <b>à sens unique</b> si calculer y = f(x) est facile mais retrouver x à partir de y est très difficile. Exemple : multiplier deux grands nombres premiers p × q = N est facile, mais <b>factoriser</b> N pour retrouver p et q est extrêmement long. Une fonction <b>à trappe</b> devient facile à inverser si l'on connaît un secret (la trappe). C'est le principe de RSA.</p>
 ```
 
+## S'exercer : exercices guidés et labo
+
+```integre crypto-farchane-outils.html#arith
+cible: [data-tab="arith"]
+garder: .guided,.bench
+```
+
 ## Flashcards
 
 ```cartes
@@ -54,8 +61,6 @@ importance: 3
 {arith@55} 51447²¹ mod 17 = ? (exemple du prof, diapo 75) :: 14. 51447 ≡ 5 ; φ(17) = 16 et 21 ≡ 5 ; donc 5⁵ mod 17 = 14.
 {arith@56} Pourquoi cet onglet est-il le plus rentable ? :: RSA, ElGamal et Diffie-Hellman (partie 2) ne sont que des exponentiations modulaires : inverse modulo φ(n) et exponentiation rapide y servent partout.
 ```
-
-🧰 [Exemples générés, outils et exercices interactifs de ce chapitre](crypto-farchane-outils.html#arith)
 
 ## Réponses courtes
 

@@ -69,6 +69,10 @@
    {
     "id": "tp2",
     "t": "TP 2 · Packet Tracer"
+   },
+   {
+    "id": "entrainement",
+    "t": "Entraînement : calculs, rédaction, TD inédit"
    }
   ],
   "items": [
@@ -394,6 +398,10 @@
    {
     "id": "td",
     "t": "TD corrigés (TD 1 à 11)"
+   },
+   {
+    "id": "entrainement",
+    "t": "Atelier, examen blanc et erreurs"
    }
   ],
   "items": [
@@ -649,6 +657,10 @@
    {
     "id": "exos",
     "t": "Exercices-types d'examen (corrigés et barèmes)"
+   },
+   {
+    "id": "entrainement",
+    "t": "Entraînement : calculs, formulaire, examen blanc"
    }
   ],
   "items": [
@@ -826,6 +838,10 @@
    {
     "id": "td1",
     "t": "TD 1 corrigé"
+   },
+   {
+    "id": "entrainement",
+    "t": "Bilan : failles, quiz, examen blanc"
    }
   ],
   "items": [

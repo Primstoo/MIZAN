@@ -27,6 +27,13 @@ importance: 3
 <ul><li>Un LFSR seul est <b>prévisible</b>, donc ce n'est pas un GPACS. Connaissant m bits consécutifs et les coefficients, on calcule tous les suivants. Connaissant <b>2m bits</b> consécutifs sans les coefficients, on les retrouve avec l'algorithme de <b>Berlekamp-Massey</b> (ou en résolvant un système linéaire).</li><li>Parades : combiner plusieurs LFSR avec une fonction non linéaire ; filtrer un LFSR par une fonction non linéaire ; utiliser une horloge irrégulière commandée par un autre LFSR.</li><li><b>A5/1 (GSM)</b> : 3 LFSR de degrés 19, 22 et 23. Chaque registre a un bit de déclenchement (positions 8, 10, 10). À chaque top, un registre n'avance que si son bit de déclenchement est égal à la <b>majorité</b> des trois : Maj(s1, s2, s3) = (s1∧s2) ⊕ (s1∧s3) ⊕ (s2∧s3).</li></ul>
 ```
 
+## S'exercer : exercices guidés et labo
+
+```integre crypto-farchane-outils.html#lfsr
+cible: [data-tab="lfsr"]
+garder: .guided,.bench
+```
+
 ## Flashcards
 
 ```cartes
@@ -38,8 +45,6 @@ importance: 3
 {lfsr@62} Comment casse-t-on cette linéarité en pratique ? :: On combine plusieurs LFSR par une fonction non linéaire. A5/1 : 3 registres et une fonction majorité.
 {lfsr@63} Diapo 95 : (1,1,0,0) contre (1,1,1,1) ? :: (1,1,0,0) donne la période maximale 15 ; (1,1,1,1) seulement 5. Tous les polynômes ne se valent pas.
 ```
-
-🧰 [Exemples générés, outils et exercices interactifs de ce chapitre](crypto-farchane-outils.html#lfsr)
 
 ## Réponses courtes
 

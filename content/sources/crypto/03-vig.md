@@ -46,6 +46,13 @@ importance: 3
 <div class="tip"><b>Le résumé en 3 lignes :</b> César = 1 roue, cassé par les fréquences. Vigenère = L roues qui tournent : on trouve L avec l'IC, puis on casse chaque roue comme un César. Vernam = une roue différente pour chaque lettre, jamais réutilisée : rien à casser.</div>
 ```
 
+## S'exercer : exercices guidés et labo
+
+```integre crypto-farchane-outils.html#vig
+cible: [data-tab="vig"]
+garder: .guided,.bench
+```
+
 ## Flashcards
 
 ```cartes
@@ -58,8 +65,6 @@ importance: 3
 {vig@23} Les valeurs repères de l'IC ? :: Français ≈ 0,078 ; texte aléatoire ≈ 0,038. Le bon L est celui qui donne l'IC le plus élevé.
 {vig@24} Clé inverse de Vigenère ? :: k⁻¹ = 26 − k lettre par lettre (A reste A) : déchiffrer revient alors à chiffrer avec k⁻¹.
 ```
-
-🧰 [Exemples générés, outils et exercices interactifs de ce chapitre](crypto-farchane-outils.html#vig)
 
 ## Réponses courtes
 

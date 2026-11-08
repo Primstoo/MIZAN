@@ -41,6 +41,13 @@ importance: 3
 <div class="tip">Garde ce tableau sous les yeux pour tous les exercices des chapitres suivants.</div>
 ```
 
+## S'exercer : exercices guidés et labo
+
+```integre crypto-farchane-outils.html#bases
+cible: [data-tab="bases"]
+garder: .guided,.bench
+```
+
 ## Flashcards
 
 ```cartes
@@ -53,8 +60,6 @@ importance: 3
 {bases@6} Oscar modifie le montant d'un virement : quel but est attaqué ? :: L'intégrité.
 {bases@7} Un client nie avoir passé commande : quel but manquait ? :: La non-répudiation.
 ```
-
-🧰 [Exemples générés, outils et exercices interactifs de ce chapitre](crypto-farchane-outils.html#bases)
 
 ## Réponses courtes
 

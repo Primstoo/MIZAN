@@ -39,6 +39,13 @@ importance: 3
 </ol>
 ```
 
+## S'exercer : exercices guidés et labo
+
+```integre crypto-farchane-outils.html#cesar
+cible: [data-tab="cesar"]
+garder: .guided,.bench
+```
+
 ## Flashcards
 
 ```cartes
@@ -52,8 +59,6 @@ importance: 3
 {cesar@15} 3⁻¹ mod 26 = ? :: 9, car 3 × 9 = 27 ≡ 1 (mod 26).
 {cesar@16} Comment casse-t-on un affine par les fréquences ? :: Lettre la plus fréquente du chiffré → E (4), la deuxième → S (18) ou A. Deux équations k1·p + k2 ≡ c, on soustrait et on résout.
 ```
-
-🧰 [Exemples générés, outils et exercices interactifs de ce chapitre](crypto-farchane-outils.html#cesar)
 
 ## Réponses courtes
 

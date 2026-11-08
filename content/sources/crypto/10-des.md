@@ -36,6 +36,13 @@ importance: 3
 <div class="trap"><b>Il manque les S-boxes du MiniDES</b> dans le document du TD : sans elles, on ne peut pas aller jusqu'au chiffré final. Demande-les au prof ; les étapes calculables sont corrigées dans les exercices ci-dessous.</div>
 ```
 
+## S'exercer : exercices guidés et labo
+
+```integre crypto-farchane-outils.html#des
+cible: [data-tab="des"]
+garder: .guided,.bench
+```
+
 ## Flashcards
 
 ```cartes
@@ -50,8 +57,6 @@ importance: 3
 {des@79} La critique principale de DES ? :: Clé de 56 bits trop courte : cassée en 22 h 15 en 1999. Remplacée par AES.
 {des@80} Combien de S-box, et quelle transformation ? :: 8 S-box (S1 à S8), chacune 6 bits → 4 bits.
 ```
-
-🧰 [Exemples générés, outils et exercices interactifs de ce chapitre](crypto-farchane-outils.html#des)
 
 ## Réponses courtes
 

@@ -86,6 +86,7 @@ Texte Markdown normal : titres ##, tableaux, **gras**, `code`...
 | ```` ```cartes ```` | flashcards ajoutées à la révision espacée (menu « Flashcards ») | `{notion} Question :: Réponse`, une par ligne (`\n` pour aller à la ligne) |
 | ```` ```exercice Titre ```` | exercice avec indice et corrigé ; l'élève se note | `? {notion} Énoncé`, puis `indice: ...` (facultatif), puis `= corrigé` (peut continuer sur plusieurs lignes). Avec `reponse: 6` (ou `reponse: A | B`, ou `reponse: 0.038 ~0.003` pour une tolérance), la réponse est saisie et vérifiée automatiquement |
 | ```` ```html ```` | HTML brut (schéma SVG, tableau spécial) | |
+| ```` ```integre fichier.html#ancre ```` | affiche dans le chapitre un outil d'une page annexe (même sauvegarde), sans son en-tête ni son menu | lignes `cible: <sélecteur CSS de l'outil>` et `garder: <sélecteur des parties à montrer>` (facultatif) ; le fichier doit être dans `annexes` |
 | ```` ```outil ```` | petit outil interactif : HTML + `<script>` exécuté à l'ouverture du chapitre | |
 | `> [!piege]` | encadré rouge « Piège » | aussi `[!astuce]`, `[!retenir]`, `[!prof]`, `[!attention]` |
 
@@ -114,7 +115,7 @@ Viser **10 à 12 QCM par chapitre**, avec au moins 3 options : ils alimentent au
 
 ## Migrer un ancien module
 
-`scripts/migration/convertir-ancien-module.cjs <slug>` (un adaptateur par module, à lancer avec Playwright) lit l'ancien HTML (renommé `<nom>-outils.html`) et écrit ses sources : cours d'origine, notions, QCM, flashcards (même emplacement de sauvegarde grâce à `{notion@n}`), TD/TP. La progression des élèves est conservée (même clé, même format). L'ancien fichier reste accessible dans le menu pour les outils non encore portés.
+`scripts/migration/convertir-ancien-module.cjs <slug>` (un adaptateur par module, à lancer avec Playwright) lit l'ancien HTML (renommé `<nom>-outils.html`) et écrit ses sources : cours d'origine, notions, QCM, flashcards (même emplacement de sauvegarde grâce à `{notion@n}`), TD/TP. La progression des élèves est conservée (même clé, même format). Les outils de l'ancienne page (calculs générés, labos, examens blancs, atelier…) sont affichés directement dans les chapitres grâce au bloc `integre` : chapitre « Entraînement » de chaque module, et exercices guidés + labo à la fin de chaque chapitre de Crypto.
 
 ## Modules existants
 

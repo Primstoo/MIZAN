@@ -25,6 +25,13 @@ importance: 3
 <p>Mêmes règles, à l'envers : même ligne → à <b>gauche</b> ; même colonne → <b>au-dessus</b> ; rectangle → coins opposés (la règle ne change pas). On retire ensuite les X qui n'ont pas de sens.</p>
 ```
 
+## S'exercer : exercices guidés et labo
+
+```integre crypto-farchane-outils.html#play
+cible: [data-tab="play"]
+garder: .guided,.bench
+```
+
 ## Flashcards
 
 ```cartes
@@ -36,8 +43,6 @@ importance: 3
 {play@30} Comment déchiffre-t-on en Playfair ? :: Gauche, dessus, et la même règle du rectangle ; puis on retire les X de remplissage.
 {play@31} Pourquoi Playfair est-il plus solide que César ? :: Il chiffre des digrammes : 25² = 625 paires possibles au lieu de 26 lettres.
 ```
-
-🧰 [Exemples générés, outils et exercices interactifs de ce chapitre](crypto-farchane-outils.html#play)
 
 ## Réponses courtes
 

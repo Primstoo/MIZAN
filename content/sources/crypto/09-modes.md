@@ -29,6 +29,13 @@ importance: 3
 <div class="trap"><b>Piège repéré dans le TD2 (mode CFB) :</b> un XOR de deux numéros peut dépasser 25 (ex. 15 ⊕ 19 = 28). Le corrigé de classe écrit 28 mod 26 = 2 (C), mais alors le déchiffrement ne redonne plus le message (on retrouve AN au lieu de AT). Signale-le sur ta copie et demande au prof quelle convention il veut ; en ECB, CBC et OFB, les valeurs de ce TD restent sous 26 et tout se déchiffre correctement.</div>
 ```
 
+## S'exercer : exercices guidés et labo
+
+```integre crypto-farchane-outils.html#modes
+cible: [data-tab="modes"]
+garder: .guided,.bench
+```
+
 ## Flashcards
 
 ```cartes
@@ -40,8 +47,6 @@ importance: 3
 {modes@69} L'astuce qui évite de se tromper entre E et D ? :: Dès que le message est XORé avec un E(…), le déchiffrement utilise aussi E, jamais D : CFB, OFB, CTR.
 {modes@70} Quel mode n'utilise ni IV ni compteur ? :: ECB. C'est pour ça qu'il est déterministe, donc inutilisable en pratique.
 ```
-
-🧰 [Exemples générés, outils et exercices interactifs de ce chapitre](crypto-farchane-outils.html#modes)
 
 ## Réponses courtes
 
