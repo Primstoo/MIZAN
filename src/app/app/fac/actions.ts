@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin } from "@/lib/acces";
 import { estSemestre, norm, quotaImport, resoudreEtab } from "@/lib/fac";
+import { pousserAdmins } from "@/lib/push";
 
 async function moi() {
   const { data: { user } } = await createClient().auth.getUser();
@@ -61,6 +62,7 @@ export async function declarerCours(meta: { chemin: string; nom: string; type: s
   }).select("id").single();
   if (error || !data) return { erreur: "Enregistrement impossible (" + (error?.code ?? "?") + ")." };
   revalidatePath("/app/modules"); revalidatePath("/app/admin");
+  await pousserAdmins({ title: "Cours importé à traiter", body: `${String(meta.nom || "Document").slice(0, 60)} · ${meta.type} · ${nomModule} (${meta.semestre})`, url: `/app/cours/${data.id}`, tag: "import-" + data.id }).catch((e) => console.error("[push]", String(e)));
   return { id: data.id };
 }
 

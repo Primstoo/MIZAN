@@ -9,6 +9,7 @@ import Deconnexion from "../Deconnexion";
 import { bonusTuteur } from "@/lib/bonus";
 import { botActif } from "@/lib/telegram";
 import Telegram from "./Telegram";
+import Notifications from "./Notifications";
 import { dateFr, NOMS, offreDe, offresActives, QUOTA_TUTEUR } from "@/lib/offres";
 
 export const metadata = { title: "Mon compte" };
@@ -57,6 +58,12 @@ export default async function Moi() {
         {p.examens.length ? (
           <ul className="list-plain">{p.examens.map((e) => <li key={e.module_slug}><strong>{e.module!.titre}</strong> · {new Date(e.exam_date + "T12:00:00Z").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })} <span className="muted">(J-{e.reste}{e.estimee ? ", estimée" : ""})</span></li>)}</ul>
         ) : <p className="muted small">Aucune date d&apos;examen. Ajoute-en une pour avoir ta mission du jour.</p>}
+      </section>
+
+      <section className="bloc">
+        <h2>Notifications</h2>
+        <p className="muted small">Reçois sur ce téléphone tes rappels de révision et l&apos;état de tes documents partagés, même quand l&apos;appli est fermée.</p>
+        <Notifications />
       </section>
 
       {botActif() && (

@@ -8,6 +8,7 @@ import { admin, estAdmin, estMembre, nouveauCode } from "@/lib/acces";
 import { MODULES } from "@/lib/modules";
 import { dateEstimee, jourMaroc } from "@/lib/parcours";
 import { secretWebhook } from "@/lib/telegram";
+import { pousser, pousserAdmins } from "@/lib/push";
 import { randomBytes } from "node:crypto";
 import NIVEAU from "@/lib/niveau.json";
 import BANQUE from "@/lib/banque.json";
@@ -253,6 +254,7 @@ export async function declarerDocument(meta: { chemin: string; nom: string; type
   });
   if (error) return error.code === "23505" ? "Document déjà enregistré." : "Enregistrement impossible (" + error.code + ").";
   revalidatePath("/app/contribuer"); revalidatePath("/app/admin");
+  await pousserAdmins({ title: "Nouveau document", body: `${String(meta.nom || "Document").slice(0, 60)} · ${meta.type} · ${slug ?? (String(meta.moduleLibre || "").trim().slice(0, 40) || "module non précisé")}`, url: "/app/admin", tag: "doc-recu" }).catch((e) => console.error("[push]", String(e)));
   return "";
 }
 
@@ -265,6 +267,7 @@ export async function statutDocument(form: FormData): Promise<void> {
   const { data: avant } = await db.from("documents").select("user_id, type, statut, analyse").eq("id", id).maybeSingle();
   // Accepter un cours importé et analysé = le partager avec toute sa fac.
   await db.from("documents").update({ statut, ...(avant?.analyse === "pret" ? { partage: statut === "accepte" } : {}), note: String(form.get("note") || "").trim().slice(0, 200) || null }).eq("id", id);
+  if (avant && avant.statut !== "accepte" && statut === "accepte") await pousser(avant.user_id, { title: "Document accepté ✓", body: "Merci ! Ton document a été accepté et aide toute ta promo.", url: "/app/contribuer", tag: "doc-" + id }).catch(() => 0);
   // Offres actives : une annale acceptée = 7 jours offerts (prolonge l'offre payée en cours, sinon Premium).
   if (offresActives() && avant && avant.type === "annale" && avant.statut !== "accepte" && statut === "accepte") {
     const o = await offreDe(avant.user_id);
