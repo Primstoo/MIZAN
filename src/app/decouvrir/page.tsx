@@ -12,12 +12,11 @@ export default function Decouvrir() {
     <main className="land">
       <header className="page top nob">
         <a href="/" className="logo">ToumaiLearn</a>
-        <a href="/login?invitation" className="btn small">Créer mon compte</a>
+        <a href="/login" className="btn small">Créer mon compte</a>
       </header>
       <section className="page">
         <p className="eyebrow">Mode visiteur</p>
         <h1>Essaie les modules, sans compte</h1>
-        <p className="muted">Tu peux lire les cours et faire les exercices. Sans compte, ta progression reste seulement dans ce navigateur : elle n&apos;est ni sauvegardée ni suivie, et le tuteur IA n&apos;est pas disponible.</p>
         <div className="grid" style={{ marginTop: 16 }}>
           {MODULES.map((m) => (
             <a key={m.slug} href={`/decouvrir/${m.slug}`} className="card">
@@ -35,7 +34,7 @@ export default function Decouvrir() {
           <li><strong>Une mission chaque jour</strong>, calculée sur ta date d&apos;examen et tes points faibles.</li>
           <li><strong>Un tuteur IA</strong> sur chaque page du cours.</li>
         </ol>
-        <p><a href="/login?invitation" className="btn big-inline">J&apos;ai un code d&apos;invitation</a></p>
+        <p className="row" style={{ gap: 8 }}><a href="/login" className="btn big-inline">Créer mon compte</a><a href="/login?invitation" className="btn alt big-inline">J&apos;ai un code d&apos;invitation</a></p>
       </section>
     </main>
   );

@@ -20,9 +20,10 @@ export default function ChoixFac({ etabs }: { etabs: Etab[] }) {
   return (
     <form action={action} className="stack">
       <label htmlFor="nom">Ton établissement, en toutes lettres</label>
-      <input id="nom" name="nom" value={nom} autoComplete="organization" autoFocus
-        onChange={(e) => { setNom(e.target.value); setChoisi(null); }}
-        placeholder="Ex. Faculté des Sciences Appliquées de Béni Mellal" />
+      <input id="nom" name="nom" value={nom} autoComplete="off" autoFocus list="liste-etabs-fac"
+        onChange={(e) => { const v = e.target.value; setNom(v); setChoisi(etabs.find((x) => x.nom === v) ?? null); }}
+        placeholder="Choisis dans la liste ou écris le nom" />
+      <datalist id="liste-etabs-fac">{[...etabs].sort((a, b) => a.nom.localeCompare(b.nom, "fr")).map((x) => <option key={x.id} value={x.nom}>{x.ville ?? ""}</option>)}</datalist>
       <input type="hidden" name="id" value={choisi?.id ?? ""} />
 
       {nom.trim().length >= 2 && (
@@ -37,7 +38,7 @@ export default function ChoixFac({ etabs }: { etabs: Etab[] }) {
               </button>
             ))}
           </div>
-        ) : <p className="small muted">Pas encore sur ToumaiLearn : tu seras le premier de ton établissement 🎉</p>
+        ) : null
       )}
 
       {!choisi && nom.trim().length >= 4 && (

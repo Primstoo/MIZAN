@@ -40,9 +40,9 @@ export default function Inscription() {
           <div className="card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 420, width: "100%", background: "var(--bg, #fff)" }}>
             <h2 id="mz-insc-t">{TEXTES[raison][0]}</h2>
             <p className="muted">{TEXTES[raison][1]}</p>
-            <p className="muted small">La création du compte est gratuite. Pendant la bêta, il faut le code d&apos;invitation d&apos;un étudiant déjà inscrit.</p>
             <div className="stack">
-              <a href="/login?invitation" className="btn big" target="_top">Créer mon compte</a>
+              <a href="/login" className="btn big" target="_top">Créer mon compte</a>
+              <a href="/login?invitation" className="btn alt" target="_top">J&apos;ai un code d&apos;invitation</a>
               <a href="/login" className="btn alt" target="_top">J&apos;ai déjà un compte</a>
               <button type="button" className="link small" onClick={() => setRaison(null)}>Continuer sans compte</button>
             </div>

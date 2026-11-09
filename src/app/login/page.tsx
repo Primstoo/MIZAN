@@ -112,7 +112,6 @@ export default function Login() {
           {etape === "invitation" ? (
             <>
               <h1>Ton code d&apos;invitation</h1>
-              <p className="muted">Entre le code reçu d&apos;un camarade déjà inscrit. Ensuite, tu te connectes avec ton e-mail.</p>
               <form onSubmit={validerInvitation} className="stack">
                 <label htmlFor="invitation">Code d&apos;invitation</label>
                 <input id="invitation" required autoComplete="off" autoCapitalize="characters" value={invitation} onChange={(e) => setInvitation(e.target.value.toUpperCase())} placeholder="MZ-XXXXXX" />
@@ -122,8 +121,7 @@ export default function Login() {
             </>
           ) : etape === "email" ? (
             <>
-              <h1>Connexion</h1>
-              <p className="muted">Entre ton adresse e-mail : tu reçois un e-mail de connexion. Pas de mot de passe à retenir. Si tu n’as pas encore de compte, il est créé automatiquement.</p>
+              <h1>Connexion ou inscription</h1>
               <form onSubmit={envoyer} className="stack">
                 <label htmlFor="email">Adresse e-mail</label>
                 <input id="email" type="email" required autoComplete="email" inputMode="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="toi@exemple.com" />

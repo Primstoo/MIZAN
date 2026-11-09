@@ -40,7 +40,6 @@ export default async function Modules({ searchParams }: { searchParams: { s?: st
         {entete}
         <div className="card narrow-m stack">
           <h2>Où est-ce que tu étudies ?</h2>
-          <p className="small muted">Fac, école, institut ou centre de formation : on t&apos;affiche ses modules du S1 au master, et tu peux ajouter tes propres cours.</p>
           <ChoixFac etabs={(data ?? []) as Etab[]} />
         </div>
         <details className="bloc catalogue">
@@ -110,7 +109,7 @@ export default async function Modules({ searchParams }: { searchParams: { s?: st
           </div>
         )}
         {!ici.length && !groupes.size && (
-          <div className="card soft"><p><strong>Rien encore en {sem} pour ton établissement.</strong></p><p className="small muted">Ajoute ton premier cours : tu as ta fiche et ton quiz, et une fois vérifié il servira à toute ta promo.</p></div>
+          <div className="card soft"><p><strong>Rien encore en {sem} pour ton établissement.</strong></p></div>
         )}
       </section>
 

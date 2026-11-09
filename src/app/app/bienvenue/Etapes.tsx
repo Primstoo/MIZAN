@@ -41,7 +41,6 @@ export default function Etapes({ etabs, etablissementId, semestre, modules, pren
       {/* Les champs restent dans le formulaire même quand l'étape est masquée */}
       <section hidden={etape !== 0}>
         <h1>Comment tu t&apos;appelles ?</h1>
-        <p className="muted">Pour que l&apos;appli s&apos;adresse à toi.</p>
         <input name="prenom" value={nom} onChange={(e) => setNom(e.target.value)} placeholder="Ton prénom" autoComplete="given-name" />
         <p className="eyebrow">Ton guide (tu pourras changer plus tard)</p>
         <div className="mascottes" role="radiogroup" aria-label="Choix du guide">
@@ -57,9 +56,10 @@ export default function Etapes({ etabs, etablissementId, semestre, modules, pren
 
       <section hidden={etape !== 1}>
         <h1>Où est-ce que tu étudies ?</h1>
-        <p className="muted">Fac, école, institut ou centre de formation : écris son nom en toutes lettres. On te montre ensuite les modules de ton établissement, et tu pourras ajouter les tiens.</p>
         <label htmlFor="etab">Nom de ton établissement</label>
-        <input id="etab" name="etablissement" value={etab} onChange={(e) => { setEtab(e.target.value); setEtabId(""); }} placeholder="Ex. Faculté des Sciences Appliquées de Béni Mellal" autoComplete="organization" />
+        <input id="etab" name="etablissement" value={etab} list="liste-etabs"
+          onChange={(e) => { const v = e.target.value; setEtab(v); const x = etabs.find((y) => y.nom === v); setEtabId(x ? x.id : ""); if (x?.ville) setVil(x.ville); }} placeholder="Choisis dans la liste ou écris le nom" autoComplete="off" />
+        <datalist id="liste-etabs">{[...etabs].sort((a, b) => a.nom.localeCompare(b.nom, "fr")).map((x) => <option key={x.id} value={x.nom}>{x.ville ?? ""}</option>)}</datalist>
         <input type="hidden" name="etablissement_id" value={etabId} />
         {props.length > 0 && (
           <div className="sugg" aria-label="Établissements trouvés">
@@ -71,8 +71,6 @@ export default function Etapes({ etabs, etablissementId, semestre, modules, pren
             ))}
           </div>
         )}
-        {etabId ? <p className="small muted">✓ Établissement reconnu. <button type="button" className="lien" onClick={() => setEtabId("")}>Ce n&apos;est pas le mien</button></p>
-          : etab.trim().length > 3 && !props.length && <p className="small muted">Pas encore sur ToumaiLearn : tu l&apos;ajoutes pour toute ta promo.</p>}
         <label htmlFor="ville">Ville</label>
         <input id="ville" name="ville" value={vil} onChange={(e) => setVil(e.target.value)} placeholder="Ex. Béni Mellal" autoComplete="address-level2" />
         <label htmlFor="filiere">Filière (facultatif)</label>
@@ -89,11 +87,10 @@ export default function Etapes({ etabs, etablissementId, semestre, modules, pren
         {siens.length === 0 && !tous ? (
           <div className="card soft stack">
             <p><strong>{etab || "Ton établissement"} n&apos;est pas encore couvert.</strong> On l&apos;a noté : les établissements les plus demandés passent en premier.</p>
-            <p className="small muted">Après l&apos;inscription, ajoute tes cours depuis l&apos;onglet Modules : tu reçois tes fiches et ton quiz. En attendant, tu peux essayer les modules déjà disponibles.</p>
             <button type="button" className="btn alt" onClick={() => setTous(true)}>Voir les modules disponibles</button>
           </div>
         ) : (
-          <p className="muted">Coche tes modules. Si la date n&apos;est pas encore annoncée, pas de souci : on part d&apos;une estimation, mise à jour pour tout le monde dès que la date officielle tombe.</p>
+          <p className="muted">Coche tes modules.</p>
         )}
         <div className="stack">
           {visibles.map((m) => {
@@ -138,14 +135,12 @@ export default function Etapes({ etabs, etablissementId, semestre, modules, pren
 
       <section hidden={etape !== 3}>
         <h1>Combien de temps par jour ?</h1>
-        <p className="muted">Sois réaliste : mieux vaut 30 minutes tous les jours que 3 heures une fois par semaine.</p>
         <input type="hidden" name="minutes" value={min} />
         {[30, 60, 120].map((v) => (
           <button type="button" key={v} className={`opt big-opt ${min === v ? "sel" : ""}`} onClick={() => setMin(v)}>
             {v === 30 ? "30 minutes" : v === 60 ? "1 heure" : "2 heures et plus"}
           </button>
         ))}
-        <div className="card soft"><p className="small">Ensuite, ouvre ton premier module : chaque jour, la page Aujourd&apos;hui te dira quoi faire.</p></div>
       </section>
 
       <div className="row between onb-nav">

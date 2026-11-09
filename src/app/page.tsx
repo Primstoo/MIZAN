@@ -12,9 +12,9 @@ export default function Accueil() {
         <h1>Révise le cours de <em>ton</em> prof, pas un cours générique.</h1>
         <p className="lead">Chaque module est construit à partir des supports réels de ton enseignant : ses notations, ses exemples, le format de ses TD et de ses examens.</p>
         <div className="cta">
-          <a href="/login?invitation" className="btn big-inline">J&apos;ai un code d&apos;invitation</a>
+          <a href="/login" className="btn big-inline">Créer mon compte</a>
+          <a href="/login?invitation" className="btn alt big-inline">J&apos;ai un code d&apos;invitation</a>
           <a href="/decouvrir" className="btn alt big-inline">Essayer sans compte</a>
-          <span className="muted small">Sans compte, rien n&apos;est sauvegardé. Le compte s&apos;ouvre avec le code d&apos;un étudiant déjà inscrit.</span>
         </div>
       </section>
 
@@ -30,9 +30,9 @@ export default function Accueil() {
       <section className="page steps">
         <h2>Comment ça marche</h2>
         <ol>
-          <li><strong>Reçois un code</strong> d&apos;un camarade déjà membre.</li>
-          <li><strong>Connecte-toi</strong> avec ton e-mail : pas de mot de passe.</li>
-          <li><strong>Choisis tes modules</strong> et commence là où tu es le plus faible.</li>
+          <li><strong>Crée ton compte</strong> avec ton e-mail.</li>
+          <li><strong>Choisis ton établissement</strong> et tes modules.</li>
+          <li><strong>Commence</strong> là où tu es le plus faible.</li>
         </ol>
       </section>
 
