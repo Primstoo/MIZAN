@@ -2,11 +2,12 @@
 import { useState } from "react";
 import { enregistrerProfil } from "../actions";
 import Mascotte, { MASCOTTES, type MascotteId } from "@/components/Mascotte";
-import { ETABLISSEMENTS, memeEtablissement } from "@/lib/modules";
+import { memeEtablissement } from "@/lib/modules";
+import { SEMESTRES, suggestions, type Etab } from "@/lib/fac-commun";
 
 type M = { slug: string; titre: string; semestre: string; etablissement: string };
 
-export default function Etapes({ modules, prenom, minutes, dates, inconnues, communes, mascotte, etablissement, ville, filiere }: { etablissement: string; ville: string; filiere: string; mascotte: MascotteId; modules: M[]; prenom: string; minutes: number; dates: Record<string, string>; inconnues: string[]; communes: Record<string, { date: string; officielle: boolean }> }) {
+export default function Etapes({ etabs, etablissementId, semestre, modules, prenom, minutes, dates, inconnues, communes, mascotte, etablissement, ville, filiere }: { etabs: Etab[]; etablissementId: string; semestre: string; etablissement: string; ville: string; filiere: string; mascotte: MascotteId; modules: M[]; prenom: string; minutes: number; dates: Record<string, string>; inconnues: string[]; communes: Record<string, { date: string; officielle: boolean }> }) {
   const [etape, setEtape] = useState(0);
   const [nom, setNom] = useState(prenom);
   const [choix, setChoix] = useState<string[]>([...Object.keys(dates), ...inconnues]);
@@ -17,6 +18,9 @@ export default function Etapes({ modules, prenom, minutes, dates, inconnues, com
   const [etab, setEtab] = useState(etablissement);
   const [vil, setVil] = useState(ville);
   const [tous, setTous] = useState(false);
+  const [etabId, setEtabId] = useState(etablissementId);
+  const [sem, setSem] = useState(semestre);
+  const props = etabId ? [] : suggestions(etab, etabs);
   const total = 4;
   const auj = new Date().toISOString().slice(0, 10);
   // Modules de son établissement d'abord ; « voir tous les modules » pour les autres facs qui veulent essayer.
@@ -24,7 +28,7 @@ export default function Etapes({ modules, prenom, minutes, dates, inconnues, com
   const visibles = tous ? modules : siens;
   const choixV = choix.filter((s) => visibles.some((m) => m.slug === s));
   const peutSuivre = etape === 0 ? nom.trim().length > 0
-    : etape === 1 ? etab.trim().length > 1 && vil.trim().length > 1
+    : etape === 1 ? (etabId ? true : etab.trim().length > 3 && vil.trim().length > 1) && !!sem
     : etape === 2 ? choixV.length === 0 ? visibles.length === 0 || siens.length === 0 : choixV.every((s) => d[s] || inc.includes(s))
     : true;
 
@@ -53,14 +57,31 @@ export default function Etapes({ modules, prenom, minutes, dates, inconnues, com
 
       <section hidden={etape !== 1}>
         <h1>Où est-ce que tu étudies ?</h1>
-        <p className="muted">On te propose les modules de ton établissement. S&apos;il n&apos;est pas encore couvert, on le note pour l&apos;ajouter.</p>
-        <label htmlFor="etab">Établissement</label>
-        <input id="etab" name="etablissement" list="etabs" value={etab} onChange={(e) => setEtab(e.target.value)} placeholder="Ex. FSABM · Béni Mellal" autoComplete="organization" />
-        <datalist id="etabs">{ETABLISSEMENTS.map((x) => <option key={x} value={x} />)}</datalist>
+        <p className="muted">Fac, école, institut ou centre de formation : écris son nom en toutes lettres. On te montre ensuite les modules de ton établissement, et tu pourras ajouter les tiens.</p>
+        <label htmlFor="etab">Nom de ton établissement</label>
+        <input id="etab" name="etablissement" value={etab} onChange={(e) => { setEtab(e.target.value); setEtabId(""); }} placeholder="Ex. Faculté des Sciences Appliquées de Béni Mellal" autoComplete="organization" />
+        <input type="hidden" name="etablissement_id" value={etabId} />
+        {props.length > 0 && (
+          <div className="sugg" aria-label="Établissements trouvés">
+            <span className="small muted">C&apos;est l&apos;un de ceux-là ?</span>
+            {props.map((x) => (
+              <button type="button" key={x.id} onClick={() => { setEtabId(x.id); setEtab(x.nom); if (x.ville) setVil(x.ville); }}>
+                <strong>{x.nom}</strong>{x.ville ? <span className="small muted"> · {x.ville}</span> : null}
+              </button>
+            ))}
+          </div>
+        )}
+        {etabId ? <p className="small muted">✓ Établissement reconnu. <button type="button" className="lien" onClick={() => setEtabId("")}>Ce n&apos;est pas le mien</button></p>
+          : etab.trim().length > 3 && !props.length && <p className="small muted">Pas encore sur ToumaiLearn : tu l&apos;ajoutes pour toute ta promo.</p>}
         <label htmlFor="ville">Ville</label>
         <input id="ville" name="ville" value={vil} onChange={(e) => setVil(e.target.value)} placeholder="Ex. Béni Mellal" autoComplete="address-level2" />
-        <label htmlFor="filiere">Filière et année (facultatif)</label>
-        <input id="filiere" name="filiere" defaultValue={filiere} placeholder="Ex. MIACSD, L3" />
+        <label htmlFor="filiere">Filière (facultatif)</label>
+        <input id="filiere" name="filiere" defaultValue={filiere} placeholder="Ex. MIACSD, Génie informatique, BTS DSI" />
+        <label htmlFor="semestre">Ton semestre actuel</label>
+        <select id="semestre" name="semestre" value={sem} onChange={(e) => setSem(e.target.value)}>
+          <option value="" disabled>Choisis</option>
+          {SEMESTRES.map((x) => <option key={x} value={x}>{x}</option>)}
+        </select>
       </section>
 
       <section hidden={etape !== 2}>
@@ -68,7 +89,7 @@ export default function Etapes({ modules, prenom, minutes, dates, inconnues, com
         {siens.length === 0 && !tous ? (
           <div className="card soft stack">
             <p><strong>{etab || "Ton établissement"} n&apos;est pas encore couvert.</strong> On l&apos;a noté : les établissements les plus demandés passent en premier.</p>
-            <p className="small muted">Tu peux accélérer en partageant tes cours, TD et annales (Moi &gt; Partager mes cours). En attendant, tu peux essayer les modules déjà disponibles.</p>
+            <p className="small muted">Après l&apos;inscription, ajoute tes cours depuis l&apos;onglet Modules : tu reçois tes fiches et ton quiz. En attendant, tu peux essayer les modules déjà disponibles.</p>
             <button type="button" className="btn alt" onClick={() => setTous(true)}>Voir les modules disponibles</button>
           </div>
         ) : (

@@ -26,7 +26,7 @@ export default async function Cours({ params }: { params: { id: string } }) {
 
   return (
     <main className="page narrow-m">
-      <a href={`/app/fac?s=${d.semestre ?? ""}`} className="small muted">← Ma fac</a>
+      <a href={`/app/modules?s=${d.semestre ?? ""}`} className="small muted">← Modules</a>
       <span className="k bloc">{[d.module_libre, d.semestre].filter(Boolean).join(" · ")}</span>
       {d.analyse === "pret" && contenuValide(d.contenu) ? (
         <>
@@ -41,8 +41,8 @@ export default async function Cours({ params }: { params: { id: string } }) {
         <form action={partagerCours} className="card bloc">
           <input type="hidden" name="id" value={d.id} />
           <input type="hidden" name="partage" value={d.partage ? "0" : "1"} />
-          <p className="small"><strong>Admin</strong> · {d.nom_fichier} · {d.partage ? "partagé avec la fac" : "privé"}</p>
-          <button className="btn small" disabled={d.analyse !== "pret"}>{d.partage ? "Retirer du partage" : "Partager avec toute la fac"}</button>
+          <p className="small"><strong>Admin</strong> · {d.nom_fichier} · {d.partage ? "partagé avec l'établissement" : "privé"}</p>
+          <button className="btn small" disabled={d.analyse !== "pret"}>{d.partage ? "Retirer du partage" : "Partager avec tout l'établissement"}</button>
         </form>
       )}
     </main>

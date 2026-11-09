@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 const LIENS = [
   { href: "/app", label: "Aujourd'hui", ic: "M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" },
   { href: "/app/modules", label: "Modules", ic: "M4 5h7v14H4zM13 5h7v14h-7z" },
-  { href: "/app/fac", label: "Ma fac", ic: "M3 10l9-6 9 6M5 10v9h14v-9M9 19v-5h6v5" },
   { href: "/app/live", label: "Live", ic: "M4 6h12v12H4zM16 10l4-2v8l-4-2" },
   { href: "/app/moi", label: "Moi", ic: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0" },
 ];

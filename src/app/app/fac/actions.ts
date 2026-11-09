@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin } from "@/lib/acces";
-import { estSemestre, norm, quotaImport, score, type Etab } from "@/lib/fac";
+import { estSemestre, norm, quotaImport, resoudreEtab } from "@/lib/fac";
 
 async function moi() {
   const { data: { user } } = await createClient().auth.getUser();
@@ -13,38 +13,19 @@ async function moi() {
 // Choix de l'établissement : un existant (id) ou un nouveau (nom tapé en toutes lettres).
 export async function choisirFac(_prev: string, form: FormData): Promise<string> {
   const u = await moi();
-  const db = admin();
-  let id = String(form.get("id") || "");
-  const nom = String(form.get("nom") || "").replace(/\s+/g, " ").trim().slice(0, 120);
-  const ville = String(form.get("ville") || "").replace(/\s+/g, " ").trim().slice(0, 60) || null;
-  if (id) {
-    const { data } = await db.from("etablissements").select("id").eq("id", id).maybeSingle();
-    if (!data) return "Établissement introuvable.";
-  } else {
-    if (norm(nom).length < 4) return "Écris le nom complet de ton établissement.";
-    // Dernier filet anti-doublon : un nom quasi identique existe déjà → on le reprend.
-    const { data: tous } = await db.from("etablissements").select("id, nom, ville, alias, valide");
-    const meme = ((tous ?? []) as Etab[]).find((e) => score(nom, e) >= 95);
-    if (meme) id = meme.id;
-    else {
-      const { count } = await db.from("etablissements").select("id", { count: "exact", head: true }).eq("cree_par", u.id);
-      if ((count ?? 0) >= 3 && !estAdmin(u)) return "Tu as déjà créé 3 établissements : choisis-en un dans la liste.";
-      const { data: cree, error } = await db.from("etablissements").insert({ nom, ville, cree_par: u.id }).select("id").single();
-      if (error || !cree) return "Création impossible pour l'instant.";
-      id = cree.id;
-    }
-  }
-  const { data: e } = await db.from("etablissements").select("nom, ville").eq("id", id).single();
-  const { error } = await db.from("profiles").upsert({ user_id: u.id, etablissement_id: id, etablissement: e?.nom ?? nom, ville: e?.ville ?? ville });
+  const r = await resoudreEtab(u.id, estAdmin(u), String(form.get("id") || ""), String(form.get("nom") || ""), String(form.get("ville") || ""));
+  if ("erreur" in r) return r.erreur;
+  const s = String(form.get("semestre") || "");
+  const { error } = await admin().from("profiles").upsert({ user_id: u.id, etablissement_id: r.id, etablissement: r.nom, ville: r.ville, ...(estSemestre(s) ? { semestre: s } : {}) });
   if (error) return "Enregistrement impossible (" + error.code + ").";
-  revalidatePath("/app/fac");
+  revalidatePath("/app/modules");
   return "";
 }
 
 export async function changerFac(): Promise<void> {
   const u = await moi();
   await admin().from("profiles").update({ etablissement_id: null }).eq("user_id", u.id);
-  revalidatePath("/app/fac");
+  revalidatePath("/app/modules");
 }
 
 export async function choisirSemestre(form: FormData): Promise<void> {
@@ -53,7 +34,7 @@ export async function choisirSemestre(form: FormData): Promise<void> {
   const filiere = String(form.get("filiere") || "").trim().slice(0, 60);
   if (!estSemestre(s)) return;
   await admin().from("profiles").update({ semestre: s, ...(filiere ? { filiere } : {}) }).eq("user_id", u.id);
-  revalidatePath("/app/fac");
+  revalidatePath("/app/modules");
 }
 
 // Cours importé depuis « Mon module n'y est pas » : enregistré puis analysé par /api/analyse.
@@ -79,7 +60,7 @@ export async function declarerCours(meta: { chemin: string; nom: string; type: s
     semestre: meta.semestre, filiere: p.filiere ?? null, analyse: "en_cours", // pris en charge par le pipeline d'import
   }).select("id").single();
   if (error || !data) return { erreur: "Enregistrement impossible (" + (error?.code ?? "?") + ")." };
-  revalidatePath("/app/fac"); revalidatePath("/app/admin");
+  revalidatePath("/app/modules"); revalidatePath("/app/admin");
   return { id: data.id };
 }
 
@@ -90,7 +71,7 @@ export async function partagerCours(form: FormData): Promise<void> {
   const id = String(form.get("id"));
   const partage = form.get("partage") === "1";
   await admin().from("documents").update({ partage, ...(partage ? { statut: "accepte" } : {}) }).eq("id", id);
-  revalidatePath("/app/admin"); revalidatePath(`/app/cours/${id}`); revalidatePath("/app/fac");
+  revalidatePath("/app/admin"); revalidatePath(`/app/cours/${id}`); revalidatePath("/app/modules");
 }
 
 // Admin : valider un établissement, ou le fusionner dans un autre (doublon).

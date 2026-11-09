@@ -47,7 +47,7 @@ export default function ChoixFac({ etabs }: { etabs: Etab[] }) {
         </>
       )}
       {msg && <p className="alert bad" role="alert">{msg}</p>}
-      <Bouton texte={choisi ? "C'est ma fac" : "Ajouter mon établissement"} />
+      <Bouton texte={choisi ? "C'est mon établissement" : "Ajouter mon établissement"} />
     </form>
   );
 }

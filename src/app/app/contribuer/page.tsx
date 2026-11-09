@@ -16,7 +16,7 @@ export default async function Contribuer() {
   return (
     <main className="page narrow-m">
       <h1 className="page-title">Partager mes cours</h1>
-      <p className="muted">Envoie les supports de tes profs : cours, TD, sujets d&apos;examen. Ils servent à améliorer les modules existants et à en créer de nouveaux, pour ta fac et ta filière.</p>
+      <p className="muted">Envoie les supports de tes profs : cours, TD, sujets d&apos;examen. Ils servent à améliorer les modules existants et à en créer de nouveaux, pour ton établissement et ta filière.</p>
       <div className="card soft">
         <p className="small"><strong>Ta récompense :</strong> chaque document accepté te donne des questions au tuteur en plus, chaque jour : annale +{BONUS_PAR_TYPE.annale}, TD +{BONUS_PAR_TYPE.td}, cours +{BONUS_PAR_TYPE.cours} (jusqu&apos;à +{BONUS_MAX}). Les annales sont les plus précieuses.</p>
       </div>

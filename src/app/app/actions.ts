@@ -1,4 +1,5 @@
 "use server";
+import { resoudreEtab, estSemestre } from "@/lib/fac";
 import { estMascotte } from "@/components/Mascotte";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -71,10 +72,15 @@ export async function enregistrerProfil(form: FormData): Promise<void> {
     minutes_jour: minutes,
   };
   const masc = form.get("mascotte");
-  const lieu = {
-    etablissement: String(form.get("etablissement") || "").trim().slice(0, 80) || null,
+  let lieu: Record<string, unknown> = {
+    etablissement: String(form.get("etablissement") || "").trim().slice(0, 120) || null,
     ville: String(form.get("ville") || "").trim().slice(0, 60) || null,
   };
+  // Établissement renseigné dès l'inscription : existant (id) ou nouveau (nom en toutes lettres).
+  const r = await resoudreEtab(u.id, estAdmin(u), String(form.get("etablissement_id") || ""), String(form.get("etablissement") || ""), String(form.get("ville") || ""));
+  if (!("erreur" in r)) lieu = { etablissement: r.nom, ville: r.ville ?? lieu.ville, etablissement_id: r.id };
+  const sem = String(form.get("semestre") || "");
+  if (estSemestre(sem)) lieu.semestre = sem;
   // Colonnes ajoutées par migration (mascotte, établissement, ville) : si l'une manque encore, on enregistre sans.
   const complet: Record<string, unknown> = { ...ligne, ...lieu, ...(estMascotte(masc) ? { mascotte: masc } : {}) };
   const { error } = await db.from("profiles").upsert(complet);

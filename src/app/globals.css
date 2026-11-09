@@ -230,3 +230,4 @@ form.stack label{display:flex;flex-direction:column;gap:4px}
 .qcm-o.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 10%,transparent)}
 .qcm-o.ko{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,transparent)}
 .carte{min-height:130px;justify-content:center;text-align:center;cursor:pointer;font-size:17px}
+.lien{background:none;border:0;padding:0;color:var(--acc);text-decoration:underline;font:inherit;cursor:pointer}
