@@ -384,8 +384,8 @@ alter table public.documents
   add column if not exists etablissement_id uuid references public.etablissements(id) on delete set null,
   add column if not exists semestre text,
   add column if not exists filiere text,
-  add column if not exists analyse text not null default 'aucune'
-    check (analyse in ('aucune','en_cours','pret','incoherent','erreur')),
+  add column if not exists "analyse" text not null default 'aucune'
+    check ("analyse" in ('aucune','en_cours','pret','incoherent','erreur')),
   add column if not exists analyse_note text,
   add column if not exists contenu jsonb,
   add column if not exists partage boolean not null default false;   -- visible par toute la fac (accord de l'admin)
