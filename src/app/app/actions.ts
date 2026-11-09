@@ -72,7 +72,8 @@ export async function enregistrerProfil(form: FormData): Promise<void> {
   };
   const masc = form.get("mascotte");
   // La colonne « mascotte » arrive avec la migration de la refonte : si elle manque encore, on enregistre sans.
-  const { error } = await db.from("profiles").upsert(estMascotte(masc) ? { ...ligne, mascotte: masc } : ligne);
+  const avecMascotte: Record<string, unknown> = estMascotte(masc) ? { ...ligne, mascotte: masc } : ligne;
+  const { error } = await db.from("profiles").upsert(avecMascotte);
   if (error) await db.from("profiles").upsert(ligne);
   const { data: communes } = await db.from("module_dates").select("module_slug, exam_date");
   const commune = new Map((communes ?? []).map((c) => [c.module_slug as string, c.exam_date as string]));
