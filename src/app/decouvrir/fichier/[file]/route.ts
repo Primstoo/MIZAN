@@ -5,9 +5,11 @@ import { MODULES } from "@/lib/modules";
 
 // Module en mode visiteur : même fichier que pour les membres, sans le pont (ni tuteur, ni synchronisation).
 export async function GET(_req: Request, { params }: { params: { file: string } }) {
-  const m = MODULES.find((x) => x.fichier === params.file);
+  // Page du module ou l'une de ses annexes (outils intégrés dans les chapitres).
+  const m = MODULES.find((x) => x.fichier === params.file || (x.annexes ?? []).includes(params.file));
   if (!m) return new NextResponse("Module introuvable", { status: 404 });
-  const html = await readFile(path.join(process.cwd(), "content", "modules", m.fichier), "utf8");
+  const html = await readFile(path.join(process.cwd(), "content", "modules", params.file), "utf8");
+  if (params.file !== m.fichier) return new NextResponse(html, { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "public, max-age=3600", "X-Frame-Options": "SAMEORIGIN" } });
   const tete = `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <style>@media (max-width:700px){input,textarea,select{font-size:16px!important}}

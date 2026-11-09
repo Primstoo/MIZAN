@@ -13,7 +13,7 @@ export type Module = {
   resume: string;
   cles: string[];
   annexes?: string[];
-  etablissement?: string; // établissement dont le module suit le cours (sert à filtrer l'inscription guidée)
+  etablissement: string; // établissement dont le module suit le cours (sert à filtrer l'inscription guidée)
 };
 
 // Établissements proposés à l'inscription (l'élève peut aussi en taper un autre).
@@ -27,15 +27,15 @@ export const ETABLISSEMENTS = [
 const norm = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 // FSABM s'appelait FPBM (Faculté polydisciplinaire de Béni Mellal) : les deux noms comptent.
 const ALIAS: Record<string, string[]> = { FSABM: ["fsabm", "fpbm", "polydisciplinaire de beni mellal", "polydisciplinaire beni mellal"] };
-export const memeEtablissement = (saisi: string | null | undefined, code = "FSABM") =>
+export const memeEtablissement = (saisi: string | null | undefined, code: string) =>
   !!saisi && (ALIAS[code] ?? [code.toLowerCase()]).some((a) => norm(saisi).includes(a));
 export const modulesPour = (etab: string | null | undefined) => MODULES.filter((m) => memeEtablissement(etab, m.etablissement));
 
-const MANUELS: Module[] = [
-];
+const MANUELS: Module[] = [];
 
 // Modules produits par scripts/construire-module.mjs (sources dans content/sources).
-export const MODULES: Module[] = [...MANUELS, ...(SOURCES as Module[])];
-export const MODULES_SOURCES = new Set((SOURCES as Module[]).map((m) => m.slug));
+// Établissement par défaut : FSABM (champ « etablissement » de module.json pour un autre).
+export const MODULES: Module[] = [...MANUELS, ...(SOURCES as Omit<Module, "etablissement">[]).map((m) => ({ etablissement: "FSABM", ...m }) as Module)];
+export const MODULES_SOURCES = new Set((SOURCES as { slug: string }[]).map((m) => m.slug));
 
 export const getModule = (slug: string) => MODULES.find((m) => m.slug === slug);
