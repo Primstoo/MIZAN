@@ -256,8 +256,9 @@ export async function statutDocument(form: FormData): Promise<void> {
   if (!["accepte", "refuse", "recu"].includes(statut)) return;
   const db = admin();
   const id = String(form.get("id"));
-  const { data: avant } = await db.from("documents").select("user_id, type, statut").eq("id", id).maybeSingle();
-  await db.from("documents").update({ statut, note: String(form.get("note") || "").trim().slice(0, 200) || null }).eq("id", id);
+  const { data: avant } = await db.from("documents").select("user_id, type, statut, analyse").eq("id", id).maybeSingle();
+  // Accepter un cours importé et analysé = le partager avec toute sa fac.
+  await db.from("documents").update({ statut, ...(avant?.analyse === "pret" ? { partage: statut === "accepte" } : {}), note: String(form.get("note") || "").trim().slice(0, 200) || null }).eq("id", id);
   // Offres actives : une annale acceptée = 7 jours offerts (prolonge l'offre payée en cours, sinon Premium).
   if (offresActives() && avant && avant.type === "annale" && avant.statut !== "accepte" && statut === "accepte") {
     const o = await offreDe(avant.user_id);

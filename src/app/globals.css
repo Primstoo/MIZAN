@@ -218,3 +218,15 @@ form.stack label{display:flex;flex-direction:column;gap:4px}
 .offre.reco{border:2px solid var(--acc)}
 .offre h2{margin:0}.offre ul{margin:0;padding-left:18px;font-size:14px;color:var(--mute);display:flex;flex-direction:column;gap:2px}
 .link{background:none;border:0;padding:0;color:var(--acc);font:inherit;text-decoration:underline;cursor:pointer}
+/* Ma fac (09/11/2026) */
+.sems{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}
+.sems a{flex:0 0 auto;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;display:flex;gap:6px;align-items:center}
+.sems a.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sems a .n{font-size:11px;font-weight:700;opacity:.7}
+.sugg{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+.sugg button{text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;color:var(--ink);cursor:pointer}
+.sugg button:hover,.sugg button.on{border-color:var(--acc)}
+.qcm-o{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin:5px 0;font:inherit;color:var(--ink);cursor:pointer}
+.qcm-o.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 10%,transparent)}
+.qcm-o.ko{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,transparent)}
+.carte{min-height:130px;justify-content:center;text-align:center;cursor:pointer;font-size:17px}

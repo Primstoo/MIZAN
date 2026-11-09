@@ -7,6 +7,7 @@ import { botActif } from "@/lib/telegram";
 import Webhook from "./Webhook";
 import OffresAdmin from "./Offres";
 import { offresActives } from "@/lib/offres";
+import { gererEtab } from "../fac/actions";
 import { creerSession, statutReservation, majLien, majDateModule, statutDocument } from "../actions";
 
 // Suivi du pilote, réservé aux admins (ADMIN_EMAILS) : qui est entré, qui révise quoi,
@@ -35,7 +36,7 @@ export default async function Suivi() {
   const { data: notes } = await db.from("notes_reelles").select("user_id, module_slug, note, note_prevue");
   const N = (notes ?? []).filter((n) => n.note_prevue !== null);
   const ecart = N.length ? Math.round((N.reduce((t, n) => t + Math.abs(Number(n.note) - Number(n.note_prevue)), 0) / N.length) * 10) / 10 : null;
-  const { data: docs } = await db.from("documents").select("id, email, type, module_slug, module_libre, etablissement, chemin, nom_fichier, statut, created_at").order("created_at", { ascending: false }).limit(50);
+  const { data: docs } = await db.from("documents").select("id, email, type, module_slug, module_libre, etablissement, chemin, nom_fichier, statut, created_at, analyse, partage, semestre").order("created_at", { ascending: false }).limit(50);
   const liens = new Map<string, string>();
   for (const d of (docs ?? []).filter((x) => x.statut === "recu")) {
     const { data: u } = await db.storage.from("documents").createSignedUrl(d.chemin, 3600);
@@ -45,6 +46,8 @@ export default async function Suivi() {
     db.from("abonnements").select("user_id, plan, plan_until, plan_source, bonus_plan, bonus_until, referred_by"),
     db.from("codes_offre").select("code, plan, jours, lot, created_at, used_by, used_at").order("created_at", { ascending: false }).limit(30),
   ]);
+  const { data: etabs } = await db.from("etablissements").select("id, nom, ville, valide, created_at").order("nom");
+  const E = etabs ?? [];
   const { data: lieux } = await db.from("profiles").select("etablissement, ville");
   const parEtab = new Map<string, number>();
   for (const l of (lieux ?? []) as { etablissement?: string | null; ville?: string | null }[]) {
@@ -140,12 +143,31 @@ export default async function Suivi() {
       </section>
 
       <section className="bloc">
+        <h2>Établissements ajoutés par les élèves</h2>
+        {!E.some((e) => !e.valide) && <p className="muted small">Rien à vérifier ({E.length} établissement(s)).</p>}
+        <ul className="list-plain">
+          {E.filter((e) => !e.valide).map((e) => (
+            <li key={e.id} className="card">
+              <span className="t">{e.nom}</span><span className="small muted">{e.ville ?? "ville non précisée"} · {(lieux ?? []).filter((l) => l.etablissement === e.nom).length} élève(s)</span>
+              <div className="row">
+                <form action={gererEtab}><input type="hidden" name="id" value={e.id} /><button className="btn small">Valider</button></form>
+                <form action={gererEtab} className="row"><input type="hidden" name="id" value={e.id} />
+                  <select name="vers" required defaultValue=""><option value="" disabled>Doublon de…</option>{E.filter((x) => x.id !== e.id).map((x) => <option key={x.id} value={x.id}>{x.nom}</option>)}</select>
+                  <button className="btn alt small">Fusionner</button></form>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="bloc">
         <h2>Documents reçus</h2>
         {!(docs ?? []).some((d) => d.statut === "recu") && <p className="muted small">Rien à vérifier.</p>}
         <ul className="list-plain">
           {(docs ?? []).filter((d) => d.statut === "recu").map((d) => (
             <li key={d.id} className="card">
               <div className="row between"><a href={liens.get(d.id)} target="_blank" rel="noopener noreferrer" className="t">{d.nom_fichier}</a><span className="chip">{d.type}</span></div>
+              {d.analyse !== "aucune" && <a href={`/app/cours/${d.id}`} className="small">Voir la fiche générée ({d.analyse}{d.semestre ? ` · ${d.semestre}` : ""}{d.partage ? " · partagée" : ""}) →</a>}
               <span className="small muted">{d.email} · {MODULES.find((m) => m.slug === d.module_slug)?.titre ?? d.module_libre ?? "—"} · {d.etablissement ?? ""}</span>
               <div className="row">
                 <form action={statutDocument}><input type="hidden" name="id" value={d.id} /><input type="hidden" name="statut" value="accepte" /><button className="btn small">Accepter</button></form>
