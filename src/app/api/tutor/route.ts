@@ -4,6 +4,7 @@ import { admin as serviceClient, estAdmin, estMembre } from "@/lib/acces";
 import { jourMaroc } from "@/lib/parcours";
 import { bonusTuteur } from "@/lib/bonus";
 import { offresActives, offreDe, QUOTA_TUTEUR, RANG } from "@/lib/offres";
+import { ordreDesModeles } from "@/lib/tuteur-ordre";
 
 // Tuteur côté serveur (décision D8) : clés IA jamais dans le navigateur.
 // Gemini d'abord, Groq en secours. Quota quotidien par élève dans tutor_usage.
@@ -134,11 +135,11 @@ export async function POST(req: Request) {
   const used = Number(compte) - 1;
 
   // Essai des modèles dans l'ordre ; on passe au suivant tant qu'aucun mot n'a été envoyé.
-  const candidats: (() => Flux)[] = [
-    ...GEMINI_MODELS.map((m) => () => geminiFlux(m, system, msgs, images)),
-    ...GROQ_MODELS.map((m) => () => groqFlux(m, system, msgs)),
-  ];
-  const noms = [...GEMINI_MODELS, ...GROQ_MODELS];
+  // Sans image, on alterne Gemini et Groq : quand Gemini est saturé (503), ses deux modèles le sont en même temps,
+  // et l'élève attendait deux délais avant d'arriver à Groq. Avec une image, Gemini d'abord (Groq ne lit pas la photo).
+  const essais = ordreDesModeles(GEMINI_MODELS, GROQ_MODELS, images.length > 0);
+  const candidats: (() => Flux)[] = essais.map((e) => e.f === "gemini" ? () => geminiFlux(e.m, system, msgs, images) : () => groqFlux(e.m, system, msgs));
+  const noms = essais.map((e) => e.m);
   const enc = new TextEncoder();
   const t0 = Date.now();
   const flux = new ReadableStream({

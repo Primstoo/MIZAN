@@ -9,7 +9,7 @@ export default function Attente({ etat, note }: { id: string; etat: string; note
   return (
     <div className="card soft stack bloc" role="status">
       <h2>{etat === "erreur" ? "Traitement à relancer" : "Ton document est en cours de traitement"}</h2>
-      <p className="muted">{note || "La fiche, le quiz et les flashcards apparaîtront ici dès qu'ils seront prêts. Reviens dans quelques minutes."}</p>
+      <p className="muted">{note || "La fiche, le quiz et les flashcards apparaîtront ici dès qu'ils seront prêts : ton document est d'abord vérifié."}</p>
     </div>
   );
 }

@@ -1,12 +1,13 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { admin, estAdmin } from "@/lib/acces";
+import { admin, estAdmin, estMembre } from "@/lib/acces";
 import { estSemestre, norm, quotaImport, resoudreEtab } from "@/lib/fac";
 
 async function moi() {
   const { data: { user } } = await createClient().auth.getUser();
-  if (!user) throw new Error("Connexion requise");
+  // Membre obligatoire, comme dans ../actions.ts : un compte sans invitation ne peut ni créer d'établissement ni importer.
+  if (!user || !(await estMembre(user))) throw new Error("Accès refusé");
   return user;
 }
 
