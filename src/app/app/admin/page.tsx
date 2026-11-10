@@ -77,6 +77,7 @@ export default async function Suivi() {
   return (
     <main className="page">
       <h1 className="page-title">Suivi du pilote</h1>
+      <p><a href="/app/admin/infos" className="btn alt small">Infos de la fac à valider</a></p>
       <div className="kpis">
         <div className="card kpi"><strong>{M.length}</strong>membres</div>
         <div className="card kpi"><strong>{actifs7.size}</strong>actifs sur 7 jours</div>
