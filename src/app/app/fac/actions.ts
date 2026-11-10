@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin, estMembre } from "@/lib/acces";
-import { estSemestre, norm, quotaImport, resoudreEtab } from "@/lib/fac";
+import { estSemestre, importActif, norm, quotaImport, resoudreEtab } from "@/lib/fac";
 
 async function moi() {
   const { data: { user } } = await createClient().auth.getUser();
@@ -47,6 +47,7 @@ export async function declarerCours(meta: { chemin: string; nom: string; type: s
   if (!estSemestre(meta.semestre)) return { erreur: "Semestre invalide." };
   const nomModule = String(meta.module || "").replace(/\s+/g, " ").trim().slice(0, 80);
   if (nomModule.length < 2) return { erreur: "Indique le nom du module." };
+  if (!importActif() && !estAdmin(u)) return { erreur: "L'ajout de cours n'est pas encore ouvert." };
   const q = await quotaImport(u.id, estAdmin(u));
   if (q.reste <= 0) return { erreur: `Tu as utilisé tes ${q.total} imports (sur ${q.jours} jours). Passe au Premium pour en avoir plus.` };
   const db = admin();
