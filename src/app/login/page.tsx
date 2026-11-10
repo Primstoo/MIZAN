@@ -6,7 +6,9 @@ import Mascotte from "@/components/Mascotte";
 import { verifierInvitation } from "./actions";
 
 // Connexion sans mot de passe : lien par e-mail (flux implicite, marche dans tout navigateur),
-// et saisie d'un code à 6 chiffres quand l'e-mail en contient un (après configuration d'un SMTP).
+// et saisie du code en chiffres contenu dans l'e-mail (après configuration d'un SMTP).
+const LONGUEUR_CODE_MAX = 10;
+
 export default function Login() {
   const supabase = createClient();
   const [etape, setEtape] = useState<"invitation" | "email" | "code">("email");
@@ -135,12 +137,13 @@ export default function Login() {
           ) : (
             <>
               <h1>Ouvre ton e-mail</h1>
-              <p className="muted">Un e-mail a été envoyé à <strong>{email}</strong> (regarde aussi dans les spams). S’il contient un code à 6 chiffres, tape-le ici : c’est le plus sûr. Sinon, clique sur le lien : tu seras connecté dans le navigateur où il s’ouvre.</p>
+              <p className="muted">Un e-mail a été envoyé à <strong>{email}</strong> (regarde aussi dans les spams). Il contient un code en chiffres : tape-le ici, c’est le plus sûr. Sinon, clique sur le lien : tu seras connecté dans le navigateur où il s’ouvre.</p>
               <form onSubmit={verifier} className="stack">
-                <label htmlFor="code">Code à 6 chiffres</label>
+                <label htmlFor="code">Code reçu par e-mail</label>
+                {/* Supabase envoie un code de 6 à 10 chiffres selon le réglage du projet (8 aujourd'hui) : on accepte toute cette plage. */}
                 <input
-                  id="code" ref={codeRef} className="code-input" inputMode="numeric" autoComplete="one-time-code" maxLength={6}
-                  value={code} onChange={(e) => { const v = e.target.value.replace(/\D/g, "").slice(0, 6); setCode(v); }} placeholder="••••••"
+                  id="code" ref={codeRef} className="code-input" inputMode="numeric" autoComplete="one-time-code" maxLength={LONGUEUR_CODE_MAX}
+                  value={code} onChange={(e) => { const v = e.target.value.replace(/\D/g, "").slice(0, LONGUEUR_CODE_MAX); setCode(v); }} placeholder="••••••••"
                 />
                 <button className="btn big" disabled={charge || code.length < 6}>{charge ? "Vérification…" : "Me connecter"}</button>
               </form>

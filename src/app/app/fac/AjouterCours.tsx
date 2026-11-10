@@ -34,14 +34,14 @@ export default function AjouterCours({ semestre, reste, modules }: { semestre: s
     if (error) { setEtat("Envoi impossible : " + error.message); setCharge(false); return; }
     const r = await declarerCours({ chemin: p.chemin, nom: fichier.name, type, module, semestre });
     if ("erreur" in r) { setEtat(r.erreur); setCharge(false); return; }
-    // La page du cours lance l'analyse et attend le résultat.
+    // La page du cours affiche l'état du traitement (fait par le pipeline d'import, hors de cette appli).
     router.push(`/app/cours/${r.id}`);
   }
 
   return (
     <form onSubmit={envoyer} className="card stack">
       <h3>Ajouter mon cours ({semestre})</h3>
-      <p className="small muted">Ton fichier reste privé. Tu reçois en 1 à 2 minutes une fiche, un quiz et des flashcards, rien que pour toi. {reste} import{reste > 1 ? "s" : ""} restant{reste > 1 ? "s" : ""}.</p>
+      <p className="small muted">Ton fichier reste privé. Après vérification, tu reçois une fiche, un quiz et des flashcards, rien que pour toi. {reste} import{reste > 1 ? "s" : ""} restant{reste > 1 ? "s" : ""}.</p>
       <label htmlFor="mod">Module</label>
       <input id="mod" list="mods" value={module} onChange={(e) => setModule(e.target.value)} placeholder="Ex. Analyse 1, Pr X" required minLength={2} />
       <datalist id="mods">{modules.map((m) => <option key={m} value={m} />)}</datalist>

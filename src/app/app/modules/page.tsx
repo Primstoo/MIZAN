@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin } from "@/lib/acces";
 import { MODULES, memeEtablissement } from "@/lib/modules";
 import { chargerParcours, chargerMaitrise } from "@/lib/parcours";
-import { SEMESTRES, estSemestre, quotaImport, type Etab } from "@/lib/fac";
+import { SEMESTRES, estSemestre, importActif, quotaImport, type Etab } from "@/lib/fac";
 import CarteModule from "@/components/CarteModule";
 import ChoixFac from "../fac/ChoixFac";
 import AjouterCours from "../fac/AjouterCours";
@@ -113,10 +113,10 @@ export default async function Modules({ searchParams }: { searchParams: { s?: st
         )}
       </section>
 
-      <section className="bloc narrow-m">
+      {(importActif() || estAdmin(user)) && <section className="bloc narrow-m">
         <AjouterCours semestre={sem} reste={q.reste} modules={Array.from(new Set([...Array.from(groupes.keys()), ...ici.map((m) => m.titre)]))} />
         <p className="small muted bloc">Les fichiers originaux restent privés. Seuls la fiche, le quiz et les flashcards générés sont partagés avec ton établissement, après vérification.</p>
-      </section>
+      </section>}
 
       {autres.length > 0 && (
         <details className="bloc catalogue">
