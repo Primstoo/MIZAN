@@ -5,6 +5,14 @@ seance: Outils interactifs
 importance: 3
 ---
 
+## Comment aborder ce chapitre
+
+> [!astuce] **Mets-toi en conditions d'examen.** Chronomètre, pas de notes. L'objectif est de trouver ce qui te coûte des points.
+
+> [!piege] Refaire seulement les calculs que tu réussis déjà. Commence par ton journal d'erreurs.
+
+## L'entraînement
+
 ## Calculs générés
 
 Débits, temps de transfert, délais : de nouveaux nombres à chaque fois, corrigés en détail.
