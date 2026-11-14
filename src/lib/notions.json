@@ -1113,6 +1113,18 @@
     "t": "Suites · la limite, avec ε et N",
     "imp": 5,
     "g": "cours"
+   },
+   {
+    "id": "calcul-limites",
+    "t": "Suites · calculer une limite",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "suites-monotones",
+    "t": "Suites monotones, adjacentes, sous-suites",
+    "imp": 4,
+    "g": "cours"
    }
   ]
  }

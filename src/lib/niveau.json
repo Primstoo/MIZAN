@@ -591,6 +591,17 @@
    "e": "L'ordre compte : $\\varepsilon$ d'abord, puis $N$ qui en dépend, puis tous les $n \\ge N$."
   },
   {
+   "n": "calcul-limites",
+   "q": "La limite de $\\dfrac{3n^2 + n}{2n^2 - 5}$ est :",
+   "o": [
+    "$+\\infty$",
+    "$\\tfrac32$",
+    "$0$"
+   ],
+   "a": 1,
+   "e": "On factorise par $n^2$ : il reste $\\tfrac{3 + 1/n}{2 - 5/n^2}$."
+  },
+  {
    "n": "borne-superieure",
    "q": "La borne supérieure de $[0, 1[$ est :",
    "o": [
@@ -600,6 +611,17 @@
    ],
    "a": 1,
    "e": "Les majorants sont les nombres $\\ge 1$. Le plus petit est 1."
+  },
+  {
+   "n": "suites-monotones",
+   "q": "Une suite croissante et majorée :",
+   "o": [
+    "converge",
+    "tend vers $+\\infty$",
+    "peut ne pas avoir de limite"
+   ],
+   "a": 0,
+   "e": "C'est le théorème de la limite monotone."
   }
  ]
 }
