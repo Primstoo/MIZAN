@@ -5,6 +5,24 @@ seance: Partie 1
 importance: 3
 ---
 
+## Avant de commencer
+
+La **division euclidienne** : écrire a = b × q + r avec un reste r plus petit que b.
+
+```html
+<details class="prereq"><summary><b>Vérifie ton prérequis.</b> 42 = 30 × q + r. Que valent q et r ?</summary><p>q = 1 et r = 12. L'algorithme d'Euclide n'est que cette opération, répétée.</p></details>
+```
+
+## Comment aborder ce chapitre
+
+> [!astuce] **Pense horloge.** Modulo n, on ne garde que le reste : c'est une horloge à n cases. Et presque tout le chapitre répond à une seule question : ce nombre a-t-il un **inverse** ?
+
+> [!piege] Croire que tout nombre a un inverse modulo n. b en a un seulement si pgcd(b, n) = 1. Exemple : 2 n'a pas d'inverse modulo 26, car 2 × 13 ≡ 0.
+
+À la fin, tu sais calculer un pgcd, un inverse modulaire, φ(n) et une grande puissance modulo n.
+
+## Le cours
+
 ```html
 <h3>Pourquoi ce chapitre est crucial</h3>
 <p>L'affine en a déjà besoin (inverse modulo 26). Toute la partie 2 (RSA, ElGamal, Diffie-Hellman) n'est faite que de ces outils. C'est le chapitre le plus rentable à travailler.</p>

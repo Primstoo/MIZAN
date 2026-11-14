@@ -5,6 +5,24 @@ seance: Partie 1
 importance: 3
 ---
 
+## Avant de commencer
+
+L'addition **modulo 2** : 0 + 0 = 0, 0 + 1 = 1, 1 + 1 = 0. C'est le « ou exclusif » (XOR).
+
+```html
+<details class="prereq"><summary><b>Vérifie ton prérequis.</b> Que vaut 1 + 1 + 1 modulo 2 ?</summary><p>1. Un nombre impair de 1 donne 1, un nombre pair donne 0.</p></details>
+```
+
+## Comment aborder ce chapitre
+
+> [!astuce] **Un LFSR est une file de bits.** À chaque top : un bit sort, les autres se décalent d'une case, et un nouveau bit entre, calculé à partir des bits présents. Fais-le toujours en tableau, une ligne par top.
+
+> [!piege] Se tromper de sens de décalage ou de bit de sortie. Convention du cours : s₀ sort en premier, et le nouveau bit est la somme des `p_j · s_j` modulo 2.
+
+À la fin, tu sais dérouler un LFSR, trouver sa période et l'utiliser pour chiffrer.
+
+## Le cours
+
 ```html
 <figure class="cfig"><svg viewBox="0 0 640 200" role="img" aria-label="registre à décalage" style="width:100%;min-width:480px;color:var(--ink)" font-family="var(--body),system-ui,sans-serif" font-size="12"><defs><marker id="cfA4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/></marker></defs><rect x="140" y="40" width="56" height="40" fill="var(--panel)" stroke="currentColor"/><text x="168" y="65" text-anchor="middle" font-family="var(--mono)" font-size="16">1</text><rect x="210" y="40" width="56" height="40" fill="var(--panel)" stroke="currentColor"/><text x="238" y="65" text-anchor="middle" font-family="var(--mono)" font-size="16">0</text><rect x="280" y="40" width="56" height="40" fill="var(--panel)" stroke="currentColor"/><text x="308" y="65" text-anchor="middle" font-family="var(--mono)" font-size="16">1</text><rect x="350" y="40" width="56" height="40" fill="var(--panel)" stroke="currentColor"/><text x="378" y="65" text-anchor="middle" font-family="var(--mono)" font-size="16">1</text><line x1="420" y1="60" x2="520" y2="60" stroke="currentColor"  marker-end="url(#cfA4)"/><text x="530" y="56" font-size="11">bit de sortie</text><text x="530" y="72" font-size="11">(suite chiffrante)</text><circle cx="260" cy="130" r="14" fill="var(--panel)" stroke="currentColor"/><text x="260" y="135" text-anchor="middle" font-size="16">⊕</text><path d="M168 80 L168 130 L246 130" fill="none" stroke="currentColor"/><path d="M378 80 L378 130 L274 130" fill="none" stroke="currentColor"/><path d="M260 144 L260 165 L100 165 L100 60 L140 60" fill="none" stroke="currentColor" marker-end="url(#cfA4)"/><text x="40" y="190" font-size="11">À chaque top : le bit de droite sort, tout décale, le XOR des cases branchées entre à gauche.</text></svg></figure>
 <h3>Deux familles de chiffrement symétrique</h3>

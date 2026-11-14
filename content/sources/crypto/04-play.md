@@ -5,6 +5,24 @@ seance: Partie 1
 importance: 3
 ---
 
+## Avant de commencer
+
+Aucun calcul. Il faut seulement savoir repérer une **ligne** et une **colonne** dans une grille 5 × 5.
+
+```html
+<details class="prereq"><summary><b>Vérifie ton prérequis.</b> Une grille 5 × 5 a 25 cases, l'alphabet a 26 lettres. Que fait-on ?</summary><p>On supprime une lettre. Dans ce cours, le W est supprimé et remplacé par V.</p></details>
+```
+
+## Comment aborder ce chapitre
+
+> [!astuce] **Playfair travaille par paires de lettres.** Pour chaque paire, une seule question : où sont les deux lettres dans la grille ? Même ligne, même colonne, ou coins d'un rectangle. À chaque cas sa règle.
+
+> [!piege] Découper le message en paires **avant** d'avoir appliqué les conventions du cours (W remplacé par V, traitement d'une paire de deux lettres identiques). Prépare toujours le message d'abord.
+
+À la fin, tu sais construire la grille à partir d'une clé et chiffrer une paire dans les trois cas.
+
+## Le cours
+
 ```html
 <h3>L'idée</h3>
 <p>Playfair chiffre les lettres <b>deux par deux</b> (substitution <b>polygrammique</b>). Une même paire de lettres donne toujours la même paire chiffrée, mais il y a 25×25 = <b>625 paires</b> possibles au lieu de 26 lettres. L'analyse de fréquences devient bien plus difficile et demande un texte très long.</p>

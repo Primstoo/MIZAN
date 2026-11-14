@@ -5,6 +5,24 @@ seance: Partie 1
 importance: 3
 ---
 
+## Avant de commencer
+
+Le **XOR**, et l'idée de permutation de bits. Une propriété sert partout : faire deux fois le même XOR annule l'opération.
+
+```html
+<details class="prereq"><summary><b>Vérifie ton prérequis.</b> Que vaut (A XOR B) XOR B ?</summary><p>A. C'est pour ça qu'un schéma de Feistel peut se défaire.</p></details>
+```
+
+## Comment aborder ce chapitre
+
+> [!astuce] **Retiens un seul tour.** On coupe le bloc en deux moitiés, on transforme l'une avec la sous-clé, on la mélange à l'autre par XOR, puis on échange. DES répète ce tour ; le déchiffrement refait le même chemin avec les sous-clés dans l'ordre inverse.
+
+> [!piege] Croire que la fonction f du tour doit être inversible. Non : grâce au XOR et à l'échange des moitiés, un schéma de Feistel se déchiffre même si f ne l'est pas.
+
+À la fin, tu sais dérouler un tour de Feistel et décrire la structure générale de DES.
+
+## Le cours
+
 ```html
 <figure class="cfig"><svg viewBox="0 0 640 205" role="img" aria-label="tour de Feistel" style="width:100%;min-width:480px;color:var(--ink)" font-family="var(--body),system-ui,sans-serif" font-size="12"><defs><marker id="cfA6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/></marker></defs><rect x="150" y="20" width="140" height="34" rx="6" fill="var(--panel)" stroke="currentColor"/><text x="220" y="41" text-anchor="middle" font-weight="700">L₀ (32 bits)</text><rect x="350" y="20" width="140" height="34" rx="6" fill="var(--panel)" stroke="currentColor"/><text x="420" y="41" text-anchor="middle" font-weight="700">R₀ (32 bits)</text><line x1="420" y1="54" x2="420" y2="150" stroke="currentColor"/><rect x="330" y="80" width="90" height="34" rx="6" fill="rgba(31,95,191,.13)" stroke="currentColor"/><text x="375" y="101" text-anchor="middle" font-weight="700">f(R₀, K₁)</text><line x1="420" y1="97" x2="420" y2="97" stroke="currentColor"/><circle cx="220" cy="97" r="12" fill="var(--panel)" stroke="currentColor"/><text x="220" y="102" text-anchor="middle" font-size="15">⊕</text><line x1="220" y1="54" x2="220" y2="85" stroke="currentColor"/><line x1="330" y1="97" x2="232" y2="97" stroke="currentColor"  marker-end="url(#cfA6)"/><path d="M220 109 L220 125 L420 160" fill="none" stroke="currentColor"/><path d="M420 125 L220 160" fill="none" stroke="currentColor"/><rect x="150" y="160" width="140" height="34" rx="6" fill="var(--panel)" stroke="currentColor"/><text x="220" y="181" text-anchor="middle" font-weight="700">L₁ = R₀</text><rect x="350" y="160" width="140" height="34" rx="6" fill="var(--panel)" stroke="currentColor"/><text x="420" y="181" text-anchor="middle" font-weight="700">R₁ = L₀ ⊕ f(R₀,K₁)</text><text x="510" y="80" font-size="11">Un tour de Feistel :</text><text x="510" y="96" font-size="11">les moitiés s'échangent,</text><text x="510" y="112" font-size="11">DES en fait 16.</text><text x="510" y="135" font-size="11">Déchiffrer = mêmes</text><text x="510" y="151" font-size="11">tours, clés à l'envers.</text></svg></figure>
 <h3>Qu'est-ce que DES</h3>

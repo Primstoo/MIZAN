@@ -5,6 +5,14 @@ seance: Outils interactifs
 importance: 3
 ---
 
+## Comment aborder ce chapitre
+
+> [!astuce] **Mets-toi en conditions d'examen.** Chronomètre, pas de notes, pas de retour au cours. L'objectif est de repérer ce qui te coûte des points, pas de tout réussir.
+
+> [!piege] Refaire uniquement ce que tu sais déjà faire. Commence par tes chapitres les plus faibles.
+
+## L'entraînement
+
 ## Mes failles
 
 Les notions où tu perds des points, d'après tes réponses.

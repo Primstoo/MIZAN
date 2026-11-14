@@ -5,6 +5,24 @@ seance: Partie 1
 importance: 3
 ---
 
+## Avant de commencer
+
+Aucun calcul ici. Il suffit de savoir ce qu'est un message, et qu'une **clé** est une information secrète partagée.
+
+```html
+<details class="prereq"><summary><b>Vérifie ton prérequis.</b> Si tout le monde connaît la méthode de chiffrement, qu'est-ce qui doit rester secret ?</summary><p>La clé, et elle seule. Un bon système reste sûr même quand sa méthode est publique.</p></details>
+```
+
+## Comment aborder ce chapitre
+
+> [!astuce] **Pense à trois personnages.** Alice envoie, Bob reçoit, Oscar écoute. Chaque notion du chapitre répond à une question : que peut faire Oscar, et comment l'en empêcher ?
+
+> [!piege] Confondre **déchiffrer** (retrouver le message avec la clé) et **décrypter** (le retrouver sans la clé). Le premier est le travail de Bob, le second celui d'Oscar.
+
+À la fin, tu sais nommer les quatre objectifs de la cryptographie et distinguer symétrique et asymétrique.
+
+## Le cours
+
 ```html
 <figure class="cfig"><svg viewBox="0 0 640 195" role="img" aria-label="Alice, Bob et Oscar" style="width:100%;min-width:480px;color:var(--ink)" font-family="var(--body),system-ui,sans-serif" font-size="12"><defs><marker id="cfA1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/></marker></defs><rect x="20" y="50" width="110" height="50" rx="6" fill="var(--panel)" stroke="currentColor"/><text x="75" y="73" text-anchor="middle" font-weight="700">Alice</text><text x="75" y="88" text-anchor="middle" font-size="11">M clair</text><line x1="130" y1="75" x2="230" y2="75" stroke="currentColor"  marker-end="url(#cfA1)"/><rect x="230" y="50" width="130" height="50" rx="6" fill="var(--panel)" stroke="currentColor"/><text x="295" y="73" text-anchor="middle" font-weight="700">Chiffrer</text><text x="295" y="88" text-anchor="middle" font-size="11">avec la clé K</text><line x1="360" y1="75" x2="500" y2="75" stroke="currentColor"  marker-end="url(#cfA1)"/><rect x="500" y="50" width="120" height="50" rx="6" fill="var(--panel)" stroke="currentColor"/><text x="560" y="73" text-anchor="middle" font-weight="700">Bob</text><text x="560" y="88" text-anchor="middle" font-size="11">déchiffre → M</text><text x="430" y="66" text-anchor="middle" font-family="var(--mono)">C = x7#qL…</text><text x="430" y="125" text-anchor="middle" font-size="11">canal non sécurisé</text><rect x="370" y="140" width="120" height="44" rx="6" fill="rgba(31,95,191,.13)" stroke="currentColor"/><text x="430" y="160" text-anchor="middle" font-weight="700">Oscar</text><text x="430" y="175" text-anchor="middle" font-size="11">voit C, pas M</text><line x1="430" y1="80" x2="430" y2="140" stroke="var(--bad)" stroke-dasharray="4 3"/><text x="40" y="160" font-size="11">Symétrique : la même clé K des deux côtés (coffre avec deux doubles).</text><text x="40" y="178" font-size="11">Asymétrique : on chiffre avec la clé publique de Bob, seul Bob déchiffre (sa clé privée).</text></svg></figure>
 <h3>Pourquoi la cryptographie existe</h3>

@@ -5,6 +5,24 @@ seance: Partie 1
 importance: 3
 ---
 
+## Avant de commencer
+
+Le chiffre de César du chapitre précédent : décaler une lettre de k positions, modulo 26.
+
+```html
+<details class="prereq"><summary><b>Vérifie ton prérequis.</b> Avec un décalage de 3, que devient la lettre Y ?</summary><p>Y = 24, et 24 + 3 = 27, soit 1 modulo 26 : la lettre B. Si ce calcul n'est pas immédiat, refais d'abord le chapitre César.</p></details>
+```
+
+## Comment aborder ce chapitre
+
+> [!astuce] **Vigenère, c'est plusieurs César à la suite.** Chaque lettre de la clé donne le décalage de la lettre du message placée en face d'elle. Écris toujours la clé sous le message avant de calculer.
+
+> [!piege] Oublier de **répéter la clé** jusqu'au bout du message, ou additionner au lieu de soustraire pour déchiffrer. Astuce du cours : déchiffrer revient à chiffrer avec la clé inverse 26 - k.
+
+À la fin, tu sais chiffrer et déchiffrer avec une clé-mot, et expliquer pourquoi c'est plus solide que César.
+
+## Le cours
+
 ```html
 <figure class="cfig"><svg viewBox="0 0 640 115" role="img" aria-label="Vigenère TCHAD clé CLE" style="width:100%;min-width:480px;color:var(--ink)" font-family="var(--body),system-ui,sans-serif" font-size="12"><defs><marker id="cfA3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/></marker></defs><text x="20" y="30" font-size="11">Message</text><text x="20" y="62" font-size="11">Clé répétée</text><text x="20" y="94" font-size="11">Chiffré</text><rect x="120" y="14" width="40" height="26" fill="var(--panel)" stroke="var(--line)"/><text x="140" y="32" text-anchor="middle" font-family="var(--mono)" font-weight="700">T</text><rect x="120" y="46" width="40" height="26" fill="rgba(31,95,191,.13)" stroke="var(--line)"/><text x="140" y="64" text-anchor="middle" font-family="var(--mono)" font-weight="700">C</text><rect x="120" y="78" width="40" height="26" fill="var(--panel)" stroke="var(--line)"/><text x="140" y="96" text-anchor="middle" font-family="var(--mono)" font-weight="700">V</text><rect x="164" y="14" width="40" height="26" fill="var(--panel)" stroke="var(--line)"/><text x="184" y="32" text-anchor="middle" font-family="var(--mono)" font-weight="700">C</text><rect x="164" y="46" width="40" height="26" fill="rgba(31,95,191,.13)" stroke="var(--line)"/><text x="184" y="64" text-anchor="middle" font-family="var(--mono)" font-weight="700">L</text><rect x="164" y="78" width="40" height="26" fill="var(--panel)" stroke="var(--line)"/><text x="184" y="96" text-anchor="middle" font-family="var(--mono)" font-weight="700">N</text><rect x="208" y="14" width="40" height="26" fill="var(--panel)" stroke="var(--line)"/><text x="228" y="32" text-anchor="middle" font-family="var(--mono)" font-weight="700">H</text><rect x="208" y="46" width="40" height="26" fill="rgba(31,95,191,.13)" stroke="var(--line)"/><text x="228" y="64" text-anchor="middle" font-family="var(--mono)" font-weight="700">E</text><rect x="208" y="78" width="40" height="26" fill="var(--panel)" stroke="var(--line)"/><text x="228" y="96" text-anchor="middle" font-family="var(--mono)" font-weight="700">L</text><rect x="252" y="14" width="40" height="26" fill="var(--panel)" stroke="var(--line)"/><text x="272" y="32" text-anchor="middle" font-family="var(--mono)" font-weight="700">A</text><rect x="252" y="46" width="40" height="26" fill="rgba(31,95,191,.13)" stroke="var(--line)"/><text x="272" y="64" text-anchor="middle" font-family="var(--mono)" font-weight="700">C</text><rect x="252" y="78" width="40" height="26" fill="var(--panel)" stroke="var(--line)"/><text x="272" y="96" text-anchor="middle" font-family="var(--mono)" font-weight="700">C</text><rect x="296" y="14" width="40" height="26" fill="var(--panel)" stroke="var(--line)"/><text x="316" y="32" text-anchor="middle" font-family="var(--mono)" font-weight="700">D</text><rect x="296" y="46" width="40" height="26" fill="rgba(31,95,191,.13)" stroke="var(--line)"/><text x="316" y="64" text-anchor="middle" font-family="var(--mono)" font-weight="700">L</text><rect x="296" y="78" width="40" height="26" fill="var(--panel)" stroke="var(--line)"/><text x="316" y="96" text-anchor="middle" font-family="var(--mono)" font-weight="700">O</text><text x="360" y="32" font-size="11">T(19) + C(2) = 21 → V</text><text x="360" y="64" font-size="11">Le même T chiffré ailleurs avec une</text><text x="360" y="80" font-size="11">autre lettre de clé donnera une autre lettre :</text><text x="360" y="96" font-size="11">l'analyse de fréquences simple ne marche plus.</text></svg></figure>
 <h3>Le problème de César et de l'affine</h3>

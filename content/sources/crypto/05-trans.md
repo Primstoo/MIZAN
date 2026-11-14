@@ -5,6 +5,24 @@ seance: Partie 1
 importance: 3
 ---
 
+## Avant de commencer
+
+Savoir ce qu'est une **permutation** : une façon de réordonner des positions.
+
+```html
+<details class="prereq"><summary><b>Vérifie ton prérequis.</b> On applique la clé K = (2, 3, 1) au bloc ABC avec la règle du cours <code>c_j = m_K[j]</code>. Résultat ?</summary><p>c₁ = m₂ = B, c₂ = m₃ = C, c₃ = m₁ = A. On obtient BCA.</p></details>
+```
+
+## Comment aborder ce chapitre
+
+> [!astuce] **Les lettres ne changent pas, seules leurs places changent.** Le message chiffré contient exactement les mêmes lettres que le clair, mélangées bloc par bloc.
+
+> [!piege] Se tromper de sens. Avec la convention du cours, la j-ième lettre chiffrée est la lettre claire de la position K[j]. Et pour déchiffrer, il faut la permutation **inverse**, pas la même.
+
+À la fin, tu sais chiffrer par blocs avec une permutation et calculer la permutation inverse.
+
+## Le cours
+
 ```html
 <h3>L'idée</h3>
 <p>Jusqu'ici, on <b>remplaçait</b> les lettres (substitution). La transposition garde les mêmes lettres mais <b>change leur ordre</b>, comme une anagramme organisée. Conséquence importante : les fréquences des lettres restent celles du français (beaucoup de E), ce qui révèle qu'il s'agit d'une transposition.</p>

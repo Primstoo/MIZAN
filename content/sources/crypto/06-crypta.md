@@ -5,6 +5,24 @@ seance: Partie 1
 importance: 3
 ---
 
+## Avant de commencer
+
+Savoir chiffrer en César, en affine et en Vigenère : on va maintenant les attaquer.
+
+```html
+<details class="prereq"><summary><b>Vérifie ton prérequis.</b> En français, quelle est la lettre la plus fréquente ?</summary><p>Le E, de loin. C'est le point de départ de presque toutes les attaques par fréquences.</p></details>
+```
+
+## Comment aborder ce chapitre
+
+> [!astuce] **Tu changes de camp : tu es Oscar.** Tu n'as pas la clé, tu cherches des régularités. Une substitution change les lettres mais garde leurs fréquences, simplement déplacées.
+
+> [!piege] Croire que « beaucoup de clés » veut dire « sûr ». Une substitution quelconque a un nombre énorme de clés et tombe pourtant en quelques minutes à l'analyse des fréquences.
+
+À la fin, tu sais casser un César, retrouver une clé affine et expliquer la démarche pour Vigenère.
+
+## Le cours
+
 ```html
 <h3>Le rôle de la cryptanalyse</h3>
 <p>La cryptanalyse étudie comment attaquer un cryptosystème. On ne fait confiance à un système que s'il a résisté à de nombreuses attaques.</p>
