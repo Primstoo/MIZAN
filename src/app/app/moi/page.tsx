@@ -43,6 +43,16 @@ export default async function Moi() {
       </div>
 
       <section className="bloc">
+        <div className="row between"><h2>Mes supports</h2><div className="row"><a href="/app/contribuer" className="btn alt small">Envoyer une annale</a><a href="/app/supports" className="btn small">Déposer un cours</a></div></div>
+        <p className="muted small">Dépose le cours de ton prof (PDF, photo ou texte) : il est découpé en fiche, quiz et flashcards. Les fichiers originaux restent privés.</p>
+      </section>
+
+      <section className="bloc">
+        <div className="row between"><h2>Séances live</h2><a href="/app/live" className="btn alt small">Voir</a></div>
+        <p className="muted small">Les séances de révision en direct, avant les examens.</p>
+      </section>
+
+      <section className="bloc">
         <div className="row between"><h2>Mon offre : {NOMS[offre.plan]}</h2><a href="/app/offres" className="btn small">{offre.plan === "premium" ? "Voir" : "Voir les offres"}</a></div>
         <p className="muted small">{offre.fin ? `Active jusqu'au ${dateFr(offre.fin)}.` : "Fiches, quiz et tuteur de base. Tu as un code ? Active-le sur la page des offres."}</p>
       </section>
@@ -67,10 +77,6 @@ export default async function Moi() {
         </section>
       )}
 
-      <section className="bloc">
-        <div className="row between"><h2>Partager mes cours</h2><a href="/app/contribuer" className="btn small">Envoyer un document</a></div>
-        <p className="muted small">Envoie les cours, TD et annales de tes profs : ils servent à créer de nouveaux modules. Chaque document accepté te donne des questions au tuteur en plus, chaque jour{bonus ? ` (tu as déjà +${bonus})` : ""}.</p>
-      </section>
 
       <section className="bloc">
         <h2>Inviter des camarades</h2>

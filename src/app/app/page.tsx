@@ -2,10 +2,9 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { admin } from "@/lib/acces";
 import { chargerParcours, chargerMaitrise, missionPerso } from "@/lib/parcours";
-import Mascotte, { estMascotte } from "@/components/Mascotte";
-import Squelette, { osMaitrises } from "@/components/Squelette";
+import { notePrevue } from "@/lib/maitrise";
 
-// « Aujourd'hui » : le cœur de l'appli. Mission du jour, compte à rebours, série, prochain live.
+// « Aujourd'hui » : la note prévue comme boussole, la séance du jour, puis ce qui coûte des points.
 export const metadata = { title: "Aujourd’hui" };
 
 export default async function Aujourdhui() {
@@ -17,85 +16,90 @@ export default async function Aujourdhui() {
   const mc = cible ? maitrise[cible.module_slug] : undefined;
   const mission = cible ? missionPerso(p.profil.minutes_jour, cible.reste, mc, cible.module_slug) : null;
   const fait = cible ? p.faitAujourdhui.has(cible.module_slug) : false;
+  const note = mc && mc.testes ? notePrevue(mc) : null;
   const { data: lives } = await admin().from("live_sessions").select("id, titre, starts_at, prix_dh, places")
     .gte("starts_at", new Date().toISOString()).order("starts_at").limit(1);
   const live = lives?.[0];
   const heure = (iso: string) => new Date(iso).toLocaleString("fr-FR", { timeZone: "Africa/Casablanca", weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" });
+  const nf = (n: number) => String(n).replace(".", ",");
+  const titre = cible ? cible.module!.titre.split(" (")[0] : "";
+  const duree = p.profil.minutes_jour >= 120 ? "2 h" : p.profil.minutes_jour + " min";
 
   return (
-    <main className="page today">
-      <header className="row between">
-        <div className="salut">
-          <Mascotte id={estMascotte(p.profil.mascotte) ? p.profil.mascotte : "toumai"} taille={52} />
-          <div><p className="eyebrow">{p.profil.prenom ? `Salut ${p.profil.prenom}` : "Salut"}</p><h1>Aujourd&apos;hui</h1></div>
-        </div>
-        {p.serie > 1 && <span className="chip">{p.serie} jours de révision d&apos;affilée</span>}
+    <main className="page tl">
+      <header className="tl-haut">
+        {cible ? <a href={`/app/module/${cible.module_slug}`} className="tl-pastille">{titre} ›</a> : <span className="tl-pastille">{p.profil.prenom ? `Salut ${p.profil.prenom}` : "Salut"}</span>}
+        {cible && <strong className="tl-compte">Examen {cible.estimee ? "≈ " : ""}dans {cible.reste} jour{cible.reste > 1 ? "s" : ""}</strong>}
       </header>
 
-      {cible && mission ? (
-        <section className="card hi">
-          <p className="k">Mission du jour · {p.profil.minutes_jour >= 120 ? "2 h" : p.profil.minutes_jour + " min"}</p>
-          <h2>{cible.module!.titre}</h2>
-          {fait && <p className="badge-ok">✓ Tu as déjà révisé ce module aujourd&apos;hui</p>}
-          {mission.urgent && <p className="small">Examen dans moins de deux semaines : place aux conditions réelles.</p>}
-          {mc && <p className="small">Maîtrise du module : <strong>{mc.pct} %</strong>{mission.cibles.length ? " · la séance commence par tes points faibles" : ""}</p>}
-          <ul className="tasks">
-            {mission.etapes.map((e) => <li key={e}>{e}</li>)}
-          </ul>
-          <a href={`/app/m/${cible.module_slug}`} className="btn inv">{fait ? "Continuer" : "Commencer"}</a>
-        </section>
-      ) : (
-        <section className="card">
-          <h2>Ajoute une date d&apos;examen</h2>
-          <p className="muted small">Sans date d&apos;examen, l&apos;appli ne peut pas calculer ta mission du jour.</p>
-          <a href="/app/bienvenue" className="btn">Choisir mes modules</a>
+      {cible && (
+        <section className="tl-note">
+          <p className="tl-lbl">Ta note prévue si l&apos;examen était demain</p>
+          {note ? (
+            <>
+              <div className="tl-note-ligne">
+                <span className="tl-chiffre">{nf(note.note)}</span><span className="tl-sur">/ 20</span>
+                <span className="tl-note-info">fiabilité {note.fiabilite}<br />{note.couverture} % du programme testé</span>
+              </div>
+              <div className="tl-jauge" role="img" aria-label={`Note prévue ${nf(note.note)} sur 20, seuil de validation à 10`}>
+                <i style={{ width: `${Math.min(100, note.note * 5)}%` }} /><b /><span>10, validé</span>
+              </div>
+            </>
+          ) : (
+            <p className="tl-vide">Elle s&apos;affichera après ton premier quiz. <a href={`/app/niveau/${cible.module_slug}`}>Faire le test de niveau (3 min)</a></p>
+          )}
         </section>
       )}
 
-      <div className="duo">
-        {cible && (
-          <section className="card">
-            <div className="row between"><span className="k">Examen dans</span><span className="chip">{cible.module!.titre.split(" (")[0]}</span></div>
-            <p className="big">{cible.estimee ? "≈ " : ""}{cible.reste} jour{cible.reste > 1 ? "s" : ""}</p>
-            {cible.estimee && <p className="small muted">Date estimée : pas encore annoncée. <a href="/app/bienvenue">Mettre à jour</a></p>}
-            <div className="days">
-              {p.semaine.map((j) => (
-                <i key={j.d} className={j.fait ? "on" : j.aujourdhui ? "today" : ""} title={j.d}>
-                  {["L", "M", "M", "J", "V", "S", "D"][(new Date(j.d + "T12:00:00Z").getUTCDay() + 6) % 7]}
-                </i>
-              ))}
-            </div>
-            {p.examens.length > 1 && (
-              <ul className="small muted list-plain">
-                {p.examens.slice(1).map((e) => <li key={e.module_slug}>{e.module!.titre} : J-{e.reste}{e.estimee ? " (estimé)" : ""}</li>)}
-              </ul>
-            )}
-          </section>
+      {cible && mission ? (
+        <section className="tl-seance">
+          <div className="tl-seance-haut"><span>{fait ? "Séance du jour, déjà commencée" : "Séance du jour"}</span><span>{duree}</span></div>
+          <h2>{titre}</h2>
+          {mission.urgent && <p className="tl-seance-info">Examen dans moins de deux semaines : place aux conditions réelles.</p>}
+          <ul>{mission.etapes.slice(0, 4).map((e) => <li key={e}>{e}</li>)}</ul>
+          <a href={`/app/m/${cible.module_slug}`} className="tl-btn sombre">{fait ? "Continuer" : "Commencer"}</a>
+        </section>
+      ) : (
+        <section className="tl-seance">
+          <h2>Ajoute une date d&apos;examen</h2>
+          <p className="tl-seance-info">Sans date d&apos;examen, l&apos;appli ne peut pas préparer ta séance du jour.</p>
+          <a href="/app/bienvenue" className="tl-btn sombre">Choisir mes cours</a>
+        </section>
+      )}
+
+      {mc && cible && mc.faibles.length > 0 && (
+        <section>
+          <p className="tl-lbl">Ce qui te coûte des points</p>
+          <div className="tl-liste">
+            {mc.faibles.slice(0, 3).map((f) => (
+              <a key={f.id} href={`/app/module/${cible.module_slug}`}>
+                <span>{f.t}</span>
+                {f.statut === "fragile" ? <em>{Math.round((f.score ?? 0) * 100)} % de réussite</em> : <small>pas encore vu</small>}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section>
+        <div className="row between"><p className="tl-lbl">Ta semaine</p>{p.serie > 1 && <span className="small muted">{p.serie} jours d&apos;affilée</span>}</div>
+        <div className="days">
+          {p.semaine.map((j) => (
+            <i key={j.d} className={j.fait ? "on" : j.aujourdhui ? "today" : ""} title={j.d}>
+              {["L", "M", "M", "J", "V", "S", "D"][(new Date(j.d + "T12:00:00Z").getUTCDay() + 6) % 7]}
+            </i>
+          ))}
+        </div>
+        {p.examens.length > 1 && (
+          <div className="tl-liste" style={{ marginTop: 12 }}>
+            {p.examens.slice(1).map((e) => <a key={e.module_slug} href={`/app/module/${e.module_slug}`}><span>{e.module!.titre.split(" (")[0]}</span><small>{e.estimee ? "≈ " : ""}dans {e.reste} jour{e.reste > 1 ? "s" : ""}</small></a>)}
+          </div>
         )}
-        <section className="card">
-          <span className="k">Ton squelette</span>
-          {mc && cible ? (
-            <a href="/app/progres" className="squel" style={{ textDecoration: "none", color: "inherit" }}>
-              <Squelette groupes={mc.groupes} taille={64} titre={cible.module!.titre} />
-              <div>
-                <p className="t">{cible.module!.titre.split(" (")[0]} · {osMaitrises(mc.groupes)} / 5 os</p>
-                <p className="small muted">Chaque os s&apos;assemble quand tu maîtrises ses chapitres.</p>
-              </div>
-            </a>
-          ) : <p className="small muted">Fais un premier quiz dans un module : ton squelette commence à s&apos;assembler.</p>}
-          <a href="/app/progres" className="btn alt small">Ma progression</a>
-        </section>
-        <section className="card">
-          <span className="k">Prochaine séance live</span>
-          {live ? (
-            <>
-              <p className="t">{live.titre}</p>
-              <p className="small muted">{heure(live.starts_at)} · {live.prix_dh} DH</p>
-              <a href="/app/live" className="btn alt small">Voir et réserver</a>
-            </>
-          ) : <p className="small muted">Aucune séance programmée pour l&apos;instant.</p>}
-        </section>
-      </div>
+      </section>
+
+      {live && (
+        <a href="/app/live" className="tl-ligne"><span>Séance live : {live.titre}, {heure(live.starts_at)}</span><strong>Voir</strong></a>
+      )}
     </main>
   );
 }

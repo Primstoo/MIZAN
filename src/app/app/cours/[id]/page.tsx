@@ -26,7 +26,7 @@ export default async function Cours({ params }: { params: { id: string } }) {
 
   return (
     <main className="page narrow-m">
-      <a href={`/app/modules?s=${d.semestre ?? ""}`} className="small muted">← Modules</a>
+      <a href={`/app/supports?s=${d.semestre ?? ""}`} className="small muted">← Mes supports</a>
       <span className="k bloc">{[d.module_libre, d.semestre].filter(Boolean).join(" · ")}</span>
       {d.analyse === "pret" && contenuValide(d.contenu) ? (
         <>

@@ -18,14 +18,14 @@ export async function choisirFac(_prev: string, form: FormData): Promise<string>
   const s = String(form.get("semestre") || "");
   const { error } = await admin().from("profiles").upsert({ user_id: u.id, etablissement_id: r.id, etablissement: r.nom, ville: r.ville, ...(estSemestre(s) ? { semestre: s } : {}) });
   if (error) return "Enregistrement impossible (" + error.code + ").";
-  revalidatePath("/app/modules");
+  revalidatePath("/app/modules"); revalidatePath("/app/supports");
   return "";
 }
 
 export async function changerFac(): Promise<void> {
   const u = await moi();
   await admin().from("profiles").update({ etablissement_id: null }).eq("user_id", u.id);
-  revalidatePath("/app/modules");
+  revalidatePath("/app/modules"); revalidatePath("/app/supports");
 }
 
 export async function choisirSemestre(form: FormData): Promise<void> {
@@ -34,7 +34,7 @@ export async function choisirSemestre(form: FormData): Promise<void> {
   const filiere = String(form.get("filiere") || "").trim().slice(0, 60);
   if (!estSemestre(s)) return;
   await admin().from("profiles").update({ semestre: s, ...(filiere ? { filiere } : {}) }).eq("user_id", u.id);
-  revalidatePath("/app/modules");
+  revalidatePath("/app/modules"); revalidatePath("/app/supports");
 }
 
 // Cours importé depuis « Mon module n'y est pas » : enregistré puis analysé par /api/analyse.
@@ -60,7 +60,7 @@ export async function declarerCours(meta: { chemin: string; nom: string; type: s
     semestre: meta.semestre, filiere: p.filiere ?? null, analyse: "en_cours", // pris en charge par le pipeline d'import
   }).select("id").single();
   if (error || !data) return { erreur: "Enregistrement impossible (" + (error?.code ?? "?") + ")." };
-  revalidatePath("/app/modules"); revalidatePath("/app/admin");
+  revalidatePath("/app/modules"); revalidatePath("/app/supports"); revalidatePath("/app/admin");
   return { id: data.id };
 }
 
@@ -71,7 +71,7 @@ export async function partagerCours(form: FormData): Promise<void> {
   const id = String(form.get("id"));
   const partage = form.get("partage") === "1";
   await admin().from("documents").update({ partage, ...(partage ? { statut: "accepte" } : {}) }).eq("id", id);
-  revalidatePath("/app/admin"); revalidatePath(`/app/cours/${id}`); revalidatePath("/app/modules");
+  revalidatePath("/app/admin"); revalidatePath(`/app/cours/${id}`); revalidatePath("/app/modules"); revalidatePath("/app/supports");
 }
 
 // Admin : valider un établissement, ou le fusionner dans un autre (doublon).
