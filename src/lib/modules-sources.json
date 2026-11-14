@@ -1,5 +1,21 @@
 [
   {
+    "slug": "analyse-1",
+    "titre": "Analyse 1",
+    "prof": "",
+    "semestre": "S1",
+    "fichier": "analyse-1.html",
+    "resume": "Nombres réels, valeur absolue, borne supérieure, puis les suites. Les 3 premiers chapitres sont prêts, la suite arrive.",
+    "cles": [
+      "analyse1_scores",
+      "analyse1_scores_etat",
+      "mzt-analyse-1*"
+    ],
+    "cle": "analyse1_scores",
+    "format": "score10",
+    "annexes": []
+  },
+  {
     "slug": "probas",
     "titre": "Probabilités et statistiques",
     "prof": "",

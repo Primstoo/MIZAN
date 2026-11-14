@@ -13,7 +13,7 @@ export type Module = {
   resume: string;
   cles: string[];
   annexes?: string[];
-  etablissement: string; // établissement dont le module suit le cours (sert à filtrer l'inscription guidée)
+  etablissement: string; // établissement dont le module suit le cours (sert à filtrer l'inscription guidée) ; « Cours généraliste » = proposé partout
 };
 
 // Établissements proposés à l'inscription (l'élève peut aussi en taper un autre).
@@ -27,8 +27,10 @@ export const ETABLISSEMENTS = [
 const norm = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 // FSABM s'appelait FPBM (Faculté polydisciplinaire de Béni Mellal) : les deux noms comptent.
 const ALIAS: Record<string, string[]> = { FSABM: ["fsabm", "fpbm", "polydisciplinaire de beni mellal", "polydisciplinaire beni mellal"] };
+// Cours généralistes (non liés à un prof) : proposés quel que soit l'établissement.
+export const GENERALISTE = "Cours généraliste";
 export const memeEtablissement = (saisi: string | null | undefined, code: string) =>
-  !!saisi && (ALIAS[code] ?? [code.toLowerCase()]).some((a) => norm(saisi).includes(a));
+  code === GENERALISTE || (!!saisi && (ALIAS[code] ?? [code.toLowerCase()]).some((a) => norm(saisi).includes(a)));
 export const modulesPour = (etab: string | null | undefined) => MODULES.filter((m) => memeEtablissement(etab, m.etablissement));
 
 const MANUELS: Module[] = [];

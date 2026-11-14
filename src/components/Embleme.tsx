@@ -6,6 +6,7 @@ const STYLES: Record<string, { motif: string; couleur: string }> = {
   archi: { motif: "archi", couleur: "#3FA57A" },
   uml: { motif: "uml", couleur: "#9A78C9" },
   "traitement-ad": { motif: "donnees", couleur: "#C76A8A" },
+  "analyse-1": { motif: "courbe", couleur: "#D9A441" },
 };
 export const couleurCours = (slug: string) => STYLES[slug]?.couleur ?? "var(--acc)";
 

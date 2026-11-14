@@ -24,7 +24,6 @@ export default async function Cours() {
   const mu = une ? maitrise[une.slug] : undefined;
   const acquis = mu ? mu.groupes.filter((g) => g.ok === g.total).length : 0;
   const suite = mu?.groupes.find((g) => g.ok < g.total);
-  const autres = MODULES.filter((m) => m.slug !== une?.slug);
 
   return (
     <main className="page tl">
@@ -45,8 +44,9 @@ export default async function Cours() {
         </a>
       )}
 
+      <p className="tl-lbl">Tous les cours</p>
       <div className="tl-grille">
-        {autres.map((m) => {
+        {MODULES.map((m) => {
           const mm = maitrise[m.slug], e = restes.get(m.slug);
           return (
             <a key={m.slug} href={`/app/module/${m.slug}`} className="tl-couv" style={{ borderLeftColor: couleurCours(m.slug) }}>

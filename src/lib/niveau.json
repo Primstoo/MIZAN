@@ -566,5 +566,40 @@
    "a": 2,
    "e": ".loc (étiquettes) inclut la fin ; tout ce qui est positionnel l'exclut."
   }
+ ],
+ "analyse-1": [
+  {
+   "n": "valeur-absolue",
+   "q": "Que vaut $|-7|$ ?",
+   "o": [
+    "$-7$",
+    "$7$",
+    "$0$"
+   ],
+   "a": 1,
+   "e": "Une valeur absolue est une distance : elle n'est jamais négative."
+  },
+  {
+   "n": "limite-suite",
+   "q": "Quelle écriture est la définition de « $(u_n)$ converge vers $\\ell$ » ?",
+   "o": [
+    "Il existe $N$ tel que pour tout $\\varepsilon > 0$ et tout $n \\ge N$, $|u_n - \\ell| < \\varepsilon$",
+    "Pour tout $\\varepsilon > 0$, il existe $N$ tel que pour tout $n \\ge N$, $|u_n - \\ell| < \\varepsilon$",
+    "Pour tout $\\varepsilon > 0$, il existe $n$ tel que $|u_n - \\ell| < \\varepsilon$"
+   ],
+   "a": 1,
+   "e": "L'ordre compte : $\\varepsilon$ d'abord, puis $N$ qui en dépend, puis tous les $n \\ge N$."
+  },
+  {
+   "n": "borne-superieure",
+   "q": "La borne supérieure de $[0, 1[$ est :",
+   "o": [
+    "$0$",
+    "$1$",
+    "elle n'existe pas"
+   ],
+   "a": 1,
+   "e": "Les majorants sont les nombres $\\ge 1$. Le plus petit est 1."
+  }
  ]
 }

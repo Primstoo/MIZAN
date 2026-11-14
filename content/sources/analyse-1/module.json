@@ -1,0 +1,13 @@
+{
+  "titre": "Analyse 1",
+  "prof": "",
+  "semestre": "S1",
+  "etablissement": "Cours généraliste",
+  "fichier": "analyse-1.html",
+  "cle": "analyse1_scores",
+  "maths": true,
+  "resume": "Nombres réels, valeur absolue, borne supérieure, puis les suites. Les 3 premiers chapitres sont prêts, la suite arrive.",
+  "conventions": "Cours généraliste d'Analyse 1 (première année de licence, tronc commun sciences au Maroc), rédigé par ToumaiLearn et non lié à un professeur. Notations : E(x) pour la partie entière, intervalles ouverts notés ]a, b[, quantificateurs écrits en toutes lettres quand c'est possible. Chaque chapitre suit trois temps : prérequis, façon d'aborder, puis idées illustrées.",
+  "intro": "Ce cours part de zéro et avance **une idée à la fois**.\n\n**Chaque chapitre a trois temps**\n\n1. **Avant de commencer** : ce qu'il faut déjà savoir, avec une question pour vérifier et un rappel court si ça coince.\n2. **Comment l'aborder** : l'état d'esprit qui rend le chapitre simple, et le piège dans lequel presque tout le monde tombe.\n3. **Les idées, illustrées** : un dessin, une phrase, un exemple.\n\nTermine par le QCM : **8/10 = chapitre maîtrisé**.\n\nCe cours est une rédaction originale de ToumaiLearn. Il couvre le programme habituel d'Analyse 1, mais l'ordre et les notations de ton prof peuvent différer : garde son polycopié à côté.",
+  "chapitres": ["01-valeur-absolue.md", "02-borne-superieure.md", "03-limite-suite.md"]
+}

@@ -1086,5 +1086,34 @@
     "g": "cours"
    }
   ]
+ },
+ "analyse-1": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "valeur-absolue",
+    "t": "Inégalités et valeur absolue",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "borne-superieure",
+    "t": "Majorant, borne supérieure, partie entière",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "limite-suite",
+    "t": "Suites · la limite, avec ε et N",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

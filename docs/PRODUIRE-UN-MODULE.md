@@ -122,6 +122,7 @@ Viser **10 à 12 QCM par chapitre**, avec au moins 3 options : ils alimentent au
 | slug | Sources | Remarque |
 |---|---|---|
 | `traitement-ad` | `content/sources/traitement-ad` | 8 chapitres, 83 QCM, Pr Madani, S5 |
+| `analyse-1` | `content/sources/analyse-1` | Cours généraliste (rédaction ToumaiLearn, sans prof), S1. Chaque chapitre suit trois temps : « Avant de commencer » (prérequis + question de contrôle), « Comment aborder ce chapitre » (état d'esprit, piège), puis des idées illustrées. 3 chapitres sur 10 prévus. `"etablissement": "Cours généraliste"` le propose à tous les établissements. |
 | `reseaux-m351` | `content/sources/reseaux-m351` (migré) | 43 notions, 132 QCM, 152 flashcards, 126 exercices ; outils dans `reseaux-M351-outils.html` |
 | `archi` | `content/sources/archi` (migré) | 26 notions, 62 QCM, 71 flashcards, 64 exercices ; outils dans `archi-ordinateurs-outils.html` |
 | `crypto` | `content/sources/crypto` (migré) | 11 chapitres, 37 QCM, 54 réponses courtes vérifiées, 86 flashcards ; labos dans `crypto-farchane-outils.html` |
