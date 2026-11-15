@@ -43,6 +43,7 @@ export default async function Moi() {
 
       <section className="bloc">
         <h2>Réglages</h2>
+        <p><a href="/app?visite=1" className="btn alt small">Revoir le tutoriel</a></p>
         <p className="k">Thème</p>
         <Theme />
         <form action={changerMascotte} className="stack" style={{ marginTop: 12 }}>
