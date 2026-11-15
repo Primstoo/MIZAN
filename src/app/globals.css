@@ -321,3 +321,5 @@ form.stack label{display:flex;flex-direction:column;gap:4px}
 @keyframes tl-cible{50%{outline-offset:7px}}
 @media (max-width:700px){.tl-visite{bottom:calc(84px + env(safe-area-inset-bottom))}}
 @media (prefers-reduced-motion:reduce){.tl-cible{animation:none}}
+.tl-voile{position:fixed;z-index:70;background:rgba(10,13,20,.6);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.tl-visite-appui{color:var(--acc)}

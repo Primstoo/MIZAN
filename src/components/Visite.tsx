@@ -42,6 +42,7 @@ const TEXTES: Record<MascotteId, string[]> = {
 export default function Visite({ mascotte, prenom }: { mascotte: MascotteId; prenom: string }) {
   const chemin = usePathname();
   const [etape, setEtape] = useState(-1); // -1 = fermée
+  const [zone, setZone] = useState<{ h: number; g: number; l: number; t: number } | null>(null);
 
   useEffect(() => {
     if (chemin !== "/app") return;
@@ -51,12 +52,28 @@ export default function Visite({ mascotte, prenom }: { mascotte: MascotteId; pre
     if (force || !vue) setEtape(0);
   }, [chemin]);
 
+  // Étape avec un bouton montré : tout le reste est flouté, et la visite n'avance que si l'élève appuie sur ce bouton.
   useEffect(() => {
+    setZone(null);
     if (etape < 0) return;
-    const el = CIBLES[etape] ? document.querySelector(CIBLES[etape]) : null;
-    el?.classList.add("tl-cible");
-    el?.scrollIntoView({ block: "center", behavior: "smooth" });
-    return () => el?.classList.remove("tl-cible");
+    const el = CIBLES[etape] ? document.querySelector<HTMLElement>(CIBLES[etape]) : null;
+    if (!el) return;
+    el.classList.add("tl-cible");
+    el.scrollIntoView({ block: "center" });
+    const mesurer = () => { const r = el.getBoundingClientRect(); setZone({ h: r.top - 8, g: r.left - 8, l: r.width + 16, t: r.height + 16 }); };
+    const appui = (e: Event) => { e.preventDefault(); e.stopPropagation(); setEtape((x) => x + 1); };
+    mesurer();
+    const t = setTimeout(mesurer, 300);
+    el.addEventListener("click", appui, true);
+    window.addEventListener("scroll", mesurer, true);
+    window.addEventListener("resize", mesurer);
+    return () => {
+      clearTimeout(t);
+      el.classList.remove("tl-cible");
+      el.removeEventListener("click", appui, true);
+      window.removeEventListener("scroll", mesurer, true);
+      window.removeEventListener("resize", mesurer);
+    };
   }, [etape]);
 
   function fermer() {
@@ -69,18 +86,27 @@ export default function Visite({ mascotte, prenom }: { mascotte: MascotteId; pre
   const textes = TEXTES[mascotte];
   const dernier = etape === textes.length - 1;
   return (
-    <div className="tl-visite" role="dialog" aria-label="Visite guidée">
-      <Mascotte id={mascotte} taille={56} decor />
-      <div className="tl-visite-bulle">
-        <p aria-live="polite">{textes[etape].replace("{p}", prenom || "toi")}</p>
-        <div className="row between">
-          <span className="small muted">{etape + 1} / {textes.length}</span>
-          <div className="row">
-            {!dernier && <button type="button" className="btn alt small" onClick={fermer}>Passer</button>}
-            <button type="button" className="btn small" onClick={() => (dernier ? fermer() : setEtape(etape + 1))}>{dernier ? "Compris" : "Suivant"}</button>
+    <>
+      {zone ? (
+        <>
+          <div className="tl-voile" style={{ top: 0, left: 0, right: 0, height: Math.max(0, zone.h) }} />
+          <div className="tl-voile" style={{ top: zone.h + zone.t, left: 0, right: 0, bottom: 0 }} />
+          <div className="tl-voile" style={{ top: zone.h, height: zone.t, left: 0, width: Math.max(0, zone.g) }} />
+          <div className="tl-voile" style={{ top: zone.h, height: zone.t, left: zone.g + zone.l, right: 0 }} />
+        </>
+      ) : <div className="tl-voile" style={{ inset: 0 }} />}
+      <div className="tl-visite" role="dialog" aria-label="Visite guidée">
+        <Mascotte id={mascotte} taille={56} decor />
+        <div className="tl-visite-bulle">
+          <p aria-live="polite">{textes[etape].replace("{p}", prenom || "toi")}</p>
+          <div className="row between">
+            <span className="small muted">{etape + 1} / {textes.length}</span>
+            {zone
+              ? <strong className="small tl-visite-appui">Appuie dessus pour continuer</strong>
+              : <button type="button" className="btn small" onClick={() => (dernier ? fermer() : setEtape(etape + 1))}>{dernier ? "Compris" : "Suivant"}</button>}
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
