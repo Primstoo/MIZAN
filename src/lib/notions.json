@@ -1269,5 +1269,52 @@
     "g": "cours"
    }
   ]
+ },
+ "dessin-industriel": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "projection-orthogonale",
+    "t": "La projection orthogonale et le cube de projection",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "disposition-vues",
+    "t": "Disposition des vues · le premier dièdre",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "correspondances",
+    "t": "Correspondances entre les vues et droite à 45°",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "choix-vues",
+    "t": "Choisir les vues · lesquelles et combien",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "vues-particulieres",
+    "t": "Vues particulières · demi-vue, vue partielle, vue interrompue, détail",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "revision",
+    "t": "Fiche de révision et examen blanc",
+    "imp": 3,
+    "g": "cours"
+   }
+  ]
  }
 }

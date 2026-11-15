@@ -9,6 +9,7 @@ const STYLES: Record<string, { motif: string; couleur: string }> = {
   "analyse-1": { motif: "courbe", couleur: "#D9A441" },
   "java-poo": { motif: "uml", couleur: "#D9824F" },
   cms: { motif: "page", couleur: "#4FA3A5" },
+  "dessin-industriel": { motif: "vues", couleur: "#6C8FB8" },
 };
 export const couleurCours = (slug: string) => STYLES[slug]?.couleur ?? "var(--acc)";
 
@@ -51,6 +52,11 @@ export default function Embleme({ slug, taille = 52, couleur }: { slug: string; 
       <rect x="6" y="10" width="52" height="44" rx="5" /><path d="M6 21h52" />
       <circle cx="13" cy="15.5" r="1.6" fill={c} stroke="none" /><circle cx="19" cy="15.5" r="1.6" fill={c} stroke="none" />
       <rect x="13" y="28" width="16" height="18" rx="2" fill={c} stroke="none" /><path d="M35 30h16M35 37h16M35 44h10" />
+    </>;
+  } else if (s.motif === "vues") {
+    dessin = <>
+      <path d="M8 8h12v16h18v12H8z" fill={c} stroke="none" /><rect x="46" y="8" width="12" height="28" rx="1" />
+      <rect x="8" y="44" width="30" height="12" rx="1" /><path d="M20 44v12M42 40l14 14" strokeDasharray="3 4" />
     </>;
   } else {
     dessin = <><path d="M8 6v50h50" /><path d="M8 50C22 50 24 16 36 16S50 40 58 20" /></>;

@@ -1,0 +1,18 @@
+{
+  "titre": "Dessin industriel",
+  "prof": "Pr I. El Hadouti",
+  "semestre": "S1",
+  "etablissement": "ENSA Al Hoceima",
+  "fichier": "dessin-industriel.html",
+  "resume": "Projection orthogonale : les six vues, le premier dièdre, les correspondances et la droite à 45°, le choix des vues, les vues particulières. Chapitre 2 du cours, avec examen blanc.",
+  "conventions": "Cours de dessin industriel de la Pr Imane El Hadouti, ENSA Al Hoceima, chapitre 2 : projection orthogonale. Disposition européenne (premier dièdre) : vue de droite à gauche de la vue de face, vue de dessus au-dessous. Arêtes vues en trait continu fort, arêtes cachées en trait interrompu fin. La droite à 45° part du point O, à l'intersection des axes entre les vues, et transfère les profondeurs. Pièce fil rouge du module : une pièce en L de 60 mm de large, 40 mm de profondeur et 50 mm de haut (montant de 20 mm de large à gauche, semelle de 20 mm de haut). Pas de formules : tout s'explique avec des mots et des schémas.",
+  "intro": "Ce module suit le **chapitre 2 du cours de la Pr I. El Hadouti** (ENSA Al Hoceima, 27 octobre 2026) : la projection orthogonale.\n\n**Chaque chapitre a trois temps**\n\n1. **Avant de commencer** : ce qu'il faut déjà savoir, avec une question pour vérifier.\n2. **Comment l'aborder** : l'état d'esprit qui rend le chapitre simple, et le piège dans lequel presque tout le monde tombe.\n3. **Les idées, illustrées** : un schéma, une phrase, un exemple.\n\nUne même pièce en L (60 × 40 × 50 mm) sert d'exemple du début à la fin. Termine chaque chapitre par le QCM : **8/10 = chapitre maîtrisé**.\n\nLe dessin industriel s'apprend le crayon à la main : refais chaque schéma sur une feuille, avec une règle et une équerre.\n\n**Ce qui est sûr** : le contenu vient des diapositives du chapitre 2. Ce que nous avons ajouté est signalé par un encadré « Attention ».\n\n**À vérifier** : le chapitre 1 du cours et les TD ne nous ont pas été fournis, et le format du contrôle n'est pas connu. Demande-les à ta prof.",
+  "chapitres": [
+    "01-projection-orthogonale.md",
+    "02-disposition-vues.md",
+    "03-correspondances.md",
+    "04-choix-vues.md",
+    "05-vues-particulieres.md",
+    "06-revision.md"
+  ]
+}

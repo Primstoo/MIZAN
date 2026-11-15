@@ -803,5 +803,73 @@
    "a": 1,
    "e": "C, Java ou HTML sont des langages ; le paradigme est la façon de penser le programme."
   }
+ ],
+ "dessin-industriel": [
+  {
+   "n": "disposition-vues",
+   "q": "En premier dièdre, la vue de droite est placée :",
+   "o": [
+    "à droite de la vue de face",
+    "à gauche de la vue de face",
+    "au-dessus de la vue de face"
+   ],
+   "a": 1,
+   "e": "Le dessin se forme derrière la pièce : ce qu'on voit depuis la droite se dessine à gauche."
+  },
+  {
+   "n": "correspondances",
+   "q": "Quelles vues sont alignées verticalement ?",
+   "o": [
+    "face, gauche et droite",
+    "face, dessus et dessous",
+    "dessus, gauche et arrière"
+   ],
+   "a": 1,
+   "e": "Face, dessus et dessous sont l'une au-dessus de l'autre. Face, gauche, droite et arrière sont sur la même ligne horizontale."
+  },
+  {
+   "n": "projection-orthogonale",
+   "q": "Dans une projection orthogonale, les lignes de projection sont :",
+   "o": [
+    "parallèles au plan de projection",
+    "parallèles entre elles et perpendiculaires au plan de projection",
+    "concourantes en un point, l'œil de l'observateur"
+   ],
+   "a": 1,
+   "e": "C'est la définition. Des lignes qui se rejoignent à l'œil donneraient une perspective, qui déforme."
+  },
+  {
+   "n": "choix-vues",
+   "q": "L'objectif du choix des vues est de :",
+   "o": [
+    "dessiner les six vues de l'objet",
+    "définir complètement l'objet avec le minimum de vues",
+    "dessiner toujours exactement trois vues"
+   ],
+   "a": 1,
+   "e": "Complètement, mais sans vue inutile."
+  },
+  {
+   "n": "vues-particulieres",
+   "q": "La demi-vue s'utilise pour un objet :",
+   "o": [
+    "très long",
+    "qui présente une symétrie",
+    "trop petit pour être lisible"
+   ],
+   "a": 1,
+   "e": "On ne dessine qu'une moitié, l'autre étant identique en miroir."
+  },
+  {
+   "n": "revision",
+   "q": "En premier dièdre, quelle vue se trouve sous la vue de face ?",
+   "o": [
+    "la vue de dessous",
+    "la vue de dessus",
+    "la vue arrière"
+   ],
+   "a": 1,
+   "e": "Ce qu'on voit d'en haut se dessine en bas."
+  }
  ]
 }

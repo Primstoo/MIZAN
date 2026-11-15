@@ -21,12 +21,15 @@ export const ETABLISSEMENTS = [
   "FSABM · Béni Mellal", "FST · Béni Mellal", "ENSA · Béni Mellal", "ENCG · Béni Mellal",
   "FS · Rabat", "FSJES · Rabat", "FS Ben M'Sik · Casablanca", "FS Aïn Chock · Casablanca", "FST · Mohammedia",
   "FSSM · Marrakech", "FST · Marrakech", "FSDM · Fès", "FST · Fès", "FS · Meknès", "FS · Agadir", "FS · Kénitra",
-  "FS · Tétouan", "FST · Tanger", "FS · Oujda", "FS · El Jadida", "FST · Settat",
+  "FS · Tétouan", "FST · Tanger", "ENSA · Al Hoceima", "FS · Oujda", "FS · El Jadida", "FST · Settat",
 ];
 
 const norm = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 // FSABM s'appelait FPBM (Faculté polydisciplinaire de Béni Mellal) : les deux noms comptent.
-const ALIAS: Record<string, string[]> = { FSABM: ["fsabm", "fpbm", "polydisciplinaire de beni mellal", "polydisciplinaire beni mellal"] };
+const ALIAS: Record<string, string[]> = {
+  FSABM: ["fsabm", "fpbm", "polydisciplinaire de beni mellal", "polydisciplinaire beni mellal"],
+  "ENSA Al Hoceima": ["ensa al hoceima", "ensa · al hoceima", "ensa d'al hoceima", "ensa al-hoceima", "ensah"],
+};
 // Cours généralistes (non liés à un prof) : proposés quel que soit l'établissement.
 export const GENERALISTE = "Cours généraliste";
 export const memeEtablissement = (saisi: string | null | undefined, code: string) =>

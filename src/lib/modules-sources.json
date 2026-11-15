@@ -16,6 +16,22 @@
     "annexes": []
   },
   {
+    "slug": "dessin-industriel",
+    "titre": "Dessin industriel",
+    "prof": "Pr I. El Hadouti",
+    "semestre": "S1",
+    "fichier": "dessin-industriel.html",
+    "resume": "Projection orthogonale : les six vues, le premier dièdre, les correspondances et la droite à 45°, le choix des vues, les vues particulières. Chapitre 2 du cours, avec examen blanc.",
+    "cles": [
+      "dessin_industriel_scores",
+      "dessin_industriel_scores_etat",
+      "mzt-dessin-industriel*"
+    ],
+    "cle": "dessin_industriel_scores",
+    "format": "score10",
+    "annexes": []
+  },
+  {
     "slug": "probas",
     "titre": "Probabilités et statistiques",
     "prof": "",
