@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { chargerParcours, chargerMaitrise, missionPerso } from "@/lib/parcours";
 import { notePrevue } from "@/lib/maitrise";
+import Installer from "./Installer";
 
 // « Aujourd'hui » : la note prévue comme boussole, la séance du jour, puis ce qui coûte des points.
 export const metadata = { title: "Aujourd’hui" };
@@ -16,6 +17,7 @@ export default async function Aujourdhui() {
   const mission = cible ? missionPerso(p.profil.minutes_jour, cible.reste, mc, cible.module_slug) : null;
   const fait = cible ? p.faitAujourdhui.has(cible.module_slug) : false;
   const note = mc && mc.testes ? notePrevue(mc) : null;
+  const appli = Array.isArray(user!.user_metadata?.appli) ? (user!.user_metadata.appli as unknown[]).filter((x): x is string => typeof x === "string") : [];
   const nf = (n: number) => String(n).replace(".", ",");
   const titre = cible ? cible.module!.titre.split(" (")[0] : "";
   const duree = p.profil.minutes_jour >= 120 ? "2 h" : p.profil.minutes_jour + " min";
@@ -70,7 +72,7 @@ export default async function Aujourdhui() {
           </div>
         </section>
       )}
-
+      <Installer deja={appli} />
     </main>
   );
 }

@@ -398,3 +398,14 @@ export async function changerMascotte(form: FormData): Promise<void> {
   await admin().from("profiles").update({ mascotte: m }).eq("user_id", u.id);
   revalidatePath("/app", "layout");
 }
+
+// L'appli installée (ouverte depuis son icône) le note sur le compte : le guide d'installation disparaît alors du navigateur.
+export async function marquerInstallee(plateforme: string): Promise<void> {
+  if (!["ios", "android", "ordi"].includes(plateforme)) return;
+  const sb = createClient();
+  const { data: { user } } = await sb.auth.getUser();
+  if (!user) return;
+  const deja = Array.isArray(user.user_metadata?.appli) ? (user.user_metadata.appli as unknown[]).filter((x): x is string => typeof x === "string") : [];
+  if (deja.includes(plateforme)) return;
+  await sb.auth.updateUser({ data: { appli: [...deja, plateforme].slice(0, 3) } });
+}
