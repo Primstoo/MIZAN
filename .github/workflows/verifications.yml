@@ -1,0 +1,26 @@
+# Vérifications automatiques à chaque push et chaque pull request : types, lint, tests, build.
+# Si une étape échoue, GitHub affiche une croix rouge sur le commit : ne pas fusionner dans main.
+name: Vérifications
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://exemple.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: cle-publique-factice

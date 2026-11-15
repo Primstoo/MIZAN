@@ -34,6 +34,15 @@ npm install
 npm run dev
 ```
 
+## Vérifier avant de mettre en ligne
+```bash
+npx tsc --noEmit   # types
+npm run lint       # style
+npm test           # tests automatiques (logique + contenu des modules)
+npm run build      # construction
+```
+GitHub Actions lance ces quatre commandes à chaque push (`.github/workflows/verifications.yml`).
+
 ## Feuille de route
 - [x] Connexion, invitations, inscription guidée, Aujourd'hui, Live, Moi, Suivi admin
 - [x] Modules protégés, progression synchronisée, tuteur serveur en continu

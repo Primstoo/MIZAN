@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "module": "node scripts/construire-module.mjs",
-    "verifier-module": "python3 scripts/verifier-code-module.py"
+    "verifier-module": "python3 scripts/verifier-code-module.py",
+    "test": "vitest run"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -18,12 +19,13 @@
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^22.20.5",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "^14.2.35",
     "marked": "^14.1.4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^5.1.0"
   }
 }

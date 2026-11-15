@@ -1,12 +1,13 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { admin, estAdmin } from "@/lib/acces";
-import { estSemestre, norm, quotaImport, resoudreEtab } from "@/lib/fac";
+import { admin, estAdmin, estMembre } from "@/lib/acces";
+import { estSemestre, importActif, norm, quotaImport, resoudreEtab } from "@/lib/fac";
 
 async function moi() {
   const { data: { user } } = await createClient().auth.getUser();
-  if (!user) throw new Error("Connexion requise");
+  // Membre obligatoire, comme dans ../actions.ts : un compte sans invitation ne peut ni créer d'établissement ni importer.
+  if (!user || !(await estMembre(user))) throw new Error("Accès refusé");
   return user;
 }
 
@@ -46,6 +47,7 @@ export async function declarerCours(meta: { chemin: string; nom: string; type: s
   if (!estSemestre(meta.semestre)) return { erreur: "Semestre invalide." };
   const nomModule = String(meta.module || "").replace(/\s+/g, " ").trim().slice(0, 80);
   if (nomModule.length < 2) return { erreur: "Indique le nom du module." };
+  if (!importActif() && !estAdmin(u)) return { erreur: "L'ajout de cours n'est pas encore ouvert." };
   const q = await quotaImport(u.id, estAdmin(u));
   if (q.reste <= 0) return { erreur: `Tu as utilisé tes ${q.total} imports (sur ${q.jours} jours). Passe au Premium pour en avoir plus.` };
   const db = admin();

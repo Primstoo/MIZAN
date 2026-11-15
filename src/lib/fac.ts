@@ -4,6 +4,10 @@ import { offresActives, offreDe, type Plan } from "@/lib/offres";
 import { norm, score, type Etab } from "./fac-commun";
 export * from "./fac-commun";
 
+// Import de ses propres cours : affiché seulement quand le pipeline qui traite les documents est branché (IMPORT_COURS=1).
+// Sans lui, un document envoyé restait « en cours de traitement » pour toujours.
+export const importActif = () => process.env.IMPORT_COURS === "1";
+
 // ---------- Quota d'imports analysés par l'IA (spec V1) ----------
 const env = (v: string | undefined, d: number) => (v && Number.isFinite(Number(v)) ? Number(v) : d);
 export const QUOTA_IMPORT: Record<Plan, { n: number; jours: number }> = {

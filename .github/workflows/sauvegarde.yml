@@ -1,0 +1,39 @@
+# Sauvegarde hebdomadaire de la base (l'offre gratuite de Supabase n'en fait aucune).
+# À configurer une fois : GitHub → Settings → Secrets and variables → Actions → New repository secret
+#   nom : SUPABASE_DB_URL
+#   valeur : Supabase → Connect → « Session pooler » (chaîne postgresql://… avec le mot de passe de la base)
+# La copie est gardée 90 jours dans l'onglet Actions (Artifacts). Le dépôt doit rester privé.
+name: Sauvegarde de la base
+on:
+  schedule:
+    - cron: "17 3 * * 0" # chaque dimanche, 3 h 17 UTC
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sauvegarder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Vérifier le secret
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ]; then echo "::error::Secret SUPABASE_DB_URL absent : voir l'en-tête de ce fichier."; exit 1; fi
+      - name: Installer le client PostgreSQL 17
+        run: |
+          sudo install -d /usr/share/postgresql-common/pgdg
+          sudo curl -fsSL -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc
+          echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+          sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client-17
+      - name: Exporter les schémas public et auth
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          /usr/lib/postgresql/17/bin/pg_dump "$SUPABASE_DB_URL" --schema=public --schema=auth --no-owner --no-privileges --format=custom --file=toumailearn-$(date +%F).dump
+          ls -lh toumailearn-*.dump
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sauvegarde-${{ github.run_id }}
+          path: toumailearn-*.dump
+          retention-days: 90

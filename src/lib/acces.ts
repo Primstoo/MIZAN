@@ -17,6 +17,18 @@ export async function estMembre(u: User | null) {
   return !!data;
 }
 
+// Inscription libre (INSCRIPTION_LIBRE=1) : toute personne connectée devient membre, sans code d'invitation.
+// Sans cette variable, la bêta reste fermée (code d'invitation obligatoire), comme avant.
+export const inscriptionLibre = () => process.env.INSCRIPTION_LIBRE === "1";
+
+// Vérifie l'accès à /app ; en inscription libre, crée la ligne « members » à la première visite.
+export async function assurerMembre(u: User | null) {
+  if (await estMembre(u)) return true;
+  if (!u || !inscriptionLibre()) return false;
+  const { error } = await admin().from("members").insert({ user_id: u.id, email: u.email });
+  return !error || error.code === "23505"; // 23505 : déjà inscrit par une requête simultanée
+}
+
 // Code lisible, sans caractères ambigus (0/O, 1/I).
 export function nouveauCode() {
   const a = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";

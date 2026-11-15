@@ -228,6 +228,12 @@ export async function preparerEnvoi(nom: string): Promise<{ chemin: string; jeto
   const { count } = await db.from("documents").select("id", { count: "exact", head: true })
     .eq("user_id", u.id).gte("created_at", new Date(Date.now() - 864e5).toISOString());
   if ((count ?? 0) >= MAX_DOCS_JOUR) return { erreur: `Limite de ${MAX_DOCS_JOUR} documents par jour atteinte. Merci, reviens demain !` };
+  // Même limite sur les fichiers réellement déposés : sans elle, on pouvait demander des autorisations d'envoi à l'infini
+  // (15 Mo chacune) sans jamais déclarer le document, et remplir le stockage. Si la liste échoue, on laisse passer.
+  const { data: deposes } = await db.storage.from("documents").list(u.id, { limit: 100, sortBy: { column: "created_at", order: "desc" } });
+  const hier = Date.now() - 864e5;
+  if ((deposes ?? []).filter((f) => f.created_at && Date.parse(f.created_at) > hier).length >= MAX_DOCS_JOUR)
+    return { erreur: `Limite de ${MAX_DOCS_JOUR} fichiers par jour atteinte. Merci, reviens demain !` };
   const propre = String(nom || "fichier").normalize("NFD").replace(/[^\w.-]+/g, "_").replace(/^\.+/, "").slice(-80) || "fichier";
   const chemin = `${u.id}/${Date.now()}-${randomBytes(4).toString("hex")}-${propre}`;
   const { data, error } = await db.storage.from("documents").createSignedUploadUrl(chemin);

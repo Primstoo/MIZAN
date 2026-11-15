@@ -36,7 +36,7 @@ export default function Accueil() {
         </ol>
       </section>
 
-      <footer className="page foot muted small">ToumaiLearn · conçu au Maroc par un étudiant, pour les étudiants</footer>
+      <footer className="page foot muted small">ToumaiLearn · conçu au Maroc par un étudiant, pour les étudiants · <a href="/confidentialite">Confidentialité</a></footer>
     </main>
   );
 }

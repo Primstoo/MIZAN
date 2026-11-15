@@ -198,3 +198,15 @@ Chaque élève relie son compte depuis « Moi » (lien t.me/<bot>?start=<jeton> 
 **Pourquoi :** le catalogue généraliste passe au centre, l'import devient un complément. Maquettes et prototype validés avant de coder.
 **Sans changement de base de données.** Les nouveaux écrans lisent les mêmes tables et reprennent les variables de couleur existantes (thèmes clair et sombre conservés).
 **Pas encore :** le contenu s'ouvre toujours dans le module d'origine (iframe, D5). Étape 2 : leçons natives en trois temps (prérequis, posture, leçon illustrée), rendues côté serveur.
+
+## D31. Audit du 10/11/2026 : tests automatiques, durcissement de la base, inscription libre en option
+**Constats reproduits par des tests réels** (détail dans le rapport d'audit du projet) :
+- le code de connexion envoyé par e-mail fait 8 chiffres, l'écran n'en acceptait que 6 : la connexion par code était impossible ;
+- un compte connecté pouvait écrire sans limite dans `progress` et `tutor_threads` (remplissage de la base gratuite) ;
+- un code Essentiel activé pendant un Premium payé faisait perdre les jours de Premium restants ;
+- on pouvait demander des autorisations d'envoi de fichier à l'infini sans déclarer de document.
+**Fait :** champ du code de 6 à 10 chiffres ; `supabase/migration-2026-11-audit.sql` (droits retirés, bornes sur `progress`, `tutor_threads` en lecture seule, code refusé sans être consommé) ; limite d'envoi comptée sur les fichiers réellement déposés ; même contrôle « membre » dans toutes les actions ; en-tête `noindex` sur les fichiers du mode visiteur ; tuteur : Gemini et Groq essayés en alternance.
+**Tests (`npm test`, Vitest) :** logique pure (établissements, mission du jour, maîtrise, offres) et contrôle du contenu (chaque question a une bonne réponse valide et une notion connue, aucun module ne contient de clé). Lancés avec les types, le lint et le build par GitHub Actions à chaque push.
+**Alternative écartée pour les tests :** tests de bout en bout dans un navigateur (Playwright) : utiles, mais ils demandent une base de test séparée ; à faire quand il y aura un projet Supabase de préproduction.
+**Inscription libre (`INSCRIPTION_LIBRE=1`) :** la page d'accueil propose « Créer mon compte », mais sans code d'invitation l'élève restait bloqué sur l'écran de la bêta privée. Avec la variable, tout compte connecté devient membre. Laissée à 0 par défaut : l'ouvrir expose le quota gratuit du tuteur, à décider avec `OFFRES_ACTIVES`. Limite connue : en inscription libre, le code d'invitation n'est plus demandé, donc l'essai de 7 jours par parrainage ne se déclenche pas.
+

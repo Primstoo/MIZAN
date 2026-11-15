@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 const LIENS = [
   { href: "/app", label: "Aujourd'hui", ic: "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v3M12 19v3M2 12h3M19 12h3", sous: [] as string[] },
   { href: "/app/modules", label: "Cours", ic: "M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5", sous: ["/app/module/", "/app/progres"] },
-  { href: "/app/moi", label: "Moi", ic: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0", sous: ["/app/supports", "/app/cours/", "/app/offres", "/app/live", "/app/contribuer"] },
+  { href: "/app/moi", label: "Moi", ic: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0", sous: ["/app/supports", "/app/cours/", "/app/offres", "/app/live", "/app/contribuer", "/app/infos"] },
 ];
 
 export default function Nav() {
