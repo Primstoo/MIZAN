@@ -16,7 +16,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <div className="shell">
       <Nav />{children}
-      {profil && <Visite mascotte={estMascotte(profil.mascotte) ? profil.mascotte : "toumai"} prenom={profil.prenom ?? ""} />}
+      {profil && <Visite mascotte={estMascotte(profil.mascotte) ? profil.mascotte : "toumai"} prenom={profil.prenom ?? ""} vue={user!.user_metadata?.visite === true} />}
     </div>
   );
 }

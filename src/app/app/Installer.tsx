@@ -14,6 +14,7 @@ export default function Installer({ deja }: { deja: string[] }) {
   const [visible, setVisible] = useState(false);
   const [safari, setSafari] = useState(true);
   const [pret, setPret] = useState(false);
+  const [integre, setIntegre] = useState(false);
   const invite = useRef<Invite | null>(null);
 
   useEffect(() => {
@@ -23,6 +24,8 @@ export default function Installer({ deja }: { deja: string[] }) {
     const installee = window.matchMedia("(display-mode: standalone)").matches || (navigator as unknown as { standalone?: boolean }).standalone === true;
     if (installee) { if (!deja.includes(p)) marquerInstallee(p).catch(() => {}); return; }
     setPf(p); setSafari(!/crios|fxios|edgios/i.test(ua));
+    // Lien ouvert depuis WhatsApp, Instagram, Facebook, Telegram… : ce navigateur intégré ne sait pas installer une appli.
+    setIntegre(/whatsapp|instagram|fban|fbav|fb_iab|telegram|line\/|tiktok|snapchat|; wv\)/i.test(ua));
     let plusTard = 0;
     try { plusTard = Number(localStorage.getItem(CLE) || 0); } catch { /* stockage indisponible */ }
     const cache = deja.includes(p) || Date.now() < plusTard;
@@ -49,7 +52,10 @@ export default function Installer({ deja }: { deja: string[] }) {
     setVisible(false);
   }
 
-  const etapes = pf === "ios"
+  const etapes = integre
+    ? [pf === "ios" ? "Touche les trois points ou l’icône boussole, puis « Ouvrir dans Safari »." : "Touche les trois points ⋮, puis « Ouvrir dans Chrome ».",
+       "Connecte-toi à nouveau : les étapes d’installation s’afficheront ici."]
+    : pf === "ios"
     ? [safari ? "Touche le bouton Partager, en bas de Safari (le carré avec une flèche vers le haut)." : "Touche le bouton Partager, en haut à droite (le carré avec une flèche vers le haut).",
        "Fais défiler et touche « Sur l’écran d’accueil ».",
        "Touche « Ajouter », puis ouvre ToumaiLearn depuis sa nouvelle icône."]
@@ -61,10 +67,12 @@ export default function Installer({ deja }: { deja: string[] }) {
 
   return (
     <section className="installer" aria-label="Installer l’appli">
-      <h2>Installe l&apos;appli sur ton {pf === "ordi" ? "ordinateur" : "téléphone"}</h2>
+      <h2>{integre ? "Pour installer l’appli, ouvre-la dans ton navigateur" : `Installe l’appli sur ton ${pf === "ordi" ? "ordinateur" : "téléphone"}`}</h2>
       {pret
         ? <button className="btn" onClick={installer}>Installer ToumaiLearn</button>
         : <ol>{etapes.map((t, i) => <li key={i}>{t}</li>)}</ol>}
+      {!pret && !integre && pf === "ios" && !safari && <p className="small muted">L&apos;option n&apos;apparaît pas ? Ouvre toumailearn.app dans Safari : ça marche à tous les coups.</p>}
+      {!pret && !integre && pf === "android" && <p className="small muted">Si on te demande, choisis « Installer » plutôt que « Créer un raccourci ».</p>}
       <button className="linkbtn" onClick={plusTard}>Plus tard</button>
     </section>
   );

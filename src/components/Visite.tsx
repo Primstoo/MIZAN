@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Mascotte, { type MascotteId } from "@/components/Mascotte";
+import { createClient } from "@/lib/supabase/client";
 
 // Visite guidée, une seule fois après l'inscription : le guide choisi présente chaque bouton, avec son ton à lui.
 // Relançable depuis Moi › Réglages (« Revoir le tutoriel », /app?visite=1).
@@ -39,7 +40,7 @@ const TEXTES: Record<MascotteId, string[]> = {
   ],
 };
 
-export default function Visite({ mascotte, prenom }: { mascotte: MascotteId; prenom: string }) {
+export default function Visite({ mascotte, prenom, vue: dejaVue }: { mascotte: MascotteId; prenom: string; vue: boolean }) {
   const chemin = usePathname();
   const [etape, setEtape] = useState(-1); // -1 = fermée
   const [zone, setZone] = useState<{ h: number; g: number; l: number; t: number } | null>(null);
@@ -47,10 +48,15 @@ export default function Visite({ mascotte, prenom }: { mascotte: MascotteId; pre
   useEffect(() => {
     if (chemin !== "/app") return;
     const force = new URLSearchParams(window.location.search).get("visite") === "1";
-    let vue = false;
-    try { vue = localStorage.getItem(CLE) === "1"; } catch {}
-    if (force || !vue) setEtape(0);
-  }, [chemin]);
+    let vue = dejaVue;
+    try { vue = vue || localStorage.getItem(CLE) === "1"; } catch {}
+    if (!force && vue) return;
+    setEtape(0);
+    // Notée comme vue dès qu'elle s'ouvre, sur le compte (et pas seulement sur ce téléphone) :
+    // elle ne revient plus après une reconnexion, sur un autre appareil ou dans l'appli installée.
+    try { localStorage.setItem(CLE, "1"); } catch {}
+    if (!dejaVue) createClient().auth.updateUser({ data: { visite: true } }).catch(() => {});
+  }, [chemin, dejaVue]);
 
   // Étape avec un bouton montré : tout le reste est flouté, et la visite n'avance que si l'élève appuie sur ce bouton.
   useEffect(() => {
