@@ -6,6 +6,12 @@ const nextConfig = {
   // pas d'interprétation hasardeuse des fichiers, adresse d'origine limitée quand on clique un lien externe.
   async headers() {
     return [{
+      source: "/sw.js",
+      headers: [
+        { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
+        { key: "Content-Type", value: "application/javascript; charset=utf-8" },
+      ],
+    }, {
       source: "/:path*",
       headers: [
         { key: "X-Frame-Options", value: "SAMEORIGIN" },

@@ -52,3 +52,10 @@ La formule Vercel gratuite (Hobby) est réservée à un usage non commercial : p
    - `CRON_SECRET` : une autre suite au hasard (Vercel l'utilise pour la tâche du matin)
 3. Redeploy, puis dans MIZAN → Suivi → « Activer / réparer le bot ».
 4. Tester : Moi → « Recevoir mes rappels sur Telegram » → Démarrer → taper /mission.
+
+## Notifications push (PWA)
+1. Supabase → SQL Editor → coller `supabase/migration-2026-11-push.sql` → Run.
+2. Générer les clés VAPID une seule fois : `npx web-push generate-vapid-keys`.
+3. Vercel → Environment Variables : `NEXT_PUBLIC_VAPID_PUBLIC_KEY` (clé publique), `VAPID_PRIVATE_KEY` (clé privée, secrète), facultative `VAPID_SUBJECT` (`mailto:…`). Puis Redeploy.
+4. Onglet « Moi » → « Activer les notifications » sur chaque appareil (sur iPhone : d'abord « Sur l'écran d'accueil »). Les admins (`ADMIN_EMAILS`) reçoivent une alerte à chaque document ou cours importé.
+Ne jamais changer les clés VAPID une fois en service : tous les abonnements seraient perdus.

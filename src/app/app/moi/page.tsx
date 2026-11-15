@@ -6,6 +6,7 @@ import Mascotte, { estMascotte, MASCOTTES } from "@/components/Mascotte";
 import Theme from "./Theme";
 import Deconnexion from "../Deconnexion";
 import { NOMS, offreDe } from "@/lib/offres";
+import Notifications from "./Notifications";
 
 export const metadata = { title: "Mon compte" };
 
@@ -34,6 +35,10 @@ export default async function Moi() {
         ) : <p className="muted small">Aucune date d&apos;examen. Ajoute-en une pour avoir ta mission du jour.</p>}
       </section>
 
+      <section className="bloc">
+        <h2>Notifications</h2>
+        <Notifications />
+      </section>
 
 
       <section className="bloc">

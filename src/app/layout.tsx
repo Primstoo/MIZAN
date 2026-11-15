@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   title: { default: "ToumaiLearn · Révise le cours de ton prof", template: "%s · ToumaiLearn" },
   description: "Plateforme de révision pour les étudiants des universités du Maroc : le cours de ton prof expliqué, des exercices corrigés, un tuteur IA et ta progression mesurée.",
   applicationName: "ToumaiLearn",
+  icons: { apple: "/icons/apple-touch-icon.png" },
+  appleWebApp: { capable: true, title: "ToumaiLearn", statusBarStyle: "default" },
   openGraph: { title: "ToumaiLearn", siteName: "ToumaiLearn", url: "https://toumailearn.app", description: "Révise le cours de ton prof, pas un cours générique.", locale: "fr_MA", type: "website" },
 };
 
