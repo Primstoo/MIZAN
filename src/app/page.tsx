@@ -8,7 +8,6 @@ export default function Accueil() {
       </header>
 
       <section className="page hero">
-        <p className="eyebrow">Bêta · Universités du Maroc</p>
         <h1>Révise le cours de <em>ton</em> prof, pas un cours générique.</h1>
         <p className="lead">Chaque module est construit à partir des supports réels de ton enseignant : ses notations, ses exemples, le format de ses TD et de ses examens.</p>
         <div className="cta">

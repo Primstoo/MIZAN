@@ -1,10 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin } from "@/lib/acces";
 import { MODULES, memeEtablissement } from "@/lib/modules";
-import { SEMESTRES, estSemestre, quotaImport, type Etab } from "@/lib/fac";
+import { estSemestre, quotaImport, type Etab } from "@/lib/fac";
 import ChoixFac from "../fac/ChoixFac";
 import AjouterCours from "../fac/AjouterCours";
-import { changerFac, choisirSemestre } from "../fac/actions";
+import { changerFac } from "../fac/actions";
 
 // « Mes supports » : les cours déposés par l'élève (et ceux partagés dans son établissement), semestre par semestre.
 // Rangé dans l'onglet Moi ; le catalogue des cours ToumaiLearn est dans /app/modules.
@@ -44,10 +44,9 @@ export default async function Supports({ searchParams }: { searchParams: { s?: s
     .order("created_at", { ascending: false }).limit(500);
   const docs = (brut ?? []) as unknown as Doc[];
   const siens = MODULES.filter((m) => memeEtablissement(etab?.nom, m.etablissement));
-  const nb = (s: string) => siens.filter((m) => m.semestre === s).length + docs.filter((d) => d.semestre === s).length;
   const ici = siens.filter((m) => m.semestre === sem);
   const groupes = new Map<string, Doc[]>();
-  for (const d of docs.filter((x) => x.semestre === sem)) {
+  for (const d of docs) {
     const k = (d.module_libre || "Autre").trim();
     groupes.set(k, [...(groupes.get(k) ?? []), d]);
   }
@@ -58,19 +57,8 @@ export default async function Supports({ searchParams }: { searchParams: { s?: s
       {entete}
       <div className="row between">
         <p className="small muted" style={{ margin: 0 }}><strong>{etab?.nom}</strong>{etab?.ville ? ` · ${etab.ville}` : ""}{!etab?.valide && " · en cours de vérification"}</p>
-        <form action={changerFac}><button className="lien small">Changer d&apos;établissement</button></form>
+        <form action={changerFac}><button className="btn alt small">Changer</button></form>
       </div>
-
-      <nav className="sems bloc" aria-label="Semestres">
-        {SEMESTRES.map((s) => (
-          <a key={s} href={`/app/supports?s=${s}`} className={s === sem ? "on" : ""} aria-current={s === sem ? "page" : undefined}>
-            {s}{nb(s) > 0 && <span className="n">{nb(s)}</span>}
-          </a>
-        ))}
-      </nav>
-      {profil.semestre !== sem && (
-        <form action={choisirSemestre}><input type="hidden" name="semestre" value={sem} /><button className="lien small">Je suis en {sem} : l&apos;ouvrir par défaut</button></form>
-      )}
 
       <section className="bloc">
         {groupes.size > 0 && (
@@ -93,13 +81,12 @@ export default async function Supports({ searchParams }: { searchParams: { s?: s
           </div>
         )}
         {!groupes.size && (
-          <div className="card soft"><p><strong>Aucun support déposé en {sem} pour l&apos;instant.</strong></p></div>
+          <div className="card soft"><p><strong>Aucun support déposé pour l&apos;instant.</strong></p></div>
         )}
       </section>
 
       <section className="bloc narrow-m">
         <AjouterCours semestre={sem} reste={q.reste} modules={Array.from(new Set([...Array.from(groupes.keys()), ...ici.map((m) => m.titre)]))} />
-        <p className="small muted bloc">Les fichiers originaux restent privés. Seuls la fiche, le quiz et les flashcards générés sont partagés avec ton établissement, après vérification.</p>
       </section>
 
     </main>

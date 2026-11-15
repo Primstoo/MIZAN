@@ -87,9 +87,8 @@ export default async function Progres() {
                 ))}
               </ul>
             ) : (
-              <p className="small muted">{x.testes ? "Rien de fragile pour l'instant : continue à te tester sur les notions restantes." : "Pas encore de résultat : fais le test de niveau (3 min) ou un quiz dans le module."}</p>
+              <p className="small muted">{x.testes ? "Rien de fragile pour l'instant : continue à te tester sur les notions restantes." : "Pas encore de résultat : fais un quiz dans le cours."}</p>
             )}
-            {!x.testes && <a href={`/app/niveau/${m.slug}`} className="btn small">Test de niveau · 3 min</a>}
             <div className="row">
               <a href={`/app/m/${m.slug}`} className="btn alt small">Ouvrir le module</a>
               <a href={`/app/blanc/${m.slug}`} className="btn alt small">Examen blanc · 20 min</a>

@@ -29,11 +29,7 @@ export default function Inscription() {
 
   return (
     <>
-      <div className="row" style={{ gap: 8 }}>
-        <button type="button" className="btn small alt" onClick={() => setRaison("tuteur")}>Tuteur IA</button>
-        <button type="button" className="btn small alt" onClick={() => setRaison("test")}>Test de niveau</button>
-        <button type="button" className="btn small" onClick={() => setRaison("sauvegarde")}>Créer mon compte</button>
-      </div>
+      <button type="button" className="btn small" onClick={() => setRaison("sauvegarde")}>Créer mon compte</button>
       {raison && (
         <div role="dialog" aria-modal="true" aria-labelledby="mz-insc-t" onClick={() => setRaison(null)}
           style={{ position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,.55)", display: "grid", placeItems: "center", padding: 16 }}>
@@ -42,9 +38,7 @@ export default function Inscription() {
             <p className="muted">{TEXTES[raison][1]}</p>
             <div className="stack">
               <a href="/login" className="btn big" target="_top">Créer mon compte</a>
-              <a href="/login?invitation" className="btn alt" target="_top">J&apos;ai un code d&apos;invitation</a>
-              <a href="/login" className="btn alt" target="_top">J&apos;ai déjà un compte</a>
-              <button type="button" className="link small" onClick={() => setRaison(null)}>Continuer sans compte</button>
+              <button type="button" className="btn alt" onClick={() => setRaison(null)}>Continuer sans compte</button>
             </div>
           </div>
         </div>

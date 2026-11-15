@@ -104,10 +104,7 @@ export async function enregistrerProfil(form: FormData): Promise<void> {
   const aRetirer = (avant ?? []).map((x) => x.module_slug as string).filter((s) => !choisis.includes(s));
   if (aRetirer.length && form.get("complet") === "1") await db.from("exams").delete().eq("user_id", u.id).in("module_slug", aRetirer);
   revalidatePath("/app");
-  // Première inscription : test de niveau sur le module dont l'examen est le plus proche.
-  const { data: dejaTeste } = await db.from("niveau").select("notion").eq("user_id", u.id).limit(1);
-  const premier = [...lignes].sort((a, b) => a.exam_date.localeCompare(b.exam_date))[0];
-  redirect(!dejaTeste?.length && premier ? `/app/niveau/${premier.module_slug}?premier=1` : "/app");
+  redirect("/app");
 }
 
 export async function reserverLive(form: FormData): Promise<void> {

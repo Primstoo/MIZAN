@@ -67,7 +67,6 @@ export default async function PageCours({ params }: { params: { slug: string } }
 
       <div className="row">
         <a href={`/app/blanc/${m.slug}`} className="btn alt small">Examen blanc</a>
-        <a href={`/app/niveau/${m.slug}`} className="btn alt small">Test de niveau</a>
         <a href="/app/progres" className="btn alt small">Mes points faibles</a>
       </div>
     </main>

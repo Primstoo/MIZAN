@@ -28,7 +28,6 @@ export default async function Cours() {
   return (
     <main className="page tl">
       <header className="tl-head">
-        <p className="tl-lbl">Catalogue</p>
         <h1>Que veux-tu comprendre ?</h1>
       </header>
 
@@ -44,7 +43,6 @@ export default async function Cours() {
         </a>
       )}
 
-      <p className="tl-lbl">Tous les cours</p>
       <div className="tl-grille">
         {MODULES.map((m) => {
           const mm = maitrise[m.slug], e = restes.get(m.slug);
@@ -60,8 +58,7 @@ export default async function Cours() {
         })}
       </div>
 
-      <a href="/app/supports" className="tl-ligne"><span>Le cours de ton prof n&apos;est pas là ?</span><strong>Dépose-le</strong></a>
-      <div className="row"><a href="/app/progres" className="btn alt small">Ma progression</a><a href="/app/bienvenue" className="btn alt small">Mes examens</a></div>
+      <a href="/app/supports" className="btn alt">Déposer le cours de mon prof</a>
     </main>
   );
 }
