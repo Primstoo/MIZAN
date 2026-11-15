@@ -38,7 +38,7 @@ setTimeout(function(){var f=t.closest("form");(f||t).scrollIntoView({block:"end"
   return new NextResponse(out, {
     headers: {
       "Content-Type": "text/html; charset=utf-8",
-      "Cache-Control": "private, no-store",
+      "Cache-Control": "private, max-age=600",
       "X-Frame-Options": "SAMEORIGIN",
     },
   });

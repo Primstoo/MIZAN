@@ -53,7 +53,7 @@ export default function Login() {
     const { error } = await raw.auth.signInWithOtp({ email: email.trim(), options: { shouldCreateUser: true, emailRedirectTo: `${window.location.origin}/auth/hash` } });
     setCharge(false);
     if (error) {
-      setMsg({ type: "bad", texte: error.status === 429 ? "Trop de demandes. Attends une minute avant de redemander un code." : "L’envoi a échoué. Vérifie ton adresse e-mail." });
+      setMsg({ type: "bad", texte: error.code === "over_email_send_rate_limit" ? "Beaucoup d’inscriptions en ce moment : l’envoi des e-mails est saturé. Réessaie dans 15 minutes." : error.status === 429 ? "Trop de demandes. Attends une minute avant de redemander un code." : "L’envoi a échoué. Vérifie ton adresse e-mail." });
       return;
     }
     setEtape("code"); setAttente(60); setCode("");
