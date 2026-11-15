@@ -1,0 +1,23 @@
+{
+  "titre": "CMS : systèmes de gestion de contenu",
+  "prof": "Pr N. Falih",
+  "semestre": "S5",
+  "etablissement": "FSABM",
+  "fichier": "cms.html",
+  "cle": "cms_scores",
+  "resume": "Ce qu'est un CMS, libre ou propriétaire, puis WordPress de A à Z : installation XAMPP, tableau de bord, SSL, WooCommerce.",
+  "conventions": "Module CMS (Content Management System) du Pr Noureddine Falih, filière MIACSD, S5, FSABM, année 2026-2027. Le support fourni couvre l'introduction aux CMS et la partie 1 (WordPress) ; la partie 2 (PrestaShop) n'est pas encore dans le cours. Vocabulaire du prof : tableau de bord (dashboard), extensions (plugins), thèmes, articles, pages, permaliens. Le prof écrit « SSL » pour le certificat HTTPS. Les chiffres du cours (parts de marché, dates) sont ceux des diapos : les citer tels quels et signaler qu'ils datent. Chaque chapitre suit trois temps : prérequis, façon d'aborder, puis idées illustrées.",
+  "intro": "Ce module suit le cours du **Pr Falih** : d'abord ce qu'est un CMS et comment le choisir, puis **WordPress** de l'installation à la boutique en ligne.\n\n**Chaque chapitre a trois temps**\n\n1. **Avant de commencer** : ce qu'il faut déjà savoir, avec une question pour vérifier.\n2. **Comment l'aborder** : l'état d'esprit qui rend le chapitre simple, et le piège classique.\n3. **Les idées, illustrées** : un schéma, une phrase, un exemple.\n\nTermine par le QCM : **8/10 = chapitre maîtrisé**.\n\nL'élément 1 du module (HTML5 et CSS3) est considéré comme acquis depuis Programmation Web 1 (S3) : il n'est pas repris ici. La partie PrestaShop sera ajoutée quand le prof l'aura traitée.\n\nC'est un cours de **définitions, comparaisons et listes** : les flashcards sont ton meilleur outil. Ouvre aussi un vrai WordPress en local, tu retiendras le tableau de bord deux fois plus vite.",
+  "chapitres": [
+    "01-definition-avantages.md",
+    "02-proprietaire-libre.md",
+    "03-choisir-cms.md",
+    "04-wordpress-presentation.md",
+    "05-org-com-prerequis.md",
+    "06-installation-xampp.md",
+    "07-tableau-de-bord.md",
+    "08-securite-ssl.md",
+    "09-woocommerce.md",
+    "10-revision.md"
+  ]
+}

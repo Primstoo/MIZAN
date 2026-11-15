@@ -1127,5 +1127,147 @@
     "g": "cours"
    }
   ]
+ },
+ "cms": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "definition-avantages",
+    "t": "C'est quoi un CMS, et pourquoi on s'en sert",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "proprietaire-libre",
+    "t": "CMS propriétaire ou CMS libre",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "choisir-cms",
+    "t": "Les 5 critères pour bien choisir un CMS",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "wordpress-presentation",
+    "t": "WordPress · pourquoi lui, ce qu'il est, son histoire",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "org-com-prerequis",
+    "t": "WordPress.org, WordPress.com et les prérequis",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "installation-xampp",
+    "t": "Installer WordPress en local avec XAMPP",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "tableau-de-bord",
+    "t": "Le tableau de bord de WordPress, menu par menu",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "securite-ssl",
+    "t": "Sécuriser WordPress avec SSL (HTTPS)",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "woocommerce",
+    "t": "WooCommerce, et reconnaître un site WordPress",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "revision-cms",
+    "t": "Révision express et examen blanc",
+    "imp": 3,
+    "g": "cours"
+   }
+  ]
+ },
+ "java-poo": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "paradigmes",
+    "t": "Paradigmes, cycle de vie et qualités d'un logiciel",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "concepts-poo",
+    "t": "Objet, classe et les trois piliers de la POO",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "relations-classes",
+    "t": "Relations entre classes, surcharge et redéfinition",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "bases-java",
+    "t": "Les bases de Java · variables, conditions, boucles, opérateurs",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "tableaux",
+    "t": "Les tableaux en Java",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "classes-objets",
+    "t": "Classes et objets en Java · new, références, private",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "constructeurs-this",
+    "t": "Constructeurs, this, getters et setters",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "static-objets-membres",
+    "t": "Paramètre objet, static et objets membres",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "td-corriges",
+    "t": "TD 2 et TD 3 corrigés, exécutés et commentés",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "revision-java",
+    "t": "Révision express et examen blanc",
+    "imp": 3,
+    "g": "cours"
+   }
+  ]
  }
 }

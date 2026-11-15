@@ -1,0 +1,23 @@
+{
+  "titre": "Programmation orientée objet en Java",
+  "prof": "",
+  "semestre": "S5",
+  "etablissement": "FSABM",
+  "fichier": "java-poo.html",
+  "cle": "java_poo_scores",
+  "resume": "Des paradigmes à la POO, puis Java : bases, tableaux, classes, constructeurs, static. Avec les TD 1, 2 et 3 corrigés et vérifiés.",
+  "conventions": "Module de programmation orientée objet en Java, S5, filière MIACSD, FSABM. Rédigé à partir de notes de séances (séances 1 à 5) et des TD 1 (questions de cours), TD 2 (bases de Java) et TD 3 (classes et objets). Vocabulaire du cours : classe, objet, instance, attribut, méthode, message, encapsulation, héritage, polymorphisme, surcharge (overloading), redéfinition (overriding), association, agrégation, composition. Le cours n'a pas encore traité en Java : l'héritage (extends, super), les classes abstraites, les interfaces, les exceptions, les collections. Les exemples du cours utilisent la classe Point (coordonnées x, y), la classe Cercle (rayon et centre de type Point), Complexe et Rationnel. Tous les programmes affichés ont été compilés et exécutés (Java 21). Chaque chapitre suit trois temps : prérequis, façon d'aborder, puis idées illustrées.",
+  "intro": "Ce module suit l'ordre des séances : d'abord **les idées** de la programmation orientée objet (sans code), puis **Java** lui-même.\n\n**Chaque chapitre a trois temps**\n\n1. **Avant de commencer** : ce qu'il faut déjà savoir, avec une question pour vérifier.\n2. **Comment l'aborder** : l'état d'esprit qui rend le chapitre simple, et le piège classique.\n3. **Les idées, illustrées** : un schéma, une phrase, un exemple.\n\nTermine par le QCM : **8/10 = chapitre maîtrisé**.\n\nTous les programmes de ce module ont été **compilés et exécutés** : les sorties affichées sont les vraies. Le module est rédigé à partir de notes de séances et des TD 1 à 3, pas d'un polycopié officiel : en cas de différence avec ce que dit ton prof, c'est ton prof qui a raison.\n\nLe conseil qui change tout : **tape les programmes toi-même**. Lire du Java ne suffit pas, il faut le faire compiler.",
+  "chapitres": [
+    "01-paradigmes.md",
+    "02-concepts-poo.md",
+    "03-relations-classes.md",
+    "04-bases-java.md",
+    "05-tableaux.md",
+    "06-classes-objets.md",
+    "07-constructeurs-this.md",
+    "08-static-objets-membres.md",
+    "09-td-corriges.md",
+    "10-revision.md"
+  ]
+}

@@ -623,5 +623,185 @@
    "a": 0,
    "e": "C'est le théorème de la limite monotone."
   }
+ ],
+ "cms": [
+  {
+   "n": "definition-avantages",
+   "q": "Que signifie le sigle CMS ?",
+   "o": [
+    "Central Management Server",
+    "Content Management System",
+    "Content Markup Software"
+   ],
+   "a": 1,
+   "e": "En français : système de gestion de contenu."
+  },
+  {
+   "n": "proprietaire-libre",
+   "q": "Qu'est-ce qui définit un CMS propriétaire ?",
+   "o": [
+    "Il est toujours plus rapide qu'un CMS libre",
+    "Son code source appartient à une entreprise et n'est pas disponible publiquement",
+    "Il ne fonctionne que sur Windows"
+   ],
+   "a": 1,
+   "e": "La propriété du code est le point de départ de toutes les autres différences."
+  },
+  {
+   "n": "wordpress-presentation",
+   "q": "WordPress est écrit en :",
+   "o": [
+    "Java",
+    "PHP",
+    "Python"
+   ],
+   "a": 1,
+   "e": "Et il utilise une base de données MySQL."
+  },
+  {
+   "n": "org-com-prerequis",
+   "q": "Que trouve-t-on sur WordPress.org ?",
+   "o": [
+    "Un service d'hébergement payant",
+    "Le logiciel WordPress à télécharger gratuitement",
+    "Une boutique de noms de domaine"
+   ],
+   "a": 1,
+   "e": "On l'installe ensuite sur l'hébergement de son choix."
+  },
+  {
+   "n": "installation-xampp",
+   "q": "Dans XAMPP, que signifie la lettre X ?",
+   "o": [
+    "XML",
+    "Cross-platform",
+    "Xdebug"
+   ],
+   "a": 1,
+   "e": "XAMPP fonctionne sur Windows, Linux et macOS."
+  },
+  {
+   "n": "tableau-de-bord",
+   "q": "Quel menu permet de classer les articles en groupes ?",
+   "o": [
+    "Étiquettes",
+    "Catégories",
+    "Permaliens"
+   ],
+   "a": 1,
+   "e": "Les étiquettes, elles, sont des mots-clés qui décrivent les articles en détail."
+  },
+  {
+   "n": "choisir-cms",
+   "q": "Combien de critères le cours donne-t-il pour bien choisir un CMS ?",
+   "o": [
+    "3",
+    "5",
+    "7"
+   ],
+   "a": 1,
+   "e": "Prix, facilité, fond, assistance, développement de fonctionnalités."
+  },
+  {
+   "n": "securite-ssl",
+   "q": "Que signifie SSL ?",
+   "o": [
+    "Secure Site Login",
+    "Secure Sockets Layer",
+    "Server Side Language"
+   ],
+   "a": 1,
+   "e": "Le certificat SSL permet de servir le site en HTTPS."
+  }
+ ],
+ "java-poo": [
+  {
+   "n": "concepts-poo",
+   "q": "Quelle formule résume un objet ?",
+   "o": [
+    "Objet = Classe + Instance",
+    "Objet = État + Comportement",
+    "Objet = Algorithme + Données"
+   ],
+   "a": 1,
+   "e": "L'état, ce sont les valeurs des attributs ; le comportement, les opérations possibles."
+  },
+  {
+   "n": "relations-classes",
+   "q": "« Un Médecin soigne un Patient » est un exemple :",
+   "o": [
+    "d'association",
+    "de composition",
+    "d'héritage"
+   ],
+   "a": 0,
+   "e": "Le médecin utilise la relation avec le patient sans le posséder : lien simple."
+  },
+  {
+   "n": "bases-java",
+   "q": "Quelle est l'extension d'un fichier source Java ?",
+   "o": [
+    ".class",
+    ".java",
+    ".jar"
+   ],
+   "a": 1,
+   "e": "Le compilateur produit ensuite un fichier .class."
+  },
+  {
+   "n": "classes-objets",
+   "q": "Quelle est la visibilité d'un attribut private ?",
+   "o": [
+    "Tout le programme",
+    "L'intérieur de la classe seulement",
+    "Le paquetage seulement"
+   ],
+   "a": 1,
+   "e": "Seules les méthodes de la classe y accèdent."
+  },
+  {
+   "n": "constructeurs-this",
+   "q": "Quel nom porte un constructeur ?",
+   "o": [
+    "init",
+    "Le même nom que sa classe",
+    "constructor"
+   ],
+   "a": 1,
+   "e": "C'est ainsi que Java le reconnaît."
+  },
+  {
+   "n": "static-objets-membres",
+   "q": "Dans p1.distance(p3), à l'intérieur de la méthode, this désigne :",
+   "o": [
+    "p1",
+    "p3",
+    "la classe Point"
+   ],
+   "a": 0,
+   "e": "this est l'objet sur lequel la méthode est appelée."
+  },
+  {
+   "n": "td-corriges",
+   "q": "Facture : prix unitaire 0,6 DH, ancien index 100, nouvel index 200, taxe 10 %. Total à payer ?",
+   "o": [
+    "60 DH",
+    "66 DH",
+    "72 DH"
+   ],
+   "a": 1,
+   "e": "100 kWh × 0,6 = 60 DH, plus 10 % = 66 DH."
+  },
+  {
+   "n": "paradigmes",
+   "q": "Qu'est-ce qu'un paradigme de programmation ?",
+   "o": [
+    "Un langage de programmation particulier",
+    "Une manière de programmer basée sur un ensemble de principes ou une théorie",
+    "Un logiciel qui traduit le code en binaire"
+   ],
+   "a": 1,
+   "e": "C, Java ou HTML sont des langages ; le paradigme est la façon de penser le programme."
+  }
  ]
 }

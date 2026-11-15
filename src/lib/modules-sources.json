@@ -52,6 +52,22 @@
     ]
   },
   {
+    "slug": "cms",
+    "titre": "CMS : systèmes de gestion de contenu",
+    "prof": "Pr N. Falih",
+    "semestre": "S5",
+    "fichier": "cms.html",
+    "resume": "Ce qu'est un CMS, libre ou propriétaire, puis WordPress de A à Z : installation XAMPP, tableau de bord, SSL, WooCommerce.",
+    "cles": [
+      "cms_scores",
+      "cms_scores_etat",
+      "mzt-cms*"
+    ],
+    "cle": "cms_scores",
+    "format": "score10",
+    "annexes": []
+  },
+  {
     "slug": "crypto",
     "titre": "Cryptographie (partie 1 + TD1)",
     "prof": "Pr A. Farchane",
@@ -70,6 +86,22 @@
     "annexes": [
       "crypto-farchane-outils.html"
     ]
+  },
+  {
+    "slug": "java-poo",
+    "titre": "Programmation orientée objet en Java",
+    "prof": "",
+    "semestre": "S5",
+    "fichier": "java-poo.html",
+    "resume": "Des paradigmes à la POO, puis Java : bases, tableaux, classes, constructeurs, static. Avec les TD 1, 2 et 3 corrigés et vérifiés.",
+    "cles": [
+      "java_poo_scores",
+      "java_poo_scores_etat",
+      "mzt-java-poo*"
+    ],
+    "cle": "java_poo_scores",
+    "format": "score10",
+    "annexes": []
   },
   {
     "slug": "reseaux-m351",
