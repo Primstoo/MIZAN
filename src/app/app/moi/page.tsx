@@ -1,21 +1,17 @@
 import { createClient } from "@/lib/supabase/server";
-import { admin, estAdmin } from "@/lib/acces";
+import { estAdmin } from "@/lib/acces";
 import { chargerParcours } from "@/lib/parcours";
 import { changerMascotte } from "../actions";
 import Mascotte, { estMascotte, MASCOTTES } from "@/components/Mascotte";
 import Theme from "./Theme";
 import Deconnexion from "../Deconnexion";
-import { botActif } from "@/lib/telegram";
-import Telegram from "./Telegram";
 import { NOMS, offreDe } from "@/lib/offres";
 
 export const metadata = { title: "Mon compte" };
 
 export default async function Moi() {
   const { data: { user } } = await createClient().auth.getUser();
-  const db = admin();
   const p = await chargerParcours(user!);
-  const { data: tg } = await db.from("telegram_links").select("chat_id, actif").eq("user_id", user!.id).maybeSingle();
   const offre = await offreDe(user!.id);
 
   return (
@@ -38,13 +34,6 @@ export default async function Moi() {
         ) : <p className="muted small">Aucune date d&apos;examen. Ajoute-en une pour avoir ta mission du jour.</p>}
       </section>
 
-      {botActif() && (
-        <section className="bloc">
-          <h2>Rappels Telegram</h2>
-          <p className="muted small">{tg?.chat_id ? (tg.actif ? "✓ Relié : tu reçois ta mission chaque matin vers 8 h. Tape /stop dans Telegram pour arrêter." : "Relié, mais les rappels sont en pause : tape /reprendre dans Telegram.") : "Reçois chaque matin ta mission du jour, ton compte à rebours et les lives, là où tu es déjà."}</p>
-          <Telegram relie={!!tg?.chat_id} />
-        </section>
-      )}
 
 
       <section className="bloc">
