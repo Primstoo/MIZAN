@@ -1,0 +1,20 @@
+{
+  "titre": "Électrocinétique : régimes transitoires",
+  "prof": "",
+  "semestre": "S3",
+  "etablissement": "ENSA Al Hoceima",
+  "fichier": "electrocinetique.html",
+  "maths": true,
+  "resume": "Chapitre 3 de Physique 3 : régime transitoire, condensateur et bobine, circuits RC, RL, LC et RLC série, avec les exercices du cours et un examen blanc.",
+  "conventions": "Cours de Physique 3, Électrocinétique, ENSA d'Al-Hoceima, chapitre 3 : étude des régimes transitoires des circuits linéaires. Conventions du cours : convention récepteur pour le condensateur et la bobine ; uC et iL sont continus ; i = C du/dt ; u = L di/dt (bobine réelle : u = L di/dt + r i) ; régime permanent continu : condensateur = interrupteur ouvert, bobine idéale = fil ; constantes de temps tau = RC et tau = L/R ; régime transitoire terminé à 5 tau (99 %) ; RLC série : lambda = R/2L, omega0 = 1/racine(LC), Q = L omega0 / R, Rc = 2 racine(L/C) ; pseudo-périodique si Q > 1/2, critique si Q = 1/2, apériodique si Q < 1/2. Équations du premier ordre : solution = régime libre + régime permanent, constante fixée par la condition initiale (continuité).",
+  "intro": "Ce module suit le **chapitre 3 du cours de Physique 3 – Électrocinétique** (ENSA d'Al-Hoceima) : l'étude des régimes transitoires des circuits linéaires.\n\n**Chaque chapitre a trois temps**\n\n1. **Avant de commencer** : ce qu'il faut déjà savoir, avec une question pour vérifier.\n2. **Comment l'aborder** : l'état d'esprit qui rend le chapitre simple, et le piège dans lequel presque tout le monde tombe.\n3. **Les idées, illustrées** : un schéma, une phrase, un exemple chiffré, puis des exercices.\n\nTermine chaque chapitre par le QCM : **8/10 = chapitre maîtrisé**. Les exercices 3.1, 3.2 et 3.3 du cours sont placés dans les chapitres RC, RL et RLC.\n\n**Ce qui est sûr** : le contenu vient du chapitre 3 fourni. Ce que nous avons ajouté est signalé par un encadré « Attention ».\n\n**À vérifier** : les chapitres 1 et 2 du cours, les TD et le format du contrôle ne nous ont pas été fournis. Le semestre (S3) est supposé : corrige-le si besoin.",
+  "chapitres": [
+    "01-regime-transitoire.md",
+    "02-condensateur-bobine.md",
+    "03-circuit-rc.md",
+    "04-circuit-rl.md",
+    "05-circuit-lc.md",
+    "06-circuit-rlc.md",
+    "07-revision.md"
+  ]
+}

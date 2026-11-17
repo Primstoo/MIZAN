@@ -10,6 +10,7 @@ const STYLES: Record<string, { motif: string; couleur: string }> = {
   "java-poo": { motif: "uml", couleur: "#D9824F" },
   cms: { motif: "page", couleur: "#4FA3A5" },
   "dessin-industriel": { motif: "vues", couleur: "#6C8FB8" },
+  electrocinetique: { motif: "courbe", couleur: "#7B6FD0" },
 };
 export const couleurCours = (slug: string) => STYLES[slug]?.couleur ?? "var(--acc)";
 

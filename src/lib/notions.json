@@ -55,12 +55,16 @@
     "t": "Ch2 · Couche réseau et ICMP"
    },
    {
+    "id": "adressage",
+    "t": "Ch3 · Adressage IP, sous-réseaux, IPv6"
+   },
+   {
     "id": "s14",
     "t": "En-têtes IP, TCP et UDP (à mémoriser)"
    },
    {
     "id": "td",
-    "t": "TD corrigés (séries 1 à 3)"
+    "t": "TD corrigés (séries 1 et 2)"
    },
    {
     "id": "tp1",
@@ -333,6 +337,36 @@
     "t": "Domaines de collision et de diffusion",
     "imp": 4,
     "g": "s3"
+   },
+   {
+    "id": "n44",
+    "t": "Ch3 · Adressage IPv4 : classes A, B, C, masque par défaut, nombre d'hôtes",
+    "imp": 4,
+    "g": "adressage"
+   },
+   {
+    "id": "n45",
+    "t": "Ch3 · Masque, CIDR, adresse réseau, diffusion et plage d'hôtes",
+    "imp": 5,
+    "g": "adressage"
+   },
+   {
+    "id": "n46",
+    "t": "Ch3 · Sous-réseaux : bits empruntés, masque, découpage d'un bloc",
+    "imp": 5,
+    "g": "adressage"
+   },
+   {
+    "id": "n47",
+    "t": "Ch3 · Routeur, passerelle par défaut, sur-réseau (CIDR)",
+    "imp": 3,
+    "g": "adressage"
+   },
+   {
+    "id": "n48",
+    "t": "Ch3 · IPv6 : écriture, lien local EUI-64, MAC multicast",
+    "imp": 3,
+    "g": "adressage"
    }
   ]
  },
@@ -1313,6 +1347,59 @@
     "id": "revision",
     "t": "Fiche de révision et examen blanc",
     "imp": 3,
+    "g": "cours"
+   }
+  ]
+ },
+ "electrocinetique": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "regime-transitoire",
+    "t": "Régime transitoire, continuité et échelon",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "condensateur-bobine",
+    "t": "Le condensateur et la bobine",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "circuit-rc",
+    "t": "Le circuit RC : charge et décharge",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "circuit-rl",
+    "t": "Le circuit RL : établissement et rupture du courant",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "circuit-lc",
+    "t": "Second ordre et circuit LC : oscillations libres",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "circuit-rlc",
+    "t": "Le circuit RLC série : les trois régimes",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "revision",
+    "t": "Fiche de révision et examen blanc",
+    "imp": 5,
     "g": "cours"
    }
   ]

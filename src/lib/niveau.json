@@ -871,5 +871,91 @@
    "a": 1,
    "e": "Ce qu'on voit d'en haut se dessine en bas."
   }
+ ],
+ "electrocinetique": [
+  {
+   "n": "condensateur-bobine",
+   "q": "La relation courant-tension d'un condensateur est…",
+   "o": [
+    "$u = C\\,\\dfrac{di}{dt}$",
+    "$i = C\\,\\dfrac{du}{dt}$",
+    "$i = \\dfrac{u}{C}$",
+    "$u = C\\,i$"
+   ],
+   "a": 1,
+   "e": "La charge $q = C u$ et $i = dq/dt$ donnent $i = C\\,du/dt$."
+  },
+  {
+   "n": "circuit-rc",
+   "q": "La constante de temps d'un circuit RC est…",
+   "o": [
+    "$R/C$",
+    "$RC$",
+    "$1/(RC)$",
+    "$C/R$"
+   ],
+   "a": 1,
+   "e": "$\\tau = RC$ (en secondes : $\\Omega \\cdot \\text{F} = \\text{s}$)."
+  },
+  {
+   "n": "circuit-rl",
+   "q": "La constante de temps d'un circuit RL est…",
+   "o": [
+    "$RL$",
+    "$L/R$",
+    "$R/L$",
+    "$1/(LR)$"
+   ],
+   "a": 1,
+   "e": "$\\tau = L/R$ (en secondes : $\\text{H}/\\Omega = \\text{s}$)."
+  },
+  {
+   "n": "circuit-rlc",
+   "q": "Le coefficient d'amortissement du RLC série est…",
+   "o": [
+    "$\\dfrac{2L}{R}$",
+    "$\\dfrac{R}{2L}$",
+    "$\\dfrac{1}{RC}$",
+    "$\\dfrac{L}{R}$"
+   ],
+   "a": 1,
+   "e": "$\\lambda = R/(2L)$, en s⁻¹."
+  },
+  {
+   "n": "revision",
+   "q": "Quelle forme décrit la charge d'un condensateur sous $E$ ?",
+   "o": [
+    "$E\\,e^{-t/\\tau}$",
+    "$E\\,(1 - e^{-t/\\tau})$",
+    "$E\\,\\cos\\omega_0 t$",
+    "$E\\,(1 + t/\\tau)$"
+   ],
+   "a": 1,
+   "e": "Elle part de $0$ et tend vers $E$."
+  },
+  {
+   "n": "regime-transitoire",
+   "q": "Le régime transitoire est…",
+   "o": [
+    "le régime stable atteint après longtemps",
+    "la phase pendant laquelle le circuit évolue entre son ancien équilibre et son nouveau régime permanent",
+    "le régime obtenu avec un générateur alternatif",
+    "le régime d'un circuit sans composants"
+   ],
+   "a": 1,
+   "e": "C'est la période d'évolution après une commutation, avant que les grandeurs se stabilisent."
+  },
+  {
+   "n": "circuit-lc",
+   "q": "Combien de conditions initiales faut-il pour une équation différentielle du second ordre ?",
+   "o": [
+    "une",
+    "deux",
+    "trois",
+    "aucune"
+   ],
+   "a": 1,
+   "e": "La valeur de la fonction et celle de sa dérivée en $t = 0$."
+  }
  ]
 }

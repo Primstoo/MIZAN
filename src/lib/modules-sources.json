@@ -32,6 +32,22 @@
     "annexes": []
   },
   {
+    "slug": "electrocinetique",
+    "titre": "Électrocinétique : régimes transitoires",
+    "prof": "",
+    "semestre": "S3",
+    "fichier": "electrocinetique.html",
+    "resume": "Chapitre 3 de Physique 3 : régime transitoire, condensateur et bobine, circuits RC, RL, LC et RLC série, avec les exercices du cours et un examen blanc.",
+    "cles": [
+      "electrocinetique_scores",
+      "electrocinetique_scores_etat",
+      "mzt-electrocinetique*"
+    ],
+    "cle": "electrocinetique_scores",
+    "format": "score10",
+    "annexes": []
+  },
+  {
     "slug": "probas",
     "titre": "Probabilités et statistiques",
     "prof": "",
