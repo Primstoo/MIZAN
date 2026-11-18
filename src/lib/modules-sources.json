@@ -120,6 +120,22 @@
     ]
   },
   {
+    "slug": "machine-learning",
+    "titre": "Machine Learning (Apprentissage automatique)",
+    "prof": "Pr Y. Madani",
+    "semestre": "S5",
+    "fichier": "machine-learning.html",
+    "resume": "Les 7 séances du Pr Madani : cycle d'un projet ML, maths de l'apprentissage, régression, classification, arbres et forêts, clustering. 9 chapitres, TP corrigés et examen blanc QCM.",
+    "cles": [
+      "ml_scores",
+      "ml_scores_etat",
+      "mzt-machine-learning*"
+    ],
+    "cle": "ml_scores",
+    "format": "score10",
+    "annexes": []
+  },
+  {
     "slug": "java-poo",
     "titre": "Programmation orientée objet en Java",
     "prof": "",

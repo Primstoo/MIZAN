@@ -957,5 +957,95 @@
    "a": 1,
    "e": "La valeur de la fonction et celle de sa dérivée en $t = 0$."
   }
+ ],
+ "machine-learning": [
+  {
+   "n": "ml-cycle-de-vie",
+   "q": "On calcule la médiane d'imputation sur toutes les données avant de séparer train et test. C'est :",
+   "o": [
+    "la bonne pratique",
+    "une fuite de données",
+    "sans effet sur l'évaluation"
+   ],
+   "a": 1,
+   "e": "La médiane contient de l'information du test. Elle doit être calculée sur $X_{train}$ seulement."
+  },
+  {
+   "n": "ml-fondements-maths",
+   "q": "Dans $\\hat y = f_\\theta(x)$, que représente $\\theta$ ?",
+   "o": [
+    "les paramètres appris du modèle",
+    "le bruit irréductible",
+    "la valeur réelle de la cible"
+   ],
+   "a": 0,
+   "e": "$\\theta$ regroupe les paramètres ajustés pendant l'entraînement, par exemple $(w, b)$."
+  },
+  {
+   "n": "ml-regression",
+   "q": "Les MCO cherchent la droite qui minimise :",
+   "o": [
+    "la somme des résidus",
+    "la somme des carrés des résidus",
+    "la plus grande erreur absolue"
+   ],
+   "a": 1,
+   "e": "La somme brute des résidus vaut toujours 0 avec un biais : il faut des carrés."
+  },
+  {
+   "n": "ml-classification",
+   "q": "La régression logistique est principalement utilisée pour :",
+   "o": [
+    "le clustering",
+    "la régression d'une valeur continue",
+    "la classification"
+   ],
+   "a": 2,
+   "e": "Malgré son nom, elle prédit une probabilité puis une classe."
+  },
+  {
+   "n": "ml-arbres-forets",
+   "q": "Un arbre de décision construit ses séparations de façon :",
+   "o": [
+    "gloutonne : la meilleure séparation immédiate, sans retour en arrière",
+    "exhaustive : il teste tous les arbres possibles",
+    "aléatoire"
+   ],
+   "a": 0,
+   "e": "C'est un compromis : très rapide, mais il peut rater une meilleure séparation au niveau suivant."
+  },
+  {
+   "n": "ml-clustering",
+   "q": "Quelle tâche relève de l'apprentissage non supervisé ?",
+   "o": [
+    "prédire le prix d'un logement",
+    "regrouper des acheteurs selon leur comportement",
+    "détecter un spam à partir d'e-mails étiquetés"
+   ],
+   "a": 1,
+   "e": "Pas d'étiquettes : on découvre des groupes."
+  },
+  {
+   "n": "ml-revision",
+   "q": "Un détecteur d'intrusion doit rater le moins d'attaques possible. On maximise :",
+   "o": [
+    "la précision",
+    "le rappel",
+    "la spécificité"
+   ],
+   "a": 1,
+   "e": "Rater une attaque = faux négatif ; le rappel $TP/(TP + FN)$ les pénalise."
+  },
+  {
+   "n": "ml-fondements",
+   "q": "Selon le cours, qu'est-ce qui n'est pas écrit à la main en Machine Learning ?",
+   "o": [
+    "les paramètres du modèle (la relation à apprendre)",
+    "le code de prétraitement",
+    "l'algorithme d'apprentissage"
+   ],
+   "a": 0,
+   "e": "L'algorithme est bien programmé. Ce sont les paramètres, appris à partir des exemples, qui ne sont pas fixés à la main."
+  }
  ]
 }

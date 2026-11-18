@@ -1407,5 +1407,70 @@
     "g": "cours"
    }
   ]
+ },
+ "machine-learning": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "ml-fondements",
+    "t": "Fondements du Machine Learning",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "ml-cycle-de-vie",
+    "t": "Cycle de vie d'un projet de Machine Learning",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ml-fondements-maths",
+    "t": "Fondements mathématiques de l'apprentissage",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ml-regression",
+    "t": "Régression linéaire, polynomiale et régularisée",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ml-classification",
+    "t": "Classification · régression logistique, KNN, métriques, ROC",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ml-arbres-forets",
+    "t": "Arbres de décision et forêts aléatoires",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ml-clustering",
+    "t": "Apprentissage non supervisé · K-Means, CAH, DBSCAN",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ml-tp-corriges",
+    "t": "TP/TD 1 à 4 corrigés",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "ml-revision",
+    "t": "Révision express et examen blanc QCM",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

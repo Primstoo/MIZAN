@@ -7,6 +7,7 @@ const STYLES: Record<string, { motif: string; couleur: string }> = {
   uml: { motif: "uml", couleur: "#9A78C9" },
   "traitement-ad": { motif: "donnees", couleur: "#C76A8A" },
   "analyse-1": { motif: "courbe", couleur: "#D9A441" },
+  "machine-learning": { motif: "donnees", couleur: "#5E9E8A" },
   "java-poo": { motif: "uml", couleur: "#D9824F" },
   cms: { motif: "page", couleur: "#4FA3A5" },
   "dessin-industriel": { motif: "vues", couleur: "#6C8FB8" },

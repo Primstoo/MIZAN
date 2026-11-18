@@ -34,8 +34,9 @@ function grille(titre, corps) {
   let cols = null, rows = null; const lignes = [];
   for (const l of corps.split("\n")) {
     const t = l.trim(); if (!t) continue;
-    if (t.startsWith("#cols:")) cols = t.slice(6).trim().split(/\s*\|\s*|\s+/);
-    else if (t.startsWith("#rows:")) rows = t.slice(6).trim().split(/\s*\|\s*|\s+/);
+    const etiq = (x) => (x.includes("|") ? x.split("|").map((c) => c.trim()) : x.split(/\s+/));
+    if (t.startsWith("#cols:")) cols = etiq(t.slice(6).trim());
+    else if (t.startsWith("#rows:")) rows = etiq(t.slice(6).trim());
     else lignes.push(t.includes("|") ? t.split("|").map((c) => c.trim()) : t.split(/\s+/));
   }
   const cell = (c) => {

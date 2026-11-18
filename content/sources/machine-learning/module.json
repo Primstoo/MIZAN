@@ -1,0 +1,23 @@
+{
+  "titre": "Machine Learning (Apprentissage automatique)",
+  "prof": "Pr Y. Madani",
+  "semestre": "S5",
+  "etablissement": "FSABM",
+  "fichier": "machine-learning.html",
+  "cle": "ml_scores",
+  "maths": true,
+  "resume": "Les 7 séances du Pr Madani : cycle d'un projet ML, maths de l'apprentissage, régression, classification, arbres et forêts, clustering. 9 chapitres, TP corrigés et examen blanc QCM.",
+  "conventions": "Cours de Machine Learning du Pr Y. Madani, licence MIACSD S5, FSA Béni Mellal, A.U. 2026-2027. Notations du prof : X (n × p) les caractéristiques, y la cible, ŷ la prédiction, f_θ le modèle, J(θ) la fonction objectif, η ou α le taux d'apprentissage, λ ou α la force de régularisation. Python 3 et scikit-learn. Exemples du prof : logements à Béni Mellal en kDH, détection d'attaques réseau, spam. L'examen sera surtout un QCM (au moins 90 %) : insiste sur les définitions, les pièges et les petits calculs (métriques, entropie, Gini, distances, K-Means).",
+  "intro": "Ce module suit **les 7 séances du Pr Y. Madani** (octobre–novembre 2026), son rappel mathématique sur la régression linéaire et les **TP/TD 1 à 4**.\n\n**L'examen** : le prof a annoncé un examen entre la 3e et la 4e semaine de décembre, **au moins 90 % de QCM**, sur les notions du cours et des TP. Ce module est donc construit autour des QCM : plus de 130 questions corrigées et expliquées, plus un examen blanc.\n\n**Chaque chapitre a trois temps**\n\n1. **Avant de commencer** : le prérequis et une question pour le vérifier.\n2. **Comment l'aborder** : l'état d'esprit, et le piège où presque tout le monde tombe.\n3. **Les idées, illustrées** : un schéma, une phrase, un exemple chiffré.\n\nTermine chaque chapitre par son QCM : **8/10 = chapitre maîtrisé**. En dessous, relis les encadrés « Piège ».\n\n**Ce qui est sûr** : tout vient des diapositives des séances et des fiches de TP ; les calculs ont été refaits et le code exécuté. Les quelques erreurs trouvées dans les diapos sont signalées dans des encadrés « Attention ».\n**À vérifier** : la date exacte et le barème de l'examen.",
+  "chapitres": [
+    "01-fondements.md",
+    "02-cycle-de-vie.md",
+    "03-fondements-maths.md",
+    "04-regression.md",
+    "05-classification.md",
+    "06-arbres-forets.md",
+    "07-clustering.md",
+    "08-tp-corriges.md",
+    "09-revision.md"
+  ]
+}
