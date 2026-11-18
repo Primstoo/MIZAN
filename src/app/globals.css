@@ -362,8 +362,6 @@ form.stack label{display:flex;flex-direction:column;gap:4px}
 .cx-retour{align-self:flex-start;padding:0;margin-bottom:-4px}
 .cx-bascule{text-align:center;margin-top:4px}
 a.cx-google{text-decoration:none}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .cx-zone{background:#1E2532}}
-:root[data-theme=dark] .cx-zone{background:#1E2532}
 .tl-salut{font:700 26px/1.15 Fraunces,Georgia,serif;margin:0}
 .tl-cnx{font-weight:600;font-size:14px;color:var(--acc);text-decoration:none}
 .tm{position:relative;margin-top:26px}
@@ -391,3 +389,6 @@ a.cx-google{text-decoration:none}
 .pomo .linkbtn{align-self:flex-start;text-decoration:none}
 .pomo-t{font:700 clamp(72px,24vw,112px)/1 Fraunces,Georgia,serif;margin:8px 0;font-variant-numeric:tabular-nums}
 .porte-feuille a.btn{color:var(--bg)}.porte-feuille a.btn.alt{color:var(--ink)}
+/* Connexion et entrée en mode sombre : couleurs inversées (panneau crème, formulaire bleu nuit), sur téléphone comme sur ordinateur. */
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .cx{background:#F4EDE1}:root:not([data-theme=light]) .cx-marque{background:#F4EDE1;color:#1E2433}:root:not([data-theme=light]) .cx-marque .cx-logo{color:#B4532A}:root:not([data-theme=light]) .cx-zone{background:#141922}}
+:root[data-theme=dark] .cx{background:#F4EDE1}:root[data-theme=dark] .cx-marque{background:#F4EDE1;color:#1E2433}:root[data-theme=dark] .cx-marque .cx-logo{color:#B4532A}:root[data-theme=dark] .cx-zone{background:#141922}
