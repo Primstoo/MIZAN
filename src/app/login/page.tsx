@@ -107,7 +107,6 @@ export default function Login() {
       <aside className="cx-marque" aria-hidden="true">
         <Mascotte id="toumai" taille={72} decor />
         <p className="cx-devise">Le cours de ton professeur, expliqué et corrigé.</p>
-        <p className="cx-pied">Universités du Maroc</p>
       </aside>
 
       <section className="cx-zone">
@@ -161,7 +160,7 @@ export default function Login() {
           )}
           {msg && <p className={`alert ${msg.type}`} role="alert">{msg.texte}</p>}
 
-          <p className="cx-legal">En continuant, tu acceptes la <a href="/confidentialite">politique de confidentialité</a>. Tu restes connecté sur cet appareil jusqu&apos;à ta déconnexion.</p>
+          <p className="cx-legal">En continuant, tu acceptes la <a href="/confidentialite">politique de confidentialité</a>.</p>
         </div>
       </section>
     </main>
