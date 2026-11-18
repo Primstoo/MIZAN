@@ -1,0 +1,23 @@
+{
+  "titre": "Structures de données en C",
+  "prof": "Pr A. Farchane",
+  "semestre": "S4",
+  "etablissement": "FSABM",
+  "fichier": "sd-c.html",
+  "cle": "sd-c_scores",
+  "resume": "Listes chaînées (simples, doubles, circulaires, par tableau), piles, files, arbres binaires et ABR en langage C, avec les TD 1 à 3, les TP et un examen blanc.",
+  "conventions": "Cours du Pr A. Farchane (module M22 Structures de données, licence MI S4, FSABM/FPBM Béni Mellal). Langage C uniquement (stdio.h, stdlib.h, malloc/free, typedef struct). Notations du prof : nœud avec champs data/next (listes), donnee/suivant/precedent (liste double), Pile avec top initialisé à -1 (tableau) ou Noeud* sommet (chaînée), File avec tete/queue, arbre avec donnee/gauche/droit ou valeur/gauche/droite. Parcours RGD (préfixe), GRD (infixe), GDR (postfixe). Hauteur d'un arbre vide : -1 dans le cours, 0 dans la correction du TD3 : toujours préciser la convention. L'examen (1 h 30) demande d'écrire le code complet de structures et fonctions (liste simple, ABR).",
+  "intro": "Ce module suit **le cours du Pr A. Farchane** (introduction, listes, piles et files, arbres) et corrige les **TD 1 à 3** et les **TP 1 et 2**.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre : les schémas montrent ce que deviennent les pointeurs à chaque opération.\n2. Recopie et compile les programmes (`gcc prog.c -o prog`). Dessine les cases et les flèches sur papier : c'est la seule façon de ne pas se perdre.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n4. Termine par l'examen blanc : il reprend le format de l'examen 2024-2025 (écrire tout le code d'une liste chaînée et d'un ABR).\n\n**Ce qui est sûr** : le contenu vient du cours et des corrections de TD ; tous les programmes C de ce module ont été compilés et exécutés.\n**À noter** : le plan du cours annonce aussi les arbres AVL, B et rouge-noir, mais le support s'arrête aux ABR. Ils ne sont pas traités ici.",
+  "chapitres": [
+    "01-introduction.md",
+    "02-liste-simple.md",
+    "03-liste-double-circulaire.md",
+    "04-liste-tableau.md",
+    "05-piles.md",
+    "06-files.md",
+    "07-arbres-binaires.md",
+    "08-abr.md",
+    "09-td-tp-corriges.md",
+    "10-revision-examen.md"
+  ]
+}

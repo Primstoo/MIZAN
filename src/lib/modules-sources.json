@@ -69,6 +69,108 @@
     "chapitres": 24
   },
   {
+    "slug": "prog-c",
+    "titre": "Programmation en C",
+    "prof": "Pr Safi",
+    "semestre": "S3",
+    "fichier": "prog-c.html",
+    "resume": "Le langage C du Pr Safi : types, opérateurs, tests et boucles, printf/scanf, fonctions, tableaux et pointeurs, avec TD 1-2, TP 2 à 5 et l'examen blanc corrigés.",
+    "cles": [
+      "prog-c_scores",
+      "prog-c_scores_etat",
+      "mzt-prog-c*"
+    ],
+    "cle": "prog-c_scores",
+    "format": "score10",
+    "chapitres": 9,
+    "annexes": []
+  },
+  {
+    "slug": "analyse-numerique",
+    "titre": "Analyse numérique",
+    "prof": "Pr Laaribi",
+    "semestre": "S4",
+    "fichier": "analyse-numerique.html",
+    "resume": "Arithmétique machine, dichotomie, point fixe, Newton et sécante, Gauss, LU, Cholesky, Jacobi, Gauss-Seidel et relaxation, avec les séries 1 à 4 corrigées et un examen blanc.",
+    "cles": [
+      "analyse-numerique_scores",
+      "analyse-numerique_scores_etat",
+      "mzt-analyse-numerique*"
+    ],
+    "cle": "analyse-numerique_scores",
+    "format": "score10",
+    "chapitres": 10,
+    "annexes": []
+  },
+  {
+    "slug": "bdd-sql",
+    "titre": "Bases de données : algèbre relationnelle et SQL",
+    "prof": "Pr Y. Madani",
+    "semestre": "S4",
+    "fichier": "bdd-sql.html",
+    "resume": "Merise (MCD, MLD, normalisation), algèbre relationnelle et SQL sous MySQL : LDD, LMD, SELECT, jointures, sous-requêtes, index, vues et utilisateurs. Séances 1 à 11 + TD/TP corrigés + examen blanc.",
+    "cles": [
+      "bdd-sql_scores",
+      "bdd-sql_scores_etat",
+      "mzt-bdd-sql*"
+    ],
+    "cle": "bdd-sql_scores",
+    "format": "score10",
+    "chapitres": 11,
+    "annexes": []
+  },
+  {
+    "slug": "javascript",
+    "titre": "JavaScript",
+    "prof": "Pr Zouina",
+    "semestre": "S4",
+    "fichier": "javascript.html",
+    "resume": "Programmation web 2 : syntaxe, objets et tableaux, DOM, événements, stockage local et JSON, promesses et fetch. Séances 1 à 7 + TD/TP corrigés + examen blanc.",
+    "cles": [
+      "javascript_scores",
+      "javascript_scores_etat",
+      "mzt-javascript*"
+    ],
+    "cle": "javascript_scores",
+    "format": "score10",
+    "chapitres": 11,
+    "annexes": []
+  },
+  {
+    "slug": "poo-cpp",
+    "titre": "Programmation orientée objet en C++",
+    "prof": "Pr A. Farchane",
+    "semestre": "S4",
+    "fichier": "poo-cpp.html",
+    "resume": "Du C au C++, classes, recopie, opérateurs, héritage simple et multiple, polymorphisme, patrons et exceptions, avec les TD1–4 et le TP1 corrigés.",
+    "cles": [
+      "poo-cpp_scores",
+      "poo-cpp_scores_etat",
+      "mzt-poo-cpp*"
+    ],
+    "cle": "poo-cpp_scores",
+    "format": "score10",
+    "chapitres": 11,
+    "annexes": []
+  },
+  {
+    "slug": "sd-c",
+    "titre": "Structures de données en C",
+    "prof": "Pr A. Farchane",
+    "semestre": "S4",
+    "fichier": "sd-c.html",
+    "resume": "Listes chaînées (simples, doubles, circulaires, par tableau), piles, files, arbres binaires et ABR en langage C, avec les TD 1 à 3, les TP et un examen blanc.",
+    "cles": [
+      "sd-c_scores",
+      "sd-c_scores_etat",
+      "mzt-sd-c*"
+    ],
+    "cle": "sd-c_scores",
+    "format": "score10",
+    "chapitres": 10,
+    "annexes": []
+  },
+  {
     "slug": "archi",
     "titre": "Architecture des ordinateurs",
     "prof": "",

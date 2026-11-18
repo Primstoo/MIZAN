@@ -12,6 +12,19 @@ const STYLES: Record<string, { motif: string; couleur: string }> = {
   cms: { motif: "page", couleur: "#4FA3A5" },
   "dessin-industriel": { motif: "vues", couleur: "#6C8FB8" },
   electrocinetique: { motif: "courbe", couleur: "#7B6FD0" },
+  "algo-python-1": { motif: "page", couleur: "#3E7CB1" },
+  "algebre-1": { motif: "proba", couleur: "#B5644A" },
+  thermodynamique: { motif: "courbe", couleur: "#D0663F" },
+  "mecanique-point": { motif: "vues", couleur: "#8A7A5A" },
+  "prog-web-1": { motif: "page", couleur: "#E07A3F" },
+  "prog-c": { motif: "archi", couleur: "#5C7A99" },
+  se1: { motif: "archi", couleur: "#6A8F4E" },
+  "analyse-numerique": { motif: "courbe", couleur: "#4E8FB0" },
+  "bdd-sql": { motif: "donnees", couleur: "#3C8D93" },
+  se2: { motif: "archi", couleur: "#8B6BB5" },
+  javascript: { motif: "page", couleur: "#C9A227" },
+  "sd-c": { motif: "reseaux", couleur: "#B0557A" },
+  "poo-cpp": { motif: "uml", couleur: "#4F6FB0" },
 };
 export const couleurCours = (slug: string) => STYLES[slug]?.couleur ?? "var(--acc)";
 

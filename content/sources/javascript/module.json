@@ -1,0 +1,24 @@
+{
+  "titre": "JavaScript",
+  "prof": "Pr Zouina",
+  "semestre": "S4",
+  "etablissement": "FSABM",
+  "fichier": "javascript.html",
+  "cle": "javascript_scores",
+  "resume": "Programmation web 2 : syntaxe, objets et tableaux, DOM, événements, stockage local et JSON, promesses et fetch. Séances 1 à 7 + TD/TP corrigés + examen blanc.",
+  "conventions": "Cours « Programmation web 2 : langage JavaScript » du Pr Mouad Zouina, MI S4, FSABM (Béni Mellal), 2025-2026. JavaScript moderne (ES6+) : const par défaut, let si mutation, jamais var ; égalité stricte === ; fonctions fléchées pour les callbacks. Le prof préfixe les variables qui contiennent un élément du DOM par $ (ex. const $liste = document.querySelector('#liste')). Il emploie un vocabulaire « architecture » (Call Stack, Heap, Task Queue, Event Loop, fail-fast, XSS). Exemples en DH/MAD. Les exemples non-DOM sont exécutables avec Node.js ; le DOM se teste dans le navigateur (F12, console). L'évaluation officielle est un mini-projet en binôme, mais il existe aussi un examen écrit (session 1, 1h30) : QCM/questions courtes, fonctions sur tableaux, DOM (todo list), fetch sur plusieurs serveurs.",
+  "intro": "Ce module suit **les 7 séances du Pr Zouina** (Programmation web 2, S4 2025-2026), puis corrige les **TD 1 à 4** et les **TP**, et finit par un **examen blanc** construit sur l'examen de 2025.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre en entier. Chaque chapitre commence par un prérequis à vérifier.\n2. Exécute les exemples : `node fichier.js` pour le JavaScript pur, la console du navigateur (F12) pour le DOM.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.** Sinon, relis les encadrés « Piège ».\n4. Le tuteur (en bas à droite) répond à tes questions sur le chapitre ouvert.\n\n**Ce qui est sûr** : le contenu vient des diapositives, des TD et des TP du prof. Tous les exemples marqués comme exécutés ont tourné sous Node.js 22.\n**À vérifier** : le barème de l'examen et le poids du mini-projet. Demande-les au prof.",
+  "chapitres": [
+    "01-introduction.md",
+    "02-variables-types.md",
+    "03-controle-fonctions.md",
+    "04-objets-classes.md",
+    "05-tableaux-callbacks-async.md",
+    "06-dom.md",
+    "07-evenements.md",
+    "08-stockage-erreurs.md",
+    "09-promesses-fetch.md",
+    "10-td-tp-corriges.md",
+    "11-revision-examen.md"
+  ]
+}

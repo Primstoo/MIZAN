@@ -1472,5 +1472,443 @@
     "g": "cours"
    }
   ]
+ },
+ "prog-c": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "bases-types",
+    "t": "Premier programme, types de base et constantes",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "operateurs",
+    "t": "Opérateurs et expressions",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "controle",
+    "t": "Tests et boucles (if, switch, while, do-while, for)",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "entrees-sorties",
+    "t": "Lire et écrire (printf, scanf, getchar, putchar)",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "fonctions",
+    "t": "Fonctions, portée et classes de variables",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "tableaux",
+    "t": "Tableaux à une et deux dimensions",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "pointeurs",
+    "t": "Les pointeurs (adresses, *, tableaux, allocation)",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "td-tp-corriges",
+    "t": "TD 1, TD 2 et TP 2 à 5 corrigés",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "revision-examen",
+    "t": "Révision et examen blanc corrigé",
+    "imp": 4,
+    "g": "cours"
+   }
+  ]
+ },
+ "sd-c": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "sd-introduction",
+    "t": "Introduction · organiser les données en mémoire",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "liste-simple",
+    "t": "Listes simplement chaînées",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "liste-double-circulaire",
+    "t": "Listes doublement chaînées et circulaires",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "liste-tableau",
+    "t": "Liste avec un tableau (contiguë)",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "piles",
+    "t": "Piles (LIFO) · tableau et liste chaînée",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "files",
+    "t": "Files (FIFO) · liste chaînée et tableau",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "arbres-binaires",
+    "t": "Arbres et arbres binaires · vocabulaire et parcours",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "abr",
+    "t": "Arbres binaires de recherche (ABR)",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "td-tp-corriges",
+    "t": "TD 1 à 3 et TP 1-2 corrigés",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "revision-examen",
+    "t": "Révision et examen blanc",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
+ },
+ "poo-cpp": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "du-c-au-cpp",
+    "t": "Du C au C++ · prototypes, cout/cin, surdéfinition, arguments par défaut",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "references-new-delete",
+    "t": "Références, passage d'arguments et new/delete",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "classes-objets",
+    "t": "Classes et objets · constructeur, destructeur, static, const, this",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "recopie-objets-membres",
+    "t": "Constructeur de recopie, objets membres et liste d'initialisation",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "amies-operateurs",
+    "t": "Fonctions amies et surdéfinition d'opérateurs",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "conversions",
+    "t": "Conversions de type définies par l'utilisateur",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "heritage-simple",
+    "t": "Héritage simple · dérivation, redéfinition, protected, constructeurs",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "multiple-polymorphisme",
+    "t": "Héritage multiple, fonctions virtuelles et classes abstraites",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "patrons-exceptions",
+    "t": "Patrons de fonctions et de classes, gestion des exceptions",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "td-tp-corriges",
+    "t": "TD et TP corrigés",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "revision-examen",
+    "t": "Révision et examen blanc",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
+ },
+ "javascript": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "introduction-js",
+    "t": "Introduction à JavaScript · web, moteur et balise script",
+    "imp": 2,
+    "g": "cours"
+   },
+   {
+    "id": "variables-types",
+    "t": "Variables, types et opérateurs",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "controle-fonctions",
+    "t": "Conditions, boucles et fonctions",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "objets-classes",
+    "t": "Objets, classes et objets intégrés",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "tableaux-callbacks",
+    "t": "Tableaux (map, filter, reduce), callbacks et Event Loop",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "dom",
+    "t": "Manipuler le DOM",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "evenements",
+    "t": "Gestion des événements",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "stockage-erreurs",
+    "t": "JSON, Web Storage et gestion des erreurs",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "promesses-fetch",
+    "t": "HTTP, promesses, async/await et fetch",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "td-tp-corriges",
+    "t": "TD 1 à 4 et TP corrigés",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "revision-examen",
+    "t": "Révision et examen blanc",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
+ },
+ "bdd-sql": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "bdd-merise-mcd",
+    "t": "Bases de données, SGBD et MCD Merise",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "mld-normalisation",
+    "t": "Du MCD au MLD, puis normalisation (1NF à BCNF)",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "algebre-base",
+    "t": "Algèbre relationnelle (1) · sélection, projection, renommage, opérations ensemblistes",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "algebre-jointures",
+    "t": "Algèbre relationnelle (2) · jointures, division, agrégation et tri",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "sql-ldd",
+    "t": "SQL et MySQL · définir les données (LDD)",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "sql-lmd",
+    "t": "SQL · manipuler les données (INSERT, UPDATE, DELETE, REPLACE)",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "sql-select",
+    "t": "SQL · interroger une table (SELECT, WHERE, GROUP BY, HAVING)",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "sql-jointures",
+    "t": "SQL · opérateurs ensemblistes, jointures et sous-requêtes",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "index-vues-utilisateurs",
+    "t": "Index, vues et gestion des utilisateurs MySQL",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "td-tp-corriges",
+    "t": "TD et TP corrigés (TD2, TD3, TD4, TP1 à TP4)",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "revision-examen",
+    "t": "Fiche de révision et examen blanc",
+    "imp": 3,
+    "g": "cours"
+   }
+  ]
+ },
+ "analyse-numerique": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "arithmetique-ordinateur",
+    "t": "Introduction et arithmétique de l'ordinateur",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "separation-dichotomie",
+    "t": "Équations f(x) = 0 · séparation des racines et dichotomie",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "point-fixe",
+    "t": "Méthode du point fixe (approximations successives)",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "newton-secante",
+    "t": "Méthodes de Newton-Raphson et de la sécante",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "systemes-gauss",
+    "t": "Systèmes linéaires (1) · Cramer, triangulaires, Gauss, Gauss-Jordan",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "lu-cholesky",
+    "t": "Systèmes linéaires (2) · décomposition LU et Cholesky",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "methodes-iteratives",
+    "t": "Systèmes linéaires (3) · Jacobi, Gauss-Seidel, relaxation",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "interpolation",
+    "t": "Interpolation polynomiale · Lagrange et Newton (annale)",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "td-corriges",
+    "t": "Séries de TD 1 à 4 corrigées",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "revision-examen",
+    "t": "Révision et examen blanc",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

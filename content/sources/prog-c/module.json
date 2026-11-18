@@ -1,0 +1,22 @@
+{
+  "titre": "Programmation en C",
+  "prof": "Pr Safi",
+  "semestre": "S3",
+  "etablissement": "FSABM",
+  "fichier": "prog-c.html",
+  "cle": "prog-c_scores",
+  "resume": "Le langage C du Pr Safi : types, opérateurs, tests et boucles, printf/scanf, fonctions, tableaux et pointeurs, avec TD 1-2, TP 2 à 5 et l'examen blanc corrigés.",
+  "conventions": "Cours « Programmation en Langage C » du Pr Said Safi (S3, FSABM, 2025-2026), 7 chapitres : environnement et types, opérateurs, structures de contrôle, lecture/écriture (printf, scanf, getchar), fonctions et classes de variables, tableaux 1D/2D, pointeurs. Le prof écrit souvent main() ou void main() (style ancien) : dans les corrigés on écrit int main(void) avec return 0. Le cours suppose parfois int sur 2 octets (ancien Turbo C) : sur les compilateurs actuels (gcc, Code::Blocks) int fait 4 octets. Notations du prof : iCompteur, iSomme, fct, echange, fact, A[I], P = A, *(P+i), formalisme tableau / formalisme pointeur. Tous les programmes affichés ont été compilés avec gcc et exécutés. Les structures (struct) et l'allocation dynamique ne sont qu'évoquées dans le cours (malloc, free) mais demandées en TP3/TP4.",
+  "intro": "Ce module suit **les 7 chapitres du polycopié du Pr Safi**, puis corrige les **TD 1 et 2**, les **TP 2 à 5** et son **examen blanc (1 h 30)**.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre : chaque idée a un schéma ou un pas-à-pas.\n2. Recopie les programmes et compile-les (Code::Blocks, ou `gcc prog.c -o prog`). Lire du C ne suffit pas.\n3. Fais le QCM : **8/10 = chapitre maîtrisé**.\n4. Le tuteur (en bas à droite) répond à tes questions.\n\n**Ce qui est sûr** : le plan et les exemples viennent du cours ; tous les programmes ont été compilés et exécutés.\n**À vérifier** : le barème de l'examen. Le corrigé manuscrit du TD qui circule contient des erreurs : elles sont signalées au chapitre « TD et TP corrigés ».",
+  "chapitres": [
+    "01-bases-types.md",
+    "02-operateurs.md",
+    "03-controle.md",
+    "04-entrees-sorties.md",
+    "05-fonctions.md",
+    "06-tableaux.md",
+    "07-pointeurs.md",
+    "08-td-tp-corriges.md",
+    "09-revision.md"
+  ]
+}

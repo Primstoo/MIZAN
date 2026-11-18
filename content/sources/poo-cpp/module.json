@@ -1,0 +1,24 @@
+{
+  "titre": "Programmation orientée objet en C++",
+  "prof": "Pr A. Farchane",
+  "semestre": "S4",
+  "etablissement": "FSABM",
+  "fichier": "poo-cpp.html",
+  "cle": "poo-cpp_scores",
+  "resume": "Du C au C++, classes, recopie, opérateurs, héritage simple et multiple, polymorphisme, patrons et exceptions, avec les TD1–4 et le TP1 corrigés.",
+  "conventions": "Cours du Pr A. Farchane, licence MI S4 à la FSABM (Béni Mellal). C++ compilé avec g++ -std=c++17. Garder les noms de classes du prof (point, pointcol, vect, vecteur3d, Graphic, Personne/Etudiant/Employe) et sa terminologie : surdéfinition (surcharge), redéfinition, fonction amie, patron (template), constructeur de recopie, dérivation publique/privée/protégée. Écrire int main() et delete[] pour les tableaux, même si les diapos écrivent main() et delete. Aucune annale de C++ n'est disponible : ne pas inventer de barème.",
+  "intro": "Ce module suit le **cours du Pr A. Farchane** (parties I à V : syntaxe C++, classes, héritage et polymorphisme, patrons, exceptions) et corrige les **TD1 à TD4** et le **TP1**.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre en entier, puis recopie et compile les exemples (g++ ou un compilateur en ligne).\n2. Pour chaque programme, essaie de **prévoir l'affichage** avant de regarder la sortie : c'est l'exercice favori des TD.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n4. Termine par l'examen blanc du dernier chapitre.\n\n**Ce qui est sûr** : tout le contenu suit les diapositives et les fiches de TD/TP ; chaque exemple de code a été compilé et exécuté, et les sorties affichées sont les sorties réelles.\n**À vérifier** : la partie VI (STL) annoncée dans le plan n'est pas développée dans les diapositives fournies, et aucune annale de C++ n'a été fournie. Demande au prof le format de l'examen.",
+  "chapitres": [
+    "01-du-c-au-cpp.md",
+    "02-references-new-delete.md",
+    "03-classes-objets.md",
+    "04-recopie-objets-membres.md",
+    "05-amies-operateurs.md",
+    "06-conversions.md",
+    "07-heritage-simple.md",
+    "08-multiple-polymorphisme.md",
+    "09-patrons-exceptions.md",
+    "10-td-tp-corriges.md",
+    "11-revision-examen.md"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "titre": "Analyse numérique",
+  "prof": "Pr Laaribi",
+  "semestre": "S4",
+  "etablissement": "FSABM",
+  "fichier": "analyse-numerique.html",
+  "cle": "analyse-numerique_scores",
+  "maths": true,
+  "resume": "Arithmétique machine, dichotomie, point fixe, Newton et sécante, Gauss, LU, Cholesky, Jacobi, Gauss-Seidel et relaxation, avec les séries 1 à 4 corrigées et un examen blanc.",
+  "conventions": "Cours d'Analyse numérique I du Pr Aziz Laaribi, licence S4 à la FSABM (ex-FPBM), Béni Mellal, 2025-2026. Notations du prof : fl(x) pour la représentation machine, x_{n+1} = g(x_n) pour le point fixe, A = D - E - F pour Jacobi / Gauss-Seidel, L à diagonale unité dans A = LU, A = LL^T pour Cholesky, rho(B) rayon spectral. Le prof insiste sur les justifications (TVI, unicité, contraction g(I) ⊂ I et |g'| ≤ k < 1, matrice SPD, rho < 1). Plusieurs erreurs de calcul des diapos sont signalées dans les chapitres. L'interpolation n'est pas dans les chapitres fournis mais tombe dans l'annale 2023/24. Formules en LaTeX.",
+  "intro": "Ce module suit **les chapitres 0 à 4 du Pr Laaribi** (arithmétique de l'ordinateur, équations non linéaires, méthodes directes et itératives pour les systèmes) et corrige les **séries 1 à 4**.\n\n**Comment l'utiliser**\n\n1. Chaque chapitre a trois temps : prérequis, façon d'aborder, idées illustrées.\n2. Chaque méthode est illustrée par un exemple chiffré calculé en Python : refais-le à la main, puis compare.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n4. Termine par l'examen blanc (1 h 30), construit sur les annales 2022/23 et 2023/24.\n\n**À savoir** : les encadrés « Attention » signalent des erreurs trouvées dans les diapos (avec la correction) et ce qui a été ajouté hors supports, comme le chapitre sur l'interpolation.",
+  "chapitres": [
+    "01-arithmetique-ordinateur.md",
+    "02-separation-dichotomie.md",
+    "03-point-fixe.md",
+    "04-newton-secante.md",
+    "05-gauss.md",
+    "06-lu-cholesky.md",
+    "07-methodes-iteratives.md",
+    "08-interpolation.md",
+    "09-td-corriges.md",
+    "10-revision.md"
+  ]
+}

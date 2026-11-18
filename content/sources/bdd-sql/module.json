@@ -1,0 +1,24 @@
+{
+  "titre": "Bases de données : algèbre relationnelle et SQL",
+  "prof": "Pr Y. Madani",
+  "semestre": "S4",
+  "etablissement": "FSABM",
+  "fichier": "bdd-sql.html",
+  "cle": "bdd-sql_scores",
+  "resume": "Merise (MCD, MLD, normalisation), algèbre relationnelle et SQL sous MySQL : LDD, LMD, SELECT, jointures, sous-requêtes, index, vues et utilisateurs. Séances 1 à 11 + TD/TP corrigés + examen blanc.",
+  "conventions": "Cours « Algèbre relationnelle & langage SQL » du Pr Y. Madani, licence MI (MIACSD) S4 à la FP/FSA Béni Mellal, mars–mai 2026. SGBD du cours et des TP : MySQL (MySQL Workbench, InnoDB, port 3306). Les exemples du module sont exécutés sous SQLite : signaler les différences de syntaxe (AUTO_INCREMENT, ENUM/SET, INSERT IGNORE, ON DUPLICATE KEY UPDATE, MODIFY, GRANT, FULL OUTER JOIN absent de MySQL). Notations de l'algèbre : σ, π, ρ, ∪, ∩, −, ×, ⋈, ⋈θ, ⟕ ⟖ ⟗, ÷, γ (regroupement, fonctions COMPTE/SOMME/MOYENNE/MIN/MAX), τ (tri). MLD textuel : clé primaire soulignée, clé étrangère suivie de #. Bases d'exemple du prof : ÉTUDIANT/FORMATION (CNE, ID_Formation), AUTEUR/LIVRE/REDIGE (TD2, TD4), BiblioDB (TD3). L'examen 2025 était un QCM de 30 questions (1 h 30).",
+  "intro": "Ce module suit **les 11 séances du Pr Y. Madani** (mars–mai 2026) : conception avec Merise, algèbre relationnelle, puis SQL sous MySQL. Il corrige les TD2, TD3, TD4 et reprend les TP.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre, puis recopie et exécute les requêtes (MySQL Workbench, ou un SQLite en ligne).\n2. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.** En dessous, relis les encadrés « Piège ».\n3. Termine par l'examen blanc : l'annale 2025 était un QCM de 30 questions en 1 h 30.\n\n**Ce qui est sûr** : le contenu vient des diapositives, des TD/TP et de l'annale 2025 ; toutes les requêtes SQL ont été exécutées (SQLite) et les sorties affichées sont réelles.\n**À savoir** : le cours utilise **MySQL**. Quand la syntaxe diffère de SQLite, un encadré « Attention » le signale ; à l'examen, écris la version MySQL.",
+  "chapitres": [
+    "01-bdd-merise-mcd.md",
+    "02-mld-normalisation.md",
+    "03-algebre-operations-base.md",
+    "04-algebre-jointures-division.md",
+    "05-sql-mysql-ldd.md",
+    "06-sql-lmd.md",
+    "07-sql-select.md",
+    "08-sql-jointures-sous-requetes.md",
+    "09-index-vues-utilisateurs.md",
+    "10-td-tp-corriges.md",
+    "11-revision-examen-blanc.md"
+  ]
+}

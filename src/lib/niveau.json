@@ -1047,5 +1047,554 @@
    "a": 0,
    "e": "L'algorithme est bien programmé. Ce sont les paramètres, appris à partir des exemples, qui ne sont pas fixés à la main."
   }
+ ],
+ "prog-c": [
+  {
+   "n": "operateurs",
+   "q": "int x = 14; (x / 4) * 4 vaut :",
+   "o": [
+    "12",
+    "14",
+    "14.0"
+   ],
+   "a": 0,
+   "e": "14/4 = 3 en division entière, puis 3×4 = 12."
+  },
+  {
+   "n": "controle",
+   "q": "Quelle boucle exécute son corps au moins une fois ?",
+   "o": [
+    "while",
+    "do … while",
+    "for"
+   ],
+   "a": 1,
+   "e": "Le test est placé après le corps."
+  },
+  {
+   "n": "fonctions",
+   "q": "Après echange(n, p) (passage par valeur) avec n=10, p=20 :",
+   "o": [
+    "n=10, p=20",
+    "n=20, p=10",
+    "Erreur"
+   ],
+   "a": 0,
+   "e": "La fonction travaille sur des copies."
+  },
+  {
+   "n": "tableaux",
+   "q": "int A[5]; : quelles composantes existent ?",
+   "o": [
+    "A[1] à A[5]",
+    "A[0] à A[4]",
+    "A[0] à A[5]"
+   ],
+   "a": 1,
+   "e": "5 cases, indices 0 à 4."
+  },
+  {
+   "n": "pointeurs",
+   "q": "Après int a = 1, *p = &a; *p = 12; que vaut a ?",
+   "o": [
+    "1",
+    "12",
+    "L'adresse de a"
+   ],
+   "a": 1,
+   "e": "Manipuler *p revient à manipuler a."
+  },
+  {
+   "n": "td-tp-corriges",
+   "q": "A %= D++ avec A = 20, D = 2 donne :",
+   "o": [
+    "A = 0, D = 3",
+    "A = 2, D = 3",
+    "A = 0, D = 2"
+   ],
+   "a": 0,
+   "e": "D++ fournit 2 : 20 % 2 = 0, puis D passe à 3."
+  },
+  {
+   "n": "bases-types",
+   "q": "Quel identificateur est valide en C ?",
+   "o": [
+    "3e_jour",
+    "_MOYENNE_du_MOIS_",
+    "limite-inf"
+   ],
+   "a": 1,
+   "e": "Un nom commence par une lettre ou _ et ne contient que lettres, chiffres et _."
+  },
+  {
+   "n": "entrees-sorties",
+   "q": "Qu'affiche printf(\"%4d\", 12345); ?",
+   "o": [
+    "1234",
+    "12345",
+    "2345"
+   ],
+   "a": 1,
+   "e": "La largeur est un minimum : rien n'est coupé."
+  }
+ ],
+ "sd-c": [
+  {
+   "n": "liste-simple",
+   "q": "Que contient le champ next du dernier nœud ?",
+   "o": [
+    "l'adresse de la tête",
+    "NULL",
+    "0 dans le champ data"
+   ],
+   "a": 1,
+   "e": "Dans une liste non circulaire, la fin est marquée par NULL."
+  },
+  {
+   "n": "piles",
+   "q": "On empile 1, 2, 3 puis on dépile une fois. On obtient :",
+   "o": [
+    "1",
+    "2",
+    "3"
+   ],
+   "a": 2,
+   "e": "Le dernier entré sort en premier."
+  },
+  {
+   "n": "arbres-binaires",
+   "q": "Dans un arbre binaire, chaque nœud a :",
+   "o": [
+    "exactement 2 fils",
+    "au plus 2 fils",
+    "au moins 1 fils"
+   ],
+   "a": 1,
+   "e": "0, 1 ou 2 fils."
+  },
+  {
+   "n": "abr",
+   "q": "Dans un ABR, le sous-arbre gauche d'un nœud contient :",
+   "o": [
+    "des clés plus petites",
+    "des clés plus grandes",
+    "n'importe quelles clés"
+   ],
+   "a": 0,
+   "e": "C'est la règle d'ordre."
+  },
+  {
+   "n": "revision-examen",
+   "q": "Quelle opération est en O(1) sur une liste simple ?",
+   "o": [
+    "insertion en tête",
+    "insertion en queue sans pointeur de queue",
+    "recherche"
+   ],
+   "a": 0,
+   "e": "Pas de parcours."
+  },
+  {
+   "n": "liste-double-circulaire",
+   "q": "Un nœud de liste doublement chaînée contient :",
+   "o": [
+    "une donnée et un pointeur",
+    "une donnée et deux pointeurs",
+    "deux données et un pointeur"
+   ],
+   "a": 1,
+   "e": "suivant + precedent."
+  },
+  {
+   "n": "files",
+   "q": "On enfile A, B, C puis on défile. On obtient :",
+   "o": [
+    "A",
+    "C",
+    "B"
+   ],
+   "a": 0,
+   "e": "Premier entré, premier sorti."
+  },
+  {
+   "n": "td-tp-corriges",
+   "q": "fusionner(1→4, 2→3) retourne :",
+   "o": [
+    "1→2→3→4",
+    "1→4→2→3",
+    "2→3→1→4"
+   ],
+   "a": 0,
+   "e": "À chaque étape, la plus petite tête."
+  }
+ ],
+ "poo-cpp": [
+  {
+   "n": "references-new-delete",
+   "q": "Après void f(int a){ a = 0; } et int n = 5; f(n);, que vaut n ?",
+   "o": [
+    "5",
+    "0",
+    "Indéterminé"
+   ],
+   "a": 0,
+   "e": "Passage par valeur : f modifie une copie."
+  },
+  {
+   "n": "classes-objets",
+   "q": "Dans class point { int x; public: ... };, x est :",
+   "o": [
+    "privé",
+    "public",
+    "protégé"
+   ],
+   "a": 0,
+   "e": "Dans une class, l'accès par défaut est private."
+  },
+  {
+   "n": "recopie-objets-membres",
+   "q": "Quel est le prototype usuel du constructeur de recopie de point ?",
+   "o": [
+    "point(point p);",
+    "point(const point &p);",
+    "point operator=(const point &p);"
+   ],
+   "a": 1,
+   "e": "Référence obligatoire, const conseillé."
+  },
+  {
+   "n": "amies-operateurs",
+   "q": "Où se place la déclaration friend int coincide(point, point); ?",
+   "o": [
+    "Dans la classe point",
+    "Dans main",
+    "Dans la fonction coincide"
+   ],
+   "a": 0,
+   "e": "C'est la classe qui accorde l'amitié."
+  },
+  {
+   "n": "heritage-simple",
+   "q": "Quelle relation traduit l'héritage public ?",
+   "o": [
+    "« est un »",
+    "« a un »",
+    "« utilise un »"
+   ],
+   "a": 0,
+   "e": "Un pointcol est un point."
+  },
+  {
+   "n": "multiple-polymorphisme",
+   "q": "Pour class D : public B, public C, quel constructeur s'exécute en premier ?",
+   "o": [
+    "Celui de B",
+    "Celui de C",
+    "Celui de D"
+   ],
+   "a": 0,
+   "e": "Les bases sont construites dans l'ordre de déclaration."
+  },
+  {
+   "n": "revision-examen",
+   "q": "Dans A *p = new B; (B dérive de A), p->g() avec g non virtuelle appelle :",
+   "o": [
+    "A::g",
+    "B::g",
+    "Une erreur"
+   ],
+   "a": 0,
+   "e": "Liaison statique."
+  },
+  {
+   "n": "du-c-au-cpp",
+   "q": "Dans la formule C++ = C + E + S + P, que désigne P ?",
+   "o": [
+    "Les pointeurs",
+    "Les possibilités de programmation orientée objet",
+    "Les prototypes"
+   ],
+   "a": 1,
+   "e": "E = écarts, S = spécificités hors objet, P = POO."
+  }
+ ],
+ "javascript": [
+  {
+   "n": "variables-types",
+   "q": "Quelle déclaration a une portée de fonction et ignore les blocs ?",
+   "o": [
+    "var",
+    "let",
+    "const"
+   ],
+   "a": 0,
+   "e": "var ne respecte pas les accolades d'un if ou d'un for : elle « fuit » dans toute la fonction."
+  },
+  {
+   "n": "controle-fonctions",
+   "q": "Laquelle de ces valeurs est truthy ?",
+   "o": [
+    "0",
+    "\"\"",
+    "\"0\"",
+    "NaN"
+   ],
+   "a": 2,
+   "e": "Une chaîne non vide est vraie, même si elle contient \"0\"."
+  },
+  {
+   "n": "objets-classes",
+   "q": "Que fait \"use strict\" face à x = 5 (x non déclaré) ?",
+   "o": [
+    "Crée une variable globale x",
+    "Lève une ReferenceError",
+    "Ignore la ligne"
+   ],
+   "a": 1,
+   "e": "Le mode strict transforme les erreurs silencieuses en exceptions."
+  },
+  {
+   "n": "tableaux-callbacks",
+   "q": "[1, 2, 3].map(x => x * 10) renvoie :",
+   "o": [
+    "[10, 20, 30]",
+    "60",
+    "[1, 2, 3]"
+   ],
+   "a": 0,
+   "e": "map transforme chaque élément et renvoie un nouveau tableau."
+  },
+  {
+   "n": "dom",
+   "q": "document.querySelector(\".p\") renvoie :",
+   "o": [
+    "tous les éléments de classe p",
+    "le premier élément de classe p, ou null",
+    "la balise <p>"
+   ],
+   "a": 1,
+   "e": ".p est une classe ; querySelector s'arrête au premier."
+  },
+  {
+   "n": "promesses-fetch",
+   "q": "Quelle méthode HTTP sert à créer une ressource ?",
+   "o": [
+    "GET",
+    "POST",
+    "DELETE"
+   ],
+   "a": 1,
+   "e": "GET lit, POST crée, PUT/PATCH modifie, DELETE supprime."
+  },
+  {
+   "n": "revision-examen",
+   "q": "Lequel est un identifiant invalide ?",
+   "o": [
+    "$maVariable",
+    "_total",
+    "maVariable+"
+   ],
+   "a": 2,
+   "e": "+ est un opérateur."
+  },
+  {
+   "n": "evenements",
+   "q": "Quel événement se déclenche à chaque frappe dans un champ ?",
+   "o": [
+    "input",
+    "change",
+    "submit"
+   ],
+   "a": 0,
+   "e": "change attend la fin de la modification."
+  }
+ ],
+ "bdd-sql": [
+  {
+   "n": "algebre-base",
+   "q": "Lequel de ces éléments représente une ligne dans une relation ?",
+   "o": [
+    "Un attribut",
+    "Un domaine",
+    "Un tuple",
+    "Un schéma"
+   ],
+   "a": 2,
+   "e": "Examen 2025."
+  },
+  {
+   "n": "algebre-jointures",
+   "q": "Dans une jointure thêta, R ⋈θ S signifie :",
+   "o": [
+    "R × S puis σθ (R × S)",
+    "σθ(R) × S",
+    "R ∪ S avec la condition θ",
+    "πθ (R × S)"
+   ],
+   "a": 0,
+   "e": "Examen 2025."
+  },
+  {
+   "n": "sql-select",
+   "q": "Que sélectionne WHERE email LIKE '_.%@gmail.com' ?",
+   "o": [
+    "Tous les emails Gmail",
+    "Les emails avec un seul caractère avant le @",
+    "Les emails avec un caractère, un point, puis n'importe quoi avant @gmail.com",
+    "Les emails finissant par .gmail.com"
+   ],
+   "a": 2,
+   "e": "Examen 2025."
+  },
+  {
+   "n": "sql-jointures",
+   "q": "Quelle syntaxe est équivalente à NATURAL JOIN ?",
+   "o": [
+    "JOIN … ON table1.col = table2.col",
+    "LEFT JOIN … ON table1.col = table2.col",
+    "WHERE table1.col = table2.col",
+    "JOIN … USING (col)"
+   ],
+   "a": 3,
+   "e": "Examen 2025 : USING fusionne la colonne commune comme la jointure naturelle."
+  },
+  {
+   "n": "bdd-merise-mcd",
+   "q": "Que signifie la notation P1 → P2 ?",
+   "o": [
+    "P2 détermine P1 de manière unique",
+    "P1 détermine P2 de manière unique",
+    "P1 et P2 sont indépendants",
+    "P1 et P2 sont équivalents"
+   ],
+   "a": 1,
+   "e": "Question tombée à l'examen 2025. La flèche va de la source (déterminant) vers la cible."
+  },
+  {
+   "n": "mld-normalisation",
+   "q": "Une table est en 2NF si :",
+   "o": [
+    "elle est en 1NF et tous les attributs non-clés dépendent entièrement de la clé primaire",
+    "elle est en 1NF et n'a pas de dépendance transitive",
+    "tous les attributs sont atomiques",
+    "elle respecte la forme de Boyce-Codd"
+   ],
+   "a": 0,
+   "e": "Question de l'examen 2025. « Pas de dépendance transitive », c'est la 3NF."
+  },
+  {
+   "n": "sql-ldd",
+   "q": "Quelle catégorie SQL contient GRANT et REVOKE ?",
+   "o": [
+    "DDL",
+    "DML",
+    "TCL",
+    "DCL"
+   ],
+   "a": 3,
+   "e": "Examen 2025."
+  },
+  {
+   "n": "sql-lmd",
+   "q": "Que fait REPLACE INTO Etudiant VALUES (5, 'Karim', NULL, DEFAULT, 15.5); ?",
+   "o": [
+    "Insère toujours un nouvel étudiant",
+    "Supprime l'étudiant 5",
+    "Génère une erreur à cause de NULL",
+    "Met à jour (supprime puis réinsère) l'étudiant 5 s'il existe, sinon l'insère"
+   ],
+   "a": 3,
+   "e": "Examen 2025."
+  }
+ ],
+ "analyse-numerique": [
+  {
+   "n": "separation-dichotomie",
+   "q": "La dichotomie exige au départ :",
+   "o": [
+    "$f'(a) \\neq 0$",
+    "$f$ continue et $f(a)f(b) < 0$",
+    "$f$ convexe"
+   ],
+   "a": 1,
+   "e": "C'est l'hypothèse du TVI."
+  },
+  {
+   "n": "point-fixe",
+   "q": "Un point fixe de $g$ vérifie :",
+   "o": [
+    "$g(r) = 0$",
+    "$g(r) = r$",
+    "$g'(r) = 0$"
+   ],
+   "a": 1,
+   "e": "Par définition."
+  },
+  {
+   "n": "newton-secante",
+   "q": "La formule de Newton est :",
+   "o": [
+    "$x_{n+1} = x_n - f'(x_n)/f(x_n)$",
+    "$x_{n+1} = x_n - f(x_n)/f'(x_n)$",
+    "$x_{n+1} = f(x_n)$"
+   ],
+   "a": 1,
+   "e": "Intersection de la tangente avec l'axe."
+  },
+  {
+   "n": "systemes-gauss",
+   "q": "Cramer s'applique si :",
+   "o": [
+    "$A$ est symétrique",
+    "$\\det A \\neq 0$",
+    "$b = 0$"
+   ],
+   "a": 1,
+   "e": "Sinon on divise par zéro."
+  },
+  {
+   "n": "lu-cholesky",
+   "q": "Dans $A = LU$ (Doolittle, cours), $L$ est :",
+   "o": [
+    "triangulaire inférieure à diagonale unité",
+    "triangulaire supérieure",
+    "diagonale"
+   ],
+   "a": 0,
+   "e": "Les multiplicateurs sont rangés sous la diagonale."
+  },
+  {
+   "n": "methodes-iteratives",
+   "q": "Une méthode itérative $x^{(k+1)} = Bx^{(k)} + c$ converge pour tout $x^{(0)}$ ssi :",
+   "o": [
+    "$\\det B \\neq 0$",
+    "$\\rho(B) < 1$",
+    "$B$ symétrique"
+   ],
+   "a": 1,
+   "e": "Proposition 1 du cours."
+  },
+  {
+   "n": "revision-examen",
+   "q": "Quelle méthode n'a besoin ni de dérivée ni d'intervalle à changement de signe ?",
+   "o": [
+    "Dichotomie",
+    "Newton",
+    "Sécante"
+   ],
+   "a": 2,
+   "e": "Deux points de départ suffisent."
+  },
+  {
+   "n": "arithmetique-ordinateur",
+   "q": "$42$ s'écrit en binaire :",
+   "o": [
+    "$(110101)_2$",
+    "$(101010)_2$",
+    "$(100110)_2$"
+   ],
+   "a": 1,
+   "e": "Divisions par 2 : restes 0,1,0,1,0,1 lus de bas en haut."
+  }
  ]
 }
