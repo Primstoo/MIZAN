@@ -2059,5 +2059,95 @@
    "a": 1,
    "e": "Q = 0 sur les adiabatiques."
   }
+ ],
+ "algebre-1": [
+  {
+   "n": "logique",
+   "q": "Si $A$ est fausse, l'implication $A \\Rightarrow B$ est :",
+   "o": [
+    "toujours fausse",
+    "toujours vraie",
+    "vraie seulement si $B$ est vraie"
+   ],
+   "a": 1,
+   "e": "$A \\Rightarrow B$ vaut $(\\neg A) \\vee B$ ; avec $\\neg A$ vraie, le « ou » est vrai."
+  },
+  {
+   "n": "ensembles-raisonnements",
+   "q": "Laquelle est correcte ?",
+   "o": [
+    "$\\{2\\} \\in [0 ; 2]$",
+    "$\\{2\\} \\subseteq [0 ; 2]$",
+    "$2 \\subseteq [0 ; 2]$"
+   ],
+   "a": 1,
+   "e": "Un singleton est un ensemble : il est inclus, pas élément."
+  },
+  {
+   "n": "applications",
+   "q": "$h : \\mathbb R \\to \\mathbb R,\\ x \\mapsto x^2$ est :",
+   "o": [
+    "injective",
+    "surjective",
+    "ni injective ni surjective"
+   ],
+   "a": 2,
+   "e": "$h(-1) = h(1)$ et $-1$ n'a pas d'antécédent."
+  },
+  {
+   "n": "arithmetique",
+   "q": "$366 \\wedge 43$ vaut :",
+   "o": [
+    "1",
+    "43",
+    "22"
+   ],
+   "a": 0,
+   "e": "Euclide : restes 22, 21, 1, 0 (exemple 17)."
+  },
+  {
+   "n": "groupes",
+   "q": "$(\\mathbb N, +)$ est-il un groupe ?",
+   "o": [
+    "oui",
+    "non, seul 0 a un opposé dans $\\mathbb N$",
+    "non, + n'est pas associative"
+   ],
+   "a": 1,
+   "e": "$-1 \\notin \\mathbb N$."
+  },
+  {
+   "n": "polynomes",
+   "q": "$\\deg\\big((X^3 + 1)(2X^2 - X)\\big)$ vaut :",
+   "o": [
+    "5",
+    "6",
+    "3"
+   ],
+   "a": 0,
+   "e": "$3 + 2 = 5$."
+  },
+  {
+   "n": "revision",
+   "q": "La contraposée de $P \\Rightarrow Q$ est :",
+   "o": [
+    "$\\neg Q \\Rightarrow \\neg P$",
+    "$Q \\Rightarrow P$",
+    "$\\neg P \\Rightarrow \\neg Q$"
+   ],
+   "a": 0,
+   "e": "Elle a la même valeur logique que $P \\Rightarrow Q$."
+  },
+  {
+   "n": "relations-binaires",
+   "q": "$\\le$ sur $\\mathbb R$ est :",
+   "o": [
+    "une relation d'ordre total",
+    "une relation d'équivalence",
+    "une relation d'ordre partiel"
+   ],
+   "a": 0,
+   "e": "Réflexive, antisymétrique, transitive, et deux réels sont toujours comparables."
+  }
  ]
 }

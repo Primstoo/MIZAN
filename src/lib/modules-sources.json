@@ -1,5 +1,22 @@
 [
   {
+    "slug": "algebre-1",
+    "titre": "Algèbre 1",
+    "prof": "Pr M. El Omari",
+    "semestre": "S1",
+    "fichier": "algebre-1.html",
+    "resume": "Logique, ensembles, applications, relations, arithmétique, groupes et anneaux, polynômes et fractions rationnelles, avec les TD 1 à 3 corrigés.",
+    "cles": [
+      "algebre-1_scores",
+      "algebre-1_scores_etat",
+      "mzt-algebre-1*"
+    ],
+    "cle": "algebre-1_scores",
+    "format": "score10",
+    "chapitres": 11,
+    "annexes": []
+  },
+  {
     "slug": "algo-python-1",
     "titre": "Algorithmique et programmation Python 1",
     "prof": "Pr Y. Madani",

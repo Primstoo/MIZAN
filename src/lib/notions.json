@@ -2277,5 +2277,82 @@
     "g": "cours"
    }
   ]
+ },
+ "algebre-1": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "logique",
+    "t": "Éléments de logique",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ensembles-raisonnements",
+    "t": "Ensembles et types de raisonnement",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "applications",
+    "t": "Applications, injections, surjections, bijections",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "relations-binaires",
+    "t": "Relations d'équivalence et relations d'ordre",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "arithmetique",
+    "t": "Arithmétique dans Z",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "groupes",
+    "t": "Lois de composition interne et groupes",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "anneaux-corps",
+    "t": "Anneaux et corps",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "polynomes",
+    "t": "Polynômes",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "fractions-rationnelles",
+    "t": "Fractions rationnelles et éléments simples",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "td-corriges",
+    "t": "TD 1, 2 et 3 corrigés",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "revision",
+    "t": "Révision et examen blanc",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

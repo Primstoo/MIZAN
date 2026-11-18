@@ -1,0 +1,25 @@
+{
+  "titre": "Algèbre 1",
+  "prof": "Pr M. El Omari",
+  "semestre": "S1",
+  "etablissement": "FSABM",
+  "fichier": "algebre-1.html",
+  "cle": "algebre-1_scores",
+  "maths": true,
+  "resume": "Logique, ensembles, applications, relations, arithmétique, groupes et anneaux, polynômes et fractions rationnelles, avec les TD 1 à 3 corrigés.",
+  "conventions": "Cours d'Algèbre 1 (filière MIP, S1) du Pr M'hamed El Omari, Faculté Polydisciplinaire de Béni Mellal (FSABM), polycopié 2024-2025. Notations du prof : a ∧ b pour le PGCD et a ∨ b pour le PPCM (entiers et polynômes), Cl(a) pour une classe d'équivalence, F(E,F) pour les applications de E dans F, B(E,E) pour les bijections, e_P pour la fonction polynomiale associée à P, deg(0) = −1 (convention du polycopié ; beaucoup de livres prennent −∞), K désigne R ou C. Le prof interdit les symboles ⇒ et ⇔ dans une rédaction : on écrit « donc », « si… alors ». Réponds en français, en tutoyant, avec des formules en LaTeX $...$.",
+  "intro": "Ce module suit **le polycopié du Pr El Omari** (Algèbre 1, MIP, 2024-2025) chapitre par chapitre, puis corrige les **TD 1, 2 et 3**.\n\n**Chaque chapitre a trois temps**\n\n1. **Avant de commencer** : le prérequis, avec une question pour vérifier.\n2. **Comment l'aborder** : l'état d'esprit et le piège classique.\n3. **Les idées, illustrées** : un schéma, une phrase, un exemple chiffré.\n\nTermine par le QCM : **8/10 = chapitre maîtrisé**.\n\n**Ce qui est sûr** : le plan, les notations et les exemples viennent du polycopié ; les calculs des exemples et des corrigés ont été vérifiés par ordinateur.\n**À savoir** : le polycopié contient des coquilles (signalées en encadré « Attention » avec la correction). Le barème et le format de l'examen ne sont pas fournis : demande-les au prof.",
+  "chapitres": [
+    "01-logique.md",
+    "02-ensembles-raisonnements.md",
+    "03-applications.md",
+    "04-relations-binaires.md",
+    "05-arithmetique.md",
+    "06-groupes.md",
+    "07-anneaux-corps.md",
+    "08-polynomes.md",
+    "09-fractions-rationnelles.md",
+    "10-td-corriges.md",
+    "11-revision.md"
+  ]
+}
