@@ -8,7 +8,11 @@ function Envoyer({ label }: { label: string }) {
 }
 
 const Plan = () => (
-  <select name="plan" defaultValue="premium"><option value="premium">Premium</option><option value="essentiel">Essentiel</option></select>
+  <select name="plan" defaultValue="essentiel">
+    <option value="essentiel">Abonnement mensuel (30 j)</option>
+    <option value="examen">Pass examen (10 j)</option>
+    <option value="premium">Premium (interne)</option>
+  </select>
 );
 
 // Après un paiement : générer des codes à envoyer (voie normale) ou activer directement un élève (secours).

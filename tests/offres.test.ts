@@ -31,6 +31,15 @@ describe("offre effective d'un élève", () => {
     ligne = { plan: "free", plan_until: null, plan_source: "paid", bonus_plan: "essentiel", bonus_until: dans(-2) };
     expect((await offreDe("u")).plan).toBe("free");
   });
+  it("Pass examen : rang 3 tant qu'il court, gratuit après", async () => {
+    process.env.OFFRES_ACTIVES = "1";
+    ligne = { plan: "examen", plan_until: dans(8), plan_source: "paid", bonus_plan: null, bonus_until: null };
+    expect(await offreDe("u")).toMatchObject({ plan: "examen", base: "examen" });
+    expect(await rangEffectif("u")).toBe(3);
+    ligne = { plan: "examen", plan_until: dans(-1), plan_source: "paid", bonus_plan: null, bonus_until: null };
+    expect((await offreDe("u")).plan).toBe("free");
+    expect(await rangEffectif("u")).toBe(1);
+  });
   it("ouvre tout pendant la bêta et à l'admin, applique l'offre sinon", async () => {
     expect(await rangEffectif("u")).toBe(3); // OFFRES_ACTIVES absent : bêta
     process.env.OFFRES_ACTIVES = "1";

@@ -14,7 +14,7 @@ import NIVEAU from "@/lib/niveau.json";
 import BANQUE from "@/lib/banque.json";
 import { notePrevue } from "@/lib/maitrise";
 import { chargerMaitrise } from "@/lib/parcours";
-import { nouveauCodeOffre, offresActives, offreDe, rangEffectif, type Plan } from "@/lib/offres";
+import { NOMS, nouveauCodeOffre, offresActives, offreDe, rangEffectif, type Plan } from "@/lib/offres";
 
 type QCM = { n: string; a: number };
 const estSlug = (s: unknown): s is string => typeof s === "string" && MODULES.some((m) => m.slug === s);
@@ -355,11 +355,11 @@ export async function activerCode(_prev: string, form: FormData): Promise<string
   const r = data as { ok: boolean; message?: string; plan?: Plan; fin?: string };
   revalidatePath("/app/moi"); revalidatePath("/app/offres");
   if (!r.ok) return r.message || "Code refusé.";
-  const nom = r.plan === "premium" ? "Premium" : "Essentiel";
+  const nom = NOMS[r.plan ?? "essentiel"] ?? "Abonnement";
   return `✓ Offre ${nom} activée jusqu'au ${new Date(r.fin!).toLocaleDateString("fr-FR")}.`;
 }
 
-const PLANS_PAYANTS = ["essentiel", "premium"];
+const PLANS_PAYANTS = ["essentiel", "examen", "premium"];
 
 export async function genererCodes(_prev: string, form: FormData): Promise<string> {
   await chef();
@@ -387,7 +387,7 @@ export async function accorderOffreAdmin(_prev: string, form: FormData): Promise
   const { data: fin, error } = await db.rpc("accorder_offre", { p_user: m.user_id, p_plan: plan, p_jours: jours, p_source: "paid" });
   if (error) return "Erreur (" + error.code + ").";
   revalidatePath("/app/admin");
-  return `✓ ${plan === "premium" ? "Premium" : "Essentiel"} jusqu'au ${new Date(fin as string).toLocaleDateString("fr-FR")} pour ${email}.`;
+  return `✓ ${NOMS[plan as Plan] ?? plan} jusqu'au ${new Date(fin as string).toLocaleDateString("fr-FR")} pour ${email}.`;
 }
 
 // Changer de guide (mascotte) depuis « Moi ».

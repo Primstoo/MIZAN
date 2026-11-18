@@ -2,20 +2,20 @@ import { createClient } from "@/lib/supabase/server";
 import { estAdmin } from "@/lib/acces";
 import { dateFr, NOMS, offreDe, offresActives, QUOTA_TUTEUR } from "@/lib/offres";
 import ActiverCode from "./ActiverCode";
+import { WHATSAPP_CONTACT, whatsappLien } from "@/lib/offres";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Mon offre" };
-
-const prix = (v: string | undefined, d: string) => v || d;
 
 export default async function Offres() {
   const { data: { user } } = await createClient().auth.getUser();
   const o = await offreDe(user!.id);
   const chef = estAdmin(user);
-  const offres: { id: "free" | "essentiel" | "premium"; nom: string; prix: string; points: string[] }[] = [
-    { id: "free", nom: "Gratuit", prix: "0 DH", points: [`${QUOTA_TUTEUR.free} questions au tuteur par jour`, "5 quiz par chapitre, squelette de base"] },
-    { id: "essentiel", nom: "Essentiel", prix: prix(process.env.PRIX_ESSENTIEL, "19 DH / mois · 49 DH / semestre"), points: [`${QUOTA_TUTEUR.essentiel} questions par jour, mode Approfondi`, "Quiz illimités, annales corrigées", "Squelette complet"] },
-    { id: "premium", nom: "Premium", prix: prix(process.env.PRIX_PREMIUM, "39 DH / mois · 99 DH / semestre"), points: ["Tuteur sans limite pratique, photo de ton brouillon", "Examen blanc chronométré, live mensuel", "Squelette complet + pièces rares"] },
+  // Aucun prix ici (D33) : orientation seulement, le détail se donne sur WhatsApp.
+  const offres: { id: "free" | "essentiel" | "examen"; nom: string; points: string[] }[] = [
+    { id: "free", nom: "Gratuit", points: [`${QUOTA_TUTEUR.free} questions au tuteur par jour`, "5 quiz par chapitre, squelette de base"] },
+    { id: "essentiel", nom: "Abonnement mensuel", points: [`${QUOTA_TUTEUR.essentiel} questions par jour, mode Approfondi`, "Quiz illimités, annales corrigées", "Squelette complet"] },
+    { id: "examen", nom: "Pass examen", points: ["Pour la période de révision avant tes examens", `Tuteur renforcé (${QUOTA_TUTEUR.examen} questions par jour), photo de ton brouillon`, "Annales corrigées, examen blanc chronométré"] },
   ];
   return (
     <main className="page">
@@ -31,22 +31,21 @@ export default async function Offres() {
 
       <div className="offres">
         {offres.map((x) => (
-          <section key={x.id} className={`offre ${x.id === "premium" ? "reco" : ""}`}>
+          <section key={x.id} className={`offre ${x.id === "examen" ? "reco" : ""}`}>
             <div className="row between">
               <h2>{x.nom}</h2>
-              {o.plan === x.id ? <span className="chip">Ton offre</span> : x.id === "premium" ? <span className="chip amber">Conseillé</span> : null}
+              {o.plan === x.id ? <span className="chip">Ton offre</span> : null}
             </div>
-            <p className="t">{x.prix}</p>
-            <ul>{x.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>
+                        <ul>{x.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>
           </section>
         ))}
       </div>
 
       <section className="bloc">
-        <h2>Comment payer</h2>
-        <p className="muted small" style={{ whiteSpace: "pre-line" }}>
-          {process.env.OFFRE_PAIEMENT_INFO || process.env.LIVE_PAIEMENT_INFO || "Paiement par CashPlus, Orange Money ou virement. Contacte l'équipe ToumaiLearn : tu reçois un code d'activation après le paiement."}
-        </p>
+        <h2>Une offre t&apos;intéresse ?</h2>
+        <p className="muted small">Les tarifs et le paiement se donnent sur WhatsApp. Tu reçois ensuite un code d&apos;activation.</p>
+        <p><a className="btn" href={whatsappLien("offres")} target="_blank" rel="noopener noreferrer">Plus d&apos;infos sur WhatsApp : {WHATSAPP_CONTACT.numero}</a></p>
+        <p className="muted small">Sans renouvellement, ton abonnement s&apos;arrête à sa date de fin et tu repasses automatiquement en gratuit.</p>
         <ActiverCode />
       </section>
 

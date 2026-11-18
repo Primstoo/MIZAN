@@ -210,3 +210,9 @@ Chaque élève relie son compte depuis « Moi » (lien t.me/<bot>?start=<jeton> 
 **Alternative écartée pour les tests :** tests de bout en bout dans un navigateur (Playwright) : utiles, mais ils demandent une base de test séparée ; à faire quand il y aura un projet Supabase de préproduction.
 **Inscription libre (`INSCRIPTION_LIBRE=1`) :** la page d'accueil propose « Créer mon compte », mais sans code d'invitation l'élève restait bloqué sur l'écran de la bêta privée. Avec la variable, tout compte connecté devient membre. Laissée à 0 par défaut : l'ouvrir expose le quota gratuit du tuteur, à décider avec `OFFRES_ACTIVES`. Limite connue : en inscription libre, le code d'invitation n'est plus demandé, donc l'essai de 7 jours par parrainage ne se déclenche pas.
 
+
+## D33. Abonnement mensuel + Pass examen, aucun prix affiché (18/11/2026)
+**Décision :** « essentiel » devient l'**abonnement mensuel** (code de 30 jours, pas de renouvellement = retour automatique au gratuit à la date de fin, sans tâche planifiée) ; nouveau plan **`examen`** (Pass examen, ~10 jours, rang 3 comme Premium, tuteur plafonné à 40/jour par défaut). Premium reste en interne (activation admin).
+**Aucun prix dans l'appli :** la page Offres montre une orientation et un bouton WhatsApp (+212 6 72 95 12 55, message prérempli). Tarifs et paiement se donnent sur WhatsApp, puis un code `TOUMAI-XXXX-XXXX` est envoyé.
+**Fait :** type `Plan` et rangs (`src/lib/offres.ts`), quotas d'import (`src/lib/fac.ts`), admin (choix Abonnement mensuel / Pass examen), `supabase/migration-2026-11-offres-mensuel-pass-examen.sql` (contraintes + parrainage qui prolonge un plan de rang 3 sans le remplacer), test du Pass examen.
+**À faire :** appliquer la migration dans Supabase avant de générer un code `examen` ; bandeau « examen proche » et affichage de l'échéance sur « Moi ».

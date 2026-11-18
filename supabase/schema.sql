@@ -236,7 +236,7 @@ alter table public.progress add constraint progress_taille check (pg_column_size
 -- Toutes les écritures passent par le serveur (clé service) : aucune fonction n'est appelable par un élève.
 create table if not exists public.abonnements (    -- une ligne par élève ayant eu une offre, un essai ou un parrainage
   user_id uuid primary key references auth.users(id) on delete cascade,
-  plan text not null default 'free' check (plan in ('free','essentiel','premium')),
+  plan text not null default 'free' check (plan in ('free','essentiel','premium','examen')),
   plan_until timestamptz,
   plan_source text not null default 'paid' check (plan_source in ('paid','invite','recompense')),
   bonus_plan text check (bonus_plan in ('essentiel','premium')),
@@ -252,7 +252,7 @@ create policy "abonnements: soi" on public.abonnements for select using ((select
 
 create table if not exists public.codes_offre (
   code text primary key,
-  plan text not null check (plan in ('essentiel','premium')),
+  plan text not null check (plan in ('essentiel','premium','examen')),
   jours int not null check (jours between 1 and 400),
   lot text,
   created_at timestamptz not null default now(),
@@ -295,7 +295,7 @@ begin
   select * into v from public.abonnements where user_id = p_user for update;
   base := case when v.plan_until is null or v.plan_until <= now() or v.plan = 'free' then 1
                when v.plan = 'essentiel' then 2 else 3 end;
-  if base = 3 then perform public.accorder_offre(p_user, 'premium', p_jours, 'recompense'); return; end if;
+  if base = 3 then perform public.accorder_offre(p_user, v.plan, p_jours, 'recompense'); return; end if;
   cible := case when base = 1 then 'essentiel' else 'premium' end;
   if v.bonus_plan = cible and v.bonus_until > now() then
     update public.abonnements set bonus_until = v.bonus_until + make_interval(days => p_jours) where user_id = p_user;

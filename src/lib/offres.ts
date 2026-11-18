@@ -1,11 +1,15 @@
 import { admin } from "@/lib/acces";
 import { randomBytes } from "node:crypto";
 
-// Offres Gratuit / Essentiel / Premium (spec V1, 06/11/2026).
+// Offres Gratuit / Abonnement mensuel (essentiel) / Pass examen (spec V1 06/11, D33 18/11/2026).
 // Tant que OFFRES_ACTIVES n'est pas à 1, rien ne change pour les élèves (bêta : quota historique, tout ouvert).
-export type Plan = "free" | "essentiel" | "premium";
-export const NOMS: Record<Plan, string> = { free: "Gratuit", essentiel: "Essentiel", premium: "Premium" };
-export const RANG: Record<Plan, number> = { free: 1, essentiel: 2, premium: 3 };
+// 18/11/2026 : « essentiel » = abonnement mensuel ; « examen » = Pass examen (court, accès complet, rang 3 comme Premium).
+// Aucun prix n'est affiché dans l'appli : orientation + renvoi WhatsApp (WHATSAPP_CONTACT).
+export type Plan = "free" | "essentiel" | "premium" | "examen";
+export const NOMS: Record<Plan, string> = { free: "Gratuit", essentiel: "Abonnement mensuel", premium: "Premium", examen: "Pass examen" };
+export const RANG: Record<Plan, number> = { free: 1, essentiel: 2, premium: 3, examen: 3 };
+export const WHATSAPP_CONTACT = { numero: "+212 6 72 95 12 55", lien: "https://wa.me/212672951255" };
+export const whatsappLien = (sujet: string) => `${WHATSAPP_CONTACT.lien}?text=${encodeURIComponent(`Bonjour, je voudrais des infos sur les offres ToumaiLearn (${sujet}).`)}`;
 
 export const offresActives = () => process.env.OFFRES_ACTIVES === "1";
 
@@ -15,6 +19,7 @@ export const QUOTA_TUTEUR: Record<Plan, number> = {
   free: n(process.env.TUTOR_QUOTA_FREE, 5),
   essentiel: n(process.env.TUTOR_QUOTA_ESSENTIEL, 20),
   premium: n(process.env.TUTOR_QUOTA_PREMIUM, 100), // plafond anti-abus « caché »
+  examen: n(process.env.TUTOR_QUOTA_EXAMEN, 40),
 };
 
 export type Offre = {

@@ -14,6 +14,7 @@ export const QUOTA_IMPORT: Record<Plan, { n: number; jours: number }> = {
   free: { n: env(process.env.IMPORT_QUOTA_FREE, 2), jours: 183 },
   essentiel: { n: env(process.env.IMPORT_QUOTA_ESSENTIEL, 5), jours: 30 },
   premium: { n: env(process.env.IMPORT_QUOTA_PREMIUM, 15), jours: 30 },
+  examen: { n: env(process.env.IMPORT_QUOTA_EXAMEN, 5), jours: 10 },
 };
 // Pendant la bêta (offres inactives) : 5 imports par 30 jours pour tout le monde.
 const BETA = { n: env(process.env.IMPORT_QUOTA_BETA, 5), jours: 30 };
