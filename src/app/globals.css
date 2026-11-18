@@ -323,3 +323,27 @@ form.stack label{display:flex;flex-direction:column;gap:4px}
 @media (prefers-reduced-motion:reduce){.tl-cible{animation:none}}
 .tl-voile{position:fixed;z-index:70;background:rgba(10,13,20,.6);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 .tl-visite-appui{color:var(--acc)}
+/* Connexion (18/11) : une carte sobre, la marque en panneau latéral sur grand écran seulement. */
+.cx{min-height:100dvh;display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.2fr);background:var(--bg)}
+.cx-marque{background:#141922;color:#EDE6D9;padding:40px;display:flex;flex-direction:column;justify-content:center;gap:16px;border-right:1px solid var(--line)}
+.cx-devise{font:600 clamp(22px,2.4vw,30px)/1.2 Fraunces,Georgia,serif;margin:0;max-width:16ch;text-wrap:balance}
+.cx-pied{margin:0;font-size:13px;opacity:.6;letter-spacing:.04em;text-transform:uppercase}
+.cx-zone{display:flex;align-items:center;justify-content:center;padding:32px 20px max(32px,env(safe-area-inset-bottom))}
+.cx-carte{width:100%;max-width:380px;display:flex;flex-direction:column;gap:14px}
+.cx-logo{font-size:22px;margin-bottom:12px}
+.cx-carte h1{font-size:28px;line-height:1.15;margin:0}
+.cx-sous{margin:0;color:var(--mute);font-size:15px}
+.cx-sous strong{color:var(--ink);word-break:break-all}
+.cx-form{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.cx-form label{font-size:14px;font-weight:600}
+.cx-form input{font-size:16px;padding:12px 14px;min-height:48px}
+.cx-form .code-input{font-size:26px;letter-spacing:.35em;padding:10px}
+.cx-form .btn.big{margin-top:6px;min-height:48px}
+.cx-form .btn:disabled{opacity:.45;cursor:not-allowed}
+.cx-ou{display:flex;align-items:center;gap:12px;margin:0;color:var(--mute);font-size:13px}
+.cx-ou::before,.cx-ou::after{content:"";flex:1;height:1px;background:var(--line)}
+.cx-aide{margin:0;font-size:14px;color:var(--mute)}
+.cx-aide .link:disabled{opacity:.5;text-decoration:none;cursor:default}
+.cx-legal{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mute);line-height:1.5}
+.cx-legal a{color:inherit}
+@media (max-width:760px){.cx{grid-template-columns:1fr}.cx-marque{display:none}.cx-zone{align-items:flex-start;padding-top:max(40px,env(safe-area-inset-top))}}

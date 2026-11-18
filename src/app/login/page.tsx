@@ -8,12 +8,13 @@ import { verifierInvitation } from "./actions";
 // Connexion sans mot de passe : lien par e-mail (flux implicite, marche dans tout navigateur),
 // et saisie du code en chiffres contenu dans l'e-mail (après configuration d'un SMTP).
 const LONGUEUR_CODE_MAX = 10;
+const LONGUEUR_CODE_AFFICHE = 8;
 
 export default function Login() {
   const supabase = createClient();
   const [etape, setEtape] = useState<"invitation" | "email" | "code">("email");
   const [invitation, setInvitation] = useState("");
-  const [etapesInvitation, setEtapesInvitation] = useState(false);
+  const [, setEtapesInvitation] = useState(false);
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [charge, setCharge] = useState(false);
@@ -28,7 +29,7 @@ export default function Login() {
     if (inv) try { localStorage.setItem("mizan-invite", inv); } catch {}
     // « J'ai un code d'invitation » : on saisit et vérifie le code AVANT l'e-mail.
     else if (p.get("invitation") !== null) { setEtape("invitation"); setEtapesInvitation(true); }
-    if (p.get("erreur")) setMsg({ type: "bad", texte: "Ce lien de connexion n’a pas fonctionné (il a peut-être expiré). Demande un nouveau code ci-dessous." });
+    if (p.get("erreur")) setMsg({ type: "bad", texte: "Ce lien de connexion n’a pas fonctionné (il a peut-être expiré). Demande un nouveau code." });
   }, []);
   useEffect(() => {
     if (attente <= 0) return;
@@ -89,73 +90,78 @@ export default function Login() {
   }
   const avecGoogle = process.env.NEXT_PUBLIC_AUTH_GOOGLE === "1";
 
-  const total = etapesInvitation ? 3 : 2;
-  const num = etape === "invitation" ? 1 : etape === "email" ? total - 1 : total;
+  // Appli installée (icône sur l'écran d'accueil) : sur iPhone, le lien de l'e-mail s'ouvre dans Safari,
+  // pas dans l'appli. On n'y parle donc que du code.
+  const [installee, setInstallee] = useState(false);
+  useEffect(() => {
+    setInstallee(window.matchMedia("(display-mode: standalone)").matches || (navigator as unknown as { standalone?: boolean }).standalone === true);
+  }, []);
+  // Le code fait 8 chiffres aujourd'hui : validation automatique dès le dernier chiffre.
+  useEffect(() => {
+    if (etape === "code" && code.length === 8 && !charge) verifier();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [code]);
 
   return (
-    <main className="auth">
-      <section className="auth-brand">
-        <a href="/" className="logo light">ToumaiLearn</a>
-        <div>
-          <Mascotte id="toumai" taille={88} />
-          <p className="auth-tag">Réviser le cours de <em>ton</em> prof.</p>
-          <ul className="auth-points">
-            <li>Leçons qui partent de zéro</li>
-            <li>Exercices corrigés et évaluations</li>
-            <li>Un tuteur qui connaît ton module</li>
-          </ul>
-        </div>
-        <p className="small auth-foot">Universités du Maroc</p>
-      </section>
+    <main className="cx">
+      <aside className="cx-marque" aria-hidden="true">
+        <Mascotte id="toumai" taille={72} decor />
+        <p className="cx-devise">Le cours de ton professeur, expliqué et corrigé.</p>
+        <p className="cx-pied">Universités du Maroc</p>
+      </aside>
 
-      <section className="auth-form">
-        <div className="auth-card">
-          <p className="auth-step">Étape {num} sur {total}</p>
+      <section className="cx-zone">
+        <div className="cx-carte">
+          <a href="/" className="logo cx-logo">ToumaiLearn</a>
+
           {etape === "invitation" ? (
             <>
-              <h1>Ton code d&apos;invitation</h1>
-              <form onSubmit={validerInvitation} className="stack">
-                <label htmlFor="invitation">Code d&apos;invitation</label>
+              <h1>Code d&apos;invitation</h1>
+              <form onSubmit={validerInvitation} className="cx-form">
+                <label htmlFor="invitation">Code</label>
                 <input id="invitation" required autoComplete="off" autoCapitalize="characters" value={invitation} onChange={(e) => setInvitation(e.target.value.toUpperCase())} placeholder="MZ-XXXXXX" />
                 <button className="btn big" disabled={charge || invitation.trim().length < 4}>{charge ? "Vérification…" : "Continuer"}</button>
               </form>
-              <p className="small muted">Déjà inscrit ? <button type="button" className="link" onClick={() => { setMsg(null); setEtape("email"); setEtapesInvitation(false); }}>Se connecter</button></p>
+              <button type="button" className="linkbtn" onClick={() => { setMsg(null); setEtape("email"); setEtapesInvitation(false); }}>J&apos;ai déjà un compte</button>
             </>
           ) : etape === "email" ? (
             <>
-              <h1>Connexion ou inscription</h1>
-              <form onSubmit={envoyer} className="stack">
-                <label htmlFor="email">Adresse e-mail</label>
-                <input id="email" type="email" required autoComplete="email" inputMode="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="toi@exemple.com" />
-                <button className="btn big" disabled={charge || !email}>{charge ? "Envoi…" : "Recevoir l’e-mail de connexion"}</button>
-              </form>
+              <h1>Connexion</h1>
+              <p className="cx-sous">Saisis ton adresse e-mail. Le compte est créé automatiquement s&apos;il n&apos;existe pas encore.</p>
               {avecGoogle && (<>
-                <p className="small muted" style={{ textAlign: "center" }}>ou</p>
                 <button type="button" className="btn alt big" onClick={google} disabled={charge}>Continuer avec Google</button>
+                <p className="cx-ou"><span>ou</span></p>
               </>)}
+              <form onSubmit={envoyer} className="cx-form">
+                <label htmlFor="email">Adresse e-mail</label>
+                <input id="email" type="email" required autoComplete="email" inputMode="email" autoCapitalize="off" spellCheck={false} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="prenom.nom@exemple.com" />
+                <button className="btn big" disabled={charge || !/^\S+@\S+\.\S+$/.test(email.trim())}>{charge ? "Envoi en cours…" : "Recevoir un code"}</button>
+              </form>
             </>
           ) : (
             <>
-              <h1>Ouvre ton e-mail</h1>
-              <p className="muted">Un e-mail a été envoyé à <strong>{email}</strong> (regarde aussi dans les spams). Il contient un code en chiffres : tape-le ici, c’est le plus sûr. Sinon, clique sur le lien : tu seras connecté dans le navigateur où il s’ouvre.</p>
-              <form onSubmit={verifier} className="stack">
-                <label htmlFor="code">Code reçu par e-mail</label>
-                {/* Supabase envoie un code de 6 à 10 chiffres selon le réglage du projet (8 aujourd'hui) : on accepte toute cette plage. */}
+              <h1>Vérification</h1>
+              <p className="cx-sous">Code à {LONGUEUR_CODE_AFFICHE} chiffres envoyé à <strong>{email}</strong>. <button type="button" className="link" onClick={() => { setEtape("email"); setMsg(null); }}>Modifier</button></p>
+              <form onSubmit={verifier} className="cx-form">
+                <label htmlFor="code">Code de vérification</label>
                 <input
                   id="code" ref={codeRef} className="code-input" inputMode="numeric" autoComplete="one-time-code" maxLength={LONGUEUR_CODE_MAX}
-                  value={code} onChange={(e) => { const v = e.target.value.replace(/\D/g, "").slice(0, LONGUEUR_CODE_MAX); setCode(v); }} placeholder="••••••••"
+                  value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, LONGUEUR_CODE_MAX))} placeholder="00000000" aria-describedby="cx-aide"
                 />
-                <button className="btn big" disabled={charge || code.length < 6}>{charge ? "Vérification…" : "Me connecter"}</button>
+                <button className="btn big" disabled={charge || code.length < 6}>{charge ? "Vérification…" : "Se connecter"}</button>
               </form>
-              <div className="auth-links">
-                <button className="linkbtn" disabled={attente > 0 || charge} onClick={() => envoyer()}>
-                  {attente > 0 ? `Renvoyer l’e-mail (${attente} s)` : "Renvoyer l’e-mail"}
+              <p id="cx-aide" className="cx-aide">
+                Rien reçu ? Vérifie le dossier Spam ou Promotions.{" "}
+                <button type="button" className="link" disabled={attente > 0 || charge} onClick={() => envoyer()}>
+                  {attente > 0 ? `Renvoyer (${attente} s)` : "Renvoyer le code"}
                 </button>
-                <button className="linkbtn" onClick={() => { setEtape("email"); setMsg(null); }}>Changer d’adresse</button>
-              </div>
+              </p>
+              {!installee && <p className="cx-aide">Le lien contenu dans l&apos;e-mail fonctionne aussi, dans ce même navigateur.</p>}
             </>
           )}
           {msg && <p className={`alert ${msg.type}`} role="alert">{msg.texte}</p>}
+
+          <p className="cx-legal">En continuant, tu acceptes la <a href="/confidentialite">politique de confidentialité</a>. Tu restes connecté sur cet appareil jusqu&apos;à ta déconnexion.</p>
         </div>
       </section>
     </main>

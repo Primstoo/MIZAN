@@ -33,7 +33,9 @@ export async function middleware(request: NextRequest) {
   };
   if (!user && request.nextUrl.pathname.startsWith("/app")) return vers("/login");
   if (user && request.nextUrl.pathname === "/login") return vers("/app");
+  // Déjà connecté : l'accueil public mène directement dans l'appli.
+  if (user && request.nextUrl.pathname === "/") return vers("/app");
   return response;
 }
 
-export const config = { matcher: ["/app/:path*", "/login"] };
+export const config = { matcher: ["/", "/app/:path*", "/login"] };
