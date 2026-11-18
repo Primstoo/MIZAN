@@ -15,6 +15,8 @@ Le chiffre de César du chapitre précédent : décaler une lettre de k position
 
 ## Comment aborder ce chapitre
 
+> [!prof] **Vu en TP 1** : coder Vigenère (les espaces ne consomment pas la clé). Corrigé dans le chapitre « TP 1 corrigé ».
+
 > [!astuce] **Vigenère, c'est plusieurs César à la suite.** Chaque lettre de la clé donne le décalage de la lettre du message placée en face d'elle. Écris toujours la clé sous le message avant de calculer.
 
 > [!piege] Oublier de **répéter la clé** jusqu'au bout du message, ou additionner au lieu de soustraire pour déchiffrer. Astuce du cours : déchiffrer revient à chiffrer avec la clé inverse 26 - k.

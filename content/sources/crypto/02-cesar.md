@@ -15,6 +15,8 @@ Deux choses : numéroter les lettres (**A = 0, B = 1, …, Z = 25**) et prendre 
 
 ## Comment aborder ce chapitre
 
+> [!prof] **Vu en TP 1** : coder César, le déchiffrer avec −k et le casser par les fréquences. Exercice classique d'examen, corrigé dans le chapitre « TP 1 corrigé ».
+
 > [!astuce] **Une lettre est un nombre.** Chiffrer, c'est faire un petit calcul sur ce nombre, puis revenir à la lettre. Tout le chapitre tient dans : lettre → nombre → calcul modulo 26 → lettre.
 
 > [!piege] Pour déchiffrer l'affine, on ne « divise » pas par k₁ : on multiplie par son **inverse modulo 26**. Et cet inverse n'existe que si k₁ est premier avec 26, ce qui laisse 12 valeurs possibles.

@@ -15,6 +15,8 @@ Savoir chiffrer en César, en affine et en Vigenère : on va maintenant les atta
 
 ## Comment aborder ce chapitre
 
+> [!prof] **Vu en TP 1** : trouver la clé de César avec la lettre la plus fréquente (k = rang − 4). Corrigé dans le chapitre « TP 1 corrigé ».
+
 > [!astuce] **Tu changes de camp : tu es Oscar.** Tu n'as pas la clé, tu cherches des régularités. Une substitution change les lettres mais garde leurs fréquences, simplement déplacées.
 
 > [!piege] Croire que « beaucoup de clés » veut dire « sûr ». Une substitution quelconque a un nombre énorme de clés et tombe pourtant en quelques minutes à l'analyse des fréquences.

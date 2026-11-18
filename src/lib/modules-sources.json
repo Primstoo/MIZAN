@@ -105,7 +105,7 @@
     "prof": "Pr A. Farchane",
     "semestre": "S5",
     "fichier": "crypto-farchane.html",
-    "resume": "Chiffres classiques, arithmétique modulaire, LFSR, modes, DES.",
+    "resume": "Chiffres classiques, arithmétique modulaire, LFSR, modes, DES, TD1 et TP1 corrigés.",
     "cles": [
       "cryptoPR",
       "cryptoPlus",
