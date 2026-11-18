@@ -13,7 +13,8 @@
     ],
     "cle": "analyse1_scores",
     "format": "score10",
-    "annexes": []
+    "annexes": [],
+    "chapitres": 5
   },
   {
     "slug": "dessin-industriel",
@@ -29,7 +30,8 @@
     ],
     "cle": "dessin_industriel_scores",
     "format": "score10",
-    "annexes": []
+    "annexes": [],
+    "chapitres": 6
   },
   {
     "slug": "electrocinetique",
@@ -45,7 +47,8 @@
     ],
     "cle": "electrocinetique_scores",
     "format": "score10",
-    "annexes": []
+    "annexes": [],
+    "chapitres": 7
   },
   {
     "slug": "probas",
@@ -62,7 +65,8 @@
     "format": "best",
     "annexes": [
       "probas-S3-outils.html"
-    ]
+    ],
+    "chapitres": 24
   },
   {
     "slug": "archi",
@@ -81,7 +85,8 @@
     "format": "essais",
     "annexes": [
       "archi-ordinateurs-outils.html"
-    ]
+    ],
+    "chapitres": 16
   },
   {
     "slug": "cms",
@@ -97,7 +102,8 @@
     ],
     "cle": "cms_scores",
     "format": "score10",
-    "annexes": []
+    "annexes": [],
+    "chapitres": 10
   },
   {
     "slug": "crypto",
@@ -117,7 +123,8 @@
     "format": "pc",
     "annexes": [
       "crypto-farchane-outils.html"
-    ]
+    ],
+    "chapitres": 13
   },
   {
     "slug": "machine-learning",
@@ -133,7 +140,8 @@
     ],
     "cle": "ml_scores",
     "format": "score10",
-    "annexes": []
+    "annexes": [],
+    "chapitres": 9
   },
   {
     "slug": "java-poo",
@@ -149,7 +157,8 @@
     ],
     "cle": "java_poo_scores",
     "format": "score10",
-    "annexes": []
+    "annexes": [],
+    "chapitres": 10
   },
   {
     "slug": "reseaux-m351",
@@ -166,7 +175,8 @@
     "format": "essais",
     "annexes": [
       "reseaux-M351-outils.html"
-    ]
+    ],
+    "chapitres": 19
   },
   {
     "slug": "traitement-ad",
@@ -182,7 +192,8 @@
     ],
     "cle": "tad_scores",
     "format": "score10",
-    "annexes": []
+    "annexes": [],
+    "chapitres": 8
   },
   {
     "slug": "uml",
@@ -201,6 +212,7 @@
     "format": "score10",
     "annexes": [
       "uml-outils.html"
-    ]
+    ],
+    "chapitres": 15
   }
 ]

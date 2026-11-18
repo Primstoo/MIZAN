@@ -51,7 +51,9 @@ export default async function Cours() {
               <span className="tl-couv-haut"><Embleme slug={m.slug} />{e && <span className="tl-jour">J-{e.reste}</span>}</span>
               <span>
                 <strong>{court(m.titre)}</strong>
-                <small>{mm ? `${mm.groupes.length} chapitres${mm.testes ? ` · ${mm.pct} % maîtrisé` : ""}` : m.semestre}</small>
+                <small>{m.chapitres ? `${m.chapitres} chapitre${m.chapitres > 1 ? "s" : ""}` : m.semestre}</small>
+                <span className="tl-prog" aria-label={`${mm?.pct ?? 0} % maîtrisé`}><i style={{ width: `${mm?.pct ?? 0}%`, background: couleurCours(m.slug) }} /></span>
+                <small>{mm?.testes ? `${mm.pct} % maîtrisé` : "Pas encore commencé"}</small>
               </span>
             </a>
           );

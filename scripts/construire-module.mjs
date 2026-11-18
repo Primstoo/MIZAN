@@ -278,7 +278,7 @@ function construire(slug) {
   const catF = path.join(LIB, "modules-sources.json");
   const cat = lireJSON(catF, []).filter((m) => m.slug !== slug);
   const cles = [...new Set([cle, cleEtat, "mzt-" + (mod.tuteurId || slug) + "*", ...(mod.clesSupplementaires || [])])];
-  cat.push({ slug, titre: mod.titre, prof: mod.prof || "", semestre: mod.semestre || "", fichier: mod.fichier, resume: mod.resume || "", cles, cle, format, annexes: (mod.annexes || []).map((a) => a.fichier) });
+  cat.push({ slug, titre: mod.titre, prof: mod.prof || "", semestre: mod.semestre || "", fichier: mod.fichier, resume: mod.resume || "", cles, cle, format, chapitres: chapitres.length, annexes: (mod.annexes || []).map((a) => a.fichier) });
   ecrireJSON(catF, cat.sort((a, b) => a.semestre.localeCompare(b.semestre) || a.titre.localeCompare(b.titre)), 2);
 
   // Notions → maîtrise et page Progrès

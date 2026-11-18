@@ -392,3 +392,5 @@ a.cx-google{text-decoration:none}
 /* Connexion et entrée en mode sombre : couleurs inversées (panneau crème, formulaire bleu nuit), sur téléphone comme sur ordinateur. */
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .cx{background:#F4EDE1}:root:not([data-theme=light]) .cx-marque{background:#F4EDE1;color:#1E2433}:root:not([data-theme=light]) .cx-marque .cx-logo{color:#B4532A}:root:not([data-theme=light]) .cx-zone{background:#141922}}
 :root[data-theme=dark] .cx{background:#F4EDE1}:root[data-theme=dark] .cx-marque{background:#F4EDE1;color:#1E2433}:root[data-theme=dark] .cx-marque .cx-logo{color:#B4532A}:root[data-theme=dark] .cx-zone{background:#141922}
+.tl-prog{display:block;height:5px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:8px}.tl-prog i{display:block;height:100%;border-radius:3px}
+.tl-cnx{white-space:nowrap}

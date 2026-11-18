@@ -11,6 +11,7 @@ export type Module = {
   semestre: string;
   fichier: string;
   resume: string;
+  chapitres?: number; // nombre réel de chapitres (module.json)
   cles: string[];
   annexes?: string[];
   etablissement: string; // établissement dont le module suit le cours (sert à filtrer l'inscription guidée) ; « Cours généraliste » = proposé partout

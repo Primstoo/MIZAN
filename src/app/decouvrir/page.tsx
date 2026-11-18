@@ -1,4 +1,6 @@
 import { MODULES } from "@/lib/modules";
+import Nav from "@/components/Nav";
+import Embleme, { couleurCours } from "@/components/Embleme";
 
 export const metadata = {
   title: "Essayer sans compte",
@@ -9,33 +11,22 @@ export const metadata = {
 // Mode visiteur : modules consultables sans compte, sans sauvegarde côté serveur ni tuteur.
 export default function Decouvrir() {
   return (
-    <main className="land">
-      <header className="page top nob">
-        <a href="/" className="logo">ToumaiLearn</a>
-        <a href="/login?mode=inscription" className="btn small">Créer mon compte</a>
-      </header>
-      <section className="page">
-        <p className="eyebrow">Mode visiteur</p>
-        <h1>Essaie les modules, sans compte</h1>
-        <div className="grid" style={{ marginTop: 16 }}>
+    <div className="shell">
+      <Nav visiteur />
+      <main className="page tl">
+        <header className="tl-haut"><h1 className="tl-salut">Que veux-tu comprendre ?</h1><a href="/login?mode=connexion" className="tl-cnx">Se connecter</a></header>
+        <div className="tl-grille">
           {MODULES.map((m) => (
-            <a key={m.slug} href={`/decouvrir/${m.slug}`} className="card">
-              <span className="muted small">{m.semestre}{m.prof ? ` · ${m.prof}` : ""}</span>
-              <h3>{m.titre}</h3>
-              <p className="muted small">{m.resume}</p>
+            <a key={m.slug} href={`/decouvrir/${m.slug}`} className="tl-couv" style={{ borderLeftColor: couleurCours(m.slug) }}>
+              <span className="tl-couv-haut"><Embleme slug={m.slug} /></span>
+              <span>
+                <strong>{m.titre.split(" (")[0]}</strong>
+                <small>{m.chapitres ? `${m.chapitres} chapitre${m.chapitres > 1 ? "s" : ""}` : m.semestre}{m.prof ? ` · ${m.prof}` : ""}</small>
+              </span>
             </a>
           ))}
         </div>
-      </section>
-      <section className="page steps">
-        <h2>Avec un compte, en plus</h2>
-        <ol>
-          <li><strong>Ta progression sauvegardée</strong>, sur téléphone et ordinateur.</li>
-          <li><strong>Une mission chaque jour</strong>, calculée sur ta date d&apos;examen et tes points faibles.</li>
-          <li><strong>Un tuteur IA</strong> sur chaque page du cours.</li>
-        </ol>
-        <p className="row" style={{ gap: 8 }}><a href="/login?mode=inscription" className="btn big-inline">Créer mon compte</a><a href="/login?invitation" className="btn alt big-inline">J&apos;ai un code d&apos;invitation</a></p>
-      </section>
-    </main>
+      </main>
+    </div>
   );
 }

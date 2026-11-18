@@ -20,7 +20,7 @@ export default function Nav({ visiteur = false }: { visiteur?: boolean }) {
         if (visiteur && l.href !== "/app") {
           const ic = <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" strokeLinecap="round"><path d={l.ic} /></svg>;
           return l.href === "/app/modules"
-            ? <a key={l.href} href="/decouvrir">{ic}<span>{l.label}</span></a>
+            ? <a key={l.href} href="/decouvrir" className={p.startsWith("/decouvrir") ? "on" : ""}>{ic}<span>{l.label}</span></a>
             : <button key={l.href} type="button" className="nav-btn" onClick={() => setPorte(true)}>{ic}<span>{l.label}</span></button>;
         }
         const on = l.href === "/app" ? p === "/app" : p.startsWith(l.href) || l.sous.some((s) => p.startsWith(s));
