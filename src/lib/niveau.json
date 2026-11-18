@@ -1872,5 +1872,102 @@
    "a": 0,
    "e": "end=\"\" colle les valeurs."
   }
+ ],
+ "se1": [
+  {
+   "n": "unix-fichiers-liens",
+   "q": "Où sont situés les fichiers de périphériques dans un système Unix ?",
+   "o": [
+    "/proc",
+    "/dev",
+    "/etc",
+    "/sys"
+   ],
+   "a": 1,
+   "e": "Question 6 de l'examen blanc. « Tout est fichier » : les périphériques sont dans /dev."
+  },
+  {
+   "n": "commandes-fichiers",
+   "q": "Pour archiver et compresser un répertoire en une seule commande, on utilise :",
+   "o": [
+    "gzip repertoire/",
+    "tar -czf archive.tar.gz repertoire/",
+    "zip -r archive.tar.gz repertoire/",
+    "tar -cf archive.tar.gz repertoire/"
+   ],
+   "a": 1,
+   "e": "Question 12 de l'examen blanc. Sans z, tar ne compresse pas, même si le nom finit par .gz."
+  },
+  {
+   "n": "droits-acces",
+   "q": "Que signifie chmod 640 fichier.txt ?",
+   "o": [
+    "Propriétaire rw-, groupe r--, autres ---",
+    "Propriétaire rwx, groupe r--, autres ---",
+    "Propriétaire r--, groupe rw-, autres ---"
+   ],
+   "a": 0,
+   "e": "6 = 4+2 (rw), 4 = r, 0 = rien."
+  },
+  {
+   "n": "redirections-filtres-processus",
+   "q": "Quelle séquence exécute cmd2 uniquement si cmd1 réussit ?",
+   "o": [
+    "cmd1 ; cmd2",
+    "cmd1 || cmd2",
+    "cmd1 && cmd2",
+    "cmd1 | cmd2"
+   ],
+   "a": 2,
+   "e": "Question 14 de l'examen blanc."
+  },
+  {
+   "n": "shell-variables",
+   "q": "Quelle commande rend une variable accessible aux sous-shells ?",
+   "o": [
+    "export var",
+    "global var",
+    "publish var",
+    "share var"
+   ],
+   "a": 0,
+   "e": "Question 16 de l'examen blanc."
+  },
+  {
+   "n": "shell-controle",
+   "q": "Quelle boucle itère sur une liste explicite comme jan fev mar ?",
+   "o": [
+    "while",
+    "for",
+    "until",
+    "select"
+   ],
+   "a": 1,
+   "e": "Question 20 de l'examen blanc."
+  },
+  {
+   "n": "revision-examen-blanc",
+   "q": "(Q2) Quel système historique a introduit la philosophie « tout est fichier » ?",
+   "o": [
+    "Unix",
+    "GM-NAA I/O",
+    "MS-DOS",
+    "Windows 3.1"
+   ],
+   "a": 0,
+   "e": "Unix (1969). GM-NAA I/O est le premier SE batch."
+  },
+  {
+   "n": "role-se",
+   "q": "Quelle est la définition principale d'un système d'exploitation ?",
+   "o": [
+    "Un logiciel qui remplace le processeur pour accélérer les calculs",
+    "Un ensemble de programmes qui gère les ressources matérielles, fournit une interface et permet l'exécution des programmes",
+    "Un pilote qui contrôle directement les périphériques sans intermédiaire",
+    "Un outil de développement réservé aux programmeurs système"
+   ],
+   "a": 1,
+   "e": "C'est la définition du cours, reprise mot pour mot à la question 1 de l'examen blanc."
+  }
  ]
 }

@@ -2135,5 +2135,82 @@
     "g": "cours"
    }
   ]
+ },
+ "se1": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "role-se",
+    "t": "Rôle et fonctions d'un système d'exploitation",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "composantes-se",
+    "t": "Noyau, interfaces et principaux SE",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "unix-fichiers-liens",
+    "t": "Unix · arborescence, inodes, chemins et liens",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "expressions-regulieres",
+    "t": "Expressions régulières et motifs du shell",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "commandes-fichiers",
+    "t": "Commandes de base · utilisateurs, fichiers, éditeurs, archives",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "droits-acces",
+    "t": "Droits d'accès · chmod, chown, umask",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "redirections-filtres-processus",
+    "t": "Redirections, filtres, composition et processus",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "shell-variables",
+    "t": "Shell (1) · variables, quotes, calcul et scripts",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "shell-controle",
+    "t": "Shell (2) · tests, if, case, boucles, fonctions, tableaux",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "td-tp-corriges",
+    "t": "TD 1 à 5 et TP 1 à 4 corrigés",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "revision-examen-blanc",
+    "t": "Révision et examen blanc",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

@@ -120,6 +120,23 @@
     "annexes": []
   },
   {
+    "slug": "se1",
+    "titre": "Systèmes d'exploitation 1",
+    "prof": "Pr Amrani",
+    "semestre": "S3",
+    "fichier": "se1.html",
+    "resume": "Rôle d'un système d'exploitation, Unix (fichiers, inodes, liens, regex), commandes de base, droits, redirections, processus et programmation shell Bash. Chapitres I à IV + TD/TP corrigés + examen blanc.",
+    "cles": [
+      "se1_scores",
+      "se1_scores_etat",
+      "mzt-se1*"
+    ],
+    "cle": "se1_scores",
+    "format": "score10",
+    "chapitres": 11,
+    "annexes": []
+  },
+  {
     "slug": "analyse-numerique",
     "titre": "Analyse numérique",
     "prof": "Pr Laaribi",

@@ -1,0 +1,24 @@
+{
+  "titre": "Systèmes d'exploitation 1",
+  "prof": "Pr Amrani",
+  "semestre": "S3",
+  "etablissement": "FSABM",
+  "fichier": "se1.html",
+  "cle": "se1_scores",
+  "resume": "Rôle d'un système d'exploitation, Unix (fichiers, inodes, liens, regex), commandes de base, droits, redirections, processus et programmation shell Bash. Chapitres I à IV + TD/TP corrigés + examen blanc.",
+  "conventions": "Cours du Pr Mohamed El Amrani, module Système d'exploitation 1 (M17), licence MI S3 à la FSA Béni Mellal (FSABM), 2025-2026. Plan du prof : I Introduction aux SE, II Unix, III Commandes de base, IV Programmation shell. Shell utilisé : bash sous Linux. Exemples du prof : utilisateurs alice, bob, charlie, groupe developpeurs, fichier fiche, script prog_debut, variable mois. Le prompt $ désigne un utilisateur normal, # root. L'examen comporte 20 QCU (0,4 pt chacun) puis des exercices courts et un script. Réponds en français, tutoie l'élève, montre la commande exacte puis explique-la. Les sorties de commandes montrées dans le cours sont indicatives (elles dépendent de la machine).",
+  "intro": "Ce module suit **les 4 chapitres du Pr El Amrani** (Système d'exploitation 1, S3), découpés en 9 chapitres courts, puis corrige les **TD 1 à 5 et les TP 1 à 4**, et termine par l'**examen blanc** du prof.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre, puis tape toi-même les commandes dans un terminal Linux (Ubuntu, WSL sous Windows, ou une machine de la fac). Lire une commande ne suffit pas.\n2. Les sorties affichées sont **indicatives** : numéros d'inode, PID, dates et noms changent d'une machine à l'autre.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.** L'examen commence par 20 QCU : c'est exactement cet exercice.\n4. Le tuteur (en bas à droite) répond à tes questions sur le chapitre ouvert.\n\n**Ce qui est sûr** : le contenu vient des diapositives, des TD corrigés, des TP et de l'examen blanc du prof. Les quelques erreurs trouvées dans ces supports sont signalées dans des encadrés « Attention », avec la correction vérifiée dans bash.\n**À vérifier** : la date et le barème exact de l'examen final. Demande-les au prof.",
+  "chapitres": [
+    "01-role-se.md",
+    "02-composantes-se.md",
+    "03-unix-fichiers-liens.md",
+    "04-expressions-regulieres.md",
+    "05-commandes-fichiers.md",
+    "06-droits-acces.md",
+    "07-redirections-filtres-processus.md",
+    "08-shell-variables.md",
+    "09-shell-controle.md",
+    "10-td-tp-corriges.md",
+    "11-revision-examen-blanc.md"
+  ]
+}
