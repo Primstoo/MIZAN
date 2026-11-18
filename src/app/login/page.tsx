@@ -90,12 +90,6 @@ export default function Login() {
   }
   const avecGoogle = process.env.NEXT_PUBLIC_AUTH_GOOGLE === "1";
 
-  // Appli installée (icône sur l'écran d'accueil) : sur iPhone, le lien de l'e-mail s'ouvre dans Safari,
-  // pas dans l'appli. On n'y parle donc que du code.
-  const [installee, setInstallee] = useState(false);
-  useEffect(() => {
-    setInstallee(window.matchMedia("(display-mode: standalone)").matches || (navigator as unknown as { standalone?: boolean }).standalone === true);
-  }, []);
   // Le code fait 8 chiffres aujourd'hui : validation automatique dès le dernier chiffre.
   useEffect(() => {
     if (etape === "code" && code.length === 8 && !charge) verifier();
@@ -104,15 +98,14 @@ export default function Login() {
 
   return (
     <main className="cx">
-      <aside className="cx-marque" aria-hidden="true">
-        <Mascotte id="toumai" taille={72} decor />
+      <aside className="cx-marque">
+        <a href="/" className="logo cx-logo">ToumaiLearn</a>
         <p className="cx-devise">Le cours de ton professeur, expliqué et corrigé.</p>
+        <span className="cx-mascotte" aria-hidden="true"><Mascotte id="toumai" taille={64} decor /></span>
       </aside>
 
       <section className="cx-zone">
         <div className="cx-carte">
-          <a href="/" className="logo cx-logo">ToumaiLearn</a>
-
           {etape === "invitation" ? (
             <>
               <h1>Code d&apos;invitation</h1>
@@ -126,36 +119,38 @@ export default function Login() {
           ) : etape === "email" ? (
             <>
               <h1>Connexion</h1>
-              <p className="cx-sous">Saisis ton adresse e-mail. Le compte est créé automatiquement s&apos;il n&apos;existe pas encore.</p>
-              {avecGoogle && (<>
-                <button type="button" className="btn alt big" onClick={google} disabled={charge}>Continuer avec Google</button>
-                <p className="cx-ou"><span>ou</span></p>
+                            {avecGoogle && (<>
+                <button type="button" className="cx-google" onClick={google} disabled={charge}><LogoGoogle />Continuer avec Google</button>
+                <p className="cx-ou">ou</p>
               </>)}
               <form onSubmit={envoyer} className="cx-form">
                 <label htmlFor="email">Adresse e-mail</label>
                 <input id="email" type="email" required autoComplete="email" inputMode="email" autoCapitalize="off" spellCheck={false} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="prenom.nom@exemple.com" />
-                <button className="btn big" disabled={charge || !/^\S+@\S+\.\S+$/.test(email.trim())}>{charge ? "Envoi en cours…" : "Recevoir un code"}</button>
+                <button className="btn big" disabled={charge || !/^\S+@\S+\.\S+$/.test(email.trim())}>{charge ? "Envoi en cours…" : "Continuer"}</button>
               </form>
             </>
           ) : (
             <>
-              <h1>Vérification</h1>
-              <p className="cx-sous">Code à {LONGUEUR_CODE_AFFICHE} chiffres envoyé à <strong>{email}</strong>. <button type="button" className="link" onClick={() => { setEtape("email"); setMsg(null); }}>Modifier</button></p>
+              <h1>Vérifie ton e-mail</h1>
+              <p className="cx-sous">Code à {LONGUEUR_CODE_AFFICHE} chiffres envoyé à <strong>{email}</strong></p>
               <form onSubmit={verifier} className="cx-form">
                 <label htmlFor="code">Code de vérification</label>
-                <input
-                  id="code" ref={codeRef} className="code-input" inputMode="numeric" autoComplete="one-time-code" maxLength={LONGUEUR_CODE_MAX}
-                  value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, LONGUEUR_CODE_MAX))} placeholder="00000000" aria-describedby="cx-aide"
-                />
-                <button className="btn big" disabled={charge || code.length < 6}>{charge ? "Vérification…" : "Se connecter"}</button>
+<div className="cx-cases" onClick={() => codeRef.current?.focus()}>
+                  {Array.from({ length: LONGUEUR_CODE_AFFICHE }, (_, i) => (
+                    <span key={i} className={i === Math.min(code.length, LONGUEUR_CODE_AFFICHE - 1) ? "actif" : ""}>{code[i] ?? ""}</span>
+                  ))}
+                  <input
+                    id="code" ref={codeRef} inputMode="numeric" autoComplete="one-time-code" maxLength={LONGUEUR_CODE_MAX}
+                    value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, LONGUEUR_CODE_MAX))} aria-describedby="cx-aide"
+                  />
+                </div>
+                <button className="btn big" disabled={charge || code.length < 6}>{charge ? "Vérification…" : "Vérifier"}</button>
               </form>
               <p id="cx-aide" className="cx-aide">
-                Rien reçu ? Vérifie le dossier Spam ou Promotions.{" "}
-                <button type="button" className="link" disabled={attente > 0 || charge} onClick={() => envoyer()}>
-                  {attente > 0 ? `Renvoyer (${attente} s)` : "Renvoyer le code"}
-                </button>
+                Code non reçu ? Regarde dans les spams, ou{" "}
+                <button type="button" className="link" disabled={attente > 0 || charge} onClick={() => envoyer()}>{attente > 0 ? `renvoie-le (${attente} s)` : "renvoie-le"}</button>
+                {" · "}<button type="button" className="link" onClick={() => { setEtape("email"); setMsg(null); }}>Modifier l&apos;adresse</button>
               </p>
-              {!installee && <p className="cx-aide">Le lien contenu dans l&apos;e-mail fonctionne aussi, dans ce même navigateur.</p>}
             </>
           )}
           {msg && <p className={`alert ${msg.type}`} role="alert">{msg.texte}</p>}
@@ -164,5 +159,17 @@ export default function Login() {
         </div>
       </section>
     </main>
+  );
+}
+
+// Logo officiel de Google (le « G » en quatre couleurs), exigé par les règles de marque de Google pour ce bouton.
+function LogoGoogle() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+    </svg>
   );
 }
