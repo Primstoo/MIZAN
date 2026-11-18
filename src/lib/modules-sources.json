@@ -86,6 +86,23 @@
     "annexes": []
   },
   {
+    "slug": "prog-web-1",
+    "titre": "Programmation Web 1",
+    "prof": "Pr N. Falih",
+    "semestre": "S3",
+    "fichier": "prog-web-1.html",
+    "resume": "Généralités du web (HTTP, client-serveur, URL), HTML5 (structure, texte, liens, tableaux, médias, formulaires) et CSS3 (sélecteurs, cascade, polices, couleurs, modèle de boîte), avec le TD et les TP 1-2 corrigés.",
+    "cles": [
+      "prog-web-1_scores",
+      "prog-web-1_scores_etat",
+      "mzt-prog-web-1*"
+    ],
+    "cle": "prog-web-1_scores",
+    "format": "score10",
+    "chapitres": 10,
+    "annexes": []
+  },
+  {
     "slug": "analyse-numerique",
     "titre": "Analyse numérique",
     "prof": "Pr Laaribi",
@@ -168,6 +185,23 @@
     "cle": "sd-c_scores",
     "format": "score10",
     "chapitres": 10,
+    "annexes": []
+  },
+  {
+    "slug": "se2",
+    "titre": "Systèmes d'exploitation 2",
+    "prof": "Pr Ouchitachen",
+    "semestre": "S4",
+    "fichier": "se2.html",
+    "resume": "Processus (fork, wait, zombies), ordonnancement (Gantt FCFS, SJF, SRTF, RR, priorités), mémoire (pagination, segmentation, remplacement), fichiers et disques, synchronisation et IPC (sémaphores, tubes, signaux).",
+    "cles": [
+      "se2_scores",
+      "se2_scores_etat",
+      "mzt-se2*"
+    ],
+    "cle": "se2_scores",
+    "format": "score10",
+    "chapitres": 11,
     "annexes": []
   },
   {

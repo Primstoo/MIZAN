@@ -1910,5 +1910,153 @@
     "g": "cours"
    }
   ]
+ },
+ "se2": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "processus-notions",
+    "t": "Processus (1) · du programme au processus, états et PCB",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "fork-wait-exit",
+    "t": "Processus (2) · fork, exit, wait, zombies et orphelins",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ordo-fcfs-sjf",
+    "t": "Ordonnancement (1) · critères, diagramme de Gantt, FCFS et SJF",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ordo-preemptif",
+    "t": "Ordonnancement (2) · SRTF, SJF préemptif, Round-Robin et priorités",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "memoire-allocation-pagination",
+    "t": "Mémoire (1) · allocation, pagination et segmentation",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "remplacement-pages",
+    "t": "Mémoire (2) · défauts de page et algorithmes de remplacement",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "fichiers-disques",
+    "t": "Fichiers et disques · SGF, i-node, FAT et ordonnancement du bras",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "synchronisation-semaphores",
+    "t": "Synchronisation · section critique, sémaphores et problèmes classiques",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "ipc-tubes-signaux",
+    "t": "Communication · tubes anonymes, tubes nommés (FIFO), signaux",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "td-tp-corriges",
+    "t": "TD 1 à 5 et TP 1 à 3 corrigés",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "revision-examen-blanc",
+    "t": "Révision et examen blanc",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
+ },
+ "prog-web-1": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "generalites-web",
+    "t": "Généralités · internet, web, HTTP et client-serveur",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "structure-html5",
+    "t": "HTML5 (1) · balises, attributs et structure d'une page",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "texte-listes-liens",
+    "t": "HTML5 (2) · blocs et en ligne, texte, listes et liens",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "tableaux-images-medias",
+    "t": "HTML5 (3) · tableaux, images, audio et vidéo",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "formulaires",
+    "t": "HTML5 (4) · formulaires",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "css-bases-selecteurs",
+    "t": "CSS3 (1) · où écrire le CSS, cascade et sélecteurs",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "css-pseudo-couleurs-polices",
+    "t": "CSS3 (2) · pseudo-classes, unités, couleurs, polices et texte",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "css-boite-fonds-listes",
+    "t": "CSS3 (3) · arrière-plans, modèle de boîte, listes et menu",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "td-tp-corriges",
+    "t": "TD et TP 1-2 corrigés",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "revision-examen-blanc",
+    "t": "Révision et examen blanc",
+    "imp": 4,
+    "g": "cours"
+   }
+  ]
  }
 }

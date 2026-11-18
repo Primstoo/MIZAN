@@ -1596,5 +1596,191 @@
    "a": 1,
    "e": "Divisions par 2 : restes 0,1,0,1,0,1 lus de bas en haut."
   }
+ ],
+ "se2": [
+  {
+   "n": "fork-wait-exit",
+   "q": "Dans le processus fils, fork() renvoie :",
+   "o": [
+    "le PID du père",
+    "0",
+    "−1",
+    "le PID du fils"
+   ],
+   "a": 1,
+   "e": "Le père reçoit le PID du fils ; le fils reçoit 0."
+  },
+  {
+   "n": "ordo-fcfs-sjf",
+   "q": "Le temps de rotation d'un processus est :",
+   "o": [
+    "sa durée d'exécution",
+    "sa date de fin moins sa date d'arrivée",
+    "sa date de fin",
+    "son temps passé dans la file des prêts"
+   ],
+   "a": 1,
+   "e": "Rotation (turnaround) = de l'arrivée à la terminaison."
+  },
+  {
+   "n": "ordo-preemptif",
+   "q": "En SRTF, un processus de durée 3 arrive alors que le processus en cours a encore 5 unités à faire. Que se passe-t-il ?",
+   "o": [
+    "Le nouveau prend le CPU",
+    "Le processus en cours continue",
+    "Les deux se partagent le CPU"
+   ],
+   "a": 0,
+   "e": "3 < 5 : le plus petit temps restant gagne."
+  },
+  {
+   "n": "memoire-allocation-pagination",
+   "q": "Qui traduit les adresses virtuelles en adresses physiques ?",
+   "o": [
+    "Le compilateur",
+    "La MMU",
+    "L'ordonnanceur",
+    "Le dispatcheur"
+   ],
+   "a": 1,
+   "e": "C'est un circuit matériel dédié."
+  },
+  {
+   "n": "fichiers-disques",
+   "q": "Sous Unix, le bloc de contrôle d'un fichier s'appelle :",
+   "o": [
+    "la FAT",
+    "l'i-node",
+    "le PCB",
+    "le superbloc de démarrage"
+   ],
+   "a": 1,
+   "e": "FCB = i-node sous Unix."
+  },
+  {
+   "n": "synchronisation-semaphores",
+   "q": "Deux processus font chacun x = V - 1; V = x; sur V = 10. Quelles valeurs finales sont possibles sans synchronisation ?",
+   "o": [
+    "8 seulement",
+    "8 ou 9",
+    "9 seulement",
+    "10"
+   ],
+   "a": 1,
+   "e": "8 si les exécutions ne se chevauchent pas, 9 si l'un est coupé entre lecture et écriture."
+  },
+  {
+   "n": "revision-examen-blanc",
+   "q": "En RR q = 2 (P1 2, P2 1, P3 8, P4 4, P5 5, tous à 0), qui termine en dernier ?",
+   "o": [
+    "P5",
+    "P3",
+    "P4"
+   ],
+   "a": 1,
+   "e": "P3 finit à 20, P5 à 18."
+  },
+  {
+   "n": "processus-notions",
+   "q": "Quand un processus apparaît-il ?",
+   "o": [
+    "Après la compilation",
+    "Après l'édition de liens",
+    "Au chargement de l'exécutable en mémoire",
+    "À l'écriture du fichier source"
+   ],
+   "a": 2,
+   "e": "Compilation et édition de liens produisent des fichiers sur disque. Le processus naît au chargement."
+  }
+ ],
+ "prog-web-1": [
+  {
+   "n": "structure-html5",
+   "q": "Quelle imbrication est correcte ?",
+   "o": [
+    "<b><i>texte</b></i>",
+    "<b><i>texte</i></b>",
+    "<b><i>texte</b>"
+   ],
+   "a": 1,
+   "e": "La dernière balise ouverte se ferme en premier."
+  },
+  {
+   "n": "formulaires",
+   "q": "Quelle méthode met les données dans l'URL ?",
+   "o": [
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "a": 0,
+   "e": "Avec GET on voit ?nom=valeur dans l'adresse."
+  },
+  {
+   "n": "css-bases-selecteurs",
+   "q": "Quelle méthode le prof recommande-t-il ?",
+   "o": [
+    "le style en ligne",
+    "le style interne",
+    "la feuille de style externe"
+   ],
+   "a": 2,
+   "e": "Séparation totale et réutilisation sur tout le site."
+  },
+  {
+   "n": "css-boite-fonds-listes",
+   "q": "De l'intérieur vers l'extérieur, la boîte CSS est…",
+   "o": [
+    "contenu, margin, border, padding",
+    "contenu, padding, border, margin",
+    "contenu, border, padding, margin"
+   ],
+   "a": 1,
+   "e": "Le padding est entre le contenu et la bordure."
+  },
+  {
+   "n": "td-tp-corriges",
+   "q": "Dans le TD 1, quel attribut rend un champ obligatoire ?",
+   "o": [
+    "obligatoire",
+    "required",
+    "needed"
+   ],
+   "a": 1,
+   "e": "Attribut booléen HTML5."
+  },
+  {
+   "n": "texte-listes-liens",
+   "q": "Quelle balise est de type bloc ?",
+   "o": [
+    "<strong>",
+    "<p>",
+    "<a>"
+   ],
+   "a": 1,
+   "e": "Le paragraphe occupe toute la largeur."
+  },
+  {
+   "n": "tableaux-images-medias",
+   "q": "Quelle balise représente une rangée de tableau ?",
+   "o": [
+    "<td>",
+    "<tr>",
+    "<th>"
+   ],
+   "a": 1,
+   "e": "tr = table row."
+  },
+  {
+   "n": "css-pseudo-couleurs-polices",
+   "q": "Quelle propriété change la couleur du texte ?",
+   "o": [
+    "font-color",
+    "text-color",
+    "color"
+   ],
+   "a": 2,
+   "e": "font-color n'existe pas."
+  }
  ]
 }

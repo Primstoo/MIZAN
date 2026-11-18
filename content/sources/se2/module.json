@@ -1,0 +1,24 @@
+{
+  "titre": "Systèmes d'exploitation 2",
+  "prof": "Pr Ouchitachen",
+  "semestre": "S4",
+  "etablissement": "FSABM",
+  "fichier": "se2.html",
+  "cle": "se2_scores",
+  "resume": "Processus (fork, wait, zombies), ordonnancement (Gantt FCFS, SJF, SRTF, RR, priorités), mémoire (pagination, segmentation, remplacement), fichiers et disques, synchronisation et IPC (sémaphores, tubes, signaux).",
+  "conventions": "Cours du Pr Hicham Ouchitachen, module M24 Système d'exploitation II, licence MI S4 à la FSABM (ex-FPBM), Béni Mellal. Programmation système en C sous Linux (unistd.h, sys/wait.h, signal.h). Notations du prof : temps de rotation (turnaround) = fin − arrivée ; temps d'attente = rotation − exécution ; TMR et TMA = moyennes ; rendement par processus = exécution / rotation. Dans le cours, « SJF préemptif » compare les durées totales, « SRTF » compare les temps restants. Adresses segmentées notées (segment:déplacement), valides si déplacement < limite. Sémaphores notés P() / V(). Toujours dessiner le diagramme de Gantt avant de calculer.",
+  "intro": "Ce module suit **les 5 chapitres du Pr Ouchitachen** (processus, ordonnancement, mémoire, fichiers, communication et synchronisation), corrige **les TD 1 à 5 et les TP 1 à 3**, et se termine par un **examen blanc** construit sur les annales 2025 (normale et rattrapage).\n\n**Comment l'utiliser**\n\n1. Lis un chapitre en entier. Les grilles montrent les diagrammes de Gantt case par case (■ = exécution, · = attente dans la file des prêts).\n2. Refais chaque Gantt sur papier **avant** de regarder la correction. À l'examen, c'est 6 à 8 points sur 20.\n3. Compile les programmes C sur Linux (ou WSL) : `gcc prog.c -o prog && ./prog`.\n4. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n\n**Ce qui est sûr** : les calculs de temps, d'adresses et de pistes ont été recalculés par programme ; les programmes C marqués comme testés ont été exécutés.\n**À vérifier** : le corrigé « Rapports TD » qui circule contient plusieurs erreurs (signalées dans le chapitre TD). Le barème de l'examen 2026 n'est pas connu.",
+  "chapitres": [
+    "01-processus.md",
+    "02-fork-wait.md",
+    "03-ordonnancement-fcfs-sjf.md",
+    "04-ordonnancement-preemptif.md",
+    "05-memoire.md",
+    "06-remplacement-pages.md",
+    "07-fichiers-disques.md",
+    "08-synchronisation.md",
+    "09-tubes-signaux.md",
+    "10-td-tp-corriges.md",
+    "11-revision-examen-blanc.md"
+  ]
+}

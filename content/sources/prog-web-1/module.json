@@ -1,0 +1,23 @@
+{
+  "titre": "Programmation Web 1",
+  "prof": "Pr N. Falih",
+  "semestre": "S3",
+  "etablissement": "FSABM",
+  "fichier": "prog-web-1.html",
+  "cle": "prog-web-1_scores",
+  "resume": "Généralités du web (HTTP, client-serveur, URL), HTML5 (structure, texte, liens, tableaux, médias, formulaires) et CSS3 (sélecteurs, cascade, polices, couleurs, modèle de boîte), avec le TD et les TP 1-2 corrigés.",
+  "conventions": "Cours Programmation Web 1 du Pr Noureddine Falih, filière MIP S3, FSABM (ex-FPBM) Béni Mellal. Plan du prof : I. Généralités (internet, web, W3C, évolution du web 1.0 à 4.0, HTTP requête/réponse, client-serveur, front-end/back-end, frameworks, CMS, navigateurs, serveurs web dont Apache, URL, pages statiques/dynamiques), II. HTML5 (balises, attributs, structure du document, balises sémantiques header/nav/section/article/aside/footer, bloc/en ligne, texte, listes, liens, tableaux, images, audio/vidéo, formulaires), III. CSS3 (trois façons d'écrire du CSS, cascade, sélecteurs, pseudo-classes, unités, couleurs, polices, texte, arrière-plans, marges, bords, padding, listes). Pas de JavaScript ni de PHP dans le cours (seul action=\"traitement.php\" dans les formulaires). Le TD (Exercices 1 à 3 : formulaire en tableau, inscription EVAX VACCIN stylée par style.css, page CV) et les TP 1 (structure et style) et TP 2 (sémantique, médias, modèle de boîte, menu) servent d'exercices. Le cours présente quelques balises et attributs obsolètes en HTML5 (font, big, blink, align, border sur table) : rappelle-le quand l'élève les utilise. Réponds en français, tutoiement, code HTML/CSS correct et moderne.",
+  "intro": "Ce module suit **le plan du Pr Falih** : généralités du web, puis **HTML5**, puis **CSS3**. Il se termine par **le TD et les deux TP corrigés** et un **examen blanc**.\n\n**Chaque chapitre a trois temps**\n\n1. **Avant de commencer** : ce qu'il faut déjà savoir, avec une question pour vérifier.\n2. **Comment l'aborder** : l'état d'esprit, et le piège classique.\n3. **Les idées, illustrées** : un schéma, une phrase, un exemple de code.\n\nTermine par le QCM : **8/10 = chapitre maîtrisé**.\n\n**Le conseil qui change tout** : ouvre un fichier `index.html` dans VS Code et tape les exemples. Ouvre-le dans **deux navigateurs**, comme le conseille le prof.\n\n**À savoir** : les diapos datent de 2024-2025 et contiennent quelques balises obsolètes et fautes de frappe. Elles sont signalées dans des encadrés « Attention », avec la version correcte. Le format de l'examen n'est pas public : demande-le au prof.",
+  "chapitres": [
+    "01-generalites-web.md",
+    "02-structure-html5.md",
+    "03-texte-listes-liens.md",
+    "04-tableaux-images-medias.md",
+    "05-formulaires.md",
+    "06-css-bases-selecteurs.md",
+    "07-css-pseudo-couleurs-polices.md",
+    "08-css-boite-fonds-listes.md",
+    "09-td-tp-corriges.md",
+    "10-revision-examen-blanc.md"
+  ]
+}
