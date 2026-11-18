@@ -37,7 +37,7 @@ export default function Inscription() {
             <h2 id="mz-insc-t">{TEXTES[raison][0]}</h2>
             <p className="muted">{TEXTES[raison][1]}</p>
             <div className="stack">
-              <a href="/login" className="btn big" target="_top">Créer mon compte</a>
+              <a href="/login?mode=inscription" className="btn big" target="_top">Créer mon compte</a>
               <button type="button" className="btn alt" onClick={() => setRaison(null)}>Continuer sans compte</button>
             </div>
           </div>

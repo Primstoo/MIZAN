@@ -12,7 +12,7 @@ export default function Decouvrir() {
     <main className="land">
       <header className="page top nob">
         <a href="/" className="logo">ToumaiLearn</a>
-        <a href="/login" className="btn small">Créer mon compte</a>
+        <a href="/login?mode=inscription" className="btn small">Créer mon compte</a>
       </header>
       <section className="page">
         <p className="eyebrow">Mode visiteur</p>
@@ -34,7 +34,7 @@ export default function Decouvrir() {
           <li><strong>Une mission chaque jour</strong>, calculée sur ta date d&apos;examen et tes points faibles.</li>
           <li><strong>Un tuteur IA</strong> sur chaque page du cours.</li>
         </ol>
-        <p className="row" style={{ gap: 8 }}><a href="/login" className="btn big-inline">Créer mon compte</a><a href="/login?invitation" className="btn alt big-inline">J&apos;ai un code d&apos;invitation</a></p>
+        <p className="row" style={{ gap: 8 }}><a href="/login?mode=inscription" className="btn big-inline">Créer mon compte</a><a href="/login?invitation" className="btn alt big-inline">J&apos;ai un code d&apos;invitation</a></p>
       </section>
     </main>
   );

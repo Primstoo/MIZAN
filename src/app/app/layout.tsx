@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { cookies } from "next/headers";
 import { admin, assurerMembre } from "@/lib/acces";
 import Rejoindre from "./Rejoindre";
 import Nav from "@/components/Nav";
@@ -11,6 +12,8 @@ export const dynamic = "force-dynamic";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const { data: { user } } = await createClient().auth.getUser();
+  // Visiteur : seule la page Aujourd'hui est servie (le middleware bloque le reste de /app).
+  if (!user && cookies().get("tl_visiteur")) return <div className="shell"><Nav visiteur />{children}</div>;
   if (!(await assurerMembre(user))) return <Rejoindre email={user?.email} />;
   const { data: profil } = await admin().from("profiles").select("prenom, mascotte").eq("user_id", user!.id).maybeSingle();
   return (

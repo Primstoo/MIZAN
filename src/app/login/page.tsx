@@ -13,6 +13,8 @@ const LONGUEUR_CODE_AFFICHE = 8;
 export default function Login() {
   const supabase = createClient();
   const [etape, setEtape] = useState<"invitation" | "email" | "code">("email");
+  // Deux portes, comme dans les applis : créer un compte ou se connecter.
+  const [mode, setMode] = useState<"inscription" | "connexion">("connexion");
   const [invitation, setInvitation] = useState("");
   const [, setEtapesInvitation] = useState(false);
   const [email, setEmail] = useState("");
@@ -25,6 +27,7 @@ export default function Login() {
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
     // Lien d'invitation : on garde le code pour pré-remplir l'écran d'entrée après connexion.
+    if (p.get("mode") === "inscription") setMode("inscription");
     const inv = p.get("code");
     if (inv) try { localStorage.setItem("mizan-invite", inv); } catch {}
     // « J'ai un code d'invitation » : on saisit et vérifie le code AVANT l'e-mail.
@@ -51,9 +54,13 @@ export default function Login() {
     setCharge(true); setMsg(null);
     // Flux « implicite » : le lien de l'e-mail fonctionne dans n'importe quel navigateur (pas de code verifier à retrouver).
     const raw = createRawClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, { auth: { flowType: "implicit", persistSession: false } });
-    const { error } = await raw.auth.signInWithOtp({ email: email.trim(), options: { shouldCreateUser: true, emailRedirectTo: `${window.location.origin}/auth/hash` } });
+    const { error } = await raw.auth.signInWithOtp({ email: email.trim(), options: { shouldCreateUser: mode === "inscription", emailRedirectTo: `${window.location.origin}/auth/hash` } });
     setCharge(false);
     if (error) {
+      if (mode === "connexion" && (error.code === "otp_disabled" || /signups not allowed/i.test(error.message))) {
+        setMsg({ type: "bad", texte: "Aucun compte avec cette adresse. Vérifie-la, ou crée un compte." });
+        return;
+      }
       setMsg({ type: "bad", texte: error.code === "over_email_send_rate_limit" ? "Beaucoup d’inscriptions en ce moment : l’envoi des e-mails est saturé. Réessaie dans 15 minutes." : error.status === 429 ? "Trop de demandes. Attends une minute avant de redemander un code." : "L’envoi a échoué. Vérifie ton adresse e-mail." });
       return;
     }
@@ -118,16 +125,21 @@ export default function Login() {
             </>
           ) : etape === "email" ? (
             <>
-              <h1>Connexion</h1>
+              <a href="/" className="linkbtn cx-retour">‹ Retour</a>
+              <h1>{mode === "inscription" ? "Créer un compte" : "Se connecter"}</h1>
+              <p className="cx-sous">{mode === "inscription" ? "Gratuit, sans mot de passe." : "Content de te revoir."}</p>
                             {avecGoogle && (<>
-                <button type="button" className="cx-google" onClick={google} disabled={charge}><LogoGoogle />Continuer avec Google</button>
+                <button type="button" className="cx-google" onClick={google} disabled={charge}><LogoGoogle />{mode === "inscription" ? "S’inscrire avec Google" : "Se connecter avec Google"}</button>
                 <p className="cx-ou">ou</p>
               </>)}
               <form onSubmit={envoyer} className="cx-form">
                 <label htmlFor="email">Adresse e-mail</label>
                 <input id="email" type="email" required autoComplete="email" inputMode="email" autoCapitalize="off" spellCheck={false} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="prenom.nom@exemple.com" />
-                <button className="btn big" disabled={charge || !/^\S+@\S+\.\S+$/.test(email.trim())}>{charge ? "Envoi en cours…" : "Continuer"}</button>
+                <button className="btn big" disabled={charge || !/^\S+@\S+\.\S+$/.test(email.trim())}>{charge ? "Envoi en cours…" : mode === "inscription" ? "Créer mon compte" : "Recevoir un code"}</button>
               </form>
+              <p className="cx-aide cx-bascule">{mode === "inscription" ? "Déjà inscrit ?" : "Pas encore de compte ?"}{" "}
+                <button type="button" className="link" onClick={() => { setMsg(null); setMode(mode === "inscription" ? "connexion" : "inscription"); }}>{mode === "inscription" ? "Se connecter" : "Créer un compte"}</button>
+              </p>
             </>
           ) : (
             <>

@@ -11,7 +11,7 @@ export default function Confidentialite() {
     <main className="land">
       <header className="page top nob">
         <a href="/" className="logo">ToumaiLearn</a>
-        <a href="/login" className="btn small">Se connecter</a>
+        <a href="/login?mode=inscription" className="btn small">Se connecter</a>
       </header>
       <section className="page narrow-m">
         <p className="eyebrow">Confidentialité</p>

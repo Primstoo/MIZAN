@@ -31,7 +31,9 @@ export async function middleware(request: NextRequest) {
     response.cookies.getAll().forEach((c) => r.cookies.set(c));
     return r;
   };
-  if (!user && request.nextUrl.pathname.startsWith("/app")) return vers("/login");
+  const visiteur = request.cookies.get("tl_visiteur");
+  if (!user && request.nextUrl.pathname === "/app" && visiteur) return response;
+  if (!user && request.nextUrl.pathname.startsWith("/app")) return vers(visiteur ? "/login" : "/");
   if (user && request.nextUrl.pathname === "/login") return vers("/app");
   // Déjà connecté : l'accueil public mène directement dans l'appli.
   if (user && request.nextUrl.pathname === "/") return vers("/app");

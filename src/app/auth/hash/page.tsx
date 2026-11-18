@@ -21,7 +21,7 @@ export default function Hash() {
         <>
           <h1>Lien expiré</h1>
           <p className="muted">Ce lien de connexion n’est plus valable (il ne sert qu’une fois et expire au bout d’une heure).</p>
-          <a className="btn" href="/login">Demander un nouveau lien</a>
+          <a className="btn" href="/login?mode=inscription">Demander un nouveau lien</a>
         </>
       ) : (
         <p className="muted">Connexion en cours…</p>
