@@ -1,5 +1,22 @@
 [
   {
+    "slug": "algo-python-1",
+    "titre": "Algorithmique et programmation Python 1",
+    "prof": "Pr Y. Madani",
+    "semestre": "S1",
+    "fichier": "algo-python-1.html",
+    "resume": "Pseudo-code (variables, conditions, boucles, tableaux, tris, recherche) puis Python (types, chaînes, if/match, boucles, array, listes, tuples, ensembles, dictionnaires). Séances 1 à 9 + TD 1 à 6 corrigés.",
+    "cles": [
+      "algo-python-1_scores",
+      "algo-python-1_scores_etat",
+      "mzt-algo-python-1*"
+    ],
+    "cle": "algo-python-1_scores",
+    "format": "score10",
+    "chapitres": 11,
+    "annexes": []
+  },
+  {
     "slug": "analyse-1",
     "titre": "Analyse 1",
     "prof": "",

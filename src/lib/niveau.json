@@ -1782,5 +1782,95 @@
    "a": 2,
    "e": "font-color n'existe pas."
   }
+ ],
+ "algo-python-1": [
+  {
+   "n": "structures-controle",
+   "q": "Quelle boucle s'exécute toujours au moins une fois ?",
+   "o": [
+    "Pour",
+    "TantQue",
+    "Répéter … jusqu'à"
+   ],
+   "a": 2,
+   "e": "La condition de Répéter est testée à la fin du tour."
+  },
+  {
+   "n": "tableaux",
+   "q": "Tableau Note[5] ← {15, 12.5, 8, 7, 20}. Que vaut Note[1] ?",
+   "o": [
+    "15",
+    "12.5",
+    "8"
+   ],
+   "a": 1,
+   "e": "Les indices commencent à 0 : Note[1] est la deuxième case."
+  },
+  {
+   "n": "tri-recherche",
+   "q": "Après la passe 0 du tri par sélection sur [23, 78, 45, 8, 32, 46], le tableau est :",
+   "o": [
+    "[8, 78, 45, 23, 32, 46]",
+    "[8, 23, 32, 45, 46, 78]",
+    "[23, 45, 8, 32, 46, 78]"
+   ],
+   "a": 0,
+   "e": "Le minimum 8 est échangé avec la case 0."
+  },
+  {
+   "n": "chaines-operateurs",
+   "q": "\"MIP S1\"[2] vaut :",
+   "o": [
+    "I",
+    "P",
+    "M"
+   ],
+   "a": 1,
+   "e": "Indices : M=0, I=1, P=2."
+  },
+  {
+   "n": "conditions-boucles-python",
+   "q": "Que manque-t-il à if x > 0 print(x) ?",
+   "o": [
+    "Des parenthèses",
+    "Les deux-points et l'indentation",
+    "Le mot then"
+   ],
+   "a": 1,
+   "e": "Syntaxe : if x > 0: puis bloc indenté."
+  },
+  {
+   "n": "collections",
+   "q": "[1, 2, 3][-2] vaut :",
+   "o": [
+    "1",
+    "2",
+    "3"
+   ],
+   "a": 1,
+   "e": "-1 est le dernier, -2 l'avant-dernier."
+  },
+  {
+   "n": "td-corriges",
+   "q": "1634 est un nombre d'Armstrong car :",
+   "o": [
+    "1⁴ + 6⁴ + 3⁴ + 4⁴ = 1634",
+    "1 + 6 + 3 + 4 = 14",
+    "1634 est premier"
+   ],
+   "a": 0,
+   "e": "4 chiffres, donc puissance 4."
+  },
+  {
+   "n": "revision-examen",
+   "q": "for i in range(3): print(i, end=\"\") affiche :",
+   "o": [
+    "012",
+    "123",
+    "0 1 2"
+   ],
+   "a": 0,
+   "e": "end=\"\" colle les valeurs."
+  }
  ]
 }

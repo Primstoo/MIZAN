@@ -1,0 +1,24 @@
+{
+  "titre": "Algorithmique et programmation Python 1",
+  "prof": "Pr Y. Madani",
+  "semestre": "S1",
+  "etablissement": "FSABM",
+  "fichier": "algo-python-1.html",
+  "cle": "algo-python-1_scores",
+  "resume": "Pseudo-code (variables, conditions, boucles, tableaux, tris, recherche) puis Python (types, chaînes, if/match, boucles, array, listes, tuples, ensembles, dictionnaires). Séances 1 à 9 + TD 1 à 6 corrigés.",
+  "conventions": "Cours du Pr Youness Madani, module Informatique 1 (Algorithmique 1 / Python), MIP S1, Faculté Polydisciplinaire de Béni Mellal (aujourd'hui FSABM), 2024-2025. Séances 1 à 4 en pseudo-langage : affectation ←, Ecrire / Lire, si … alors … sinon … finsi, tantque … faire … fin tantque, pour i ← a jusqu'à b [Pas p] faire … fin pour, répéter … jusqu'à, Tableau T[taille] : type, indices de 0 à taille − 1. Séances 5 à 9 en Python 3 (VS Code), module array importé « import array as ar ». Exemples du prof autour des filières MIP, BCG, PC et de la FPBM. Les TD n'ont pas de corrigé officiel : les corrigés sont rédigés par ToumaiLearn.",
+  "intro": "Ce module suit **les 9 séances du Pr Y. Madani** (octobre–novembre 2024) : quatre séances d'algorithmique en pseudo-langage, puis cinq séances de Python.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre dans l'ordre : *Avant de commencer*, *Comment aborder*, puis les idées une par une.\n2. Recopie et exécute les exemples Python (VS Code, IDLE ou Google Colab). Toutes les sorties affichées ont été vérifiées en exécutant le code.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n4. Termine par le chapitre « TD corrigés » puis l'examen blanc.\n\n**Ce qui est sûr** : le plan, les notations et les exemples viennent des diapositives et des fiches de TD 1 à 6.\n**À vérifier** : les TD n'ont pas de corrigé officiel (corrigés ToumaiLearn) et aucune annale n'était fournie : l'examen blanc est construit à partir des TD. Demande au prof le format de l'examen.",
+  "chapitres": [
+    "01-intro-algorithmique.md",
+    "02-structures-controle.md",
+    "03-tableaux.md",
+    "04-tri-recherche.md",
+    "05-intro-python.md",
+    "06-chaines-operateurs.md",
+    "07-conditions-boucles-python.md",
+    "08-modules-array.md",
+    "09-listes-tuples-sets-dicts.md",
+    "10-td-corriges.md",
+    "11-revision-examen-blanc.md"
+  ]
+}

@@ -2058,5 +2058,82 @@
     "g": "cours"
    }
   ]
+ },
+ "algo-python-1": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "intro-algorithmique",
+    "t": "Introduction à l'algorithmique et instructions élémentaires",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "structures-controle",
+    "t": "Structures de contrôle · conditions et boucles (pseudo-code)",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "tableaux",
+    "t": "Les tableaux (pseudo-code)",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "tri-recherche",
+    "t": "Tri et recherche dans les tableaux",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "intro-python",
+    "t": "Introduction à Python · variables, types, conversions",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "chaines-operateurs",
+    "t": "Nombres, chaînes, opérateurs, input et print",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "conditions-boucles-python",
+    "t": "Conditions et boucles en Python",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "modules-array",
+    "t": "Modules Python et tableaux (module array)",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "collections",
+    "t": "Listes, tuples, ensembles et dictionnaires",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "td-corriges",
+    "t": "TD 1 à 6 corrigés",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "revision-examen",
+    "t": "Révision et examen blanc",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }
