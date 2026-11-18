@@ -2212,5 +2212,70 @@
     "g": "cours"
    }
   ]
+ },
+ "thermodynamique": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "systemes-formes-differentielles",
+    "t": "Systèmes, variables d'état et formes différentielles",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "coefficients-transformations",
+    "t": "Coefficients thermoélastiques, équilibre et transformations",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "premier-principe-travail",
+    "t": "Premier principe, travail et statique des fluides",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "chaleur-calorimetrie",
+    "t": "Chaleur, enthalpie, calorimétrie et chaleur latente",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "gaz-parfaits",
+    "t": "Propriétés énergétiques des gaz parfaits",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "entropie-second-principe",
+    "t": "L'entropie et le second principe",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "machines-thermiques",
+    "t": "Les machines thermiques, cycle de Beau de Rochas et cycle de Carnot",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "td-corriges",
+    "t": "TD corrigés (séries 1 et 2)",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "revision-examen-blanc",
+    "t": "Révision et examen blanc",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

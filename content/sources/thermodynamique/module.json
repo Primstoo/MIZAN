@@ -1,0 +1,23 @@
+{
+  "titre": "Thermodynamique",
+  "prof": "Pr I. Arroub",
+  "semestre": "S1",
+  "etablissement": "FSABM",
+  "fichier": "thermodynamique.html",
+  "cle": "thermodynamique_scores",
+  "maths": true,
+  "resume": "Thermodynamique I du Pr Arroub : systèmes et formes différentielles, premier principe, calorimétrie, gaz parfaits, entropie et machines thermiques, avec les séries de TD et l'examen 2022-2023 corrigés.",
+  "conventions": "Cours « Thermodynamique I » du Pr Ismail Arroub, FSA Béni Mellal (ex-FPBM), S1 SMPC/SMIA. Convention de signe du prof : positif ce que le système reçoit (W > 0 reçu, Q > 0 reçu). Notations : δW, δQ pour les formes non exactes ; dU = δW + δQ ; α (dilatation isobare), β (augmentation de pression isochore), χ_T (compressibilité isotherme) ; coefficients calorimétriques c_v, c_p, ℓ, h, λ, μ ; γ = C_p/C_v ; ρ pour le rendement, e pour l'efficacité ; Q_c (source chaude), Q_f (source froide). Le prof demande des résultats avec unités et trois chiffres significatifs.",
+  "intro": "Ce module suit **les 5 chapitres du cours du Pr I. Arroub** (Thermodynamique I, S1) et corrige **les séries de TD 1 et 2** et **l'examen de session ordinaire 2022-2023**.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre : avant de commencer, comment l'aborder, puis les idées une à une.\n2. Refais les exemples chiffrés à la main, calculatrice à côté.\n3. Fais le QCM : **8/10 = chapitre maîtrisé**.\n4. Termine par les TD corrigés et l'examen blanc.\n\n**Convention à garder en tête** : tout ce que le système **reçoit** est compté **positif**.\n\n**Ce qui est sûr** : le contenu suit les diapositives du prof ; les calculs numériques des corrigés ont été vérifiés en Python.\n**À vérifier** : les corrigés des TD sont une rédaction ToumaiLearn (pas ceux du prof), et le format de l'examen peut changer d'une année à l'autre.",
+  "chapitres": [
+    "01-systemes-formes-differentielles.md",
+    "02-coefficients-transformations.md",
+    "03-premier-principe-travail.md",
+    "04-chaleur-calorimetrie.md",
+    "05-gaz-parfaits.md",
+    "06-entropie-second-principe.md",
+    "07-machines-thermiques.md",
+    "08-td-corriges.md",
+    "09-revision-examen-blanc.md"
+  ]
+}

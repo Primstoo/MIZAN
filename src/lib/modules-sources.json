@@ -51,6 +51,23 @@
     "chapitres": 6
   },
   {
+    "slug": "thermodynamique",
+    "titre": "Thermodynamique",
+    "prof": "Pr I. Arroub",
+    "semestre": "S1",
+    "fichier": "thermodynamique.html",
+    "resume": "Thermodynamique I du Pr Arroub : systèmes et formes différentielles, premier principe, calorimétrie, gaz parfaits, entropie et machines thermiques, avec les séries de TD et l'examen 2022-2023 corrigés.",
+    "cles": [
+      "thermodynamique_scores",
+      "thermodynamique_scores_etat",
+      "mzt-thermodynamique*"
+    ],
+    "cle": "thermodynamique_scores",
+    "format": "score10",
+    "chapitres": 9,
+    "annexes": []
+  },
+  {
     "slug": "electrocinetique",
     "titre": "Électrocinétique : régimes transitoires",
     "prof": "",

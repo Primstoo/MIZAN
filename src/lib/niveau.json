@@ -1969,5 +1969,95 @@
    "a": 1,
    "e": "C'est la définition du cours, reprise mot pour mot à la question 1 de l'examen blanc."
   }
+ ],
+ "thermodynamique": [
+  {
+   "n": "systemes-formes-differentielles",
+   "q": "Un gaz enfermé dans un cylindre fermé par un piston est un système :",
+   "o": [
+    "isolé",
+    "fermé",
+    "ouvert"
+   ],
+   "a": 1,
+   "e": "Il peut échanger de l'énergie (travail, chaleur) mais pas de matière."
+  },
+  {
+   "n": "premier-principe-travail",
+   "q": "Un gaz reçoit 400 J de chaleur et fournit 100 J de travail. $\\Delta U$ vaut :",
+   "o": [
+    "500 J",
+    "300 J",
+    "−300 J"
+   ],
+   "a": 1,
+   "e": "$\\Delta U = W + Q = -100 + 400$."
+  },
+  {
+   "n": "chaleur-calorimetrie",
+   "q": "À pression constante, la chaleur échangée (quasi-statique) est égale à :",
+   "o": [
+    "$\\Delta U$",
+    "$\\Delta H$",
+    "$W$"
+   ],
+   "a": 1,
+   "e": "$dH = \\delta Q + V\\,dP$ et $dP = 0$."
+  },
+  {
+   "n": "gaz-parfaits",
+   "q": "La détente de Joule–Gay-Lussac est :",
+   "o": [
+    "iso-énergétique ($\\Delta U = 0$)",
+    "isenthalpique",
+    "isobare"
+   ],
+   "a": 0,
+   "e": "W = 0 et Q = 0."
+  },
+  {
+   "n": "entropie-second-principe",
+   "q": "L'unité de l'entropie est :",
+   "o": [
+    "J",
+    "J/K",
+    "K/J"
+   ],
+   "a": 1,
+   "e": "$dS = \\delta Q/T$."
+  },
+  {
+   "n": "machines-thermiques",
+   "q": "Pour un moteur thermique (convention du prof) :",
+   "o": [
+    "W < 0, $Q_c$ > 0, $Q_f$ < 0",
+    "W > 0, $Q_c$ < 0, $Q_f$ > 0",
+    "W < 0, $Q_c$ < 0, $Q_f$ > 0"
+   ],
+   "a": 0,
+   "e": "Il reçoit de la chaleur de la source chaude et fournit du travail."
+  },
+  {
+   "n": "td-corriges",
+   "q": "$\\delta Q = C_p(T)dT - \\frac{RT}{P}dP$ est :",
+   "o": [
+    "exacte",
+    "non exacte, mais $\\delta Q/T$ est exacte",
+    "exacte, mais $\\delta Q/T$ ne l'est pas"
+   ],
+   "a": 1,
+   "e": "Dérivées croisées : 0 et $-R/P$."
+  },
+  {
+   "n": "revision-examen-blanc",
+   "q": "Dans le cycle de Brayton, la chaleur est échangée pendant :",
+   "o": [
+    "les adiabatiques",
+    "les isobares",
+    "tout le cycle"
+   ],
+   "a": 1,
+   "e": "Q = 0 sur les adiabatiques."
+  }
  ]
 }
