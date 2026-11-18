@@ -113,10 +113,14 @@ details.prereq{margin:16px 0;border:1px solid var(--line);border-radius:16px;bac
 mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:4px 0}
 /*{{CSS_MODULE}}*/
 @media (max-width:860px){.wrap{grid-template-columns:1fr}nav{display:none;position:fixed;inset:54px 0 0 0;height:auto;background:var(--bg);z-index:4;border:0}nav.open{display:block}#menu{display:inline-block}main{padding:20px 18px 110px}h1.t{font-size:28px}main h2{font-size:22px}nav{inset:65px 0 0 0}}
+
+/* Aucun tableau, schéma ou code ne doit élargir la page (téléphone) : défilement dans son cadre. */
+main table{display:block;max-width:100%;overflow-x:auto}main figure,main .grille,main details{max-width:100%;overflow-x:auto}main :not(pre)>code{overflow-wrap:anywhere}main img{max-width:100%;height:auto}main p,main li,main td,main th,main a{overflow-wrap:break-word}mjx-container[display="true"]{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.retour{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;margin-right:6px;width:44px;height:44px;padding:0;border-radius:22px;font-size:18px;flex-shrink:0}.retour[hidden]{display:none}
 </style>
 </head>
 <body>
-<header><button class="b" id="menu" aria-label="Chapitres">☰</button><h1>{{TITRE}}<small>{{SOUS_TITRE}}</small></h1><span class="pct" id="pct"></span></header>
+<header><a class="b retour" id="retour" href="/app/modules" target="_top" aria-label="Retour aux cours" title="Retour aux cours">←</a><button class="b" id="menu" aria-label="Chapitres">☰</button><h1>{{TITRE}}<small>{{SOUS_TITRE}}</small></h1><span class="pct" id="pct"></span></header>
 <div class="wrap"><nav id="nav"></nav><main id="main"></main></div>
 <script>
 /*{{DONNEES}}*/
@@ -300,5 +304,8 @@ window.MZT_CONFIG.getContext = () => { const h = document.querySelector("h1.t");
 <script>
 /*{{TUTEUR}}*/
 </script>
+<script>(function(){var a=document.getElementById("retour");if(!a)return;var p="";try{p=window.top.location.pathname}catch(e){}
+if(window.top===window&&location.protocol==="file:"){a.hidden=true;return}
+a.href=p.indexOf("/decouvrir")===0||location.pathname.indexOf("/decouvrir")===0?"/decouvrir":"/app/modules";})();</script>
 </body>
 </html>

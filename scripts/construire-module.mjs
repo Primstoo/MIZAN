@@ -21,6 +21,8 @@ const LIB = path.join(RACINE, "src", "lib");
 const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const brut = (t) => String(t).replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
 const lireJSON = (f, def) => (fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, "utf8")) : def);
+// JSON injecté dans un <script> : « </script> » ou « <!-- » dans le contenu fermeraient la balise.
+const jsonScript = (v) => JSON.stringify(v).replace(/<\//g, "<\\/").replace(/<!--/g, "<\\!--").replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029");
 const ecrireJSON = (f, v, indent = 1) => fs.writeFileSync(f, JSON.stringify(v, null, indent) + "\n");
 
 // ---------- Blocs spéciaux ----------
@@ -269,7 +271,7 @@ function construire(slug) {
     .replace("{{SOUS_TITRE}}", esc([mod.prof, mod.semestre, mod.etablissement].filter(Boolean).join(" · ")))
     .replace("/*{{CSS_MODULE}}*/", () => css)
     .replace("<!--{{MATHS}}-->", () => mod.maths ? `<script>window.MathJax={tex:{inlineMath:[["$","$"]],displayMath:[["$$","$$"]]},svg:{fontCache:"global"},startup:{typeset:false,pageReady:()=>MathJax.startup.defaultPageReady().then(()=>window.typeset&&typeset())}};</script>\n<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js" async></script>` : "")
-    .replace("/*{{DONNEES}}*/", () => `const MODULE=${JSON.stringify(donnees)};\nconst CHAPS=${JSON.stringify(chapitres)};\nconst NOTIONS=${JSON.stringify(notions)};\nconst CARTES=${JSON.stringify(ctx.cartes)};\nconst OUTILS=${JSON.stringify(ctx.outils)};`)
+    .replace("/*{{DONNEES}}*/", () => `const MODULE=${jsonScript(donnees)};\nconst CHAPS=${jsonScript(chapitres)};\nconst NOTIONS=${jsonScript(notions)};\nconst CARTES=${jsonScript(ctx.cartes)};\nconst OUTILS=${jsonScript(ctx.outils)};`)
     .replace("/*{{MZT_CONFIG}}*/", () => `window.MZT_CONFIG=${JSON.stringify(config)};`)
     .replace("/*{{TUTEUR}}*/", () => tuteur);
   fs.writeFileSync(path.join(RACINE, "content", "modules", mod.fichier), page);

@@ -47,8 +47,8 @@
     ],
     "cle": "analyse1_scores",
     "format": "score10",
-    "annexes": [],
-    "chapitres": 5
+    "chapitres": 5,
+    "annexes": []
   },
   {
     "slug": "dessin-industriel",
@@ -64,8 +64,8 @@
     ],
     "cle": "dessin_industriel_scores",
     "format": "score10",
-    "annexes": [],
-    "chapitres": 6
+    "chapitres": 6,
+    "annexes": []
   },
   {
     "slug": "mecanique-point",
@@ -115,8 +115,8 @@
     ],
     "cle": "electrocinetique_scores",
     "format": "score10",
-    "annexes": [],
-    "chapitres": 7
+    "chapitres": 7,
+    "annexes": []
   },
   {
     "slug": "probas",
@@ -131,10 +131,10 @@
     ],
     "cle": "ps3_revision_v1",
     "format": "best",
+    "chapitres": 24,
     "annexes": [
       "probas-S3-outils.html"
-    ],
-    "chapitres": 24
+    ]
   },
   {
     "slug": "prog-c",
@@ -304,10 +304,10 @@
     ],
     "cle": "ao-revision-v1",
     "format": "essais",
+    "chapitres": 16,
     "annexes": [
       "archi-ordinateurs-outils.html"
-    ],
-    "chapitres": 16
+    ]
   },
   {
     "slug": "cms",
@@ -323,8 +323,8 @@
     ],
     "cle": "cms_scores",
     "format": "score10",
-    "annexes": [],
-    "chapitres": 10
+    "chapitres": 10,
+    "annexes": []
   },
   {
     "slug": "crypto",
@@ -342,10 +342,10 @@
     ],
     "cle": "cryptoPR",
     "format": "pc",
+    "chapitres": 13,
     "annexes": [
       "crypto-farchane-outils.html"
-    ],
-    "chapitres": 13
+    ]
   },
   {
     "slug": "machine-learning",
@@ -361,8 +361,8 @@
     ],
     "cle": "ml_scores",
     "format": "score10",
-    "annexes": [],
-    "chapitres": 9
+    "chapitres": 9,
+    "annexes": []
   },
   {
     "slug": "java-poo",
@@ -378,8 +378,8 @@
     ],
     "cle": "java_poo_scores",
     "format": "score10",
-    "annexes": [],
-    "chapitres": 10
+    "chapitres": 10,
+    "annexes": []
   },
   {
     "slug": "reseaux-m351",
@@ -394,10 +394,10 @@
     ],
     "cle": "m351-revision-v1",
     "format": "essais",
+    "chapitres": 19,
     "annexes": [
       "reseaux-M351-outils.html"
-    ],
-    "chapitres": 19
+    ]
   },
   {
     "slug": "traitement-ad",
@@ -413,8 +413,8 @@
     ],
     "cle": "tad_scores",
     "format": "score10",
-    "annexes": [],
-    "chapitres": 8
+    "chapitres": 8,
+    "annexes": []
   },
   {
     "slug": "uml",
@@ -431,9 +431,9 @@
     ],
     "cle": "umlp_scores",
     "format": "score10",
+    "chapitres": 15,
     "annexes": [
       "uml-outils.html"
-    ],
-    "chapitres": 15
+    ]
   }
 ]

@@ -14,7 +14,7 @@ export default function ModulePage({ params }: { params: { slug: string } }) {
   return (
     <main className="module">
       <header className="top slim">
-        <a href="/app" className="back">← Aujourd&apos;hui</a>
+        <a href="/app/modules" className="back">← Cours</a>
         <strong>{m.titre}</strong>
       </header>
       <ModuleFrame slug={m.slug} fichier={m.fichier} titre={m.titre} cles={m.cles} />
