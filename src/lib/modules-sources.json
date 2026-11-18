@@ -68,6 +68,23 @@
     "chapitres": 6
   },
   {
+    "slug": "mecanique-point",
+    "titre": "Mécanique du point",
+    "prof": "Pr M. Driouich",
+    "semestre": "S1",
+    "fichier": "mecanique-point.html",
+    "resume": "Vecteurs et coordonnées, cinématique, changement de référentiel, lois de Newton et théorèmes généraux, avec les trois séries corrigées et un examen blanc.",
+    "cles": [
+      "mecanique-point_scores",
+      "mecanique-point_scores_etat",
+      "mzt-mecanique-point*"
+    ],
+    "cle": "mecanique-point_scores",
+    "format": "score10",
+    "chapitres": 9,
+    "annexes": []
+  },
+  {
     "slug": "thermodynamique",
     "titre": "Thermodynamique",
     "prof": "Pr I. Arroub",

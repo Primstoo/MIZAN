@@ -2354,5 +2354,70 @@
     "g": "cours"
    }
   ]
+ },
+ "mecanique-point": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "vecteurs",
+    "t": "Vecteurs, bases et produits",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "coordonnees-operateurs",
+    "t": "Coordonnées et opérateurs (gradient, divergence, rotationnel)",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "cinematique",
+    "t": "Cinématique · vitesse et accélération",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "frenet",
+    "t": "Repère de Frenet et rayon de courbure",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "changement-referentiel",
+    "t": "Changement de référentiel",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "dynamique",
+    "t": "Dynamique · PFD, forces d'inertie, pendule et ressort",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "theoremes-generaux",
+    "t": "Théorèmes généraux · moment cinétique et énergie",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "series-corrigees",
+    "t": "Séries de TD corrigées (1 à 3)",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "revision",
+    "t": "Révision et examen blanc",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

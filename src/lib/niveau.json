@@ -2149,5 +2149,95 @@
    "a": 0,
    "e": "Réflexive, antisymétrique, transitive, et deux réels sont toujours comparables."
   }
+ ],
+ "mecanique-point": [
+  {
+   "n": "cinematique",
+   "q": "La trajectoire de $x = t-1$, $y = -t^2+1$ est :",
+   "o": [
+    "une droite",
+    "une parabole",
+    "un cercle"
+   ],
+   "a": 1,
+   "e": "$y = -x^2 - 2x$."
+  },
+  {
+   "n": "changement-referentiel",
+   "q": "L'accélération de Coriolis vaut :",
+   "o": [
+    "$\\vec\\Omega\\wedge\\vec V_r$",
+    "$2\\,\\vec\\Omega\\wedge\\vec V_r$",
+    "$2\\,\\vec\\Omega\\wedge\\vec V_a$"
+   ],
+   "a": 1,
+   "e": "Avec la vitesse relative."
+  },
+  {
+   "n": "dynamique",
+   "q": "Le PFD dans un référentiel galiléen s'écrit :",
+   "o": [
+    "$m\\vec\\gamma = \\sum\\vec F_{ext}$",
+    "$m\\vec V = \\sum\\vec F_{ext}$",
+    "$m\\vec\\gamma = \\sum\\vec F_{ext} + \\vec F_e$"
+   ],
+   "a": 0,
+   "e": "Pas de force d'inertie en galiléen."
+  },
+  {
+   "n": "theoremes-generaux",
+   "q": "Le moment cinétique en $O$ vaut :",
+   "o": [
+    "$\\overrightarrow{OM}\\wedge m\\vec V$",
+    "$m\\vec V\\wedge\\overrightarrow{OM}$",
+    "$\\overrightarrow{OM}\\cdot m\\vec V$"
+   ],
+   "a": 0,
+   "e": "Ordre : position puis quantité de mouvement."
+  },
+  {
+   "n": "revision",
+   "q": "Pour éliminer la tension d'un fil, on utilise de préférence :",
+   "o": [
+    "le TMC au point d'attache",
+    "le PFD projeté sur le fil",
+    "la composition des vitesses"
+   ],
+   "a": 0,
+   "e": "Son moment au point d'attache est nul."
+  },
+  {
+   "n": "vecteurs",
+   "q": "La norme de $\\vec A(3, 2, \\sqrt3)$ vaut :",
+   "o": [
+    "$3 + 2 + \\sqrt3$",
+    "4",
+    "16"
+   ],
+   "a": 1,
+   "e": "$\\sqrt{9 + 4 + 3} = \\sqrt{16} = 4$."
+  },
+  {
+   "n": "coordonnees-operateurs",
+   "q": "En cylindriques, $x$ vaut :",
+   "o": [
+    "$\\rho\\cos\\varphi$",
+    "$\\rho\\sin\\varphi$",
+    "$r\\sin\\theta\\cos\\varphi$"
+   ],
+   "a": 0,
+   "e": "$\\rho$ est la distance dans le plan $(xOy)$."
+  },
+  {
+   "n": "frenet",
+   "q": "$\\vec n$ est dirigé vers :",
+   "o": [
+    "le centre de courbure",
+    "l'extérieur du virage",
+    "l'origine $O$"
+   ],
+   "a": 0,
+   "e": "Concavité de la trajectoire."
+  }
  ]
 }

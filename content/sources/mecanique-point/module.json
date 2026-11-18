@@ -1,0 +1,23 @@
+{
+  "titre": "Mécanique du point",
+  "prof": "Pr M. Driouich",
+  "semestre": "S1",
+  "etablissement": "FSABM",
+  "fichier": "mecanique-point.html",
+  "cle": "mecanique-point_scores",
+  "maths": true,
+  "resume": "Vecteurs et coordonnées, cinématique, changement de référentiel, lois de Newton et théorèmes généraux, avec les trois séries corrigées et un examen blanc.",
+  "conventions": "Cours de Mécanique du point matériel du Pr M. Driouich, tronc commun MIP / MI, FSABM (ex-FPBM), Université Sultan Moulay Slimane, Béni Mellal. Plan du prof : I Rappels et compléments mathématiques, II Cinématique, III Changement de référentiel, IV Dynamique, V Théorèmes généraux. Notations : repère R(O, i, j, k) ; vitesse V(M/R) = dOM/dt|R, accélération γ(M/R) ; coordonnées cylindriques (ρ, φ, z) avec base (e_ρ, e_φ, e_z), sphériques (r, θ, φ) avec base (e_r, e_θ, e_φ) ; base de Frenet (τ, n, b), abscisse curviligne s, rayon de courbure R_c = ||V||^3 / ||V ∧ γ|| ; repère absolu R et relatif R1(O1, i1, j1, k1), vecteur rotation Ω(R1/R) ; Va = Vr + Ve, γa = γr + γe + γc avec γc = 2 Ω ∧ Vr ; forces d'inertie Fe = -m γe et Fc = -m γc ; moment cinétique σ_O(M/R) = OM ∧ m V(M/R) ; travail W, puissance P, Ec, Ep (F = -grad Ep), Em = Ec + Ep. Réponds en français, tutoiement, avec la méthode pas à pas (base, dérivées des vecteurs de base, projection). Étudiants de S1 : rappelle les dérivées de cos et sin quand il le faut.",
+  "intro": "Ce module suit le **cours de Mécanique du point matériel du Pr M. Driouich** (FSABM, S1) et ses trois séries de TD corrigées.\n\n**Chaque chapitre a trois temps**\n\n1. **Avant de commencer** : ce qu'il faut déjà savoir, avec une question pour vérifier.\n2. **Comment l'aborder** : l'état d'esprit et le piège classique.\n3. **Les idées, illustrées** : un schéma, une phrase, un exemple chiffré, puis exercices, flashcards et QCM.\n\nTermine chaque chapitre par le QCM : **8/10 = chapitre maîtrisé**.\n\n**Ce qui est sûr** : le plan, les notations et les exemples viennent du polycopié (58 pages) et des séries 1 à 3 corrigées. Les corrections des séries sont manuscrites ; quand nous y avons trouvé une erreur, elle est signalée.\n\n**À vérifier** : aucune annale de contrôle ne nous a été fournie. L'examen blanc est construit sur le modèle des séries.",
+  "chapitres": [
+    "01-vecteurs.md",
+    "02-coordonnees-operateurs.md",
+    "03-cinematique.md",
+    "04-frenet-mouvements.md",
+    "05-changement-referentiel.md",
+    "06-dynamique.md",
+    "07-theoremes-generaux.md",
+    "08-series-corrigees.md",
+    "09-revision.md"
+  ]
+}
