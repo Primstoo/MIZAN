@@ -436,6 +436,14 @@
    {
     "id": "entrainement",
     "t": "Atelier, examen blanc et erreurs"
+   },
+   {
+    "id": "td-tp-zouina",
+    "t": "TD et TP corrigés · Pr Zouina (2025-2026)"
+   },
+   {
+    "id": "examen-blanc-zouina",
+    "t": "Examen blanc corrigé · format Pr Zouina"
    }
   ],
   "items": [
@@ -695,6 +703,14 @@
    {
     "id": "entrainement",
     "t": "Entraînement : calculs, formulaire, examen blanc"
+   },
+   {
+    "id": "annales-corrigees-2021-2024",
+    "t": "Annales 2021-2024 corrigées (sujets complets)"
+   },
+   {
+    "id": "annales-corrigees-2016-2021",
+    "t": "Annales 2016-2021 corrigées (sujets complets)"
    }
   ],
   "items": [
@@ -1162,6 +1178,60 @@
     "id": "suites-monotones",
     "t": "Suites monotones, adjacentes, sous-suites",
     "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "suites-cauchy",
+    "t": "Suites de Cauchy, suites usuelles, densité par les suites",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "limites-fonctions",
+    "t": "Limite d'une fonction",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "continuite",
+    "t": "Continuité en un point et sur un intervalle",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "grands-theoremes-continuite",
+    "t": "TVI, bornes atteintes, bijection, continuité uniforme",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "fonctions-usuelles",
+    "t": "Racines n-ièmes, puissances, fonctions circulaires réciproques",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "derivabilite",
+    "t": "Dérivabilité, règles de calcul, dérivée d'une réciproque",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "rolle-accroissements-finis",
+    "t": "Théorème de Rolle et accroissements finis",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "series-td-corrigees",
+    "t": "Séries de TD corrigées",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "examen-blanc",
+    "t": "Examen blanc corrigé",
+    "imp": 5,
     "g": "cours"
    }
   ]

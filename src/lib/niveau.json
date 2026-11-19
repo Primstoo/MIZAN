@@ -602,6 +602,39 @@
    "e": "On factorise par $n^2$ : il reste $\\tfrac{3 + 1/n}{2 - 5/n^2}$."
   },
   {
+   "n": "grands-theoremes-continuite",
+   "q": "Le TVI demande :",
+   "o": [
+    "$f$ continue sur un intervalle",
+    "$f$ dérivable",
+    "$f$ monotone"
+   ],
+   "a": 0,
+   "e": "La continuité suffit."
+  },
+  {
+   "n": "rolle-accroissements-finis",
+   "q": "Rolle demande que $f$ soit dérivable sur :",
+   "o": [
+    "$[a, b]$",
+    "$]a, b[$",
+    "$\\mathbb R$"
+   ],
+   "a": 1,
+   "e": "Les bornes peuvent être des points non dérivables."
+  },
+  {
+   "n": "series-td-corrigees",
+   "q": "Pour montrer que $3^q = 2^p$ est impossible ($p, q \\ge 1$), on utilise :",
+   "o": [
+    "la parité",
+    "la monotonie de $\\ln$",
+    "le TVI"
+   ],
+   "a": 0,
+   "e": "Impair contre pair."
+  },
+  {
    "n": "borne-superieure",
    "q": "La borne supérieure de $[0, 1[$ est :",
    "o": [
