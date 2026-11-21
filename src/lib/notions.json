@@ -1753,6 +1753,18 @@
     "t": "Révision et examen blanc",
     "imp": 5,
     "g": "cours"
+   },
+   {
+    "id": "annales-2022-2023-2021-2022",
+    "t": "Annales corrigées · 2022-2023 et 2021-2022",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "annale-2020-2021",
+    "t": "Annale corrigée · 2020-2021 (Polynome, Employe)",
+    "imp": 4,
+    "g": "cours"
    }
   ]
  },
@@ -2053,6 +2065,12 @@
    {
     "id": "revision-examen-blanc",
     "t": "Révision et examen blanc",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "annale-normale-2025",
+    "t": "Annale corrigée · session normale 2025 (08/07/2025)",
     "imp": 5,
     "g": "cours"
    }

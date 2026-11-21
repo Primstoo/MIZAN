@@ -5,7 +5,7 @@ seance: Préparation de l'examen
 importance: 5
 ---
 
-> [!attention] Aucune annale de POO en C++ n'a été fournie (les fichiers « Exam 2223 » et « Exam 2324 » du dossier sont des examens d'analyse numérique). Cet examen blanc est **construit à partir des TD et du cours** : même style d'exercices (« quels résultats fournira ce programme ? », « écrire la classe… »), mais le format réel de l'examen est à confirmer auprès du prof.
+> [!attention] Cet examen blanc a été **construit à partir des TD et du cours** (même style : « quels résultats fournira ce programme ? », « écrire la classe… »). Les vrais sujets (2020-2021 à 2022-2023) sont corrigés dans les chapitres d'annales à la fin du module : ce sont des **problèmes guidés** (une classe enrichie question par question, puis héritage et composition).
 
 ## La carte du module
 

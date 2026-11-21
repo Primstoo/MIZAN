@@ -1340,15 +1340,15 @@
    "e": "Liaison statique."
   },
   {
-   "n": "du-c-au-cpp",
-   "q": "Dans la formule C++ = C + E + S + P, que désigne P ?",
+   "n": "annales-2022-2023-2021-2022",
+   "q": "Quelle signature permet d'appeler Affiche() sur un const Client ?",
    "o": [
-    "Les pointeurs",
-    "Les possibilités de programmation orientée objet",
-    "Les prototypes"
+    "void Affiche()",
+    "void Affiche() const",
+    "const void Affiche()"
    ],
    "a": 1,
-   "e": "E = écarts, S = spécificités hors objet, P = POO."
+   "e": "Le const après la parenthèse s'applique à l'objet courant (this)."
   }
  ],
  "javascript": [
@@ -1714,16 +1714,15 @@
    "e": "P3 finit à 20, P5 à 18."
   },
   {
-   "n": "processus-notions",
-   "q": "Quand un processus apparaît-il ?",
+   "n": "annale-normale-2025",
+   "q": "En SRTF, à t = 6, P4 (2) arrive pendant que P2 a encore 3 unités. Que se passe-t-il ?",
    "o": [
-    "Après la compilation",
-    "Après l'édition de liens",
-    "Au chargement de l'exécutable en mémoire",
-    "À l'écriture du fichier source"
+    "P4 préempte P2",
+    "P2 continue",
+    "P3 prend le CPU"
    ],
-   "a": 2,
-   "e": "Compilation et édition de liens produisent des fichiers sur disque. Le processus naît au chargement."
+   "a": 0,
+   "e": "2 < 3 : le plus petit temps restant gagne."
   }
  ],
  "prog-web-1": [
