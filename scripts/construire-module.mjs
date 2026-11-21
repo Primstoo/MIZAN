@@ -212,7 +212,7 @@ function rendreChapitre({ meta, corps }, ctx) {
   const html = R(md.parse(corps));
   for (const c of ctx.cartes.slice(nbCartes)) { c.q = R(c.q); c.r = R(c.r); }
   return {
-    id: meta.id, t: meta.titre, seance: meta.seance || "", imp: Number(meta.importance || 3), html, ex,
+    id: meta.id, t: meta.titre, seance: meta.seance || "", imp: Number(meta.importance || 3), ...(String(meta.payant) === "true" ? { payant: true } : {}), html, ex,
     qcm: qcm.map((q) => ({ n: q.n, q: R(md.parseInline(q.q)), o: q.o.map((o) => R(md.parseInline(o))), a: q.a, e: R(md.parseInline(q.e)) })),
   };
 }

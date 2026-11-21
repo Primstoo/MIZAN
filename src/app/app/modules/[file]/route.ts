@@ -4,6 +4,8 @@ import { NextResponse } from "next/server";
 import { MODULES } from "@/lib/modules";
 import { createClient } from "@/lib/supabase/server";
 import { estMembre } from "@/lib/acces";
+import { rangEffectif } from "@/lib/offres";
+import { verrouillerAnnales } from "@/lib/annales";
 
 // Sert un module depuis content/modules (dossier non public).
 // Sous /app, donc déjà protégé par le middleware ; on revérifie la session ici
@@ -20,7 +22,10 @@ export async function GET(_req: Request, { params }: { params: { file: string } 
   if (!user) return new NextResponse("Connexion requise", { status: 401 });
   if (!(await estMembre(user))) return new NextResponse("Invitation requise", { status: 403 });
 
-  const html = await readFile(path.join(process.cwd(), "content", "modules", params.file), "utf8");
+  let html = await readFile(path.join(process.cwd(), "content", "modules", params.file), "utf8");
+  // Annales et examens blancs : réservés aux offres payantes. Le contenu est retiré ici, côté serveur
+  // (pas seulement masqué) ; l'élève gratuit voit le titre, le plan et un aperçu flouté avec le cadenas.
+  if ((await rangEffectif(user.id)) < 2) html = verrouillerAnnales(html, m.titre);
   // Pont + correctifs mobile communs à tous les modules :
   // - police 16 px dans les champs : sinon iOS zoome dès qu'on touche la zone de texte ;
   // - tuteur en plein écran sur téléphone, bouton Envoyer ramené à l'écran quand le clavier s'ouvre.
