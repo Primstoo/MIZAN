@@ -1,0 +1,24 @@
+{
+  "titre": "Analyse 2",
+  "prof": "",
+  "semestre": "S2",
+  "etablissement": "Cours généraliste",
+  "fichier": "analyse-2.html",
+  "cle": "analyse2_scores",
+  "maths": true,
+  "resume": "Rolle et accroissements finis, formules de Taylor, développements limités et leurs applications, intégrale simple et intégrales impropres, séries de TD corrigées et examen blanc.",
+  "conventions": "Cours généraliste d'Analyse 2 (première année de licence, tronc commun sciences au Maroc), rédigé par ToumaiLearn et non lié à un professeur. Plan calqué sur les séries de TD habituelles : dérivabilité, DL, intégrale simple, intégrale impropre. Notations : o(x^n) de Landau, intervalles ouverts ]a, b[, ch et sh pour les fonctions hyperboliques, Arctg ou arctan indifféremment. Toujours annoncer l'ordre d'un DL avant de le calculer. Chaque chapitre suit trois temps : prérequis, façon d'aborder, puis idées illustrées.",
+  "intro": "Ce cours avance **une idée à la fois**, de Rolle jusqu'aux intégrales impropres.\n\n**Chaque chapitre a trois temps**\n\n1. **Avant de commencer** : ce qu'il faut déjà savoir, avec une question pour vérifier.\n2. **Comment l'aborder** : l'état d'esprit qui rend le chapitre simple, et le piège classique.\n3. **Les idées, illustrées** : un dessin, une phrase, un exemple.\n\nTermine par le QCM : **8/10 = chapitre maîtrisé**.\n\nCe cours est une rédaction originale de ToumaiLearn. L'ordre et les notations de ton prof peuvent différer : garde son polycopié à côté.",
+  "chapitres": [
+    "01-rolle-taf.md",
+    "02-taylor.md",
+    "03-dl-usuels.md",
+    "04-dl-operations.md",
+    "05-applications-dl.md",
+    "06-primitives-riemann.md",
+    "07-techniques-integration.md",
+    "08-integrales-impropres.md",
+    "09-series-td-corrigees.md",
+    "10-examen-blanc.md"
+  ]
+}

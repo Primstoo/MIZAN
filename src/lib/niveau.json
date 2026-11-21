@@ -2418,5 +2418,95 @@
    "a": 0,
    "e": "Elle n'existe que pendant l'appel."
   }
+ ],
+ "analyse-2": [
+  {
+   "n": "dl-definition-usuels",
+   "q": "Un DL d'ordre 1 en 0 existe si et seulement si $f$ est :",
+   "o": [
+    "continue en 0",
+    "dérivable en 0",
+    "de classe $C^2$"
+   ],
+   "a": 1,
+   "e": "Ordre 1 : $f(0) + f'(0)x + o(x)$."
+  },
+  {
+   "n": "dl-operations",
+   "q": "Pour composer $g(u(x))$ en 0, il faut :",
+   "o": [
+    "$u(x) \\to 0$",
+    "$u(x) \\to 1$",
+    "$g$ polynomiale"
+   ],
+   "a": 0,
+   "e": "On utilise le DL de $g$ en 0."
+  },
+  {
+   "n": "applications-dl",
+   "q": "$\\lim_{x \\to 0} \\frac{1 - \\cos x}{x^2}$ :",
+   "o": [
+    "0",
+    "$\\frac12$",
+    "1"
+   ],
+   "a": 1,
+   "e": "$1 - \\cos x = \\frac{x^2}{2} + o(x^2)$."
+  },
+  {
+   "n": "primitives-integrale",
+   "q": "Une primitive de $\\frac{2x}{1 + x^2}$ :",
+   "o": [
+    "$\\ln(1 + x^2)$",
+    "$\\arctan(x^2)$",
+    "$\\frac{1}{1 + x^2}$"
+   ],
+   "a": 0,
+   "e": "Forme $\\frac{u'}{u}$."
+  },
+  {
+   "n": "techniques-integration",
+   "q": "Pour $\\int x\\sin x\\,dx$, on dérive :",
+   "o": [
+    "$x$",
+    "$\\sin x$",
+    "les deux"
+   ],
+   "a": 0,
+   "e": "$x' = 1$ simplifie."
+  },
+  {
+   "n": "integrales-impropres",
+   "q": "$\\int_1^{+\\infty}\\frac{dt}{t^2}$ :",
+   "o": [
+    "converge et vaut 1",
+    "diverge",
+    "vaut 2"
+   ],
+   "a": 0,
+   "e": "$\\left[-\\frac1t\\right]_1^{+\\infty}$."
+  },
+  {
+   "n": "rolle-taf-applications",
+   "q": "Rolle exige la dérivabilité sur :",
+   "o": [
+    "$[a, b]$",
+    "$]a, b[$",
+    "$\\mathbb R$ tout entier"
+   ],
+   "a": 1,
+   "e": "Les bornes peuvent poser problème sans gêner le théorème."
+  },
+  {
+   "n": "formules-taylor",
+   "q": "Le coefficient de $(x-a)^k$ dans $T_n$ est :",
+   "o": [
+    "$\\frac{f^{(k)}(a)}{k!}$",
+    "$f^{(k)}(a)$",
+    "$\\frac{f^{(k)}(a)}{k}$"
+   ],
+   "a": 0,
+   "e": "Ne pas oublier la factorielle."
+  }
  ]
 }

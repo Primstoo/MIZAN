@@ -136,6 +136,23 @@
     "annexes": []
   },
   {
+    "slug": "analyse-2",
+    "titre": "Analyse 2",
+    "prof": "",
+    "semestre": "S2",
+    "fichier": "analyse-2.html",
+    "resume": "Rolle et accroissements finis, formules de Taylor, développements limités et leurs applications, intégrale simple et intégrales impropres, séries de TD corrigées et examen blanc.",
+    "cles": [
+      "analyse2_scores",
+      "analyse2_scores_etat",
+      "mzt-analyse-2*"
+    ],
+    "cle": "analyse2_scores",
+    "format": "score10",
+    "chapitres": 10,
+    "annexes": []
+  },
+  {
     "slug": "archi",
     "titre": "Architecture des ordinateurs",
     "prof": "Pr Zouina",

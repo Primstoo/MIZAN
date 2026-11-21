@@ -2625,5 +2625,76 @@
     "g": "cours"
    }
   ]
+ },
+ "analyse-2": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "rolle-taf-applications",
+    "t": "Rolle, accroissements finis et leurs usages",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "formules-taylor",
+    "t": "Les formules de Taylor",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "dl-definition-usuels",
+    "t": "Développements limités : définition et DL usuels",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "dl-operations",
+    "t": "Opérations sur les DL",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "applications-dl",
+    "t": "Applications des DL : limites, tangentes, asymptotes",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "primitives-integrale",
+    "t": "Primitives et intégrale de Riemann",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "techniques-integration",
+    "t": "Techniques de calcul : parties, changement de variable, fractions rationnelles",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "integrales-impropres",
+    "t": "Intégrales impropres",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "series-td-corrigees",
+    "t": "Séries de TD corrigées",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "examen-blanc",
+    "t": "Examen blanc corrigé",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }
