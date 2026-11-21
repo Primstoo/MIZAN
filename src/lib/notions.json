@@ -1765,6 +1765,18 @@
     "t": "Annale corrigée · 2020-2021 (Polynome, Employe)",
     "imp": 4,
     "g": "cours"
+   },
+   {
+    "id": "annales-2016-2018",
+    "t": "Annales corrigées · 2016-2017 et 2017-2018",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "annales-2018-2020",
+    "t": "Annales corrigées · 2018-2019 et 2019-2020",
+    "imp": 4,
+    "g": "cours"
    }
   ]
  },
