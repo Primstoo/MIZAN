@@ -1,0 +1,12 @@
+{
+  "titre": "Culture digitale (Digital skills)",
+  "prof": "",
+  "semestre": "S1",
+  "etablissement": "FSABM",
+  "fichier": "culture-digitale.html",
+  "cle": "culture-digitale_scores",
+  "resume": "Matériel, système d'exploitation, Internet et le Web, intelligence artificielle : les 4 séquences du module, avec beaucoup de QCM car l'évaluation est un quiz.",
+  "conventions": "Module Culture digitale (Digital skills), S1 à la FSA Béni Mellal. Évaluation par quiz (QCM et Vrai/Faux). Reste au niveau débutant, dates et définitions du résumé de cours. Ne pas inventer de barème.",
+  "intro": "Ce module suit **les 4 séquences du cours** : matériel, logiciel, Internet et le Web, intelligence artificielle.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre, puis fais son QCM. **8/10 = chapitre maîtrisé.**\n2. L'évaluation est un quiz : les dates, définitions et « qui a fait quoi » comptent. Les flashcards servent à ça.\n3. Termine par le **quiz d'entraînement final** (20 questions).\n\n**Ce qui est sûr** : le contenu vient du résumé détaillé des séquences et des quiz.\n**À vérifier** : le nombre de questions et la durée du quiz officiel. Les compléments hors support sont signalés par un encadré « Attention ».",
+  "chapitres": ["01-materiel.md", "02-logiciel.md", "03-internet-web.md", "04-intelligence-artificielle.md", "05-quiz-final.md"]
+}

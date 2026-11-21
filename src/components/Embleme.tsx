@@ -12,6 +12,9 @@ const STYLES: Record<string, { motif: string; couleur: string }> = {
   cms: { motif: "page", couleur: "#4FA3A5" },
   "dessin-industriel": { motif: "vues", couleur: "#6C8FB8" },
   electrocinetique: { motif: "circuit", couleur: "#7B6FD0" },
+  "algo-python-2": { motif: "python2", couleur: "#2E8B6E" },
+  "analyse-2": { motif: "integrale", couleur: "#A0522D" },
+  "culture-digitale": { motif: "globe", couleur: "#5B7FD6" },
   "algo-python-1": { motif: "python", couleur: "#3E7CB1" },
   "algebre-1": { motif: "ensembles", couleur: "#B5644A" },
   thermodynamique: { motif: "thermo", couleur: "#D0663F" },
@@ -73,6 +76,12 @@ export default function Embleme({ slug, taille = 52, couleur }: { slug: string; 
       <path d="M8 8h12v16h18v12H8z" fill={c} stroke="none" /><rect x="46" y="8" width="12" height="28" rx="1" />
       <rect x="8" y="44" width="30" height="12" rx="1" /><path d="M20 44v12M42 40l14 14" strokeDasharray="3 4" />
     </>;
+  } else if (s.motif === "python2") {
+    dessin = <><path d="M20 8h24v14H20zM20 42h24v14H20z" /><path d="M32 22v20M26 36l6 6 6-6" /><circle cx="27" cy="15" r="2.5" fill={c} stroke="none" /><circle cx="37" cy="49" r="2.5" fill={c} stroke="none" /></>;
+  } else if (s.motif === "integrale") {
+    dessin = <><path d="M36 8c-6 0-6 6-6 12v24c0 6 0 12-6 12" strokeWidth="4" /><path d="M42 44h16M42 44c4-10 10-14 16-14" /><path d="M42 44l16 0 0-14z" fill={c} stroke="none" opacity=".5" /></>;
+  } else if (s.motif === "globe") {
+    dessin = <><circle cx="32" cy="32" r="22" /><ellipse cx="32" cy="32" rx="10" ry="22" /><path d="M10 32h44M14 20h36M14 44h36" /><circle cx="50" cy="14" r="5" fill={c} stroke="none" /></>;
   } else if (s.motif === "neurones") {
     const cs = [[12, [16, 32, 48]], [32, [12, 26, 40, 54]], [52, [24, 40]]] as const;
     dessin = <>

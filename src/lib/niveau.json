@@ -2272,5 +2272,62 @@
    "a": 0,
    "e": "Concavité de la trajectoire."
   }
+ ],
+ "culture-digitale": [
+  {
+   "n": "materiel",
+   "q": "Quel composant relie tous les autres ?",
+   "o": [
+    "Le disque dur",
+    "La carte mère",
+    "La RAM"
+   ],
+   "a": 1,
+   "e": "La carte mère assure la connexion et la communication entre les composants."
+  },
+  {
+   "n": "logiciel",
+   "q": "Quelle est la partie principale du système d'exploitation ?",
+   "o": [
+    "L'interface graphique",
+    "Le noyau",
+    "Le terminal"
+   ],
+   "a": 1,
+   "e": "Le noyau gère processus, mémoire, fichiers, E/S et réseau."
+  },
+  {
+   "n": "internet-web",
+   "q": "En quelle année ARPANET a-t-il été créé (selon le cours) ?",
+   "o": [
+    "1945",
+    "1971",
+    "1991"
+   ],
+   "a": 1,
+   "e": "En pleine Guerre froide, par les États-Unis."
+  },
+  {
+   "n": "intelligence-artificielle",
+   "q": "Selon le cours, l'IA est…",
+   "o": [
+    "une intelligence biologique",
+    "une imitation de l'intelligence",
+    "un composant matériel"
+   ],
+   "a": 1,
+   "e": "Elle simule l'intelligence humaine."
+  },
+  {
+   "n": "quiz-final",
+   "q": "Quel disque est le plus ancien ?",
+   "o": [
+    "IDE",
+    "SATA",
+    "SSD"
+   ],
+   "a": 0,
+   "e": "IDE → SATA → SSD."
+  }
  ]
 }

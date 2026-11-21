@@ -2489,5 +2489,46 @@
     "g": "cours"
    }
   ]
+ },
+ "culture-digitale": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "materiel",
+    "t": "Environnement de travail · le matériel",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "logiciel",
+    "t": "Environnement de travail · le logiciel",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "internet-web",
+    "t": "Internet et le Web",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "intelligence-artificielle",
+    "t": "L'intelligence artificielle",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "quiz-final",
+    "t": "Quiz d'entraînement final",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

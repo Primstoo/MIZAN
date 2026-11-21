@@ -51,6 +51,23 @@
     "annexes": []
   },
   {
+    "slug": "culture-digitale",
+    "titre": "Culture digitale (Digital skills)",
+    "prof": "",
+    "semestre": "S1",
+    "fichier": "culture-digitale.html",
+    "resume": "Matériel, système d'exploitation, Internet et le Web, intelligence artificielle : les 4 séquences du module, avec beaucoup de QCM car l'évaluation est un quiz.",
+    "cles": [
+      "culture-digitale_scores",
+      "culture-digitale_scores_etat",
+      "mzt-culture-digitale*"
+    ],
+    "cle": "culture-digitale_scores",
+    "format": "score10",
+    "chapitres": 5,
+    "annexes": []
+  },
+  {
     "slug": "dessin-industriel",
     "titre": "Dessin industriel",
     "prof": "Pr I. El Hadouti",
