@@ -2548,5 +2548,70 @@
     "g": "cours"
    }
   ]
+ },
+ "algo-python-2": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "procedures-fonctions",
+    "t": "Typage, procédures et fonctions",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "passage-parametres",
+    "t": "Passage par valeur et par adresse",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "portee-variables",
+    "t": "Portée des variables · global, local, nonlocal",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "recursivite",
+    "t": "Récursivité terminale et non terminale",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "enregistrements-enumerations",
+    "t": "Enregistrements (dataclass) et énumérations",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "dictionnaires-ensembles-tuples",
+    "t": "Listes, dictionnaires, ensembles et tuples",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "fichiers",
+    "t": "Manipulation des fichiers et gestion des erreurs",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "td-corriges",
+    "t": "TD corrigé · gestion de produits (TD 6)",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "examen-blanc",
+    "t": "Révision et examen blanc corrigé",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

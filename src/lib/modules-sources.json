@@ -119,6 +119,23 @@
     "annexes": []
   },
   {
+    "slug": "algo-python-2",
+    "titre": "Algorithmique et programmation Python 2",
+    "prof": "Pr M. Biniz",
+    "semestre": "S2",
+    "fichier": "algo-python-2.html",
+    "resume": "Procédures et fonctions typées, passage des paramètres, portée, récursivité, enregistrements, énumérations, dictionnaires, ensembles, tuples et fichiers, en pseudo-code et en Python.",
+    "cles": [
+      "algo-python-2_scores",
+      "algo-python-2_scores_etat",
+      "mzt-algo-python-2*"
+    ],
+    "cle": "algo-python-2_scores",
+    "format": "score10",
+    "chapitres": 9,
+    "annexes": []
+  },
+  {
     "slug": "archi",
     "titre": "Architecture des ordinateurs",
     "prof": "Pr Zouina",

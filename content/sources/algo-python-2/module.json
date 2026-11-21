@@ -1,0 +1,22 @@
+{
+  "titre": "Algorithmique et programmation Python 2",
+  "prof": "Pr M. Biniz",
+  "semestre": "S2",
+  "etablissement": "FSABM",
+  "fichier": "algo-python-2.html",
+  "cle": "algo-python-2_scores",
+  "resume": "Procédures et fonctions typées, passage des paramètres, portée, récursivité, enregistrements, énumérations, dictionnaires, ensembles, tuples et fichiers, en pseudo-code et en Python.",
+  "conventions": "Cours d'Algorithmique et Python 2 du Pr M. Biniz (FSABM, S2). Le prof écrit chaque notion en pseudo-code (PROCEDURE, FONCTION, DÉBUT/FIN, <- pour l'affectation, AFFICHER, RETOURNER) puis en Python 3 typé (annotations : int, str, list[int], Dict[str, int] du module typing, -> None pour une procédure). Les enregistrements se font avec @dataclass. À l'examen : QCM, petits programmes (dataclass Produit, tri, somme itérative et récursive) et calcul de coût d'un algorithme. Réponds en français, avec des exemples courts et typés.",
+  "intro": "Ce module suit **le polycopié du Pr M. Biniz** (Algorithmique et Python 2, S2) et corrige **l'examen blanc (TD 6)**.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre en entier. Chaque notion est montrée en pseudo-code puis en Python typé, comme en cours.\n2. Recopie et exécute les exemples (Thonny, VS Code ou Google Colab).\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n4. Le tuteur (en bas à droite) répond à tes questions sur le chapitre ouvert.\n\n**Ce qui est sûr** : le contenu vient du polycopié et de la correction de l'examen blanc. Tous les exemples Python ont été exécutés.\n**À vérifier** : l'énoncé des QCM de l'examen blanc n'était pas fourni (seule la grille de réponses) et la complexité n'est pas dans le polycopié. Demande au prof le format exact de l'examen.",
+  "chapitres": [
+    "01-procedures-fonctions.md",
+    "02-passage-parametres.md",
+    "03-portee-variables.md",
+    "04-recursivite.md",
+    "05-enregistrements-enumerations.md",
+    "06-dictionnaires-ensembles-tuples.md",
+    "07-fichiers.md",
+    "08-td-corriges.md",
+    "09-examen-blanc.md"
+  ]
+}

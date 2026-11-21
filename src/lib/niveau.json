@@ -2328,5 +2328,95 @@
    "a": 0,
    "e": "IDE → SATA → SSD."
   }
+ ],
+ "algo-python-2": [
+  {
+   "n": "passage-parametres",
+   "q": "y = 5, incrementer(y) (qui fait x = x + 1; return x), puis print(y). Affichage ?",
+   "o": [
+    "5",
+    "6",
+    "None"
+   ],
+   "a": 0,
+   "e": "Le résultat n'est pas récupéré et l'entier original ne change pas."
+  },
+  {
+   "n": "recursivite",
+   "q": "Quelle version est terminale ?",
+   "o": [
+    "return n * f(n - 1)",
+    "return f(n - 1, acc * n)",
+    "return 1 + f(n - 1)"
+   ],
+   "a": 1,
+   "e": "Rien n'est calculé après l'appel."
+  },
+  {
+   "n": "enregistrements-enumerations",
+   "q": "Quel module fournit @dataclass ?",
+   "o": [
+    "typing",
+    "dataclasses",
+    "collections"
+   ],
+   "a": 1,
+   "e": "from dataclasses import dataclass."
+  },
+  {
+   "n": "dictionnaires-ensembles-tuples",
+   "q": "L = [1, 2, 3, 2, 4], L.remove(2). Que vaut L ?",
+   "o": [
+    "[1, 3, 2, 4]",
+    "[1, 3, 4]",
+    "[1, 2, 2, 4]"
+   ],
+   "a": 0,
+   "e": "Seule la première occurrence de 2 est supprimée."
+  },
+  {
+   "n": "td-corriges",
+   "q": "print(f\"Nom: p.nom\") affiche…",
+   "o": [
+    "Nom: p.nom",
+    "le nom du produit",
+    "une erreur"
+   ],
+   "a": 0,
+   "e": "Sans accolades, rien n'est évalué."
+  },
+  {
+   "n": "examen-blanc",
+   "q": "def f(x: int) -> None: x += 1, puis a = 1; f(a); print(a) ?",
+   "o": [
+    "1",
+    "2",
+    "None"
+   ],
+   "a": 0,
+   "e": "int immuable : a ne change pas."
+  },
+  {
+   "n": "procedures-fonctions",
+   "q": "Quelle est la différence entre une procédure et une fonction ?",
+   "o": [
+    "La procédure a toujours des paramètres",
+    "La fonction retourne une valeur, la procédure non",
+    "La fonction ne peut pas afficher"
+   ],
+   "a": 1,
+   "e": "Une procédure fait des actions ; une fonction renvoie un résultat."
+  },
+  {
+   "n": "portee-variables",
+   "q": "Une variable créée dans une fonction est…",
+   "o": [
+    "locale",
+    "globale",
+    "nonlocale"
+   ],
+   "a": 0,
+   "e": "Elle n'existe que pendant l'appel."
+  }
  ]
 }
