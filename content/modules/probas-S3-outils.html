@@ -1554,10 +1554,25 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
     const h = el.querySelector('h1, h2, h3');
     return { label: (h ? h.innerText : document.title).trim().slice(0, 80), text: (el.innerText || '').replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim() };
   }
+  // MathJax découpe une formule en un symbole par ligne dans innerText : on la remplace le temps de la lecture par son LaTeX.
+  // (vaut aussi pour l'extrait fourni par la page du module, qui lit lui-même innerText)
+  function avecFormulesEnLatex(lire) {
+    let items = [];
+    try { if (window.MathJax && MathJax.startup && MathJax.startup.document) items = MathJax.startup.document.getMathItemsWithin(document.body) || []; } catch (e) {}
+    const poses = [];
+    items.forEach((it) => {
+      const r = it.typesetRoot; if (!r || !r.isConnected || !r.parentNode) return;
+      const s = document.createElement('span'); s.textContent = it.display ? '\n$$' + it.math.trim() + '$$\n' : '$' + it.math.trim() + '$';
+      r.parentNode.insertBefore(s, r); const d = r.style.display; r.style.display = 'none'; poses.push([s, r, d]);
+    });
+    try { return lire(); } finally { poses.forEach(([s, r, d]) => { s.remove(); r.style.display = d; }); }
+  }
   function context() {
     if (forced) return forced;
-    try { if (C.getContext) { const c = C.getContext(); if (c && c.text) return c; } } catch (e) {}
-    return visibleSection();
+    return avecFormulesEnLatex(() => {
+      try { if (C.getContext) { const c = C.getContext(); if (c && c.text) return c; } } catch (e) {}
+      return visibleSection();
+    });
   }
 
   // ---------- interface ----------
@@ -1597,7 +1612,13 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
 .mzt-m.a ul,.mzt-m.a ol{margin:4px 0 6px;padding-left:20px}.mzt-m.a li{margin:2px 0}
 .mzt-m code{font:12.5px ui-monospace,Menlo,Consolas,monospace;background:color-mix(in srgb,var(--i) 10%,transparent);padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
 .mzt-m pre{margin:6px 0;padding:8px;overflow-x:auto;background:color-mix(in srgb,var(--i) 10%,transparent);border-radius:6px;font:12.5px ui-monospace,Menlo,Consolas,monospace;white-space:pre}
-.mzt-m pre code{background:none;padding:0}`;
+.mzt-m pre code{background:none;padding:0}
+.mzt-tex{font:12.5px ui-monospace,Menlo,Consolas,monospace;color:var(--m)}.mzt-tex[data-ok]{font:inherit;color:inherit}
+.mzt-tex.d{display:block;margin:6px 0;text-align:center}
+.mzt-m mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}.mzt-m mjx-container[display]{margin:0!important}
+.mzt-m mjx-container svg{max-width:none}
+.mzt-tab{overflow-x:auto;margin:6px 0}.mzt-tab table{border-collapse:collapse;font-size:13px;min-width:60%}
+.mzt-tab th,.mzt-tab td{border:1px solid var(--l);padding:4px 8px;text-align:left;vertical-align:top}.mzt-tab th{background:color-mix(in srgb,var(--a) 12%,transparent);font-weight:600}`;
   const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
   document.body.insertAdjacentHTML('beforeend', `
 <button class="mzt-btn" id="mztBtn" type="button">Tuteur</button>
@@ -1650,8 +1671,10 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
   }
   function closePanel() { $('#mztPan').hidden = true; $('#mztBtn').hidden = false; forced = null; }
 
+  // Sur téléphone, la réponse doit avoir la place : relances et note seulement sur une discussion vide.
+  function compacter(on) { $('#mztChips').hidden = on; $('#mztNote').hidden = on; }
   function renderLog() {
-    const log = $('#mztLog'); log.innerHTML = '';
+    const log = $('#mztLog'); log.innerHTML = ''; compacter(!!(cur && cur.msgs.length));
     if (!cur || !cur.msgs.length) {
       log.innerHTML = `<div class="mzt-m a">Pose ta question sur « ${esc(context().label)} » : une phrase que tu ne comprends pas, un calcul à vérifier, un exemple en plus… Tu peux joindre une photo de ton brouillon.</div>`; return;
     }
@@ -1664,12 +1687,13 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
         b.onclick = () => ask('Approfondis ta réponse précédente : explique plus en détail, avec un exemple complet et les pièges.', true); log.appendChild(b);
       }
     });
-    log.scrollTop = 1e9;
+    dessinerMaths(log); log.scrollTop = 1e9;
   }
   function renderList() {
     const q = norm($('#mztQ').value || ''); const ts = [...ST.threads].reverse().filter((t) => !q || norm(t.msgs.map((m) => m.t).join(' ')).includes(q));
     $('#mztList').innerHTML = ts.length ? ts.map((t) => `<details class="mzt-item"><summary>${esc(t.title)}</summary><div class="mzt-meta">${esc(t.sec)} · ${esc(t.date)}</div>${t.msgs.map((m) => `<div class="mzt-m ${m.r === 'u' ? 'u' : 'a'}" style="margin:6px 0">${m.r === 'u' ? esc(m.t) : md(m.t)}</div>`).join('')}<button type="button" data-cont="${esc(t.id)}">Continuer cette discussion</button></details>`).join('')
       : `<p class="mzt-note">${ST.threads.length ? 'Aucune discussion ne contient ce mot.' : 'Aucune discussion pour l\'instant.'}</p>`;
+    dessinerMaths($('#mztList'));
   }
   function renderMem() {
     $('#mztMemL').innerHTML = ST.memos.length ? ST.memos.map((m, i) => `<div class="mzt-item"><div class="mzt-meta">${esc(m.date)}</div>${esc(m.text)}<div><button type="button" data-memdel="${i}" style="margin-top:4px">Effacer</button></div></div>`).join('')
@@ -1690,18 +1714,41 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
     for (let i = L.length - 1; i >= Math.max(0, L.length - 3); i--) if (/^\s*M[ÉE]MO\s*:/i.test(L[i])) return L.slice(0, i).join('\n').trim();
     return String(t).trim();
   };
-  // rendu léger : on échappe le HTML d'abord, puis gras, italique, code, titres, puces et blocs de code
+  // rendu léger : on échappe le HTML d'abord, puis gras, italique, code, titres, puces, tableaux et blocs de code.
+  // Les formules ($…$, $$…$$, \(…\), \[…\]) sont mises de côté avant le Markdown, puis dessinées par MathJax.
+  const MATHS = [];
+  const protegerMaths = (t) => {
+    MATHS.length = 0;
+    const garde = (tex, d) => { MATHS.push({ tex: tex.trim(), d }); return '\u0000' + (MATHS.length - 1) + '\u0000'; };
+    const RX = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\\\(([\s\S]+?)\\\)|\$(?=[^\s$\d])([^$\n]*?[^\s$\\])\$(?!\d)/g;
+    // le code (blocs ``` et `…`) n'est jamais lu comme une formule
+    return String(t).split(/(```[\s\S]*?(?:```|$))/).map((bloc, i) => i % 2 ? bloc
+      : bloc.split(/(`[^`\n]*`)/).map((x, j) => j % 2 ? x : x.replace(RX, (_, a, b, c, d) => a != null ? garde(a, 1) : b != null ? garde(b, 1) : c != null ? garde(c, 0) : garde(d, 0))).join('')).join('');
+  };
+  const rendreMaths = (h) => h.replace(/\u0000(\d+)\u0000/g, (_, n) => { const m = MATHS[+n]; return m ? `<span class="mzt-tex${m.d ? ' d' : ''}" data-d="${m.d}">${esc(m.tex)}</span>` : ''; });
   const inl = (s) => {
     const p = s.split('`'); if (p.length % 2 === 0) { const last = p.pop(); p[p.length - 1] += '`' + last; }
     return p.map((x, i) => i % 2 ? '<code>' + esc(x) + '</code>' : esc(x).replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*\w])\*([^*\n]+)\*(?![*\w])/g, '$1<em>$2</em>')).join('');
   };
+  const cellules = (l) => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
   const md = (t) => {
-    const out = []; let list = null, code = null;
-    const flush = () => { if (list) { out.push('</' + list + '>'); list = null; } };
-    String(t).split('\n').forEach((raw) => {
+    const out = []; let list = null, code = null, tab = null;
+    const flushTab = () => {
+      if (!tab) return;
+      if (tab.length >= 2 && /^[\s|:-]+$/.test(tab[1]) && tab[1].includes('-')) {
+        const [tete, , ...corps] = tab;
+        out.push('<div class="mzt-tab"><table><thead><tr>' + cellules(tete).map((c) => '<th>' + inl(c) + '</th>').join('') + '</tr></thead><tbody>'
+          + corps.map((r) => '<tr>' + cellules(r).map((c) => '<td>' + inl(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>');
+      } else tab.forEach((r) => out.push('<p>' + inl(r) + '</p>'));
+      tab = null;
+    };
+    const flush = () => { flushTab(); if (list) { out.push('</' + list + '>'); list = null; } };
+    protegerMaths(t).split('\n').forEach((raw) => {
       if (/^\s*```/.test(raw)) { if (code === null) { flush(); code = []; } else { out.push('<pre>' + esc(code.join('\n')) + '</pre>'); code = null; } return; }
       if (code !== null) { code.push(raw); return; }
       let m;
+      if (/^\s*\|.*\|\s*$/.test(raw)) { if (list) { out.push('</' + list + '>'); list = null; } (tab = tab || []).push(raw); return; }
+      flushTab();
       if ((m = raw.match(/^\s*#{1,6}\s+(.*)$/))) { flush(); out.push('<p><strong>' + inl(m[1]) + '</strong></p>'); }
       else if ((m = raw.match(/^\s*[-*•]\s+(.*)$/))) { if (list !== 'ul') { flush(); out.push('<ul>'); list = 'ul'; } out.push('<li>' + inl(m[1]) + '</li>'); }
       else if ((m = raw.match(/^\s*\d+[.)]\s+(.*)$/))) { if (list !== 'ol') { flush(); out.push('<ol>'); list = 'ol'; } out.push('<li>' + inl(m[1]) + '</li>'); }
@@ -1709,8 +1756,32 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
       else { flush(); out.push('<p>' + inl(raw) + '</p>'); }
     });
     if (code !== null) out.push('<pre>' + esc(code.join('\n')) + '</pre>');
-    flush(); return out.join('');
+    flush(); return rendreMaths(out.join(''));
   };
+
+  // ---------- MathJax : celui de la page s'il existe, sinon chargé à la première formule ----------
+  let mjPret = null;
+  const mathjax = () => mjPret || (mjPret = new Promise((ok, ko) => {
+    if (!window.MathJax) {
+      window.MathJax = { svg: { fontCache: 'global' }, startup: { typeset: false } };
+      const s = document.createElement('script'); s.async = true; s.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js';
+      s.onerror = () => ko(new Error('MathJax')); document.head.appendChild(s);
+    }
+    let n = 0; const t = setInterval(() => {
+      if (window.MathJax && MathJax.tex2svgPromise && MathJax.startup && MathJax.startup.promise) { clearInterval(t); MathJax.startup.promise.then(ok, ko); }
+      else if (++n > 150) { clearInterval(t); ko(new Error('MathJax')); }
+    }, 100);
+  })).catch((e) => { mjPret = null; throw e; });
+  const svgCache = new Map(); let file = Promise.resolve();
+  function dessinerMaths(racine) {
+    const spans = [...racine.querySelectorAll('.mzt-tex:not([data-ok])')]; if (!spans.length) return;
+    mathjax().then(() => spans.forEach((sp) => {
+      const cle = sp.dataset.d + '|' + sp.textContent;
+      const poser = (n) => { if (!sp.isConnected || sp.dataset.ok) return; sp.textContent = ''; sp.appendChild(n.cloneNode(true)); sp.dataset.ok = '1'; };
+      if (svgCache.has(cle)) return poser(svgCache.get(cle));
+      file = file.then(() => MathJax.tex2svgPromise(sp.textContent, { display: sp.dataset.d === '1' }).then((n) => { svgCache.set(cle, n); poser(n); })).catch(() => {});
+    })).catch(() => {});
+  }
   async function ask(q, deep) {
     q = (q || '').trim(); deep = deep || $('#mztDeep').checked;
     if (busy || !q) return; if (!sample) { note(); return; }
@@ -1728,7 +1799,7 @@ window.MZT_CONFIG={id:'probas',module:'Probabilités et statistiques (S3)',prof:
     const lastQ = ST.threads.flatMap((t) => t.msgs.filter((m) => m.r === 'u').map((m) => `[${t.sec}] ${m.t.slice(0, 100)}`)).slice(-6);
     if (lastQ.length) mem.push('SES DERNIÈRES QUESTIONS :\n' + lastQ.map((x) => '- ' + x).join('\n'));
     const rules = `Tu es le tuteur de ${C.student}, pour le module ${C.module}${C.prof ? ' du ' + C.prof : ''}. Il apprend souvent la notion pour la première fois.
-Règles : réponds en français simple, en Markdown léger (**gras** pour les termes clés, tirets, étapes numérotées, formules et calculs entre accents graves ; pas de tableaux). ${style} Appuie-toi d'abord sur l'EXTRAIT ci-dessous et sur les conventions du prof ; si une source générale diffère du cours, signale l'écart et dis quelle version utiliser à l'examen (celle du prof). Pour un calcul, pose chaque étape et vérifie-la. S'il envoie une réponse ou une photo de brouillon, corrige étape par étape et nomme précisément l'erreur. Si tu n'es pas sûr, dis-le. S'il demande un mini-exercice, donne l'exercice sans la solution.
+Règles : réponds en français simple, en Markdown léger (**gras** pour les termes clés, tirets, étapes numérotées). Toute formule ou tout calcul s'écrit en LaTeX : $…$ dans la phrase, $$…$$ seul sur sa ligne pour une formule importante (ex. $\\hat y_i$, $$\\text{MSE}=\\frac{1}{n}\\sum_{i=1}^{n}(y_i-\\hat y_i)^2$$) ; jamais d'accents graves pour une formule, ils sont réservés au code et aux noms de fonctions. Un petit tableau Markdown est permis s'il clarifie (3 colonnes maximum, l'écran est étroit). ${style} Appuie-toi d'abord sur l'EXTRAIT ci-dessous et sur les conventions du prof ; si une source générale diffère du cours, signale l'écart et dis quelle version utiliser à l'examen (celle du prof). Pour un calcul, pose chaque étape et vérifie-la. S'il envoie une réponse ou une photo de brouillon, corrige étape par étape et nomme précisément l'erreur. Si tu n'es pas sûr, dis-le. S'il demande un mini-exercice, donne l'exercice sans la solution.
 Utilise sa mémoire pour faire des liens avec ses confusions passées, sans la réciter.
 Termine TOUJOURS par une dernière ligne séparée au format exact « MÉMO: … » qui résume en 15 mots maximum la difficulté révélée par sa question (ou « MÉMO: rien »). Cette ligne lui est cachée.
 ${C.conventions ? 'CONVENTIONS DU PROF : ' + C.conventions + '\n' : ''}MÉMOIRE DE L'ÉLÈVE :
@@ -1739,7 +1810,7 @@ ${c.text.slice(0, deep ? 9000 : 3500)}`;
     while (recent.length && recent[0].role !== 'user') recent.shift();
     const msgs = [...recent.filter((m) => m.content && m.content.trim()), { role: 'user', content: q }]; while (msgs.length > 1 && msgs[0].role !== 'user') msgs.shift(); msgs[0] = { role: 'user', content: rules + '\n\n---\nQuestion : ' + msgs[0].content };
     ctl = new AbortController();
-    const opts = { modelTier: deep ? 'complex' : 'quick', cache: false, signal: ctl.signal, onText: ({ text }) => { out.innerHTML = md(visible(text)); $('#mztLog').scrollTop = 1e9; } };
+    const opts = { modelTier: deep ? 'complex' : 'quick', cache: false, signal: ctl.signal, onText: ({ text }) => { out.innerHTML = md(visible(text)); dessinerMaths(out); $('#mztLog').scrollTop = 1e9; } };
     if (img) opts.images = [img];
     try {
       const r = await sample(msgs, opts);
@@ -1750,7 +1821,7 @@ ${c.text.slice(0, deep ? 9000 : 3500)}`;
     } catch (e) {
       const kept = e && e.text ? visible(e.text) : '';
       if (e && e.code === 'cancelled') { if (kept) cur.msgs.push({ r: 'a', t: kept + '\n(Arrêté.)' }); else cur.msgs.pop(); }
-      else { cur.msgs.pop(); out.textContent = (kept ? kept + '\n\n' : '') + (ERR[e && e.code] || 'Le tuteur n\'a pas pu répondre. Réessaie dans un instant.'); }
+      else { cur.msgs.pop(); compacter(!!cur.msgs.length); out.textContent = (kept ? kept + '\n\n' : '') + (ERR[e && e.code] || 'Le tuteur n\'a pas pu répondre. Réessaie dans un instant.'); }
       if (!cur.msgs.length) ST.threads = ST.threads.filter((t) => t !== cur);
       saveLocal();
       if (!(e && e.code === 'cancelled')) { busy = false; $('#mztSend').disabled = false; $('#mztStop').hidden = true; img = null; $('#mztImgN').textContent = ''; return; }
