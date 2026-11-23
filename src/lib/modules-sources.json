@@ -102,6 +102,23 @@
     "annexes": []
   },
   {
+    "slug": "optique-radioactivite",
+    "titre": "Optique géométrique et radioactivité",
+    "prof": "Pr C. Satif",
+    "semestre": "S1",
+    "fichier": "optique-radioactivite.html",
+    "resume": "Module Optique et radioactivité de la filière BCG : principe de Fermat et lois de Descartes, miroirs, dioptres et lentilles, œil et instruments, radioactivité et dosimétrie, avec les examens 2021 corrigés.",
+    "cles": [
+      "optique-radioactivite_scores",
+      "optique-radioactivite_scores_etat",
+      "mzt-optique-radioactivite*"
+    ],
+    "cle": "optique-radioactivite_scores",
+    "format": "score10",
+    "chapitres": 6,
+    "annexes": []
+  },
+  {
     "slug": "thermodynamique",
     "titre": "Thermodynamique",
     "prof": "Pr I. Arroub",
@@ -167,6 +184,23 @@
     "cle": "biologie-cellulaire_scores",
     "format": "score10",
     "chapitres": 9,
+    "annexes": []
+  },
+  {
+    "slug": "electricite",
+    "titre": "Électricité",
+    "prof": "Pr S. Bentachfine",
+    "semestre": "S2",
+    "fichier": "electricite.html",
+    "resume": "Module Électricité de la filière BCG : analyse vectorielle, électrostatique (Coulomb, champ, potentiel, Gauss), électrocinétique (Kirchhoff, diviseurs, Thévenin et Norton), magnétostatique (Biot-Savart, Ampère, Laplace), avec l'examen 2021 corrigé.",
+    "cles": [
+      "electricite_scores",
+      "electricite_scores_etat",
+      "mzt-electricite*"
+    ],
+    "cle": "electricite_scores",
+    "format": "score10",
+    "chapitres": 6,
     "annexes": []
   },
   {

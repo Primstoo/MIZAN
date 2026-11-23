@@ -2789,5 +2789,99 @@
     "g": "cours"
    }
   ]
+ },
+ "electricite": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "analyse-vectorielle",
+    "t": "Analyse vectorielle",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "coulomb-champ-potentiel",
+    "t": "Coulomb, champ et potentiel électrostatiques",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "theoreme-de-gauss",
+    "t": "Le théorème de Gauss",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "electrocinetique",
+    "t": "Électrocinétique · Kirchhoff, diviseurs, Thévenin et Norton",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "magnetostatique",
+    "t": "Magnétostatique · Biot-Savart, Ampère, Laplace",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "annale-2021",
+    "t": "Annale corrigée · examen du 17 février 2021",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
+ },
+ "optique-radioactivite": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "fermat-descartes",
+    "t": "Principe de Fermat et lois de Descartes",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "miroirs",
+    "t": "Miroirs plans et sphériques",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "dioptres-lentilles",
+    "t": "Dioptres et lentilles",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "oeil-instruments",
+    "t": "L'œil et les instruments",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "radioactivite",
+    "t": "Radioactivité et dosimétrie",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "annales-2021",
+    "t": "Annales corrigées · examens 2021 (normale et rattrapage)",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

@@ -1,0 +1,20 @@
+{
+  "titre": "Optique géométrique et radioactivité",
+  "prof": "Pr C. Satif",
+  "semestre": "S1",
+  "etablissement": "FST Béni Mellal",
+  "fichier": "optique-radioactivite.html",
+  "cle": "optique-radioactivite_scores",
+  "maths": true,
+  "resume": "Module Optique et radioactivité de la filière BCG : principe de Fermat et lois de Descartes, miroirs, dioptres et lentilles, œil et instruments, radioactivité et dosimétrie, avec les examens 2021 corrigés.",
+  "conventions": "Module Optique géométrique et Radioactivité, parcours BCG section B, FST Béni Mellal, 2020-2021 (séries de TD de C. Satif). Grandeurs algébriques orientées dans le sens de la lumière (SA, OA', SC). Conjugaison des lentilles avec origine au centre : 1/OA' − 1/OA = 1/f'. Miroir sphérique, origine au sommet : 1/SA' + 1/SA = 2/SC. Dioptre sphérique : n2/SA' − n1/SA = (n2 − n1)/SC. Vergence en dioptries (m⁻¹). Approximation de Gauss supposée.",
+  "intro": "Ce module suit **le cours et les séries 1 à 3** de la FST Béni Mellal (optique géométrique, puis radioactivité) et se termine par **les deux examens 2021 corrigés** (normale et rattrapage).\n\n**Comment l'utiliser**\n\n1. Lis un chapitre, puis refais chaque construction de rayons sur papier.\n2. Respecte les signes : toutes les distances sont algébriques.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n\n**À vérifier** : certaines figures des sujets manquent dans les fichiers fournis ; les questions qui en dépendent sont traitées par la méthode.",
+  "chapitres": [
+    "01-fermat-descartes.md",
+    "02-miroirs.md",
+    "03-dioptres-lentilles.md",
+    "04-oeil-instruments.md",
+    "05-radioactivite.md",
+    "06-annales-2021.md"
+  ]
+}

@@ -2598,5 +2598,141 @@
    "a": 1,
    "e": "S = synthèse."
   }
+ ],
+ "electricite": [
+  {
+   "n": "coulomb-champ-potentiel",
+   "q": "Si la distance double, la force de Coulomb est :",
+   "o": [
+    "divisée par 2",
+    "divisée par 4",
+    "multipliée par 2"
+   ],
+   "a": 1,
+   "e": "Loi en $1/r^2$."
+  },
+  {
+   "n": "theoreme-de-gauss",
+   "q": "Le théorème de Gauss utilise :",
+   "o": [
+    "la charge totale",
+    "la charge intérieure à la surface",
+    "la charge extérieure"
+   ],
+   "a": 1,
+   "e": "$Q_{int}$."
+  },
+  {
+   "n": "electrocinetique",
+   "q": "Deux résistances de 6 Ω en parallèle :",
+   "o": [
+    "12 Ω",
+    "3 Ω",
+    "6 Ω"
+   ],
+   "a": 1,
+   "e": "$36/12$."
+  },
+  {
+   "n": "magnetostatique",
+   "q": "L'outil de symétrie pour B est :",
+   "o": [
+    "Gauss",
+    "Ampère",
+    "Kirchhoff"
+   ],
+   "a": 1,
+   "e": "Circulation sur un contour fermé."
+  },
+  {
+   "n": "annale-2021",
+   "q": "Au point $(1, \\pi/2, 0)$, $\\overrightarrow{\\operatorname{rot}}\\,\\vec V$ vaut :",
+   "o": [
+    "$\\vec 0$",
+    "$-2\\vec e_\\theta$",
+    "$\\vec e_r$"
+   ],
+   "a": 0,
+   "e": "$\\sin 0 = 0$."
+  },
+  {
+   "n": "analyse-vectorielle",
+   "q": "Le gradient d'une fonction scalaire est :",
+   "o": [
+    "un scalaire",
+    "un vecteur",
+    "une matrice"
+   ],
+   "a": 1,
+   "e": "Trois composantes."
+  }
+ ],
+ "optique-radioactivite": [
+  {
+   "n": "miroirs",
+   "q": "Le foyer d'un miroir sphérique est :",
+   "o": [
+    "au milieu de SC",
+    "en C",
+    "en S"
+   ],
+   "a": 0,
+   "e": "$\\overline{SF} = \\overline{SC}/2$."
+  },
+  {
+   "n": "dioptres-lentilles",
+   "q": "Une lentille divergente a :",
+   "o": [
+    "f' > 0",
+    "f' < 0",
+    "V > 0"
+   ],
+   "a": 1,
+   "e": "Vergence négative."
+  },
+  {
+   "n": "radioactivite",
+   "q": "En α, A diminue de :",
+   "o": [
+    "4",
+    "2",
+    "1"
+   ],
+   "a": 0,
+   "e": "On perd un noyau d'hélium."
+  },
+  {
+   "n": "annales-2021",
+   "q": "Une lentille biconcave en verre dans l'air est :",
+   "o": [
+    "divergente",
+    "convergente",
+    "afocale"
+   ],
+   "a": 0,
+   "e": "f' = −6 cm ici."
+  },
+  {
+   "n": "fermat-descartes",
+   "q": "Les angles se mesurent par rapport à :",
+   "o": [
+    "la surface",
+    "la normale",
+    "l'axe optique"
+   ],
+   "a": 1,
+   "e": "Toujours la normale."
+  },
+  {
+   "n": "oeil-instruments",
+   "q": "Le myope voit mal :",
+   "o": [
+    "de loin",
+    "de près",
+    "en couleur"
+   ],
+   "a": 0,
+   "e": "PR à distance finie."
+  }
  ]
 }
