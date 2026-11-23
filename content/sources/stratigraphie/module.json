@@ -1,0 +1,19 @@
+{
+  "titre": "Stratigraphie et paléontologie",
+  "prof": "Pr M. Rhalmi (paléontologie)",
+  "semestre": "S3",
+  "etablissement": "FST Béni Mellal",
+  "fichier": "stratigraphie.html",
+  "cle": "stratigraphie_scores",
+  "resume": "Stratigraphie, lithostratigraphie, biostratigraphie, fossilisation et paléoécologie pour la filière BCG, avec les contrôles corrigés du Pr Rhalmi.",
+  "conventions": "Module de la FST Béni Mellal, BCG S3, Département des Sciences de la Terre : demi-module Stratigraphie (chapitres 1 Stratigraphie, 2 Lithostratigraphie, 3 Biostratigraphie, 2020-2021) et demi-module Paléontologie et paléoécologie (Pr Mohamed Rhalmi). Les contrôles de paléontologie (1 h) demandent des définitions courtes et des questions de synthèse.",
+  "intro": "Ce module suit **les chapitres de stratigraphie 2020-2021** et **le cours de paléontologie et paléoécologie**, puis **les contrôles du Pr Rhalmi corrigés** (2015 à 2021).\n\n**Comment l'utiliser**\n\n1. Apprends les définitions par cœur : elles valent la moitié des points.\n2. Pour les questions de synthèse, suis les étapes données dans chaque chapitre.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n\n**À vérifier** : plusieurs cours de paléontologie et l'examen 2022 sont des scans non lus ; les réponses des contrôles sont rédigées par nous.",
+  "chapitres": [
+    "01-principes-stratigraphie.md",
+    "02-lithostratigraphie.md",
+    "03-biostratigraphie.md",
+    "04-fossilisation.md",
+    "05-paleoecologie-crises.md",
+    "06-annales-corrigees.md"
+  ]
+}

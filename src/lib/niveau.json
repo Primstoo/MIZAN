@@ -3006,5 +3006,141 @@
    "a": 0,
    "e": "La fronde."
   }
+ ],
+ "stratigraphie": [
+  {
+   "n": "principes-stratigraphie",
+   "q": "Le principe de recoupement dit :",
+   "o": [
+    "ce qui recoupe est plus récent",
+    "ce qui recoupe est plus ancien",
+    "tout a le même âge"
+   ],
+   "a": 0,
+   "e": "Faille, filon."
+  },
+  {
+   "n": "biostratigraphie",
+   "q": "Un bon fossile stratigraphique a une durée de vie :",
+   "o": [
+    "courte",
+    "longue",
+    "infinie"
+   ],
+   "a": 0,
+   "e": "Précision."
+  },
+  {
+   "n": "fossilisation",
+   "q": "Une empreinte de pas de dinosaure est :",
+   "o": [
+    "un ichnofossile",
+    "une perminéralisation",
+    "une thanatocénose"
+   ],
+   "a": 0,
+   "e": "Trace d'activité."
+  },
+  {
+   "n": "paleoecologie-crises",
+   "q": "La plus grande extinction :",
+   "o": [
+    "Permien-Trias",
+    "K-T",
+    "fin Dévonien"
+   ],
+   "a": 0,
+   "e": "≈ 95 % des espèces marines."
+  },
+  {
+   "n": "annales-corrigees",
+   "q": "Un terrier fossile est :",
+   "o": [
+    "un ichnofossile",
+    "une biocénose",
+    "une perminéralisation"
+   ],
+   "a": 0,
+   "e": "Trace."
+  },
+  {
+   "n": "lithostratigraphie",
+   "q": "L'unité de base de la lithostratigraphie :",
+   "o": [
+    "la formation",
+    "l'étage",
+    "la zone"
+   ],
+   "a": 0,
+   "e": "Cartographiable."
+  }
+ ],
+ "microbiologie": [
+  {
+   "n": "cellule-bacterienne",
+   "q": "Les Gram − possèdent :",
+   "o": [
+    "une membrane externe",
+    "un peptidoglycane épais",
+    "des acides teichoïques"
+   ],
+   "a": 0,
+   "e": "Deux membranes."
+  },
+  {
+   "n": "metabolisme",
+   "q": "L'acide pyruvique a :",
+   "o": [
+    "3 carbones",
+    "4 carbones",
+    "6 carbones"
+   ],
+   "a": 0,
+   "e": "Moitié de glucose."
+  },
+  {
+   "n": "genetique-bacterienne",
+   "q": "La transduction utilise :",
+   "o": [
+    "un bactériophage",
+    "un pilus",
+    "de l'ADN libre"
+   ],
+   "a": 0,
+   "e": "Virus de bactérie."
+  },
+  {
+   "n": "annale-2020",
+   "q": "Un mot comme « toutes » dans un vrai/faux rend la phrase :",
+   "o": [
+    "souvent fausse",
+    "toujours vraie",
+    "sans effet"
+   ],
+   "a": 0,
+   "e": "Une seule exception suffit."
+  },
+  {
+   "n": "nutrition-croissance",
+   "q": "E. coli est :",
+   "o": [
+    "chimiohétérotrophe",
+    "photoautotrophe",
+    "chimioautotrophe"
+   ],
+   "a": 0,
+   "e": "Matière organique."
+  },
+  {
+   "n": "lutte-antimicrobienne",
+   "q": "L'autoclave fonctionne à :",
+   "o": [
+    "121 °C en chaleur humide",
+    "60 °C",
+    "300 °C sec"
+   ],
+   "a": 0,
+   "e": "Vapeur sous pression."
+  }
  ]
 }

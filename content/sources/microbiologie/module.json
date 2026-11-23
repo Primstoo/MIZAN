@@ -1,0 +1,19 @@
+{
+  "titre": "Microbiologie générale",
+  "prof": "",
+  "semestre": "S4",
+  "etablissement": "FST Béni Mellal",
+  "fichier": "microbiologie.html",
+  "cle": "microbiologie_scores",
+  "resume": "Microbiologie générale de la filière BCG : la cellule bactérienne, nutrition et croissance, métabolisme énergétique, génétique bactérienne, lutte contre les microorganismes, avec l'examen 2020 corrigé.",
+  "conventions": "Module Microbiologie générale, BCG S3-S4, Département des Sciences de la Vie, FST Béni Mellal (polycopié 2021). L'examen (1 h 15) est un long vrai/faux : chaque affirmation se juge seule, et les mots absolus (« toujours », « toutes ») rendent souvent la phrase fausse.",
+  "intro": "Ce module suit **le polycopié de Microbiologie BCG 2021** de la FST Béni Mellal, puis **l'examen du 2/9/2020 corrigé** (vrai/faux).\n\n**Comment l'utiliser**\n\n1. Lis un chapitre et retiens les tableaux : Gram + et Gram −, types respiratoires, transferts de gènes.\n2. Méfie-toi des mots « toujours », « toutes », « jamais » dans les vrai/faux.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n\n**À vérifier** : le cours est rédigé par nous à partir du polycopié ; les comptes rendus de TP (photos) n'ont pas été exploités.",
+  "chapitres": [
+    "01-cellule-bacterienne.md",
+    "02-nutrition-croissance.md",
+    "03-metabolisme.md",
+    "04-genetique-bacterienne.md",
+    "05-lutte-antimicrobienne.md",
+    "06-annale-2020.md"
+  ]
+}

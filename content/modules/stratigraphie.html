@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stratigraphie et paléontologie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+<script>try{var t=localStorage.getItem('tl-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+
+<!-- Page générée par scripts/construire-module.mjs : modifier les sources (content/sources), pas ce fichier. -->
+<style>
+:root{--bg:#F4EDE1;--card:#FBF7F0;--ink:#1E2433;--mute:#5C5346;--line:#DCCFBA;--acc:#B4532A;--acc2:#F3E2CF;--h2:#2F5A73;--h2b:#DCE7EE;--ok:#2F7D55;--okb:#DFF0E6;--ko:#A23B2A;--kob:#F4DDD6;--code:#1E2433;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#141922;--card:#1E2532;--ink:#EDE6D9;--mute:#A9A094;--line:#343D4D;--acc:#E8906A;--acc2:#3A2A20;--h2:#7FB3CF;--h2b:#1E3340;--ok:#7FD3A6;--okb:#173326;--ko:#F0907F;--kob:#40221E;--code:#0E1118;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#141922;--card:#1E2532;--ink:#EDE6D9;--mute:#A9A094;--line:#343D4D;--acc:#E8906A;--acc2:#3A2A20;--h2:#7FB3CF;--h2b:#1E3340;--ok:#7FD3A6;--okb:#173326;--ko:#F0907F;--kob:#40221E;--code:#0E1118;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:9px 16px;display:flex;gap:12px;align-items:center}
+header h1{font-size:16px;margin:0;line-height:1.25}header small{display:block;color:var(--mute);font-weight:400;font-size:12px}header .pct{margin-left:auto;font-size:13px;color:var(--mute);white-space:nowrap}
+.wrap{display:grid;grid-template-columns:270px 1fr;max-width:1180px;margin:0 auto}
+nav{padding:14px;border-right:1px solid var(--line);position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto}
+nav button{display:flex;width:100%;text-align:left;gap:8px;align-items:flex-start;background:none;border:0;color:var(--ink);padding:8px 10px;border-radius:8px;cursor:pointer;font:inherit;font-size:14px;line-height:1.35}
+nav button:hover{background:var(--acc2)}nav button.on{background:var(--acc2);font-weight:600}
+nav .sc{margin-left:auto;font-size:12px;color:var(--mute);white-space:nowrap}nav .sc.ok{color:var(--ok);font-weight:600}nav .se{display:block;font-size:11.5px;color:var(--mute);font-weight:400}
+main{padding:22px 30px 90px;min-width:0;max-width:860px}
+.seance{color:var(--acc);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+h1.t{font-size:27px;margin:.1em 0 .7em;line-height:1.25}main h2{font-size:21px;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:4px}main h3{font-size:17.5px;margin-top:1.6em}
+pre{position:relative;background:var(--code);color:#f1e7d6;padding:13px 15px;border-radius:10px;overflow:auto;font-size:13.5px;line-height:1.5}
+pre.sortie{background:var(--card);color:var(--ink);border:1px dashed var(--line);padding-top:22px}.code-tag{position:absolute;top:4px;left:12px;font:600 11px system-ui;color:var(--mute);text-transform:uppercase}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}:not(pre)>code{background:var(--acc2);padding:1px 5px;border-radius:5px}
+main>table,.enc table{border-collapse:collapse;margin:14px 0;font-size:14.5px;display:block;overflow:auto}main>table td,main>table th{border:1px solid var(--line);padding:6px 10px}main>table th{background:var(--acc2);text-align:left}
+blockquote{margin:14px 0;padding:8px 14px;border-left:4px solid var(--line);color:var(--mute)}
+.enc{margin:18px 0;padding:10px 16px;border-radius:10px;border-left:5px solid}.enc p{margin:.35em 0}.enc-t{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.enc.piege,.enc.attention{background:var(--kob);border-color:var(--ko)}.enc.piege .enc-t,.enc.attention .enc-t{color:var(--ko)}
+.enc.astuce{background:var(--h2b);border-color:var(--h2)}.enc.astuce .enc-t{color:var(--h2)}
+.enc.retenir{background:var(--okb);border-color:var(--ok)}.enc.retenir .enc-t{color:var(--ok)}
+.enc.prof{background:var(--acc2);border-color:var(--acc)}.enc.prof .enc-t{color:var(--acc)}
+figure{margin:18px 0}figcaption{font-size:13px;font-weight:600;color:var(--mute);margin-bottom:6px}
+.grille table{border-collapse:separate;border-spacing:4px}.grille td,.grille th{min-width:42px;height:38px;text-align:center;font:14px ui-monospace,Menlo,monospace;padding:4px 8px;border-radius:7px}
+.grille td{background:var(--card);border:1px solid var(--line)}.grille th{color:var(--mute);font-weight:500;font-size:12.5px}
+.grille td.h1{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:700}.grille td.h2{background:var(--h2);color:#fff;border-color:var(--h2);font-weight:700}.grille td.h0{opacity:.35}
+.flux-l{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0}.flux-b{background:var(--card);border:1.5px solid var(--acc);border-radius:9px;padding:7px 12px;font-size:14px}.flux-f{color:var(--acc);font-weight:700}
+.etapes{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}.et-t{font-weight:700;color:var(--acc);margin-bottom:4px}.et-nav{display:flex;gap:8px;justify-content:space-between;margin-top:10px}
+.qcm{margin:22px 0}.qq{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}.qq-q{font-weight:600;margin-bottom:8px}.qq-q p{margin:0}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-size:15px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default}.opt.bon{background:var(--okb);border-color:var(--ok)}.opt.faux{background:var(--kob);border-color:var(--ko)}
+.qq-e{margin-top:8px;padding:9px 12px;border-radius:8px;background:var(--acc2);font-size:14.5px}
+.b{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 13px;border-radius:9px;cursor:pointer;font:inherit;font-size:14px}.b.p{background:var(--acc);color:#fff;border-color:var(--acc)}.b:disabled{opacity:.4;cursor:default}
+.bilan{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 0;font-weight:600;margin-top:20px}
+.nx{display:flex;justify-content:space-between;margin-top:30px;gap:10px}
+#menu{display:none}
+/* compatibilité : variables et classes des anciens modules convertis */
+:root{--panel:var(--card);--muted:var(--mute);--soft:var(--acc2);--blue:var(--h2);--orange:var(--acc);--green:var(--ok);--bad:var(--ko);--badbg:var(--kob);--good:var(--ok);--goodbg:var(--okb);--warnbg:var(--acc2);--warn:var(--acc);--mono:ui-monospace,Menlo,Consolas,monospace;--body:system-ui,sans-serif;--display:system-ui,sans-serif}
+main svg{max-width:100%;height:auto}
+.def,.trap,.exam{padding:10px 16px;border-radius:10px;border-left:5px solid;margin:16px 0}.def{background:var(--h2b);border-color:var(--h2)}.trap{background:var(--kob);border-color:var(--ko)}.exam{background:var(--acc2);border-color:var(--acc)}
+.formula{white-space:pre-line;font-family:var(--mono);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;margin:12px 0}
+.table-wrap{overflow-x:auto;margin:12px 0}.table-wrap table{border-collapse:collapse;font-size:14.5px}.table-wrap td,.table-wrap th{border:1px solid var(--line);padding:6px 10px}.table-wrap th{background:var(--acc2)}
+.integre{margin:16px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}.integre iframe{display:block;width:100%;border:0;min-height:120px}.integre-att{padding:16px;color:var(--mute);font-size:14px}
+.cartes-info{font-size:14px;color:var(--mute)}
+.exo h3{margin-top:1.4em}.ex{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}.ex-q p{margin:.3em 0}.ex-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.ex-h,.ex-c{margin-top:10px;padding:10px 12px;border-radius:8px}.ex-h{background:var(--h2b)}.ex-c{background:var(--okb)}.ex.fait{opacity:.75}.ex-r{display:flex;gap:8px;margin-top:8px}.ex-r input{flex:1;font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink)}
+.b.ok{border-color:var(--ok);color:var(--ok)}.b.ko{border-color:var(--ko);color:var(--ko)}
+.carte{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;min-height:180px;margin:14px 0}.carte .lbl{font-size:12.5px;color:var(--mute);margin-bottom:8px}.carte .rep{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}.kpi div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.kpi b{display:block;font-size:24px}
+.barre{height:8px;background:var(--line);border-radius:6px;overflow:hidden}.barre i{display:block;height:100%;background:var(--ok)}
+.liste-n{list-style:none;padding:0}.liste-n li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.liste-n button{background:none;border:0;color:var(--acc);cursor:pointer;font:inherit;padding:0;text-align:left}
+nav .sep{border-top:1px solid var(--line);margin:8px 0}nav a{display:block;padding:8px 10px;color:var(--ink);font-size:14px;text-decoration:none;border-radius:8px}nav a:hover{background:var(--acc2)}
+
+/* ---- Présentation 11/2026 : même identité que l'appli (Fraunces + Inter, cartes, grandes cibles tactiles) ---- */
+body{font:16.5px/1.7 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+header{padding:10px 16px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+header h1{font:700 17px/1.2 Fraunces,Georgia,serif;letter-spacing:-.01em}header small{font:500 12px/1.4 Inter,system-ui,sans-serif}
+header .pct{font-size:12px;font-weight:700;color:var(--acc);border:1px solid var(--acc);border-radius:999px;padding:5px 10px}
+#menu{width:44px;height:44px;padding:0;border-radius:22px;font-size:17px;flex-shrink:0}
+main{padding:28px 30px 110px;max-width:720px;margin:0 auto;width:100%;animation:mz-in .35s ease both}
+@keyframes mz-in{from{opacity:0;transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){main{animation:none}html{scroll-behavior:auto}}
+.seance{font-size:12px;font-weight:700;letter-spacing:.08em}
+h1.t{font:700 34px/1.12 Fraunces,Georgia,serif;letter-spacing:-.02em;margin:.15em 0 .8em;text-wrap:balance}
+main h2{font:700 24px/1.2 Fraunces,Georgia,serif;letter-spacing:-.01em;margin-top:2.4em;padding:0 0 0 14px;border:0;border-left:4px solid var(--acc);text-wrap:balance}
+main h3{font:700 18px/1.3 Fraunces,Georgia,serif;margin-top:1.8em}
+main p,main li{max-width:66ch}main li{margin:.3em 0}main strong,main b{font-weight:700}
+main a{color:var(--acc)}
+nav{padding:16px 12px}
+nav button{padding:11px 12px;border-radius:12px;min-height:44px;font-size:14.5px}nav button.on{background:var(--acc2);color:var(--ink)}
+nav .se{font-size:12px}nav .sc.ok{color:var(--ok)}nav a{min-height:44px;display:flex;align-items:center;border-radius:12px}
+pre{border-radius:14px;padding:15px 16px;font-size:13.5px}
+main>table,.enc table{font-size:14.5px;border-radius:12px}main>table th{font-weight:700}
+.enc{margin:20px 0;padding:14px 16px;border-radius:16px;border:1px solid;border-left-width:5px}
+.enc-t{font-size:12px;letter-spacing:.08em;margin-bottom:4px}
+.enc.piege,.enc.attention{border-color:var(--ko)}.enc.astuce{border-color:var(--h2)}.enc.retenir{border-color:var(--ok)}.enc.prof{border-color:var(--acc)}
+figure{margin:22px 0}figcaption{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.etapes{border-radius:18px;padding:18px}.et-t{font:700 17px/1.3 Fraunces,Georgia,serif;margin-bottom:8px}.et-nav{margin-top:14px}
+.qq{border-radius:18px;padding:18px;margin:14px 0}.qq-q{font-size:17px;line-height:1.45;margin-bottom:12px}
+.opt{min-height:52px;margin:8px 0;padding:12px 16px;border-width:1.5px;border-radius:14px;background:var(--bg);font-size:16px;transition:transform .12s ease,border-color .15s,background .15s}
+.opt:active:not(:disabled){transform:scale(.98)}
+.opt.bon{border-color:var(--ok);font-weight:600;animation:mz-pop .3s ease}.opt.faux{border-color:var(--ko);animation:mz-shake .3s ease}
+@keyframes mz-pop{50%{transform:scale(1.02)}}@keyframes mz-shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.qq-e{margin-top:10px;padding:12px 14px;border-radius:12px;font-size:15px;line-height:1.55;animation:mz-in .25s ease both}
+.b{min-height:44px;padding:9px 16px;border-radius:12px;font-weight:600;font-size:14.5px;transition:transform .12s ease}.b:active:not(:disabled){transform:scale(.97)}
+.b.p{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bilan{bottom:10px;margin-top:28px;padding:12px 16px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 8px 24px rgba(0,0,0,.18);font-size:14.5px;max-width:calc(100% - 96px)}
+.nx{margin-top:36px}.nx .b{min-height:52px;flex:1;border-radius:14px}
+.ex{border-radius:18px;padding:16px 18px;margin:14px 0}.ex-h,.ex-c{border-radius:12px;padding:12px 14px;animation:mz-in .25s ease both}
+.ex-r input{min-height:44px;min-width:0;border-radius:12px;font-size:16px}.ex-r .b{flex-shrink:0}
+.carte{border-radius:22px;padding:26px;min-height:200px;font-size:17px}.carte .lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.kpi div{border-radius:16px;padding:14px 16px}.kpi b{font:700 28px/1.2 Fraunces,Georgia,serif}
+.barre{height:8px;border-radius:4px}.barre i{background:var(--acc);border-radius:4px}
+.liste-n li{padding:12px 0;align-items:center}
+.flux-b{border-radius:12px;padding:9px 14px;font-weight:600}
+.integre{border-radius:18px}
+/* Schémas : un texte ou une forme sans couleur déclarée prend la couleur du texte (lisible en thème sombre), jamais le noir par défaut */
+:where(main svg:not([fill])){fill:currentColor}
+details.prereq{margin:16px 0;border:1px solid var(--line);border-radius:16px;background:var(--card);padding:0 16px}details.prereq summary{cursor:pointer;min-height:52px;padding:14px 0;line-height:1.5;list-style:none;position:relative;padding-right:28px}details.prereq summary::-webkit-details-marker{display:none}details.prereq summary::after{content:"+";position:absolute;right:2px;top:12px;font-size:22px;font-weight:600;color:var(--acc)}details.prereq[open] summary::after{content:"−"}details.prereq p{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:var(--okb);animation:mz-in .25s ease both}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:4px 0}
+
+@media (max-width:860px){.wrap{grid-template-columns:1fr}nav{display:none;position:fixed;inset:54px 0 0 0;height:auto;background:var(--bg);z-index:4;border:0}nav.open{display:block}#menu{display:inline-block}main{padding:20px 18px 110px}h1.t{font-size:28px}main h2{font-size:22px}nav{inset:65px 0 0 0}}
+
+/* Aucun tableau, schéma ou code ne doit élargir la page (téléphone) : défilement dans son cadre. */
+main table{display:block;max-width:100%;overflow-x:auto}main figure,main .grille,main details{max-width:100%;overflow-x:auto}main :not(pre)>code{overflow-wrap:anywhere}main img{max-width:100%;height:auto}main p,main li,main td,main th,main a{overflow-wrap:break-word}mjx-container[display="true"]{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.retour{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;margin-right:6px;width:44px;height:44px;padding:0;border-radius:22px;font-size:18px;flex-shrink:0}.retour[hidden]{display:none}
+</style>
+</head>
+<body>
+<header><a class="b retour" id="retour" href="/app/modules" target="_top" aria-label="Retour aux cours" title="Retour aux cours">←</a><button class="b" id="menu" aria-label="Chapitres">☰</button><h1>Stratigraphie et paléontologie<small>Pr M. Rhalmi (paléontologie) · S3 · FST Béni Mellal</small></h1><span class="pct" id="pct"></span></header>
+<div class="wrap"><nav id="nav"></nav><main id="main"></main></div>
+<script>
+const MODULE={"slug":"stratigraphie","titre":"Stratigraphie et paléontologie","cle":"stratigraphie_scores","cleEtat":"stratigraphie_scores_etat","format":"score10","intro":"<p>Ce module suit <strong>les chapitres de stratigraphie 2020-2021<\/strong> et <strong>le cours de paléontologie et paléoécologie<\/strong>, puis <strong>les contrôles du Pr Rhalmi corrigés<\/strong> (2015 à 2021).<\/p>\n<p><strong>Comment l&#39;utiliser<\/strong><\/p>\n<ol>\n<li>Apprends les définitions par cœur : elles valent la moitié des points.<\/li>\n<li>Pour les questions de synthèse, suis les étapes données dans chaque chapitre.<\/li>\n<li>Fais le QCM du chapitre. <strong>8/10 = chapitre maîtrisé.<\/strong><\/li>\n<\/ol>\n<p><strong>À vérifier<\/strong> : plusieurs cours de paléontologie et l&#39;examen 2022 sont des scans non lus ; les réponses des contrôles sont rédigées par nous.<\/p>\n","annexes":[],"cartes":null,"maths":false};
+const CHAPS=[{"id":"principes-stratigraphie","t":"Les principes de la stratigraphie","seance":"Chapitre 1 · Stratigraphie","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir qu&#39;une roche sédimentaire se dépose en couches (strates) horizontales au départ.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Dans une pile de couches non déformée, laquelle s&#39;est déposée en premier ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Celle du bas.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « lire une pile de pages ».<\/strong> Chaque strate est une page de l&#39;histoire ; les principes disent dans quel ordre les lire.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Appliquer la superposition à une série plissée ou renversée. Il faut d&#39;abord repérer la polarité (figures sédimentaires, fossiles en position de vie).<\/p>\n<\/aside><p>À la fin, tu sais appliquer les principes et reconnaître une discordance.<\/p>\n<h2>Idée 1 · Les principes<\/h2>\n<figure class=\"grille\"><figcaption>Principes de la stratigraphie<\/figcaption><table><tr><th>Principe,<\/th><th>Énoncé<\/th><\/tr><tr><td class=\"h1\">Horizontalité,<\/td><td>les<\/td><td>couches<\/td><td>se<\/td><td>déposent<\/td><td>horizontalement<\/td><\/tr><tr><td class=\"h1\">Superposition,<\/td><td>la<\/td><td>couche<\/td><td>du<\/td><td>dessus<\/td><td>est<\/td><td>plus<\/td><td>récente<\/td><\/tr><tr><td class=\"h1\">Continuité,<\/td><td>une<\/td><td>couche<\/td><td>a<\/td><td>le<\/td><td>même<\/td><td>âge<\/td><td>sur<\/td><td>toute<\/td><td>son<\/td><td>étendue<\/td><\/tr><tr><td class=\"h1\">Recoupement,<\/td><td>ce<\/td><td>qui<\/td><td>recoupe<\/td><td>est<\/td><td>plus<\/td><td>récent<\/td><\/tr><tr><td class=\"h1\">Inclusion,<\/td><td>un<\/td><td>élément<\/td><td>inclus<\/td><td>est<\/td><td>plus<\/td><td>ancien<\/td><td>que<\/td><td>son<\/td><td>encaissant<\/td><\/tr><tr><td class=\"h1\">Identité<\/td><td>paléontologique,<\/td><td>mêmes<\/td><td>fossiles<\/td><td>stratigraphiques<\/td><td>=<\/td><td>même<\/td><td>âge<\/td><\/tr><tr><td class=\"h1\">Actualisme,<\/td><td>les<\/td><td>processus<\/td><td>actuels<\/td><td>expliquent<\/td><td>le<\/td><td>passé<\/td><\/tr><\/table><\/figure><h2>Idée 2 · Discordances et lacunes<\/h2>\n<svg viewBox=\"0 0 320 120\" role=\"img\" aria-label=\"Discordance angulaire : couches inclinées érodées, recouvertes de couches horizontales\" style=\"max-width:360px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M10 110L120 60M40 110L150 60M70 110L180 60M100 110L210 60\"/><path d=\"M10 60h300\" stroke=\"#D9824F\" stroke-width=\"3\"/><path d=\"M10 45h300M10 30h300M10 15h300\"/><\/g>\n<g fill=\"currentColor\" font-size=\"10\"><text x=\"215\" y=\"80\">série plissée ancienne<\/text><text x=\"210\" y=\"57\">surface d'érosion<\/text><\/g>\n<\/svg><p>Une <strong>discordance angulaire<\/strong> montre : dépôt, déformation, érosion, puis nouveau dépôt. Une <strong>lacune<\/strong> est une période sans dépôt (ou érodée).<\/p>\n<h2>Idée 3 · Transgression et régression<\/h2>\n<p>Transgression : la mer avance sur le continent, les dépôts deviennent plus marins vers le haut. Régression : la mer recule, les dépôts deviennent plus continentaux.<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Une série plissée est recouverte en discordance par des couches horizontales. Ordonne les événements.<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Dépôt de la série inférieure, plissement, érosion, dépôt de la série supérieure.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Un galet de granite est inclus dans un conglomérat. Lequel est le plus ancien ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Le granite (principe d&#39;inclusion).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Le principe de recoupement dit :<\/div><button class=\"opt\" data-o=\"0\">ce qui recoupe est plus récent<\/button><button class=\"opt\" data-o=\"1\">ce qui recoupe est plus ancien<\/button><button class=\"opt\" data-o=\"2\">tout a le même âge<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Une discordance angulaire implique :<\/div><button class=\"opt\" data-o=\"0\">une déformation et une érosion<\/button><button class=\"opt\" data-o=\"1\">un dépôt continu<\/button><button class=\"opt\" data-o=\"2\">l&#39;absence de fossiles<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Dans une transgression, les dépôts deviennent vers le haut :<\/div><button class=\"opt\" data-o=\"0\">plus marins<\/button><button class=\"opt\" data-o=\"1\">plus continentaux<\/button><button class=\"opt\" data-o=\"2\">volcaniques<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Le principe d&#39;inclusion :<\/div><button class=\"opt\" data-o=\"0\">l&#39;inclus est plus ancien que l&#39;encaissant<\/button><button class=\"opt\" data-o=\"1\">l&#39;inclus est plus récent<\/button><button class=\"opt\" data-o=\"2\">ils ont le même âge<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">L&#39;actualisme signifie :<\/div><button class=\"opt\" data-o=\"0\">les processus actuels expliquent le passé<\/button><button class=\"opt\" data-o=\"1\">tout est récent<\/button><button class=\"opt\" data-o=\"2\">les fossiles sont actuels<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Une lacune correspond à :<\/div><button class=\"opt\" data-o=\"0\">une absence de dépôt<\/button><button class=\"opt\" data-o=\"1\">une couche épaisse<\/button><button class=\"opt\" data-o=\"2\">un fossile<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Le principe de continuité :<\/div><button class=\"opt\" data-o=\"0\">une couche a le même âge sur toute son étendue<\/button><button class=\"opt\" data-o=\"1\">les couches sont continues dans le temps<\/button><button class=\"opt\" data-o=\"2\">les fossiles évoluent<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Avant d&#39;appliquer la superposition, il faut vérifier :<\/div><button class=\"opt\" data-o=\"0\">que la série n&#39;est pas renversée<\/button><button class=\"opt\" data-o=\"1\">la couleur<\/button><button class=\"opt\" data-o=\"2\">la température<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">L&#39;identité paléontologique sert à :<\/div><button class=\"opt\" data-o=\"0\">corréler des couches éloignées<\/button><button class=\"opt\" data-o=\"1\">dater en années<\/button><button class=\"opt\" data-o=\"2\">mesurer l&#39;épaisseur<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Le principe d&#39;horizontalité concerne :<\/div><button class=\"opt\" data-o=\"0\">le dépôt initial des couches<\/button><button class=\"opt\" data-o=\"1\">les failles<\/button><button class=\"opt\" data-o=\"2\">les plis<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"principes-stratigraphie","rep":null,"tol":null},{"n":"principes-stratigraphie","rep":null,"tol":null},{"n":"principes-stratigraphie","rep":null,"tol":null}],"qcm":[{"n":"principes-stratigraphie","q":"Le principe de recoupement dit :","o":["ce qui recoupe est plus récent","ce qui recoupe est plus ancien","tout a le même âge"],"a":0,"e":"Faille, filon."},{"n":"principes-stratigraphie","q":"Une discordance angulaire implique :","o":["une déformation et une érosion","un dépôt continu","l&#39;absence de fossiles"],"a":0,"e":"Interruption de sédimentation."},{"n":"principes-stratigraphie","q":"Dans une transgression, les dépôts deviennent vers le haut :","o":["plus marins","plus continentaux","volcaniques"],"a":0,"e":"La mer avance."},{"n":"principes-stratigraphie","q":"Le principe d&#39;inclusion :","o":["l&#39;inclus est plus ancien que l&#39;encaissant","l&#39;inclus est plus récent","ils ont le même âge"],"a":0,"e":"Galets."},{"n":"principes-stratigraphie","q":"L&#39;actualisme signifie :","o":["les processus actuels expliquent le passé","tout est récent","les fossiles sont actuels"],"a":0,"e":"Lyell."},{"n":"principes-stratigraphie","q":"Une lacune correspond à :","o":["une absence de dépôt","une couche épaisse","un fossile"],"a":0,"e":"Temps non enregistré."},{"n":"principes-stratigraphie","q":"Le principe de continuité :","o":["une couche a le même âge sur toute son étendue","les couches sont continues dans le temps","les fossiles évoluent"],"a":0,"e":"Limité par les variations latérales."},{"n":"principes-stratigraphie","q":"Avant d&#39;appliquer la superposition, il faut vérifier :","o":["que la série n&#39;est pas renversée","la couleur","la température"],"a":0,"e":"Polarité."},{"n":"principes-stratigraphie","q":"L&#39;identité paléontologique sert à :","o":["corréler des couches éloignées","dater en années","mesurer l&#39;épaisseur"],"a":0,"e":"Fossiles stratigraphiques."},{"n":"principes-stratigraphie","q":"Le principe d&#39;horizontalité concerne :","o":["le dépôt initial des couches","les failles","les plis"],"a":0,"e":"Avant déformation."}]},{"id":"lithostratigraphie","t":"La lithostratigraphie","seance":"Chapitre 2 · Lithostratigraphie","imp":4,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir qu&#39;une roche sédimentaire raconte son milieu de dépôt (calcaire marin, grès de rivière, argile calme…).<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Un conglomérat à gros galets arrondis indique-t-il une eau calme ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Non : il faut un courant fort pour transporter de gros galets.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « découper selon la roche ».<\/strong> La lithostratigraphie découpe la série d&#39;après la nature des roches, sans s&#39;occuper de leur âge.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Confondre une formation (unité de roche) et un étage (unité de temps). Une formation peut avoir des âges différents d&#39;un endroit à l&#39;autre.<\/p>\n<\/aside><p>À la fin, tu sais nommer les unités lithostratigraphiques et lire une colonne.<\/p>\n<h2>Idée 1 · Les unités<\/h2>\n<figure class=\"grille\"><figcaption>Unités lithostratigraphiques (de la plus grande à la plus petite)<\/figcaption><table><tr><th>Unité,<\/th><th>Définition<\/th><\/tr><tr><td class=\"h1\">Groupe,<\/td><td>ensemble<\/td><td>de<\/td><td>formations<\/td><\/tr><tr><td class=\"h1\">Formation,<\/td><td>unité<\/td><td>de<\/td><td>base<\/td><td>cartographiable,<\/td><td>lithologie<\/td><td>homogène,<\/td><td>avec<\/td><td>une<\/td><td>localité<\/td><td>type<\/td><\/tr><tr><td class=\"h1\">Membre,<\/td><td>partie<\/td><td>d'une<\/td><td>formation<\/td><\/tr><tr><td class=\"h1\">Banc<\/td><td>(couche),<\/td><td>plus<\/td><td>petite<\/td><td>unité<\/td><\/tr><\/table><\/figure><h2>Idée 2 · La colonne stratigraphique<\/h2>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Lever une coupe<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/4 · 1. Mesure l&#39;épaisseur de chaque banc, de bas en haut.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/4 · 2. Note la lithologie, la couleur, la granulométrie, les figures sédimentaires, les fossiles.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/4 · 3. Dessine la colonne avec les figurés conventionnels.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/4 · 4. Regroupe en membres et formations.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><h2>Idée 3 · Les variations latérales de faciès<\/h2>\n<p>Un <strong>faciès<\/strong> est l&#39;ensemble des caractères d&#39;une roche qui traduisent son milieu de dépôt. À un même moment, on dépose du sable près de la côte et de l&#39;argile au large : les limites de formations peuvent recouper les lignes de temps (diachronisme).<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Une formation de grès est datée du Jurassique ici et du Crétacé 100 km plus loin. Est-ce contradictoire ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Non : c&#39;est un diachronisme ; le rivage s&#39;est déplacé et le même faciès s&#39;est déposé à des moments différents.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">L&#39;unité de base de la lithostratigraphie :<\/div><button class=\"opt\" data-o=\"0\">la formation<\/button><button class=\"opt\" data-o=\"1\">l&#39;étage<\/button><button class=\"opt\" data-o=\"2\">la zone<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">La lithostratigraphie découpe selon :<\/div><button class=\"opt\" data-o=\"0\">la nature des roches<\/button><button class=\"opt\" data-o=\"1\">les fossiles<\/button><button class=\"opt\" data-o=\"2\">l&#39;âge en années<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Un faciès traduit :<\/div><button class=\"opt\" data-o=\"0\">un milieu de dépôt<\/button><button class=\"opt\" data-o=\"1\">un âge précis<\/button><button class=\"opt\" data-o=\"2\">une température de fusion<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Un membre est :<\/div><button class=\"opt\" data-o=\"0\">une partie d&#39;une formation<\/button><button class=\"opt\" data-o=\"1\">un ensemble de groupes<\/button><button class=\"opt\" data-o=\"2\">une unité de temps<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Le diachronisme signifie que :<\/div><button class=\"opt\" data-o=\"0\">une formation a des âges différents selon le lieu<\/button><button class=\"opt\" data-o=\"1\">toutes les couches ont le même âge<\/button><button class=\"opt\" data-o=\"2\">les fossiles sont remaniés<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Une argile indique un milieu :<\/div><button class=\"opt\" data-o=\"0\">calme<\/button><button class=\"opt\" data-o=\"1\">très agité<\/button><button class=\"opt\" data-o=\"2\">volcanique<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Une coupe se lève :<\/div><button class=\"opt\" data-o=\"0\">de bas en haut<\/button><button class=\"opt\" data-o=\"1\">de haut en bas<\/button><button class=\"opt\" data-o=\"2\">au hasard<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Un groupe réunit :<\/div><button class=\"opt\" data-o=\"0\">plusieurs formations<\/button><button class=\"opt\" data-o=\"1\">plusieurs bancs seulement<\/button><button class=\"opt\" data-o=\"2\">plusieurs étages<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">L&#39;étage est une unité :<\/div><button class=\"opt\" data-o=\"0\">chronostratigraphique<\/button><button class=\"opt\" data-o=\"1\">lithostratigraphique<\/button><button class=\"opt\" data-o=\"2\">biostratigraphique<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Les figures sédimentaires servent notamment à :<\/div><button class=\"opt\" data-o=\"0\">trouver la polarité de la série<\/button><button class=\"opt\" data-o=\"1\">dater en Ma<\/button><button class=\"opt\" data-o=\"2\">mesurer la radioactivité<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"lithostratigraphie","rep":null,"tol":null},{"n":"lithostratigraphie","rep":null,"tol":null}],"qcm":[{"n":"lithostratigraphie","q":"L&#39;unité de base de la lithostratigraphie :","o":["la formation","l&#39;étage","la zone"],"a":0,"e":"Cartographiable."},{"n":"lithostratigraphie","q":"La lithostratigraphie découpe selon :","o":["la nature des roches","les fossiles","l&#39;âge en années"],"a":0,"e":"Litho = roche."},{"n":"lithostratigraphie","q":"Un faciès traduit :","o":["un milieu de dépôt","un âge précis","une température de fusion"],"a":0,"e":"Ensemble de caractères."},{"n":"lithostratigraphie","q":"Un membre est :","o":["une partie d&#39;une formation","un ensemble de groupes","une unité de temps"],"a":0,"e":"Subdivision."},{"n":"lithostratigraphie","q":"Le diachronisme signifie que :","o":["une formation a des âges différents selon le lieu","toutes les couches ont le même âge","les fossiles sont remaniés"],"a":0,"e":"Migration du faciès."},{"n":"lithostratigraphie","q":"Une argile indique un milieu :","o":["calme","très agité","volcanique"],"a":0,"e":"Particules fines."},{"n":"lithostratigraphie","q":"Une coupe se lève :","o":["de bas en haut","de haut en bas","au hasard"],"a":0,"e":"Ordre de dépôt."},{"n":"lithostratigraphie","q":"Un groupe réunit :","o":["plusieurs formations","plusieurs bancs seulement","plusieurs étages"],"a":0,"e":"Unité supérieure."},{"n":"lithostratigraphie","q":"L&#39;étage est une unité :","o":["chronostratigraphique","lithostratigraphique","biostratigraphique"],"a":0,"e":"Temps."},{"n":"lithostratigraphie","q":"Les figures sédimentaires servent notamment à :","o":["trouver la polarité de la série","dater en Ma","mesurer la radioactivité"],"a":0,"e":"Rides, granoclassement."}]},{"id":"biostratigraphie","t":"La biostratigraphie","seance":"Chapitre 3 · Biostratigraphie","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir que les espèces apparaissent et disparaissent au cours du temps (évolution).<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Une espèce qui a vécu pendant 100 Ma est-elle un bon outil pour dater finement ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Non : on préfère des espèces qui ont vécu peu de temps.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « horloge fossile ».<\/strong> Un bon fossile stratigraphique vit peu longtemps, partout, et en grand nombre.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Confondre biostratigraphie et paléoécologie. La biostratigraphie utilise les fossiles pour <strong>dater et corréler<\/strong> ; la paléoécologie pour <strong>reconstituer le milieu de vie<\/strong>.<\/p>\n<\/aside><p>À la fin, tu sais définir une biozone et choisir un bon fossile stratigraphique.<\/p>\n<h2>Idée 1 · Le bon fossile stratigraphique<\/h2>\n<figure class=\"grille\"><figcaption>Critères<\/figcaption><table><tr><th>Critère,<\/th><th>Pourquoi<\/th><\/tr><tr><td class=\"h1\">Courte<\/td><td>durée<\/td><td>de<\/td><td>vie<\/td><td>de<\/td><td>l'espèce,<\/td><td>datation<\/td><td>précise<\/td><\/tr><tr><td class=\"h1\">Large<\/td><td>répartition<\/td><td>géographique,<\/td><td>corrélations<\/td><td>lointaines<\/td><\/tr><tr><td class=\"h1\">Abondance,<\/td><td>on<\/td><td>le<\/td><td>trouve<\/td><td>facilement<\/td><\/tr><tr><td class=\"h1\">Indépendance<\/td><td>du<\/td><td>faciès,<\/td><td>présent<\/td><td>dans<\/td><td>plusieurs<\/td><td>milieux<\/td><\/tr><tr><td class=\"h1\">Facile<\/td><td>à<\/td><td>reconnaître,<\/td><td>identification<\/td><td>sûre<\/td><\/tr><\/table><\/figure><p>Exemples : ammonites (Mésozoïque), graptolites (Paléozoïque inférieur), trilobites (Cambrien), foraminifères planctoniques (Crétacé-Cénozoïque).<\/p>\n<h2>Idée 2 · Les biozones<\/h2>\n<svg viewBox=\"0 0 320 130\" role=\"img\" aria-label=\"Biozone d'intervalle : trois espèces avec leurs durées d'existence et la zone définie\" style=\"max-width:360px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M60 120V20M120 120V50M180 90V10\"/><path d=\"M30 50h200M30 90h200\" stroke=\"#D9824F\" stroke-dasharray=\"5 4\"/><\/g>\n<g fill=\"currentColor\" font-size=\"10\"><text x=\"50\" y=\"14\">A<\/text><text x=\"114\" y=\"44\">B<\/text><text x=\"174\" y=\"8\">C<\/text><text x=\"235\" y=\"74\">biozone<\/text><\/g>\n<\/svg><figure class=\"grille\"><figcaption>Types de biozones<\/figcaption><table><tr><th>Zone,<\/th><th>Définie<\/th><th>par<\/th><\/tr><tr><td class=\"h1\">Zone<\/td><td>d'extension,<\/td><td>toute<\/td><td>la<\/td><td>durée<\/td><td>d'un<\/td><td>taxon<\/td><\/tr><tr><td class=\"h1\">Zone<\/td><td>d'intervalle,<\/td><td>entre<\/td><td>deux<\/td><td>événements<\/td><td>(apparition,<\/td><td>disparition)<\/td><\/tr><tr><td class=\"h1\">Zone<\/td><td>d'association,<\/td><td>un<\/td><td>ensemble<\/td><td>de<\/td><td>taxons<\/td><td>qui<\/td><td>vivent<\/td><td>ensemble<\/td><\/tr><tr><td class=\"h1\">Zone<\/td><td>d'abondance<\/td><td>(acmé),<\/td><td>le<\/td><td>maximum<\/td><td>d'abondance<\/td><td>d'un<\/td><td>taxon<\/td><\/tr><\/table><\/figure><h2>Idée 3 · Corréler<\/h2>\n<p>On relie deux coupes éloignées en reconnaissant les mêmes biozones. Les limites de biozones sont des lignes de temps, contrairement aux limites de formations.<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Contrôle 2019-2020<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Différence entre étude biostratigraphique et étude paléoécologique ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Biostratigraphie : on utilise la succession des fossiles pour dater relativement et corréler les couches (biozones). Paléoécologie : on utilise les fossiles et les sédiments pour reconstituer le milieu de vie (bathymétrie, salinité, énergie, climat) et les relations entre organismes.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Un bon fossile stratigraphique a une durée de vie :<\/div><button class=\"opt\" data-o=\"0\">courte<\/button><button class=\"opt\" data-o=\"1\">longue<\/button><button class=\"opt\" data-o=\"2\">infinie<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Les ammonites datent surtout :<\/div><button class=\"opt\" data-o=\"0\">le Mésozoïque<\/button><button class=\"opt\" data-o=\"1\">le Quaternaire<\/button><button class=\"opt\" data-o=\"2\">le Précambrien<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Une biozone est définie par :<\/div><button class=\"opt\" data-o=\"0\">son contenu fossile<\/button><button class=\"opt\" data-o=\"1\">la couleur des roches<\/button><button class=\"opt\" data-o=\"2\">l&#39;épaisseur<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">La biostratigraphie sert à :<\/div><button class=\"opt\" data-o=\"0\">dater et corréler<\/button><button class=\"opt\" data-o=\"1\">reconstituer le climat seulement<\/button><button class=\"opt\" data-o=\"2\">mesurer la radioactivité<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Les graptolites caractérisent :<\/div><button class=\"opt\" data-o=\"0\">le Paléozoïque inférieur<\/button><button class=\"opt\" data-o=\"1\">le Cénozoïque<\/button><button class=\"opt\" data-o=\"2\">le Jurassique<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Une zone d&#39;acmé correspond :<\/div><button class=\"opt\" data-o=\"0\">au maximum d&#39;abondance d&#39;un taxon<\/button><button class=\"opt\" data-o=\"1\">à son apparition<\/button><button class=\"opt\" data-o=\"2\">à son extinction<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Les limites de biozones sont :<\/div><button class=\"opt\" data-o=\"0\">des lignes de temps<\/button><button class=\"opt\" data-o=\"1\">des limites de faciès<\/button><button class=\"opt\" data-o=\"2\">des failles<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Un fossile dépendant du faciès est :<\/div><button class=\"opt\" data-o=\"0\">un mauvais fossile stratigraphique<\/button><button class=\"opt\" data-o=\"1\">un excellent fossile stratigraphique<\/button><button class=\"opt\" data-o=\"2\">toujours un microfossile<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Les foraminifères planctoniques sont utiles car :<\/div><button class=\"opt\" data-o=\"0\">abondants et largement répandus<\/button><button class=\"opt\" data-o=\"1\">très grands<\/button><button class=\"opt\" data-o=\"2\">terrestres<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">La paléoécologie reconstitue :<\/div><button class=\"opt\" data-o=\"0\">le milieu de vie<\/button><button class=\"opt\" data-o=\"1\">l&#39;âge en années<\/button><button class=\"opt\" data-o=\"2\">l&#39;ordre des couches<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"biostratigraphie","rep":null,"tol":null},{"n":"biostratigraphie","rep":null,"tol":null}],"qcm":[{"n":"biostratigraphie","q":"Un bon fossile stratigraphique a une durée de vie :","o":["courte","longue","infinie"],"a":0,"e":"Précision."},{"n":"biostratigraphie","q":"Les ammonites datent surtout :","o":["le Mésozoïque","le Quaternaire","le Précambrien"],"a":0,"e":"Disparues à K-T."},{"n":"biostratigraphie","q":"Une biozone est définie par :","o":["son contenu fossile","la couleur des roches","l&#39;épaisseur"],"a":0,"e":"Bio."},{"n":"biostratigraphie","q":"La biostratigraphie sert à :","o":["dater et corréler","reconstituer le climat seulement","mesurer la radioactivité"],"a":0,"e":"Chronologie relative."},{"n":"biostratigraphie","q":"Les graptolites caractérisent :","o":["le Paléozoïque inférieur","le Cénozoïque","le Jurassique"],"a":0,"e":"Ordovicien, Silurien."},{"n":"biostratigraphie","q":"Une zone d&#39;acmé correspond :","o":["au maximum d&#39;abondance d&#39;un taxon","à son apparition","à son extinction"],"a":0,"e":"Abondance."},{"n":"biostratigraphie","q":"Les limites de biozones sont :","o":["des lignes de temps","des limites de faciès","des failles"],"a":0,"e":"Isochrones."},{"n":"biostratigraphie","q":"Un fossile dépendant du faciès est :","o":["un mauvais fossile stratigraphique","un excellent fossile stratigraphique","toujours un microfossile"],"a":0,"e":"Il manque dans les autres milieux."},{"n":"biostratigraphie","q":"Les foraminifères planctoniques sont utiles car :","o":["abondants et largement répandus","très grands","terrestres"],"a":0,"e":"Microfossiles marins."},{"n":"biostratigraphie","q":"La paléoécologie reconstitue :","o":["le milieu de vie","l&#39;âge en années","l&#39;ordre des couches"],"a":0,"e":"Environnement."}]},{"id":"fossilisation","t":"Fossiles et fossilisation","seance":"Paléontologie · Taphonomie et vocabulaire","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir qu&#39;un organisme mort est en général détruit (décomposition, charognards).<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Les parties molles se fossilisent-elles souvent ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Rarement : il faut un enfouissement très rapide et sans oxygène.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « enterré vite, à l&#39;abri ».<\/strong> Une fossilisation réussie = parties dures + enfouissement rapide + peu d&#39;oxygène.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Croire qu&#39;un fossile est toujours un reste d&#39;organisme. Une trace (empreinte de pas, terrier) est aussi un fossile : un <strong>ichnofossile<\/strong>.<\/p>\n<\/aside><p>À la fin, tu sais définir les termes qui tombent au contrôle et décrire les modes de fossilisation.<\/p>\n<h2>Idée 1 · Les modes de fossilisation<\/h2>\n<figure class=\"grille\"><figcaption>Modes<\/figcaption><table><tr><th>Mode,<\/th><th>Ce<\/th><th>qui<\/th><th>se<\/th><th>passe,<\/th><th>Exemple<\/th><\/tr><tr><td class=\"h1\">Conservation<\/td><td>intégrale,<\/td><td>l'organisme<\/td><td>entier<\/td><td>est<\/td><td>gardé,<\/td><td>mammouth<\/td><td>dans<\/td><td>la<\/td><td>glace,<\/td><td>insecte<\/td><td>dans<\/td><td>l'ambre<\/td><\/tr><tr><td class=\"h1\">Perminéralisation,<\/td><td>des<\/td><td>minéraux<\/td><td>remplissent<\/td><td>les<\/td><td>pores<\/td><td>des<\/td><td>tissus,<\/td><td>bois<\/td><td>silicifié<\/td><\/tr><tr><td class=\"h1\">Épigénie<\/td><td>(remplacement),<\/td><td>la<\/td><td>matière<\/td><td>est<\/td><td>remplacée<\/td><td>molécule<\/td><td>à<\/td><td>molécule,<\/td><td>ammonite<\/td><td>pyritisée<\/td><\/tr><tr><td class=\"h1\">Moule<\/td><td>et<\/td><td>empreinte,<\/td><td>le<\/td><td>reste<\/td><td>disparaît,<\/td><td>seule<\/td><td>sa<\/td><td>forme<\/td><td>reste,<\/td><td>moule<\/td><td>interne<\/td><td>de<\/td><td>coquille<\/td><\/tr><tr><td class=\"h1\">Carbonisation<\/td><td>(extraction<\/td><td>des<\/td><td>éléments<\/td><td>volatils),<\/td><td>les<\/td><td>éléments<\/td><td>volatils<\/td><td>(H,<\/td><td>O,<\/td><td>N)<\/td><td>partent,<\/td><td>il<\/td><td>reste<\/td><td>un<\/td><td>film<\/td><td>de<\/td><td>carbone,<\/td><td>feuilles<\/td><td>fossiles<\/td><\/tr><\/table><\/figure><h2>Idée 2 · Le vocabulaire du contrôle<\/h2>\n<figure class=\"grille\"><figcaption>Définitions<\/figcaption><table><tr><th>Terme,<\/th><th>Définition<\/th><\/tr><tr><td class=\"h1\">Ichnofossile,<\/td><td>trace<\/td><td>d'activité<\/td><td>fossilisée<\/td><td>(piste,<\/td><td>terrier,<\/td><td>empreinte)<\/td><\/tr><tr><td class=\"h1\">Taxonomie,<\/td><td>science<\/td><td>qui<\/td><td>nomme<\/td><td>et<\/td><td>classe<\/td><td>les<\/td><td>êtres<\/td><td>vivants<\/td><\/tr><tr><td class=\"h1\">Biocénose,<\/td><td>ensemble<\/td><td>des<\/td><td>organismes<\/td><td>vivant<\/td><td>ensemble<\/td><td>dans<\/td><td>un<\/td><td>milieu<\/td><\/tr><tr><td class=\"h1\">Thanatocénose,<\/td><td>ensemble<\/td><td>des<\/td><td>restes<\/td><td>accumulés<\/td><td>après<\/td><td>la<\/td><td>mort<\/td><\/tr><tr><td class=\"h1\">Endobionte,<\/td><td>organisme<\/td><td>vivant<\/td><td>dans<\/td><td>le<\/td><td>sédiment<\/td><\/tr><tr><td class=\"h1\">Sessile,<\/td><td>organisme<\/td><td>fixé<\/td><\/tr><tr><td class=\"h1\">Nécrophage,<\/td><td>se<\/td><td>nourrit<\/td><td>de<\/td><td>cadavres<\/td><\/tr><tr><td class=\"h1\">Limnivore,<\/td><td>avale<\/td><td>le<\/td><td>sédiment<\/td><td>pour<\/td><td>en<\/td><td>extraire<\/td><td>la<\/td><td>matière<\/td><td>organique<\/td><\/tr><tr><td class=\"h1\">Extinction,<\/td><td>disparition<\/td><td>définitive<\/td><td>d'un<\/td><td>taxon<\/td><\/tr><\/table><\/figure><h2>Idée 3 · Le dimorphisme sexuel<\/h2>\n<p>Différence de forme entre mâles et femelles d&#39;une même espèce. Chez les <strong>ammonites<\/strong>, les macroconques (grandes, femelles probables) et microconques (petites, à apophyses jugales, mâles probables). Chez les <strong>ostracodes<\/strong>, les carapaces des femelles sont souvent renflées à l&#39;arrière (logement des œufs).<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Contrôle 2015-2016<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Explique le cas de l&#39;extraction des éléments volatils.<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>C&#39;est la carbonisation : après l&#39;enfouissement, la pression et la chaleur chassent l&#39;hydrogène, l&#39;oxygène et l&#39;azote de la matière organique. Il reste une pellicule de carbone qui dessine l&#39;organisme (feuilles, poissons). C&#39;est aussi le processus qui forme le charbon.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Une empreinte de pas de dinosaure est :<\/div><button class=\"opt\" data-o=\"0\">un ichnofossile<\/button><button class=\"opt\" data-o=\"1\">une perminéralisation<\/button><button class=\"opt\" data-o=\"2\">une thanatocénose<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Le bois silicifié résulte :<\/div><button class=\"opt\" data-o=\"0\">d&#39;une perminéralisation<\/button><button class=\"opt\" data-o=\"1\">d&#39;une carbonisation<\/button><button class=\"opt\" data-o=\"2\">d&#39;une conservation intégrale<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Un organisme fixé est dit :<\/div><button class=\"opt\" data-o=\"0\">sessile<\/button><button class=\"opt\" data-o=\"1\">vagile<\/button><button class=\"opt\" data-o=\"2\">endobionte<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Un limnivore :<\/div><button class=\"opt\" data-o=\"0\">avale le sédiment<\/button><button class=\"opt\" data-o=\"1\">chasse des proies<\/button><button class=\"opt\" data-o=\"2\">fait la photosynthèse<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">La carbonisation :<\/div><button class=\"opt\" data-o=\"0\">chasse les éléments volatils<\/button><button class=\"opt\" data-o=\"1\">ajoute du calcaire<\/button><button class=\"opt\" data-o=\"2\">conserve les couleurs<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">La thanatocénose est :<\/div><button class=\"opt\" data-o=\"0\">un assemblage de restes après la mort<\/button><button class=\"opt\" data-o=\"1\">une communauté vivante<\/button><button class=\"opt\" data-o=\"2\">une espèce<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">La conservation dans l&#39;ambre est :<\/div><button class=\"opt\" data-o=\"0\">intégrale<\/button><button class=\"opt\" data-o=\"1\">un moule<\/button><button class=\"opt\" data-o=\"2\">une épigénie<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Favorise la fossilisation :<\/div><button class=\"opt\" data-o=\"0\">un enfouissement rapide<\/button><button class=\"opt\" data-o=\"1\">l&#39;oxygène abondant<\/button><button class=\"opt\" data-o=\"2\">les charognards<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Un endobionte vit :<\/div><button class=\"opt\" data-o=\"0\">dans le sédiment<\/button><button class=\"opt\" data-o=\"1\">sur une roche<\/button><button class=\"opt\" data-o=\"2\">en pleine eau<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Les microconques d&#39;ammonites sont probablement :<\/div><button class=\"opt\" data-o=\"0\">des mâles<\/button><button class=\"opt\" data-o=\"1\">des juvéniles<\/button><button class=\"opt\" data-o=\"2\">des femelles<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"fossilisation","rep":null,"tol":null},{"n":"fossilisation","rep":null,"tol":null}],"qcm":[{"n":"fossilisation","q":"Une empreinte de pas de dinosaure est :","o":["un ichnofossile","une perminéralisation","une thanatocénose"],"a":0,"e":"Trace d&#39;activité."},{"n":"fossilisation","q":"Le bois silicifié résulte :","o":["d&#39;une perminéralisation","d&#39;une carbonisation","d&#39;une conservation intégrale"],"a":0,"e":"Silice dans les pores."},{"n":"fossilisation","q":"Un organisme fixé est dit :","o":["sessile","vagile","endobionte"],"a":0,"e":"Moules, coraux."},{"n":"fossilisation","q":"Un limnivore :","o":["avale le sédiment","chasse des proies","fait la photosynthèse"],"a":0,"e":"Vers fouisseurs."},{"n":"fossilisation","q":"La carbonisation :","o":["chasse les éléments volatils","ajoute du calcaire","conserve les couleurs"],"a":0,"e":"Il reste du carbone."},{"n":"fossilisation","q":"La thanatocénose est :","o":["un assemblage de restes après la mort","une communauté vivante","une espèce"],"a":0,"e":"Thanatos = mort."},{"n":"fossilisation","q":"La conservation dans l&#39;ambre est :","o":["intégrale","un moule","une épigénie"],"a":0,"e":"Insectes."},{"n":"fossilisation","q":"Favorise la fossilisation :","o":["un enfouissement rapide","l&#39;oxygène abondant","les charognards"],"a":0,"e":"À l&#39;abri de la décomposition."},{"n":"fossilisation","q":"Un endobionte vit :","o":["dans le sédiment","sur une roche","en pleine eau"],"a":0,"e":"Fouisseur."},{"n":"fossilisation","q":"Les microconques d&#39;ammonites sont probablement :","o":["des mâles","des juvéniles","des femelles"],"a":0,"e":"Dimorphisme sexuel."}]},{"id":"paleoecologie-crises","t":"Paléoécologie et crises biologiques","seance":"Paléontologie · Paléoenvironnements, extinctions","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir qu&#39;une espèce vit dans un milieu précis (profondeur, salinité, température).<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Des coraux constructeurs actuels vivent-ils en eau froide et profonde ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Non : en eau chaude, claire et peu profonde (zone éclairée).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « détective ».<\/strong> Fossiles en position de vie + sédiment + traces = un paléoenvironnement.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Utiliser un fossile transporté. Une coquille roulée a pu être déplacée loin de son milieu de vie : vérifie qu&#39;il est <strong>en place<\/strong> (autochtone).<\/p>\n<\/aside><p>À la fin, tu sais reconstituer un paléoenvironnement et citer les causes des crises biologiques.<\/p>\n<h2>Idée 1 · Reconstituer un paléoenvironnement<\/h2>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Méthode (contrôle 2019-2020)<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/5 · 1. Identifier les fossiles et vérifier qu&#39;ils sont en place (biocénose, pas thanatocénose remaniée).<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/5 · 2. Appliquer l&#39;actualisme : comparer aux espèces actuelles proches et à leur milieu.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/5 · 3. Étudier le sédiment : granulométrie, figures sédimentaires, minéraux (énergie, profondeur).<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/5 · 4. Utiliser les traces fossiles (ichnofaciès) et la géochimie (isotopes de l&#39;oxygène pour la température).<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">5/5 · 5. Croiser tous les indices et conclure : milieu, profondeur, salinité, climat.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><h2>Idée 2 · Les grandes crises<\/h2>\n<figure class=\"grille\"><figcaption>Les cinq grandes extinctions<\/figcaption><table><tr><th>Crise,<\/th><th>Âge,<\/th><th>Victimes<\/th><th>emblématiques<\/th><\/tr><tr><td class=\"h1\">Fin<\/td><td>Ordovicien,<\/td><td>≈<\/td><td>444<\/td><td>Ma,<\/td><td>nombreux<\/td><td>invertébrés<\/td><td>marins<\/td><\/tr><tr><td class=\"h1\">Fin<\/td><td>Dévonien,<\/td><td>≈<\/td><td>372<\/td><td>Ma,<\/td><td>récifs<\/td><\/tr><tr><td class=\"h1\">Permien-Trias,<\/td><td>252<\/td><td>Ma,<\/td><td>≈<\/td><td>95<\/td><td>%<\/td><td>des<\/td><td>espèces<\/td><td>marines,<\/td><td>trilobites<\/td><\/tr><tr><td class=\"h1\">Fin<\/td><td>Trias,<\/td><td>≈<\/td><td>201<\/td><td>Ma,<\/td><td>nombreux<\/td><td>reptiles<\/td><\/tr><tr><td class=\"h1\">Crétacé-Tertiaire<\/td><td>(K-T),<\/td><td>66<\/td><td>Ma,<\/td><td>dinosaures<\/td><td>non<\/td><td>aviens,<\/td><td>ammonites<\/td><\/tr><\/table><\/figure><h2>Idée 3 · Les causes<\/h2>\n<aside class=\"enc retenir\"><div class=\"enc-t\">À retenir<\/div><p>Trois grandes causes : <strong>volcanisme massif<\/strong> (trapps de Sibérie au Permien-Trias, trapps du Deccan à K-T), <strong>impacts météoritiques<\/strong> (Chicxulub à K-T, couche à iridium), <strong>variations du niveau marin et du climat<\/strong> (régressions, glaciations, anoxie des océans).<\/p>\n<\/aside><h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Contrôle 2019-2020<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Cite les trois principales causes des crises biologiques majeures.<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Volcanisme intense (trapps), impact de météorite, changements du niveau marin et du climat (glaciation, réchauffement, anoxie).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">La plus grande extinction :<\/div><button class=\"opt\" data-o=\"0\">Permien-Trias<\/button><button class=\"opt\" data-o=\"1\">K-T<\/button><button class=\"opt\" data-o=\"2\">fin Dévonien<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Le cratère de Chicxulub est lié :<\/div><button class=\"opt\" data-o=\"0\">à la limite K-T<\/button><button class=\"opt\" data-o=\"1\">au Permien<\/button><button class=\"opt\" data-o=\"2\">au Cambrien<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Les trapps de Sibérie sont :<\/div><button class=\"opt\" data-o=\"0\">un volcanisme massif<\/button><button class=\"opt\" data-o=\"1\">un impact<\/button><button class=\"opt\" data-o=\"2\">une glaciation<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Pour reconstituer un milieu, un fossile doit être :<\/div><button class=\"opt\" data-o=\"0\">en place<\/button><button class=\"opt\" data-o=\"1\">roulé et transporté<\/button><button class=\"opt\" data-o=\"2\">isolé de tout sédiment<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Les isotopes de l&#39;oxygène renseignent sur :<\/div><button class=\"opt\" data-o=\"0\">la température<\/button><button class=\"opt\" data-o=\"1\">l&#39;âge absolu<\/button><button class=\"opt\" data-o=\"2\">la profondeur des failles<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Les ammonites disparaissent :<\/div><button class=\"opt\" data-o=\"0\">à K-T<\/button><button class=\"opt\" data-o=\"1\">au Permien-Trias<\/button><button class=\"opt\" data-o=\"2\">au Quaternaire<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Des coraux constructeurs fossiles indiquent :<\/div><button class=\"opt\" data-o=\"0\">une mer chaude et peu profonde<\/button><button class=\"opt\" data-o=\"1\">une mer froide et profonde<\/button><button class=\"opt\" data-o=\"2\">un lac de montagne<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">L&#39;anoxie des océans est :<\/div><button class=\"opt\" data-o=\"0\">un manque d&#39;oxygène dans l&#39;eau<\/button><button class=\"opt\" data-o=\"1\">un excès d&#39;oxygène<\/button><button class=\"opt\" data-o=\"2\">un volcan sous-marin<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Une régression peut provoquer :<\/div><button class=\"opt\" data-o=\"0\">la disparition d&#39;habitats côtiers<\/button><button class=\"opt\" data-o=\"1\">une hausse du niveau marin<\/button><button class=\"opt\" data-o=\"2\">aucun effet<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Les trapps du Deccan sont associés à :<\/div><button class=\"opt\" data-o=\"0\">la limite K-T<\/button><button class=\"opt\" data-o=\"1\">l&#39;Ordovicien<\/button><button class=\"opt\" data-o=\"2\">le Trias<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"paleoecologie-crises","rep":null,"tol":null},{"n":"paleoecologie-crises","rep":null,"tol":null}],"qcm":[{"n":"paleoecologie-crises","q":"La plus grande extinction :","o":["Permien-Trias","K-T","fin Dévonien"],"a":0,"e":"≈ 95 % des espèces marines."},{"n":"paleoecologie-crises","q":"Le cratère de Chicxulub est lié :","o":["à la limite K-T","au Permien","au Cambrien"],"a":0,"e":"66 Ma."},{"n":"paleoecologie-crises","q":"Les trapps de Sibérie sont :","o":["un volcanisme massif","un impact","une glaciation"],"a":0,"e":"Permien-Trias."},{"n":"paleoecologie-crises","q":"Pour reconstituer un milieu, un fossile doit être :","o":["en place","roulé et transporté","isolé de tout sédiment"],"a":0,"e":"Autochtone."},{"n":"paleoecologie-crises","q":"Les isotopes de l&#39;oxygène renseignent sur :","o":["la température","l&#39;âge absolu","la profondeur des failles"],"a":0,"e":"Paléothermomètre."},{"n":"paleoecologie-crises","q":"Les ammonites disparaissent :","o":["à K-T","au Permien-Trias","au Quaternaire"],"a":0,"e":"Avec les dinosaures."},{"n":"paleoecologie-crises","q":"Des coraux constructeurs fossiles indiquent :","o":["une mer chaude et peu profonde","une mer froide et profonde","un lac de montagne"],"a":0,"e":"Actualisme."},{"n":"paleoecologie-crises","q":"L&#39;anoxie des océans est :","o":["un manque d&#39;oxygène dans l&#39;eau","un excès d&#39;oxygène","un volcan sous-marin"],"a":0,"e":"Cause de crise."},{"n":"paleoecologie-crises","q":"Une régression peut provoquer :","o":["la disparition d&#39;habitats côtiers","une hausse du niveau marin","aucun effet"],"a":0,"e":"Plateaux continentaux exondés."},{"n":"paleoecologie-crises","q":"Les trapps du Deccan sont associés à :","o":["la limite K-T","l&#39;Ordovicien","le Trias"],"a":0,"e":"Inde."}]},{"id":"annales-corrigees","t":"Annales corrigées · contrôles de paléontologie (Pr Rhalmi)","seance":"Contrôles de cours, BCG S3 section A (1 h)","imp":5,"payant":true,"html":"<p>Les questions qui reviennent dans les contrôles du Pr Rhalmi (2015-2016, 2017-2018, 2019-2020, 2020-2021), avec des réponses types. Les réponses sont rédigées par nous à partir du cours.<\/p>\n<h2>Contrôle 2015-2016<\/h2>\n<section class=\"exo\"><h3>Définitions (5 points)<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Ichnofossile, perminéralisation, paléoenvironnement, endobionte, taxonomie.<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Ichnofossile : trace fossile d&#39;activité. Perminéralisation : remplissage des pores des tissus par des minéraux. Paléoenvironnement : milieu de vie et de dépôt d&#39;une époque passée. Endobionte : organisme vivant dans le sédiment. Taxonomie : science de la classification et de la nomenclature des êtres vivants.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Extinction, biocénose, sessile, nécrophage, limnivore.<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Extinction : disparition définitive d&#39;un taxon. Biocénose : communauté d&#39;organismes vivant ensemble. Sessile : fixé au substrat. Nécrophage : se nourrit de cadavres. Limnivore : ingère le sédiment pour en extraire la matière organique.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><section class=\"exo\"><h3>Questions (6 points)<\/h3><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Explique le dimorphisme sexuel, avec deux exemples.<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Différence morphologique entre mâles et femelles d&#39;une même espèce. Ex. 1 : ammonites, macroconques et microconques (à apophyses jugales). Ex. 2 : ostracodes, carapace des femelles renflée à l&#39;arrière.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"3\"><div class=\"ex-q\"><p>Explique le cas de l&#39;extraction des éléments volatils.<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Carbonisation : sous l&#39;effet de l&#39;enfouissement, H, O et N quittent la matière organique ; il reste un film de carbone qui garde la forme de l&#39;organisme.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Contrôle 2019-2020<\/h2>\n<section class=\"exo\"><h3>Synthèse (15 points)<\/h3><div class=\"ex\" data-x=\"4\"><div class=\"ex-q\"><p>Différence entre étude biostratigraphique et étude paléoécologique (5 points).<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Biostratigraphie : fossiles comme outils de datation relative et de corrélation (biozones, bons fossiles stratigraphiques). Paléoécologie : fossiles comme indicateurs du milieu de vie (bathymétrie, salinité, température, énergie) et des relations entre organismes.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"5\"><div class=\"ex-q\"><p>Trois principales causes des crises biologiques (5 points).<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Volcanisme massif (trapps), impact météoritique, variations du niveau marin et du climat (glaciation, anoxie).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"6\"><div class=\"ex-q\"><p>Comment reconstituer un paléoenvironnement (5 points) ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Fossiles en place, actualisme, étude du sédiment, traces fossiles, géochimie, puis synthèse (voir chapitre 5).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p>Pour une question de synthèse à 5 points, vise 5 idées : une par point, chacune avec un exemple.<\/p>\n<\/aside><h2>QCM d&#39;entraînement<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Un terrier fossile est :<\/div><button class=\"opt\" data-o=\"0\">un ichnofossile<\/button><button class=\"opt\" data-o=\"1\">une biocénose<\/button><button class=\"opt\" data-o=\"2\">une perminéralisation<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">La taxonomie :<\/div><button class=\"opt\" data-o=\"0\">classe et nomme les êtres vivants<\/button><button class=\"opt\" data-o=\"1\">date les roches<\/button><button class=\"opt\" data-o=\"2\">étudie les séismes<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Les ostracodes montrent un dimorphisme :<\/div><button class=\"opt\" data-o=\"0\">de la carapace<\/button><button class=\"opt\" data-o=\"1\">de la couleur seulement<\/button><button class=\"opt\" data-o=\"2\">aucun<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Un limnivore se nourrit :<\/div><button class=\"opt\" data-o=\"0\">du sédiment<\/button><button class=\"opt\" data-o=\"1\">de plantes<\/button><button class=\"opt\" data-o=\"2\">de cadavres<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">La carbonisation laisse :<\/div><button class=\"opt\" data-o=\"0\">un film de carbone<\/button><button class=\"opt\" data-o=\"1\">un moule calcaire<\/button><button class=\"opt\" data-o=\"2\">un organisme entier<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">La biostratigraphie utilise les fossiles pour :<\/div><button class=\"opt\" data-o=\"0\">dater et corréler<\/button><button class=\"opt\" data-o=\"1\">reconstituer la température seulement<\/button><button class=\"opt\" data-o=\"2\">mesurer l&#39;épaisseur<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Une question à 5 points demande environ :<\/div><button class=\"opt\" data-o=\"0\">5 idées<\/button><button class=\"opt\" data-o=\"1\">1 idée<\/button><button class=\"opt\" data-o=\"2\">20 lignes de détails sans structure<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">L&#39;actualisme sert à :<\/div><button class=\"opt\" data-o=\"0\">interpréter les fossiles par comparaison avec l&#39;actuel<\/button><button class=\"opt\" data-o=\"1\">dater en années<\/button><button class=\"opt\" data-o=\"2\">classer les roches<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Le volcanisme des trapps est :<\/div><button class=\"opt\" data-o=\"0\">une cause de crise<\/button><button class=\"opt\" data-o=\"1\">une conséquence d&#39;une crise<\/button><button class=\"opt\" data-o=\"2\">sans effet sur le climat<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Un nécrophage :<\/div><button class=\"opt\" data-o=\"0\">mange des cadavres<\/button><button class=\"opt\" data-o=\"1\">est fixé<\/button><button class=\"opt\" data-o=\"2\">vit dans le sédiment<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"annales-corrigees","rep":null,"tol":null},{"n":"annales-corrigees","rep":null,"tol":null},{"n":"annales-corrigees","rep":null,"tol":null},{"n":"annales-corrigees","rep":null,"tol":null},{"n":"annales-corrigees","rep":null,"tol":null},{"n":"annales-corrigees","rep":null,"tol":null},{"n":"annales-corrigees","rep":null,"tol":null}],"qcm":[{"n":"annales-corrigees","q":"Un terrier fossile est :","o":["un ichnofossile","une biocénose","une perminéralisation"],"a":0,"e":"Trace."},{"n":"annales-corrigees","q":"La taxonomie :","o":["classe et nomme les êtres vivants","date les roches","étudie les séismes"],"a":0,"e":"Classification."},{"n":"annales-corrigees","q":"Les ostracodes montrent un dimorphisme :","o":["de la carapace","de la couleur seulement","aucun"],"a":0,"e":"Femelles renflées."},{"n":"annales-corrigees","q":"Un limnivore se nourrit :","o":["du sédiment","de plantes","de cadavres"],"a":0,"e":"Ingestion du sédiment."},{"n":"annales-corrigees","q":"La carbonisation laisse :","o":["un film de carbone","un moule calcaire","un organisme entier"],"a":0,"e":"Éléments volatils partis."},{"n":"annales-corrigees","q":"La biostratigraphie utilise les fossiles pour :","o":["dater et corréler","reconstituer la température seulement","mesurer l&#39;épaisseur"],"a":0,"e":"Biozones."},{"n":"annales-corrigees","q":"Une question à 5 points demande environ :","o":["5 idées","1 idée","20 lignes de détails sans structure"],"a":0,"e":"Méthode."},{"n":"annales-corrigees","q":"L&#39;actualisme sert à :","o":["interpréter les fossiles par comparaison avec l&#39;actuel","dater en années","classer les roches"],"a":0,"e":"Principe de Lyell."},{"n":"annales-corrigees","q":"Le volcanisme des trapps est :","o":["une cause de crise","une conséquence d&#39;une crise","sans effet sur le climat"],"a":0,"e":"Gaz et poussières."},{"n":"annales-corrigees","q":"Un nécrophage :","o":["mange des cadavres","est fixé","vit dans le sédiment"],"a":0,"e":"Charognard."}]}];
+const NOTIONS=[{"id":"principes-stratigraphie","t":"Les principes de la stratigraphie","imp":5,"ch":"principes-stratigraphie"},{"id":"lithostratigraphie","t":"La lithostratigraphie","imp":4,"ch":"lithostratigraphie"},{"id":"biostratigraphie","t":"La biostratigraphie","imp":5,"ch":"biostratigraphie"},{"id":"fossilisation","t":"Fossiles et fossilisation","imp":5,"ch":"fossilisation"},{"id":"paleoecologie-crises","t":"Paléoécologie et crises biologiques","imp":5,"ch":"paleoecologie-crises"},{"id":"annales-corrigees","t":"Annales corrigées · contrôles de paléontologie (Pr Rhalmi)","imp":5,"ch":"annales-corrigees"}];
+const CARTES=[{"n":"principes-stratigraphie","k":0,"ch":"principes-stratigraphie","q":"<p>Superposition<\/p>\n","r":"<p>La couche du dessus est plus récente (série non renversée).<\/p>\n"},{"n":"principes-stratigraphie","k":1,"ch":"principes-stratigraphie","q":"<p>Discordance angulaire<\/p>\n","r":"<p>Couches anciennes déformées et érodées, recouvertes par des couches plus jeunes.<\/p>\n"},{"n":"principes-stratigraphie","k":2,"ch":"principes-stratigraphie","q":"<p>Lacune<\/p>\n","r":"<p>Période non représentée par des dépôts.<\/p>\n"},{"n":"principes-stratigraphie","k":3,"ch":"principes-stratigraphie","q":"<p>Transgression<\/p>\n","r":"<p>Avancée de la mer sur le continent.<\/p>\n"},{"n":"lithostratigraphie","k":4,"ch":"lithostratigraphie","q":"<p>Formation<\/p>\n","r":"<p>Unité lithostratigraphique de base, homogène et cartographiable.<\/p>\n"},{"n":"lithostratigraphie","k":5,"ch":"lithostratigraphie","q":"<p>Faciès<\/p>\n","r":"<p>Caractères d&#39;une roche qui traduisent son milieu de dépôt.<\/p>\n"},{"n":"lithostratigraphie","k":6,"ch":"lithostratigraphie","q":"<p>Diachronisme<\/p>\n","r":"<p>Une même formation n&#39;a pas le même âge partout.<\/p>\n"},{"n":"lithostratigraphie","k":7,"ch":"lithostratigraphie","q":"<p>Ordre des unités<\/p>\n","r":"<p>Groupe &gt; formation &gt; membre &gt; banc.<\/p>\n"},{"n":"biostratigraphie","k":8,"ch":"biostratigraphie","q":"<p>Bon fossile stratigraphique<\/p>\n","r":"<p>Courte durée, large répartition, abondant, indépendant du faciès.<\/p>\n"},{"n":"biostratigraphie","k":9,"ch":"biostratigraphie","q":"<p>Biozone<\/p>\n","r":"<p>Ensemble de couches défini par son contenu fossile.<\/p>\n"},{"n":"biostratigraphie","k":10,"ch":"biostratigraphie","q":"<p>Ammonites<\/p>\n","r":"<p>Fossiles stratigraphiques du Mésozoïque.<\/p>\n"},{"n":"biostratigraphie","k":11,"ch":"biostratigraphie","q":"<p>Corrélation<\/p>\n","r":"<p>Mise en équivalence d&#39;âge de couches éloignées.<\/p>\n"},{"n":"fossilisation","k":12,"ch":"fossilisation","q":"<p>Ichnofossile<\/p>\n","r":"<p>Trace fossile d&#39;activité (piste, terrier).<\/p>\n"},{"n":"fossilisation","k":13,"ch":"fossilisation","q":"<p>Perminéralisation<\/p>\n","r":"<p>Remplissage des pores par des minéraux (bois silicifié).<\/p>\n"},{"n":"fossilisation","k":14,"ch":"fossilisation","q":"<p>Biocénose / thanatocénose<\/p>\n","r":"<p>Communauté vivante / accumulation de restes après la mort.<\/p>\n"},{"n":"fossilisation","k":15,"ch":"fossilisation","q":"<p>Dimorphisme sexuel<\/p>\n","r":"<p>Mâles et femelles de formes différentes (macroconques et microconques des ammonites).<\/p>\n"},{"n":"paleoecologie-crises","k":16,"ch":"paleoecologie-crises","q":"<p>Plus grande extinction<\/p>\n","r":"<p>Permien-Trias, 252 Ma.<\/p>\n"},{"n":"paleoecologie-crises","k":17,"ch":"paleoecologie-crises","q":"<p>Causes des crises<\/p>\n","r":"<p>Volcanisme massif, impact, variations du niveau marin et du climat.<\/p>\n"},{"n":"paleoecologie-crises","k":18,"ch":"paleoecologie-crises","q":"<p>Fossile autochtone<\/p>\n","r":"<p>Retrouvé en place, dans son milieu de vie.<\/p>\n"},{"n":"paleoecologie-crises","k":19,"ch":"paleoecologie-crises","q":"<p>Chicxulub<\/p>\n","r":"<p>Cratère d&#39;impact (Mexique) associé à la limite K-T.<\/p>\n"}];
+const OUTILS=[];
+// ---------- Sauvegarde ----------
+// Format « essais » : un objet partagé avec l'ancien module (attempts par notion, cards par indice) ; on ne touche qu'à ces deux champs.
+// Format « score10 » : scores des chapitres dans MODULE.cle, essais et cartes dans MODULE.cleEtat.
+const lireJ = (k) => { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } };
+const ecrireJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const etat = () => { const S = lireJ(MODULE.cleEtat); S.attempts = S.attempts || {}; S.cards = S.cards || {}; return S; };
+function noter(n, ok) { const S = etat(); (S.attempts[n] = S.attempts[n] || []).push(ok ? 1 : 0); if (S.attempts[n].length > 30) S.attempts[n].shift(); ecrireJ(MODULE.cleEtat, S); }
+// Maîtrisé = au moins 3 essais et 80 % de réussite sur les 5 derniers (règle commune à la plateforme).
+function statut(n) {
+  if (MODULE.format === "score10") { const v = lireJ(MODULE.cle)[n]; if (v !== undefined) return [v >= 8 ? "ok" : "fragile", v / 10]; }
+  if (MODULE.format === "best") { const v = (lireJ(MODULE.cle).notions || {})[n]; return v && v.best != null ? [v.best >= 0.8 ? "ok" : "fragile", v.best] : ["jamais", null]; }
+  if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[n]; return v && v.pc !== undefined ? [v.pc >= 80 ? "ok" : "fragile", v.pc / 100] : ["jamais", null]; } const a = (etat().attempts[n] || []).slice(-5); if (!a.length) return ["jamais", null]; const r = a.reduce((x, y) => x + y, 0) / a.length; return [(etat().attempts[n].length >= 3 && r >= 0.8) ? "ok" : "fragile", r]; }
+const NCH = {}; NOTIONS.forEach((n) => (NCH[n.ch] = NCH[n.ch] || []).push(n));
+function scoreChap(c) {
+  if (MODULE.format === "score10") return lireJ(MODULE.cle)[c.id];
+  if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[c.id]; return v && v.pc !== undefined ? Math.round(v.pc / 10) : undefined; }
+  if (MODULE.format === "best") { const v = (lireJ(MODULE.cle).notions || {})[c.id]; return v && v.best != null ? Math.round(v.best * 10) : undefined; }
+  const l = NCH[c.id] || []; if (!l.length || !l.some((n) => statut(n.id)[0] !== "jamais")) return undefined;
+  return Math.round((10 * l.filter((n) => statut(n.id)[0] === "ok").length) / l.length);
+}
+// ---------- Flashcards (boîtes de Leitner, mêmes intervalles que les anciens modules) ----------
+const CFG_C = MODULE.cartes || { champ: "box", intervalles: [0, 1, 3, 7, 14, 30], echec: 1, depart: 0 };
+const INTV = CFG_C.intervalles, CHAMP = CFG_C.champ;
+const jour = () => new Date().toISOString().slice(0, 10);
+const numJour = (d) => Math.floor(new Date(d + "T00:00:00").getTime() / 864e5);
+const dansJours = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); };
+const aRevoir = () => { const S = etat(), t = numJour(jour()); return CARTES.map((_, i) => i).filter((i) => { const st = S.cards[CARTES[i].k]; return !st || numJour(st.due) <= t; }); };
+let file = [], montre = false;
+
+const nav = document.getElementById("nav"), main = document.getElementById("main"), pct = document.getElementById("pct");
+let cur = -1, rep = {};
+const VUES = { bord: -3, cartes: -2, intro: -1 };
+function dessinerNav() {
+  let ok = 0;
+  const ligne = (i, titre, sous, v) => `<button class="${cur === i ? "on" : ""}" data-go="${i}"><span>${titre}${sous ? `<span class="se">${sous}</span>` : ""}</span><span class="sc ${v >= 8 ? "ok" : ""}">${v === undefined ? "" : v + "/10"}</span></button>`;
+  const dues = CARTES.length ? aRevoir().length : 0;
+  let h = ligne(VUES.bord, "📊 Tableau de bord");
+  if (CARTES.length) h += ligne(VUES.cartes, `🃏 Flashcards${dues ? ` <b>(${dues})</b>` : ""}`);
+  if (MODULE.intro) h += ligne(VUES.intro, "Avant de commencer");
+  h += '<div class="sep"></div>' + CHAPS.map((c, i) => { const v = scoreChap(c); if (v >= 8) ok++; return ligne(i, `${i + 1}. ${c.t}`, c.seance, v); }).join("");
+  nav.innerHTML = h;
+  pct.textContent = `${ok}/${CHAPS.length} maîtrisés`;
+}
+function vueBord() {
+  const st = NOTIONS.map((n) => ({ ...n, s: statut(n.id) }));
+  const okN = st.filter((n) => n.s[0] === "ok").length, fr = st.filter((n) => n.s[0] === "fragile"), jam = st.filter((n) => n.s[0] === "jamais");
+  const chapDe = (id) => CHAPS.findIndex((c) => c.id === id);
+  const li = (n) => `<li><button data-go="${chapDe(n.ch)}">${n.t}</button><span>${n.s[1] === null ? "jamais testé" : Math.round(100 * n.s[1]) + " %"}</span></li>`;
+  return `<h1 class="t">Tableau de bord</h1>
+  <div class="kpi"><div><b>${okN}/${NOTIONS.length}</b>${MODULE.format === "essais" ? "notions" : "chapitres"} maîtrisé(e)s</div><div><b>${fr.length}</b>à consolider</div><div><b>${CARTES.length ? aRevoir().length : 0}</b>flashcards à revoir aujourd'hui</div></div>
+  <div class="barre"><i style="width:${NOTIONS.length ? (100 * okN) / NOTIONS.length : 0}%"></i></div>
+  ${fr.length ? `<h2>À consolider en priorité</h2><ul class="liste-n">${fr.sort((a, b) => b.imp - a.imp || a.s[1] - b.s[1]).slice(0, 10).map(li).join("")}</ul>` : ""}
+  ${jam.length ? `<h2>Pas encore travaillé (les plus importants d'abord)</h2><ul class="liste-n">${jam.sort((a, b) => b.imp - a.imp).slice(0, 10).map(li).join("")}</ul>` : ""}
+  <p style="color:var(--mute);font-size:14px">Une ${MODULE.format === "essais" ? "notion" : "partie"} est maîtrisée après au moins 3 essais (QCM, exercices, flashcards) avec 80 % de réussite sur les 5 derniers.</p>`;
+}
+function vueCartes() {
+  if (!file.length) { file = aRevoir(); montre = false; }
+  if (!file.length) return `<h1 class="t">Flashcards</h1><p>✔ Rien à revoir aujourd'hui. Reviens demain : les cartes réussies reviennent après 1, 3, 7, 14 puis 30 jours.</p>`;
+  const i = file[0], c = CARTES[i], st = etat().cards[c.k], n = NOTIONS.find((x) => x.id === c.n);
+  return `<h1 class="t">Flashcards</h1><p style="color:var(--mute)">${file.length} carte(s) à revoir aujourd'hui.</p>
+  <div class="carte"><div class="lbl">${n ? n.t : ""} · ${st && st[CHAMP] >= 0 ? "boîte " + st[CHAMP] : "nouvelle"}</div>${c.q}${montre ? `<div class="rep">${c.r}</div>` : ""}</div>
+  <div class="ex-b">${montre ? `<button class="b ko" data-fc="0">Raté</button><button class="b ok" data-fc="1">Je savais</button>` : `<button class="b p" data-fc="voir">Retourner la carte</button>`}</div>`;
+}
+window.typeset = () => { if (MODULE.maths && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([main]).catch(() => {}); };
+const nEval = (c) => c.qcm.length + c.ex.filter((x) => x.rep).length;
+const norm = (t) => String(t).toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "").replace(/,/g, ".");
+function bilanChap() {
+  typeset();
+  const c = CHAPS[cur], tot = nEval(c), fait = Object.keys(rep).length, juste = Object.values(rep).reduce((a, b) => a + b, 0), bilan = document.getElementById("bilan");
+  if (!bilan) return;
+  if (fait < tot) { bilan.textContent = `Évaluation du chapitre : ${fait}/${tot} répondu(s) · ${juste} juste${juste > 1 ? "s" : ""}`; dessinerNav(); return; }
+  const sc = Math.round((10 * juste) / fait);
+  if (MODULE.format === "score10") { const s = lireJ(MODULE.cle); s[c.id] = Math.max(sc, s[c.id] ?? 0); ecrireJ(MODULE.cle, s); }
+  if (MODULE.format === "pc") { const s = lireJ(MODULE.cle); s[c.id] = { ...(s[c.id] || {}), pc: Math.round((100 * juste) / fait), date: new Date().toLocaleDateString("fr-FR") }; ecrireJ(MODULE.cle, s); }
+  if (MODULE.format === "best") { const S = etat(); S.notions = S.notions || {}; const st = S.notions[c.id] = { ...(S.notions[c.id] || {}), read: true }; st.last = juste / fait; st.best = Math.max(st.best || 0, st.last); st.tries = (st.tries || 0) + 1; ecrireJ(MODULE.cle, S); }
+  bilan.textContent = `Score : ${sc}/10 ${sc >= 8 ? "· très bien ✔" : "· relis les encadrés « Piège » puis recommence (recharge le chapitre)."}`;
+  dessinerNav();
+}
+// Outils d'origine affichés dans le chapitre : même origine, on masque tout sauf l'outil visé.
+const vueIntegre = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { vueIntegre.unobserve(e.target); chargerIntegre(e.target); } }), { rootMargin: "400px" });
+function chargerIntegre(box) {
+  const f = document.createElement("iframe");
+  f.title = "Outil interactif"; f.loading = "lazy";
+  f.src = box.dataset.src + (box.dataset.ancre ? "#" + box.dataset.ancre : "");
+  f.onload = () => {
+    let d; try { d = f.contentDocument; } catch (e) { return; }
+    if (!d) return;
+    const st = d.createElement("style");
+    st.textContent = "#mztBtn,#mztPan,.toast{display:none!important}html,body{background:transparent!important;margin:0!important;padding:0!important;min-height:0!important}";
+    d.head.appendChild(st);
+    const appliquer = () => {
+      const cible = d.querySelector(box.dataset.cible);
+      if (!cible) return;
+      let e = cible;
+      while (e && e !== d.body) {
+        e.hidden = false; e.style.display = e.style.display === "none" ? "" : e.style.display;
+        e.style.margin = "0"; e.style.padding = e === cible ? "8px 14px" : "0"; e.style.maxWidth = "none";
+        for (const sib of e.parentElement.children) if (sib !== e && !/^(SCRIPT|STYLE|LINK|META|TITLE)$/.test(sib.tagName)) sib.style.display = "none";
+        e = e.parentElement;
+      }
+      if (box.dataset.garder) for (const c of cible.children) c.style.display = c.matches(box.dataset.garder) ? "" : "none";
+    };
+    appliquer(); setTimeout(appliquer, 400);
+    const ajuster = () => { const h = Math.max(d.body.scrollHeight, d.documentElement.scrollHeight); if (h && Math.abs(f.offsetHeight - h) > 4) f.style.height = h + "px"; };
+    ajuster(); new ResizeObserver(ajuster).observe(d.body); setInterval(ajuster, 1500);
+    const att = box.querySelector(".integre-att"); if (att) att.remove();
+  };
+  box.appendChild(f);
+}
+function lancerOutils() {
+  main.querySelectorAll(".integre").forEach((b) => vueIntegre.observe(b));
+  main.querySelectorAll("[data-outil]").forEach((d) => {
+    const tmp = document.createElement("div"); tmp.innerHTML = OUTILS[Number(d.dataset.outil)];
+    tmp.querySelectorAll("script").forEach((sc) => { const n = document.createElement("script"); n.textContent = sc.textContent; sc.replaceWith(n); });
+    d.replaceWith(...tmp.childNodes);
+  });
+}
+function aller(i) {
+  if (i === VUES.intro && !MODULE.intro) i = 0;
+  if (i === VUES.cartes && !CARTES.length) i = 0;
+  cur = i; rep = {}; nav.classList.remove("open");
+  try { localStorage.setItem(MODULE.cleEtat + "_dernier", String(i)); } catch (e) {}
+  if (i === VUES.bord) main.innerHTML = vueBord();
+  else if (i === VUES.cartes) { file = []; main.innerHTML = vueCartes(); }
+  else if (i === VUES.intro) main.innerHTML = `<h1 class="t">Avant de commencer</h1>${MODULE.intro}<div class="nx"><span></span><button class="b p" data-go="0">Commencer →</button></div>`;
+  else {
+    const c = CHAPS[i], n = nEval(c);
+    main.innerHTML = `${c.seance ? `<div class="seance">${c.seance}</div>` : ""}<h1 class="t">${c.t}</h1>${c.html}${n ? `<div class="bilan" id="bilan">Évaluation du chapitre : 0/${n} répondu(s)</div>` : ""}<div class="nx">${i > 0 || MODULE.intro ? `<button class="b" data-go="${i > 0 ? i - 1 : VUES.intro}">← Précédent</button>` : "<span></span>"}${i < CHAPS.length - 1 ? `<button class="b p" data-go="${i + 1}">Chapitre suivant →</button>` : ""}</div>`;
+    lancerOutils();
+  }
+  scrollTo(0, 0); dessinerNav(); typeset();
+}
+document.addEventListener("click", (e) => {
+  const g = e.target.closest("[data-go]"); if (g) return aller(Number(g.dataset.go));
+  const et = e.target.closest("[data-et]");
+  if (et) { const f = et.closest(".etapes"), l = f.querySelectorAll(".etape"); let i = Math.min(l.length - 1, Math.max(0, Number(f.dataset.i) + Number(et.dataset.et))); f.dataset.i = i; l.forEach((x, j) => (x.hidden = j !== i)); return; }
+  const fc = e.target.closest("[data-fc]");
+  if (fc) {
+    if (fc.dataset.fc === "voir") { montre = true; main.innerHTML = vueCartes(); typeset(); return; }
+    const i = file.shift(), ok = fc.dataset.fc === "1", S = etat(), k = CARTES[i].k, st = S.cards[k] || { [CHAMP]: CFG_C.depart ?? 0 };
+    st[CHAMP] = ok ? Math.min(INTV.length - 1, Math.max(0, st[CHAMP] + 1)) : CFG_C.echec; st.due = dansJours(ok ? INTV[st[CHAMP]] : 1); S.cards[k] = st; ecrireJ(MODULE.cleEtat, S);
+    noter(CARTES[i].n, ok); montre = false; main.innerHTML = vueCartes(); dessinerNav(); typeset(); return;
+  }
+  const xb = e.target.closest("[data-ex]");
+  if (xb) {
+    const ex = xb.closest(".ex"), v = xb.dataset.ex;
+    if (v === "h") ex.querySelector(".ex-h").hidden = false;
+    else if (v === "v") {
+      const k = Number(ex.dataset.x), it = CHAPS[cur].ex[k], inp = ex.querySelector("input");
+      if (!inp.value.trim() || ("x" + k) in rep) return;
+      const ok = it.tol !== null ? Math.abs(parseFloat(norm(inp.value)) - parseFloat(it.rep[0])) <= it.tol : it.rep.some((r) => norm(r) === norm(inp.value));
+      rep["x" + k] = ok ? 1 : 0; noter(it.n, ok); inp.disabled = true; xb.disabled = true;
+      inp.style.borderColor = ok ? "var(--ok)" : "var(--ko)";
+      const c = ex.querySelector(".ex-c"); c.hidden = false; c.insertAdjacentHTML("afterbegin", `<p>${ok ? "✔ Bonne réponse." : "✘ Raté."}</p>`);
+      bilanChap();
+    }
+    else if (v === "c") ex.querySelector(".ex-c").hidden = false;
+    else if (!ex.classList.contains("fait")) { ex.classList.add("fait"); noter(CHAPS[cur].ex[Number(ex.dataset.x)].n, v === "1"); xb.parentNode.innerHTML = v === "1" ? "✔ Noté : réussi." : "✘ Noté : à retravailler."; dessinerNav(); }
+    return;
+  }
+  const o = e.target.closest(".opt"); if (!o) return;
+  const qq = o.closest(".qq"), k = Number(qq.dataset.k), c = CHAPS[cur], q = c.qcm[k];
+  if (("q" + k) in rep) return;
+  rep["q" + k] = Number(o.dataset.o) === q.a ? 1 : 0;
+  noter(q.n, rep["q" + k] === 1);
+  qq.querySelectorAll(".opt").forEach((b, j) => { b.disabled = true; if (j === q.a) b.classList.add("bon"); else if (b === o) b.classList.add("faux"); });
+  const ex = qq.querySelector(".qq-e"); ex.innerHTML = (rep["q" + k] ? "✔ Bonne réponse. " : "✘ Raté. ") + q.e; ex.hidden = false;
+  bilanChap();
+});
+document.getElementById("menu").onclick = () => nav.classList.toggle("open");
+let depart = MODULE.intro ? -1 : 0; try { const d = localStorage.getItem(MODULE.cleEtat + "_dernier"); if (d !== null) depart = Number(d); } catch (e) {}
+aller(depart >= -3 && depart < CHAPS.length ? depart : 0);
+</script>
+<script>
+window.MZT_CONFIG={"id":"stratigraphie","module":"Stratigraphie et paléontologie","prof":"Pr M. Rhalmi (paléontologie)","student":"un étudiant de licence (FST Béni Mellal)","conventions":"Module de la FST Béni Mellal, BCG S3, Département des Sciences de la Terre : demi-module Stratigraphie (chapitres 1 Stratigraphie, 2 Lithostratigraphie, 3 Biostratigraphie, 2020-2021) et demi-module Paléontologie et paléoécologie (Pr Mohamed Rhalmi). Les contrôles de paléontologie (1 h) demandent des définitions courtes et des questions de synthèse."};
+window.MZT_CONFIG.getContext = () => { const h = document.querySelector("h1.t"); return { label: h ? h.textContent : MODULE.titre, text: (document.querySelector("main").innerText || "").slice(0, 6000) }; };
+</script>
+<script>
+/* ToumaiLearn · tuteur commun (bouton flottant présent sur chaque section)
+   Configuration attendue avant ce script : window.MZT_CONFIG = {
+     id: 'crypto',                      // identifiant court du module (stockage)
+     module: 'Cryptographie',           // nom affiché et donné au tuteur
+     prof: 'Pr A. Farchane',
+     student:'un étudiant de licence (FSABM)',
+     conventions: '…',                  // conventions du prof à respecter
+     getContext: () => ({label, text})  // facultatif : extrait courant (sinon section visible)
+   };
+   Fonctions : extrait automatique de la section visible (ou contexte fourni par le module),
+   mode rapide explicatif par défaut, mode approfondi (modèle supérieur), relances rapides,
+   photo jointe, bouton Arrêter, mémoire des difficultés (note cachée MÉMO), historique par
+   section avec recherche. Stockage : compte (db) si disponible, sinon navigateur. */
+(function () {
+  if (window.MZT) return;
+  const C = Object.assign({ id: 'module', module: 'ce module', prof: '', student: 'un étudiant', conventions: '' }, window.MZT_CONFIG || {});
+  const LS = 'mzt-' + C.id;
+  const $ = (s, r) => (r || document).querySelector(s);
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const today = () => new Date().toLocaleDateString('fr-FR');
+  const norm = (t) => String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  // ---------- état ----------
+  let ST = { threads: [], memos: [] };
+  try { ST = Object.assign(ST, JSON.parse(localStorage.getItem(LS) || '{}')); } catch (e) {}
+  const saveLocal = () => { try { localStorage.setItem(LS, JSON.stringify({ threads: ST.threads.slice(-80), memos: ST.memos.slice(-30) })); } catch (e) {} };
+  let sample = null, ready = false, imgOK = false, db = null, base = null;
+  let cur = null, busy = false, ctl = null, img = null, forced = null;
+
+  // ---------- extrait de la section visible ----------
+  function visibleSection() {
+    const cands = [...document.querySelectorAll('section, [data-tab], [data-view], main')]
+      .filter((el) => !el.closest('.mzt-pan') && el.offsetParent !== null && (el.innerText || '').trim().length > 80);
+    // la plus profonde parmi les visibles qui contiennent le plus de texte
+    cands.sort((a, b) => (b.innerText || '').length - (a.innerText || '').length);
+    let el = cands.find((c) => !cands.some((d) => d !== c && c.contains(d) && (d.innerText || '').length > 0.6 * (c.innerText || '').length)) || cands[0] || document.body;
+    const h = el.querySelector('h1, h2, h3');
+    return { label: (h ? h.innerText : document.title).trim().slice(0, 80), text: (el.innerText || '').replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim() };
+  }
+  // MathJax découpe une formule en un symbole par ligne dans innerText : on la remplace le temps de la lecture par son LaTeX.
+  // (vaut aussi pour l'extrait fourni par la page du module, qui lit lui-même innerText)
+  function avecFormulesEnLatex(lire) {
+    let items = [];
+    try { if (window.MathJax && MathJax.startup && MathJax.startup.document) items = MathJax.startup.document.getMathItemsWithin(document.body) || []; } catch (e) {}
+    const poses = [];
+    items.forEach((it) => {
+      const r = it.typesetRoot; if (!r || !r.isConnected || !r.parentNode) return;
+      const s = document.createElement('span'); s.textContent = it.display ? '\n$$' + it.math.trim() + '$$\n' : '$' + it.math.trim() + '$';
+      r.parentNode.insertBefore(s, r); const d = r.style.display; r.style.display = 'none'; poses.push([s, r, d]);
+    });
+    try { return lire(); } finally { poses.forEach(([s, r, d]) => { s.remove(); r.style.display = d; }); }
+  }
+  function context() {
+    if (forced) return forced;
+    return avecFormulesEnLatex(() => {
+      try { if (C.getContext) { const c = C.getContext(); if (c && c.text) return c; } } catch (e) {}
+      return visibleSection();
+    });
+  }
+
+  // ---------- interface ----------
+  const css = `
+.mzt-btn{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9999;font:600 15px Inter,system-ui,sans-serif;background:#B4532A;color:#fff;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.mzt-pan{--b:#FBF7F0;--s:#F4EDE1;--i:#1E2433;--m:#5C5346;--l:#DCCFBA;--a:#B4532A;--w:#8A5A12;--bad:#A23B2A;position:fixed;right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:9999;width:min(440px,calc(100vw - 20px));height:min(680px,calc(100vh - 70px));height:min(680px,calc(100dvh - 70px));max-height:calc(100vh - 20px);max-height:calc(100dvh - 20px);background:var(--b);color:var(--i);border:1px solid var(--l);border-radius:12px;display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(0,0,0,.3);font:14px/1.5 system-ui,sans-serif}
+@media (prefers-color-scheme:dark){.mzt-pan{--b:#1E2532;--s:#141922;--i:#EDE6D9;--m:#A9A094;--l:#343D4D;--a:#E8906A;--w:#E4C48A;--bad:#E58A7A}}
+.mzt-pan *{box-sizing:border-box}
+.mzt-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:8px 10px;border-bottom:1px solid var(--l)}
+.mzt-h b{flex:0 0 auto}.mzt-h .mzt-ctx{flex:1 1 90px;min-width:0;color:var(--m);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mzt-pan button{font:600 12px system-ui,sans-serif;border:1px solid var(--l);background:var(--s);color:var(--i);border-radius:999px;padding:4px 10px;cursor:pointer}
+.mzt-pan button.mzt-pri{background:var(--a);color:#fff;border-color:var(--a)}
+.mzt-pan button:disabled{opacity:.5}
+.mzt-body{flex:1;min-height:0;display:flex;flex-direction:column}
+.mzt-log{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.mzt-m{padding:8px 11px;border-radius:10px;max-width:92%;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere}
+.mzt-m.a{background:var(--s);align-self:flex-start}.mzt-m.u{background:color-mix(in srgb,var(--a) 22%,transparent);align-self:flex-end}
+.mzt-m .mzt-tag{display:block;font-size:11px;color:var(--w);font-weight:700}
+.mzt-deepbtn{align-self:flex-start;border-color:var(--w)!important;color:var(--w)!important;background:transparent!important}
+.mzt-chips{display:flex;gap:5px;flex-wrap:wrap;padding:4px 10px}
+.mzt-f{display:flex;flex-direction:column;gap:6px;padding:8px 10px;border-top:1px solid var(--l)}
+.mzt-f textarea{width:100%;min-height:54px;max-height:140px;resize:vertical;font:16px system-ui,sans-serif;padding:7px;border:1px solid var(--l);border-radius:8px;background:var(--s);color:var(--i)}
+.mzt-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.mzt-row label{display:flex;gap:4px;align-items:center;font-size:12px;color:var(--m);cursor:pointer}
+.mzt-note{font-size:11.5px;color:var(--m);margin:0}
+.mzt-pan details{padding:0 10px}.mzt-pan summary{cursor:pointer;font-size:12px;color:var(--a);font-weight:600;padding:4px 0}
+.mzt-prev{max-height:140px;overflow:auto;font-size:12px;white-space:pre-wrap;background:var(--s);border-radius:6px;padding:6px;color:var(--m)}
+.mzt-list{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.mzt-item{border:1px solid var(--l);border-radius:8px;padding:8px}
+.mzt-item .mzt-meta{font-size:11px;color:var(--m)}
+.mzt-pan input[type=search]{width:100%;font:16px system-ui,sans-serif;padding:7px;border:1px solid var(--l);border-radius:8px;background:var(--s);color:var(--i)}
+.mzt-pan input[type=checkbox]{width:auto}
+.mzt-pan[hidden],.mzt-btn[hidden],.mzt-pan [hidden]{display:none!important}
+.mzt-h button{flex:0 0 auto;white-space:nowrap}
+.mzt-pan #mztX{background:var(--bad);border-color:var(--bad);color:#fff}
+.mzt-m.a{white-space:normal}.mzt-m.a p{margin:0 0 6px}.mzt-m.a p:last-child{margin-bottom:0}
+.mzt-m.a ul,.mzt-m.a ol{margin:4px 0 6px;padding-left:20px}.mzt-m.a li{margin:2px 0}
+.mzt-m code{font:12.5px ui-monospace,Menlo,Consolas,monospace;background:color-mix(in srgb,var(--i) 10%,transparent);padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
+.mzt-m pre{margin:6px 0;padding:8px;overflow-x:auto;background:color-mix(in srgb,var(--i) 10%,transparent);border-radius:6px;font:12.5px ui-monospace,Menlo,Consolas,monospace;white-space:pre}
+.mzt-m pre code{background:none;padding:0}
+.mzt-tex{font:12.5px ui-monospace,Menlo,Consolas,monospace;color:var(--m)}.mzt-tex[data-ok]{font:inherit;color:inherit}
+.mzt-tex.d{display:block;margin:6px 0;text-align:center}
+.mzt-m mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}.mzt-m mjx-container[display]{margin:0!important}
+.mzt-m mjx-container svg{max-width:none}
+.mzt-tab{overflow-x:auto;margin:6px 0}.mzt-tab table{border-collapse:collapse;font-size:13px;min-width:60%}
+.mzt-tab th,.mzt-tab td{border:1px solid var(--l);padding:4px 8px;text-align:left;vertical-align:top}.mzt-tab th{background:color-mix(in srgb,var(--a) 12%,transparent);font-weight:600}`;
+  const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+  document.body.insertAdjacentHTML('beforeend', `
+<button class="mzt-btn" id="mztBtn" type="button">Tuteur</button>
+<div class="mzt-pan" id="mztPan" hidden role="dialog" aria-label="Tuteur">
+ <div class="mzt-h"><b>Tuteur</b><span class="mzt-ctx" id="mztCtx"></span><button type="button" id="mztTabH">Historique</button><button type="button" id="mztTabM">Mémoire</button><button type="button" id="mztX">Fermer</button></div>
+ <div class="mzt-body" id="mztChat">
+  <details><summary>Voir l'extrait envoyé au tuteur</summary><div class="mzt-prev" id="mztPrev"></div></details>
+  <div class="mzt-log" id="mztLog"></div>
+  <div class="mzt-chips" id="mztChips"></div>
+  <form class="mzt-f" id="mztF">
+   <textarea id="mztIn" placeholder="Ta question, ou ta réponse à vérifier… (Entrée pour envoyer, Maj+Entrée pour aller à la ligne)"></textarea>
+   <div class="mzt-row">
+    <button class="mzt-pri" id="mztSend" type="submit">Envoyer</button>
+    <button type="button" id="mztStop" hidden>Arrêter</button>
+    <label id="mztImgL" hidden>📎 Photo<input type="file" id="mztImg" accept="image/*" hidden></label>
+    <span class="mzt-note" id="mztImgN"></span>
+    <label title="Modèle plus puissant : réponse plus longue et plus détaillée, consomme davantage"><input type="checkbox" id="mztDeep"> Approfondi</label>
+    <button type="button" id="mztNew">Nouvelle discussion</button>
+   </div>
+   <p class="mzt-note" id="mztNote"></p>
+  </form>
+ </div>
+ <div class="mzt-body" id="mztHist" hidden><div style="padding:10px"><input type="search" id="mztQ" placeholder="Chercher dans toutes mes anciennes questions…"></div><div class="mzt-list" id="mztList"></div></div>
+ <div class="mzt-body" id="mztMem" hidden><div class="mzt-list"><p class="mzt-note">Ce que le tuteur retient de tes difficultés d'une conversation à l'autre. Il s'en sert pour faire des liens avec tes confusions passées. Tu peux effacer une note.</p><div id="mztMemL"></div></div></div>
+</div>`);
+
+  const CHIPS = ['Explique plus simplement', 'Donne un exemple concret', "Pourquoi c'est un piège ?", 'Fais-moi un mini-exercice'];
+  $('#mztChips').innerHTML = CHIPS.map((c) => `<button type="button" data-chip="${esc(c)}">${esc(c)}</button>`).join('');
+
+  function view(v) {
+    $('#mztChat').hidden = v !== 'chat'; $('#mztHist').hidden = v !== 'hist'; $('#mztMem').hidden = v !== 'mem';
+    $('#mztTabH').textContent = v === 'hist' ? 'Retour' : 'Historique'; $('#mztTabM').textContent = v === 'mem' ? 'Retour' : 'Mémoire';
+    if (v === 'hist') renderList(); if (v === 'mem') renderMem();
+  }
+  function note() {
+    $('#mztNote').textContent = !ready ? 'Connexion au tuteur…' : sample
+      ? 'Mode rapide (économe) par défaut. « Approfondi » ou « Approfondir cette réponse » utilise un modèle supérieur. Pense à chercher dans l\'Historique avant de reposer une question.'
+      : 'Le tuteur n\'est pas disponible ici (il faut ouvrir la page dans Claude et accepter la demande d\'autorisation). L\'historique reste consultable.';
+  }
+  function refreshCtx() {
+    const c = context(); $('#mztCtx').textContent = '· ' + c.label; $('#mztPrev').textContent = c.text.slice(0, 2500) + (c.text.length > 2500 ? '\n…' : '');
+    return c;
+  }
+  function openPanel(ctx) {
+    forced = ctx && ctx.text ? ctx : null;
+    $('#mztPan').hidden = false; $('#mztBtn').hidden = true; view('chat');
+    const c = refreshCtx();
+    if (!cur || cur.sec !== c.label) { const ts = ST.threads.filter((t) => t.sec === c.label); cur = forced ? null : ts[ts.length - 1] || null; }
+    renderLog(); note(); setTimeout(() => $('#mztIn').focus(), 30);
+  }
+  function closePanel() { $('#mztPan').hidden = true; $('#mztBtn').hidden = false; forced = null; }
+
+  // Sur téléphone, la réponse doit avoir la place : relances et note seulement sur une discussion vide.
+  function compacter(on) { $('#mztChips').hidden = on; $('#mztNote').hidden = on; }
+  function renderLog() {
+    const log = $('#mztLog'); log.innerHTML = ''; compacter(!!(cur && cur.msgs.length));
+    if (!cur || !cur.msgs.length) {
+      log.innerHTML = `<div class="mzt-m a">Pose ta question sur « ${esc(context().label)} » : une phrase que tu ne comprends pas, un calcul à vérifier, un exemple en plus… Tu peux joindre une photo de ton brouillon.</div>`; return;
+    }
+    cur.msgs.forEach((m, i) => {
+      const d = document.createElement('div'); d.className = 'mzt-m ' + (m.r === 'u' ? 'u' : 'a');
+      if (m.d) d.innerHTML = '<span class="mzt-tag">Réponse approfondie</span>';
+      if (m.r === 'u') d.appendChild(document.createTextNode(m.t)); else d.insertAdjacentHTML('beforeend', md(m.t)); log.appendChild(d);
+      if (m.r === 'a' && i === cur.msgs.length - 1 && !m.d && !busy) {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'mzt-deepbtn'; b.textContent = 'Approfondir cette réponse';
+        b.onclick = () => ask('Approfondis ta réponse précédente : explique plus en détail, avec un exemple complet et les pièges.', true); log.appendChild(b);
+      }
+    });
+    dessinerMaths(log); log.scrollTop = 1e9;
+  }
+  function renderList() {
+    const q = norm($('#mztQ').value || ''); const ts = [...ST.threads].reverse().filter((t) => !q || norm(t.msgs.map((m) => m.t).join(' ')).includes(q));
+    $('#mztList').innerHTML = ts.length ? ts.map((t) => `<details class="mzt-item"><summary>${esc(t.title)}</summary><div class="mzt-meta">${esc(t.sec)} · ${esc(t.date)}</div>${t.msgs.map((m) => `<div class="mzt-m ${m.r === 'u' ? 'u' : 'a'}" style="margin:6px 0">${m.r === 'u' ? esc(m.t) : md(m.t)}</div>`).join('')}<button type="button" data-cont="${esc(t.id)}">Continuer cette discussion</button></details>`).join('')
+      : `<p class="mzt-note">${ST.threads.length ? 'Aucune discussion ne contient ce mot.' : 'Aucune discussion pour l\'instant.'}</p>`;
+    dessinerMaths($('#mztList'));
+  }
+  function renderMem() {
+    $('#mztMemL').innerHTML = ST.memos.length ? ST.memos.map((m, i) => `<div class="mzt-item"><div class="mzt-meta">${esc(m.date)}</div>${esc(m.text)}<div><button type="button" data-memdel="${i}" style="margin-top:4px">Effacer</button></div></div>`).join('')
+      : '<p class="mzt-note">Aucune note pour l\'instant. Elles apparaîtront au fil de tes questions.</p>';
+  }
+
+  // ---------- stockage compte ----------
+  async function saveThread(t) {
+    saveLocal(); if (!db) return;
+    try { await db.collection(base + '/threads').doc(t.id).set({ sec: t.sec, date: t.date, title: t.title, msgs: t.msgs.slice(-40) }); } catch (e) {}
+  }
+  async function saveMemos() { saveLocal(); if (!db) return; try { await db.doc(base).set({ memos: ST.memos.slice(-30), updated: Date.now() }); } catch (e) {} }
+
+  // ---------- appel au tuteur ----------
+  const ERR = { not_granted: 'Tu n\'as pas autorisé la page à utiliser Claude. Recharge-la et accepte la demande, ou change-le dans le menu Autorisations de l\'artifact.', rate_limited: 'Trop de questions d\'un coup, ou limite d\'usage atteinte. Réessaie dans un moment.', prompt_too_large: 'L\'extrait est trop long : ouvre une partie plus précise du cours.', image_rejected: 'Cette photo n\'est pas acceptée. Essaie un JPEG ou un PNG plus léger.', refused: 'Claude n\'a pas pu répondre à cette demande. Reformule ta question.' };
+  const visible = (t) => {
+    const L = String(t).split('\n');
+    for (let i = L.length - 1; i >= Math.max(0, L.length - 3); i--) if (/^\s*M[ÉE]MO\s*:/i.test(L[i])) return L.slice(0, i).join('\n').trim();
+    return String(t).trim();
+  };
+  // rendu léger : on échappe le HTML d'abord, puis gras, italique, code, titres, puces, tableaux et blocs de code.
+  // Les formules ($…$, $$…$$, \(…\), \[…\]) sont mises de côté avant le Markdown, puis dessinées par MathJax.
+  const MATHS = [];
+  const protegerMaths = (t) => {
+    MATHS.length = 0;
+    const garde = (tex, d) => { MATHS.push({ tex: tex.trim(), d }); return '\u0000' + (MATHS.length - 1) + '\u0000'; };
+    const RX = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\\\(([\s\S]+?)\\\)|\$(?=[^\s$\d])([^$\n]*?[^\s$\\])\$(?!\d)/g;
+    // le code (blocs ``` et `…`) n'est jamais lu comme une formule
+    return String(t).split(/(```[\s\S]*?(?:```|$))/).map((bloc, i) => i % 2 ? bloc
+      : bloc.split(/(`[^`\n]*`)/).map((x, j) => j % 2 ? x : x.replace(RX, (_, a, b, c, d) => a != null ? garde(a, 1) : b != null ? garde(b, 1) : c != null ? garde(c, 0) : garde(d, 0))).join('')).join('');
+  };
+  const rendreMaths = (h) => h.replace(/\u0000(\d+)\u0000/g, (_, n) => { const m = MATHS[+n]; return m ? `<span class="mzt-tex${m.d ? ' d' : ''}" data-d="${m.d}">${esc(m.tex)}</span>` : ''; });
+  const inl = (s) => {
+    const p = s.split('`'); if (p.length % 2 === 0) { const last = p.pop(); p[p.length - 1] += '`' + last; }
+    return p.map((x, i) => i % 2 ? '<code>' + esc(x) + '</code>' : esc(x).replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*\w])\*([^*\n]+)\*(?![*\w])/g, '$1<em>$2</em>')).join('');
+  };
+  const cellules = (l) => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
+  const md = (t) => {
+    const out = []; let list = null, code = null, tab = null;
+    const flushTab = () => {
+      if (!tab) return;
+      if (tab.length >= 2 && /^[\s|:-]+$/.test(tab[1]) && tab[1].includes('-')) {
+        const [tete, , ...corps] = tab;
+        out.push('<div class="mzt-tab"><table><thead><tr>' + cellules(tete).map((c) => '<th>' + inl(c) + '</th>').join('') + '</tr></thead><tbody>'
+          + corps.map((r) => '<tr>' + cellules(r).map((c) => '<td>' + inl(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>');
+      } else tab.forEach((r) => out.push('<p>' + inl(r) + '</p>'));
+      tab = null;
+    };
+    const flush = () => { flushTab(); if (list) { out.push('</' + list + '>'); list = null; } };
+    protegerMaths(t).split('\n').forEach((raw) => {
+      if (/^\s*```/.test(raw)) { if (code === null) { flush(); code = []; } else { out.push('<pre>' + esc(code.join('\n')) + '</pre>'); code = null; } return; }
+      if (code !== null) { code.push(raw); return; }
+      let m;
+      if (/^\s*\|.*\|\s*$/.test(raw)) { if (list) { out.push('</' + list + '>'); list = null; } (tab = tab || []).push(raw); return; }
+      flushTab();
+      if ((m = raw.match(/^\s*#{1,6}\s+(.*)$/))) { flush(); out.push('<p><strong>' + inl(m[1]) + '</strong></p>'); }
+      else if ((m = raw.match(/^\s*[-*•]\s+(.*)$/))) { if (list !== 'ul') { flush(); out.push('<ul>'); list = 'ul'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if ((m = raw.match(/^\s*\d+[.)]\s+(.*)$/))) { if (list !== 'ol') { flush(); out.push('<ol>'); list = 'ol'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if (!raw.trim()) flush();
+      else { flush(); out.push('<p>' + inl(raw) + '</p>'); }
+    });
+    if (code !== null) out.push('<pre>' + esc(code.join('\n')) + '</pre>');
+    flush(); return rendreMaths(out.join(''));
+  };
+
+  // ---------- MathJax : celui de la page s'il existe, sinon chargé à la première formule ----------
+  let mjPret = null;
+  const mathjax = () => mjPret || (mjPret = new Promise((ok, ko) => {
+    if (!window.MathJax) {
+      window.MathJax = { svg: { fontCache: 'global' }, startup: { typeset: false } };
+      const s = document.createElement('script'); s.async = true; s.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js';
+      s.onerror = () => ko(new Error('MathJax')); document.head.appendChild(s);
+    }
+    let n = 0; const t = setInterval(() => {
+      if (window.MathJax && MathJax.tex2svgPromise && MathJax.startup && MathJax.startup.promise) { clearInterval(t); MathJax.startup.promise.then(ok, ko); }
+      else if (++n > 150) { clearInterval(t); ko(new Error('MathJax')); }
+    }, 100);
+  })).catch((e) => { mjPret = null; throw e; });
+  const svgCache = new Map(); let file = Promise.resolve();
+  function dessinerMaths(racine) {
+    const spans = [...racine.querySelectorAll('.mzt-tex:not([data-ok])')]; if (!spans.length) return;
+    mathjax().then(() => spans.forEach((sp) => {
+      const cle = sp.dataset.d + '|' + sp.textContent;
+      const poser = (n) => { if (!sp.isConnected || sp.dataset.ok) return; sp.textContent = ''; sp.appendChild(n.cloneNode(true)); sp.dataset.ok = '1'; };
+      if (svgCache.has(cle)) return poser(svgCache.get(cle));
+      file = file.then(() => MathJax.tex2svgPromise(sp.textContent, { display: sp.dataset.d === '1' }).then((n) => { svgCache.set(cle, n); poser(n); })).catch(() => {});
+    })).catch(() => {});
+  }
+  async function ask(q, deep) {
+    q = (q || '').trim(); deep = deep || $('#mztDeep').checked;
+    if (busy || !q) return; if (!sample) { note(); return; }
+    const c = refreshCtx();
+    if (!cur || (cur.sec !== c.label && !forced)) { cur = { id: 't' + Date.now().toString(36), sec: c.label, date: today(), title: q.slice(0, 80), msgs: [] }; ST.threads.push(cur); }
+    else if (!ST.threads.includes(cur)) ST.threads.push(cur);
+    cur.msgs.push({ r: 'u', t: q }); busy = true; renderLog();
+    const out = document.createElement('div'); out.className = 'mzt-m a'; out.textContent = deep ? 'Réflexion approfondie…' : 'Réflexion…'; $('#mztLog').appendChild(out);
+    $('#mztSend').disabled = true; $('#mztStop').hidden = false;
+    const style = deep
+      ? 'Réponse APPROFONDIE (400 à 700 mots) : 1) l\'intuition avec une analogie, 2) l\'explication détaillée pas à pas, 3) pourquoi ça marche, 4) un exemple complet chiffré, 5) les pièges fréquents et ce qui tombe à l\'examen, 6) une question pour vérifier la compréhension.'
+      : 'Réponse EXPLICATIVE (150 à 250 mots) : 1) l\'idée en une phrase, 2) l\'explication pas à pas, 3) un petit exemple chiffré ou concret, 4) une courte question pour vérifier la compréhension.';
+    const mem = [];
+    if (ST.memos.length) mem.push('DIFFICULTÉS DÉJÀ REPÉRÉES :\n' + ST.memos.slice(-12).map((m) => `- ${m.date} : ${m.text}`).join('\n'));
+    const lastQ = ST.threads.flatMap((t) => t.msgs.filter((m) => m.r === 'u').map((m) => `[${t.sec}] ${m.t.slice(0, 100)}`)).slice(-6);
+    if (lastQ.length) mem.push('SES DERNIÈRES QUESTIONS :\n' + lastQ.map((x) => '- ' + x).join('\n'));
+    const rules = `Tu es le tuteur de ${C.student}, pour le module ${C.module}${C.prof ? ' du ' + C.prof : ''}. Il apprend souvent la notion pour la première fois.
+Règles : réponds en français simple, en Markdown léger (**gras** pour les termes clés, tirets, étapes numérotées). Toute formule ou tout calcul s'écrit en LaTeX : $…$ dans la phrase, $$…$$ seul sur sa ligne pour une formule importante (ex. $\\hat y_i$, $$\\text{MSE}=\\frac{1}{n}\\sum_{i=1}^{n}(y_i-\\hat y_i)^2$$) ; jamais d'accents graves pour une formule, ils sont réservés au code et aux noms de fonctions. Un petit tableau Markdown est permis s'il clarifie (3 colonnes maximum, l'écran est étroit). ${style} Appuie-toi d'abord sur l'EXTRAIT ci-dessous et sur les conventions du prof ; si une source générale diffère du cours, signale l'écart et dis quelle version utiliser à l'examen (celle du prof). Pour un calcul, pose chaque étape et vérifie-la. S'il envoie une réponse ou une photo de brouillon, corrige étape par étape et nomme précisément l'erreur. Si tu n'es pas sûr, dis-le. S'il demande un mini-exercice, donne l'exercice sans la solution.
+Utilise sa mémoire pour faire des liens avec ses confusions passées, sans la réciter.
+Termine TOUJOURS par une dernière ligne séparée au format exact « MÉMO: … » qui résume en 15 mots maximum la difficulté révélée par sa question (ou « MÉMO: rien »). Cette ligne lui est cachée.
+${C.conventions ? 'CONVENTIONS DU PROF : ' + C.conventions + '\n' : ''}MÉMOIRE DE L'ÉLÈVE :
+${mem.join('\n\n') || '(rien pour l\'instant)'}
+EXTRAIT (${c.label}) :
+${c.text.slice(0, deep ? 9000 : 3500)}`;
+    const recent = cur.msgs.slice(deep ? -9 : -5, -1).map((m) => ({ role: m.r === 'u' ? 'user' : 'assistant', content: m.t }));
+    while (recent.length && recent[0].role !== 'user') recent.shift();
+    const msgs = [...recent.filter((m) => m.content && m.content.trim()), { role: 'user', content: q }]; while (msgs.length > 1 && msgs[0].role !== 'user') msgs.shift(); msgs[0] = { role: 'user', content: rules + '\n\n---\nQuestion : ' + msgs[0].content };
+    ctl = new AbortController();
+    const opts = { modelTier: deep ? 'complex' : 'quick', cache: false, signal: ctl.signal, onText: ({ text }) => { out.innerHTML = md(visible(text)); dessinerMaths(out); $('#mztLog').scrollTop = 1e9; } };
+    if (img) opts.images = [img];
+    try {
+      const r = await sample(msgs, opts);
+      const mm = r.text.match(/(?:^|\n)\s*M[ÉE]MO\s*:\s*(.+)\s*$/i);
+      cur.msgs.push({ r: 'a', t: visible(r.text) + (r.truncated ? '\n\n(Réponse coupée : pose une question plus ciblée.)' : ''), d: !!deep });
+      if (mm && !/^\s*rien/i.test(mm[1])) { ST.memos.push({ date: today(), text: mm[1].trim().slice(0, 160) }); if (ST.memos.length > 30) ST.memos.shift(); saveMemos(); }
+      await saveThread(cur);
+    } catch (e) {
+      const kept = e && e.text ? visible(e.text) : '';
+      if (e && e.code === 'cancelled') { if (kept) cur.msgs.push({ r: 'a', t: kept + '\n(Arrêté.)' }); else cur.msgs.pop(); }
+      else { cur.msgs.pop(); compacter(!!cur.msgs.length); out.textContent = (kept ? kept + '\n\n' : '') + (ERR[e && e.code] || 'Le tuteur n\'a pas pu répondre. Réessaie dans un instant.'); }
+      if (!cur.msgs.length) ST.threads = ST.threads.filter((t) => t !== cur);
+      saveLocal();
+      if (!(e && e.code === 'cancelled')) { busy = false; $('#mztSend').disabled = false; $('#mztStop').hidden = true; img = null; $('#mztImgN').textContent = ''; return; }
+    }
+    busy = false; $('#mztSend').disabled = false; $('#mztStop').hidden = true; img = null; $('#mztImg').value = ''; $('#mztImgN').textContent = ''; renderLog();
+  }
+
+  // ---------- événements ----------
+  $('#mztBtn').onclick = () => openPanel(null);
+  $('#mztX').onclick = closePanel;
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#mztPan').hidden) closePanel(); });
+  $('#mztTabH').onclick = () => view($('#mztHist').hidden ? 'hist' : 'chat');
+  $('#mztTabM').onclick = () => view($('#mztMem').hidden ? 'mem' : 'chat');
+  $('#mztQ').oninput = renderList;
+  $('#mztList').onclick = (e) => { const id = e.target.dataset && e.target.dataset.cont; if (!id) return; cur = ST.threads.find((t) => t.id === id); view('chat'); $('#mztCtx').textContent = '· ' + cur.sec; renderLog(); };
+  $('#mztMemL').onclick = (e) => { const i = e.target.dataset && e.target.dataset.memdel; if (i == null) return; ST.memos.splice(+i, 1); saveMemos(); renderMem(); };
+  $('#mztChips').onclick = (e) => { const b = e.target.closest('[data-chip]'); if (!b) return; const t = $('#mztIn'); t.value = b.dataset.chip + (t.value ? ' : ' + t.value : ''); t.focus(); };
+  $('#mztNew').onclick = () => { cur = null; renderLog(); };
+  $('#mztStop').onclick = () => { if (ctl) ctl.abort(); };
+  $('#mztImg').onchange = (e) => { img = e.target.files[0] || null; $('#mztImgN').textContent = img ? 'Photo : ' + img.name : ''; };
+  $('#mztF').onsubmit = (e) => { e.preventDefault(); const v = $('#mztIn').value; $('#mztIn').value = ''; ask(v); };
+  $('#mztIn').addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('#mztF').requestSubmit(); } });
+
+  // ---------- capacités (facultatives) ----------
+  const W = window.claude;
+  if (W && W.use) {
+    W.use('sample').then((s) => { sample = s; ready = true; note();
+      if (s && s.limits) s.limits().then((l) => { if (l && l.images) { imgOK = true; $('#mztImgL').hidden = false; if (l.images.mediaTypes) $('#mztImg').accept = l.images.mediaTypes.join(','); } }).catch(() => {});
+    }).catch(() => { ready = true; note(); });
+    Promise.all([W.use('db'), W.use('user')]).then(async ([d, u]) => {
+      if (!d || !u) return; const id = await u.id(); if (!id) return; db = d; base = 'data/users/' + id + '/mzt_' + C.id;
+      try {
+        const m = await db.doc(base).get(); if (m.exists) { const v = m.data() || {}; if (Array.isArray(v.memos)) ST.memos = JSON.parse(JSON.stringify(v.memos)); }
+        const q = await db.collection(base + '/threads').get(); const remote = q.docs.map((x) => Object.assign({ id: x.id }, JSON.parse(JSON.stringify(x.data() || {}))));
+        const map = {}; [...ST.threads, ...remote].forEach((t) => { if (!map[t.id] || (t.msgs || []).length > (map[t.id].msgs || []).length) map[t.id] = t; });
+        ST.threads = Object.values(map).sort((a, b) => parseInt(a.id.slice(1), 36) - parseInt(b.id.slice(1), 36)); saveLocal();
+      } catch (e) {}
+    }).catch(() => {});
+  } else { ready = true; note(); }
+
+  window.MZT = { open: openPanel, close: closePanel };
+})();
+
+</script>
+<script>(function(){var a=document.getElementById("retour");if(!a)return;var p="";try{p=window.top.location.pathname}catch(e){}
+if(window.top===window&&location.protocol==="file:"){a.hidden=true;return}
+a.href=p.indexOf("/decouvrir")===0||location.pathname.indexOf("/decouvrir")===0?"/decouvrir":"/app/modules";})();</script>
+</body>
+</html>

@@ -3071,5 +3071,99 @@
     "g": "cours"
    }
   ]
+ },
+ "stratigraphie": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "principes-stratigraphie",
+    "t": "Les principes de la stratigraphie",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "lithostratigraphie",
+    "t": "La lithostratigraphie",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "biostratigraphie",
+    "t": "La biostratigraphie",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "fossilisation",
+    "t": "Fossiles et fossilisation",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "paleoecologie-crises",
+    "t": "Paléoécologie et crises biologiques",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "annales-corrigees",
+    "t": "Annales corrigées · contrôles de paléontologie (Pr Rhalmi)",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
+ },
+ "microbiologie": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "cellule-bacterienne",
+    "t": "La cellule bactérienne",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "nutrition-croissance",
+    "t": "Nutrition, croissance et milieux de culture",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "metabolisme",
+    "t": "Métabolisme énergétique bactérien",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "genetique-bacterienne",
+    "t": "Génétique bactérienne",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "lutte-antimicrobienne",
+    "t": "Lutte contre les microorganismes",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "annale-2020",
+    "t": "Annale corrigée · examen du 2/9/2020",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

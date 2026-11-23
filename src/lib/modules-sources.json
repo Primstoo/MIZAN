@@ -361,6 +361,23 @@
     "annexes": []
   },
   {
+    "slug": "stratigraphie",
+    "titre": "Stratigraphie et paléontologie",
+    "prof": "Pr M. Rhalmi (paléontologie)",
+    "semestre": "S3",
+    "fichier": "stratigraphie.html",
+    "resume": "Stratigraphie, lithostratigraphie, biostratigraphie, fossilisation et paléoécologie pour la filière BCG, avec les contrôles corrigés du Pr Rhalmi.",
+    "cles": [
+      "stratigraphie_scores",
+      "stratigraphie_scores_etat",
+      "mzt-stratigraphie*"
+    ],
+    "cle": "stratigraphie_scores",
+    "format": "score10",
+    "chapitres": 6,
+    "annexes": []
+  },
+  {
     "slug": "se1",
     "titre": "Systèmes d'exploitation 1",
     "prof": "Pr Amrani",
@@ -426,6 +443,23 @@
     "cle": "javascript_scores",
     "format": "score10",
     "chapitres": 11,
+    "annexes": []
+  },
+  {
+    "slug": "microbiologie",
+    "titre": "Microbiologie générale",
+    "prof": "",
+    "semestre": "S4",
+    "fichier": "microbiologie.html",
+    "resume": "Microbiologie générale de la filière BCG : la cellule bactérienne, nutrition et croissance, métabolisme énergétique, génétique bactérienne, lutte contre les microorganismes, avec l'examen 2020 corrigé.",
+    "cles": [
+      "microbiologie_scores",
+      "microbiologie_scores_etat",
+      "mzt-microbiologie*"
+    ],
+    "cle": "microbiologie_scores",
+    "format": "score10",
+    "chapitres": 6,
     "annexes": []
   },
   {
