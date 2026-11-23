@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Réactivité chimique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+<script>try{var t=localStorage.getItem('tl-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>window.MathJax={tex:{inlineMath:[["$","$"]],displayMath:[["$$","$$"]]},svg:{fontCache:"global"},startup:{typeset:false,pageReady:()=>MathJax.startup.defaultPageReady().then(()=>window.typeset&&typeset())}};</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js" async></script>
+<!-- Page générée par scripts/construire-module.mjs : modifier les sources (content/sources), pas ce fichier. -->
+<style>
+:root{--bg:#F4EDE1;--card:#FBF7F0;--ink:#1E2433;--mute:#5C5346;--line:#DCCFBA;--acc:#B4532A;--acc2:#F3E2CF;--h2:#2F5A73;--h2b:#DCE7EE;--ok:#2F7D55;--okb:#DFF0E6;--ko:#A23B2A;--kob:#F4DDD6;--code:#1E2433;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#141922;--card:#1E2532;--ink:#EDE6D9;--mute:#A9A094;--line:#343D4D;--acc:#E8906A;--acc2:#3A2A20;--h2:#7FB3CF;--h2b:#1E3340;--ok:#7FD3A6;--okb:#173326;--ko:#F0907F;--kob:#40221E;--code:#0E1118;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#141922;--card:#1E2532;--ink:#EDE6D9;--mute:#A9A094;--line:#343D4D;--acc:#E8906A;--acc2:#3A2A20;--h2:#7FB3CF;--h2b:#1E3340;--ok:#7FD3A6;--okb:#173326;--ko:#F0907F;--kob:#40221E;--code:#0E1118;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:9px 16px;display:flex;gap:12px;align-items:center}
+header h1{font-size:16px;margin:0;line-height:1.25}header small{display:block;color:var(--mute);font-weight:400;font-size:12px}header .pct{margin-left:auto;font-size:13px;color:var(--mute);white-space:nowrap}
+.wrap{display:grid;grid-template-columns:270px 1fr;max-width:1180px;margin:0 auto}
+nav{padding:14px;border-right:1px solid var(--line);position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto}
+nav button{display:flex;width:100%;text-align:left;gap:8px;align-items:flex-start;background:none;border:0;color:var(--ink);padding:8px 10px;border-radius:8px;cursor:pointer;font:inherit;font-size:14px;line-height:1.35}
+nav button:hover{background:var(--acc2)}nav button.on{background:var(--acc2);font-weight:600}
+nav .sc{margin-left:auto;font-size:12px;color:var(--mute);white-space:nowrap}nav .sc.ok{color:var(--ok);font-weight:600}nav .se{display:block;font-size:11.5px;color:var(--mute);font-weight:400}
+main{padding:22px 30px 90px;min-width:0;max-width:860px}
+.seance{color:var(--acc);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+h1.t{font-size:27px;margin:.1em 0 .7em;line-height:1.25}main h2{font-size:21px;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:4px}main h3{font-size:17.5px;margin-top:1.6em}
+pre{position:relative;background:var(--code);color:#f1e7d6;padding:13px 15px;border-radius:10px;overflow:auto;font-size:13.5px;line-height:1.5}
+pre.sortie{background:var(--card);color:var(--ink);border:1px dashed var(--line);padding-top:22px}.code-tag{position:absolute;top:4px;left:12px;font:600 11px system-ui;color:var(--mute);text-transform:uppercase}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}:not(pre)>code{background:var(--acc2);padding:1px 5px;border-radius:5px}
+main>table,.enc table{border-collapse:collapse;margin:14px 0;font-size:14.5px;display:block;overflow:auto}main>table td,main>table th{border:1px solid var(--line);padding:6px 10px}main>table th{background:var(--acc2);text-align:left}
+blockquote{margin:14px 0;padding:8px 14px;border-left:4px solid var(--line);color:var(--mute)}
+.enc{margin:18px 0;padding:10px 16px;border-radius:10px;border-left:5px solid}.enc p{margin:.35em 0}.enc-t{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.enc.piege,.enc.attention{background:var(--kob);border-color:var(--ko)}.enc.piege .enc-t,.enc.attention .enc-t{color:var(--ko)}
+.enc.astuce{background:var(--h2b);border-color:var(--h2)}.enc.astuce .enc-t{color:var(--h2)}
+.enc.retenir{background:var(--okb);border-color:var(--ok)}.enc.retenir .enc-t{color:var(--ok)}
+.enc.prof{background:var(--acc2);border-color:var(--acc)}.enc.prof .enc-t{color:var(--acc)}
+figure{margin:18px 0}figcaption{font-size:13px;font-weight:600;color:var(--mute);margin-bottom:6px}
+.grille table{border-collapse:separate;border-spacing:4px}.grille td,.grille th{min-width:42px;height:38px;text-align:center;font:14px ui-monospace,Menlo,monospace;padding:4px 8px;border-radius:7px}
+.grille td{background:var(--card);border:1px solid var(--line)}.grille th{color:var(--mute);font-weight:500;font-size:12.5px}
+.grille td.h1{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:700}.grille td.h2{background:var(--h2);color:#fff;border-color:var(--h2);font-weight:700}.grille td.h0{opacity:.35}
+.flux-l{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0}.flux-b{background:var(--card);border:1.5px solid var(--acc);border-radius:9px;padding:7px 12px;font-size:14px}.flux-f{color:var(--acc);font-weight:700}
+.etapes{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}.et-t{font-weight:700;color:var(--acc);margin-bottom:4px}.et-nav{display:flex;gap:8px;justify-content:space-between;margin-top:10px}
+.qcm{margin:22px 0}.qq{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}.qq-q{font-weight:600;margin-bottom:8px}.qq-q p{margin:0}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-size:15px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default}.opt.bon{background:var(--okb);border-color:var(--ok)}.opt.faux{background:var(--kob);border-color:var(--ko)}
+.qq-e{margin-top:8px;padding:9px 12px;border-radius:8px;background:var(--acc2);font-size:14.5px}
+.b{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 13px;border-radius:9px;cursor:pointer;font:inherit;font-size:14px}.b.p{background:var(--acc);color:#fff;border-color:var(--acc)}.b:disabled{opacity:.4;cursor:default}
+.bilan{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 0;font-weight:600;margin-top:20px}
+.nx{display:flex;justify-content:space-between;margin-top:30px;gap:10px}
+#menu{display:none}
+/* compatibilité : variables et classes des anciens modules convertis */
+:root{--panel:var(--card);--muted:var(--mute);--soft:var(--acc2);--blue:var(--h2);--orange:var(--acc);--green:var(--ok);--bad:var(--ko);--badbg:var(--kob);--good:var(--ok);--goodbg:var(--okb);--warnbg:var(--acc2);--warn:var(--acc);--mono:ui-monospace,Menlo,Consolas,monospace;--body:system-ui,sans-serif;--display:system-ui,sans-serif}
+main svg{max-width:100%;height:auto}
+.def,.trap,.exam{padding:10px 16px;border-radius:10px;border-left:5px solid;margin:16px 0}.def{background:var(--h2b);border-color:var(--h2)}.trap{background:var(--kob);border-color:var(--ko)}.exam{background:var(--acc2);border-color:var(--acc)}
+.formula{white-space:pre-line;font-family:var(--mono);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;margin:12px 0}
+.table-wrap{overflow-x:auto;margin:12px 0}.table-wrap table{border-collapse:collapse;font-size:14.5px}.table-wrap td,.table-wrap th{border:1px solid var(--line);padding:6px 10px}.table-wrap th{background:var(--acc2)}
+.integre{margin:16px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}.integre iframe{display:block;width:100%;border:0;min-height:120px}.integre-att{padding:16px;color:var(--mute);font-size:14px}
+.cartes-info{font-size:14px;color:var(--mute)}
+.exo h3{margin-top:1.4em}.ex{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}.ex-q p{margin:.3em 0}.ex-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.ex-h,.ex-c{margin-top:10px;padding:10px 12px;border-radius:8px}.ex-h{background:var(--h2b)}.ex-c{background:var(--okb)}.ex.fait{opacity:.75}.ex-r{display:flex;gap:8px;margin-top:8px}.ex-r input{flex:1;font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink)}
+.b.ok{border-color:var(--ok);color:var(--ok)}.b.ko{border-color:var(--ko);color:var(--ko)}
+.carte{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;min-height:180px;margin:14px 0}.carte .lbl{font-size:12.5px;color:var(--mute);margin-bottom:8px}.carte .rep{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}.kpi div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.kpi b{display:block;font-size:24px}
+.barre{height:8px;background:var(--line);border-radius:6px;overflow:hidden}.barre i{display:block;height:100%;background:var(--ok)}
+.liste-n{list-style:none;padding:0}.liste-n li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.liste-n button{background:none;border:0;color:var(--acc);cursor:pointer;font:inherit;padding:0;text-align:left}
+nav .sep{border-top:1px solid var(--line);margin:8px 0}nav a{display:block;padding:8px 10px;color:var(--ink);font-size:14px;text-decoration:none;border-radius:8px}nav a:hover{background:var(--acc2)}
+
+/* ---- Présentation 11/2026 : même identité que l'appli (Fraunces + Inter, cartes, grandes cibles tactiles) ---- */
+body{font:16.5px/1.7 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+header{padding:10px 16px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+header h1{font:700 17px/1.2 Fraunces,Georgia,serif;letter-spacing:-.01em}header small{font:500 12px/1.4 Inter,system-ui,sans-serif}
+header .pct{font-size:12px;font-weight:700;color:var(--acc);border:1px solid var(--acc);border-radius:999px;padding:5px 10px}
+#menu{width:44px;height:44px;padding:0;border-radius:22px;font-size:17px;flex-shrink:0}
+main{padding:28px 30px 110px;max-width:720px;margin:0 auto;width:100%;animation:mz-in .35s ease both}
+@keyframes mz-in{from{opacity:0;transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){main{animation:none}html{scroll-behavior:auto}}
+.seance{font-size:12px;font-weight:700;letter-spacing:.08em}
+h1.t{font:700 34px/1.12 Fraunces,Georgia,serif;letter-spacing:-.02em;margin:.15em 0 .8em;text-wrap:balance}
+main h2{font:700 24px/1.2 Fraunces,Georgia,serif;letter-spacing:-.01em;margin-top:2.4em;padding:0 0 0 14px;border:0;border-left:4px solid var(--acc);text-wrap:balance}
+main h3{font:700 18px/1.3 Fraunces,Georgia,serif;margin-top:1.8em}
+main p,main li{max-width:66ch}main li{margin:.3em 0}main strong,main b{font-weight:700}
+main a{color:var(--acc)}
+nav{padding:16px 12px}
+nav button{padding:11px 12px;border-radius:12px;min-height:44px;font-size:14.5px}nav button.on{background:var(--acc2);color:var(--ink)}
+nav .se{font-size:12px}nav .sc.ok{color:var(--ok)}nav a{min-height:44px;display:flex;align-items:center;border-radius:12px}
+pre{border-radius:14px;padding:15px 16px;font-size:13.5px}
+main>table,.enc table{font-size:14.5px;border-radius:12px}main>table th{font-weight:700}
+.enc{margin:20px 0;padding:14px 16px;border-radius:16px;border:1px solid;border-left-width:5px}
+.enc-t{font-size:12px;letter-spacing:.08em;margin-bottom:4px}
+.enc.piege,.enc.attention{border-color:var(--ko)}.enc.astuce{border-color:var(--h2)}.enc.retenir{border-color:var(--ok)}.enc.prof{border-color:var(--acc)}
+figure{margin:22px 0}figcaption{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.etapes{border-radius:18px;padding:18px}.et-t{font:700 17px/1.3 Fraunces,Georgia,serif;margin-bottom:8px}.et-nav{margin-top:14px}
+.qq{border-radius:18px;padding:18px;margin:14px 0}.qq-q{font-size:17px;line-height:1.45;margin-bottom:12px}
+.opt{min-height:52px;margin:8px 0;padding:12px 16px;border-width:1.5px;border-radius:14px;background:var(--bg);font-size:16px;transition:transform .12s ease,border-color .15s,background .15s}
+.opt:active:not(:disabled){transform:scale(.98)}
+.opt.bon{border-color:var(--ok);font-weight:600;animation:mz-pop .3s ease}.opt.faux{border-color:var(--ko);animation:mz-shake .3s ease}
+@keyframes mz-pop{50%{transform:scale(1.02)}}@keyframes mz-shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.qq-e{margin-top:10px;padding:12px 14px;border-radius:12px;font-size:15px;line-height:1.55;animation:mz-in .25s ease both}
+.b{min-height:44px;padding:9px 16px;border-radius:12px;font-weight:600;font-size:14.5px;transition:transform .12s ease}.b:active:not(:disabled){transform:scale(.97)}
+.b.p{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bilan{bottom:10px;margin-top:28px;padding:12px 16px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 8px 24px rgba(0,0,0,.18);font-size:14.5px;max-width:calc(100% - 96px)}
+.nx{margin-top:36px}.nx .b{min-height:52px;flex:1;border-radius:14px}
+.ex{border-radius:18px;padding:16px 18px;margin:14px 0}.ex-h,.ex-c{border-radius:12px;padding:12px 14px;animation:mz-in .25s ease both}
+.ex-r input{min-height:44px;min-width:0;border-radius:12px;font-size:16px}.ex-r .b{flex-shrink:0}
+.carte{border-radius:22px;padding:26px;min-height:200px;font-size:17px}.carte .lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.kpi div{border-radius:16px;padding:14px 16px}.kpi b{font:700 28px/1.2 Fraunces,Georgia,serif}
+.barre{height:8px;border-radius:4px}.barre i{background:var(--acc);border-radius:4px}
+.liste-n li{padding:12px 0;align-items:center}
+.flux-b{border-radius:12px;padding:9px 14px;font-weight:600}
+.integre{border-radius:18px}
+/* Schémas : un texte ou une forme sans couleur déclarée prend la couleur du texte (lisible en thème sombre), jamais le noir par défaut */
+:where(main svg:not([fill])){fill:currentColor}
+details.prereq{margin:16px 0;border:1px solid var(--line);border-radius:16px;background:var(--card);padding:0 16px}details.prereq summary{cursor:pointer;min-height:52px;padding:14px 0;line-height:1.5;list-style:none;position:relative;padding-right:28px}details.prereq summary::-webkit-details-marker{display:none}details.prereq summary::after{content:"+";position:absolute;right:2px;top:12px;font-size:22px;font-weight:600;color:var(--acc)}details.prereq[open] summary::after{content:"−"}details.prereq p{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:var(--okb);animation:mz-in .25s ease both}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:4px 0}
+
+@media (max-width:860px){.wrap{grid-template-columns:1fr}nav{display:none;position:fixed;inset:54px 0 0 0;height:auto;background:var(--bg);z-index:4;border:0}nav.open{display:block}#menu{display:inline-block}main{padding:20px 18px 110px}h1.t{font-size:28px}main h2{font-size:22px}nav{inset:65px 0 0 0}}
+
+/* Aucun tableau, schéma ou code ne doit élargir la page (téléphone) : défilement dans son cadre. */
+main table{display:block;max-width:100%;overflow-x:auto}main figure,main .grille,main details{max-width:100%;overflow-x:auto}main :not(pre)>code{overflow-wrap:anywhere}main img{max-width:100%;height:auto}main p,main li,main td,main th,main a{overflow-wrap:break-word}mjx-container[display="true"]{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.retour{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;margin-right:6px;width:44px;height:44px;padding:0;border-radius:22px;font-size:18px;flex-shrink:0}.retour[hidden]{display:none}
+</style>
+</head>
+<body>
+<header><a class="b retour" id="retour" href="/app/modules" target="_top" aria-label="Retour aux cours" title="Retour aux cours">←</a><button class="b" id="menu" aria-label="Chapitres">☰</button><h1>Réactivité chimique<small>Pr Hafid · S1 · FST Béni Mellal</small></h1><span class="pct" id="pct"></span></header>
+<div class="wrap"><nav id="nav"></nav><main id="main"></main></div>
+<script>
+const MODULE={"slug":"reactivite-chimique","titre":"Réactivité chimique","cle":"reactivite-chimique_scores","cleEtat":"reactivite-chimique_scores_etat","format":"score10","intro":"<p>Ce module suit <strong>le polycopié du Pr Hafid<\/strong> (BCG-C213) : acides et bases, précipitation, oxydoréduction, cinétique, puis <strong>le devoir 2 et les exercices de révision corrigés<\/strong>.<\/p>\n<p><strong>Comment l&#39;utiliser<\/strong><\/p>\n<ol>\n<li>Apprends le formulaire de pH du chapitre 1 : c&#39;est la moitié de l&#39;examen.<\/li>\n<li>Pour chaque calcul, écris l&#39;approximation que tu fais et vérifie-la à la fin.<\/li>\n<li>Fais le QCM du chapitre. <strong>8/10 = chapitre maîtrisé.<\/strong><\/li>\n<\/ol>\n<p><strong>À vérifier<\/strong> : les séries de TD 1 à 4 sont des scans non lus ; les exercices viennent du devoir 2 et des fiches de révision 2021.<\/p>\n","annexes":[],"cartes":null,"maths":true};
+const CHAPS=[{"id":"ph-des-solutions","t":"Le pH des solutions","seance":"Chapitre I-2 · Réactions acido-basiques","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir manipuler les logarithmes décimaux : $\\log(10^{-3}) = -3$ et $\\log(ab) = \\log a + \\log b$.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>$[H_3O^+] = 10^{-3}$ mol/L. pH ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 3<\/b><\/p><p>pH = 3.<\/p>\n<\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « fort ou faible, puis une formule ».<\/strong> Identifie l&#39;espèce (acide fort, acide faible, base faible, ampholyte), choisis la formule, puis vérifie l&#39;approximation.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Appliquer la formule de l&#39;acide fort à un acide faible. L&#39;acide acétique 0,1 M n&#39;a pas un pH de 1 mais d&#39;environ 2,85 : il est très peu dissocié.<\/p>\n<\/aside><p>À la fin, tu sais calculer le pH de n&#39;importe quelle solution simple et justifier ton approximation.<\/p>\n<h2>Idée 1 · Le formulaire<\/h2>\n<figure class=\"grille\"><figcaption>Formules du pH (25 °C)<\/figcaption><table><tr><th>Solution,<\/th><th>Formule,<\/th><th>Valable<\/th><th>si<\/th><\/tr><tr><td class=\"h1\">Acide<\/td><td>fort<\/td><td>C,<\/td><td>pH<\/td><td>=<\/td><td>−log<\/td><td>C,<\/td><td>C<\/td><td>&gt;<\/td><td>10⁻⁶<\/td><td>M<\/td><\/tr><tr><td class=\"h1\">Base<\/td><td>forte<\/td><td>C,<\/td><td>pH<\/td><td>=<\/td><td>14<\/td><td>+<\/td><td>log<\/td><td>C,<\/td><td>C<\/td><td>&gt;<\/td><td>10⁻⁶<\/td><td>M<\/td><\/tr><tr><td class=\"h1\">Acide<\/td><td>faible<\/td><td>C,<\/td><td>pH<\/td><td>=<\/td><td>½(pKa<\/td><td>−<\/td><td>log<\/td><td>C),<\/td><td>α<\/td><td>&lt;<\/td><td>5<\/td><td>%<\/td><td>(pH<\/td><td>&lt;<\/td><td>pKa<\/td><td>−<\/td><td>1)<\/td><\/tr><tr><td class=\"h1\">Base<\/td><td>faible<\/td><td>C,<\/td><td>pH<\/td><td>=<\/td><td>7<\/td><td>+<\/td><td>½(pKa<\/td><td>+<\/td><td>log<\/td><td>C),<\/td><td>pH<\/td><td>&gt;<\/td><td>pKa<\/td><td>+<\/td><td>1<\/td><\/tr><tr><td class=\"h1\">Ampholyte,<\/td><td>pH<\/td><td>=<\/td><td>½(pKa1<\/td><td>+<\/td><td>pKa2),<\/td><td>indépendant<\/td><td>de<\/td><td>C<\/td><\/tr><\/table><\/figure><h2>Idée 2 · Le coefficient de dissociation<\/h2>\n<p>$\\alpha = \\frac{[A^-]}{C}$. Pour un acide faible peu dissocié, $\\alpha \\approx \\sqrt{K_a / C}$.<\/p>\n<svg viewBox=\"0 0 320 70\" role=\"img\" aria-label=\"Axe des pH : en dessous de pKa l'acide domine, au-dessus la base\" style=\"max-width:380px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M10 35h300\"/><path d=\"M160 25v20\" stroke=\"#D9824F\"/><\/g>\n<g fill=\"currentColor\" font-size=\"11\"><text x=\"150\" y=\"18\">pKa<\/text><text x=\"40\" y=\"60\">HA majoritaire<\/text><text x=\"200\" y=\"60\">A⁻ majoritaire<\/text><\/g>\n<\/svg><figure class=\"etapes\" data-i=\"0\"><figcaption>Calcul type : acide acétique 0,1 M, Ka = 2·10⁻⁵<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/3 · 1. Acide faible : on suppose α petit.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/3 · 2. pH = ½(pKa − log C) = ½(4,70 + 1) ≈ 2,85.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/3 · 3. α ≈ √(2·10⁻⁵ / 0,1) ≈ 1,4 % &lt; 5 % : approximation justifiée.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><h2>Idée 3 · Les ampholytes<\/h2>\n<p>Une espèce à la fois acide et base (HCO₃⁻) : pH = ½(pKa1 + pKa2). Pour NaHCO₃ : ½(6,30 + 10,33) ≈ <strong>8,32<\/strong>, quelle que soit la concentration.<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Exercices de révision<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Ex. 3 : acide formique 10⁻² M, pH = 2,9. α et pKa ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 3.74<\/b><\/p><p>[H₃O⁺] = 10⁻²·⁹ ≈ 1,26·10⁻³ ; α ≈ 12,6 %. $K_a = \\frac{h^2}{C - h}$ donne <strong>pKa ≈ 3,74<\/strong> (pas d&#39;approximation, α &gt; 5 %).<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Ex. 4 : NaF 0,1 M (pKa HF/F⁻ = 3,18). pH ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 8.09<\/b><\/p><p>F⁻ est une base faible : pH = 7 + ½(3,18) + ½ log(0,1) ≈ <strong>8,09<\/strong>.<\/p>\n<\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">pH de HCl 10⁻² M :<\/div><button class=\"opt\" data-o=\"0\">2<\/button><button class=\"opt\" data-o=\"1\">12<\/button><button class=\"opt\" data-o=\"2\">7<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">pH de NaOH 10⁻³ M :<\/div><button class=\"opt\" data-o=\"0\">11<\/button><button class=\"opt\" data-o=\"1\">3<\/button><button class=\"opt\" data-o=\"2\">14<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Un acide plus dilué est :<\/div><button class=\"opt\" data-o=\"0\">plus dissocié<\/button><button class=\"opt\" data-o=\"1\">moins dissocié<\/button><button class=\"opt\" data-o=\"2\">pas plus dissocié<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">pH d&#39;un ampholyte :<\/div><button class=\"opt\" data-o=\"0\">ne dépend pas de C<\/button><button class=\"opt\" data-o=\"1\">dépend fortement de C<\/button><button class=\"opt\" data-o=\"2\">vaut toujours 7<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">À pH = pKa :<\/div><button class=\"opt\" data-o=\"0\">[HA] = [A⁻]<\/button><button class=\"opt\" data-o=\"1\">[HA] &gt; [A⁻]<\/button><button class=\"opt\" data-o=\"2\">il n&#39;y a plus d&#39;acide<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">NaF en solution est :<\/div><button class=\"opt\" data-o=\"0\">basique<\/button><button class=\"opt\" data-o=\"1\">acide<\/button><button class=\"opt\" data-o=\"2\">neutre<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">L&#39;approximation « acide faiblement dissocié » est valable si :<\/div><button class=\"opt\" data-o=\"0\">α &lt; 5 %<\/button><button class=\"opt\" data-o=\"1\">α &gt; 50 %<\/button><button class=\"opt\" data-o=\"2\">toujours<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Ke à 25 °C vaut :<\/div><button class=\"opt\" data-o=\"0\">10⁻¹⁴<\/button><button class=\"opt\" data-o=\"1\">10⁻⁷<\/button><button class=\"opt\" data-o=\"2\">14<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">pH d&#39;acide acétique 0,1 M (Ka = 2·10⁻⁵) :<\/div><button class=\"opt\" data-o=\"0\">≈ 2,85<\/button><button class=\"opt\" data-o=\"1\">1<\/button><button class=\"opt\" data-o=\"2\">4,7<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">HCO₃⁻ est :<\/div><button class=\"opt\" data-o=\"0\">un ampholyte<\/button><button class=\"opt\" data-o=\"1\">un acide fort<\/button><button class=\"opt\" data-o=\"2\">un ion indifférent<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"ph-des-solutions","rep":["3"],"tol":null},{"n":"ph-des-solutions","rep":["3.74"],"tol":null},{"n":"ph-des-solutions","rep":["8.09"],"tol":null}],"qcm":[{"n":"ph-des-solutions","q":"pH de HCl 10⁻² M :","o":["2","12","7"],"a":0,"e":"Acide fort."},{"n":"ph-des-solutions","q":"pH de NaOH 10⁻³ M :","o":["11","3","14"],"a":0,"e":"14 + log C."},{"n":"ph-des-solutions","q":"Un acide plus dilué est :","o":["plus dissocié","moins dissocié","pas plus dissocié"],"a":0,"e":"α ≈ √(Ka/C) augmente."},{"n":"ph-des-solutions","q":"pH d&#39;un ampholyte :","o":["ne dépend pas de C","dépend fortement de C","vaut toujours 7"],"a":0,"e":"½(pKa1 + pKa2)."},{"n":"ph-des-solutions","q":"À pH = pKa :","o":["[HA] = [A⁻]","[HA] &gt; [A⁻]","il n&#39;y a plus d&#39;acide"],"a":0,"e":"Demi-équivalence."},{"n":"ph-des-solutions","q":"NaF en solution est :","o":["basique","acide","neutre"],"a":0,"e":"F⁻ est une base faible."},{"n":"ph-des-solutions","q":"L&#39;approximation « acide faiblement dissocié » est valable si :","o":["α &lt; 5 %","α &gt; 50 %","toujours"],"a":0,"e":"Sinon on résout l&#39;équation du second degré."},{"n":"ph-des-solutions","q":"Ke à 25 °C vaut :","o":["10⁻¹⁴","10⁻⁷","14"],"a":0,"e":"pKe = 14."},{"n":"ph-des-solutions","q":"pH d&#39;acide acétique 0,1 M (Ka = 2·10⁻⁵) :","o":["≈ 2,85","1","4,7"],"a":0,"e":"Formule de l&#39;acide faible."},{"n":"ph-des-solutions","q":"HCO₃⁻ est :","o":["un ampholyte","un acide fort","un ion indifférent"],"a":0,"e":"Base de H₂CO₃, acide de CO₃²⁻."}]},{"id":"titrages-melanges","t":"Mélanges et titrages acido-basiques","seance":"Chapitre I-2 · Dosages","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir calculer une quantité de matière : n = C × V.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>20 mL de NaOH 0,25 M : combien de mmol ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 5<\/b><\/p><p>20 × 0,25 = 5 mmol.<\/p>\n<\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « qui est en excès ? ».<\/strong> Dans un mélange acide + base, fais d&#39;abord la réaction totale, puis calcule le pH avec ce qui reste.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Oublier de diviser par le volume total. Après un mélange, toutes les concentrations se calculent sur la somme des volumes.<\/p>\n<\/aside><p>À la fin, tu sais tracer et exploiter la courbe de dosage d&#39;un acide faible par une base forte.<\/p>\n<h2>Idée 1 · Les mélanges<\/h2>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Mélange acide fort + base forte<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/3 · 1. Calcule les quantités : n(H₃O⁺) et n(OH⁻).<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/3 · 2. Retranche : l&#39;espèce en excès fixe le pH.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/3 · 3. Divise par le volume total.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><p><strong>Exemple (révision, ex. 5).<\/strong> 10 mL de HCl 0,1 M (1 mmol) + 20 mL de NaOH 0,25 M (5 mmol) : il reste 4 mmol de OH⁻ dans 30 mL, [OH⁻] = 0,133 M, <strong>pH ≈ 13,1<\/strong>.<\/p>\n<h2>Idée 2 · Le dosage d&#39;un acide faible par une base forte<\/h2>\n<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Courbe de dosage acide faible base forte : demi-équivalence à pH = pKa, saut de pH à l'équivalence\" style=\"max-width:380px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M30 10v130h270\"/><path d=\"M30 110C60 95 70 92 100 90S150 82 160 70C166 40 175 30 200 25S270 20 295 18\" stroke=\"#D9824F\"/><path d=\"M95 90v50M30 90h65M165 50v90\" stroke-dasharray=\"3 4\"/><\/g>\n<g fill=\"currentColor\" font-size=\"10\"><text x=\"0\" y=\"94\">pKa<\/text><text x=\"85\" y=\"148\">Ve/2<\/text><text x=\"160\" y=\"148\">Ve<\/text><text x=\"250\" y=\"148\">V<\/text><text x=\"5\" y=\"14\">pH<\/text><\/g>\n<\/svg><figure class=\"grille\"><figcaption>Points remarquables (x = V/Ve)<\/figcaption><table><tr><th>Point,<\/th><th>pH<\/th><\/tr><tr><td class=\"h1\">x<\/td><td>=<\/td><td>0,<\/td><td>acide<\/td><td>faible<\/td><td>seul<\/td><td>:<\/td><td>½(pKa<\/td><td>−<\/td><td>log<\/td><td>Ca)<\/td><\/tr><tr><td class=\"h1\">0<\/td><td>&lt;<\/td><td>x<\/td><td>&lt;<\/td><td>1,<\/td><td>tampon<\/td><td>:<\/td><td>pKa<\/td><td>+<\/td><td>log(x<\/td><td>/<\/td><td>(1<\/td><td>−<\/td><td>x))<\/td><\/tr><tr><td class=\"h1\">x<\/td><td>=<\/td><td>0,5,<\/td><td>demi-équivalence<\/td><td>:<\/td><td>pH<\/td><td>=<\/td><td>pKa<\/td><\/tr><tr><td class=\"h1\">x<\/td><td>=<\/td><td>1,<\/td><td>base<\/td><td>faible<\/td><td>seule<\/td><td>:<\/td><td>7<\/td><td>+<\/td><td>½(pKa<\/td><td>+<\/td><td>log<\/td><td>C)<\/td><\/tr><tr><td class=\"h1\">x<\/td><td>&gt;<\/td><td>1,<\/td><td>base<\/td><td>forte<\/td><td>en<\/td><td>excès<\/td><td>:<\/td><td>14<\/td><td>+<\/td><td>log[OH⁻]<\/td><\/tr><\/table><\/figure><h2>Idée 3 · Les solutions tampons<\/h2>\n<p>Un mélange acide faible + base conjuguée en quantités proches : le pH varie peu par ajout d&#39;acide, de base ou par dilution. pH = pKa + log([A⁻]/[HA]).<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Révision, exercice 6<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>50 mL d&#39;acide formique 0,1 M dosés par NaOH 0,5 M. Ve ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 10<\/b><\/p><p>Ve = 50 × 0,1 / 0,5 = <strong>10 mL<\/strong>.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>pH à l&#39;équivalence (pKa = 3,8) ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 8.36<\/b><\/p><p>C(HCOO⁻) = 5 mmol / 60 mL ≈ 0,083 M ; pH = 7 + ½(3,8) + ½ log(0,083) ≈ <strong>8,36<\/strong>.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"3\"><div class=\"ex-q\"><p>pH pour x = 1,5 ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 12.6<\/b><\/p><p>V = 15 mL : excès de 2,5 mmol de OH⁻ dans 65 mL, [OH⁻] ≈ 0,0385 M, <strong>pH ≈ 12,6<\/strong>.<\/p>\n<\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">À la demi-équivalence :<\/div><button class=\"opt\" data-o=\"0\">pH = pKa<\/button><button class=\"opt\" data-o=\"1\">pH = 7<\/button><button class=\"opt\" data-o=\"2\">pH = 14<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Le pH à l&#39;équivalence d&#39;un acide faible dosé par une base forte est :<\/div><button class=\"opt\" data-o=\"0\">supérieur à 7<\/button><button class=\"opt\" data-o=\"1\">égal à 7<\/button><button class=\"opt\" data-o=\"2\">inférieur à 7<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Un tampon résiste à :<\/div><button class=\"opt\" data-o=\"0\">l&#39;ajout modéré d&#39;acide ou de base<\/button><button class=\"opt\" data-o=\"1\">toute réaction<\/button><button class=\"opt\" data-o=\"2\">la chaleur<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Ve se calcule par :<\/div><button class=\"opt\" data-o=\"0\">Ca·Va = Cb·Ve<\/button><button class=\"opt\" data-o=\"1\">Ca + Cb<\/button><button class=\"opt\" data-o=\"2\">Va/Vb<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Après l&#39;équivalence, le pH est fixé par :<\/div><button class=\"opt\" data-o=\"0\">la base forte en excès<\/button><button class=\"opt\" data-o=\"1\">l&#39;acide faible<\/button><button class=\"opt\" data-o=\"2\">le pKa<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Dosage d&#39;un acide fort par une base forte : pH à l&#39;équivalence :<\/div><button class=\"opt\" data-o=\"0\">7<\/button><button class=\"opt\" data-o=\"1\">8,4<\/button><button class=\"opt\" data-o=\"2\">pKa<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Pour x = 0,25, pH =<\/div><button class=\"opt\" data-o=\"0\">pKa − log 3<\/button><button class=\"opt\" data-o=\"1\">pKa + log 3<\/button><button class=\"opt\" data-o=\"2\">pKa<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">1 mmol de HCl + 5 mmol de NaOH dans 30 mL :<\/div><button class=\"opt\" data-o=\"0\">basique<\/button><button class=\"opt\" data-o=\"1\">acide<\/button><button class=\"opt\" data-o=\"2\">neutre<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Le saut de pH sert à :<\/div><button class=\"opt\" data-o=\"0\">repérer l&#39;équivalence<\/button><button class=\"opt\" data-o=\"1\">mesurer le pKa<\/button><button class=\"opt\" data-o=\"2\">calculer la masse molaire<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Diluer un tampon :<\/div><button class=\"opt\" data-o=\"0\">change peu son pH<\/button><button class=\"opt\" data-o=\"1\">le rend neutre<\/button><button class=\"opt\" data-o=\"2\">double son pH<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"titrages-melanges","rep":["5"],"tol":null},{"n":"titrages-melanges","rep":["10"],"tol":null},{"n":"titrages-melanges","rep":["8.36"],"tol":null},{"n":"titrages-melanges","rep":["12.6"],"tol":null}],"qcm":[{"n":"titrages-melanges","q":"À la demi-équivalence :","o":["pH = pKa","pH = 7","pH = 14"],"a":0,"e":"Autant de HA que de A⁻."},{"n":"titrages-melanges","q":"Le pH à l&#39;équivalence d&#39;un acide faible dosé par une base forte est :","o":["supérieur à 7","égal à 7","inférieur à 7"],"a":0,"e":"Il reste la base conjuguée."},{"n":"titrages-melanges","q":"Un tampon résiste à :","o":["l&#39;ajout modéré d&#39;acide ou de base","toute réaction","la chaleur"],"a":0,"e":"pH quasi constant."},{"n":"titrages-melanges","q":"Ve se calcule par :","o":["Ca·Va = Cb·Ve","Ca + Cb","Va/Vb"],"a":0,"e":"Égalité des quantités."},{"n":"titrages-melanges","q":"Après l&#39;équivalence, le pH est fixé par :","o":["la base forte en excès","l&#39;acide faible","le pKa"],"a":0,"e":"OH⁻ en excès."},{"n":"titrages-melanges","q":"Dosage d&#39;un acide fort par une base forte : pH à l&#39;équivalence :","o":["7","8,4","pKa"],"a":0,"e":"Seuls des ions indifférents."},{"n":"titrages-melanges","q":"Pour x = 0,25, pH =","o":["pKa − log 3","pKa + log 3","pKa"],"a":0,"e":"log(0,25/0,75)."},{"n":"titrages-melanges","q":"1 mmol de HCl + 5 mmol de NaOH dans 30 mL :","o":["basique","acide","neutre"],"a":0,"e":"4 mmol de OH⁻ en excès."},{"n":"titrages-melanges","q":"Le saut de pH sert à :","o":["repérer l&#39;équivalence","mesurer le pKa","calculer la masse molaire"],"a":0,"e":"Indicateur coloré ou dérivée."},{"n":"titrages-melanges","q":"Diluer un tampon :","o":["change peu son pH","le rend neutre","double son pH"],"a":0,"e":"Le rapport [A⁻]/[HA] ne change pas."}]},{"id":"precipitation-complexation","t":"Précipitation et complexation","seance":"Chapitre I-3 · Solubilité, Ks, complexes","imp":4,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir écrire une dissolution : $AgCl(s) \\rightleftharpoons Ag^+ + Cl^-$.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Combien d&#39;ions OH⁻ libère une unité de Cu(OH)₂ ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 2<\/b><\/p><p>Deux : $Cu(OH)_2 \\rightleftharpoons Cu^{2+} + 2OH^-$.<\/p>\n<\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « tableau d&#39;avancement avec s ».<\/strong> Note s la solubilité, écris les concentrations en fonction de s, puis Ks.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Oublier les exposants. Pour Cu(OH)₂, $K_s = [Cu^{2+}][OH^-]^2 = s(2s)^2 = 4s^3$, pas $s^2$.<\/p>\n<\/aside><p>À la fin, tu sais relier Ks et solubilité, prévoir un précipité et l&#39;effet d&#39;un ion commun.<\/p>\n<h2>Idée 1 · Produit de solubilité<\/h2>\n<figure class=\"grille\"><figcaption>Ks en fonction de s<\/figcaption><table><tr><th>Sel,<\/th><th>Ks<\/th><\/tr><tr><td class=\"h1\">AB<\/td><td>(AgCl),<\/td><td>s²<\/td><\/tr><tr><td class=\"h1\">AB₂<\/td><td>ou<\/td><td>A₂B<\/td><td>(Cu(OH)₂,<\/td><td>Ag₂CrO₄),<\/td><td>4s³<\/td><\/tr><tr><td class=\"h1\">A₃B<\/td><td>ou<\/td><td>AB₃,<\/td><td>27s⁴<\/td><\/tr><\/table><\/figure><h2>Idée 2 · Prévoir la précipitation<\/h2>\n<svg viewBox=\"0 0 320 70\" role=\"img\" aria-label=\"Comparer le produit ionique Q à Ks : précipité si Q > Ks\" style=\"max-width:380px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M10 35h300\"/><path d=\"M160 25v20\" stroke=\"#D9824F\"/><\/g>\n<g fill=\"currentColor\" font-size=\"11\"><text x=\"152\" y=\"18\">Ks<\/text><text x=\"30\" y=\"60\">Q &lt; Ks : pas de précipité<\/text><text x=\"185\" y=\"60\">Q &gt; Ks : précipité<\/text><\/g>\n<\/svg><p><strong>Effet d&#39;ion commun<\/strong> : ajouter Cl⁻ à une solution de AgCl diminue sa solubilité. <strong>Effet du pH<\/strong> : un hydroxyde est moins soluble en milieu basique.<\/p>\n<h2>Idée 3 · Les complexes<\/h2>\n<p>Un complexe = un ion central + des ligands. Constante de formation $\\beta = \\frac{[ML_n]}{[M][L]^n}$. Former un complexe peut redissoudre un précipité (AgCl dans l&#39;ammoniac : $Ag(NH_3)_2^+$).<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Devoir 2, exercice 2<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Solution saturée de Cu(OH)₂ à pH = 7,4. Ks ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>[OH⁻] = 10⁻⁶·⁶ ≈ 2,5·10⁻⁷ M ; [Cu²⁺] = [OH⁻]/2 ≈ 1,26·10⁻⁷ M ; Ks = [Cu²⁺][OH⁻]² ≈ <strong>7,9·10⁻²¹<\/strong>.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>AgCl, Ks = 1,8·10⁻¹⁰. Solubilité dans l&#39;eau pure ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>s = √Ks ≈ <strong>1,34·10⁻⁵<\/strong> mol/L.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><aside class=\"enc attention\"><div class=\"enc-t\">Attention<\/div><p>La valeur de Ks obtenue (≈ 8·10⁻²¹) est plus petite que la valeur des tables pour Cu(OH)₂ (≈ 2·10⁻²⁰) : la donnée pH = 7,4 du devoir est arrondie. Le raisonnement est ce qui est noté.<\/p>\n<\/aside><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Ks de AgCl en fonction de s :<\/div><button class=\"opt\" data-o=\"0\">s²<\/button><button class=\"opt\" data-o=\"1\">4s³<\/button><button class=\"opt\" data-o=\"2\">2s<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Ks de Cu(OH)₂ :<\/div><button class=\"opt\" data-o=\"0\">s²<\/button><button class=\"opt\" data-o=\"1\">4s³<\/button><button class=\"opt\" data-o=\"2\">27s⁴<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Un précipité se forme si :<\/div><button class=\"opt\" data-o=\"0\">Q &gt; Ks<\/button><button class=\"opt\" data-o=\"1\">Q &lt; Ks<\/button><button class=\"opt\" data-o=\"2\">Q = 0<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Ajouter NaCl à une solution de AgCl :<\/div><button class=\"opt\" data-o=\"0\">diminue la solubilité de AgCl<\/button><button class=\"opt\" data-o=\"1\">l&#39;augmente<\/button><button class=\"opt\" data-o=\"2\">ne change rien<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Un hydroxyde métallique est plus soluble :<\/div><button class=\"opt\" data-o=\"0\">en milieu acide<\/button><button class=\"opt\" data-o=\"1\">en milieu basique<\/button><button class=\"opt\" data-o=\"2\">jamais<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">AgCl se dissout dans l&#39;ammoniac grâce à :<\/div><button class=\"opt\" data-o=\"0\">la formation de Ag(NH₃)₂⁺<\/button><button class=\"opt\" data-o=\"1\">l&#39;oxydation<\/button><button class=\"opt\" data-o=\"2\">l&#39;ion commun<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Plus Ks est petit, le sel est :<\/div><button class=\"opt\" data-o=\"0\">moins soluble<\/button><button class=\"opt\" data-o=\"1\">plus soluble<\/button><button class=\"opt\" data-o=\"2\">toujours insoluble<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Un ligand est :<\/div><button class=\"opt\" data-o=\"0\">une espèce qui donne un doublet au métal<\/button><button class=\"opt\" data-o=\"1\">un cation<\/button><button class=\"opt\" data-o=\"2\">un précipité<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Solubilité de AgCl (Ks = 1,8·10⁻¹⁰) :<\/div><button class=\"opt\" data-o=\"0\">≈ 1,3·10⁻⁵ M<\/button><button class=\"opt\" data-o=\"1\">1,8·10⁻¹⁰ M<\/button><button class=\"opt\" data-o=\"2\">≈ 10⁻³ M<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">β est la constante :<\/div><button class=\"opt\" data-o=\"0\">de formation d&#39;un complexe<\/button><button class=\"opt\" data-o=\"1\">de solubilité<\/button><button class=\"opt\" data-o=\"2\">d&#39;acidité<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"precipitation-complexation","rep":["2"],"tol":null},{"n":"precipitation-complexation","rep":null,"tol":null},{"n":"precipitation-complexation","rep":null,"tol":null}],"qcm":[{"n":"precipitation-complexation","q":"Ks de AgCl en fonction de s :","o":["s²","4s³","2s"],"a":0,"e":"Sel 1:1."},{"n":"precipitation-complexation","q":"Ks de Cu(OH)₂ :","o":["s²","4s³","27s⁴"],"a":1,"e":"[OH⁻] = 2s."},{"n":"precipitation-complexation","q":"Un précipité se forme si :","o":["Q &gt; Ks","Q &lt; Ks","Q = 0"],"a":0,"e":"Solution sursaturée."},{"n":"precipitation-complexation","q":"Ajouter NaCl à une solution de AgCl :","o":["diminue la solubilité de AgCl","l&#39;augmente","ne change rien"],"a":0,"e":"Ion commun."},{"n":"precipitation-complexation","q":"Un hydroxyde métallique est plus soluble :","o":["en milieu acide","en milieu basique","jamais"],"a":0,"e":"H₃O⁺ consomme OH⁻."},{"n":"precipitation-complexation","q":"AgCl se dissout dans l&#39;ammoniac grâce à :","o":["la formation de Ag(NH₃)₂⁺","l&#39;oxydation","l&#39;ion commun"],"a":0,"e":"Complexation."},{"n":"precipitation-complexation","q":"Plus Ks est petit, le sel est :","o":["moins soluble","plus soluble","toujours insoluble"],"a":0,"e":"À formule comparable."},{"n":"precipitation-complexation","q":"Un ligand est :","o":["une espèce qui donne un doublet au métal","un cation","un précipité"],"a":0,"e":"Base de Lewis."},{"n":"precipitation-complexation","q":"Solubilité de AgCl (Ks = 1,8·10⁻¹⁰) :","o":["≈ 1,3·10⁻⁵ M","1,8·10⁻¹⁰ M","≈ 10⁻³ M"],"a":0,"e":"√Ks."},{"n":"precipitation-complexation","q":"β est la constante :","o":["de formation d&#39;un complexe","de solubilité","d&#39;acidité"],"a":0,"e":"Plus elle est grande, plus le complexe est stable."}]},{"id":"oxydoreduction-piles","t":"Oxydoréduction et piles","seance":"Chapitre I-4 · Réactions d'oxydoréduction","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir qu&#39;un oxydant capte des électrons et un réducteur en cède.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Dans $Ag^+ + e^- \\to Ag$, qui est l&#39;oxydant ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Ag⁺ : il capte un électron (il est réduit).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « le plus grand E est la cathode ».<\/strong> L&#39;électrode de plus haut potentiel est le pôle + où a lieu la réduction ; l&#39;autre est l&#39;anode où a lieu l&#39;oxydation.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Oublier de diviser 0,06 par n dans la loi de Nernst. Pour Cd²⁺/Cd, n = 2 : le facteur est 0,03.<\/p>\n<\/aside><p>À la fin, tu sais équilibrer une réaction, calculer des potentiels, une fem et une constante d&#39;équilibre.<\/p>\n<h2>Idée 1 · Équilibrer en milieu acide<\/h2>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Méthode des demi-équations<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/4 · 1. Équilibre l&#39;élément qui change d&#39;oxydation.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/4 · 2. Équilibre O avec H₂O, puis H avec H⁺.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/4 · 3. Équilibre les charges avec des électrons.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/4 · 4. Multiplie pour avoir autant d&#39;électrons dans les deux demi-équations, puis additionne.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><p><strong>Exemple (révision, ex. 11a).<\/strong> $MnO_4^- + 8H^+ + 5e^- \\to Mn^{2+} + 4H_2O$ et $2Cl^- \\to Cl_2 + 2e^-$. Bilan : $2MnO_4^- + 16H^+ + 10Cl^- \\to 2Mn^{2+} + 5Cl_2 + 8H_2O$.<\/p>\n<h2>Idée 2 · La loi de Nernst<\/h2>\n<p>$$E = E° + \\frac{0{,}06}{n}\\log\\frac{[Ox]}{[Red]}$$<\/p>\n<svg viewBox=\"0 0 320 120\" role=\"img\" aria-label=\"Pile : anode à gauche, cathode à droite, électrons dans le fil de l'anode vers la cathode, pont salin\" style=\"max-width:380px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M30 50h70v60H30zM220 50h70v60h-70z\"/><path d=\"M60 50V20h200v30\"/><path d=\"M90 60q70-40 140 0\" stroke=\"#D9824F\"/><path d=\"M150 14l10 6-10 6\"/><\/g>\n<g fill=\"currentColor\" font-size=\"10\"><text x=\"30\" y=\"125\">anode (−) oxydation<\/text><text x=\"200\" y=\"125\">cathode (+) réduction<\/text><text x=\"120\" y=\"12\">électrons →<\/text><text x=\"130\" y=\"48\">pont salin<\/text><\/g>\n<\/svg><h2>Idée 3 · Fem et constante d&#39;équilibre<\/h2>\n<p>fem = E(cathode) − E(anode). Constante : $\\log K = \\frac{n\\,(E°_{cathode} - E°_{anode})}{0{,}06}$. À l&#39;équilibre (pile usée), les deux potentiels sont égaux.<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Révision, exercice 12 : Cu/Cu²⁺ (0,1 M) // Fe²⁺ (0,1 M)/Fe<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Potentiels des électrodes ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 0.31<\/b><\/p><p>E(Cu) = 0,34 + 0,03 log 0,1 = <strong>0,31 V<\/strong> ; E(Fe) = −0,44 + 0,03 log 0,1 = <strong>−0,47 V<\/strong>.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Anode, cathode, fem ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 0.78<\/b><\/p><p>Cathode : cuivre ($Cu^{2+} + 2e^- \\to Cu$). Anode : fer ($Fe \\to Fe^{2+} + 2e^-$). fem = 0,31 − (−0,47) = <strong>0,78 V<\/strong>. Attention : la pile est écrite à l&#39;envers dans le sujet, le fer est bien l&#39;anode.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"3\"><div class=\"ex-q\"><p>Constante de $Cu^{2+} + Fe \\to Cu + Fe^{2+}$ ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 26<\/b><\/p><p>log K = 2 × 0,78 / 0,06 = 26, <strong>K = 10²⁶<\/strong> : réaction totale.<\/p>\n<\/div><\/div><\/section><aside class=\"enc attention\"><div class=\"enc-t\">Attention<\/div><p>Révision, exercice 13 : le sujet annonce Fe cathode d&#39;une pile Ni/Fe avec une fem de 0,21 V. Avec les vraies valeurs (E°(Ni²⁺/Ni) = −0,25 V, E°(Fe²⁺/Fe) = −0,44 V), c&#39;est le nickel qui serait la cathode. Les données conduisent à E°(Ni²⁺/Ni) ≈ −0,63 V, valeur fictive : signale-le sur ta copie.<\/p>\n<\/aside><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">À la cathode a lieu :<\/div><button class=\"opt\" data-o=\"0\">la réduction<\/button><button class=\"opt\" data-o=\"1\">l&#39;oxydation<\/button><button class=\"opt\" data-o=\"2\">rien<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Les électrons circulent dans le fil :<\/div><button class=\"opt\" data-o=\"0\">de l&#39;anode vers la cathode<\/button><button class=\"opt\" data-o=\"1\">de la cathode vers l&#39;anode<\/button><button class=\"opt\" data-o=\"2\">dans le pont salin<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Pour Cd²⁺/Cd, le facteur de Nernst est :<\/div><button class=\"opt\" data-o=\"0\">0,03<\/button><button class=\"opt\" data-o=\"1\">0,06<\/button><button class=\"opt\" data-o=\"2\">0,12<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Quand la pile est usée :<\/div><button class=\"opt\" data-o=\"0\">fem = 0<\/button><button class=\"opt\" data-o=\"1\">fem maximale<\/button><button class=\"opt\" data-o=\"2\">K = 0<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Dans MnO₄⁻ → Mn²⁺, le nombre d&#39;électrons est :<\/div><button class=\"opt\" data-o=\"0\">5<\/button><button class=\"opt\" data-o=\"1\">2<\/button><button class=\"opt\" data-o=\"2\">7<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">K = 10²⁶ signifie une réaction :<\/div><button class=\"opt\" data-o=\"0\">totale<\/button><button class=\"opt\" data-o=\"1\">impossible<\/button><button class=\"opt\" data-o=\"2\">équilibrée à 50 %<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">fem de Cd/Ag (0,20 M chacun) :<\/div><button class=\"opt\" data-o=\"0\">1,18 V<\/button><button class=\"opt\" data-o=\"1\">1,20 V<\/button><button class=\"opt\" data-o=\"2\">0,40 V<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Rôle du pont salin :<\/div><button class=\"opt\" data-o=\"0\">fermer le circuit et garder la neutralité<\/button><button class=\"opt\" data-o=\"1\">fournir des électrons<\/button><button class=\"opt\" data-o=\"2\">stocker l&#39;énergie<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Un réducteur :<\/div><button class=\"opt\" data-o=\"0\">cède des électrons<\/button><button class=\"opt\" data-o=\"1\">capte des électrons<\/button><button class=\"opt\" data-o=\"2\">capte des protons<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Augmenter [Ag⁺] fait :<\/div><button class=\"opt\" data-o=\"0\">monter E(Ag⁺/Ag)<\/button><button class=\"opt\" data-o=\"1\">baisser E(Ag⁺/Ag)<\/button><button class=\"opt\" data-o=\"2\">rien<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"oxydoreduction-piles","rep":null,"tol":null},{"n":"oxydoreduction-piles","rep":["0.31"],"tol":null},{"n":"oxydoreduction-piles","rep":["0.78"],"tol":null},{"n":"oxydoreduction-piles","rep":["26"],"tol":null}],"qcm":[{"n":"oxydoreduction-piles","q":"À la cathode a lieu :","o":["la réduction","l&#39;oxydation","rien"],"a":0,"e":"Gain d&#39;électrons."},{"n":"oxydoreduction-piles","q":"Les électrons circulent dans le fil :","o":["de l&#39;anode vers la cathode","de la cathode vers l&#39;anode","dans le pont salin"],"a":0,"e":"Les ions circulent dans le pont."},{"n":"oxydoreduction-piles","q":"Pour Cd²⁺/Cd, le facteur de Nernst est :","o":["0,03","0,06","0,12"],"a":0,"e":"0,06/2."},{"n":"oxydoreduction-piles","q":"Quand la pile est usée :","o":["fem = 0","fem maximale","K = 0"],"a":0,"e":"Équilibre atteint."},{"n":"oxydoreduction-piles","q":"Dans MnO₄⁻ → Mn²⁺, le nombre d&#39;électrons est :","o":["5","2","7"],"a":0,"e":"Mn passe de +7 à +2."},{"n":"oxydoreduction-piles","q":"K = 10²⁶ signifie une réaction :","o":["totale","impossible","équilibrée à 50 %"],"a":0,"e":"K très grand."},{"n":"oxydoreduction-piles","q":"fem de Cd/Ag (0,20 M chacun) :","o":["1,18 V","1,20 V","0,40 V"],"a":0,"e":"Devoir 2."},{"n":"oxydoreduction-piles","q":"Rôle du pont salin :","o":["fermer le circuit et garder la neutralité","fournir des électrons","stocker l&#39;énergie"],"a":0,"e":"Migration d&#39;ions."},{"n":"oxydoreduction-piles","q":"Un réducteur :","o":["cède des électrons","capte des électrons","capte des protons"],"a":0,"e":"Il s&#39;oxyde."},{"n":"oxydoreduction-piles","q":"Augmenter [Ag⁺] fait :","o":["monter E(Ag⁺/Ag)","baisser E(Ag⁺/Ag)","rien"],"a":0,"e":"Log croissant."}]},{"id":"cinetique","t":"Notions de cinétique chimique","seance":"Chapitre II · Vitesse, ordre, énergie d'activation","imp":4,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir que $\\ln$ et $\\exp$ sont réciproques : $\\ln(e^{-kt}) = -kt$.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Résous $e^{-x} = 0{,}5$ (à 0,01 près).<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 0.69<\/b><\/p><p>$x = \\ln 2 \\approx 0{,}69$.<\/p>\n<\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « quelle fonction est une droite ? ».<\/strong> Pour trouver l&#39;ordre, teste : [A] (ordre 0), ln[A] (ordre 1) ou 1/[A] (ordre 2) en fonction du temps. Celle qui donne un k constant est la bonne.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Croire que t½ dépend toujours de [A]₀. Pour l&#39;ordre 1, t½ = ln2/k ne dépend pas de la concentration initiale.<\/p>\n<\/aside><p>À la fin, tu sais trouver l&#39;ordre, k, t½ et l&#39;énergie d&#39;activation.<\/p>\n<h2>Idée 1 · Les lois de vitesse intégrées<\/h2>\n<figure class=\"grille\"><figcaption>Ordres 0, 1, 2<\/figcaption><table><tr><th>Ordre,<\/th><th>Loi<\/th><th>intégrée,<\/th><th>Droite,<\/th><th>t½,<\/th><th>Unité<\/th><th>de<\/th><th>k<\/th><\/tr><tr><td class=\"h1\">0,<\/td><td>[A]<\/td><td>=<\/td><td>[A]₀<\/td><td>−<\/td><td>kt,<\/td><td>[A]<\/td><td>=<\/td><td>f(t),<\/td><td>[A]₀/(2k),<\/td><td>mol·L⁻¹·s⁻¹<\/td><\/tr><tr><td class=\"h1\">1,<\/td><td>ln([A]₀/[A])<\/td><td>=<\/td><td>kt,<\/td><td>ln[A]<\/td><td>=<\/td><td>f(t),<\/td><td>ln2/k,<\/td><td>s⁻¹<\/td><\/tr><tr><td class=\"h1\">2,<\/td><td>1/[A]<\/td><td>−<\/td><td>1/[A]₀<\/td><td>=<\/td><td>kt,<\/td><td>1/[A]<\/td><td>=<\/td><td>f(t),<\/td><td>1/(k[A]₀),<\/td><td>L·mol⁻¹·s⁻¹<\/td><\/tr><\/table><\/figure><h2>Idée 2 · La loi d&#39;Arrhenius<\/h2>\n<p>$$k = A\\,e^{-E_a/RT} \\qquad \\ln\\frac{k_2}{k_1} = \\frac{E_a}{R}\\left(\\frac{1}{T_1} - \\frac{1}{T_2}\\right)$$<\/p>\n<svg viewBox=\"0 0 320 120\" role=\"img\" aria-label=\"Profil énergétique : barrière d'activation Ea entre réactifs et produits\" style=\"max-width:360px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M20 80h60Q140-10 200 95h100\" stroke=\"#D9824F\"/><path d=\"M140 30v50\" stroke-dasharray=\"3 4\"/><\/g>\n<g fill=\"currentColor\" font-size=\"10\"><text x=\"146\" y=\"60\">Ea<\/text><text x=\"20\" y=\"95\">réactifs<\/text><text x=\"250\" y=\"112\">produits<\/text><\/g>\n<\/svg><h2>Idée 3 · Méthode pour un tableau de mesures<\/h2>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Révision, exercice 14<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/4 · 1. Calcule k avec la loi d&#39;ordre 1 pour chaque point : $k = \\frac{1}{t}\\ln\\frac{[A]_0}{[A]}$.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/4 · 2. On trouve 8,50·10⁻³ ; 8,51·10⁻³ ; 8,56·10⁻³ ; 8,51·10⁻³ ; 8,49·10⁻³ min⁻¹ : constant.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/4 · 3. Ordre 1 confirmé ; k ≈ 8,5·10⁻³ min⁻¹.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/4 · 4. t½ = ln2 / k ≈ 81,5 min.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Avec la loi d&#39;ordre 2 sur le même tableau, k est-il constant ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Non : (1/[A] − 10)/t donne 0,097 puis 0,111, 0,135… en croissant. L&#39;ordre 2 est exclu.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>t½ pour k = 8,5·10⁻³ min⁻¹ (ordre 1) ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 81.5<\/b><\/p><p>ln2 / 8,5·10⁻³ ≈ <strong>81,5 min<\/strong>.<\/p>\n<\/div><\/div><\/section><aside class=\"enc attention\"><div class=\"enc-t\">Attention<\/div><p>Exercice 14 c : le rapport des constantes entre 25 °C et 50 °C n&#39;apparaît pas dans le fichier. Méthode : $E_a = \\frac{R\\ln(k_2/k_1)}{1/T_1 - 1/T_2}$ avec T₁ = 298 K et T₂ = 323 K. Par exemple, un rapport de 5 donnerait Ea ≈ 51,5 kJ/mol.<\/p>\n<\/aside><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Pour l&#39;ordre 1, la droite est :<\/div><button class=\"opt\" data-o=\"0\">ln[A] = f(t)<\/button><button class=\"opt\" data-o=\"1\">[A] = f(t)<\/button><button class=\"opt\" data-o=\"2\">1/[A] = f(t)<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">t½ d&#39;ordre 1 :<\/div><button class=\"opt\" data-o=\"0\">ln2/k<\/button><button class=\"opt\" data-o=\"1\">1/(k[A]₀)<\/button><button class=\"opt\" data-o=\"2\">[A]₀/(2k)<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Unité de k pour l&#39;ordre 2 :<\/div><button class=\"opt\" data-o=\"0\">L·mol⁻¹·s⁻¹<\/button><button class=\"opt\" data-o=\"1\">s⁻¹<\/button><button class=\"opt\" data-o=\"2\">mol·L⁻¹·s⁻¹<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Quand T augmente, k :<\/div><button class=\"opt\" data-o=\"0\">augmente<\/button><button class=\"opt\" data-o=\"1\">diminue<\/button><button class=\"opt\" data-o=\"2\">ne change pas<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Ea est :<\/div><button class=\"opt\" data-o=\"0\">la barrière d&#39;énergie à franchir<\/button><button class=\"opt\" data-o=\"1\">l&#39;énergie libérée<\/button><button class=\"opt\" data-o=\"2\">la température de réaction<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Un catalyseur :<\/div><button class=\"opt\" data-o=\"0\">abaisse Ea<\/button><button class=\"opt\" data-o=\"1\">augmente Ea<\/button><button class=\"opt\" data-o=\"2\">change l&#39;état final<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Après 3 demi-vies (ordre 1), il reste :<\/div><button class=\"opt\" data-o=\"0\">12,5 %<\/button><button class=\"opt\" data-o=\"1\">33 %<\/button><button class=\"opt\" data-o=\"2\">0 %<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">L&#39;ordre de l&#39;exercice 14 est :<\/div><button class=\"opt\" data-o=\"0\">1<\/button><button class=\"opt\" data-o=\"1\">0<\/button><button class=\"opt\" data-o=\"2\">2<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Pour l&#39;ordre 0, [A] décroît :<\/div><button class=\"opt\" data-o=\"0\">linéairement<\/button><button class=\"opt\" data-o=\"1\">exponentiellement<\/button><button class=\"opt\" data-o=\"2\">en 1/t<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">R vaut :<\/div><button class=\"opt\" data-o=\"0\">8,3 J·mol⁻¹·K⁻¹<\/button><button class=\"opt\" data-o=\"1\">0,06 V<\/button><button class=\"opt\" data-o=\"2\">6,02·10²³<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"cinetique","rep":["0.69"],"tol":null},{"n":"cinetique","rep":null,"tol":null},{"n":"cinetique","rep":["81.5"],"tol":null}],"qcm":[{"n":"cinetique","q":"Pour l&#39;ordre 1, la droite est :","o":["ln[A] = f(t)","[A] = f(t)","1/[A] = f(t)"],"a":0,"e":"Pente −k."},{"n":"cinetique","q":"t½ d&#39;ordre 1 :","o":["ln2/k","1/(k[A]₀)","[A]₀/(2k)"],"a":0,"e":"Indépendant de [A]₀."},{"n":"cinetique","q":"Unité de k pour l&#39;ordre 2 :","o":["L·mol⁻¹·s⁻¹","s⁻¹","mol·L⁻¹·s⁻¹"],"a":0,"e":"Selon la loi de vitesse."},{"n":"cinetique","q":"Quand T augmente, k :","o":["augmente","diminue","ne change pas"],"a":0,"e":"Arrhenius."},{"n":"cinetique","q":"Ea est :","o":["la barrière d&#39;énergie à franchir","l&#39;énergie libérée","la température de réaction"],"a":0,"e":"Énergie d&#39;activation."},{"n":"cinetique","q":"Un catalyseur :","o":["abaisse Ea","augmente Ea","change l&#39;état final"],"a":0,"e":"Même équilibre, atteint plus vite."},{"n":"cinetique","q":"Après 3 demi-vies (ordre 1), il reste :","o":["12,5 %","33 %","0 %"],"a":0,"e":"(1/2)³."},{"n":"cinetique","q":"L&#39;ordre de l&#39;exercice 14 est :","o":["1","0","2"],"a":0,"e":"k constant avec la loi d&#39;ordre 1."},{"n":"cinetique","q":"Pour l&#39;ordre 0, [A] décroît :","o":["linéairement","exponentiellement","en 1/t"],"a":0,"e":"[A]₀ − kt."},{"n":"cinetique","q":"R vaut :","o":["8,3 J·mol⁻¹·K⁻¹","0,06 V","6,02·10²³"],"a":0,"e":"Constante des gaz."}]},{"id":"annales-corrigees","t":"Annales corrigées · devoir 2 et exercices de révision","seance":"Examen BCG-C213 (devoir 2, 2020) et fiches de révision 2021","imp":5,"payant":true,"html":"<p>Le devoir 2 du module, puis les calculs-clés des fiches de révision qui ne sont pas déjà dans les chapitres.<\/p>\n<h2>Devoir 2<\/h2>\n<section class=\"exo\"><h3>Devoir 2<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Ex. 1 : pH de NaHCO₃ 0,05 M (pKa1 = 6,30 ; pKa2 = 10,33).<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 8.32<\/b><\/p><p>HCO₃⁻ est un ampholyte : pH = ½(6,30 + 10,33) ≈ <strong>8,32<\/strong>.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Ex. 2 : Ks de Cu(OH)₂, solution saturée à pH 7,4.<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>[OH⁻] = 10⁻⁶·⁶ ; [Cu²⁺] = [OH⁻]/2 ; Ks ≈ <strong>7,9·10⁻²¹<\/strong>.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Ex. 3 : pile Cd | Cd²⁺ (0,20 M) || Ag⁺ (0,20 M) | Ag. Potentiels et fem.<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 1.18<\/b><\/p><p>E(Cd) = −0,40 + 0,03 log 0,2 ≈ <strong>−0,42 V<\/strong> ; E(Ag) = 0,80 + 0,06 log 0,2 ≈ <strong>0,76 V<\/strong> ; fem ≈ <strong>1,18 V<\/strong>. Cathode : argent. Réaction : $2Ag^+ + Cd \\to 2Ag + Cd^{2+}$.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"3\"><div class=\"ex-q\"><p>Ex. 3 : constante d&#39;équilibre.<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 40<\/b><\/p><p>log K = 2 × (0,80 + 0,40) / 0,06 = 40 : <strong>K = 10⁴⁰<\/strong>.<\/p>\n<\/div><\/div><\/section><h2>Exercices de révision (avril 2021)<\/h2>\n<section class=\"exo\"><h3>Révision<\/h3><div class=\"ex\" data-x=\"4\"><div class=\"ex-q\"><p>Ex. 1 : acide acétique 0,1 M, Ka = 2·10⁻⁵. pH et α.<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 2.85<\/b><\/p><p>pH ≈ <strong>2,85<\/strong> ; α ≈ <strong>1,4 %<\/strong>.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"5\"><div class=\"ex-q\"><p>Ex. 2a : volume de HCl à pH 1,7 à ajouter à 750 cm³ à pH 2,5 pour obtenir pH 2,15.<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 228<\/b><\/p><p>Bilan de H₃O⁺ : $750\\times10^{-2{,}5} + V\\times10^{-1{,}7} = (750 + V)\\times10^{-2{,}15}$, d&#39;où <strong>V ≈ 228 cm³<\/strong>.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"6\"><div class=\"ex-q\"><p>Ex. 2b, c : chlorure dans 250 cm³ de C, puis pH de D (5 cm³ de C + 495 cm³ d&#39;eau).<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 4.15<\/b><\/p><p>[Cl⁻] = [H₃O⁺] = 10⁻²·¹⁵ M : 250 cm³ contiennent ≈ <strong>62,8 mg<\/strong> de Cl⁻. Dilution par 100 : <strong>pH = 4,15<\/strong>.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"7\"><div class=\"ex-q\"><p>Ex. 11b : équilibrer $ClO_4^- + I^- \\to Cl^- + HIO$ en milieu acide.<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>$ClO_4^- + 8H^+ + 8e^- \\to Cl^- + 4H_2O$ et $I^- + H_2O \\to HIO + H^+ + 2e^-$ (×4). Bilan : $ClO_4^- + 4I^- + 4H^+ \\to Cl^- + 4HIO$.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>QCM<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Le pH d&#39;une solution de NaHCO₃ dépend de sa concentration :<\/div><button class=\"opt\" data-o=\"0\">fortement<\/button><button class=\"opt\" data-o=\"1\">presque pas<\/button><button class=\"opt\" data-o=\"2\">linéairement<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Dans la pile Cd/Ag, la cathode est :<\/div><button class=\"opt\" data-o=\"0\">l&#39;argent<\/button><button class=\"opt\" data-o=\"1\">le cadmium<\/button><button class=\"opt\" data-o=\"2\">le pont salin<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">K = 10⁴⁰ :<\/div><button class=\"opt\" data-o=\"0\">réaction totale<\/button><button class=\"opt\" data-o=\"1\">réaction nulle<\/button><button class=\"opt\" data-o=\"2\">équilibre partagé<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Diluer 100 fois un acide fort fait monter le pH de :<\/div><button class=\"opt\" data-o=\"0\">2<\/button><button class=\"opt\" data-o=\"1\">100<\/button><button class=\"opt\" data-o=\"2\">1<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Dans le pont salin, K⁺ migre vers :<\/div><button class=\"opt\" data-o=\"0\">la cathode<\/button><button class=\"opt\" data-o=\"1\">l&#39;anode<\/button><button class=\"opt\" data-o=\"2\">nulle part<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Bilan de ClO₄⁻ + I⁻ : coefficient de I⁻ :<\/div><button class=\"opt\" data-o=\"0\">4<\/button><button class=\"opt\" data-o=\"1\">8<\/button><button class=\"opt\" data-o=\"2\">2<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">La concentration de Cl⁻ dans HCl égale :<\/div><button class=\"opt\" data-o=\"0\">celle de H₃O⁺<\/button><button class=\"opt\" data-o=\"1\">le double<\/button><button class=\"opt\" data-o=\"2\">zéro<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">α de l&#39;acide acétique 0,1 M :<\/div><button class=\"opt\" data-o=\"0\">≈ 1,4 %<\/button><button class=\"opt\" data-o=\"1\">≈ 14 %<\/button><button class=\"opt\" data-o=\"2\">100 %<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Pour mélanger deux solutions d&#39;acide fort, on conserve :<\/div><button class=\"opt\" data-o=\"0\">la quantité de H₃O⁺<\/button><button class=\"opt\" data-o=\"1\">le pH<\/button><button class=\"opt\" data-o=\"2\">le volume<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">E(Ag⁺/Ag) à 0,20 M :<\/div><button class=\"opt\" data-o=\"0\">≈ 0,76 V<\/button><button class=\"opt\" data-o=\"1\">0,80 V<\/button><button class=\"opt\" data-o=\"2\">0,86 V<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"annales-corrigees","rep":["8.32"],"tol":null},{"n":"annales-corrigees","rep":null,"tol":null},{"n":"annales-corrigees","rep":["1.18"],"tol":null},{"n":"annales-corrigees","rep":["40"],"tol":null},{"n":"annales-corrigees","rep":["2.85"],"tol":null},{"n":"annales-corrigees","rep":["228"],"tol":null},{"n":"annales-corrigees","rep":["4.15"],"tol":null},{"n":"annales-corrigees","rep":null,"tol":null}],"qcm":[{"n":"annales-corrigees","q":"Le pH d&#39;une solution de NaHCO₃ dépend de sa concentration :","o":["fortement","presque pas","linéairement"],"a":1,"e":"Ampholyte."},{"n":"annales-corrigees","q":"Dans la pile Cd/Ag, la cathode est :","o":["l&#39;argent","le cadmium","le pont salin"],"a":0,"e":"Plus grand potentiel."},{"n":"annales-corrigees","q":"K = 10⁴⁰ :","o":["réaction totale","réaction nulle","équilibre partagé"],"a":0,"e":"K énorme."},{"n":"annales-corrigees","q":"Diluer 100 fois un acide fort fait monter le pH de :","o":["2","100","1"],"a":0,"e":"log 100."},{"n":"annales-corrigees","q":"Dans le pont salin, K⁺ migre vers :","o":["la cathode","l&#39;anode","nulle part"],"a":0,"e":"Il compense la disparition des cations Ag⁺."},{"n":"annales-corrigees","q":"Bilan de ClO₄⁻ + I⁻ : coefficient de I⁻ :","o":["4","8","2"],"a":0,"e":"8 électrons, 2 par I⁻."},{"n":"annales-corrigees","q":"La concentration de Cl⁻ dans HCl égale :","o":["celle de H₃O⁺","le double","zéro"],"a":0,"e":"Acide fort totalement dissocié."},{"n":"annales-corrigees","q":"α de l&#39;acide acétique 0,1 M :","o":["≈ 1,4 %","≈ 14 %","100 %"],"a":0,"e":"√(Ka/C)."},{"n":"annales-corrigees","q":"Pour mélanger deux solutions d&#39;acide fort, on conserve :","o":["la quantité de H₃O⁺","le pH","le volume"],"a":0,"e":"Bilan de matière."},{"n":"annales-corrigees","q":"E(Ag⁺/Ag) à 0,20 M :","o":["≈ 0,76 V","0,80 V","0,86 V"],"a":0,"e":"0,80 + 0,06 log 0,2."}]}];
+const NOTIONS=[{"id":"ph-des-solutions","t":"Le pH des solutions","imp":5,"ch":"ph-des-solutions"},{"id":"titrages-melanges","t":"Mélanges et titrages acido-basiques","imp":5,"ch":"titrages-melanges"},{"id":"precipitation-complexation","t":"Précipitation et complexation","imp":4,"ch":"precipitation-complexation"},{"id":"oxydoreduction-piles","t":"Oxydoréduction et piles","imp":5,"ch":"oxydoreduction-piles"},{"id":"cinetique","t":"Notions de cinétique chimique","imp":4,"ch":"cinetique"},{"id":"annales-corrigees","t":"Annales corrigées · devoir 2 et exercices de révision","imp":5,"ch":"annales-corrigees"}];
+const CARTES=[{"n":"ph-des-solutions","k":0,"ch":"ph-des-solutions","q":"<p>pH d&#39;un acide faible<\/p>\n","r":"<p>½(pKa − log C), si α &lt; 5 %.<\/p>\n"},{"n":"ph-des-solutions","k":1,"ch":"ph-des-solutions","q":"<p>pH d&#39;une base faible<\/p>\n","r":"<p>7 + ½(pKa + log C).<\/p>\n"},{"n":"ph-des-solutions","k":2,"ch":"ph-des-solutions","q":"<p>pH d&#39;un ampholyte<\/p>\n","r":"<p>½(pKa1 + pKa2).<\/p>\n"},{"n":"ph-des-solutions","k":3,"ch":"ph-des-solutions","q":"<p>Coefficient de dissociation<\/p>\n","r":"<p>α = [A⁻]/C ≈ √(Ka/C).<\/p>\n"},{"n":"titrages-melanges","k":4,"ch":"titrages-melanges","q":"<p>Demi-équivalence<\/p>\n","r":"<p>pH = pKa.<\/p>\n"},{"n":"titrages-melanges","k":5,"ch":"titrages-melanges","q":"<p>Henderson<\/p>\n","r":"<p>pH = pKa + log([A⁻]/[HA]).<\/p>\n"},{"n":"titrages-melanges","k":6,"ch":"titrages-melanges","q":"<p>pH à l&#39;équivalence (acide faible / base forte)<\/p>\n","r":"<blockquote><p>7 (la base conjuguée est seule).<\/p>\n<\/blockquote>"},{"n":"titrages-melanges","k":7,"ch":"titrages-melanges","q":"<p>Mélange : quel volume ?<\/p>\n","r":"<p>Toujours le volume total.<\/p>\n"},{"n":"precipitation-complexation","k":8,"ch":"precipitation-complexation","q":"<p>Ks de AB₂<\/p>\n","r":"<p>4s³.<\/p>\n"},{"n":"precipitation-complexation","k":9,"ch":"precipitation-complexation","q":"<p>Condition de précipitation<\/p>\n","r":"<p>Produit ionique Q &gt; Ks.<\/p>\n"},{"n":"precipitation-complexation","k":10,"ch":"precipitation-complexation","q":"<p>Effet d&#39;ion commun<\/p>\n","r":"<p>Diminue la solubilité.<\/p>\n"},{"n":"precipitation-complexation","k":11,"ch":"precipitation-complexation","q":"<p>Complexe et précipité<\/p>\n","r":"<p>La complexation peut redissoudre un précipité.<\/p>\n"},{"n":"oxydoreduction-piles","k":12,"ch":"oxydoreduction-piles","q":"<p>Nernst<\/p>\n","r":"<p>$E = E° + \\frac{0{,}06}{n}\\log\\frac{[Ox]}{[Red]}$.<\/p>\n"},{"n":"oxydoreduction-piles","k":13,"ch":"oxydoreduction-piles","q":"<p>Cathode<\/p>\n","r":"<p>Pôle + , réduction, plus grand potentiel.<\/p>\n"},{"n":"oxydoreduction-piles","k":14,"ch":"oxydoreduction-piles","q":"<p>fem<\/p>\n","r":"<p>E(cathode) − E(anode).<\/p>\n"},{"n":"oxydoreduction-piles","k":15,"ch":"oxydoreduction-piles","q":"<p>Constante d&#39;une pile<\/p>\n","r":"<p>$\\log K = n\\Delta E°/0{,}06$.<\/p>\n"},{"n":"cinetique","k":16,"ch":"cinetique","q":"<p>Test de l&#39;ordre 1<\/p>\n","r":"<p>ln[A] linéaire en t ; k constant.<\/p>\n"},{"n":"cinetique","k":17,"ch":"cinetique","q":"<p>t½ (ordre 1)<\/p>\n","r":"<p>ln2/k, indépendant de [A]₀.<\/p>\n"},{"n":"cinetique","k":18,"ch":"cinetique","q":"<p>Arrhenius<\/p>\n","r":"<p>$k = Ae^{-E_a/RT}$.<\/p>\n"},{"n":"cinetique","k":19,"ch":"cinetique","q":"<p>Unité de k (ordre 1)<\/p>\n","r":"<p>s⁻¹ ou min⁻¹.<\/p>\n"}];
+const OUTILS=[];
+// ---------- Sauvegarde ----------
+// Format « essais » : un objet partagé avec l'ancien module (attempts par notion, cards par indice) ; on ne touche qu'à ces deux champs.
+// Format « score10 » : scores des chapitres dans MODULE.cle, essais et cartes dans MODULE.cleEtat.
+const lireJ = (k) => { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } };
+const ecrireJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const etat = () => { const S = lireJ(MODULE.cleEtat); S.attempts = S.attempts || {}; S.cards = S.cards || {}; return S; };
+function noter(n, ok) { const S = etat(); (S.attempts[n] = S.attempts[n] || []).push(ok ? 1 : 0); if (S.attempts[n].length > 30) S.attempts[n].shift(); ecrireJ(MODULE.cleEtat, S); }
+// Maîtrisé = au moins 3 essais et 80 % de réussite sur les 5 derniers (règle commune à la plateforme).
+function statut(n) {
+  if (MODULE.format === "score10") { const v = lireJ(MODULE.cle)[n]; if (v !== undefined) return [v >= 8 ? "ok" : "fragile", v / 10]; }
+  if (MODULE.format === "best") { const v = (lireJ(MODULE.cle).notions || {})[n]; return v && v.best != null ? [v.best >= 0.8 ? "ok" : "fragile", v.best] : ["jamais", null]; }
+  if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[n]; return v && v.pc !== undefined ? [v.pc >= 80 ? "ok" : "fragile", v.pc / 100] : ["jamais", null]; } const a = (etat().attempts[n] || []).slice(-5); if (!a.length) return ["jamais", null]; const r = a.reduce((x, y) => x + y, 0) / a.length; return [(etat().attempts[n].length >= 3 && r >= 0.8) ? "ok" : "fragile", r]; }
+const NCH = {}; NOTIONS.forEach((n) => (NCH[n.ch] = NCH[n.ch] || []).push(n));
+function scoreChap(c) {
+  if (MODULE.format === "score10") return lireJ(MODULE.cle)[c.id];
+  if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[c.id]; return v && v.pc !== undefined ? Math.round(v.pc / 10) : undefined; }
+  if (MODULE.format === "best") { const v = (lireJ(MODULE.cle).notions || {})[c.id]; return v && v.best != null ? Math.round(v.best * 10) : undefined; }
+  const l = NCH[c.id] || []; if (!l.length || !l.some((n) => statut(n.id)[0] !== "jamais")) return undefined;
+  return Math.round((10 * l.filter((n) => statut(n.id)[0] === "ok").length) / l.length);
+}
+// ---------- Flashcards (boîtes de Leitner, mêmes intervalles que les anciens modules) ----------
+const CFG_C = MODULE.cartes || { champ: "box", intervalles: [0, 1, 3, 7, 14, 30], echec: 1, depart: 0 };
+const INTV = CFG_C.intervalles, CHAMP = CFG_C.champ;
+const jour = () => new Date().toISOString().slice(0, 10);
+const numJour = (d) => Math.floor(new Date(d + "T00:00:00").getTime() / 864e5);
+const dansJours = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); };
+const aRevoir = () => { const S = etat(), t = numJour(jour()); return CARTES.map((_, i) => i).filter((i) => { const st = S.cards[CARTES[i].k]; return !st || numJour(st.due) <= t; }); };
+let file = [], montre = false;
+
+const nav = document.getElementById("nav"), main = document.getElementById("main"), pct = document.getElementById("pct");
+let cur = -1, rep = {};
+const VUES = { bord: -3, cartes: -2, intro: -1 };
+function dessinerNav() {
+  let ok = 0;
+  const ligne = (i, titre, sous, v) => `<button class="${cur === i ? "on" : ""}" data-go="${i}"><span>${titre}${sous ? `<span class="se">${sous}</span>` : ""}</span><span class="sc ${v >= 8 ? "ok" : ""}">${v === undefined ? "" : v + "/10"}</span></button>`;
+  const dues = CARTES.length ? aRevoir().length : 0;
+  let h = ligne(VUES.bord, "📊 Tableau de bord");
+  if (CARTES.length) h += ligne(VUES.cartes, `🃏 Flashcards${dues ? ` <b>(${dues})</b>` : ""}`);
+  if (MODULE.intro) h += ligne(VUES.intro, "Avant de commencer");
+  h += '<div class="sep"></div>' + CHAPS.map((c, i) => { const v = scoreChap(c); if (v >= 8) ok++; return ligne(i, `${i + 1}. ${c.t}`, c.seance, v); }).join("");
+  nav.innerHTML = h;
+  pct.textContent = `${ok}/${CHAPS.length} maîtrisés`;
+}
+function vueBord() {
+  const st = NOTIONS.map((n) => ({ ...n, s: statut(n.id) }));
+  const okN = st.filter((n) => n.s[0] === "ok").length, fr = st.filter((n) => n.s[0] === "fragile"), jam = st.filter((n) => n.s[0] === "jamais");
+  const chapDe = (id) => CHAPS.findIndex((c) => c.id === id);
+  const li = (n) => `<li><button data-go="${chapDe(n.ch)}">${n.t}</button><span>${n.s[1] === null ? "jamais testé" : Math.round(100 * n.s[1]) + " %"}</span></li>`;
+  return `<h1 class="t">Tableau de bord</h1>
+  <div class="kpi"><div><b>${okN}/${NOTIONS.length}</b>${MODULE.format === "essais" ? "notions" : "chapitres"} maîtrisé(e)s</div><div><b>${fr.length}</b>à consolider</div><div><b>${CARTES.length ? aRevoir().length : 0}</b>flashcards à revoir aujourd'hui</div></div>
+  <div class="barre"><i style="width:${NOTIONS.length ? (100 * okN) / NOTIONS.length : 0}%"></i></div>
+  ${fr.length ? `<h2>À consolider en priorité</h2><ul class="liste-n">${fr.sort((a, b) => b.imp - a.imp || a.s[1] - b.s[1]).slice(0, 10).map(li).join("")}</ul>` : ""}
+  ${jam.length ? `<h2>Pas encore travaillé (les plus importants d'abord)</h2><ul class="liste-n">${jam.sort((a, b) => b.imp - a.imp).slice(0, 10).map(li).join("")}</ul>` : ""}
+  <p style="color:var(--mute);font-size:14px">Une ${MODULE.format === "essais" ? "notion" : "partie"} est maîtrisée après au moins 3 essais (QCM, exercices, flashcards) avec 80 % de réussite sur les 5 derniers.</p>`;
+}
+function vueCartes() {
+  if (!file.length) { file = aRevoir(); montre = false; }
+  if (!file.length) return `<h1 class="t">Flashcards</h1><p>✔ Rien à revoir aujourd'hui. Reviens demain : les cartes réussies reviennent après 1, 3, 7, 14 puis 30 jours.</p>`;
+  const i = file[0], c = CARTES[i], st = etat().cards[c.k], n = NOTIONS.find((x) => x.id === c.n);
+  return `<h1 class="t">Flashcards</h1><p style="color:var(--mute)">${file.length} carte(s) à revoir aujourd'hui.</p>
+  <div class="carte"><div class="lbl">${n ? n.t : ""} · ${st && st[CHAMP] >= 0 ? "boîte " + st[CHAMP] : "nouvelle"}</div>${c.q}${montre ? `<div class="rep">${c.r}</div>` : ""}</div>
+  <div class="ex-b">${montre ? `<button class="b ko" data-fc="0">Raté</button><button class="b ok" data-fc="1">Je savais</button>` : `<button class="b p" data-fc="voir">Retourner la carte</button>`}</div>`;
+}
+window.typeset = () => { if (MODULE.maths && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([main]).catch(() => {}); };
+const nEval = (c) => c.qcm.length + c.ex.filter((x) => x.rep).length;
+const norm = (t) => String(t).toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "").replace(/,/g, ".");
+function bilanChap() {
+  typeset();
+  const c = CHAPS[cur], tot = nEval(c), fait = Object.keys(rep).length, juste = Object.values(rep).reduce((a, b) => a + b, 0), bilan = document.getElementById("bilan");
+  if (!bilan) return;
+  if (fait < tot) { bilan.textContent = `Évaluation du chapitre : ${fait}/${tot} répondu(s) · ${juste} juste${juste > 1 ? "s" : ""}`; dessinerNav(); return; }
+  const sc = Math.round((10 * juste) / fait);
+  if (MODULE.format === "score10") { const s = lireJ(MODULE.cle); s[c.id] = Math.max(sc, s[c.id] ?? 0); ecrireJ(MODULE.cle, s); }
+  if (MODULE.format === "pc") { const s = lireJ(MODULE.cle); s[c.id] = { ...(s[c.id] || {}), pc: Math.round((100 * juste) / fait), date: new Date().toLocaleDateString("fr-FR") }; ecrireJ(MODULE.cle, s); }
+  if (MODULE.format === "best") { const S = etat(); S.notions = S.notions || {}; const st = S.notions[c.id] = { ...(S.notions[c.id] || {}), read: true }; st.last = juste / fait; st.best = Math.max(st.best || 0, st.last); st.tries = (st.tries || 0) + 1; ecrireJ(MODULE.cle, S); }
+  bilan.textContent = `Score : ${sc}/10 ${sc >= 8 ? "· très bien ✔" : "· relis les encadrés « Piège » puis recommence (recharge le chapitre)."}`;
+  dessinerNav();
+}
+// Outils d'origine affichés dans le chapitre : même origine, on masque tout sauf l'outil visé.
+const vueIntegre = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { vueIntegre.unobserve(e.target); chargerIntegre(e.target); } }), { rootMargin: "400px" });
+function chargerIntegre(box) {
+  const f = document.createElement("iframe");
+  f.title = "Outil interactif"; f.loading = "lazy";
+  f.src = box.dataset.src + (box.dataset.ancre ? "#" + box.dataset.ancre : "");
+  f.onload = () => {
+    let d; try { d = f.contentDocument; } catch (e) { return; }
+    if (!d) return;
+    const st = d.createElement("style");
+    st.textContent = "#mztBtn,#mztPan,.toast{display:none!important}html,body{background:transparent!important;margin:0!important;padding:0!important;min-height:0!important}";
+    d.head.appendChild(st);
+    const appliquer = () => {
+      const cible = d.querySelector(box.dataset.cible);
+      if (!cible) return;
+      let e = cible;
+      while (e && e !== d.body) {
+        e.hidden = false; e.style.display = e.style.display === "none" ? "" : e.style.display;
+        e.style.margin = "0"; e.style.padding = e === cible ? "8px 14px" : "0"; e.style.maxWidth = "none";
+        for (const sib of e.parentElement.children) if (sib !== e && !/^(SCRIPT|STYLE|LINK|META|TITLE)$/.test(sib.tagName)) sib.style.display = "none";
+        e = e.parentElement;
+      }
+      if (box.dataset.garder) for (const c of cible.children) c.style.display = c.matches(box.dataset.garder) ? "" : "none";
+    };
+    appliquer(); setTimeout(appliquer, 400);
+    const ajuster = () => { const h = Math.max(d.body.scrollHeight, d.documentElement.scrollHeight); if (h && Math.abs(f.offsetHeight - h) > 4) f.style.height = h + "px"; };
+    ajuster(); new ResizeObserver(ajuster).observe(d.body); setInterval(ajuster, 1500);
+    const att = box.querySelector(".integre-att"); if (att) att.remove();
+  };
+  box.appendChild(f);
+}
+function lancerOutils() {
+  main.querySelectorAll(".integre").forEach((b) => vueIntegre.observe(b));
+  main.querySelectorAll("[data-outil]").forEach((d) => {
+    const tmp = document.createElement("div"); tmp.innerHTML = OUTILS[Number(d.dataset.outil)];
+    tmp.querySelectorAll("script").forEach((sc) => { const n = document.createElement("script"); n.textContent = sc.textContent; sc.replaceWith(n); });
+    d.replaceWith(...tmp.childNodes);
+  });
+}
+function aller(i) {
+  if (i === VUES.intro && !MODULE.intro) i = 0;
+  if (i === VUES.cartes && !CARTES.length) i = 0;
+  cur = i; rep = {}; nav.classList.remove("open");
+  try { localStorage.setItem(MODULE.cleEtat + "_dernier", String(i)); } catch (e) {}
+  if (i === VUES.bord) main.innerHTML = vueBord();
+  else if (i === VUES.cartes) { file = []; main.innerHTML = vueCartes(); }
+  else if (i === VUES.intro) main.innerHTML = `<h1 class="t">Avant de commencer</h1>${MODULE.intro}<div class="nx"><span></span><button class="b p" data-go="0">Commencer →</button></div>`;
+  else {
+    const c = CHAPS[i], n = nEval(c);
+    main.innerHTML = `${c.seance ? `<div class="seance">${c.seance}</div>` : ""}<h1 class="t">${c.t}</h1>${c.html}${n ? `<div class="bilan" id="bilan">Évaluation du chapitre : 0/${n} répondu(s)</div>` : ""}<div class="nx">${i > 0 || MODULE.intro ? `<button class="b" data-go="${i > 0 ? i - 1 : VUES.intro}">← Précédent</button>` : "<span></span>"}${i < CHAPS.length - 1 ? `<button class="b p" data-go="${i + 1}">Chapitre suivant →</button>` : ""}</div>`;
+    lancerOutils();
+  }
+  scrollTo(0, 0); dessinerNav(); typeset();
+}
+document.addEventListener("click", (e) => {
+  const g = e.target.closest("[data-go]"); if (g) return aller(Number(g.dataset.go));
+  const et = e.target.closest("[data-et]");
+  if (et) { const f = et.closest(".etapes"), l = f.querySelectorAll(".etape"); let i = Math.min(l.length - 1, Math.max(0, Number(f.dataset.i) + Number(et.dataset.et))); f.dataset.i = i; l.forEach((x, j) => (x.hidden = j !== i)); return; }
+  const fc = e.target.closest("[data-fc]");
+  if (fc) {
+    if (fc.dataset.fc === "voir") { montre = true; main.innerHTML = vueCartes(); typeset(); return; }
+    const i = file.shift(), ok = fc.dataset.fc === "1", S = etat(), k = CARTES[i].k, st = S.cards[k] || { [CHAMP]: CFG_C.depart ?? 0 };
+    st[CHAMP] = ok ? Math.min(INTV.length - 1, Math.max(0, st[CHAMP] + 1)) : CFG_C.echec; st.due = dansJours(ok ? INTV[st[CHAMP]] : 1); S.cards[k] = st; ecrireJ(MODULE.cleEtat, S);
+    noter(CARTES[i].n, ok); montre = false; main.innerHTML = vueCartes(); dessinerNav(); typeset(); return;
+  }
+  const xb = e.target.closest("[data-ex]");
+  if (xb) {
+    const ex = xb.closest(".ex"), v = xb.dataset.ex;
+    if (v === "h") ex.querySelector(".ex-h").hidden = false;
+    else if (v === "v") {
+      const k = Number(ex.dataset.x), it = CHAPS[cur].ex[k], inp = ex.querySelector("input");
+      if (!inp.value.trim() || ("x" + k) in rep) return;
+      const ok = it.tol !== null ? Math.abs(parseFloat(norm(inp.value)) - parseFloat(it.rep[0])) <= it.tol : it.rep.some((r) => norm(r) === norm(inp.value));
+      rep["x" + k] = ok ? 1 : 0; noter(it.n, ok); inp.disabled = true; xb.disabled = true;
+      inp.style.borderColor = ok ? "var(--ok)" : "var(--ko)";
+      const c = ex.querySelector(".ex-c"); c.hidden = false; c.insertAdjacentHTML("afterbegin", `<p>${ok ? "✔ Bonne réponse." : "✘ Raté."}</p>`);
+      bilanChap();
+    }
+    else if (v === "c") ex.querySelector(".ex-c").hidden = false;
+    else if (!ex.classList.contains("fait")) { ex.classList.add("fait"); noter(CHAPS[cur].ex[Number(ex.dataset.x)].n, v === "1"); xb.parentNode.innerHTML = v === "1" ? "✔ Noté : réussi." : "✘ Noté : à retravailler."; dessinerNav(); }
+    return;
+  }
+  const o = e.target.closest(".opt"); if (!o) return;
+  const qq = o.closest(".qq"), k = Number(qq.dataset.k), c = CHAPS[cur], q = c.qcm[k];
+  if (("q" + k) in rep) return;
+  rep["q" + k] = Number(o.dataset.o) === q.a ? 1 : 0;
+  noter(q.n, rep["q" + k] === 1);
+  qq.querySelectorAll(".opt").forEach((b, j) => { b.disabled = true; if (j === q.a) b.classList.add("bon"); else if (b === o) b.classList.add("faux"); });
+  const ex = qq.querySelector(".qq-e"); ex.innerHTML = (rep["q" + k] ? "✔ Bonne réponse. " : "✘ Raté. ") + q.e; ex.hidden = false;
+  bilanChap();
+});
+document.getElementById("menu").onclick = () => nav.classList.toggle("open");
+let depart = MODULE.intro ? -1 : 0; try { const d = localStorage.getItem(MODULE.cleEtat + "_dernier"); if (d !== null) depart = Number(d); } catch (e) {}
+aller(depart >= -3 && depart < CHAPS.length ? depart : 0);
+</script>
+<script>
+window.MZT_CONFIG={"id":"reactivite-chimique","module":"Réactivité chimique","prof":"Pr Hafid","student":"un étudiant de licence (FST Béni Mellal)","conventions":"Cours du Pr Hafid, module BCG-C213 « Réactivité chimique », tronc commun BCG section B, FST Béni Mellal, 2020-2021. Plan : I-1 rappels, I-2 acido-basique, I-3 précipitation et complexation, I-4 oxydoréduction, II cinétique. Conventions : pH = −log[H3O+], Ke = 10⁻¹⁴ à 25 °C, Nernst avec (RT/nF)ln x = (0,06/n) log x. Toujours justifier une approximation (acide fort ou faible, faiblement dissocié si α < 5 %)."};
+window.MZT_CONFIG.getContext = () => { const h = document.querySelector("h1.t"); return { label: h ? h.textContent : MODULE.titre, text: (document.querySelector("main").innerText || "").slice(0, 6000) }; };
+</script>
+<script>
+/* ToumaiLearn · tuteur commun (bouton flottant présent sur chaque section)
+   Configuration attendue avant ce script : window.MZT_CONFIG = {
+     id: 'crypto',                      // identifiant court du module (stockage)
+     module: 'Cryptographie',           // nom affiché et donné au tuteur
+     prof: 'Pr A. Farchane',
+     student:'un étudiant de licence (FSABM)',
+     conventions: '…',                  // conventions du prof à respecter
+     getContext: () => ({label, text})  // facultatif : extrait courant (sinon section visible)
+   };
+   Fonctions : extrait automatique de la section visible (ou contexte fourni par le module),
+   mode rapide explicatif par défaut, mode approfondi (modèle supérieur), relances rapides,
+   photo jointe, bouton Arrêter, mémoire des difficultés (note cachée MÉMO), historique par
+   section avec recherche. Stockage : compte (db) si disponible, sinon navigateur. */
+(function () {
+  if (window.MZT) return;
+  const C = Object.assign({ id: 'module', module: 'ce module', prof: '', student: 'un étudiant', conventions: '' }, window.MZT_CONFIG || {});
+  const LS = 'mzt-' + C.id;
+  const $ = (s, r) => (r || document).querySelector(s);
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const today = () => new Date().toLocaleDateString('fr-FR');
+  const norm = (t) => String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  // ---------- état ----------
+  let ST = { threads: [], memos: [] };
+  try { ST = Object.assign(ST, JSON.parse(localStorage.getItem(LS) || '{}')); } catch (e) {}
+  const saveLocal = () => { try { localStorage.setItem(LS, JSON.stringify({ threads: ST.threads.slice(-80), memos: ST.memos.slice(-30) })); } catch (e) {} };
+  let sample = null, ready = false, imgOK = false, db = null, base = null;
+  let cur = null, busy = false, ctl = null, img = null, forced = null;
+
+  // ---------- extrait de la section visible ----------
+  function visibleSection() {
+    const cands = [...document.querySelectorAll('section, [data-tab], [data-view], main')]
+      .filter((el) => !el.closest('.mzt-pan') && el.offsetParent !== null && (el.innerText || '').trim().length > 80);
+    // la plus profonde parmi les visibles qui contiennent le plus de texte
+    cands.sort((a, b) => (b.innerText || '').length - (a.innerText || '').length);
+    let el = cands.find((c) => !cands.some((d) => d !== c && c.contains(d) && (d.innerText || '').length > 0.6 * (c.innerText || '').length)) || cands[0] || document.body;
+    const h = el.querySelector('h1, h2, h3');
+    return { label: (h ? h.innerText : document.title).trim().slice(0, 80), text: (el.innerText || '').replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim() };
+  }
+  // MathJax découpe une formule en un symbole par ligne dans innerText : on la remplace le temps de la lecture par son LaTeX.
+  // (vaut aussi pour l'extrait fourni par la page du module, qui lit lui-même innerText)
+  function avecFormulesEnLatex(lire) {
+    let items = [];
+    try { if (window.MathJax && MathJax.startup && MathJax.startup.document) items = MathJax.startup.document.getMathItemsWithin(document.body) || []; } catch (e) {}
+    const poses = [];
+    items.forEach((it) => {
+      const r = it.typesetRoot; if (!r || !r.isConnected || !r.parentNode) return;
+      const s = document.createElement('span'); s.textContent = it.display ? '\n$$' + it.math.trim() + '$$\n' : '$' + it.math.trim() + '$';
+      r.parentNode.insertBefore(s, r); const d = r.style.display; r.style.display = 'none'; poses.push([s, r, d]);
+    });
+    try { return lire(); } finally { poses.forEach(([s, r, d]) => { s.remove(); r.style.display = d; }); }
+  }
+  function context() {
+    if (forced) return forced;
+    return avecFormulesEnLatex(() => {
+      try { if (C.getContext) { const c = C.getContext(); if (c && c.text) return c; } } catch (e) {}
+      return visibleSection();
+    });
+  }
+
+  // ---------- interface ----------
+  const css = `
+.mzt-btn{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9999;font:600 15px Inter,system-ui,sans-serif;background:#B4532A;color:#fff;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.mzt-pan{--b:#FBF7F0;--s:#F4EDE1;--i:#1E2433;--m:#5C5346;--l:#DCCFBA;--a:#B4532A;--w:#8A5A12;--bad:#A23B2A;position:fixed;right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:9999;width:min(440px,calc(100vw - 20px));height:min(680px,calc(100vh - 70px));height:min(680px,calc(100dvh - 70px));max-height:calc(100vh - 20px);max-height:calc(100dvh - 20px);background:var(--b);color:var(--i);border:1px solid var(--l);border-radius:12px;display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(0,0,0,.3);font:14px/1.5 system-ui,sans-serif}
+@media (prefers-color-scheme:dark){.mzt-pan{--b:#1E2532;--s:#141922;--i:#EDE6D9;--m:#A9A094;--l:#343D4D;--a:#E8906A;--w:#E4C48A;--bad:#E58A7A}}
+.mzt-pan *{box-sizing:border-box}
+.mzt-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:8px 10px;border-bottom:1px solid var(--l)}
+.mzt-h b{flex:0 0 auto}.mzt-h .mzt-ctx{flex:1 1 90px;min-width:0;color:var(--m);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mzt-pan button{font:600 12px system-ui,sans-serif;border:1px solid var(--l);background:var(--s);color:var(--i);border-radius:999px;padding:4px 10px;cursor:pointer}
+.mzt-pan button.mzt-pri{background:var(--a);color:#fff;border-color:var(--a)}
+.mzt-pan button:disabled{opacity:.5}
+.mzt-body{flex:1;min-height:0;display:flex;flex-direction:column}
+.mzt-log{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.mzt-m{padding:8px 11px;border-radius:10px;max-width:92%;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere}
+.mzt-m.a{background:var(--s);align-self:flex-start}.mzt-m.u{background:color-mix(in srgb,var(--a) 22%,transparent);align-self:flex-end}
+.mzt-m .mzt-tag{display:block;font-size:11px;color:var(--w);font-weight:700}
+.mzt-deepbtn{align-self:flex-start;border-color:var(--w)!important;color:var(--w)!important;background:transparent!important}
+.mzt-chips{display:flex;gap:5px;flex-wrap:wrap;padding:4px 10px}
+.mzt-f{display:flex;flex-direction:column;gap:6px;padding:8px 10px;border-top:1px solid var(--l)}
+.mzt-f textarea{width:100%;min-height:54px;max-height:140px;resize:vertical;font:16px system-ui,sans-serif;padding:7px;border:1px solid var(--l);border-radius:8px;background:var(--s);color:var(--i)}
+.mzt-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.mzt-row label{display:flex;gap:4px;align-items:center;font-size:12px;color:var(--m);cursor:pointer}
+.mzt-note{font-size:11.5px;color:var(--m);margin:0}
+.mzt-pan details{padding:0 10px}.mzt-pan summary{cursor:pointer;font-size:12px;color:var(--a);font-weight:600;padding:4px 0}
+.mzt-prev{max-height:140px;overflow:auto;font-size:12px;white-space:pre-wrap;background:var(--s);border-radius:6px;padding:6px;color:var(--m)}
+.mzt-list{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.mzt-item{border:1px solid var(--l);border-radius:8px;padding:8px}
+.mzt-item .mzt-meta{font-size:11px;color:var(--m)}
+.mzt-pan input[type=search]{width:100%;font:16px system-ui,sans-serif;padding:7px;border:1px solid var(--l);border-radius:8px;background:var(--s);color:var(--i)}
+.mzt-pan input[type=checkbox]{width:auto}
+.mzt-pan[hidden],.mzt-btn[hidden],.mzt-pan [hidden]{display:none!important}
+.mzt-h button{flex:0 0 auto;white-space:nowrap}
+.mzt-pan #mztX{background:var(--bad);border-color:var(--bad);color:#fff}
+.mzt-m.a{white-space:normal}.mzt-m.a p{margin:0 0 6px}.mzt-m.a p:last-child{margin-bottom:0}
+.mzt-m.a ul,.mzt-m.a ol{margin:4px 0 6px;padding-left:20px}.mzt-m.a li{margin:2px 0}
+.mzt-m code{font:12.5px ui-monospace,Menlo,Consolas,monospace;background:color-mix(in srgb,var(--i) 10%,transparent);padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
+.mzt-m pre{margin:6px 0;padding:8px;overflow-x:auto;background:color-mix(in srgb,var(--i) 10%,transparent);border-radius:6px;font:12.5px ui-monospace,Menlo,Consolas,monospace;white-space:pre}
+.mzt-m pre code{background:none;padding:0}
+.mzt-tex{font:12.5px ui-monospace,Menlo,Consolas,monospace;color:var(--m)}.mzt-tex[data-ok]{font:inherit;color:inherit}
+.mzt-tex.d{display:block;margin:6px 0;text-align:center}
+.mzt-m mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}.mzt-m mjx-container[display]{margin:0!important}
+.mzt-m mjx-container svg{max-width:none}
+.mzt-tab{overflow-x:auto;margin:6px 0}.mzt-tab table{border-collapse:collapse;font-size:13px;min-width:60%}
+.mzt-tab th,.mzt-tab td{border:1px solid var(--l);padding:4px 8px;text-align:left;vertical-align:top}.mzt-tab th{background:color-mix(in srgb,var(--a) 12%,transparent);font-weight:600}`;
+  const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+  document.body.insertAdjacentHTML('beforeend', `
+<button class="mzt-btn" id="mztBtn" type="button">Tuteur</button>
+<div class="mzt-pan" id="mztPan" hidden role="dialog" aria-label="Tuteur">
+ <div class="mzt-h"><b>Tuteur</b><span class="mzt-ctx" id="mztCtx"></span><button type="button" id="mztTabH">Historique</button><button type="button" id="mztTabM">Mémoire</button><button type="button" id="mztX">Fermer</button></div>
+ <div class="mzt-body" id="mztChat">
+  <details><summary>Voir l'extrait envoyé au tuteur</summary><div class="mzt-prev" id="mztPrev"></div></details>
+  <div class="mzt-log" id="mztLog"></div>
+  <div class="mzt-chips" id="mztChips"></div>
+  <form class="mzt-f" id="mztF">
+   <textarea id="mztIn" placeholder="Ta question, ou ta réponse à vérifier… (Entrée pour envoyer, Maj+Entrée pour aller à la ligne)"></textarea>
+   <div class="mzt-row">
+    <button class="mzt-pri" id="mztSend" type="submit">Envoyer</button>
+    <button type="button" id="mztStop" hidden>Arrêter</button>
+    <label id="mztImgL" hidden>📎 Photo<input type="file" id="mztImg" accept="image/*" hidden></label>
+    <span class="mzt-note" id="mztImgN"></span>
+    <label title="Modèle plus puissant : réponse plus longue et plus détaillée, consomme davantage"><input type="checkbox" id="mztDeep"> Approfondi</label>
+    <button type="button" id="mztNew">Nouvelle discussion</button>
+   </div>
+   <p class="mzt-note" id="mztNote"></p>
+  </form>
+ </div>
+ <div class="mzt-body" id="mztHist" hidden><div style="padding:10px"><input type="search" id="mztQ" placeholder="Chercher dans toutes mes anciennes questions…"></div><div class="mzt-list" id="mztList"></div></div>
+ <div class="mzt-body" id="mztMem" hidden><div class="mzt-list"><p class="mzt-note">Ce que le tuteur retient de tes difficultés d'une conversation à l'autre. Il s'en sert pour faire des liens avec tes confusions passées. Tu peux effacer une note.</p><div id="mztMemL"></div></div></div>
+</div>`);
+
+  const CHIPS = ['Explique plus simplement', 'Donne un exemple concret', "Pourquoi c'est un piège ?", 'Fais-moi un mini-exercice'];
+  $('#mztChips').innerHTML = CHIPS.map((c) => `<button type="button" data-chip="${esc(c)}">${esc(c)}</button>`).join('');
+
+  function view(v) {
+    $('#mztChat').hidden = v !== 'chat'; $('#mztHist').hidden = v !== 'hist'; $('#mztMem').hidden = v !== 'mem';
+    $('#mztTabH').textContent = v === 'hist' ? 'Retour' : 'Historique'; $('#mztTabM').textContent = v === 'mem' ? 'Retour' : 'Mémoire';
+    if (v === 'hist') renderList(); if (v === 'mem') renderMem();
+  }
+  function note() {
+    $('#mztNote').textContent = !ready ? 'Connexion au tuteur…' : sample
+      ? 'Mode rapide (économe) par défaut. « Approfondi » ou « Approfondir cette réponse » utilise un modèle supérieur. Pense à chercher dans l\'Historique avant de reposer une question.'
+      : 'Le tuteur n\'est pas disponible ici (il faut ouvrir la page dans Claude et accepter la demande d\'autorisation). L\'historique reste consultable.';
+  }
+  function refreshCtx() {
+    const c = context(); $('#mztCtx').textContent = '· ' + c.label; $('#mztPrev').textContent = c.text.slice(0, 2500) + (c.text.length > 2500 ? '\n…' : '');
+    return c;
+  }
+  function openPanel(ctx) {
+    forced = ctx && ctx.text ? ctx : null;
+    $('#mztPan').hidden = false; $('#mztBtn').hidden = true; view('chat');
+    const c = refreshCtx();
+    if (!cur || cur.sec !== c.label) { const ts = ST.threads.filter((t) => t.sec === c.label); cur = forced ? null : ts[ts.length - 1] || null; }
+    renderLog(); note(); setTimeout(() => $('#mztIn').focus(), 30);
+  }
+  function closePanel() { $('#mztPan').hidden = true; $('#mztBtn').hidden = false; forced = null; }
+
+  // Sur téléphone, la réponse doit avoir la place : relances et note seulement sur une discussion vide.
+  function compacter(on) { $('#mztChips').hidden = on; $('#mztNote').hidden = on; }
+  function renderLog() {
+    const log = $('#mztLog'); log.innerHTML = ''; compacter(!!(cur && cur.msgs.length));
+    if (!cur || !cur.msgs.length) {
+      log.innerHTML = `<div class="mzt-m a">Pose ta question sur « ${esc(context().label)} » : une phrase que tu ne comprends pas, un calcul à vérifier, un exemple en plus… Tu peux joindre une photo de ton brouillon.</div>`; return;
+    }
+    cur.msgs.forEach((m, i) => {
+      const d = document.createElement('div'); d.className = 'mzt-m ' + (m.r === 'u' ? 'u' : 'a');
+      if (m.d) d.innerHTML = '<span class="mzt-tag">Réponse approfondie</span>';
+      if (m.r === 'u') d.appendChild(document.createTextNode(m.t)); else d.insertAdjacentHTML('beforeend', md(m.t)); log.appendChild(d);
+      if (m.r === 'a' && i === cur.msgs.length - 1 && !m.d && !busy) {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'mzt-deepbtn'; b.textContent = 'Approfondir cette réponse';
+        b.onclick = () => ask('Approfondis ta réponse précédente : explique plus en détail, avec un exemple complet et les pièges.', true); log.appendChild(b);
+      }
+    });
+    dessinerMaths(log); log.scrollTop = 1e9;
+  }
+  function renderList() {
+    const q = norm($('#mztQ').value || ''); const ts = [...ST.threads].reverse().filter((t) => !q || norm(t.msgs.map((m) => m.t).join(' ')).includes(q));
+    $('#mztList').innerHTML = ts.length ? ts.map((t) => `<details class="mzt-item"><summary>${esc(t.title)}</summary><div class="mzt-meta">${esc(t.sec)} · ${esc(t.date)}</div>${t.msgs.map((m) => `<div class="mzt-m ${m.r === 'u' ? 'u' : 'a'}" style="margin:6px 0">${m.r === 'u' ? esc(m.t) : md(m.t)}</div>`).join('')}<button type="button" data-cont="${esc(t.id)}">Continuer cette discussion</button></details>`).join('')
+      : `<p class="mzt-note">${ST.threads.length ? 'Aucune discussion ne contient ce mot.' : 'Aucune discussion pour l\'instant.'}</p>`;
+    dessinerMaths($('#mztList'));
+  }
+  function renderMem() {
+    $('#mztMemL').innerHTML = ST.memos.length ? ST.memos.map((m, i) => `<div class="mzt-item"><div class="mzt-meta">${esc(m.date)}</div>${esc(m.text)}<div><button type="button" data-memdel="${i}" style="margin-top:4px">Effacer</button></div></div>`).join('')
+      : '<p class="mzt-note">Aucune note pour l\'instant. Elles apparaîtront au fil de tes questions.</p>';
+  }
+
+  // ---------- stockage compte ----------
+  async function saveThread(t) {
+    saveLocal(); if (!db) return;
+    try { await db.collection(base + '/threads').doc(t.id).set({ sec: t.sec, date: t.date, title: t.title, msgs: t.msgs.slice(-40) }); } catch (e) {}
+  }
+  async function saveMemos() { saveLocal(); if (!db) return; try { await db.doc(base).set({ memos: ST.memos.slice(-30), updated: Date.now() }); } catch (e) {} }
+
+  // ---------- appel au tuteur ----------
+  const ERR = { not_granted: 'Tu n\'as pas autorisé la page à utiliser Claude. Recharge-la et accepte la demande, ou change-le dans le menu Autorisations de l\'artifact.', rate_limited: 'Trop de questions d\'un coup, ou limite d\'usage atteinte. Réessaie dans un moment.', prompt_too_large: 'L\'extrait est trop long : ouvre une partie plus précise du cours.', image_rejected: 'Cette photo n\'est pas acceptée. Essaie un JPEG ou un PNG plus léger.', refused: 'Claude n\'a pas pu répondre à cette demande. Reformule ta question.' };
+  const visible = (t) => {
+    const L = String(t).split('\n');
+    for (let i = L.length - 1; i >= Math.max(0, L.length - 3); i--) if (/^\s*M[ÉE]MO\s*:/i.test(L[i])) return L.slice(0, i).join('\n').trim();
+    return String(t).trim();
+  };
+  // rendu léger : on échappe le HTML d'abord, puis gras, italique, code, titres, puces, tableaux et blocs de code.
+  // Les formules ($…$, $$…$$, \(…\), \[…\]) sont mises de côté avant le Markdown, puis dessinées par MathJax.
+  const MATHS = [];
+  const protegerMaths = (t) => {
+    MATHS.length = 0;
+    const garde = (tex, d) => { MATHS.push({ tex: tex.trim(), d }); return '\u0000' + (MATHS.length - 1) + '\u0000'; };
+    const RX = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\\\(([\s\S]+?)\\\)|\$(?=[^\s$\d])([^$\n]*?[^\s$\\])\$(?!\d)/g;
+    // le code (blocs ``` et `…`) n'est jamais lu comme une formule
+    return String(t).split(/(```[\s\S]*?(?:```|$))/).map((bloc, i) => i % 2 ? bloc
+      : bloc.split(/(`[^`\n]*`)/).map((x, j) => j % 2 ? x : x.replace(RX, (_, a, b, c, d) => a != null ? garde(a, 1) : b != null ? garde(b, 1) : c != null ? garde(c, 0) : garde(d, 0))).join('')).join('');
+  };
+  const rendreMaths = (h) => h.replace(/\u0000(\d+)\u0000/g, (_, n) => { const m = MATHS[+n]; return m ? `<span class="mzt-tex${m.d ? ' d' : ''}" data-d="${m.d}">${esc(m.tex)}</span>` : ''; });
+  const inl = (s) => {
+    const p = s.split('`'); if (p.length % 2 === 0) { const last = p.pop(); p[p.length - 1] += '`' + last; }
+    return p.map((x, i) => i % 2 ? '<code>' + esc(x) + '</code>' : esc(x).replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*\w])\*([^*\n]+)\*(?![*\w])/g, '$1<em>$2</em>')).join('');
+  };
+  const cellules = (l) => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
+  const md = (t) => {
+    const out = []; let list = null, code = null, tab = null;
+    const flushTab = () => {
+      if (!tab) return;
+      if (tab.length >= 2 && /^[\s|:-]+$/.test(tab[1]) && tab[1].includes('-')) {
+        const [tete, , ...corps] = tab;
+        out.push('<div class="mzt-tab"><table><thead><tr>' + cellules(tete).map((c) => '<th>' + inl(c) + '</th>').join('') + '</tr></thead><tbody>'
+          + corps.map((r) => '<tr>' + cellules(r).map((c) => '<td>' + inl(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>');
+      } else tab.forEach((r) => out.push('<p>' + inl(r) + '</p>'));
+      tab = null;
+    };
+    const flush = () => { flushTab(); if (list) { out.push('</' + list + '>'); list = null; } };
+    protegerMaths(t).split('\n').forEach((raw) => {
+      if (/^\s*```/.test(raw)) { if (code === null) { flush(); code = []; } else { out.push('<pre>' + esc(code.join('\n')) + '</pre>'); code = null; } return; }
+      if (code !== null) { code.push(raw); return; }
+      let m;
+      if (/^\s*\|.*\|\s*$/.test(raw)) { if (list) { out.push('</' + list + '>'); list = null; } (tab = tab || []).push(raw); return; }
+      flushTab();
+      if ((m = raw.match(/^\s*#{1,6}\s+(.*)$/))) { flush(); out.push('<p><strong>' + inl(m[1]) + '</strong></p>'); }
+      else if ((m = raw.match(/^\s*[-*•]\s+(.*)$/))) { if (list !== 'ul') { flush(); out.push('<ul>'); list = 'ul'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if ((m = raw.match(/^\s*\d+[.)]\s+(.*)$/))) { if (list !== 'ol') { flush(); out.push('<ol>'); list = 'ol'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if (!raw.trim()) flush();
+      else { flush(); out.push('<p>' + inl(raw) + '</p>'); }
+    });
+    if (code !== null) out.push('<pre>' + esc(code.join('\n')) + '</pre>');
+    flush(); return rendreMaths(out.join(''));
+  };
+
+  // ---------- MathJax : celui de la page s'il existe, sinon chargé à la première formule ----------
+  let mjPret = null;
+  const mathjax = () => mjPret || (mjPret = new Promise((ok, ko) => {
+    if (!window.MathJax) {
+      window.MathJax = { svg: { fontCache: 'global' }, startup: { typeset: false } };
+      const s = document.createElement('script'); s.async = true; s.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js';
+      s.onerror = () => ko(new Error('MathJax')); document.head.appendChild(s);
+    }
+    let n = 0; const t = setInterval(() => {
+      if (window.MathJax && MathJax.tex2svgPromise && MathJax.startup && MathJax.startup.promise) { clearInterval(t); MathJax.startup.promise.then(ok, ko); }
+      else if (++n > 150) { clearInterval(t); ko(new Error('MathJax')); }
+    }, 100);
+  })).catch((e) => { mjPret = null; throw e; });
+  const svgCache = new Map(); let file = Promise.resolve();
+  function dessinerMaths(racine) {
+    const spans = [...racine.querySelectorAll('.mzt-tex:not([data-ok])')]; if (!spans.length) return;
+    mathjax().then(() => spans.forEach((sp) => {
+      const cle = sp.dataset.d + '|' + sp.textContent;
+      const poser = (n) => { if (!sp.isConnected || sp.dataset.ok) return; sp.textContent = ''; sp.appendChild(n.cloneNode(true)); sp.dataset.ok = '1'; };
+      if (svgCache.has(cle)) return poser(svgCache.get(cle));
+      file = file.then(() => MathJax.tex2svgPromise(sp.textContent, { display: sp.dataset.d === '1' }).then((n) => { svgCache.set(cle, n); poser(n); })).catch(() => {});
+    })).catch(() => {});
+  }
+  async function ask(q, deep) {
+    q = (q || '').trim(); deep = deep || $('#mztDeep').checked;
+    if (busy || !q) return; if (!sample) { note(); return; }
+    const c = refreshCtx();
+    if (!cur || (cur.sec !== c.label && !forced)) { cur = { id: 't' + Date.now().toString(36), sec: c.label, date: today(), title: q.slice(0, 80), msgs: [] }; ST.threads.push(cur); }
+    else if (!ST.threads.includes(cur)) ST.threads.push(cur);
+    cur.msgs.push({ r: 'u', t: q }); busy = true; renderLog();
+    const out = document.createElement('div'); out.className = 'mzt-m a'; out.textContent = deep ? 'Réflexion approfondie…' : 'Réflexion…'; $('#mztLog').appendChild(out);
+    $('#mztSend').disabled = true; $('#mztStop').hidden = false;
+    const style = deep
+      ? 'Réponse APPROFONDIE (400 à 700 mots) : 1) l\'intuition avec une analogie, 2) l\'explication détaillée pas à pas, 3) pourquoi ça marche, 4) un exemple complet chiffré, 5) les pièges fréquents et ce qui tombe à l\'examen, 6) une question pour vérifier la compréhension.'
+      : 'Réponse EXPLICATIVE (150 à 250 mots) : 1) l\'idée en une phrase, 2) l\'explication pas à pas, 3) un petit exemple chiffré ou concret, 4) une courte question pour vérifier la compréhension.';
+    const mem = [];
+    if (ST.memos.length) mem.push('DIFFICULTÉS DÉJÀ REPÉRÉES :\n' + ST.memos.slice(-12).map((m) => `- ${m.date} : ${m.text}`).join('\n'));
+    const lastQ = ST.threads.flatMap((t) => t.msgs.filter((m) => m.r === 'u').map((m) => `[${t.sec}] ${m.t.slice(0, 100)}`)).slice(-6);
+    if (lastQ.length) mem.push('SES DERNIÈRES QUESTIONS :\n' + lastQ.map((x) => '- ' + x).join('\n'));
+    const rules = `Tu es le tuteur de ${C.student}, pour le module ${C.module}${C.prof ? ' du ' + C.prof : ''}. Il apprend souvent la notion pour la première fois.
+Règles : réponds en français simple, en Markdown léger (**gras** pour les termes clés, tirets, étapes numérotées). Toute formule ou tout calcul s'écrit en LaTeX : $…$ dans la phrase, $$…$$ seul sur sa ligne pour une formule importante (ex. $\\hat y_i$, $$\\text{MSE}=\\frac{1}{n}\\sum_{i=1}^{n}(y_i-\\hat y_i)^2$$) ; jamais d'accents graves pour une formule, ils sont réservés au code et aux noms de fonctions. Un petit tableau Markdown est permis s'il clarifie (3 colonnes maximum, l'écran est étroit). ${style} Appuie-toi d'abord sur l'EXTRAIT ci-dessous et sur les conventions du prof ; si une source générale diffère du cours, signale l'écart et dis quelle version utiliser à l'examen (celle du prof). Pour un calcul, pose chaque étape et vérifie-la. S'il envoie une réponse ou une photo de brouillon, corrige étape par étape et nomme précisément l'erreur. Si tu n'es pas sûr, dis-le. S'il demande un mini-exercice, donne l'exercice sans la solution.
+Utilise sa mémoire pour faire des liens avec ses confusions passées, sans la réciter.
+Termine TOUJOURS par une dernière ligne séparée au format exact « MÉMO: … » qui résume en 15 mots maximum la difficulté révélée par sa question (ou « MÉMO: rien »). Cette ligne lui est cachée.
+${C.conventions ? 'CONVENTIONS DU PROF : ' + C.conventions + '\n' : ''}MÉMOIRE DE L'ÉLÈVE :
+${mem.join('\n\n') || '(rien pour l\'instant)'}
+EXTRAIT (${c.label}) :
+${c.text.slice(0, deep ? 9000 : 3500)}`;
+    const recent = cur.msgs.slice(deep ? -9 : -5, -1).map((m) => ({ role: m.r === 'u' ? 'user' : 'assistant', content: m.t }));
+    while (recent.length && recent[0].role !== 'user') recent.shift();
+    const msgs = [...recent.filter((m) => m.content && m.content.trim()), { role: 'user', content: q }]; while (msgs.length > 1 && msgs[0].role !== 'user') msgs.shift(); msgs[0] = { role: 'user', content: rules + '\n\n---\nQuestion : ' + msgs[0].content };
+    ctl = new AbortController();
+    const opts = { modelTier: deep ? 'complex' : 'quick', cache: false, signal: ctl.signal, onText: ({ text }) => { out.innerHTML = md(visible(text)); dessinerMaths(out); $('#mztLog').scrollTop = 1e9; } };
+    if (img) opts.images = [img];
+    try {
+      const r = await sample(msgs, opts);
+      const mm = r.text.match(/(?:^|\n)\s*M[ÉE]MO\s*:\s*(.+)\s*$/i);
+      cur.msgs.push({ r: 'a', t: visible(r.text) + (r.truncated ? '\n\n(Réponse coupée : pose une question plus ciblée.)' : ''), d: !!deep });
+      if (mm && !/^\s*rien/i.test(mm[1])) { ST.memos.push({ date: today(), text: mm[1].trim().slice(0, 160) }); if (ST.memos.length > 30) ST.memos.shift(); saveMemos(); }
+      await saveThread(cur);
+    } catch (e) {
+      const kept = e && e.text ? visible(e.text) : '';
+      if (e && e.code === 'cancelled') { if (kept) cur.msgs.push({ r: 'a', t: kept + '\n(Arrêté.)' }); else cur.msgs.pop(); }
+      else { cur.msgs.pop(); compacter(!!cur.msgs.length); out.textContent = (kept ? kept + '\n\n' : '') + (ERR[e && e.code] || 'Le tuteur n\'a pas pu répondre. Réessaie dans un instant.'); }
+      if (!cur.msgs.length) ST.threads = ST.threads.filter((t) => t !== cur);
+      saveLocal();
+      if (!(e && e.code === 'cancelled')) { busy = false; $('#mztSend').disabled = false; $('#mztStop').hidden = true; img = null; $('#mztImgN').textContent = ''; return; }
+    }
+    busy = false; $('#mztSend').disabled = false; $('#mztStop').hidden = true; img = null; $('#mztImg').value = ''; $('#mztImgN').textContent = ''; renderLog();
+  }
+
+  // ---------- événements ----------
+  $('#mztBtn').onclick = () => openPanel(null);
+  $('#mztX').onclick = closePanel;
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#mztPan').hidden) closePanel(); });
+  $('#mztTabH').onclick = () => view($('#mztHist').hidden ? 'hist' : 'chat');
+  $('#mztTabM').onclick = () => view($('#mztMem').hidden ? 'mem' : 'chat');
+  $('#mztQ').oninput = renderList;
+  $('#mztList').onclick = (e) => { const id = e.target.dataset && e.target.dataset.cont; if (!id) return; cur = ST.threads.find((t) => t.id === id); view('chat'); $('#mztCtx').textContent = '· ' + cur.sec; renderLog(); };
+  $('#mztMemL').onclick = (e) => { const i = e.target.dataset && e.target.dataset.memdel; if (i == null) return; ST.memos.splice(+i, 1); saveMemos(); renderMem(); };
+  $('#mztChips').onclick = (e) => { const b = e.target.closest('[data-chip]'); if (!b) return; const t = $('#mztIn'); t.value = b.dataset.chip + (t.value ? ' : ' + t.value : ''); t.focus(); };
+  $('#mztNew').onclick = () => { cur = null; renderLog(); };
+  $('#mztStop').onclick = () => { if (ctl) ctl.abort(); };
+  $('#mztImg').onchange = (e) => { img = e.target.files[0] || null; $('#mztImgN').textContent = img ? 'Photo : ' + img.name : ''; };
+  $('#mztF').onsubmit = (e) => { e.preventDefault(); const v = $('#mztIn').value; $('#mztIn').value = ''; ask(v); };
+  $('#mztIn').addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('#mztF').requestSubmit(); } });
+
+  // ---------- capacités (facultatives) ----------
+  const W = window.claude;
+  if (W && W.use) {
+    W.use('sample').then((s) => { sample = s; ready = true; note();
+      if (s && s.limits) s.limits().then((l) => { if (l && l.images) { imgOK = true; $('#mztImgL').hidden = false; if (l.images.mediaTypes) $('#mztImg').accept = l.images.mediaTypes.join(','); } }).catch(() => {});
+    }).catch(() => { ready = true; note(); });
+    Promise.all([W.use('db'), W.use('user')]).then(async ([d, u]) => {
+      if (!d || !u) return; const id = await u.id(); if (!id) return; db = d; base = 'data/users/' + id + '/mzt_' + C.id;
+      try {
+        const m = await db.doc(base).get(); if (m.exists) { const v = m.data() || {}; if (Array.isArray(v.memos)) ST.memos = JSON.parse(JSON.stringify(v.memos)); }
+        const q = await db.collection(base + '/threads').get(); const remote = q.docs.map((x) => Object.assign({ id: x.id }, JSON.parse(JSON.stringify(x.data() || {}))));
+        const map = {}; [...ST.threads, ...remote].forEach((t) => { if (!map[t.id] || (t.msgs || []).length > (map[t.id].msgs || []).length) map[t.id] = t; });
+        ST.threads = Object.values(map).sort((a, b) => parseInt(a.id.slice(1), 36) - parseInt(b.id.slice(1), 36)); saveLocal();
+      } catch (e) {}
+    }).catch(() => {});
+  } else { ready = true; note(); }
+
+  window.MZT = { open: openPanel, close: closePanel };
+})();
+
+</script>
+<script>(function(){var a=document.getElementById("retour");if(!a)return;var p="";try{p=window.top.location.pathname}catch(e){}
+if(window.top===window&&location.protocol==="file:"){a.hidden=true;return}
+a.href=p.indexOf("/decouvrir")===0||location.pathname.indexOf("/decouvrir")===0?"/decouvrir":"/app/modules";})();</script>
+</body>
+</html>

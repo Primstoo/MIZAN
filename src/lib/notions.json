@@ -2930,5 +2930,52 @@
     "g": "cours"
    }
   ]
+ },
+ "reactivite-chimique": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "ph-des-solutions",
+    "t": "Le pH des solutions",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "titrages-melanges",
+    "t": "Mélanges et titrages acido-basiques",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "precipitation-complexation",
+    "t": "Précipitation et complexation",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "oxydoreduction-piles",
+    "t": "Oxydoréduction et piles",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "cinetique",
+    "t": "Notions de cinétique chimique",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "annales-corrigees",
+    "t": "Annales corrigées · devoir 2 et exercices de révision",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

@@ -1,0 +1,20 @@
+{
+  "titre": "Réactivité chimique",
+  "prof": "Pr Hafid",
+  "semestre": "S1",
+  "etablissement": "FST Béni Mellal",
+  "fichier": "reactivite-chimique.html",
+  "cle": "reactivite-chimique_scores",
+  "maths": true,
+  "resume": "Module BCG-C213 : pH des solutions, titrages, précipitation et complexation, oxydoréduction et piles, cinétique chimique, avec le devoir 2 et les exercices de révision corrigés.",
+  "conventions": "Cours du Pr Hafid, module BCG-C213 « Réactivité chimique », tronc commun BCG section B, FST Béni Mellal, 2020-2021. Plan : I-1 rappels, I-2 acido-basique, I-3 précipitation et complexation, I-4 oxydoréduction, II cinétique. Conventions : pH = −log[H3O+], Ke = 10⁻¹⁴ à 25 °C, Nernst avec (RT/nF)ln x = (0,06/n) log x. Toujours justifier une approximation (acide fort ou faible, faiblement dissocié si α < 5 %).",
+  "intro": "Ce module suit **le polycopié du Pr Hafid** (BCG-C213) : acides et bases, précipitation, oxydoréduction, cinétique, puis **le devoir 2 et les exercices de révision corrigés**.\n\n**Comment l'utiliser**\n\n1. Apprends le formulaire de pH du chapitre 1 : c'est la moitié de l'examen.\n2. Pour chaque calcul, écris l'approximation que tu fais et vérifie-la à la fin.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n\n**À vérifier** : les séries de TD 1 à 4 sont des scans non lus ; les exercices viennent du devoir 2 et des fiches de révision 2021.",
+  "chapitres": [
+    "01-ph-des-solutions.md",
+    "02-titrages-melanges.md",
+    "03-precipitation-complexation.md",
+    "04-oxydoreduction-piles.md",
+    "05-cinetique.md",
+    "06-annales-corrigees.md"
+  ]
+}

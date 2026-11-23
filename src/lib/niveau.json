@@ -2802,5 +2802,73 @@
    "a": 0,
    "e": "Trois phases."
   }
+ ],
+ "reactivite-chimique": [
+  {
+   "n": "ph-des-solutions",
+   "q": "pH de HCl 10⁻² M :",
+   "o": [
+    "2",
+    "12",
+    "7"
+   ],
+   "a": 0,
+   "e": "Acide fort."
+  },
+  {
+   "n": "titrages-melanges",
+   "q": "À la demi-équivalence :",
+   "o": [
+    "pH = pKa",
+    "pH = 7",
+    "pH = 14"
+   ],
+   "a": 0,
+   "e": "Autant de HA que de A⁻."
+  },
+  {
+   "n": "oxydoreduction-piles",
+   "q": "À la cathode a lieu :",
+   "o": [
+    "la réduction",
+    "l'oxydation",
+    "rien"
+   ],
+   "a": 0,
+   "e": "Gain d'électrons."
+  },
+  {
+   "n": "annales-corrigees",
+   "q": "Le pH d'une solution de NaHCO₃ dépend de sa concentration :",
+   "o": [
+    "fortement",
+    "presque pas",
+    "linéairement"
+   ],
+   "a": 1,
+   "e": "Ampholyte."
+  },
+  {
+   "n": "precipitation-complexation",
+   "q": "Ks de AgCl en fonction de s :",
+   "o": [
+    "s²",
+    "4s³",
+    "2s"
+   ],
+   "a": 0,
+   "e": "Sel 1:1."
+  },
+  {
+   "n": "cinetique",
+   "q": "Pour l'ordre 1, la droite est :",
+   "o": [
+    "ln[A] = f(t)",
+    "[A] = f(t)",
+    "1/[A] = f(t)"
+   ],
+   "a": 0,
+   "e": "Pente −k."
+  }
  ]
 }

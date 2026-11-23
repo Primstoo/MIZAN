@@ -119,6 +119,23 @@
     "annexes": []
   },
   {
+    "slug": "reactivite-chimique",
+    "titre": "Réactivité chimique",
+    "prof": "Pr Hafid",
+    "semestre": "S1",
+    "fichier": "reactivite-chimique.html",
+    "resume": "Module BCG-C213 : pH des solutions, titrages, précipitation et complexation, oxydoréduction et piles, cinétique chimique, avec le devoir 2 et les exercices de révision corrigés.",
+    "cles": [
+      "reactivite-chimique_scores",
+      "reactivite-chimique_scores_etat",
+      "mzt-reactivite-chimique*"
+    ],
+    "cle": "reactivite-chimique_scores",
+    "format": "score10",
+    "chapitres": 6,
+    "annexes": []
+  },
+  {
     "slug": "thermodynamique",
     "titre": "Thermodynamique",
     "prof": "Pr I. Arroub",
