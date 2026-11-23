@@ -2734,5 +2734,73 @@
    "a": 0,
    "e": "PR à distance finie."
   }
+ ],
+ "chimie-minerale": [
+  {
+   "n": "metaux-empilements",
+   "q": "Coordinence dans un empilement compact :",
+   "o": [
+    "8",
+    "12",
+    "6"
+   ],
+   "a": 1,
+   "e": "CFC et HC."
+  },
+  {
+   "n": "cristaux-ioniques",
+   "q": "Coordinence dans CsCl :",
+   "o": [
+    "8-8",
+    "6-6",
+    "4-4"
+   ],
+   "a": 0,
+   "e": "Cubique simple."
+  },
+  {
+   "n": "ellingham",
+   "q": "Les réactions d'Ellingham sont écrites pour :",
+   "o": [
+    "1 mol de O₂",
+    "1 mol de métal",
+    "1 mol d'oxyde"
+   ],
+   "a": 0,
+   "e": "Pour pouvoir comparer."
+  },
+  {
+   "n": "annales-corrigees",
+   "q": "Z ≈ 1 pour un composé AB cubique :",
+   "o": [
+    "CsCl",
+    "NaCl",
+    "ZnS"
+   ],
+   "a": 0,
+   "e": "Une seule paire d'ions."
+  },
+  {
+   "n": "reseaux-rayons-x",
+   "q": "Un atome au centre d'une face compte pour :",
+   "o": [
+    "1/8",
+    "1/2",
+    "1"
+   ],
+   "a": 1,
+   "e": "Partagé entre 2 mailles."
+  },
+  {
+   "n": "diagrammes-de-phases",
+   "q": "Au point eutectique, la variance vaut :",
+   "o": [
+    "0",
+    "1",
+    "2"
+   ],
+   "a": 0,
+   "e": "Trois phases."
+  }
  ]
 }

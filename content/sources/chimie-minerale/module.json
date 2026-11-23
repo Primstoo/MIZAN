@@ -1,0 +1,20 @@
+{
+  "titre": "Chimie minérale",
+  "prof": "",
+  "semestre": "S3",
+  "etablissement": "FST Béni Mellal",
+  "fichier": "chimie-minerale.html",
+  "cle": "chimie-minerale_scores",
+  "maths": true,
+  "resume": "Chimie minérale 1 de la filière BCG : réseaux et diffraction X, empilements compacts des métaux, cristaux ioniques, diagrammes de phases, diagrammes d'Ellingham, avec les examens corrigés.",
+  "conventions": "Module Chimie minérale 1, filière BCG S3, FST Béni Mellal. Plan du cours : ch. 1 chimie du solide (réseau cristallin, rayons X, métaux, cristaux ioniques), ch. 2 diagrammes de phases, ch. 3 initiation à la réactivité en chimie minérale (Ellingham). Notations : Z = nombre de motifs par maille, ρ = Z·M/(N·a³), compacité C = volume des atomes / volume de la maille, d(hkl) = a/√(h²+k²+l²) en cubique, loi de Bragg 2d sin θ = nλ. Distances en pm ou Å (1 Å = 100 pm).",
+  "intro": "Ce module suit **le cours de Chimie minérale 1 de la FST Béni Mellal** (BCG S3) : chimie du solide, diagrammes de phases, réactivité (Ellingham), puis **les examens corrigés**.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre et refais chaque calcul de Z, de ρ et de compacité.\n2. Dessine chaque maille de mémoire : c'est demandé à l'examen.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n\n**À vérifier** : le nom du professeur n'apparaît pas dans les supports ; les examens 2022 (normale et rattrapage) sont des scans non lus ; le diagramme d'Ellingham de l'examen manque dans le fichier.",
+  "chapitres": [
+    "01-reseaux-rayons-x.md",
+    "02-metaux-empilements.md",
+    "03-cristaux-ioniques.md",
+    "04-diagrammes-de-phases.md",
+    "05-ellingham.md",
+    "06-annales-corrigees.md"
+  ]
+}

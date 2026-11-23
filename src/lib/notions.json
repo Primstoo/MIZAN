@@ -2883,5 +2883,52 @@
     "g": "cours"
    }
   ]
+ },
+ "chimie-minerale": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "reseaux-rayons-x",
+    "t": "Réseau cristallin et diffraction des rayons X",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "metaux-empilements",
+    "t": "Métaux · empilements compacts et sites",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "cristaux-ioniques",
+    "t": "Cristaux ioniques",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "diagrammes-de-phases",
+    "t": "Diagrammes de phases binaires",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "ellingham",
+    "t": "Diagrammes d'Ellingham",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "annales-corrigees",
+    "t": "Annales corrigées · examen BCG et contrôle de cristallochimie",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

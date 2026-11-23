@@ -224,6 +224,23 @@
     ]
   },
   {
+    "slug": "chimie-minerale",
+    "titre": "Chimie minérale",
+    "prof": "",
+    "semestre": "S3",
+    "fichier": "chimie-minerale.html",
+    "resume": "Chimie minérale 1 de la filière BCG : réseaux et diffraction X, empilements compacts des métaux, cristaux ioniques, diagrammes de phases, diagrammes d'Ellingham, avec les examens corrigés.",
+    "cles": [
+      "chimie-minerale_scores",
+      "chimie-minerale_scores_etat",
+      "mzt-chimie-minerale*"
+    ],
+    "cle": "chimie-minerale_scores",
+    "format": "score10",
+    "chapitres": 6,
+    "annexes": []
+  },
+  {
     "slug": "electrocinetique",
     "titre": "Électrocinétique : régimes transitoires",
     "prof": "",

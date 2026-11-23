@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie minérale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+<script>try{var t=localStorage.getItem('tl-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>window.MathJax={tex:{inlineMath:[["$","$"]],displayMath:[["$$","$$"]]},svg:{fontCache:"global"},startup:{typeset:false,pageReady:()=>MathJax.startup.defaultPageReady().then(()=>window.typeset&&typeset())}};</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js" async></script>
+<!-- Page générée par scripts/construire-module.mjs : modifier les sources (content/sources), pas ce fichier. -->
+<style>
+:root{--bg:#F4EDE1;--card:#FBF7F0;--ink:#1E2433;--mute:#5C5346;--line:#DCCFBA;--acc:#B4532A;--acc2:#F3E2CF;--h2:#2F5A73;--h2b:#DCE7EE;--ok:#2F7D55;--okb:#DFF0E6;--ko:#A23B2A;--kob:#F4DDD6;--code:#1E2433;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#141922;--card:#1E2532;--ink:#EDE6D9;--mute:#A9A094;--line:#343D4D;--acc:#E8906A;--acc2:#3A2A20;--h2:#7FB3CF;--h2b:#1E3340;--ok:#7FD3A6;--okb:#173326;--ko:#F0907F;--kob:#40221E;--code:#0E1118;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#141922;--card:#1E2532;--ink:#EDE6D9;--mute:#A9A094;--line:#343D4D;--acc:#E8906A;--acc2:#3A2A20;--h2:#7FB3CF;--h2b:#1E3340;--ok:#7FD3A6;--okb:#173326;--ko:#F0907F;--kob:#40221E;--code:#0E1118;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:9px 16px;display:flex;gap:12px;align-items:center}
+header h1{font-size:16px;margin:0;line-height:1.25}header small{display:block;color:var(--mute);font-weight:400;font-size:12px}header .pct{margin-left:auto;font-size:13px;color:var(--mute);white-space:nowrap}
+.wrap{display:grid;grid-template-columns:270px 1fr;max-width:1180px;margin:0 auto}
+nav{padding:14px;border-right:1px solid var(--line);position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto}
+nav button{display:flex;width:100%;text-align:left;gap:8px;align-items:flex-start;background:none;border:0;color:var(--ink);padding:8px 10px;border-radius:8px;cursor:pointer;font:inherit;font-size:14px;line-height:1.35}
+nav button:hover{background:var(--acc2)}nav button.on{background:var(--acc2);font-weight:600}
+nav .sc{margin-left:auto;font-size:12px;color:var(--mute);white-space:nowrap}nav .sc.ok{color:var(--ok);font-weight:600}nav .se{display:block;font-size:11.5px;color:var(--mute);font-weight:400}
+main{padding:22px 30px 90px;min-width:0;max-width:860px}
+.seance{color:var(--acc);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+h1.t{font-size:27px;margin:.1em 0 .7em;line-height:1.25}main h2{font-size:21px;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:4px}main h3{font-size:17.5px;margin-top:1.6em}
+pre{position:relative;background:var(--code);color:#f1e7d6;padding:13px 15px;border-radius:10px;overflow:auto;font-size:13.5px;line-height:1.5}
+pre.sortie{background:var(--card);color:var(--ink);border:1px dashed var(--line);padding-top:22px}.code-tag{position:absolute;top:4px;left:12px;font:600 11px system-ui;color:var(--mute);text-transform:uppercase}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}:not(pre)>code{background:var(--acc2);padding:1px 5px;border-radius:5px}
+main>table,.enc table{border-collapse:collapse;margin:14px 0;font-size:14.5px;display:block;overflow:auto}main>table td,main>table th{border:1px solid var(--line);padding:6px 10px}main>table th{background:var(--acc2);text-align:left}
+blockquote{margin:14px 0;padding:8px 14px;border-left:4px solid var(--line);color:var(--mute)}
+.enc{margin:18px 0;padding:10px 16px;border-radius:10px;border-left:5px solid}.enc p{margin:.35em 0}.enc-t{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.enc.piege,.enc.attention{background:var(--kob);border-color:var(--ko)}.enc.piege .enc-t,.enc.attention .enc-t{color:var(--ko)}
+.enc.astuce{background:var(--h2b);border-color:var(--h2)}.enc.astuce .enc-t{color:var(--h2)}
+.enc.retenir{background:var(--okb);border-color:var(--ok)}.enc.retenir .enc-t{color:var(--ok)}
+.enc.prof{background:var(--acc2);border-color:var(--acc)}.enc.prof .enc-t{color:var(--acc)}
+figure{margin:18px 0}figcaption{font-size:13px;font-weight:600;color:var(--mute);margin-bottom:6px}
+.grille table{border-collapse:separate;border-spacing:4px}.grille td,.grille th{min-width:42px;height:38px;text-align:center;font:14px ui-monospace,Menlo,monospace;padding:4px 8px;border-radius:7px}
+.grille td{background:var(--card);border:1px solid var(--line)}.grille th{color:var(--mute);font-weight:500;font-size:12.5px}
+.grille td.h1{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:700}.grille td.h2{background:var(--h2);color:#fff;border-color:var(--h2);font-weight:700}.grille td.h0{opacity:.35}
+.flux-l{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0}.flux-b{background:var(--card);border:1.5px solid var(--acc);border-radius:9px;padding:7px 12px;font-size:14px}.flux-f{color:var(--acc);font-weight:700}
+.etapes{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}.et-t{font-weight:700;color:var(--acc);margin-bottom:4px}.et-nav{display:flex;gap:8px;justify-content:space-between;margin-top:10px}
+.qcm{margin:22px 0}.qq{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}.qq-q{font-weight:600;margin-bottom:8px}.qq-q p{margin:0}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-size:15px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default}.opt.bon{background:var(--okb);border-color:var(--ok)}.opt.faux{background:var(--kob);border-color:var(--ko)}
+.qq-e{margin-top:8px;padding:9px 12px;border-radius:8px;background:var(--acc2);font-size:14.5px}
+.b{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 13px;border-radius:9px;cursor:pointer;font:inherit;font-size:14px}.b.p{background:var(--acc);color:#fff;border-color:var(--acc)}.b:disabled{opacity:.4;cursor:default}
+.bilan{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 0;font-weight:600;margin-top:20px}
+.nx{display:flex;justify-content:space-between;margin-top:30px;gap:10px}
+#menu{display:none}
+/* compatibilité : variables et classes des anciens modules convertis */
+:root{--panel:var(--card);--muted:var(--mute);--soft:var(--acc2);--blue:var(--h2);--orange:var(--acc);--green:var(--ok);--bad:var(--ko);--badbg:var(--kob);--good:var(--ok);--goodbg:var(--okb);--warnbg:var(--acc2);--warn:var(--acc);--mono:ui-monospace,Menlo,Consolas,monospace;--body:system-ui,sans-serif;--display:system-ui,sans-serif}
+main svg{max-width:100%;height:auto}
+.def,.trap,.exam{padding:10px 16px;border-radius:10px;border-left:5px solid;margin:16px 0}.def{background:var(--h2b);border-color:var(--h2)}.trap{background:var(--kob);border-color:var(--ko)}.exam{background:var(--acc2);border-color:var(--acc)}
+.formula{white-space:pre-line;font-family:var(--mono);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;margin:12px 0}
+.table-wrap{overflow-x:auto;margin:12px 0}.table-wrap table{border-collapse:collapse;font-size:14.5px}.table-wrap td,.table-wrap th{border:1px solid var(--line);padding:6px 10px}.table-wrap th{background:var(--acc2)}
+.integre{margin:16px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}.integre iframe{display:block;width:100%;border:0;min-height:120px}.integre-att{padding:16px;color:var(--mute);font-size:14px}
+.cartes-info{font-size:14px;color:var(--mute)}
+.exo h3{margin-top:1.4em}.ex{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}.ex-q p{margin:.3em 0}.ex-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.ex-h,.ex-c{margin-top:10px;padding:10px 12px;border-radius:8px}.ex-h{background:var(--h2b)}.ex-c{background:var(--okb)}.ex.fait{opacity:.75}.ex-r{display:flex;gap:8px;margin-top:8px}.ex-r input{flex:1;font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink)}
+.b.ok{border-color:var(--ok);color:var(--ok)}.b.ko{border-color:var(--ko);color:var(--ko)}
+.carte{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;min-height:180px;margin:14px 0}.carte .lbl{font-size:12.5px;color:var(--mute);margin-bottom:8px}.carte .rep{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}.kpi div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.kpi b{display:block;font-size:24px}
+.barre{height:8px;background:var(--line);border-radius:6px;overflow:hidden}.barre i{display:block;height:100%;background:var(--ok)}
+.liste-n{list-style:none;padding:0}.liste-n li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.liste-n button{background:none;border:0;color:var(--acc);cursor:pointer;font:inherit;padding:0;text-align:left}
+nav .sep{border-top:1px solid var(--line);margin:8px 0}nav a{display:block;padding:8px 10px;color:var(--ink);font-size:14px;text-decoration:none;border-radius:8px}nav a:hover{background:var(--acc2)}
+
+/* ---- Présentation 11/2026 : même identité que l'appli (Fraunces + Inter, cartes, grandes cibles tactiles) ---- */
+body{font:16.5px/1.7 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+header{padding:10px 16px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+header h1{font:700 17px/1.2 Fraunces,Georgia,serif;letter-spacing:-.01em}header small{font:500 12px/1.4 Inter,system-ui,sans-serif}
+header .pct{font-size:12px;font-weight:700;color:var(--acc);border:1px solid var(--acc);border-radius:999px;padding:5px 10px}
+#menu{width:44px;height:44px;padding:0;border-radius:22px;font-size:17px;flex-shrink:0}
+main{padding:28px 30px 110px;max-width:720px;margin:0 auto;width:100%;animation:mz-in .35s ease both}
+@keyframes mz-in{from{opacity:0;transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){main{animation:none}html{scroll-behavior:auto}}
+.seance{font-size:12px;font-weight:700;letter-spacing:.08em}
+h1.t{font:700 34px/1.12 Fraunces,Georgia,serif;letter-spacing:-.02em;margin:.15em 0 .8em;text-wrap:balance}
+main h2{font:700 24px/1.2 Fraunces,Georgia,serif;letter-spacing:-.01em;margin-top:2.4em;padding:0 0 0 14px;border:0;border-left:4px solid var(--acc);text-wrap:balance}
+main h3{font:700 18px/1.3 Fraunces,Georgia,serif;margin-top:1.8em}
+main p,main li{max-width:66ch}main li{margin:.3em 0}main strong,main b{font-weight:700}
+main a{color:var(--acc)}
+nav{padding:16px 12px}
+nav button{padding:11px 12px;border-radius:12px;min-height:44px;font-size:14.5px}nav button.on{background:var(--acc2);color:var(--ink)}
+nav .se{font-size:12px}nav .sc.ok{color:var(--ok)}nav a{min-height:44px;display:flex;align-items:center;border-radius:12px}
+pre{border-radius:14px;padding:15px 16px;font-size:13.5px}
+main>table,.enc table{font-size:14.5px;border-radius:12px}main>table th{font-weight:700}
+.enc{margin:20px 0;padding:14px 16px;border-radius:16px;border:1px solid;border-left-width:5px}
+.enc-t{font-size:12px;letter-spacing:.08em;margin-bottom:4px}
+.enc.piege,.enc.attention{border-color:var(--ko)}.enc.astuce{border-color:var(--h2)}.enc.retenir{border-color:var(--ok)}.enc.prof{border-color:var(--acc)}
+figure{margin:22px 0}figcaption{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.etapes{border-radius:18px;padding:18px}.et-t{font:700 17px/1.3 Fraunces,Georgia,serif;margin-bottom:8px}.et-nav{margin-top:14px}
+.qq{border-radius:18px;padding:18px;margin:14px 0}.qq-q{font-size:17px;line-height:1.45;margin-bottom:12px}
+.opt{min-height:52px;margin:8px 0;padding:12px 16px;border-width:1.5px;border-radius:14px;background:var(--bg);font-size:16px;transition:transform .12s ease,border-color .15s,background .15s}
+.opt:active:not(:disabled){transform:scale(.98)}
+.opt.bon{border-color:var(--ok);font-weight:600;animation:mz-pop .3s ease}.opt.faux{border-color:var(--ko);animation:mz-shake .3s ease}
+@keyframes mz-pop{50%{transform:scale(1.02)}}@keyframes mz-shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.qq-e{margin-top:10px;padding:12px 14px;border-radius:12px;font-size:15px;line-height:1.55;animation:mz-in .25s ease both}
+.b{min-height:44px;padding:9px 16px;border-radius:12px;font-weight:600;font-size:14.5px;transition:transform .12s ease}.b:active:not(:disabled){transform:scale(.97)}
+.b.p{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bilan{bottom:10px;margin-top:28px;padding:12px 16px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 8px 24px rgba(0,0,0,.18);font-size:14.5px;max-width:calc(100% - 96px)}
+.nx{margin-top:36px}.nx .b{min-height:52px;flex:1;border-radius:14px}
+.ex{border-radius:18px;padding:16px 18px;margin:14px 0}.ex-h,.ex-c{border-radius:12px;padding:12px 14px;animation:mz-in .25s ease both}
+.ex-r input{min-height:44px;min-width:0;border-radius:12px;font-size:16px}.ex-r .b{flex-shrink:0}
+.carte{border-radius:22px;padding:26px;min-height:200px;font-size:17px}.carte .lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.kpi div{border-radius:16px;padding:14px 16px}.kpi b{font:700 28px/1.2 Fraunces,Georgia,serif}
+.barre{height:8px;border-radius:4px}.barre i{background:var(--acc);border-radius:4px}
+.liste-n li{padding:12px 0;align-items:center}
+.flux-b{border-radius:12px;padding:9px 14px;font-weight:600}
+.integre{border-radius:18px}
+/* Schémas : un texte ou une forme sans couleur déclarée prend la couleur du texte (lisible en thème sombre), jamais le noir par défaut */
+:where(main svg:not([fill])){fill:currentColor}
+details.prereq{margin:16px 0;border:1px solid var(--line);border-radius:16px;background:var(--card);padding:0 16px}details.prereq summary{cursor:pointer;min-height:52px;padding:14px 0;line-height:1.5;list-style:none;position:relative;padding-right:28px}details.prereq summary::-webkit-details-marker{display:none}details.prereq summary::after{content:"+";position:absolute;right:2px;top:12px;font-size:22px;font-weight:600;color:var(--acc)}details.prereq[open] summary::after{content:"−"}details.prereq p{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:var(--okb);animation:mz-in .25s ease both}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:4px 0}
+
+@media (max-width:860px){.wrap{grid-template-columns:1fr}nav{display:none;position:fixed;inset:54px 0 0 0;height:auto;background:var(--bg);z-index:4;border:0}nav.open{display:block}#menu{display:inline-block}main{padding:20px 18px 110px}h1.t{font-size:28px}main h2{font-size:22px}nav{inset:65px 0 0 0}}
+
+/* Aucun tableau, schéma ou code ne doit élargir la page (téléphone) : défilement dans son cadre. */
+main table{display:block;max-width:100%;overflow-x:auto}main figure,main .grille,main details{max-width:100%;overflow-x:auto}main :not(pre)>code{overflow-wrap:anywhere}main img{max-width:100%;height:auto}main p,main li,main td,main th,main a{overflow-wrap:break-word}mjx-container[display="true"]{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.retour{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;margin-right:6px;width:44px;height:44px;padding:0;border-radius:22px;font-size:18px;flex-shrink:0}.retour[hidden]{display:none}
+</style>
+</head>
+<body>
+<header><a class="b retour" id="retour" href="/app/modules" target="_top" aria-label="Retour aux cours" title="Retour aux cours">←</a><button class="b" id="menu" aria-label="Chapitres">☰</button><h1>Chimie minérale<small>S3 · FST Béni Mellal</small></h1><span class="pct" id="pct"></span></header>
+<div class="wrap"><nav id="nav"></nav><main id="main"></main></div>
+<script>
+const MODULE={"slug":"chimie-minerale","titre":"Chimie minérale","cle":"chimie-minerale_scores","cleEtat":"chimie-minerale_scores_etat","format":"score10","intro":"<p>Ce module suit <strong>le cours de Chimie minérale 1 de la FST Béni Mellal<\/strong> (BCG S3) : chimie du solide, diagrammes de phases, réactivité (Ellingham), puis <strong>les examens corrigés<\/strong>.<\/p>\n<p><strong>Comment l&#39;utiliser<\/strong><\/p>\n<ol>\n<li>Lis un chapitre et refais chaque calcul de Z, de ρ et de compacité.<\/li>\n<li>Dessine chaque maille de mémoire : c&#39;est demandé à l&#39;examen.<\/li>\n<li>Fais le QCM du chapitre. <strong>8/10 = chapitre maîtrisé.<\/strong><\/li>\n<\/ol>\n<p><strong>À vérifier<\/strong> : le nom du professeur n&#39;apparaît pas dans les supports ; les examens 2022 (normale et rattrapage) sont des scans non lus ; le diagramme d&#39;Ellingham de l&#39;examen manque dans le fichier.<\/p>\n","annexes":[],"cartes":null,"maths":true};
+const CHAPS=[{"id":"reseaux-rayons-x","t":"Réseau cristallin et diffraction des rayons X","seance":"Chapitre 1 · Chimie du solide (réseau, Bravais, Miller, RX)","imp":4,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir calculer un sinus inverse et convertir : 1 Å = 100 pm = 10⁻¹⁰ m.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>398 pm en ångströms ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 3.98<\/b><\/p><p>3,98 Å.<\/p>\n<\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « un motif répété ».<\/strong> Un cristal = un réseau (des points) + un motif (les atomes posés sur chaque point). On étudie la plus petite boîte qui se répète : la maille.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Compter un atome de sommet comme 1. Un sommet de cube est partagé par 8 mailles : il compte pour 1/8. Une face : 1/2. Une arête : 1/4.<\/p>\n<\/aside><p>À la fin, tu sais compter Z, nommer un réseau de Bravais et placer le premier pic de diffraction.<\/p>\n<h2>Idée 1 · Maille et comptage<\/h2>\n<figure class=\"grille\"><figcaption>Contribution d'un atome à la maille cubique<\/figcaption><table><tr><th>Position,<\/th><th>Partagé<\/th><th>entre,<\/th><th>Compte<\/th><th>pour<\/th><\/tr><tr><td class=\"h1\">Sommet,<\/td><td>8<\/td><td>mailles,<\/td><td>1/8<\/td><\/tr><tr><td class=\"h1\">Arête,<\/td><td>4<\/td><td>mailles,<\/td><td>1/4<\/td><\/tr><tr><td class=\"h1\">Face,<\/td><td>2<\/td><td>mailles,<\/td><td>1/2<\/td><\/tr><tr><td class=\"h1\">Centre,<\/td><td>1<\/td><td>maille,<\/td><td>1<\/td><\/tr><\/table><\/figure><figure class=\"grille\"><figcaption>Les trois réseaux cubiques<\/figcaption><table><tr><th>Réseau,<\/th><th>Symbole,<\/th><th>Nœuds<\/th><th>par<\/th><th>maille<\/th><\/tr><tr><td class=\"h1\">Cubique<\/td><td>simple,<\/td><td>P,<\/td><td>8<\/td><td>×<\/td><td>1/8<\/td><td>=<\/td><td>1<\/td><\/tr><tr><td class=\"h1\">Cubique<\/td><td>centré,<\/td><td>I,<\/td><td>1<\/td><td>+<\/td><td>1<\/td><td>=<\/td><td>2<\/td><\/tr><tr><td class=\"h1\">Cubique<\/td><td>à<\/td><td>faces<\/td><td>centrées,<\/td><td>F,<\/td><td>1<\/td><td>+<\/td><td>6<\/td><td>×<\/td><td>1/2<\/td><td>=<\/td><td>4<\/td><\/tr><\/table><\/figure><p>Il existe 7 systèmes cristallins et 14 réseaux de Bravais.<\/p>\n<h2>Idée 2 · Plans et indices de Miller<\/h2>\n<svg viewBox=\"0 0 320 130\" role=\"img\" aria-label=\"Cube avec le plan (111) coupant les trois axes à 1\" style=\"max-width:300px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M60 110h100v-80H60zM60 30l40-20h100l-40 20M160 110l40-20V10\"/><path d=\"M100 10v80h100\" stroke-dasharray=\"4 4\"/><path d=\"M60 30L160 110L200 10z\" fill=\"#D9824F\" fill-opacity=\".3\" stroke=\"#D9824F\"/><\/g>\n<g fill=\"currentColor\" font-size=\"11\"><text x=\"215\" y=\"60\">plan (111)<\/text><\/g>\n<\/svg><figure class=\"etapes\" data-i=\"0\"><figcaption>Trouver (hkl)<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/3 · 1. Lis les intersections du plan avec les axes, en unités de a, b, c.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/3 · 2. Prends les inverses.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/3 · 3. Ramène à des entiers les plus petits possibles.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><p>En cubique : $d_{hkl} = \\dfrac{a}{\\sqrt{h^2+k^2+l^2}}$.<\/p>\n<h2>Idée 3 · Diffraction : loi de Bragg<\/h2>\n<p>$$2\\,d_{hkl}\\sin\\theta = n\\lambda$$<\/p>\n<figure class=\"grille\"><figcaption>Premier pic observé (réflexions permises)<\/figcaption><table><tr><th>Réseau,<\/th><th>Condition,<\/th><th>Premier<\/th><th>pic<\/th><\/tr><tr><td class=\"h1\">P,<\/td><td>aucune<\/td><td>extinction,<\/td><td>(100)<\/td><\/tr><tr><td class=\"h1\">I,<\/td><td>h<\/td><td>+<\/td><td>k<\/td><td>+<\/td><td>l<\/td><td>pair,<\/td><td>(110)<\/td><\/tr><tr><td class=\"h1\">F,<\/td><td>h<\/td><td>k<\/td><td>l<\/td><td>tous<\/td><td>pairs<\/td><td>ou<\/td><td>tous<\/td><td>impairs,<\/td><td>(111)<\/td><\/tr><\/table><\/figure><p><strong>Exemple.<\/strong> Réseau P, a = 3,98 Å, λ = 1,541 Å : $d_{100} = 3{,}98$ Å, $\\sin\\theta = \\frac{1{,}541}{7{,}96}$, θ ≈ 11,2°, <strong>2θ ≈ 22,3°<\/strong>.<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Combien de nœuds dans une maille cubique F ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 4<\/b><\/p><p>8 × 1/8 + 6 × 1/2 = 4.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Réseau F, a = 6,02 Å : 2θ du premier pic (λ = 1,541 Å) ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 25.6<\/b><\/p><p>Premier pic (111) : $d = 6{,}02/\\sqrt3 = 3{,}476$ Å ; θ = arcsin(1,541/6,951) ≈ 12,8° ; <strong>2θ ≈ 25,6°<\/strong>.<\/p>\n<\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Un atome au centre d&#39;une face compte pour :<\/div><button class=\"opt\" data-o=\"0\">1/8<\/button><button class=\"opt\" data-o=\"1\">1/2<\/button><button class=\"opt\" data-o=\"2\">1<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Nombre de réseaux de Bravais :<\/div><button class=\"opt\" data-o=\"0\">7<\/button><button class=\"opt\" data-o=\"1\">14<\/button><button class=\"opt\" data-o=\"2\">32<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">$d_{110}$ en cubique vaut :<\/div><button class=\"opt\" data-o=\"0\">$a/\\sqrt2$<\/button><button class=\"opt\" data-o=\"1\">$a\\sqrt2$<\/button><button class=\"opt\" data-o=\"2\">$a/2$<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">En réseau I, la réflexion (100) est :<\/div><button class=\"opt\" data-o=\"0\">observée<\/button><button class=\"opt\" data-o=\"1\">éteinte<\/button><button class=\"opt\" data-o=\"2\">la plus intense<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Le premier pic d&#39;un réseau F est :<\/div><button class=\"opt\" data-o=\"0\">(100)<\/button><button class=\"opt\" data-o=\"1\">(110)<\/button><button class=\"opt\" data-o=\"2\">(111)<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Plan coupant les axes en 1, 1, ∞ :<\/div><button class=\"opt\" data-o=\"0\">(110)<\/button><button class=\"opt\" data-o=\"1\">(111)<\/button><button class=\"opt\" data-o=\"2\">(001)<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Si d augmente, θ :<\/div><button class=\"opt\" data-o=\"0\">diminue<\/button><button class=\"opt\" data-o=\"1\">augmente<\/button><button class=\"opt\" data-o=\"2\">ne change pas<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Un cube centré contient :<\/div><button class=\"opt\" data-o=\"0\">2 nœuds<\/button><button class=\"opt\" data-o=\"1\">1 nœud<\/button><button class=\"opt\" data-o=\"2\">4 nœuds<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">La raie Kα du cuivre vaut environ :<\/div><button class=\"opt\" data-o=\"0\">1,54 Å<\/button><button class=\"opt\" data-o=\"1\">15,4 Å<\/button><button class=\"opt\" data-o=\"2\">0,154 Å<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Un cristal est :<\/div><button class=\"opt\" data-o=\"0\">un réseau + un motif<\/button><button class=\"opt\" data-o=\"1\">un ensemble désordonné<\/button><button class=\"opt\" data-o=\"2\">un seul atome<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"reseaux-rayons-x","rep":["3.98"],"tol":null},{"n":"reseaux-rayons-x","rep":["4"],"tol":null},{"n":"reseaux-rayons-x","rep":["25.6"],"tol":null}],"qcm":[{"n":"reseaux-rayons-x","q":"Un atome au centre d&#39;une face compte pour :","o":["1/8","1/2","1"],"a":1,"e":"Partagé entre 2 mailles."},{"n":"reseaux-rayons-x","q":"Nombre de réseaux de Bravais :","o":["7","14","32"],"a":1,"e":"7 systèmes, 14 réseaux."},{"n":"reseaux-rayons-x","q":"$d_{110}$ en cubique vaut :","o":["$a/\\sqrt2$","$a\\sqrt2$","$a/2$"],"a":0,"e":"$\\sqrt{1+1+0}$."},{"n":"reseaux-rayons-x","q":"En réseau I, la réflexion (100) est :","o":["observée","éteinte","la plus intense"],"a":1,"e":"h + k + l = 1, impair."},{"n":"reseaux-rayons-x","q":"Le premier pic d&#39;un réseau F est :","o":["(100)","(110)","(111)"],"a":2,"e":"Indices de même parité."},{"n":"reseaux-rayons-x","q":"Plan coupant les axes en 1, 1, ∞ :","o":["(110)","(111)","(001)"],"a":0,"e":"Inverses : 1, 1, 0."},{"n":"reseaux-rayons-x","q":"Si d augmente, θ :","o":["diminue","augmente","ne change pas"],"a":0,"e":"$\\sin\\theta = \\lambda/(2d)$."},{"n":"reseaux-rayons-x","q":"Un cube centré contient :","o":["2 nœuds","1 nœud","4 nœuds"],"a":0,"e":"Sommets + centre."},{"n":"reseaux-rayons-x","q":"La raie Kα du cuivre vaut environ :","o":["1,54 Å","15,4 Å","0,154 Å"],"a":0,"e":"Source classique des diffractomètres."},{"n":"reseaux-rayons-x","q":"Un cristal est :","o":["un réseau + un motif","un ensemble désordonné","un seul atome"],"a":0,"e":"Définition."}]},{"id":"metaux-empilements","t":"Métaux · empilements compacts et sites","seance":"Chapitre 1 · Structures métalliques (CFC, HC, CC)","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut connaître le volume d&#39;une sphère : $\\frac43\\pi r^3$.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Volume (en Å³) d&#39;un atome de rayon 1 Å, à 0,1 près ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 4.2<\/b><\/p><p>$\\frac43\\pi \\approx 4{,}2$ Å³.<\/p>\n<\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « où les sphères se touchent ».<\/strong> Toute relation entre a et r vient de la direction où les atomes sont tangents : la diagonale d&#39;une face en CFC, la grande diagonale en CC, l&#39;arête en HC.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Écrire a = 2r en CFC. Les atomes ne se touchent pas le long de l&#39;arête, mais le long de la diagonale d&#39;une face : $a\\sqrt2 = 4r$.<\/p>\n<\/aside><p>À la fin, tu sais calculer coordinence, compacité, masse volumique et taille des sites.<\/p>\n<h2>Idée 1 · Les trois structures<\/h2>\n<figure class=\"grille\"><figcaption>Comparaison<\/figcaption><table><tr><th>Structure,<\/th><th>Contact,<\/th><th>Z,<\/th><th>Coordinence,<\/th><th>Compacité<\/th><\/tr><tr><td class=\"h1\">CFC,<\/td><td>a√2<\/td><td>=<\/td><td>4r,<\/td><td>4,<\/td><td>12,<\/td><td>0,74<\/td><\/tr><tr><td class=\"h1\">HC,<\/td><td>a<\/td><td>=<\/td><td>2r<\/td><td>et<\/td><td>c/a<\/td><td>=<\/td><td>√(8/3)<\/td><td>≈<\/td><td>1,633,<\/td><td>2<\/td><td>(6<\/td><td>pour<\/td><td>la<\/td><td>maille<\/td><td>triple),<\/td><td>12,<\/td><td>0,74<\/td><\/tr><tr><td class=\"h1\">CC,<\/td><td>a√3<\/td><td>=<\/td><td>4r,<\/td><td>2,<\/td><td>8,<\/td><td>0,68<\/td><\/tr><\/table><\/figure><svg viewBox=\"0 0 320 120\" role=\"img\" aria-label=\"Empilements ABAB pour HC et ABCABC pour CFC\" style=\"max-width:360px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><g stroke=\"#D9824F\"><circle cx=\"40\" cy=\"95\" r=\"12\"/><circle cx=\"64\" cy=\"95\" r=\"12\"/><circle cx=\"52\" cy=\"73\" r=\"12\" stroke=\"currentColor\"/><circle cx=\"40\" cy=\"51\" r=\"12\"/><circle cx=\"64\" cy=\"51\" r=\"12\"/><\/g>\n<g><circle cx=\"200\" cy=\"95\" r=\"12\" stroke=\"#D9824F\"/><circle cx=\"224\" cy=\"95\" r=\"12\" stroke=\"#D9824F\"/><circle cx=\"212\" cy=\"73\" r=\"12\"/><circle cx=\"224\" cy=\"51\" r=\"12\" stroke-dasharray=\"3 3\"/><\/g><\/g>\n<g fill=\"currentColor\" font-size=\"11\"><text x=\"90\" y=\"75\">HC : A B A B<\/text><text x=\"245\" y=\"75\">CFC : A B C<\/text><\/g>\n<\/svg><h2>Idée 2 · Masse volumique et compacité<\/h2>\n<p>$$\\rho = \\frac{Z\\,M}{N_A\\,V_{\\text{maille}}} \\qquad C = \\frac{Z\\cdot\\frac43\\pi r^3}{V_{\\text{maille}}}$$<\/p>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Calcul type (cobalt HC, examen corrigé)<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/4 · 1. Tangence selon l&#39;arête : a = 2r = 2,5 Å.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/4 · 2. c = a√(8/3) = 4,08 Å.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/4 · 3. Maille triple (prisme hexagonal) : V = 3a²c·sin 120°, Z = 6.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/4 · 4. ρ = 6 × 58,93 / (6,02·10²³ × V) ≈ 8,86 g/cm³, la même que la variété CFC : même compacité.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><h2>Idée 3 · Les sites interstitiels<\/h2>\n<figure class=\"grille\"><figcaption>Sites du CFC<\/figcaption><table><tr><th>Site,<\/th><th>Nombre<\/th><th>par<\/th><th>maille,<\/th><th>Position,<\/th><th>Rayon<\/th><th>max<\/th><th>du<\/th><th>site<\/th><\/tr><tr><td class=\"h1\">Octaédrique<\/td><td>[6],<\/td><td>4,<\/td><td>centre<\/td><td>+<\/td><td>milieux<\/td><td>des<\/td><td>arêtes,<\/td><td>0,414<\/td><td>r<\/td><\/tr><tr><td class=\"h1\">Tétraédrique<\/td><td>[4],<\/td><td>8,<\/td><td>centres<\/td><td>des<\/td><td>8<\/td><td>petits<\/td><td>cubes,<\/td><td>0,225<\/td><td>r<\/td><\/tr><\/table><\/figure><h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Cuivre CFC, r = 1,28 Å. Paramètre a ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 3.62<\/b><\/p><p>$a = 4r/\\sqrt2 = 2\\sqrt2\\,r \\approx 3{,}62$ Å.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Compacité du CC ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 0.68<\/b><\/p><p>Z = 2, $a\\sqrt3 = 4r$ : $C = \\frac{2\\cdot\\frac43\\pi r^3}{(4r/\\sqrt3)^3} = \\frac{\\pi\\sqrt3}{8} \\approx 0{,}68$.<\/p>\n<\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Coordinence dans un empilement compact :<\/div><button class=\"opt\" data-o=\"0\">8<\/button><button class=\"opt\" data-o=\"1\">12<\/button><button class=\"opt\" data-o=\"2\">6<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Compacité du CC :<\/div><button class=\"opt\" data-o=\"0\">0,68<\/button><button class=\"opt\" data-o=\"1\">0,74<\/button><button class=\"opt\" data-o=\"2\">0,52<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Le CFC correspond à l&#39;empilement :<\/div><button class=\"opt\" data-o=\"0\">ABAB<\/button><button class=\"opt\" data-o=\"1\">ABCABC<\/button><button class=\"opt\" data-o=\"2\">AAAA<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">En CFC, Z vaut :<\/div><button class=\"opt\" data-o=\"0\">4<\/button><button class=\"opt\" data-o=\"1\">2<\/button><button class=\"opt\" data-o=\"2\">6<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Rapport c/a idéal en HC :<\/div><button class=\"opt\" data-o=\"0\">1,633<\/button><button class=\"opt\" data-o=\"1\">1,414<\/button><button class=\"opt\" data-o=\"2\">2<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Nombre de sites octaédriques par maille CFC :<\/div><button class=\"opt\" data-o=\"0\">4<\/button><button class=\"opt\" data-o=\"1\">8<\/button><button class=\"opt\" data-o=\"2\">12<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Nombre de sites tétraédriques par maille CFC :<\/div><button class=\"opt\" data-o=\"0\">4<\/button><button class=\"opt\" data-o=\"1\">8<\/button><button class=\"opt\" data-o=\"2\">6<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">En CFC, a vaut :<\/div><button class=\"opt\" data-o=\"0\">$2\\sqrt2\\,r$<\/button><button class=\"opt\" data-o=\"1\">$2r$<\/button><button class=\"opt\" data-o=\"2\">$4r/\\sqrt3$<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Le cobalt HC et le cobalt CFC ont :<\/div><button class=\"opt\" data-o=\"0\">la même masse volumique<\/button><button class=\"opt\" data-o=\"1\">des masses volumiques très différentes<\/button><button class=\"opt\" data-o=\"2\">des coordinences différentes<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">La coordinence en CC vaut :<\/div><button class=\"opt\" data-o=\"0\">8<\/button><button class=\"opt\" data-o=\"1\">12<\/button><button class=\"opt\" data-o=\"2\">4<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"metaux-empilements","rep":["4.2"],"tol":null},{"n":"metaux-empilements","rep":["3.62"],"tol":null},{"n":"metaux-empilements","rep":["0.68"],"tol":null}],"qcm":[{"n":"metaux-empilements","q":"Coordinence dans un empilement compact :","o":["8","12","6"],"a":1,"e":"CFC et HC."},{"n":"metaux-empilements","q":"Compacité du CC :","o":["0,68","0,74","0,52"],"a":0,"e":"Moins compact."},{"n":"metaux-empilements","q":"Le CFC correspond à l&#39;empilement :","o":["ABAB","ABCABC","AAAA"],"a":1,"e":"HC = ABAB."},{"n":"metaux-empilements","q":"En CFC, Z vaut :","o":["4","2","6"],"a":0,"e":"8 × 1/8 + 6 × 1/2."},{"n":"metaux-empilements","q":"Rapport c/a idéal en HC :","o":["1,633","1,414","2"],"a":0,"e":"√(8/3)."},{"n":"metaux-empilements","q":"Nombre de sites octaédriques par maille CFC :","o":["4","8","12"],"a":0,"e":"Autant que d&#39;atomes."},{"n":"metaux-empilements","q":"Nombre de sites tétraédriques par maille CFC :","o":["4","8","6"],"a":1,"e":"Deux fois plus que d&#39;atomes."},{"n":"metaux-empilements","q":"En CFC, a vaut :","o":["$2\\sqrt2\\,r$","$2r$","$4r/\\sqrt3$"],"a":0,"e":"Contact sur la diagonale de face."},{"n":"metaux-empilements","q":"Le cobalt HC et le cobalt CFC ont :","o":["la même masse volumique","des masses volumiques très différentes","des coordinences différentes"],"a":0,"e":"Même compacité 0,74."},{"n":"metaux-empilements","q":"La coordinence en CC vaut :","o":["8","12","4"],"a":0,"e":"8 voisins aux sommets."}]},{"id":"cristaux-ioniques","t":"Cristaux ioniques","seance":"Chapitre 1 · Structures ioniques (TD cristaux ioniques)","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir que, dans un cristal ionique, un cation est entouré d&#39;anions et réciproquement.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Dans NaCl, combien de Cl⁻ entourent un Na⁺ ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 6<\/b><\/p><p>6 (coordinence octaédrique).<\/p>\n<\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « les anions font l&#39;empilement, les cations remplissent les trous ».<\/strong> Le rapport des rayons $r^+/r^-$ dit quel trou le cation peut occuper.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Oublier de vérifier la neutralité. Dans la maille, le nombre de charges + doit égaler le nombre de charges −.<\/p>\n<\/aside><p>À la fin, tu sais identifier la structure d&#39;un composé AB à partir de Z et du rapport des rayons.<\/p>\n<h2>Idée 1 · Les quatre structures à connaître<\/h2>\n<figure class=\"grille\"><figcaption>Structures types<\/figcaption><table><tr><th>Type,<\/th><th>Réseau,<\/th><th>Coordinence,<\/th><th>Z<\/th><th>(motifs<\/th><th>AB),<\/th><th>Contact<\/th><th>anion-cation<\/th><\/tr><tr><td class=\"h1\">CsCl,<\/td><td>cubique<\/td><td>P,<\/td><td>8-8,<\/td><td>1,<\/td><td>a√3/2<\/td><td>=<\/td><td>r⁺<\/td><td>+<\/td><td>r⁻<\/td><\/tr><tr><td class=\"h1\">NaCl,<\/td><td>cubique<\/td><td>F,<\/td><td>6-6,<\/td><td>4,<\/td><td>a/2<\/td><td>=<\/td><td>r⁺<\/td><td>+<\/td><td>r⁻<\/td><\/tr><tr><td class=\"h1\">ZnS<\/td><td>blende,<\/td><td>cubique<\/td><td>F,<\/td><td>4-4,<\/td><td>4,<\/td><td>a√3/4<\/td><td>=<\/td><td>r⁺<\/td><td>+<\/td><td>r⁻<\/td><\/tr><tr><td class=\"h1\">CaF₂<\/td><td>fluorine,<\/td><td>cubique<\/td><td>F,<\/td><td>8-4,<\/td><td>4<\/td><td>(CaF₂),<\/td><td>a√3/4<\/td><td>=<\/td><td>r⁺<\/td><td>+<\/td><td>r⁻<\/td><\/tr><\/table><\/figure><h2>Idée 2 · Le rapport des rayons<\/h2>\n<svg viewBox=\"0 0 320 70\" role=\"img\" aria-label=\"Échelle du rapport r+/r- : 0,225 tétraédrique, 0,414 octaédrique, 0,732 cubique\" style=\"max-width:400px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M10 35h300\"/><path d=\"M80 28v14M160 28v14M250 28v14\" stroke=\"#D9824F\"/><\/g>\n<g fill=\"currentColor\" font-size=\"10\"><text x=\"70\" y=\"22\">0,225<\/text><text x=\"150\" y=\"22\">0,414<\/text><text x=\"240\" y=\"22\">0,732<\/text><text x=\"92\" y=\"58\">ZnS (4)<\/text><text x=\"180\" y=\"58\">NaCl (6)<\/text><text x=\"262\" y=\"58\">CsCl (8)<\/text><\/g>\n<\/svg><figure class=\"etapes\" data-i=\"0\"><figcaption>Identifier une structure AB<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/3 · 1. Calcule Z = ρ·a³·N_A / M.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/3 · 2. Z = 1 : CsCl. Z = 4 : NaCl ou ZnS.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/3 · 3. Pour départager : rapport r⁺/r⁻, ou relation de contact avec les rayons connus.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><h2>Idée 3 · Masse volumique d&#39;un cristal ionique<\/h2>\n<p><strong>Exemple (NaCl).<\/strong> a = 564 pm, M = 58,44 g/mol, Z = 4 : $\\rho = \\frac{4\\times58{,}44}{6{,}02\\cdot10^{23}\\times(5{,}64\\cdot10^{-8})^3} \\approx 2{,}16$ g/cm³.<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Composé AB : a = 398 pm, ρ = 2,10 g/cm³, M = 79,9 g/mol. Z ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 1<\/b><\/p><p>$Z = \\frac{2{,}10\\times(3{,}98\\cdot10^{-8})^3\\times6{,}02\\cdot10^{23}}{79{,}9} \\approx 1{,}0$ : <strong>type CsCl<\/strong>.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Rapport $r^+/r^- = 0{,}5$ : quelle coordinence attendue ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 6<\/b><\/p><p>Entre 0,414 et 0,732 : coordinence 6, type NaCl.<\/p>\n<\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Coordinence dans CsCl :<\/div><button class=\"opt\" data-o=\"0\">8-8<\/button><button class=\"opt\" data-o=\"1\">6-6<\/button><button class=\"opt\" data-o=\"2\">4-4<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Z pour NaCl :<\/div><button class=\"opt\" data-o=\"0\">1<\/button><button class=\"opt\" data-o=\"1\">4<\/button><button class=\"opt\" data-o=\"2\">8<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Dans la blende, Zn²⁺ occupe :<\/div><button class=\"opt\" data-o=\"0\">la moitié des sites tétraédriques<\/button><button class=\"opt\" data-o=\"1\">tous les sites octaédriques<\/button><button class=\"opt\" data-o=\"2\">les sommets<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Relation de contact dans NaCl :<\/div><button class=\"opt\" data-o=\"0\">a = 2(r⁺ + r⁻)<\/button><button class=\"opt\" data-o=\"1\">a√3 = 2(r⁺ + r⁻)<\/button><button class=\"opt\" data-o=\"2\">a = r⁺ + r⁻<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">r⁺/r⁻ = 0,8 favorise :<\/div><button class=\"opt\" data-o=\"0\">CsCl<\/button><button class=\"opt\" data-o=\"1\">NaCl<\/button><button class=\"opt\" data-o=\"2\">ZnS<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Dans la fluorine CaF₂, F⁻ est en coordinence :<\/div><button class=\"opt\" data-o=\"0\">4<\/button><button class=\"opt\" data-o=\"1\">8<\/button><button class=\"opt\" data-o=\"2\">6<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Le réseau de NaCl est :<\/div><button class=\"opt\" data-o=\"0\">cubique P<\/button><button class=\"opt\" data-o=\"1\">cubique F<\/button><button class=\"opt\" data-o=\"2\">cubique I<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Z = 1 avec un composé AB indique :<\/div><button class=\"opt\" data-o=\"0\">CsCl<\/button><button class=\"opt\" data-o=\"1\">NaCl<\/button><button class=\"opt\" data-o=\"2\">ZnS<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Une maille doit être :<\/div><button class=\"opt\" data-o=\"0\">électriquement neutre<\/button><button class=\"opt\" data-o=\"1\">chargée positivement<\/button><button class=\"opt\" data-o=\"2\">vide au centre<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">CsCl n&#39;est pas un cubique centré parce que :<\/div><button class=\"opt\" data-o=\"0\">le nœud du centre porte un ion différent<\/button><button class=\"opt\" data-o=\"1\">il n&#39;a pas d&#39;ion au centre<\/button><button class=\"opt\" data-o=\"2\">il est hexagonal<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"cristaux-ioniques","rep":["6"],"tol":null},{"n":"cristaux-ioniques","rep":["1"],"tol":null},{"n":"cristaux-ioniques","rep":["6"],"tol":null}],"qcm":[{"n":"cristaux-ioniques","q":"Coordinence dans CsCl :","o":["8-8","6-6","4-4"],"a":0,"e":"Cubique simple."},{"n":"cristaux-ioniques","q":"Z pour NaCl :","o":["1","4","8"],"a":1,"e":"4 Na⁺ et 4 Cl⁻."},{"n":"cristaux-ioniques","q":"Dans la blende, Zn²⁺ occupe :","o":["la moitié des sites tétraédriques","tous les sites octaédriques","les sommets"],"a":0,"e":"4 sur 8."},{"n":"cristaux-ioniques","q":"Relation de contact dans NaCl :","o":["a = 2(r⁺ + r⁻)","a√3 = 2(r⁺ + r⁻)","a = r⁺ + r⁻"],"a":0,"e":"Le long de l&#39;arête."},{"n":"cristaux-ioniques","q":"r⁺/r⁻ = 0,8 favorise :","o":["CsCl","NaCl","ZnS"],"a":0,"e":"Au-dessus de 0,732."},{"n":"cristaux-ioniques","q":"Dans la fluorine CaF₂, F⁻ est en coordinence :","o":["4","8","6"],"a":0,"e":"Ca²⁺ en coordinence 8."},{"n":"cristaux-ioniques","q":"Le réseau de NaCl est :","o":["cubique P","cubique F","cubique I"],"a":1,"e":"Deux sous-réseaux F imbriqués."},{"n":"cristaux-ioniques","q":"Z = 1 avec un composé AB indique :","o":["CsCl","NaCl","ZnS"],"a":0,"e":"Seule structure à 1 motif."},{"n":"cristaux-ioniques","q":"Une maille doit être :","o":["électriquement neutre","chargée positivement","vide au centre"],"a":0,"e":"Neutralité."},{"n":"cristaux-ioniques","q":"CsCl n&#39;est pas un cubique centré parce que :","o":["le nœud du centre porte un ion différent","il n&#39;a pas d&#39;ion au centre","il est hexagonal"],"a":0,"e":"Réseau P avec un motif de deux ions."}]},{"id":"diagrammes-de-phases","t":"Diagrammes de phases binaires","seance":"Chapitre 2 · Diagrammes de phases","imp":4,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir lire une composition en fraction massique ou molaire : $x_B = \\frac{n_B}{n_A + n_B}$.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>3 mol de A et 1 mol de B : fraction molaire de B ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 0.25<\/b><\/p><p>1/4 = 0,25.<\/p>\n<\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « verticale et horizontale ».<\/strong> Un refroidissement se lit sur une verticale (composition fixe). Dans un domaine à deux phases, une horizontale (isotherme) donne la composition de chaque phase.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Lire la proportion des phases à l&#39;envers. Avec la règle des moments (des leviers), la quantité d&#39;une phase est proportionnelle au segment <strong>opposé<\/strong>.<\/p>\n<\/aside><p>À la fin, tu sais lire un diagramme à eutectique et tracer une courbe de refroidissement.<\/p>\n<h2>Idée 1 · La règle des phases<\/h2>\n<p>Variance $v = c + 2 - \\varphi$ ; à pression fixée, $v = c + 1 - \\varphi$. Pour un binaire (c = 2) à P fixée : un point eutectique (3 phases) a v = 0, d&#39;où le palier de température.<\/p>\n<h2>Idée 2 · Le diagramme à eutectique<\/h2>\n<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Diagramme binaire à eutectique : liquidus en V, palier eutectique horizontal\" style=\"max-width:380px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M30 10v120h260V10\"/><path d=\"M30 30Q120 60 170 100Q220 60 290 20\" stroke=\"#D9824F\"/><path d=\"M30 100h260\"/><path d=\"M110 15v115\" stroke-dasharray=\"4 4\"/><\/g>\n<g fill=\"currentColor\" font-size=\"10\"><text x=\"120\" y=\"45\">liquide<\/text><text x=\"40\" y=\"90\">L + A<\/text><text x=\"230\" y=\"90\">L + B<\/text><text x=\"140\" y=\"118\">A + B solides<\/text><text x=\"160\" y=\"96\">E<\/text><text x=\"24\" y=\"145\">A<\/text><text x=\"286\" y=\"145\">B<\/text><\/g>\n<\/svg><figure class=\"grille\"><figcaption>Les lignes<\/figcaption><table><tr><th>Ligne,<\/th><th>Sens<\/th><\/tr><tr><td class=\"h1\">Liquidus,<\/td><td>au-dessus<\/td><td>:<\/td><td>tout<\/td><td>est<\/td><td>liquide<\/td><\/tr><tr><td class=\"h1\">Solidus<\/td><td>(palier<\/td><td>eutectique),<\/td><td>en<\/td><td>dessous<\/td><td>:<\/td><td>tout<\/td><td>est<\/td><td>solide<\/td><\/tr><tr><td class=\"h1\">Point<\/td><td>eutectique<\/td><td>E,<\/td><td>liquide<\/td><td>→<\/td><td>solide<\/td><td>A<\/td><td>+<\/td><td>solide<\/td><td>B<\/td><td>à<\/td><td>température<\/td><td>constante<\/td><\/tr><\/table><\/figure><h2>Idée 3 · Règle des moments<\/h2>\n<p>Sur l&#39;isotherme, pour un mélange de composition $x_0$ entre une phase de composition $x_1$ et une autre $x_2$ :<\/p>\n<p>$$\\frac{m_1}{m_2} = \\frac{x_2 - x_0}{x_0 - x_1}$$<\/p>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Lire un refroidissement<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/4 · 1. Pars du liquide sur la verticale de ta composition.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/4 · 2. Au liquidus : premier cristal (rupture de pente sur la courbe de refroidissement).<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/4 · 3. Entre liquidus et palier : cristallisation d&#39;un solide pur, le liquide s&#39;enrichit vers E.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/4 · 4. Au palier eutectique : le liquide restant cristallise en A + B à T constante (palier horizontal).<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Variance au point eutectique d&#39;un binaire à P fixée ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 0<\/b><\/p><p>$v = 2 + 1 - 3 = 0$ : la température est imposée, d&#39;où le palier.<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Mélange $x_0 = 0{,}3$ entre un solide pur A ($x_1 = 0$) et un liquide $x_2 = 0{,}5$. Fraction de solide ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 0.4<\/b><\/p><p>$\\frac{m_{solide}}{m_{total}} = \\frac{0{,}5 - 0{,}3}{0{,}5 - 0} = 0{,}4$.<\/p>\n<\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Au point eutectique, la variance vaut :<\/div><button class=\"opt\" data-o=\"0\">0<\/button><button class=\"opt\" data-o=\"1\">1<\/button><button class=\"opt\" data-o=\"2\">2<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Sous le palier eutectique, on a :<\/div><button class=\"opt\" data-o=\"0\">deux solides<\/button><button class=\"opt\" data-o=\"1\">un liquide<\/button><button class=\"opt\" data-o=\"2\">un gaz<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Sur une courbe de refroidissement, l&#39;eutectique donne :<\/div><button class=\"opt\" data-o=\"0\">un palier horizontal<\/button><button class=\"opt\" data-o=\"1\">une rupture de pente<\/button><button class=\"opt\" data-o=\"2\">une droite verticale<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Le liquidus marque :<\/div><button class=\"opt\" data-o=\"0\">l&#39;apparition du premier cristal<\/button><button class=\"opt\" data-o=\"1\">la fin de la solidification<\/button><button class=\"opt\" data-o=\"2\">l&#39;ébullition<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">La règle des moments donne :<\/div><button class=\"opt\" data-o=\"0\">les proportions des phases<\/button><button class=\"opt\" data-o=\"1\">la température de fusion<\/button><button class=\"opt\" data-o=\"2\">la variance<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Au-dessus du liquidus :<\/div><button class=\"opt\" data-o=\"0\">une seule phase liquide<\/button><button class=\"opt\" data-o=\"1\">deux phases<\/button><button class=\"opt\" data-o=\"2\">trois phases<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Un mélange de composition eutectique :<\/div><button class=\"opt\" data-o=\"0\">fond à température constante, comme un corps pur<\/button><button class=\"opt\" data-o=\"1\">ne fond jamais<\/button><button class=\"opt\" data-o=\"2\">fond sur un intervalle<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Pour un binaire à P fixée, la variance maximale est :<\/div><button class=\"opt\" data-o=\"0\">2<\/button><button class=\"opt\" data-o=\"1\">3<\/button><button class=\"opt\" data-o=\"2\">1<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Pendant la cristallisation de A, le liquide :<\/div><button class=\"opt\" data-o=\"0\">s&#39;enrichit en B<\/button><button class=\"opt\" data-o=\"1\">s&#39;enrichit en A<\/button><button class=\"opt\" data-o=\"2\">garde sa composition<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Une isotherme dans un domaine biphasé relie :<\/div><button class=\"opt\" data-o=\"0\">les compositions des deux phases<\/button><button class=\"opt\" data-o=\"1\">deux températures<\/button><button class=\"opt\" data-o=\"2\">deux pressions<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"diagrammes-de-phases","rep":["0.25"],"tol":null},{"n":"diagrammes-de-phases","rep":["0"],"tol":null},{"n":"diagrammes-de-phases","rep":["0.4"],"tol":null}],"qcm":[{"n":"diagrammes-de-phases","q":"Au point eutectique, la variance vaut :","o":["0","1","2"],"a":0,"e":"Trois phases."},{"n":"diagrammes-de-phases","q":"Sous le palier eutectique, on a :","o":["deux solides","un liquide","un gaz"],"a":0,"e":"Tout est solide."},{"n":"diagrammes-de-phases","q":"Sur une courbe de refroidissement, l&#39;eutectique donne :","o":["un palier horizontal","une rupture de pente","une droite verticale"],"a":0,"e":"T constante."},{"n":"diagrammes-de-phases","q":"Le liquidus marque :","o":["l&#39;apparition du premier cristal","la fin de la solidification","l&#39;ébullition"],"a":0,"e":"En refroidissant."},{"n":"diagrammes-de-phases","q":"La règle des moments donne :","o":["les proportions des phases","la température de fusion","la variance"],"a":0,"e":"Bras de levier."},{"n":"diagrammes-de-phases","q":"Au-dessus du liquidus :","o":["une seule phase liquide","deux phases","trois phases"],"a":0,"e":"Domaine liquide."},{"n":"diagrammes-de-phases","q":"Un mélange de composition eutectique :","o":["fond à température constante, comme un corps pur","ne fond jamais","fond sur un intervalle"],"a":0,"e":"Palier unique."},{"n":"diagrammes-de-phases","q":"Pour un binaire à P fixée, la variance maximale est :","o":["2","3","1"],"a":0,"e":"Une seule phase."},{"n":"diagrammes-de-phases","q":"Pendant la cristallisation de A, le liquide :","o":["s&#39;enrichit en B","s&#39;enrichit en A","garde sa composition"],"a":0,"e":"A le quitte."},{"n":"diagrammes-de-phases","q":"Une isotherme dans un domaine biphasé relie :","o":["les compositions des deux phases","deux températures","deux pressions"],"a":0,"e":"Conode."}]},{"id":"ellingham","t":"Diagrammes d'Ellingham","seance":"Chapitre 3 · Initiation à la réactivité en chimie minérale","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut connaître $\\Delta_rG° = \\Delta_rH° - T\\Delta_rS°$ et savoir que $\\Delta_rG° &lt; 0$ favorise la réaction.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>ΔH° = −1000 kJ/mol, ΔS° = −0,2 kJ/(mol·K). ΔG° à 1000 K ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : -800<\/b><\/p><p>−1000 − 1000 × (−0,2) = −800 kJ/mol.<\/p>\n<\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « une droite par couple oxyde/métal, toujours pour 1 mol de O₂ ».<\/strong> Plus une droite est basse, plus l&#39;oxyde est stable. Un métal réduit l&#39;oxyde d&#39;un couple situé <strong>au-dessus<\/strong> de lui.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Écrire les réactions avec des coefficients quelconques. Les droites ne se comparent que si chaque réaction consomme <strong>1 mol de O₂<\/strong>.<\/p>\n<\/aside><p>À la fin, tu sais tracer $\\Delta_rG°(T)$, trouver une température d&#39;inversion et prévoir une réduction.<\/p>\n<h2>Idée 1 · L&#39;approximation d&#39;Ellingham<\/h2>\n<p>ΔH° et ΔS° sont supposés indépendants de T : $\\Delta_rG°(T) = \\Delta_rH° - T\\Delta_rS°$ est une <strong>droite<\/strong>. Pour une oxydation $2M + O_2 \\to 2MO$, un gaz disparaît : ΔS° &lt; 0, donc la pente $-\\Delta_rS°$ est <strong>positive<\/strong>.<\/p>\n<svg viewBox=\"0 0 320 140\" role=\"img\" aria-label=\"Deux droites d'Ellingham : la plus basse correspond à l'oxyde le plus stable ; le métal du bas réduit l'oxyde du haut\" style=\"max-width:380px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M30 10v120h270\"/><path d=\"M30 40L290 20\"/><path d=\"M30 100L290 60\" stroke=\"#D9824F\"/><\/g>\n<g fill=\"currentColor\" font-size=\"10\"><text x=\"200\" y=\"22\">Cu₂O/Cu<\/text><text x=\"200\" y=\"68\">Al₂O₃/Al<\/text><text x=\"230\" y=\"140\">T<\/text><text x=\"0\" y=\"12\">ΔG°<\/text><\/g>\n<\/svg><h2>Idée 2 · Domaines de stabilité<\/h2>\n<p>Pour un couple, au-dessus de la droite (si la pression de O₂ est supérieure) l&#39;oxyde est stable ; en dessous, le métal. Quand un métal a plusieurs oxydes (MO, M₃O₄, M₂O₃), un oxyde intermédiaire n&#39;est stable que si son domaine existe : là où deux droites se croisent, il peut disparaître (<strong>dismutation<\/strong>).<\/p>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Trouver une température d'inversion Ti<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/4 · 1. Écris les deux réactions pour 1 mol de O₂.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/4 · 2. Exprime $\\Delta_rG°_1(T)$ et $\\Delta_rG°_2(T)$.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/4 · 3. Résous $\\Delta_rG°_1(T_i) = \\Delta_rG°_2(T_i)$ : $T_i = \\frac{\\Delta H_1 - \\Delta H_2}{\\Delta S_1 - \\Delta S_2}$.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/4 · 4. De part et d&#39;autre de Ti, l&#39;ordre des droites s&#39;inverse.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><h2>Idée 3 · Combiner des réactions<\/h2>\n<p>Si (4) = a·(1) + b·(2), alors $\\Delta_rG°_4 = a\\,\\Delta_rG°_1 + b\\,\\Delta_rG°_2$ (loi de Hess).<\/p>\n<p><strong>Exemple.<\/strong> $6MO + O_2 \\to 2M_3O_4$ (2) et $2M + O_2 \\to 2MO$ (1). Pour $\\frac32M + O_2 \\to \\frac12M_3O_4$ (4) : (4) = ¾·(1) + ¼·(2), donc $\\Delta_rG°_4 = \\frac34\\Delta_rG°_1 + \\frac14\\Delta_rG°_2$.<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Équilibre $4M + 3O_2 \\to 2M_2O_3$ pour 1 mol de O₂ ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>On divise par 3 : $\\frac43M + O_2 \\to \\frac23M_2O_3$.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Réaction 1 : ΔH = −500 kJ, ΔS = −0,1 kJ/K. Réaction 2 : ΔH = −600 kJ, ΔS = −0,2 kJ/K. Ti ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 1000<\/b><\/p><p>$T_i = \\frac{-500 - (-600)}{-0{,}1 - (-0{,}2)} = \\frac{100}{0{,}1} = 1000$ K.<\/p>\n<\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Les réactions d&#39;Ellingham sont écrites pour :<\/div><button class=\"opt\" data-o=\"0\">1 mol de O₂<\/button><button class=\"opt\" data-o=\"1\">1 mol de métal<\/button><button class=\"opt\" data-o=\"2\">1 mol d&#39;oxyde<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">La pente d&#39;une droite d&#39;oxydation est généralement :<\/div><button class=\"opt\" data-o=\"0\">positive<\/button><button class=\"opt\" data-o=\"1\">négative<\/button><button class=\"opt\" data-o=\"2\">nulle<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">L&#39;oxyde le plus stable a la droite :<\/div><button class=\"opt\" data-o=\"0\">la plus basse<\/button><button class=\"opt\" data-o=\"1\">la plus haute<\/button><button class=\"opt\" data-o=\"2\">la plus pentue<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">L&#39;aluminium peut réduire Cu₂O car :<\/div><button class=\"opt\" data-o=\"0\">sa droite est en dessous<\/button><button class=\"opt\" data-o=\"1\">sa droite est au-dessus<\/button><button class=\"opt\" data-o=\"2\">il est plus lourd<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Ti s&#39;obtient en égalant :<\/div><button class=\"opt\" data-o=\"0\">deux ΔG°(T)<\/button><button class=\"opt\" data-o=\"1\">deux ΔH°<\/button><button class=\"opt\" data-o=\"2\">deux ΔS°<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Une dismutation transforme :<\/div><button class=\"opt\" data-o=\"0\">un oxyde intermédiaire en un oxyde supérieur et un inférieur<\/button><button class=\"opt\" data-o=\"1\">un métal en gaz<\/button><button class=\"opt\" data-o=\"2\">un oxyde en métal seul<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Changement de pente sur une droite d&#39;Ellingham :<\/div><button class=\"opt\" data-o=\"0\">changement d&#39;état (fusion, ébullition)<\/button><button class=\"opt\" data-o=\"1\">erreur de tracé<\/button><button class=\"opt\" data-o=\"2\">changement de catalyseur<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">$\\Delta_rG°_4 = \\frac34\\Delta_rG°_1 + \\frac14\\Delta_rG°_2$ découle de :<\/div><button class=\"opt\" data-o=\"0\">la loi de Hess<\/button><button class=\"opt\" data-o=\"1\">la loi de Bragg<\/button><button class=\"opt\" data-o=\"2\">la règle des phases<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">ΔG° &lt; 0 signifie que la réaction est :<\/div><button class=\"opt\" data-o=\"0\">favorisée dans le sens direct<\/button><button class=\"opt\" data-o=\"1\">impossible<\/button><button class=\"opt\" data-o=\"2\">à l&#39;équilibre<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Le carbone réduit beaucoup d&#39;oxydes à haute T car sa droite C/CO :<\/div><button class=\"opt\" data-o=\"0\">descend quand T augmente<\/button><button class=\"opt\" data-o=\"1\">monte très vite<\/button><button class=\"opt\" data-o=\"2\">est horizontale<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"ellingham","rep":["-800"],"tol":null},{"n":"ellingham","rep":null,"tol":null},{"n":"ellingham","rep":["1000"],"tol":null}],"qcm":[{"n":"ellingham","q":"Les réactions d&#39;Ellingham sont écrites pour :","o":["1 mol de O₂","1 mol de métal","1 mol d&#39;oxyde"],"a":0,"e":"Pour pouvoir comparer."},{"n":"ellingham","q":"La pente d&#39;une droite d&#39;oxydation est généralement :","o":["positive","négative","nulle"],"a":0,"e":"ΔS° &lt; 0."},{"n":"ellingham","q":"L&#39;oxyde le plus stable a la droite :","o":["la plus basse","la plus haute","la plus pentue"],"a":0,"e":"ΔG° le plus négatif."},{"n":"ellingham","q":"L&#39;aluminium peut réduire Cu₂O car :","o":["sa droite est en dessous","sa droite est au-dessus","il est plus lourd"],"a":0,"e":"Aluminothermie."},{"n":"ellingham","q":"Ti s&#39;obtient en égalant :","o":["deux ΔG°(T)","deux ΔH°","deux ΔS°"],"a":0,"e":"Intersection des droites."},{"n":"ellingham","q":"Une dismutation transforme :","o":["un oxyde intermédiaire en un oxyde supérieur et un inférieur","un métal en gaz","un oxyde en métal seul"],"a":0,"e":"Ex. 4MO → M + M₃O₄."},{"n":"ellingham","q":"Changement de pente sur une droite d&#39;Ellingham :","o":["changement d&#39;état (fusion, ébullition)","erreur de tracé","changement de catalyseur"],"a":0,"e":"ΔS° change."},{"n":"ellingham","q":"$\\Delta_rG°_4 = \\frac34\\Delta_rG°_1 + \\frac14\\Delta_rG°_2$ découle de :","o":["la loi de Hess","la loi de Bragg","la règle des phases"],"a":0,"e":"Combinaison linéaire."},{"n":"ellingham","q":"ΔG° &lt; 0 signifie que la réaction est :","o":["favorisée dans le sens direct","impossible","à l&#39;équilibre"],"a":0,"e":"K &gt; 1."},{"n":"ellingham","q":"Le carbone réduit beaucoup d&#39;oxydes à haute T car sa droite C/CO :","o":["descend quand T augmente","monte très vite","est horizontale"],"a":0,"e":"2C + O₂ → 2CO : un gaz se forme, ΔS° &gt; 0."}]},{"id":"annales-corrigees","t":"Annales corrigées · examen BCG et contrôle de cristallochimie","seance":"Examen de Chimie minérale 1 (BCG S3, 1 h 30) et contrôle corrigé 2015-16","imp":5,"payant":true,"html":"<p>Le sujet d&#39;examen de Chimie minérale 1 de la filière BCG, puis un contrôle corrigé de cristallochimie (Pr N. El Jouhari) qui sert d&#39;entraînement.<\/p>\n<h2>Examen BCG · partie A (composé ionique AB)<\/h2>\n<p><strong>Énoncé.<\/strong> AB cristallise en deux variétés cubiques : α (a = 398 pm, ρ = 2,10 g/cm³) et β (a = 602 pm, ρ = 2,43 g/cm³). M = 79,9 g/mol ; r(B⁺) = 150 pm ; λ(CuKα) = 1,541 Å.<\/p>\n<section class=\"exo\"><h3>Partie A<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>a) Structure de α.<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 1<\/b><\/p><p>$Z = \\rho a^3 N_A / M \\approx 1{,}0$ : <strong>type CsCl<\/strong> (cubique P, 8-8).<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>a) Structure de β.<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 4<\/b><\/p><p>$Z \\approx 4{,}0$ : type NaCl ou ZnS (cubique F).<\/p>\n<\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>b) Avec des rayons invariants, laquelle ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Dans α : $r^+ + r^- = a\\sqrt3/2 \\approx 344{,}7$ pm, donc $r^- \\approx 195$ pm. Si β était NaCl : a = 2 × 344,7 ≈ 689 pm ; si ZnS : a = 4 × 344,7 / √3 ≈ 796 pm. La valeur 602 pm est la plus proche de NaCl, et $r^+/r^- = 150/195 \\approx 0{,}77$ exclut la coordinence 4. <strong>β est de type NaCl.<\/strong><\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"3\"><div class=\"ex-q\"><p>c, d) Réseaux de Bravais et premier pic.<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 22.3<\/b><\/p><p>α : cubique <strong>P<\/strong>, premier pic <strong>(100)<\/strong>, d = 3,98 Å, <strong>2θ ≈ 22,3°<\/strong>. β : cubique <strong>F<\/strong>, premier pic <strong>(111)<\/strong>, d = 3,48 Å, <strong>2θ ≈ 25,6°<\/strong>.<\/p>\n<\/div><\/div><\/section><aside class=\"enc attention\"><div class=\"enc-t\">Attention<\/div><p>Les données ne sont pas parfaitement cohérentes : avec des rayons strictement invariants, β de type NaCl aurait a ≈ 689 pm, pas 602 pm. Sur ta copie, justifie ton choix par Z et par le rapport des rayons, et signale l&#39;écart.<\/p>\n<\/aside><h2>Examen BCG · partie B (Ellingham, métal à trois oxydes)<\/h2>\n<p>Le diagramme et les valeurs de ΔH° et ΔS° sont dans une figure absente du fichier. Méthode à rédiger (chapitre 5) :<\/p>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Partie B<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/4 · 1. a) Équilibre pour 1 mol de O₂ : 2M + O₂ → 2MO ; 6MO + O₂ → 2M₃O₄ ; 4M₃O₄ + O₂ → 6M₂O₃.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/4 · 2. b) MO n&#39;est stable qu&#39;au-dessus de la température Ti où les droites (1) et (2) se croisent ; en dessous, il se dismute : 4MO → M + M₃O₄.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/4 · 3. c, d) ΔG°ᵢ(T) = ΔH°ᵢ − TΔS°ᵢ ; Ti = (ΔH°₁ − ΔH°₂)/(ΔS°₁ − ΔS°₂).<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/4 · 4. e) (4) : ³⁄₂M + O₂ → ½M₃O₄ = ¾(1) + ¼(2), donc ΔG°₄ = ¾ΔG°₁ + ¼ΔG°₂.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><h2>Contrôle corrigé · cobalt et carbone<\/h2>\n<section class=\"exo\"><h3>Contrôle 2015-16<\/h3><div class=\"ex\" data-x=\"4\"><div class=\"ex-q\"><p>Les liaisons présentes dans tous les états (solide, liquide, gaz) ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Les liaisons de Van der Waals.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"5\"><div class=\"ex-q\"><p>Graphite et diamant : hybridation et coordinence.<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Graphite : sp², coordinence 3, covalent dans les plans et Van der Waals entre les plans. Diamant : sp³, coordinence 4, covalent en 3D.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"6\"><div class=\"ex-q\"><p>Cobalt HC (r = 1,25 Å) : a, c, ρ.<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 8.86<\/b><\/p><p>a = 2r = 2,5 Å ; c = a√(8/3) ≈ 4,08 Å ; maille triple Z = 6 ; <strong>ρ ≈ 8,86 g/cm³<\/strong>, égale à celle de la variété CFC (même compacité 0,74).<\/p>\n<\/div><\/div><\/section><h2>QCM<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Z ≈ 1 pour un composé AB cubique :<\/div><button class=\"opt\" data-o=\"0\">CsCl<\/button><button class=\"opt\" data-o=\"1\">NaCl<\/button><button class=\"opt\" data-o=\"2\">ZnS<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">r⁺/r⁻ ≈ 0,77 exclut :<\/div><button class=\"opt\" data-o=\"0\">la coordinence 4<\/button><button class=\"opt\" data-o=\"1\">la coordinence 8<\/button><button class=\"opt\" data-o=\"2\">tout cristal ionique<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Premier pic d&#39;un cubique P :<\/div><button class=\"opt\" data-o=\"0\">(100)<\/button><button class=\"opt\" data-o=\"1\">(111)<\/button><button class=\"opt\" data-o=\"2\">(110)<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Coordinence du cobalt HC :<\/div><button class=\"opt\" data-o=\"0\">12<\/button><button class=\"opt\" data-o=\"1\">8<\/button><button class=\"opt\" data-o=\"2\">6<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Multiplicité de la maille triple HC :<\/div><button class=\"opt\" data-o=\"0\">6<\/button><button class=\"opt\" data-o=\"1\">2<\/button><button class=\"opt\" data-o=\"2\">4<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Le graphite est hybridé :<\/div><button class=\"opt\" data-o=\"0\">sp²<\/button><button class=\"opt\" data-o=\"1\">sp³<\/button><button class=\"opt\" data-o=\"2\">sp<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">MO instable sous Ti se transforme en :<\/div><button class=\"opt\" data-o=\"0\">M + M₃O₄<\/button><button class=\"opt\" data-o=\"1\">M₂O₃ seul<\/button><button class=\"opt\" data-o=\"2\">O₂<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Liaisons entre feuillets du graphite :<\/div><button class=\"opt\" data-o=\"0\">Van der Waals<\/button><button class=\"opt\" data-o=\"1\">covalentes<\/button><button class=\"opt\" data-o=\"2\">ioniques<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">2θ augmente quand a :<\/div><button class=\"opt\" data-o=\"0\">diminue<\/button><button class=\"opt\" data-o=\"1\">augmente<\/button><button class=\"opt\" data-o=\"2\">ne change pas<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Les droites d&#39;Ellingham sont comparables si :<\/div><button class=\"opt\" data-o=\"0\">elles sont écrites pour 1 mol de O₂<\/button><button class=\"opt\" data-o=\"1\">elles ont la même pente<\/button><button class=\"opt\" data-o=\"2\">les métaux ont la même masse<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"annales-corrigees","rep":["1"],"tol":null},{"n":"annales-corrigees","rep":["4"],"tol":null},{"n":"annales-corrigees","rep":null,"tol":null},{"n":"annales-corrigees","rep":["22.3"],"tol":null},{"n":"annales-corrigees","rep":null,"tol":null},{"n":"annales-corrigees","rep":null,"tol":null},{"n":"annales-corrigees","rep":["8.86"],"tol":null}],"qcm":[{"n":"annales-corrigees","q":"Z ≈ 1 pour un composé AB cubique :","o":["CsCl","NaCl","ZnS"],"a":0,"e":"Une seule paire d&#39;ions."},{"n":"annales-corrigees","q":"r⁺/r⁻ ≈ 0,77 exclut :","o":["la coordinence 4","la coordinence 8","tout cristal ionique"],"a":0,"e":"Il faut r⁺/r⁻ &lt; 0,414 pour la blende."},{"n":"annales-corrigees","q":"Premier pic d&#39;un cubique P :","o":["(100)","(111)","(110)"],"a":0,"e":"Pas d&#39;extinction."},{"n":"annales-corrigees","q":"Coordinence du cobalt HC :","o":["12","8","6"],"a":0,"e":"6 + 3 + 3."},{"n":"annales-corrigees","q":"Multiplicité de la maille triple HC :","o":["6","2","4"],"a":0,"e":"12/6 + 2/2 + 3."},{"n":"annales-corrigees","q":"Le graphite est hybridé :","o":["sp²","sp³","sp"],"a":0,"e":"Plans d&#39;hexagones."},{"n":"annales-corrigees","q":"MO instable sous Ti se transforme en :","o":["M + M₃O₄","M₂O₃ seul","O₂"],"a":0,"e":"Dismutation."},{"n":"annales-corrigees","q":"Liaisons entre feuillets du graphite :","o":["Van der Waals","covalentes","ioniques"],"a":0,"e":"D&#39;où son clivage facile."},{"n":"annales-corrigees","q":"2θ augmente quand a :","o":["diminue","augmente","ne change pas"],"a":0,"e":"d plus petit, θ plus grand."},{"n":"annales-corrigees","q":"Les droites d&#39;Ellingham sont comparables si :","o":["elles sont écrites pour 1 mol de O₂","elles ont la même pente","les métaux ont la même masse"],"a":0,"e":"Convention."}]}];
+const NOTIONS=[{"id":"reseaux-rayons-x","t":"Réseau cristallin et diffraction des rayons X","imp":4,"ch":"reseaux-rayons-x"},{"id":"metaux-empilements","t":"Métaux · empilements compacts et sites","imp":5,"ch":"metaux-empilements"},{"id":"cristaux-ioniques","t":"Cristaux ioniques","imp":5,"ch":"cristaux-ioniques"},{"id":"diagrammes-de-phases","t":"Diagrammes de phases binaires","imp":4,"ch":"diagrammes-de-phases"},{"id":"ellingham","t":"Diagrammes d'Ellingham","imp":5,"ch":"ellingham"},{"id":"annales-corrigees","t":"Annales corrigées · examen BCG et contrôle de cristallochimie","imp":5,"ch":"annales-corrigees"}];
+const CARTES=[{"n":"reseaux-rayons-x","k":0,"ch":"reseaux-rayons-x","q":"<p>Sommet / face / arête<\/p>\n","r":"<p>1/8, 1/2, 1/4.<\/p>\n"},{"n":"reseaux-rayons-x","k":1,"ch":"reseaux-rayons-x","q":"<p>Nœuds par maille P, I, F<\/p>\n","r":"<p>1, 2, 4.<\/p>\n"},{"n":"reseaux-rayons-x","k":2,"ch":"reseaux-rayons-x","q":"<p>Loi de Bragg<\/p>\n","r":"<p>$2d\\sin\\theta = n\\lambda$.<\/p>\n"},{"n":"reseaux-rayons-x","k":3,"ch":"reseaux-rayons-x","q":"<p>Premier pic en F<\/p>\n","r":"<p>(111).<\/p>\n"},{"n":"metaux-empilements","k":4,"ch":"metaux-empilements","q":"<p>Contact en CFC<\/p>\n","r":"<p>Diagonale d&#39;une face : $a\\sqrt2 = 4r$.<\/p>\n"},{"n":"metaux-empilements","k":5,"ch":"metaux-empilements","q":"<p>Contact en CC<\/p>\n","r":"<p>Grande diagonale : $a\\sqrt3 = 4r$.<\/p>\n"},{"n":"metaux-empilements","k":6,"ch":"metaux-empilements","q":"<p>Compacité CFC et HC<\/p>\n","r":"<p>0,74 (empilements compacts).<\/p>\n"},{"n":"metaux-empilements","k":7,"ch":"metaux-empilements","q":"<p>Sites du CFC<\/p>\n","r":"<p>4 octaédriques, 8 tétraédriques.<\/p>\n"},{"n":"cristaux-ioniques","k":8,"ch":"cristaux-ioniques","q":"<p>CsCl<\/p>\n","r":"<p>Cubique P, 8-8, Z = 1, contact sur la grande diagonale.<\/p>\n"},{"n":"cristaux-ioniques","k":9,"ch":"cristaux-ioniques","q":"<p>NaCl<\/p>\n","r":"<p>Cubique F, 6-6, Z = 4, contact sur l&#39;arête : a = 2(r⁺ + r⁻).<\/p>\n"},{"n":"cristaux-ioniques","k":10,"ch":"cristaux-ioniques","q":"<p>Blende ZnS<\/p>\n","r":"<p>Cubique F, 4-4, Z = 4, Zn dans la moitié des sites tétraédriques.<\/p>\n"},{"n":"cristaux-ioniques","k":11,"ch":"cristaux-ioniques","q":"<p>Seuils de r⁺/r⁻<\/p>\n","r":"<p>0,225 ; 0,414 ; 0,732.<\/p>\n"},{"n":"diagrammes-de-phases","k":12,"ch":"diagrammes-de-phases","q":"<p>Liquidus<\/p>\n","r":"<p>Courbe au-dessus de laquelle tout est liquide.<\/p>\n"},{"n":"diagrammes-de-phases","k":13,"ch":"diagrammes-de-phases","q":"<p>Eutectique<\/p>\n","r":"<p>Liquide qui cristallise en deux solides à T constante.<\/p>\n"},{"n":"diagrammes-de-phases","k":14,"ch":"diagrammes-de-phases","q":"<p>Variance (binaire, P fixée)<\/p>\n","r":"<p>$v = 3 - \\varphi$.<\/p>\n"},{"n":"diagrammes-de-phases","k":15,"ch":"diagrammes-de-phases","q":"<p>Règle des moments<\/p>\n","r":"<p>Chaque phase est proportionnelle au segment opposé.<\/p>\n"},{"n":"ellingham","k":16,"ch":"ellingham","q":"<p>Approximation d&#39;Ellingham<\/p>\n","r":"<p>ΔH° et ΔS° constants : ΔG°(T) est une droite.<\/p>\n"},{"n":"ellingham","k":17,"ch":"ellingham","q":"<p>Pente d&#39;une droite d&#39;oxydation<\/p>\n","r":"<p>$-\\Delta_rS°$, positive (un gaz disparaît).<\/p>\n"},{"n":"ellingham","k":18,"ch":"ellingham","q":"<p>Qui réduit qui ?<\/p>\n","r":"<p>Le métal de la droite du bas réduit l&#39;oxyde de la droite du haut.<\/p>\n"},{"n":"ellingham","k":19,"ch":"ellingham","q":"<p>Convention<\/p>\n","r":"<p>Toujours 1 mol de O₂.<\/p>\n"}];
+const OUTILS=[];
+// ---------- Sauvegarde ----------
+// Format « essais » : un objet partagé avec l'ancien module (attempts par notion, cards par indice) ; on ne touche qu'à ces deux champs.
+// Format « score10 » : scores des chapitres dans MODULE.cle, essais et cartes dans MODULE.cleEtat.
+const lireJ = (k) => { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } };
+const ecrireJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const etat = () => { const S = lireJ(MODULE.cleEtat); S.attempts = S.attempts || {}; S.cards = S.cards || {}; return S; };
+function noter(n, ok) { const S = etat(); (S.attempts[n] = S.attempts[n] || []).push(ok ? 1 : 0); if (S.attempts[n].length > 30) S.attempts[n].shift(); ecrireJ(MODULE.cleEtat, S); }
+// Maîtrisé = au moins 3 essais et 80 % de réussite sur les 5 derniers (règle commune à la plateforme).
+function statut(n) {
+  if (MODULE.format === "score10") { const v = lireJ(MODULE.cle)[n]; if (v !== undefined) return [v >= 8 ? "ok" : "fragile", v / 10]; }
+  if (MODULE.format === "best") { const v = (lireJ(MODULE.cle).notions || {})[n]; return v && v.best != null ? [v.best >= 0.8 ? "ok" : "fragile", v.best] : ["jamais", null]; }
+  if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[n]; return v && v.pc !== undefined ? [v.pc >= 80 ? "ok" : "fragile", v.pc / 100] : ["jamais", null]; } const a = (etat().attempts[n] || []).slice(-5); if (!a.length) return ["jamais", null]; const r = a.reduce((x, y) => x + y, 0) / a.length; return [(etat().attempts[n].length >= 3 && r >= 0.8) ? "ok" : "fragile", r]; }
+const NCH = {}; NOTIONS.forEach((n) => (NCH[n.ch] = NCH[n.ch] || []).push(n));
+function scoreChap(c) {
+  if (MODULE.format === "score10") return lireJ(MODULE.cle)[c.id];
+  if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[c.id]; return v && v.pc !== undefined ? Math.round(v.pc / 10) : undefined; }
+  if (MODULE.format === "best") { const v = (lireJ(MODULE.cle).notions || {})[c.id]; return v && v.best != null ? Math.round(v.best * 10) : undefined; }
+  const l = NCH[c.id] || []; if (!l.length || !l.some((n) => statut(n.id)[0] !== "jamais")) return undefined;
+  return Math.round((10 * l.filter((n) => statut(n.id)[0] === "ok").length) / l.length);
+}
+// ---------- Flashcards (boîtes de Leitner, mêmes intervalles que les anciens modules) ----------
+const CFG_C = MODULE.cartes || { champ: "box", intervalles: [0, 1, 3, 7, 14, 30], echec: 1, depart: 0 };
+const INTV = CFG_C.intervalles, CHAMP = CFG_C.champ;
+const jour = () => new Date().toISOString().slice(0, 10);
+const numJour = (d) => Math.floor(new Date(d + "T00:00:00").getTime() / 864e5);
+const dansJours = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); };
+const aRevoir = () => { const S = etat(), t = numJour(jour()); return CARTES.map((_, i) => i).filter((i) => { const st = S.cards[CARTES[i].k]; return !st || numJour(st.due) <= t; }); };
+let file = [], montre = false;
+
+const nav = document.getElementById("nav"), main = document.getElementById("main"), pct = document.getElementById("pct");
+let cur = -1, rep = {};
+const VUES = { bord: -3, cartes: -2, intro: -1 };
+function dessinerNav() {
+  let ok = 0;
+  const ligne = (i, titre, sous, v) => `<button class="${cur === i ? "on" : ""}" data-go="${i}"><span>${titre}${sous ? `<span class="se">${sous}</span>` : ""}</span><span class="sc ${v >= 8 ? "ok" : ""}">${v === undefined ? "" : v + "/10"}</span></button>`;
+  const dues = CARTES.length ? aRevoir().length : 0;
+  let h = ligne(VUES.bord, "📊 Tableau de bord");
+  if (CARTES.length) h += ligne(VUES.cartes, `🃏 Flashcards${dues ? ` <b>(${dues})</b>` : ""}`);
+  if (MODULE.intro) h += ligne(VUES.intro, "Avant de commencer");
+  h += '<div class="sep"></div>' + CHAPS.map((c, i) => { const v = scoreChap(c); if (v >= 8) ok++; return ligne(i, `${i + 1}. ${c.t}`, c.seance, v); }).join("");
+  nav.innerHTML = h;
+  pct.textContent = `${ok}/${CHAPS.length} maîtrisés`;
+}
+function vueBord() {
+  const st = NOTIONS.map((n) => ({ ...n, s: statut(n.id) }));
+  const okN = st.filter((n) => n.s[0] === "ok").length, fr = st.filter((n) => n.s[0] === "fragile"), jam = st.filter((n) => n.s[0] === "jamais");
+  const chapDe = (id) => CHAPS.findIndex((c) => c.id === id);
+  const li = (n) => `<li><button data-go="${chapDe(n.ch)}">${n.t}</button><span>${n.s[1] === null ? "jamais testé" : Math.round(100 * n.s[1]) + " %"}</span></li>`;
+  return `<h1 class="t">Tableau de bord</h1>
+  <div class="kpi"><div><b>${okN}/${NOTIONS.length}</b>${MODULE.format === "essais" ? "notions" : "chapitres"} maîtrisé(e)s</div><div><b>${fr.length}</b>à consolider</div><div><b>${CARTES.length ? aRevoir().length : 0}</b>flashcards à revoir aujourd'hui</div></div>
+  <div class="barre"><i style="width:${NOTIONS.length ? (100 * okN) / NOTIONS.length : 0}%"></i></div>
+  ${fr.length ? `<h2>À consolider en priorité</h2><ul class="liste-n">${fr.sort((a, b) => b.imp - a.imp || a.s[1] - b.s[1]).slice(0, 10).map(li).join("")}</ul>` : ""}
+  ${jam.length ? `<h2>Pas encore travaillé (les plus importants d'abord)</h2><ul class="liste-n">${jam.sort((a, b) => b.imp - a.imp).slice(0, 10).map(li).join("")}</ul>` : ""}
+  <p style="color:var(--mute);font-size:14px">Une ${MODULE.format === "essais" ? "notion" : "partie"} est maîtrisée après au moins 3 essais (QCM, exercices, flashcards) avec 80 % de réussite sur les 5 derniers.</p>`;
+}
+function vueCartes() {
+  if (!file.length) { file = aRevoir(); montre = false; }
+  if (!file.length) return `<h1 class="t">Flashcards</h1><p>✔ Rien à revoir aujourd'hui. Reviens demain : les cartes réussies reviennent après 1, 3, 7, 14 puis 30 jours.</p>`;
+  const i = file[0], c = CARTES[i], st = etat().cards[c.k], n = NOTIONS.find((x) => x.id === c.n);
+  return `<h1 class="t">Flashcards</h1><p style="color:var(--mute)">${file.length} carte(s) à revoir aujourd'hui.</p>
+  <div class="carte"><div class="lbl">${n ? n.t : ""} · ${st && st[CHAMP] >= 0 ? "boîte " + st[CHAMP] : "nouvelle"}</div>${c.q}${montre ? `<div class="rep">${c.r}</div>` : ""}</div>
+  <div class="ex-b">${montre ? `<button class="b ko" data-fc="0">Raté</button><button class="b ok" data-fc="1">Je savais</button>` : `<button class="b p" data-fc="voir">Retourner la carte</button>`}</div>`;
+}
+window.typeset = () => { if (MODULE.maths && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([main]).catch(() => {}); };
+const nEval = (c) => c.qcm.length + c.ex.filter((x) => x.rep).length;
+const norm = (t) => String(t).toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "").replace(/,/g, ".");
+function bilanChap() {
+  typeset();
+  const c = CHAPS[cur], tot = nEval(c), fait = Object.keys(rep).length, juste = Object.values(rep).reduce((a, b) => a + b, 0), bilan = document.getElementById("bilan");
+  if (!bilan) return;
+  if (fait < tot) { bilan.textContent = `Évaluation du chapitre : ${fait}/${tot} répondu(s) · ${juste} juste${juste > 1 ? "s" : ""}`; dessinerNav(); return; }
+  const sc = Math.round((10 * juste) / fait);
+  if (MODULE.format === "score10") { const s = lireJ(MODULE.cle); s[c.id] = Math.max(sc, s[c.id] ?? 0); ecrireJ(MODULE.cle, s); }
+  if (MODULE.format === "pc") { const s = lireJ(MODULE.cle); s[c.id] = { ...(s[c.id] || {}), pc: Math.round((100 * juste) / fait), date: new Date().toLocaleDateString("fr-FR") }; ecrireJ(MODULE.cle, s); }
+  if (MODULE.format === "best") { const S = etat(); S.notions = S.notions || {}; const st = S.notions[c.id] = { ...(S.notions[c.id] || {}), read: true }; st.last = juste / fait; st.best = Math.max(st.best || 0, st.last); st.tries = (st.tries || 0) + 1; ecrireJ(MODULE.cle, S); }
+  bilan.textContent = `Score : ${sc}/10 ${sc >= 8 ? "· très bien ✔" : "· relis les encadrés « Piège » puis recommence (recharge le chapitre)."}`;
+  dessinerNav();
+}
+// Outils d'origine affichés dans le chapitre : même origine, on masque tout sauf l'outil visé.
+const vueIntegre = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { vueIntegre.unobserve(e.target); chargerIntegre(e.target); } }), { rootMargin: "400px" });
+function chargerIntegre(box) {
+  const f = document.createElement("iframe");
+  f.title = "Outil interactif"; f.loading = "lazy";
+  f.src = box.dataset.src + (box.dataset.ancre ? "#" + box.dataset.ancre : "");
+  f.onload = () => {
+    let d; try { d = f.contentDocument; } catch (e) { return; }
+    if (!d) return;
+    const st = d.createElement("style");
+    st.textContent = "#mztBtn,#mztPan,.toast{display:none!important}html,body{background:transparent!important;margin:0!important;padding:0!important;min-height:0!important}";
+    d.head.appendChild(st);
+    const appliquer = () => {
+      const cible = d.querySelector(box.dataset.cible);
+      if (!cible) return;
+      let e = cible;
+      while (e && e !== d.body) {
+        e.hidden = false; e.style.display = e.style.display === "none" ? "" : e.style.display;
+        e.style.margin = "0"; e.style.padding = e === cible ? "8px 14px" : "0"; e.style.maxWidth = "none";
+        for (const sib of e.parentElement.children) if (sib !== e && !/^(SCRIPT|STYLE|LINK|META|TITLE)$/.test(sib.tagName)) sib.style.display = "none";
+        e = e.parentElement;
+      }
+      if (box.dataset.garder) for (const c of cible.children) c.style.display = c.matches(box.dataset.garder) ? "" : "none";
+    };
+    appliquer(); setTimeout(appliquer, 400);
+    const ajuster = () => { const h = Math.max(d.body.scrollHeight, d.documentElement.scrollHeight); if (h && Math.abs(f.offsetHeight - h) > 4) f.style.height = h + "px"; };
+    ajuster(); new ResizeObserver(ajuster).observe(d.body); setInterval(ajuster, 1500);
+    const att = box.querySelector(".integre-att"); if (att) att.remove();
+  };
+  box.appendChild(f);
+}
+function lancerOutils() {
+  main.querySelectorAll(".integre").forEach((b) => vueIntegre.observe(b));
+  main.querySelectorAll("[data-outil]").forEach((d) => {
+    const tmp = document.createElement("div"); tmp.innerHTML = OUTILS[Number(d.dataset.outil)];
+    tmp.querySelectorAll("script").forEach((sc) => { const n = document.createElement("script"); n.textContent = sc.textContent; sc.replaceWith(n); });
+    d.replaceWith(...tmp.childNodes);
+  });
+}
+function aller(i) {
+  if (i === VUES.intro && !MODULE.intro) i = 0;
+  if (i === VUES.cartes && !CARTES.length) i = 0;
+  cur = i; rep = {}; nav.classList.remove("open");
+  try { localStorage.setItem(MODULE.cleEtat + "_dernier", String(i)); } catch (e) {}
+  if (i === VUES.bord) main.innerHTML = vueBord();
+  else if (i === VUES.cartes) { file = []; main.innerHTML = vueCartes(); }
+  else if (i === VUES.intro) main.innerHTML = `<h1 class="t">Avant de commencer</h1>${MODULE.intro}<div class="nx"><span></span><button class="b p" data-go="0">Commencer →</button></div>`;
+  else {
+    const c = CHAPS[i], n = nEval(c);
+    main.innerHTML = `${c.seance ? `<div class="seance">${c.seance}</div>` : ""}<h1 class="t">${c.t}</h1>${c.html}${n ? `<div class="bilan" id="bilan">Évaluation du chapitre : 0/${n} répondu(s)</div>` : ""}<div class="nx">${i > 0 || MODULE.intro ? `<button class="b" data-go="${i > 0 ? i - 1 : VUES.intro}">← Précédent</button>` : "<span></span>"}${i < CHAPS.length - 1 ? `<button class="b p" data-go="${i + 1}">Chapitre suivant →</button>` : ""}</div>`;
+    lancerOutils();
+  }
+  scrollTo(0, 0); dessinerNav(); typeset();
+}
+document.addEventListener("click", (e) => {
+  const g = e.target.closest("[data-go]"); if (g) return aller(Number(g.dataset.go));
+  const et = e.target.closest("[data-et]");
+  if (et) { const f = et.closest(".etapes"), l = f.querySelectorAll(".etape"); let i = Math.min(l.length - 1, Math.max(0, Number(f.dataset.i) + Number(et.dataset.et))); f.dataset.i = i; l.forEach((x, j) => (x.hidden = j !== i)); return; }
+  const fc = e.target.closest("[data-fc]");
+  if (fc) {
+    if (fc.dataset.fc === "voir") { montre = true; main.innerHTML = vueCartes(); typeset(); return; }
+    const i = file.shift(), ok = fc.dataset.fc === "1", S = etat(), k = CARTES[i].k, st = S.cards[k] || { [CHAMP]: CFG_C.depart ?? 0 };
+    st[CHAMP] = ok ? Math.min(INTV.length - 1, Math.max(0, st[CHAMP] + 1)) : CFG_C.echec; st.due = dansJours(ok ? INTV[st[CHAMP]] : 1); S.cards[k] = st; ecrireJ(MODULE.cleEtat, S);
+    noter(CARTES[i].n, ok); montre = false; main.innerHTML = vueCartes(); dessinerNav(); typeset(); return;
+  }
+  const xb = e.target.closest("[data-ex]");
+  if (xb) {
+    const ex = xb.closest(".ex"), v = xb.dataset.ex;
+    if (v === "h") ex.querySelector(".ex-h").hidden = false;
+    else if (v === "v") {
+      const k = Number(ex.dataset.x), it = CHAPS[cur].ex[k], inp = ex.querySelector("input");
+      if (!inp.value.trim() || ("x" + k) in rep) return;
+      const ok = it.tol !== null ? Math.abs(parseFloat(norm(inp.value)) - parseFloat(it.rep[0])) <= it.tol : it.rep.some((r) => norm(r) === norm(inp.value));
+      rep["x" + k] = ok ? 1 : 0; noter(it.n, ok); inp.disabled = true; xb.disabled = true;
+      inp.style.borderColor = ok ? "var(--ok)" : "var(--ko)";
+      const c = ex.querySelector(".ex-c"); c.hidden = false; c.insertAdjacentHTML("afterbegin", `<p>${ok ? "✔ Bonne réponse." : "✘ Raté."}</p>`);
+      bilanChap();
+    }
+    else if (v === "c") ex.querySelector(".ex-c").hidden = false;
+    else if (!ex.classList.contains("fait")) { ex.classList.add("fait"); noter(CHAPS[cur].ex[Number(ex.dataset.x)].n, v === "1"); xb.parentNode.innerHTML = v === "1" ? "✔ Noté : réussi." : "✘ Noté : à retravailler."; dessinerNav(); }
+    return;
+  }
+  const o = e.target.closest(".opt"); if (!o) return;
+  const qq = o.closest(".qq"), k = Number(qq.dataset.k), c = CHAPS[cur], q = c.qcm[k];
+  if (("q" + k) in rep) return;
+  rep["q" + k] = Number(o.dataset.o) === q.a ? 1 : 0;
+  noter(q.n, rep["q" + k] === 1);
+  qq.querySelectorAll(".opt").forEach((b, j) => { b.disabled = true; if (j === q.a) b.classList.add("bon"); else if (b === o) b.classList.add("faux"); });
+  const ex = qq.querySelector(".qq-e"); ex.innerHTML = (rep["q" + k] ? "✔ Bonne réponse. " : "✘ Raté. ") + q.e; ex.hidden = false;
+  bilanChap();
+});
+document.getElementById("menu").onclick = () => nav.classList.toggle("open");
+let depart = MODULE.intro ? -1 : 0; try { const d = localStorage.getItem(MODULE.cleEtat + "_dernier"); if (d !== null) depart = Number(d); } catch (e) {}
+aller(depart >= -3 && depart < CHAPS.length ? depart : 0);
+</script>
+<script>
+window.MZT_CONFIG={"id":"chimie-minerale","module":"Chimie minérale","prof":"","student":"un étudiant de licence (FST Béni Mellal)","conventions":"Module Chimie minérale 1, filière BCG S3, FST Béni Mellal. Plan du cours : ch. 1 chimie du solide (réseau cristallin, rayons X, métaux, cristaux ioniques), ch. 2 diagrammes de phases, ch. 3 initiation à la réactivité en chimie minérale (Ellingham). Notations : Z = nombre de motifs par maille, ρ = Z·M/(N·a³), compacité C = volume des atomes / volume de la maille, d(hkl) = a/√(h²+k²+l²) en cubique, loi de Bragg 2d sin θ = nλ. Distances en pm ou Å (1 Å = 100 pm)."};
+window.MZT_CONFIG.getContext = () => { const h = document.querySelector("h1.t"); return { label: h ? h.textContent : MODULE.titre, text: (document.querySelector("main").innerText || "").slice(0, 6000) }; };
+</script>
+<script>
+/* ToumaiLearn · tuteur commun (bouton flottant présent sur chaque section)
+   Configuration attendue avant ce script : window.MZT_CONFIG = {
+     id: 'crypto',                      // identifiant court du module (stockage)
+     module: 'Cryptographie',           // nom affiché et donné au tuteur
+     prof: 'Pr A. Farchane',
+     student:'un étudiant de licence (FSABM)',
+     conventions: '…',                  // conventions du prof à respecter
+     getContext: () => ({label, text})  // facultatif : extrait courant (sinon section visible)
+   };
+   Fonctions : extrait automatique de la section visible (ou contexte fourni par le module),
+   mode rapide explicatif par défaut, mode approfondi (modèle supérieur), relances rapides,
+   photo jointe, bouton Arrêter, mémoire des difficultés (note cachée MÉMO), historique par
+   section avec recherche. Stockage : compte (db) si disponible, sinon navigateur. */
+(function () {
+  if (window.MZT) return;
+  const C = Object.assign({ id: 'module', module: 'ce module', prof: '', student: 'un étudiant', conventions: '' }, window.MZT_CONFIG || {});
+  const LS = 'mzt-' + C.id;
+  const $ = (s, r) => (r || document).querySelector(s);
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const today = () => new Date().toLocaleDateString('fr-FR');
+  const norm = (t) => String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  // ---------- état ----------
+  let ST = { threads: [], memos: [] };
+  try { ST = Object.assign(ST, JSON.parse(localStorage.getItem(LS) || '{}')); } catch (e) {}
+  const saveLocal = () => { try { localStorage.setItem(LS, JSON.stringify({ threads: ST.threads.slice(-80), memos: ST.memos.slice(-30) })); } catch (e) {} };
+  let sample = null, ready = false, imgOK = false, db = null, base = null;
+  let cur = null, busy = false, ctl = null, img = null, forced = null;
+
+  // ---------- extrait de la section visible ----------
+  function visibleSection() {
+    const cands = [...document.querySelectorAll('section, [data-tab], [data-view], main')]
+      .filter((el) => !el.closest('.mzt-pan') && el.offsetParent !== null && (el.innerText || '').trim().length > 80);
+    // la plus profonde parmi les visibles qui contiennent le plus de texte
+    cands.sort((a, b) => (b.innerText || '').length - (a.innerText || '').length);
+    let el = cands.find((c) => !cands.some((d) => d !== c && c.contains(d) && (d.innerText || '').length > 0.6 * (c.innerText || '').length)) || cands[0] || document.body;
+    const h = el.querySelector('h1, h2, h3');
+    return { label: (h ? h.innerText : document.title).trim().slice(0, 80), text: (el.innerText || '').replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim() };
+  }
+  // MathJax découpe une formule en un symbole par ligne dans innerText : on la remplace le temps de la lecture par son LaTeX.
+  // (vaut aussi pour l'extrait fourni par la page du module, qui lit lui-même innerText)
+  function avecFormulesEnLatex(lire) {
+    let items = [];
+    try { if (window.MathJax && MathJax.startup && MathJax.startup.document) items = MathJax.startup.document.getMathItemsWithin(document.body) || []; } catch (e) {}
+    const poses = [];
+    items.forEach((it) => {
+      const r = it.typesetRoot; if (!r || !r.isConnected || !r.parentNode) return;
+      const s = document.createElement('span'); s.textContent = it.display ? '\n$$' + it.math.trim() + '$$\n' : '$' + it.math.trim() + '$';
+      r.parentNode.insertBefore(s, r); const d = r.style.display; r.style.display = 'none'; poses.push([s, r, d]);
+    });
+    try { return lire(); } finally { poses.forEach(([s, r, d]) => { s.remove(); r.style.display = d; }); }
+  }
+  function context() {
+    if (forced) return forced;
+    return avecFormulesEnLatex(() => {
+      try { if (C.getContext) { const c = C.getContext(); if (c && c.text) return c; } } catch (e) {}
+      return visibleSection();
+    });
+  }
+
+  // ---------- interface ----------
+  const css = `
+.mzt-btn{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9999;font:600 15px Inter,system-ui,sans-serif;background:#B4532A;color:#fff;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.mzt-pan{--b:#FBF7F0;--s:#F4EDE1;--i:#1E2433;--m:#5C5346;--l:#DCCFBA;--a:#B4532A;--w:#8A5A12;--bad:#A23B2A;position:fixed;right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:9999;width:min(440px,calc(100vw - 20px));height:min(680px,calc(100vh - 70px));height:min(680px,calc(100dvh - 70px));max-height:calc(100vh - 20px);max-height:calc(100dvh - 20px);background:var(--b);color:var(--i);border:1px solid var(--l);border-radius:12px;display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(0,0,0,.3);font:14px/1.5 system-ui,sans-serif}
+@media (prefers-color-scheme:dark){.mzt-pan{--b:#1E2532;--s:#141922;--i:#EDE6D9;--m:#A9A094;--l:#343D4D;--a:#E8906A;--w:#E4C48A;--bad:#E58A7A}}
+.mzt-pan *{box-sizing:border-box}
+.mzt-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:8px 10px;border-bottom:1px solid var(--l)}
+.mzt-h b{flex:0 0 auto}.mzt-h .mzt-ctx{flex:1 1 90px;min-width:0;color:var(--m);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mzt-pan button{font:600 12px system-ui,sans-serif;border:1px solid var(--l);background:var(--s);color:var(--i);border-radius:999px;padding:4px 10px;cursor:pointer}
+.mzt-pan button.mzt-pri{background:var(--a);color:#fff;border-color:var(--a)}
+.mzt-pan button:disabled{opacity:.5}
+.mzt-body{flex:1;min-height:0;display:flex;flex-direction:column}
+.mzt-log{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.mzt-m{padding:8px 11px;border-radius:10px;max-width:92%;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere}
+.mzt-m.a{background:var(--s);align-self:flex-start}.mzt-m.u{background:color-mix(in srgb,var(--a) 22%,transparent);align-self:flex-end}
+.mzt-m .mzt-tag{display:block;font-size:11px;color:var(--w);font-weight:700}
+.mzt-deepbtn{align-self:flex-start;border-color:var(--w)!important;color:var(--w)!important;background:transparent!important}
+.mzt-chips{display:flex;gap:5px;flex-wrap:wrap;padding:4px 10px}
+.mzt-f{display:flex;flex-direction:column;gap:6px;padding:8px 10px;border-top:1px solid var(--l)}
+.mzt-f textarea{width:100%;min-height:54px;max-height:140px;resize:vertical;font:16px system-ui,sans-serif;padding:7px;border:1px solid var(--l);border-radius:8px;background:var(--s);color:var(--i)}
+.mzt-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.mzt-row label{display:flex;gap:4px;align-items:center;font-size:12px;color:var(--m);cursor:pointer}
+.mzt-note{font-size:11.5px;color:var(--m);margin:0}
+.mzt-pan details{padding:0 10px}.mzt-pan summary{cursor:pointer;font-size:12px;color:var(--a);font-weight:600;padding:4px 0}
+.mzt-prev{max-height:140px;overflow:auto;font-size:12px;white-space:pre-wrap;background:var(--s);border-radius:6px;padding:6px;color:var(--m)}
+.mzt-list{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.mzt-item{border:1px solid var(--l);border-radius:8px;padding:8px}
+.mzt-item .mzt-meta{font-size:11px;color:var(--m)}
+.mzt-pan input[type=search]{width:100%;font:16px system-ui,sans-serif;padding:7px;border:1px solid var(--l);border-radius:8px;background:var(--s);color:var(--i)}
+.mzt-pan input[type=checkbox]{width:auto}
+.mzt-pan[hidden],.mzt-btn[hidden],.mzt-pan [hidden]{display:none!important}
+.mzt-h button{flex:0 0 auto;white-space:nowrap}
+.mzt-pan #mztX{background:var(--bad);border-color:var(--bad);color:#fff}
+.mzt-m.a{white-space:normal}.mzt-m.a p{margin:0 0 6px}.mzt-m.a p:last-child{margin-bottom:0}
+.mzt-m.a ul,.mzt-m.a ol{margin:4px 0 6px;padding-left:20px}.mzt-m.a li{margin:2px 0}
+.mzt-m code{font:12.5px ui-monospace,Menlo,Consolas,monospace;background:color-mix(in srgb,var(--i) 10%,transparent);padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
+.mzt-m pre{margin:6px 0;padding:8px;overflow-x:auto;background:color-mix(in srgb,var(--i) 10%,transparent);border-radius:6px;font:12.5px ui-monospace,Menlo,Consolas,monospace;white-space:pre}
+.mzt-m pre code{background:none;padding:0}
+.mzt-tex{font:12.5px ui-monospace,Menlo,Consolas,monospace;color:var(--m)}.mzt-tex[data-ok]{font:inherit;color:inherit}
+.mzt-tex.d{display:block;margin:6px 0;text-align:center}
+.mzt-m mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}.mzt-m mjx-container[display]{margin:0!important}
+.mzt-m mjx-container svg{max-width:none}
+.mzt-tab{overflow-x:auto;margin:6px 0}.mzt-tab table{border-collapse:collapse;font-size:13px;min-width:60%}
+.mzt-tab th,.mzt-tab td{border:1px solid var(--l);padding:4px 8px;text-align:left;vertical-align:top}.mzt-tab th{background:color-mix(in srgb,var(--a) 12%,transparent);font-weight:600}`;
+  const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+  document.body.insertAdjacentHTML('beforeend', `
+<button class="mzt-btn" id="mztBtn" type="button">Tuteur</button>
+<div class="mzt-pan" id="mztPan" hidden role="dialog" aria-label="Tuteur">
+ <div class="mzt-h"><b>Tuteur</b><span class="mzt-ctx" id="mztCtx"></span><button type="button" id="mztTabH">Historique</button><button type="button" id="mztTabM">Mémoire</button><button type="button" id="mztX">Fermer</button></div>
+ <div class="mzt-body" id="mztChat">
+  <details><summary>Voir l'extrait envoyé au tuteur</summary><div class="mzt-prev" id="mztPrev"></div></details>
+  <div class="mzt-log" id="mztLog"></div>
+  <div class="mzt-chips" id="mztChips"></div>
+  <form class="mzt-f" id="mztF">
+   <textarea id="mztIn" placeholder="Ta question, ou ta réponse à vérifier… (Entrée pour envoyer, Maj+Entrée pour aller à la ligne)"></textarea>
+   <div class="mzt-row">
+    <button class="mzt-pri" id="mztSend" type="submit">Envoyer</button>
+    <button type="button" id="mztStop" hidden>Arrêter</button>
+    <label id="mztImgL" hidden>📎 Photo<input type="file" id="mztImg" accept="image/*" hidden></label>
+    <span class="mzt-note" id="mztImgN"></span>
+    <label title="Modèle plus puissant : réponse plus longue et plus détaillée, consomme davantage"><input type="checkbox" id="mztDeep"> Approfondi</label>
+    <button type="button" id="mztNew">Nouvelle discussion</button>
+   </div>
+   <p class="mzt-note" id="mztNote"></p>
+  </form>
+ </div>
+ <div class="mzt-body" id="mztHist" hidden><div style="padding:10px"><input type="search" id="mztQ" placeholder="Chercher dans toutes mes anciennes questions…"></div><div class="mzt-list" id="mztList"></div></div>
+ <div class="mzt-body" id="mztMem" hidden><div class="mzt-list"><p class="mzt-note">Ce que le tuteur retient de tes difficultés d'une conversation à l'autre. Il s'en sert pour faire des liens avec tes confusions passées. Tu peux effacer une note.</p><div id="mztMemL"></div></div></div>
+</div>`);
+
+  const CHIPS = ['Explique plus simplement', 'Donne un exemple concret', "Pourquoi c'est un piège ?", 'Fais-moi un mini-exercice'];
+  $('#mztChips').innerHTML = CHIPS.map((c) => `<button type="button" data-chip="${esc(c)}">${esc(c)}</button>`).join('');
+
+  function view(v) {
+    $('#mztChat').hidden = v !== 'chat'; $('#mztHist').hidden = v !== 'hist'; $('#mztMem').hidden = v !== 'mem';
+    $('#mztTabH').textContent = v === 'hist' ? 'Retour' : 'Historique'; $('#mztTabM').textContent = v === 'mem' ? 'Retour' : 'Mémoire';
+    if (v === 'hist') renderList(); if (v === 'mem') renderMem();
+  }
+  function note() {
+    $('#mztNote').textContent = !ready ? 'Connexion au tuteur…' : sample
+      ? 'Mode rapide (économe) par défaut. « Approfondi » ou « Approfondir cette réponse » utilise un modèle supérieur. Pense à chercher dans l\'Historique avant de reposer une question.'
+      : 'Le tuteur n\'est pas disponible ici (il faut ouvrir la page dans Claude et accepter la demande d\'autorisation). L\'historique reste consultable.';
+  }
+  function refreshCtx() {
+    const c = context(); $('#mztCtx').textContent = '· ' + c.label; $('#mztPrev').textContent = c.text.slice(0, 2500) + (c.text.length > 2500 ? '\n…' : '');
+    return c;
+  }
+  function openPanel(ctx) {
+    forced = ctx && ctx.text ? ctx : null;
+    $('#mztPan').hidden = false; $('#mztBtn').hidden = true; view('chat');
+    const c = refreshCtx();
+    if (!cur || cur.sec !== c.label) { const ts = ST.threads.filter((t) => t.sec === c.label); cur = forced ? null : ts[ts.length - 1] || null; }
+    renderLog(); note(); setTimeout(() => $('#mztIn').focus(), 30);
+  }
+  function closePanel() { $('#mztPan').hidden = true; $('#mztBtn').hidden = false; forced = null; }
+
+  // Sur téléphone, la réponse doit avoir la place : relances et note seulement sur une discussion vide.
+  function compacter(on) { $('#mztChips').hidden = on; $('#mztNote').hidden = on; }
+  function renderLog() {
+    const log = $('#mztLog'); log.innerHTML = ''; compacter(!!(cur && cur.msgs.length));
+    if (!cur || !cur.msgs.length) {
+      log.innerHTML = `<div class="mzt-m a">Pose ta question sur « ${esc(context().label)} » : une phrase que tu ne comprends pas, un calcul à vérifier, un exemple en plus… Tu peux joindre une photo de ton brouillon.</div>`; return;
+    }
+    cur.msgs.forEach((m, i) => {
+      const d = document.createElement('div'); d.className = 'mzt-m ' + (m.r === 'u' ? 'u' : 'a');
+      if (m.d) d.innerHTML = '<span class="mzt-tag">Réponse approfondie</span>';
+      if (m.r === 'u') d.appendChild(document.createTextNode(m.t)); else d.insertAdjacentHTML('beforeend', md(m.t)); log.appendChild(d);
+      if (m.r === 'a' && i === cur.msgs.length - 1 && !m.d && !busy) {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'mzt-deepbtn'; b.textContent = 'Approfondir cette réponse';
+        b.onclick = () => ask('Approfondis ta réponse précédente : explique plus en détail, avec un exemple complet et les pièges.', true); log.appendChild(b);
+      }
+    });
+    dessinerMaths(log); log.scrollTop = 1e9;
+  }
+  function renderList() {
+    const q = norm($('#mztQ').value || ''); const ts = [...ST.threads].reverse().filter((t) => !q || norm(t.msgs.map((m) => m.t).join(' ')).includes(q));
+    $('#mztList').innerHTML = ts.length ? ts.map((t) => `<details class="mzt-item"><summary>${esc(t.title)}</summary><div class="mzt-meta">${esc(t.sec)} · ${esc(t.date)}</div>${t.msgs.map((m) => `<div class="mzt-m ${m.r === 'u' ? 'u' : 'a'}" style="margin:6px 0">${m.r === 'u' ? esc(m.t) : md(m.t)}</div>`).join('')}<button type="button" data-cont="${esc(t.id)}">Continuer cette discussion</button></details>`).join('')
+      : `<p class="mzt-note">${ST.threads.length ? 'Aucune discussion ne contient ce mot.' : 'Aucune discussion pour l\'instant.'}</p>`;
+    dessinerMaths($('#mztList'));
+  }
+  function renderMem() {
+    $('#mztMemL').innerHTML = ST.memos.length ? ST.memos.map((m, i) => `<div class="mzt-item"><div class="mzt-meta">${esc(m.date)}</div>${esc(m.text)}<div><button type="button" data-memdel="${i}" style="margin-top:4px">Effacer</button></div></div>`).join('')
+      : '<p class="mzt-note">Aucune note pour l\'instant. Elles apparaîtront au fil de tes questions.</p>';
+  }
+
+  // ---------- stockage compte ----------
+  async function saveThread(t) {
+    saveLocal(); if (!db) return;
+    try { await db.collection(base + '/threads').doc(t.id).set({ sec: t.sec, date: t.date, title: t.title, msgs: t.msgs.slice(-40) }); } catch (e) {}
+  }
+  async function saveMemos() { saveLocal(); if (!db) return; try { await db.doc(base).set({ memos: ST.memos.slice(-30), updated: Date.now() }); } catch (e) {} }
+
+  // ---------- appel au tuteur ----------
+  const ERR = { not_granted: 'Tu n\'as pas autorisé la page à utiliser Claude. Recharge-la et accepte la demande, ou change-le dans le menu Autorisations de l\'artifact.', rate_limited: 'Trop de questions d\'un coup, ou limite d\'usage atteinte. Réessaie dans un moment.', prompt_too_large: 'L\'extrait est trop long : ouvre une partie plus précise du cours.', image_rejected: 'Cette photo n\'est pas acceptée. Essaie un JPEG ou un PNG plus léger.', refused: 'Claude n\'a pas pu répondre à cette demande. Reformule ta question.' };
+  const visible = (t) => {
+    const L = String(t).split('\n');
+    for (let i = L.length - 1; i >= Math.max(0, L.length - 3); i--) if (/^\s*M[ÉE]MO\s*:/i.test(L[i])) return L.slice(0, i).join('\n').trim();
+    return String(t).trim();
+  };
+  // rendu léger : on échappe le HTML d'abord, puis gras, italique, code, titres, puces, tableaux et blocs de code.
+  // Les formules ($…$, $$…$$, \(…\), \[…\]) sont mises de côté avant le Markdown, puis dessinées par MathJax.
+  const MATHS = [];
+  const protegerMaths = (t) => {
+    MATHS.length = 0;
+    const garde = (tex, d) => { MATHS.push({ tex: tex.trim(), d }); return '\u0000' + (MATHS.length - 1) + '\u0000'; };
+    const RX = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\\\(([\s\S]+?)\\\)|\$(?=[^\s$\d])([^$\n]*?[^\s$\\])\$(?!\d)/g;
+    // le code (blocs ``` et `…`) n'est jamais lu comme une formule
+    return String(t).split(/(```[\s\S]*?(?:```|$))/).map((bloc, i) => i % 2 ? bloc
+      : bloc.split(/(`[^`\n]*`)/).map((x, j) => j % 2 ? x : x.replace(RX, (_, a, b, c, d) => a != null ? garde(a, 1) : b != null ? garde(b, 1) : c != null ? garde(c, 0) : garde(d, 0))).join('')).join('');
+  };
+  const rendreMaths = (h) => h.replace(/\u0000(\d+)\u0000/g, (_, n) => { const m = MATHS[+n]; return m ? `<span class="mzt-tex${m.d ? ' d' : ''}" data-d="${m.d}">${esc(m.tex)}</span>` : ''; });
+  const inl = (s) => {
+    const p = s.split('`'); if (p.length % 2 === 0) { const last = p.pop(); p[p.length - 1] += '`' + last; }
+    return p.map((x, i) => i % 2 ? '<code>' + esc(x) + '</code>' : esc(x).replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*\w])\*([^*\n]+)\*(?![*\w])/g, '$1<em>$2</em>')).join('');
+  };
+  const cellules = (l) => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
+  const md = (t) => {
+    const out = []; let list = null, code = null, tab = null;
+    const flushTab = () => {
+      if (!tab) return;
+      if (tab.length >= 2 && /^[\s|:-]+$/.test(tab[1]) && tab[1].includes('-')) {
+        const [tete, , ...corps] = tab;
+        out.push('<div class="mzt-tab"><table><thead><tr>' + cellules(tete).map((c) => '<th>' + inl(c) + '</th>').join('') + '</tr></thead><tbody>'
+          + corps.map((r) => '<tr>' + cellules(r).map((c) => '<td>' + inl(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>');
+      } else tab.forEach((r) => out.push('<p>' + inl(r) + '</p>'));
+      tab = null;
+    };
+    const flush = () => { flushTab(); if (list) { out.push('</' + list + '>'); list = null; } };
+    protegerMaths(t).split('\n').forEach((raw) => {
+      if (/^\s*```/.test(raw)) { if (code === null) { flush(); code = []; } else { out.push('<pre>' + esc(code.join('\n')) + '</pre>'); code = null; } return; }
+      if (code !== null) { code.push(raw); return; }
+      let m;
+      if (/^\s*\|.*\|\s*$/.test(raw)) { if (list) { out.push('</' + list + '>'); list = null; } (tab = tab || []).push(raw); return; }
+      flushTab();
+      if ((m = raw.match(/^\s*#{1,6}\s+(.*)$/))) { flush(); out.push('<p><strong>' + inl(m[1]) + '</strong></p>'); }
+      else if ((m = raw.match(/^\s*[-*•]\s+(.*)$/))) { if (list !== 'ul') { flush(); out.push('<ul>'); list = 'ul'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if ((m = raw.match(/^\s*\d+[.)]\s+(.*)$/))) { if (list !== 'ol') { flush(); out.push('<ol>'); list = 'ol'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if (!raw.trim()) flush();
+      else { flush(); out.push('<p>' + inl(raw) + '</p>'); }
+    });
+    if (code !== null) out.push('<pre>' + esc(code.join('\n')) + '</pre>');
+    flush(); return rendreMaths(out.join(''));
+  };
+
+  // ---------- MathJax : celui de la page s'il existe, sinon chargé à la première formule ----------
+  let mjPret = null;
+  const mathjax = () => mjPret || (mjPret = new Promise((ok, ko) => {
+    if (!window.MathJax) {
+      window.MathJax = { svg: { fontCache: 'global' }, startup: { typeset: false } };
+      const s = document.createElement('script'); s.async = true; s.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js';
+      s.onerror = () => ko(new Error('MathJax')); document.head.appendChild(s);
+    }
+    let n = 0; const t = setInterval(() => {
+      if (window.MathJax && MathJax.tex2svgPromise && MathJax.startup && MathJax.startup.promise) { clearInterval(t); MathJax.startup.promise.then(ok, ko); }
+      else if (++n > 150) { clearInterval(t); ko(new Error('MathJax')); }
+    }, 100);
+  })).catch((e) => { mjPret = null; throw e; });
+  const svgCache = new Map(); let file = Promise.resolve();
+  function dessinerMaths(racine) {
+    const spans = [...racine.querySelectorAll('.mzt-tex:not([data-ok])')]; if (!spans.length) return;
+    mathjax().then(() => spans.forEach((sp) => {
+      const cle = sp.dataset.d + '|' + sp.textContent;
+      const poser = (n) => { if (!sp.isConnected || sp.dataset.ok) return; sp.textContent = ''; sp.appendChild(n.cloneNode(true)); sp.dataset.ok = '1'; };
+      if (svgCache.has(cle)) return poser(svgCache.get(cle));
+      file = file.then(() => MathJax.tex2svgPromise(sp.textContent, { display: sp.dataset.d === '1' }).then((n) => { svgCache.set(cle, n); poser(n); })).catch(() => {});
+    })).catch(() => {});
+  }
+  async function ask(q, deep) {
+    q = (q || '').trim(); deep = deep || $('#mztDeep').checked;
+    if (busy || !q) return; if (!sample) { note(); return; }
+    const c = refreshCtx();
+    if (!cur || (cur.sec !== c.label && !forced)) { cur = { id: 't' + Date.now().toString(36), sec: c.label, date: today(), title: q.slice(0, 80), msgs: [] }; ST.threads.push(cur); }
+    else if (!ST.threads.includes(cur)) ST.threads.push(cur);
+    cur.msgs.push({ r: 'u', t: q }); busy = true; renderLog();
+    const out = document.createElement('div'); out.className = 'mzt-m a'; out.textContent = deep ? 'Réflexion approfondie…' : 'Réflexion…'; $('#mztLog').appendChild(out);
+    $('#mztSend').disabled = true; $('#mztStop').hidden = false;
+    const style = deep
+      ? 'Réponse APPROFONDIE (400 à 700 mots) : 1) l\'intuition avec une analogie, 2) l\'explication détaillée pas à pas, 3) pourquoi ça marche, 4) un exemple complet chiffré, 5) les pièges fréquents et ce qui tombe à l\'examen, 6) une question pour vérifier la compréhension.'
+      : 'Réponse EXPLICATIVE (150 à 250 mots) : 1) l\'idée en une phrase, 2) l\'explication pas à pas, 3) un petit exemple chiffré ou concret, 4) une courte question pour vérifier la compréhension.';
+    const mem = [];
+    if (ST.memos.length) mem.push('DIFFICULTÉS DÉJÀ REPÉRÉES :\n' + ST.memos.slice(-12).map((m) => `- ${m.date} : ${m.text}`).join('\n'));
+    const lastQ = ST.threads.flatMap((t) => t.msgs.filter((m) => m.r === 'u').map((m) => `[${t.sec}] ${m.t.slice(0, 100)}`)).slice(-6);
+    if (lastQ.length) mem.push('SES DERNIÈRES QUESTIONS :\n' + lastQ.map((x) => '- ' + x).join('\n'));
+    const rules = `Tu es le tuteur de ${C.student}, pour le module ${C.module}${C.prof ? ' du ' + C.prof : ''}. Il apprend souvent la notion pour la première fois.
+Règles : réponds en français simple, en Markdown léger (**gras** pour les termes clés, tirets, étapes numérotées). Toute formule ou tout calcul s'écrit en LaTeX : $…$ dans la phrase, $$…$$ seul sur sa ligne pour une formule importante (ex. $\\hat y_i$, $$\\text{MSE}=\\frac{1}{n}\\sum_{i=1}^{n}(y_i-\\hat y_i)^2$$) ; jamais d'accents graves pour une formule, ils sont réservés au code et aux noms de fonctions. Un petit tableau Markdown est permis s'il clarifie (3 colonnes maximum, l'écran est étroit). ${style} Appuie-toi d'abord sur l'EXTRAIT ci-dessous et sur les conventions du prof ; si une source générale diffère du cours, signale l'écart et dis quelle version utiliser à l'examen (celle du prof). Pour un calcul, pose chaque étape et vérifie-la. S'il envoie une réponse ou une photo de brouillon, corrige étape par étape et nomme précisément l'erreur. Si tu n'es pas sûr, dis-le. S'il demande un mini-exercice, donne l'exercice sans la solution.
+Utilise sa mémoire pour faire des liens avec ses confusions passées, sans la réciter.
+Termine TOUJOURS par une dernière ligne séparée au format exact « MÉMO: … » qui résume en 15 mots maximum la difficulté révélée par sa question (ou « MÉMO: rien »). Cette ligne lui est cachée.
+${C.conventions ? 'CONVENTIONS DU PROF : ' + C.conventions + '\n' : ''}MÉMOIRE DE L'ÉLÈVE :
+${mem.join('\n\n') || '(rien pour l\'instant)'}
+EXTRAIT (${c.label}) :
+${c.text.slice(0, deep ? 9000 : 3500)}`;
+    const recent = cur.msgs.slice(deep ? -9 : -5, -1).map((m) => ({ role: m.r === 'u' ? 'user' : 'assistant', content: m.t }));
+    while (recent.length && recent[0].role !== 'user') recent.shift();
+    const msgs = [...recent.filter((m) => m.content && m.content.trim()), { role: 'user', content: q }]; while (msgs.length > 1 && msgs[0].role !== 'user') msgs.shift(); msgs[0] = { role: 'user', content: rules + '\n\n---\nQuestion : ' + msgs[0].content };
+    ctl = new AbortController();
+    const opts = { modelTier: deep ? 'complex' : 'quick', cache: false, signal: ctl.signal, onText: ({ text }) => { out.innerHTML = md(visible(text)); dessinerMaths(out); $('#mztLog').scrollTop = 1e9; } };
+    if (img) opts.images = [img];
+    try {
+      const r = await sample(msgs, opts);
+      const mm = r.text.match(/(?:^|\n)\s*M[ÉE]MO\s*:\s*(.+)\s*$/i);
+      cur.msgs.push({ r: 'a', t: visible(r.text) + (r.truncated ? '\n\n(Réponse coupée : pose une question plus ciblée.)' : ''), d: !!deep });
+      if (mm && !/^\s*rien/i.test(mm[1])) { ST.memos.push({ date: today(), text: mm[1].trim().slice(0, 160) }); if (ST.memos.length > 30) ST.memos.shift(); saveMemos(); }
+      await saveThread(cur);
+    } catch (e) {
+      const kept = e && e.text ? visible(e.text) : '';
+      if (e && e.code === 'cancelled') { if (kept) cur.msgs.push({ r: 'a', t: kept + '\n(Arrêté.)' }); else cur.msgs.pop(); }
+      else { cur.msgs.pop(); compacter(!!cur.msgs.length); out.textContent = (kept ? kept + '\n\n' : '') + (ERR[e && e.code] || 'Le tuteur n\'a pas pu répondre. Réessaie dans un instant.'); }
+      if (!cur.msgs.length) ST.threads = ST.threads.filter((t) => t !== cur);
+      saveLocal();
+      if (!(e && e.code === 'cancelled')) { busy = false; $('#mztSend').disabled = false; $('#mztStop').hidden = true; img = null; $('#mztImgN').textContent = ''; return; }
+    }
+    busy = false; $('#mztSend').disabled = false; $('#mztStop').hidden = true; img = null; $('#mztImg').value = ''; $('#mztImgN').textContent = ''; renderLog();
+  }
+
+  // ---------- événements ----------
+  $('#mztBtn').onclick = () => openPanel(null);
+  $('#mztX').onclick = closePanel;
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#mztPan').hidden) closePanel(); });
+  $('#mztTabH').onclick = () => view($('#mztHist').hidden ? 'hist' : 'chat');
+  $('#mztTabM').onclick = () => view($('#mztMem').hidden ? 'mem' : 'chat');
+  $('#mztQ').oninput = renderList;
+  $('#mztList').onclick = (e) => { const id = e.target.dataset && e.target.dataset.cont; if (!id) return; cur = ST.threads.find((t) => t.id === id); view('chat'); $('#mztCtx').textContent = '· ' + cur.sec; renderLog(); };
+  $('#mztMemL').onclick = (e) => { const i = e.target.dataset && e.target.dataset.memdel; if (i == null) return; ST.memos.splice(+i, 1); saveMemos(); renderMem(); };
+  $('#mztChips').onclick = (e) => { const b = e.target.closest('[data-chip]'); if (!b) return; const t = $('#mztIn'); t.value = b.dataset.chip + (t.value ? ' : ' + t.value : ''); t.focus(); };
+  $('#mztNew').onclick = () => { cur = null; renderLog(); };
+  $('#mztStop').onclick = () => { if (ctl) ctl.abort(); };
+  $('#mztImg').onchange = (e) => { img = e.target.files[0] || null; $('#mztImgN').textContent = img ? 'Photo : ' + img.name : ''; };
+  $('#mztF').onsubmit = (e) => { e.preventDefault(); const v = $('#mztIn').value; $('#mztIn').value = ''; ask(v); };
+  $('#mztIn').addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('#mztF').requestSubmit(); } });
+
+  // ---------- capacités (facultatives) ----------
+  const W = window.claude;
+  if (W && W.use) {
+    W.use('sample').then((s) => { sample = s; ready = true; note();
+      if (s && s.limits) s.limits().then((l) => { if (l && l.images) { imgOK = true; $('#mztImgL').hidden = false; if (l.images.mediaTypes) $('#mztImg').accept = l.images.mediaTypes.join(','); } }).catch(() => {});
+    }).catch(() => { ready = true; note(); });
+    Promise.all([W.use('db'), W.use('user')]).then(async ([d, u]) => {
+      if (!d || !u) return; const id = await u.id(); if (!id) return; db = d; base = 'data/users/' + id + '/mzt_' + C.id;
+      try {
+        const m = await db.doc(base).get(); if (m.exists) { const v = m.data() || {}; if (Array.isArray(v.memos)) ST.memos = JSON.parse(JSON.stringify(v.memos)); }
+        const q = await db.collection(base + '/threads').get(); const remote = q.docs.map((x) => Object.assign({ id: x.id }, JSON.parse(JSON.stringify(x.data() || {}))));
+        const map = {}; [...ST.threads, ...remote].forEach((t) => { if (!map[t.id] || (t.msgs || []).length > (map[t.id].msgs || []).length) map[t.id] = t; });
+        ST.threads = Object.values(map).sort((a, b) => parseInt(a.id.slice(1), 36) - parseInt(b.id.slice(1), 36)); saveLocal();
+      } catch (e) {}
+    }).catch(() => {});
+  } else { ready = true; note(); }
+
+  window.MZT = { open: openPanel, close: closePanel };
+})();
+
+</script>
+<script>(function(){var a=document.getElementById("retour");if(!a)return;var p="";try{p=window.top.location.pathname}catch(e){}
+if(window.top===window&&location.protocol==="file:"){a.hidden=true;return}
+a.href=p.indexOf("/decouvrir")===0||location.pathname.indexOf("/decouvrir")===0?"/decouvrir":"/app/modules";})();</script>
+</body>
+</html>

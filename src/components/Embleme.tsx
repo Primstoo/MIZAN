@@ -30,6 +30,7 @@ const STYLES: Record<string, { motif: string; couleur: string }> = {
   "poo-cpp": { motif: "cpp", couleur: "#4F6FB0" },
   "biologie-cellulaire": { motif: "cellule", couleur: "#5E9E5A" },
   electricite: { motif: "champ", couleur: "#C98A2E" },
+  "chimie-minerale": { motif: "cristal", couleur: "#7A6FB5" },
   "optique-radioactivite": { motif: "lentille", couleur: "#4F8FC0" },
 };
 export const couleurCours = (slug: string) => STYLES[slug]?.couleur ?? "var(--acc)";
@@ -81,6 +82,8 @@ export default function Embleme({ slug, taille = 52, couleur }: { slug: string; 
     </>;
   } else if (s.motif === "cellule") {
     dessin = <><ellipse cx="32" cy="32" rx="26" ry="22" /><circle cx="30" cy="30" r="9" fill={c} stroke="none" /><ellipse cx="48" cy="40" rx="5" ry="3" /><ellipse cx="16" cy="40" rx="4" ry="2.5" /><circle cx="46" cy="20" r="2" fill={c} stroke="none" /></>;
+  } else if (s.motif === "cristal") {
+    dessin = <><path d="M14 22h28v28H14zM14 22l12-10h28L42 22M42 50l12-10V12" />{[[14, 22], [42, 22], [14, 50], [42, 50], [26, 12], [54, 12], [54, 40], [28, 36]].map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r="3.5" fill={c} stroke="none" />)}</>;
   } else if (s.motif === "lentille") {
     dessin = <><path d="M4 32h56" /><path d="M32 8q10 24 0 48q-10-24 0-48z" fill={c} fillOpacity=".3" /><path d="M6 20l26 12 24 14" /><path d="M6 44l26-12 24-14" /></>;
   } else if (s.motif === "champ") {
