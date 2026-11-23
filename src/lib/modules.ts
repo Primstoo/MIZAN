@@ -29,6 +29,7 @@ const norm = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").t
 // FSABM s'appelait FPBM (Faculté polydisciplinaire de Béni Mellal) : les deux noms comptent.
 const ALIAS: Record<string, string[]> = {
   FSABM: ["fsabm", "fpbm", "polydisciplinaire de beni mellal", "polydisciplinaire beni mellal"],
+  "FST Béni Mellal": ["fst · beni mellal", "fst beni mellal", "fst de beni mellal", "fstbm", "sciences et techniques de beni mellal", "sciences et techniques beni mellal"],
   "ENSA Al Hoceima": ["ensa al hoceima", "ensa · al hoceima", "ensa d'al hoceima", "ensa al-hoceima", "ensah"],
 };
 // Cours généralistes (non liés à un prof) : proposés quel que soit l'établissement.

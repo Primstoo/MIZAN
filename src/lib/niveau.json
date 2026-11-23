@@ -2508,5 +2508,95 @@
    "a": 0,
    "e": "Ne pas oublier la factorielle."
   }
+ ],
+ "biologie-cellulaire": [
+  {
+   "n": "membrane-plasmique",
+   "q": "Le modèle actuel de la membrane est :",
+   "o": [
+    "la mosaïque fluide",
+    "le sandwich rigide",
+    "la monocouche"
+   ],
+   "a": 0,
+   "e": "Singer et Nicolson, 1972."
+  },
+  {
+   "n": "echanges-membranaires",
+   "q": "La pompe Na⁺/K⁺ fait entrer :",
+   "o": [
+    "3 K⁺",
+    "2 K⁺",
+    "3 Na⁺"
+   ],
+   "a": 1,
+   "e": "3 Na⁺ sortent, 2 K⁺ entrent."
+  },
+  {
+   "n": "mitochondrie-chloroplaste",
+   "q": "La membrane mitochondriale externe est :",
+   "o": [
+    "perméable (porines)",
+    "totalement imperméable",
+    "absente"
+   ],
+   "a": 0,
+   "e": "Réponse « oui » à la question de l'examen 2020."
+  },
+  {
+   "n": "noyau-information-genetique",
+   "q": "Les nucléofilaments sont composés :",
+   "o": [
+    "uniquement d'ADN",
+    "d'ADN et d'histones",
+    "d'ARN"
+   ],
+   "a": 1,
+   "e": "« Collier de perles » des nucléosomes."
+  },
+  {
+   "n": "annales-corrigees",
+   "q": "En 45 minutes, l'examen demande surtout :",
+   "o": [
+    "des définitions, des oui/non et des schémas",
+    "de longs calculs",
+    "des dissertations"
+   ],
+   "a": 0,
+   "e": "Format des sujets FST."
+  },
+  {
+   "n": "organisation-cellulaire",
+   "q": "Le noyau est absent chez :",
+   "o": [
+    "les bactéries",
+    "les levures",
+    "les cellules végétales"
+   ],
+   "a": 0,
+   "e": "Les levures sont des champignons, donc eucaryotes."
+  },
+  {
+   "n": "systeme-endomembranaire",
+   "q": "Le RE rugueux est riche dans :",
+   "o": [
+    "les cellules sécrétrices de protéines",
+    "les globules rouges",
+    "les cellules adipeuses uniquement"
+   ],
+   "a": 0,
+   "e": "Ex. cellules acineuses du pancréas."
+  },
+  {
+   "n": "divisions-cellulaires",
+   "q": "La réplication de l'ADN a lieu en :",
+   "o": [
+    "G1",
+    "phase S",
+    "métaphase"
+   ],
+   "a": 1,
+   "e": "S = synthèse."
+  }
  ]
 }

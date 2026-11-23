@@ -13,7 +13,7 @@
     ],
     "cle": "algebre-1_scores",
     "format": "score10",
-    "chapitres": 11,
+    "chapitres": 12,
     "annexes": []
   },
   {
@@ -47,7 +47,7 @@
     ],
     "cle": "analyse1_scores",
     "format": "score10",
-    "chapitres": 14,
+    "chapitres": 15,
     "annexes": []
   },
   {
@@ -115,7 +115,7 @@
     ],
     "cle": "thermodynamique_scores",
     "format": "score10",
-    "chapitres": 9,
+    "chapitres": 10,
     "annexes": []
   },
   {
@@ -150,6 +150,23 @@
     "cle": "analyse2_scores",
     "format": "score10",
     "chapitres": 10,
+    "annexes": []
+  },
+  {
+    "slug": "biologie-cellulaire",
+    "titre": "Biologie cellulaire",
+    "prof": "Pr A. Ait Chaoui · Pr N. Wahid",
+    "semestre": "S2",
+    "fichier": "biologie-cellulaire.html",
+    "resume": "La cellule de A à Z pour la filière BCG : organisation, méthodes d'étude, membrane et échanges, système endomembranaire, mitochondrie et chloroplaste, noyau et information génétique, mitose et méiose, avec les examens corrigés.",
+    "cles": [
+      "biologie-cellulaire_scores",
+      "biologie-cellulaire_scores_etat",
+      "mzt-biologie-cellulaire*"
+    ],
+    "cle": "biologie-cellulaire_scores",
+    "format": "score10",
+    "chapitres": 9,
     "annexes": []
   },
   {
@@ -202,7 +219,7 @@
     ],
     "cle": "ps3_revision_v1",
     "format": "best",
-    "chapitres": 26,
+    "chapitres": 27,
     "annexes": [
       "probas-S3-outils.html"
     ]

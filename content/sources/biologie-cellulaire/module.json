@@ -1,0 +1,22 @@
+{
+  "titre": "Biologie cellulaire",
+  "prof": "Pr A. Ait Chaoui · Pr N. Wahid",
+  "semestre": "S2",
+  "etablissement": "FST Béni Mellal",
+  "fichier": "biologie-cellulaire.html",
+  "cle": "biologie-cellulaire_scores",
+  "resume": "La cellule de A à Z pour la filière BCG : organisation, méthodes d'étude, membrane et échanges, système endomembranaire, mitochondrie et chloroplaste, noyau et information génétique, mitose et méiose, avec les examens corrigés.",
+  "conventions": "Module BioCell de la FST Béni Mellal, filière BCG, semestre 2 (responsable Pr N. Wahid ; partie 1 ultrastructures : Pr A. Ait Chaoui ; partie 2 information génétique et divisions : Pr N. Wahid ; TP : Pr A. Hansali). Programme : ch. 1 organisation cellulaire, ch. 2 membranes, ch. 3 organites, ch. 4 information génétique (réplication, transcription, traduction), ch. 5 divisions cellulaires. TD1 méthodes d'étude, TD2 échanges membranaires, TD3 mitochondrie et chloroplaste, TD4 information génétique. L'examen de la partie ultrastructures dure 45 minutes : définitions, vrai/faux, schémas expliqués. Pour une séquence d'ADN, toujours écrire les extrémités 5' et 3'. Répondre en phrases courtes avec un schéma légendé quand la question dit « expliquez ».",
+  "intro": "Ce module suit **le programme BioCell de la FST Béni Mellal** (filière BCG, S2) : 8 chapitres de cours, puis les **examens corrigés** (2019-2020 et 2020).\n\n**Comment l'utiliser**\n\n1. Lis un chapitre en entier, schémas compris : à l'examen, on te demande souvent d'« expliquer par un schéma ».\n2. Redessine chaque schéma de mémoire sur une feuille.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n\n**Ce qui est sûr** : le plan et les sujets viennent des supports de la FST. **À vérifier** : le cours est rédigé par nous à partir de ces supports ; les chiffres (tailles, masses) sont les valeurs classiques des manuels.",
+  "chapitres": [
+    "01-organisation-cellulaire.md",
+    "02-methodes-etude.md",
+    "03-membrane-plasmique.md",
+    "04-echanges-membranaires.md",
+    "05-systeme-endomembranaire.md",
+    "06-mitochondrie-chloroplaste.md",
+    "07-noyau-information-genetique.md",
+    "08-divisions-cellulaires.md",
+    "09-annales-corrigees.md"
+  ]
+}

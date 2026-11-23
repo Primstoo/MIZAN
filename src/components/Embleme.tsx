@@ -28,6 +28,8 @@ const STYLES: Record<string, { motif: string; couleur: string }> = {
   javascript: { motif: "js", couleur: "#C9A227" },
   "sd-c": { motif: "liste", couleur: "#B0557A" },
   "poo-cpp": { motif: "cpp", couleur: "#4F6FB0" },
+  "biologie-cellulaire": { motif: "cellule", couleur: "#5E9E5A" },
+  electricite: { motif: "champ", couleur: "#C98A2E" },
 };
 export const couleurCours = (slug: string) => STYLES[slug]?.couleur ?? "var(--acc)";
 
@@ -76,6 +78,10 @@ export default function Embleme({ slug, taille = 52, couleur }: { slug: string; 
       <path d="M8 8h12v16h18v12H8z" fill={c} stroke="none" /><rect x="46" y="8" width="12" height="28" rx="1" />
       <rect x="8" y="44" width="30" height="12" rx="1" /><path d="M20 44v12M42 40l14 14" strokeDasharray="3 4" />
     </>;
+  } else if (s.motif === "cellule") {
+    dessin = <><ellipse cx="32" cy="32" rx="26" ry="22" /><circle cx="30" cy="30" r="9" fill={c} stroke="none" /><ellipse cx="48" cy="40" rx="5" ry="3" /><ellipse cx="16" cy="40" rx="4" ry="2.5" /><circle cx="46" cy="20" r="2" fill={c} stroke="none" /></>;
+  } else if (s.motif === "champ") {
+    dessin = <><circle cx="32" cy="32" r="7" fill={c} stroke="none" />{[0, 45, 90, 135, 180, 225, 270, 315].map((a) => { const r = (a * Math.PI) / 180; return <path key={a} d={`M${32 + 12 * Math.cos(r)} ${32 + 12 * Math.sin(r)}L${32 + 26 * Math.cos(r)} ${32 + 26 * Math.sin(r)}`} />; })}</>;
   } else if (s.motif === "python2") {
     dessin = <><path d="M20 8h24v14H20zM20 42h24v14H20z" /><path d="M32 22v20M26 36l6 6 6-6" /><circle cx="27" cy="15" r="2.5" fill={c} stroke="none" /><circle cx="37" cy="49" r="2.5" fill={c} stroke="none" /></>;
   } else if (s.motif === "integrale") {

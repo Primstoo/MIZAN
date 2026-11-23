@@ -711,6 +711,10 @@
    {
     "id": "annales-corrigees-2016-2021",
     "t": "Annales 2016-2021 corrigées (sujets complets)"
+   },
+   {
+    "id": "annales-fstbm-bcg",
+    "t": "Annales corrigées · deux contrôles FST Béni Mellal (BCG, S3)"
    }
   ],
   "items": [
@@ -839,6 +843,12 @@
     "t": "Loi du Khi-deux et liens Normale-Gamma",
     "imp": 5,
     "g": "khideux"
+   },
+   {
+    "id": "annales-fstbm-bcg",
+    "t": "Contrôles BCG : séries groupées et densités",
+    "imp": 4,
+    "g": "annales-fstbm-bcg"
    }
   ]
  },
@@ -1232,6 +1242,12 @@
     "id": "examen-blanc",
     "t": "Examen blanc corrigé",
     "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "annale-fstbm-bcg-2021",
+    "t": "Annale corrigée · contrôle d'analyse FST Béni Mellal (BCG, février 2021)",
+    "imp": 4,
     "g": "cours"
    }
   ]
@@ -2375,6 +2391,12 @@
     "t": "Révision et examen blanc",
     "imp": 5,
     "g": "cours"
+   },
+   {
+    "id": "annales-fstbm-bcg",
+    "t": "Annales corrigées · thermodynamique FST Béni Mellal (BCG)",
+    "imp": 4,
+    "g": "cours"
    }
   ]
  },
@@ -2451,6 +2473,12 @@
     "id": "revision",
     "t": "Révision et examen blanc",
     "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "annale-fstbm-bcg-2021",
+    "t": "Annale corrigée · examen d'algèbre FST Béni Mellal (BCG, 2020-2021)",
+    "imp": 4,
     "g": "cours"
    }
   ]
@@ -2692,6 +2720,71 @@
    {
     "id": "examen-blanc",
     "t": "Examen blanc corrigé",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
+ },
+ "biologie-cellulaire": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "organisation-cellulaire",
+    "t": "Organisation cellulaire",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "methodes-etude",
+    "t": "Méthodes d'étude de la cellule",
+    "imp": 3,
+    "g": "cours"
+   },
+   {
+    "id": "membrane-plasmique",
+    "t": "La membrane plasmique",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "echanges-membranaires",
+    "t": "Les échanges membranaires",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "systeme-endomembranaire",
+    "t": "Réticulum, Golgi, lysosomes",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "mitochondrie-chloroplaste",
+    "t": "Mitochondrie, chloroplaste et autres organites",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "noyau-information-genetique",
+    "t": "Noyau et information génétique",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "divisions-cellulaires",
+    "t": "Mitose et méiose",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "annales-corrigees",
+    "t": "Annales corrigées · examens 2020 et examen blanc",
     "imp": 5,
     "g": "cours"
    }
