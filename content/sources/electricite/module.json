@@ -1,0 +1,20 @@
+{
+  "titre": "Électricité",
+  "prof": "Pr S. Bentachfine",
+  "semestre": "S2",
+  "etablissement": "FST Béni Mellal",
+  "fichier": "electricite.html",
+  "cle": "electricite_scores",
+  "maths": true,
+  "resume": "Module Électricité de la filière BCG : analyse vectorielle, électrostatique (Coulomb, champ, potentiel, Gauss), électrocinétique (Kirchhoff, diviseurs, Thévenin et Norton), magnétostatique (Biot-Savart, Ampère, Laplace), avec l'examen 2021 corrigé.",
+  "conventions": "Cours et TD du Pr S. Bentachfine, module Électricité, parcours BCG section B, FST Béni Mellal, 2020-2021. Séries de TD : 1 analyse vectorielle, 2 électrostatique, 3 électrocinétique, 4 magnétostatique. Coordonnées cylindriques (r, θ, z) et sphériques (r, θ, φ) avec bases (e_r, e_θ, e_φ). k = 1/(4πε₀) ≈ 9·10⁹ SI. MET = modèle équivalent de Thévenin, MEN = modèle équivalent de Norton. Toujours exploiter les symétries avant de calculer un champ.",
+  "intro": "Ce module suit **les 4 séries de TD du Pr Bentachfine** (analyse vectorielle, électrostatique, électrocinétique, magnétostatique) et se termine par **l'examen de février 2021 corrigé**.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre, puis refais l'exemple sur papier.\n2. Pour chaque champ : symétries d'abord, calcul ensuite.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n\n**À vérifier** : les figures des circuits des TD ne sont pas dans les fichiers fournis ; les exercices de circuits sont traités par la méthode générale.",
+  "chapitres": [
+    "01-analyse-vectorielle.md",
+    "02-coulomb-champ-potentiel.md",
+    "03-theoreme-de-gauss.md",
+    "04-electrocinetique.md",
+    "05-magnetostatique.md",
+    "06-annale-2021.md"
+  ]
+}
