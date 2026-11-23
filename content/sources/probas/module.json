@@ -146,6 +146,12 @@
       "t": "Loi du Khi-deux et liens Normale-Gamma",
       "imp": 5,
       "chapitre": "khideux"
+    },
+    {
+      "id": "annales-fstbm-bcg",
+      "t": "Contrôles BCG : séries groupées et densités",
+      "imp": 4,
+      "chapitre": "annales-fstbm-bcg"
     }
   ],
   "chapitres": [
@@ -174,6 +180,7 @@
     "23-exos.md",
     "24-entrainement.md",
     "25-annales-2021-2024.md",
-    "26-annales-2016-2021.md"
+    "26-annales-2016-2021.md",
+    "27-annales-fstbm-bcg.md"
   ]
 }
