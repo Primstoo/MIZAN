@@ -30,6 +30,12 @@ const STYLES: Record<string, { motif: string; couleur: string }> = {
   "poo-cpp": { motif: "cpp", couleur: "#4F6FB0" },
   "biologie-cellulaire": { motif: "cellule", couleur: "#5E9E5A" },
   electricite: { motif: "champ", couleur: "#C98A2E" },
+  "cosmologie-geodynamique": { motif: "globe", couleur: "#9A6B3F" },
+  "biologie-vegetale": { motif: "feuille", couleur: "#4E9A4A" },
+  stratigraphie: { motif: "strates", couleur: "#B08A4F" },
+  microbiologie: { motif: "bacterie", couleur: "#5FA0A8" },
+  biochimie: { motif: "molecule", couleur: "#C0675A" },
+  tectonique: { motif: "faille", couleur: "#8C6A55" },
   "reactivite-chimique": { motif: "fiole", couleur: "#3E9E8E" },
   "chimie-minerale": { motif: "cristal", couleur: "#7A6FB5" },
   "optique-radioactivite": { motif: "lentille", couleur: "#4F8FC0" },
@@ -83,6 +89,16 @@ export default function Embleme({ slug, taille = 52, couleur }: { slug: string; 
     </>;
   } else if (s.motif === "cellule") {
     dessin = <><ellipse cx="32" cy="32" rx="26" ry="22" /><circle cx="30" cy="30" r="9" fill={c} stroke="none" /><ellipse cx="48" cy="40" rx="5" ry="3" /><ellipse cx="16" cy="40" rx="4" ry="2.5" /><circle cx="46" cy="20" r="2" fill={c} stroke="none" /></>;
+  } else if (s.motif === "feuille") {
+    dessin = <><path d="M12 52C12 24 32 10 54 10c0 26-16 42-42 42z" fill={c} fillOpacity=".3" /><path d="M12 52L44 20" /></>;
+  } else if (s.motif === "strates") {
+    dessin = <><path d="M6 16h52M6 28h52M6 40h52M6 52h52" /><path d="M6 22h52" stroke={c} strokeWidth="5" /><circle cx="22" cy="46" r="3" fill={c} stroke="none" /></>;
+  } else if (s.motif === "bacterie") {
+    dessin = <><rect x="10" y="20" width="44" height="24" rx="12" fill={c} fillOpacity=".3" /><path d="M54 32c4 0 4 8 8 8" /><circle cx="26" cy="32" r="3" fill={c} stroke="none" /></>;
+  } else if (s.motif === "molecule") {
+    dessin = <><path d="M16 44l16-12 16 12M32 32V14" />{[[16, 44], [32, 32], [48, 44], [32, 14]].map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r="5" fill={c} stroke="none" />)}</>;
+  } else if (s.motif === "faille") {
+    dessin = <><path d="M6 20h22l8 10h22M6 34h22M36 44h22M28 14v40" /><path d="M6 27h22M36 37h22" stroke={c} strokeWidth="5" /></>;
   } else if (s.motif === "fiole") {
     dessin = <><path d="M26 8h12M28 8v16L14 52a4 4 0 0 0 4 5h28a4 4 0 0 0 4-5L36 24V8" /><path d="M19 42h26l4 10a3 3 0 0 1-3 4H18a3 3 0 0 1-3-4z" fill={c} stroke="none" /></>;
   } else if (s.motif === "cristal") {

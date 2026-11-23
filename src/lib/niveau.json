@@ -2870,5 +2870,141 @@
    "a": 0,
    "e": "Pente −k."
   }
+ ],
+ "cosmologie-geodynamique": [
+  {
+   "n": "structure-interne",
+   "q": "Les ondes P sont :",
+   "o": [
+    "des ondes de compression",
+    "transversales",
+    "arrêtées par les liquides"
+   ],
+   "a": 0,
+   "e": "Longitudinales."
+  },
+  {
+   "n": "tectonique-des-plaques",
+   "q": "Une dorsale est une frontière :",
+   "o": [
+    "divergente",
+    "convergente",
+    "transformante"
+   ],
+   "a": 0,
+   "e": "Accrétion."
+  },
+  {
+   "n": "annales-2022",
+   "q": "Le Permien appartient au :",
+   "o": [
+    "Paléozoïque",
+    "Mésozoïque",
+    "Cénozoïque"
+   ],
+   "a": 0,
+   "e": "Dernière période de l'ère primaire."
+  },
+  {
+   "n": "univers-systeme-solaire",
+   "q": "L'âge de la Terre a été mesuré sur :",
+   "o": [
+    "des roches océaniques",
+    "des météorites",
+    "des fossiles"
+   ],
+   "a": 1,
+   "e": "Chondrites."
+  },
+  {
+   "n": "temps-geologiques",
+   "q": "Le Mésozoïque comprend :",
+   "o": [
+    "Trias, Jurassique, Crétacé",
+    "Cambrien, Trias, Permien",
+    "Permien, Trias, Jurassique"
+   ],
+   "a": 0,
+   "e": "Le Permien est paléozoïque."
+  }
+ ],
+ "biologie-vegetale": [
+  {
+   "n": "bryophytes",
+   "q": "Les rhizoïdes des Bryophytes assurent surtout :",
+   "o": [
+    "la fixation",
+    "l'absorption exclusive",
+    "la photosynthèse"
+   ],
+   "a": 0,
+   "e": "Absorption par toute la surface."
+  },
+  {
+   "n": "spermaphytes-multiplication",
+   "q": "Les Gymnospermes ont des ovules :",
+   "o": [
+    "nus",
+    "dans un ovaire",
+    "absents"
+   ],
+   "a": 0,
+   "e": "Gymno = nu."
+  },
+  {
+   "n": "annales-corrigees",
+   "q": "Une réponse fausse au contrôle Thallophytes vaut :",
+   "o": [
+    "−0,5 point",
+    "0 point",
+    "+0,5 point"
+   ],
+   "a": 0,
+   "e": "Ne réponds pas au hasard."
+  },
+  {
+   "n": "classification",
+   "q": "Les champignons sont :",
+   "o": [
+    "hétérotrophes",
+    "chlorophylliens",
+    "des plantes vasculaires"
+   ],
+   "a": 0,
+   "e": "Pas de chlorophylle."
+  },
+  {
+   "n": "algues",
+   "q": "La chlorophylle a est présente :",
+   "o": [
+    "chez toutes les algues",
+    "uniquement chez les algues vertes",
+    "chez les champignons"
+   ],
+   "a": 0,
+   "e": "Pigment de base."
+  },
+  {
+   "n": "champignons",
+   "q": "La réserve des champignons est :",
+   "o": [
+    "le glycogène",
+    "l'amidon",
+    "la laminarine"
+   ],
+   "a": 0,
+   "e": "Comme les animaux."
+  },
+  {
+   "n": "cryptogames-vasculaires",
+   "q": "La phase dominante de la fougère :",
+   "o": [
+    "sporophyte 2n",
+    "gamétophyte n",
+    "prothalle"
+   ],
+   "a": 0,
+   "e": "La fronde."
+  }
  ]
 }

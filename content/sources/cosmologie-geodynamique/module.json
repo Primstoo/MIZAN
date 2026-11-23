@@ -1,0 +1,18 @@
+{
+  "titre": "Cosmologie et géodynamique interne",
+  "prof": "",
+  "semestre": "S1",
+  "etablissement": "FST Béni Mellal",
+  "fichier": "cosmologie-geodynamique.html",
+  "cle": "cosmologie-geodynamique_scores",
+  "resume": "Module G116 de la filière BCG : l'Univers et le système solaire, le temps géologique et la datation, la structure interne de la Terre par la sismologie, la tectonique des plaques, avec les contrôles 2022 corrigés.",
+  "conventions": "Module G116 « Cosmologie & Géodynamique interne », parcours BCG, Département des Sciences de la Terre, FST Béni Mellal. Les contrôles sont des QCM à réponses multiples (une question peut avoir plusieurs bonnes réponses ; toute rature annule la réponse). Âges en Ga (milliards d'années) ou Ma. Vitesses sismiques en km/s.",
+  "intro": "Ce module suit **le polycopié du module G116** (cosmologie, introduction à la géologie, géodynamique interne) et se termine par **les contrôles 2022 corrigés** (normale et rattrapage).\n\n**Comment l'utiliser**\n\n1. Lis un chapitre ; retiens les chiffres en gras (âges, profondeurs, vitesses) : ils tombent dans les QCM.\n2. À l'examen, plusieurs réponses peuvent être justes : lis chaque proposition seule.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n\n**À vérifier** : les fichiers des contrôles corrigés ne contiennent pas les cases cochées ; les réponses sont rédigées par nous.",
+  "chapitres": [
+    "01-univers-systeme-solaire.md",
+    "02-temps-geologiques.md",
+    "03-structure-interne.md",
+    "04-tectonique-des-plaques.md",
+    "05-annales-2022.md"
+  ]
+}

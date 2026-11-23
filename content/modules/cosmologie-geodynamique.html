@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cosmologie et géodynamique interne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+<script>try{var t=localStorage.getItem('tl-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+
+<!-- Page générée par scripts/construire-module.mjs : modifier les sources (content/sources), pas ce fichier. -->
+<style>
+:root{--bg:#F4EDE1;--card:#FBF7F0;--ink:#1E2433;--mute:#5C5346;--line:#DCCFBA;--acc:#B4532A;--acc2:#F3E2CF;--h2:#2F5A73;--h2b:#DCE7EE;--ok:#2F7D55;--okb:#DFF0E6;--ko:#A23B2A;--kob:#F4DDD6;--code:#1E2433;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#141922;--card:#1E2532;--ink:#EDE6D9;--mute:#A9A094;--line:#343D4D;--acc:#E8906A;--acc2:#3A2A20;--h2:#7FB3CF;--h2b:#1E3340;--ok:#7FD3A6;--okb:#173326;--ko:#F0907F;--kob:#40221E;--code:#0E1118;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#141922;--card:#1E2532;--ink:#EDE6D9;--mute:#A9A094;--line:#343D4D;--acc:#E8906A;--acc2:#3A2A20;--h2:#7FB3CF;--h2b:#1E3340;--ok:#7FD3A6;--okb:#173326;--ko:#F0907F;--kob:#40221E;--code:#0E1118;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:9px 16px;display:flex;gap:12px;align-items:center}
+header h1{font-size:16px;margin:0;line-height:1.25}header small{display:block;color:var(--mute);font-weight:400;font-size:12px}header .pct{margin-left:auto;font-size:13px;color:var(--mute);white-space:nowrap}
+.wrap{display:grid;grid-template-columns:270px 1fr;max-width:1180px;margin:0 auto}
+nav{padding:14px;border-right:1px solid var(--line);position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto}
+nav button{display:flex;width:100%;text-align:left;gap:8px;align-items:flex-start;background:none;border:0;color:var(--ink);padding:8px 10px;border-radius:8px;cursor:pointer;font:inherit;font-size:14px;line-height:1.35}
+nav button:hover{background:var(--acc2)}nav button.on{background:var(--acc2);font-weight:600}
+nav .sc{margin-left:auto;font-size:12px;color:var(--mute);white-space:nowrap}nav .sc.ok{color:var(--ok);font-weight:600}nav .se{display:block;font-size:11.5px;color:var(--mute);font-weight:400}
+main{padding:22px 30px 90px;min-width:0;max-width:860px}
+.seance{color:var(--acc);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+h1.t{font-size:27px;margin:.1em 0 .7em;line-height:1.25}main h2{font-size:21px;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:4px}main h3{font-size:17.5px;margin-top:1.6em}
+pre{position:relative;background:var(--code);color:#f1e7d6;padding:13px 15px;border-radius:10px;overflow:auto;font-size:13.5px;line-height:1.5}
+pre.sortie{background:var(--card);color:var(--ink);border:1px dashed var(--line);padding-top:22px}.code-tag{position:absolute;top:4px;left:12px;font:600 11px system-ui;color:var(--mute);text-transform:uppercase}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}:not(pre)>code{background:var(--acc2);padding:1px 5px;border-radius:5px}
+main>table,.enc table{border-collapse:collapse;margin:14px 0;font-size:14.5px;display:block;overflow:auto}main>table td,main>table th{border:1px solid var(--line);padding:6px 10px}main>table th{background:var(--acc2);text-align:left}
+blockquote{margin:14px 0;padding:8px 14px;border-left:4px solid var(--line);color:var(--mute)}
+.enc{margin:18px 0;padding:10px 16px;border-radius:10px;border-left:5px solid}.enc p{margin:.35em 0}.enc-t{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.enc.piege,.enc.attention{background:var(--kob);border-color:var(--ko)}.enc.piege .enc-t,.enc.attention .enc-t{color:var(--ko)}
+.enc.astuce{background:var(--h2b);border-color:var(--h2)}.enc.astuce .enc-t{color:var(--h2)}
+.enc.retenir{background:var(--okb);border-color:var(--ok)}.enc.retenir .enc-t{color:var(--ok)}
+.enc.prof{background:var(--acc2);border-color:var(--acc)}.enc.prof .enc-t{color:var(--acc)}
+figure{margin:18px 0}figcaption{font-size:13px;font-weight:600;color:var(--mute);margin-bottom:6px}
+.grille table{border-collapse:separate;border-spacing:4px}.grille td,.grille th{min-width:42px;height:38px;text-align:center;font:14px ui-monospace,Menlo,monospace;padding:4px 8px;border-radius:7px}
+.grille td{background:var(--card);border:1px solid var(--line)}.grille th{color:var(--mute);font-weight:500;font-size:12.5px}
+.grille td.h1{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:700}.grille td.h2{background:var(--h2);color:#fff;border-color:var(--h2);font-weight:700}.grille td.h0{opacity:.35}
+.flux-l{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0}.flux-b{background:var(--card);border:1.5px solid var(--acc);border-radius:9px;padding:7px 12px;font-size:14px}.flux-f{color:var(--acc);font-weight:700}
+.etapes{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}.et-t{font-weight:700;color:var(--acc);margin-bottom:4px}.et-nav{display:flex;gap:8px;justify-content:space-between;margin-top:10px}
+.qcm{margin:22px 0}.qq{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}.qq-q{font-weight:600;margin-bottom:8px}.qq-q p{margin:0}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-size:15px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default}.opt.bon{background:var(--okb);border-color:var(--ok)}.opt.faux{background:var(--kob);border-color:var(--ko)}
+.qq-e{margin-top:8px;padding:9px 12px;border-radius:8px;background:var(--acc2);font-size:14.5px}
+.b{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 13px;border-radius:9px;cursor:pointer;font:inherit;font-size:14px}.b.p{background:var(--acc);color:#fff;border-color:var(--acc)}.b:disabled{opacity:.4;cursor:default}
+.bilan{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 0;font-weight:600;margin-top:20px}
+.nx{display:flex;justify-content:space-between;margin-top:30px;gap:10px}
+#menu{display:none}
+/* compatibilité : variables et classes des anciens modules convertis */
+:root{--panel:var(--card);--muted:var(--mute);--soft:var(--acc2);--blue:var(--h2);--orange:var(--acc);--green:var(--ok);--bad:var(--ko);--badbg:var(--kob);--good:var(--ok);--goodbg:var(--okb);--warnbg:var(--acc2);--warn:var(--acc);--mono:ui-monospace,Menlo,Consolas,monospace;--body:system-ui,sans-serif;--display:system-ui,sans-serif}
+main svg{max-width:100%;height:auto}
+.def,.trap,.exam{padding:10px 16px;border-radius:10px;border-left:5px solid;margin:16px 0}.def{background:var(--h2b);border-color:var(--h2)}.trap{background:var(--kob);border-color:var(--ko)}.exam{background:var(--acc2);border-color:var(--acc)}
+.formula{white-space:pre-line;font-family:var(--mono);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;margin:12px 0}
+.table-wrap{overflow-x:auto;margin:12px 0}.table-wrap table{border-collapse:collapse;font-size:14.5px}.table-wrap td,.table-wrap th{border:1px solid var(--line);padding:6px 10px}.table-wrap th{background:var(--acc2)}
+.integre{margin:16px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}.integre iframe{display:block;width:100%;border:0;min-height:120px}.integre-att{padding:16px;color:var(--mute);font-size:14px}
+.cartes-info{font-size:14px;color:var(--mute)}
+.exo h3{margin-top:1.4em}.ex{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}.ex-q p{margin:.3em 0}.ex-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.ex-h,.ex-c{margin-top:10px;padding:10px 12px;border-radius:8px}.ex-h{background:var(--h2b)}.ex-c{background:var(--okb)}.ex.fait{opacity:.75}.ex-r{display:flex;gap:8px;margin-top:8px}.ex-r input{flex:1;font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink)}
+.b.ok{border-color:var(--ok);color:var(--ok)}.b.ko{border-color:var(--ko);color:var(--ko)}
+.carte{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;min-height:180px;margin:14px 0}.carte .lbl{font-size:12.5px;color:var(--mute);margin-bottom:8px}.carte .rep{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}.kpi div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.kpi b{display:block;font-size:24px}
+.barre{height:8px;background:var(--line);border-radius:6px;overflow:hidden}.barre i{display:block;height:100%;background:var(--ok)}
+.liste-n{list-style:none;padding:0}.liste-n li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.liste-n button{background:none;border:0;color:var(--acc);cursor:pointer;font:inherit;padding:0;text-align:left}
+nav .sep{border-top:1px solid var(--line);margin:8px 0}nav a{display:block;padding:8px 10px;color:var(--ink);font-size:14px;text-decoration:none;border-radius:8px}nav a:hover{background:var(--acc2)}
+
+/* ---- Présentation 11/2026 : même identité que l'appli (Fraunces + Inter, cartes, grandes cibles tactiles) ---- */
+body{font:16.5px/1.7 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+header{padding:10px 16px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+header h1{font:700 17px/1.2 Fraunces,Georgia,serif;letter-spacing:-.01em}header small{font:500 12px/1.4 Inter,system-ui,sans-serif}
+header .pct{font-size:12px;font-weight:700;color:var(--acc);border:1px solid var(--acc);border-radius:999px;padding:5px 10px}
+#menu{width:44px;height:44px;padding:0;border-radius:22px;font-size:17px;flex-shrink:0}
+main{padding:28px 30px 110px;max-width:720px;margin:0 auto;width:100%;animation:mz-in .35s ease both}
+@keyframes mz-in{from{opacity:0;transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){main{animation:none}html{scroll-behavior:auto}}
+.seance{font-size:12px;font-weight:700;letter-spacing:.08em}
+h1.t{font:700 34px/1.12 Fraunces,Georgia,serif;letter-spacing:-.02em;margin:.15em 0 .8em;text-wrap:balance}
+main h2{font:700 24px/1.2 Fraunces,Georgia,serif;letter-spacing:-.01em;margin-top:2.4em;padding:0 0 0 14px;border:0;border-left:4px solid var(--acc);text-wrap:balance}
+main h3{font:700 18px/1.3 Fraunces,Georgia,serif;margin-top:1.8em}
+main p,main li{max-width:66ch}main li{margin:.3em 0}main strong,main b{font-weight:700}
+main a{color:var(--acc)}
+nav{padding:16px 12px}
+nav button{padding:11px 12px;border-radius:12px;min-height:44px;font-size:14.5px}nav button.on{background:var(--acc2);color:var(--ink)}
+nav .se{font-size:12px}nav .sc.ok{color:var(--ok)}nav a{min-height:44px;display:flex;align-items:center;border-radius:12px}
+pre{border-radius:14px;padding:15px 16px;font-size:13.5px}
+main>table,.enc table{font-size:14.5px;border-radius:12px}main>table th{font-weight:700}
+.enc{margin:20px 0;padding:14px 16px;border-radius:16px;border:1px solid;border-left-width:5px}
+.enc-t{font-size:12px;letter-spacing:.08em;margin-bottom:4px}
+.enc.piege,.enc.attention{border-color:var(--ko)}.enc.astuce{border-color:var(--h2)}.enc.retenir{border-color:var(--ok)}.enc.prof{border-color:var(--acc)}
+figure{margin:22px 0}figcaption{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.etapes{border-radius:18px;padding:18px}.et-t{font:700 17px/1.3 Fraunces,Georgia,serif;margin-bottom:8px}.et-nav{margin-top:14px}
+.qq{border-radius:18px;padding:18px;margin:14px 0}.qq-q{font-size:17px;line-height:1.45;margin-bottom:12px}
+.opt{min-height:52px;margin:8px 0;padding:12px 16px;border-width:1.5px;border-radius:14px;background:var(--bg);font-size:16px;transition:transform .12s ease,border-color .15s,background .15s}
+.opt:active:not(:disabled){transform:scale(.98)}
+.opt.bon{border-color:var(--ok);font-weight:600;animation:mz-pop .3s ease}.opt.faux{border-color:var(--ko);animation:mz-shake .3s ease}
+@keyframes mz-pop{50%{transform:scale(1.02)}}@keyframes mz-shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.qq-e{margin-top:10px;padding:12px 14px;border-radius:12px;font-size:15px;line-height:1.55;animation:mz-in .25s ease both}
+.b{min-height:44px;padding:9px 16px;border-radius:12px;font-weight:600;font-size:14.5px;transition:transform .12s ease}.b:active:not(:disabled){transform:scale(.97)}
+.b.p{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bilan{bottom:10px;margin-top:28px;padding:12px 16px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 8px 24px rgba(0,0,0,.18);font-size:14.5px;max-width:calc(100% - 96px)}
+.nx{margin-top:36px}.nx .b{min-height:52px;flex:1;border-radius:14px}
+.ex{border-radius:18px;padding:16px 18px;margin:14px 0}.ex-h,.ex-c{border-radius:12px;padding:12px 14px;animation:mz-in .25s ease both}
+.ex-r input{min-height:44px;min-width:0;border-radius:12px;font-size:16px}.ex-r .b{flex-shrink:0}
+.carte{border-radius:22px;padding:26px;min-height:200px;font-size:17px}.carte .lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.kpi div{border-radius:16px;padding:14px 16px}.kpi b{font:700 28px/1.2 Fraunces,Georgia,serif}
+.barre{height:8px;border-radius:4px}.barre i{background:var(--acc);border-radius:4px}
+.liste-n li{padding:12px 0;align-items:center}
+.flux-b{border-radius:12px;padding:9px 14px;font-weight:600}
+.integre{border-radius:18px}
+/* Schémas : un texte ou une forme sans couleur déclarée prend la couleur du texte (lisible en thème sombre), jamais le noir par défaut */
+:where(main svg:not([fill])){fill:currentColor}
+details.prereq{margin:16px 0;border:1px solid var(--line);border-radius:16px;background:var(--card);padding:0 16px}details.prereq summary{cursor:pointer;min-height:52px;padding:14px 0;line-height:1.5;list-style:none;position:relative;padding-right:28px}details.prereq summary::-webkit-details-marker{display:none}details.prereq summary::after{content:"+";position:absolute;right:2px;top:12px;font-size:22px;font-weight:600;color:var(--acc)}details.prereq[open] summary::after{content:"−"}details.prereq p{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:var(--okb);animation:mz-in .25s ease both}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:4px 0}
+
+@media (max-width:860px){.wrap{grid-template-columns:1fr}nav{display:none;position:fixed;inset:54px 0 0 0;height:auto;background:var(--bg);z-index:4;border:0}nav.open{display:block}#menu{display:inline-block}main{padding:20px 18px 110px}h1.t{font-size:28px}main h2{font-size:22px}nav{inset:65px 0 0 0}}
+
+/* Aucun tableau, schéma ou code ne doit élargir la page (téléphone) : défilement dans son cadre. */
+main table{display:block;max-width:100%;overflow-x:auto}main figure,main .grille,main details{max-width:100%;overflow-x:auto}main :not(pre)>code{overflow-wrap:anywhere}main img{max-width:100%;height:auto}main p,main li,main td,main th,main a{overflow-wrap:break-word}mjx-container[display="true"]{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.retour{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;margin-right:6px;width:44px;height:44px;padding:0;border-radius:22px;font-size:18px;flex-shrink:0}.retour[hidden]{display:none}
+</style>
+</head>
+<body>
+<header><a class="b retour" id="retour" href="/app/modules" target="_top" aria-label="Retour aux cours" title="Retour aux cours">←</a><button class="b" id="menu" aria-label="Chapitres">☰</button><h1>Cosmologie et géodynamique interne<small>S1 · FST Béni Mellal</small></h1><span class="pct" id="pct"></span></header>
+<div class="wrap"><nav id="nav"></nav><main id="main"></main></div>
+<script>
+const MODULE={"slug":"cosmologie-geodynamique","titre":"Cosmologie et géodynamique interne","cle":"cosmologie-geodynamique_scores","cleEtat":"cosmologie-geodynamique_scores_etat","format":"score10","intro":"<p>Ce module suit <strong>le polycopié du module G116<\/strong> (cosmologie, introduction à la géologie, géodynamique interne) et se termine par <strong>les contrôles 2022 corrigés<\/strong> (normale et rattrapage).<\/p>\n<p><strong>Comment l&#39;utiliser<\/strong><\/p>\n<ol>\n<li>Lis un chapitre ; retiens les chiffres en gras (âges, profondeurs, vitesses) : ils tombent dans les QCM.<\/li>\n<li>À l&#39;examen, plusieurs réponses peuvent être justes : lis chaque proposition seule.<\/li>\n<li>Fais le QCM du chapitre. <strong>8/10 = chapitre maîtrisé.<\/strong><\/li>\n<\/ol>\n<p><strong>À vérifier<\/strong> : les fichiers des contrôles corrigés ne contiennent pas les cases cochées ; les réponses sont rédigées par nous.<\/p>\n","annexes":[],"cartes":null,"maths":false};
+const CHAPS=[{"id":"univers-systeme-solaire","t":"L'Univers et le système solaire","seance":"Chapitre 2 · Cosmologie","imp":4,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut lire les puissances de 10 : 4,56·10⁹ ans = 4 560 millions d&#39;années = 4,56 Ga.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>4560·10⁶ ans et 4,56·10⁹ ans, est-ce la même durée ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Oui : 4560·10⁶ = 4,56·10⁹. Les deux propositions sont justes dans un QCM.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « une histoire en quatre temps ».<\/strong> Big Bang → étoiles et galaxies → nébuleuse solaire → planètes qui se différencient.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Croire que l&#39;âge de la Terre a été mesuré sur des roches terrestres. Il a été mesuré sur des <strong>météorites<\/strong> (chondrites), car les roches les plus anciennes de la Terre ont été recyclées.<\/p>\n<\/aside><p>À la fin, tu connais les étapes de la formation du système solaire et les chiffres clés.<\/p>\n<h2>Idée 1 · Le Big Bang<\/h2>\n<p>L&#39;Univers est né il y a environ <strong>13,8 Ga<\/strong>. Trois preuves : l&#39;expansion (fuite des galaxies, loi de Hubble, décalage vers le rouge), le rayonnement fossile (fond diffus cosmologique à ≈ 2,7 K), l&#39;abondance de l&#39;hélium et de l&#39;hydrogène.<\/p>\n<h2>Idée 2 · La formation du système solaire<\/h2>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Du nuage aux planètes<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/4 · 1. Un nuage de gaz et de poussières (nébuleuse) s&#39;effondre et tourne.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/4 · 2. Le centre forme le Soleil ; autour, un disque.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/4 · 3. Les poussières s&#39;agglomèrent : planétésimaux, puis planètes (accrétion).<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/4 · 4. Près du Soleil : planètes telluriques (rocheuses) ; loin : planètes géantes gazeuses.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><figure class=\"grille\"><figcaption>Les deux familles de planètes<\/figcaption><table><tr><th>,<\/th><th>Telluriques,<\/th><th>Géantes<\/th><\/tr><tr><td class=\"h1\">Exemples,<\/td><td>Mercure<\/td><td>Vénus<\/td><td>Terre<\/td><td>Mars,<\/td><td>Jupiter<\/td><td>Saturne<\/td><td>Uranus<\/td><td>Neptune<\/td><\/tr><tr><td class=\"h1\">Composition,<\/td><td>roches<\/td><td>et<\/td><td>métaux,<\/td><td>gaz<\/td><td>(H,<\/td><td>He)<\/td><td>et<\/td><td>glaces<\/td><\/tr><tr><td class=\"h1\">Densité,<\/td><td>forte<\/td><td>(≈<\/td><td>5,5<\/td><td>pour<\/td><td>la<\/td><td>Terre),<\/td><td>faible<\/td><\/tr><\/table><\/figure><h2>Idée 3 · L&#39;âge de la Terre<\/h2>\n<p><strong>4,56 Ga<\/strong>, obtenu par <strong>radiochronologie<\/strong> sur des <strong>météorites<\/strong>. Les plus vieilles roches terrestres connues sont des <strong>gneiss d&#39;Acasta<\/strong> (nord du Canada), <strong>≈ 4,03-4,04 Ga<\/strong>, dans la <strong>croûte continentale<\/strong>. Des cristaux de zircon d&#39;Australie atteignent 4,4 Ga.<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Pourquoi date-t-on la Terre avec des météorites ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Elles se sont formées en même temps que la Terre et n&#39;ont pas été transformées par la tectonique, l&#39;érosion ou le métamorphisme.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Où sont les plus anciennes roches terrestres ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Dans la croûte continentale (gneiss d&#39;Acasta, nord du Canada, ≈ 4,03 Ga). La croûte océanique a au plus ≈ 180 Ma.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">L&#39;âge de la Terre a été mesuré sur :<\/div><button class=\"opt\" data-o=\"0\">des roches océaniques<\/button><button class=\"opt\" data-o=\"1\">des météorites<\/button><button class=\"opt\" data-o=\"2\">des fossiles<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Une preuve du Big Bang :<\/div><button class=\"opt\" data-o=\"0\">le rayonnement fossile<\/button><button class=\"opt\" data-o=\"1\">la tectonique des plaques<\/button><button class=\"opt\" data-o=\"2\">les marées<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Jupiter est une planète :<\/div><button class=\"opt\" data-o=\"0\">tellurique<\/button><button class=\"opt\" data-o=\"1\">géante gazeuse<\/button><button class=\"opt\" data-o=\"2\">naine<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">L&#39;âge de la Terre vaut :<\/div><button class=\"opt\" data-o=\"0\">4,56 Ga<\/button><button class=\"opt\" data-o=\"1\">13,8 Ga<\/button><button class=\"opt\" data-o=\"2\">4,56 Ma<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Les plus vieilles roches terrestres sont dans :<\/div><button class=\"opt\" data-o=\"0\">la croûte continentale<\/button><button class=\"opt\" data-o=\"1\">la croûte océanique<\/button><button class=\"opt\" data-o=\"2\">le noyau<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">L&#39;accrétion est :<\/div><button class=\"opt\" data-o=\"0\">l&#39;agglomération de matière en corps plus gros<\/button><button class=\"opt\" data-o=\"1\">la destruction d&#39;une planète<\/button><button class=\"opt\" data-o=\"2\">la fusion nucléaire<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Les planètes proches du Soleil sont :<\/div><button class=\"opt\" data-o=\"0\">rocheuses<\/button><button class=\"opt\" data-o=\"1\">gazeuses<\/button><button class=\"opt\" data-o=\"2\">glacées<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">La fuite des galaxies montre :<\/div><button class=\"opt\" data-o=\"0\">que l&#39;Univers est en expansion<\/button><button class=\"opt\" data-o=\"1\">que la Terre tourne<\/button><button class=\"opt\" data-o=\"2\">que le Soleil est jeune<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">La méthode qui donne un âge en années est :<\/div><button class=\"opt\" data-o=\"0\">la radiochronologie<\/button><button class=\"opt\" data-o=\"1\">la superposition<\/button><button class=\"opt\" data-o=\"2\">la paléontologie seule<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Les gneiss d&#39;Acasta ont :<\/div><button class=\"opt\" data-o=\"0\">≈ 4,03 Ga<\/button><button class=\"opt\" data-o=\"1\">4,56 Ga<\/button><button class=\"opt\" data-o=\"2\">180 Ma<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"univers-systeme-solaire","rep":null,"tol":null},{"n":"univers-systeme-solaire","rep":null,"tol":null},{"n":"univers-systeme-solaire","rep":null,"tol":null}],"qcm":[{"n":"univers-systeme-solaire","q":"L&#39;âge de la Terre a été mesuré sur :","o":["des roches océaniques","des météorites","des fossiles"],"a":1,"e":"Chondrites."},{"n":"univers-systeme-solaire","q":"Une preuve du Big Bang :","o":["le rayonnement fossile","la tectonique des plaques","les marées"],"a":0,"e":"Fond diffus à ≈ 2,7 K."},{"n":"univers-systeme-solaire","q":"Jupiter est une planète :","o":["tellurique","géante gazeuse","naine"],"a":1,"e":"Surtout H et He."},{"n":"univers-systeme-solaire","q":"L&#39;âge de la Terre vaut :","o":["4,56 Ga","13,8 Ga","4,56 Ma"],"a":0,"e":"Milliards d&#39;années."},{"n":"univers-systeme-solaire","q":"Les plus vieilles roches terrestres sont dans :","o":["la croûte continentale","la croûte océanique","le noyau"],"a":0,"e":"Recyclage de la croûte océanique."},{"n":"univers-systeme-solaire","q":"L&#39;accrétion est :","o":["l&#39;agglomération de matière en corps plus gros","la destruction d&#39;une planète","la fusion nucléaire"],"a":0,"e":"Planétésimaux → planètes."},{"n":"univers-systeme-solaire","q":"Les planètes proches du Soleil sont :","o":["rocheuses","gazeuses","glacées"],"a":0,"e":"Les éléments volatils ont été chassés."},{"n":"univers-systeme-solaire","q":"La fuite des galaxies montre :","o":["que l&#39;Univers est en expansion","que la Terre tourne","que le Soleil est jeune"],"a":0,"e":"Loi de Hubble."},{"n":"univers-systeme-solaire","q":"La méthode qui donne un âge en années est :","o":["la radiochronologie","la superposition","la paléontologie seule"],"a":0,"e":"Datation absolue."},{"n":"univers-systeme-solaire","q":"Les gneiss d&#39;Acasta ont :","o":["≈ 4,03 Ga","4,56 Ga","180 Ma"],"a":0,"e":"Nord du Canada."}]},{"id":"temps-geologiques","t":"Le temps en géologie","seance":"Introduction à la géologie · Datation relative et absolue","imp":4,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut se souvenir de la décroissance radioactive : après une demi-vie, il reste la moitié des atomes pères.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Après 2 demi-vies, quelle fraction d&#39;atomes pères reste-t-il ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 0.25<\/b><\/p><p>Un quart.<\/p>\n<\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « avant / après », puis « combien ».<\/strong> La datation relative ordonne les événements ; la datation absolue (radiochronologie) leur donne un âge chiffré.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Placer le Permien dans le Mésozoïque. Le Permien est la <strong>dernière période du Paléozoïque<\/strong> (ère primaire) ; le Mésozoïque commence avec le Trias.<\/p>\n<\/aside><p>À la fin, tu sais réciter les ères et leurs limites, et appliquer les principes de datation relative.<\/p>\n<h2>Idée 1 · L&#39;échelle des temps<\/h2>\n<figure class=\"grille\"><figcaption>Les ères du Phanérozoïque<\/figcaption><table><tr><th>Ère,<\/th><th>Ancien<\/th><th>nom,<\/th><th>Périodes,<\/th><th>Fin<\/th><th>marquée<\/th><th>par<\/th><\/tr><tr><td class=\"h1\">Paléozoïque<\/td><td>(541<\/td><td>à<\/td><td>252<\/td><td>Ma),<\/td><td>primaire,<\/td><td>Cambrien<\/td><td>Ordovicien<\/td><td>Silurien<\/td><td>Dévonien<\/td><td>Carbonifère<\/td><td>Permien,<\/td><td>crise<\/td><td>Permien-Trias<\/td><td>(la<\/td><td>plus<\/td><td>grave)<\/td><\/tr><tr><td class=\"h1\">Mésozoïque<\/td><td>(252<\/td><td>à<\/td><td>66<\/td><td>Ma),<\/td><td>secondaire,<\/td><td>Trias<\/td><td>Jurassique<\/td><td>Crétacé,<\/td><td>limite<\/td><td>K-T<\/td><td>(dinosaures)<\/td><\/tr><tr><td class=\"h1\">Cénozoïque<\/td><td>(66<\/td><td>Ma<\/td><td>à<\/td><td>aujourd'hui),<\/td><td>tertiaire<\/td><td>et<\/td><td>quaternaire,<\/td><td>Paléogène<\/td><td>Néogène<\/td><td>Quaternaire,<\/td><td>—<\/td><\/tr><\/table><\/figure><aside class=\"enc retenir\"><div class=\"enc-t\">À retenir<\/div><p>La <strong>limite K-T<\/strong> (Crétacé-Tertiaire, 66 Ma) est soulignée par une couche argileuse riche en <strong>iridium<\/strong> (impact d&#39;astéroïde) ; elle voit l&#39;extinction des dinosaures et des ammonites. Les <strong>trilobites<\/strong>, eux, disparaissent à la fin du <strong>Permien<\/strong>.<\/p>\n<\/aside><h2>Idée 2 · La datation relative<\/h2>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Les principes<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/5 · 1. Superposition : une couche est plus récente que celle qu&#39;elle recouvre.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/5 · 2. Continuité : une couche a le même âge sur toute son étendue.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/5 · 3. Recoupement : ce qui recoupe (faille, filon) est plus récent que ce qui est recoupé.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/5 · 4. Inclusion : un fragment inclus est plus ancien que la roche qui l&#39;inclut.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">5/5 · 5. Identité paléontologique : mêmes fossiles stratigraphiques, même âge.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><h2>Idée 3 · La radiochronologie<\/h2>\n<p>Âge : t = (1/λ) × ln(1 + F/P), avec F atomes fils et P atomes pères. Couples usuels : U/Pb (roches très anciennes), K/Ar, Rb/Sr, ¹⁴C (moins de ≈ 50 000 ans).<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Un filon de basalte recoupe une couche de calcaire. Lequel est le plus ancien ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Le calcaire : ce qui recoupe est plus récent.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Le ¹⁴C peut-il dater une roche de 10 Ma ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Non : sa demi-vie (5 730 ans) le limite à ≈ 50 000 ans. On utilise K/Ar par exemple.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Le Mésozoïque comprend :<\/div><button class=\"opt\" data-o=\"0\">Trias, Jurassique, Crétacé<\/button><button class=\"opt\" data-o=\"1\">Cambrien, Trias, Permien<\/button><button class=\"opt\" data-o=\"2\">Permien, Trias, Jurassique<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">La limite K-T est marquée par :<\/div><button class=\"opt\" data-o=\"0\">une couche riche en iridium<\/button><button class=\"opt\" data-o=\"1\">l&#39;apparition des trilobites<\/button><button class=\"opt\" data-o=\"2\">la formation de la Pangée<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Les trilobites disparaissent à la fin :<\/div><button class=\"opt\" data-o=\"0\">du Permien<\/button><button class=\"opt\" data-o=\"1\">du Crétacé<\/button><button class=\"opt\" data-o=\"2\">du Cambrien<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">La datation absolue utilise :<\/div><button class=\"opt\" data-o=\"0\">la radioactivité<\/button><button class=\"opt\" data-o=\"1\">la superposition<\/button><button class=\"opt\" data-o=\"2\">les fossiles seuls<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Une faille qui coupe trois couches est :<\/div><button class=\"opt\" data-o=\"0\">plus récente que les trois<\/button><button class=\"opt\" data-o=\"1\">plus ancienne<\/button><button class=\"opt\" data-o=\"2\">du même âge<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">La plus grande crise biologique :<\/div><button class=\"opt\" data-o=\"0\">Permien-Trias<\/button><button class=\"opt\" data-o=\"1\">K-T<\/button><button class=\"opt\" data-o=\"2\">Quaternaire<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Le Cénozoïque commence à :<\/div><button class=\"opt\" data-o=\"0\">66 Ma<\/button><button class=\"opt\" data-o=\"1\">252 Ma<\/button><button class=\"opt\" data-o=\"2\">541 Ma<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Le ¹⁴C sert à dater :<\/div><button class=\"opt\" data-o=\"0\">des restes de moins de 50 000 ans<\/button><button class=\"opt\" data-o=\"1\">des météorites<\/button><button class=\"opt\" data-o=\"2\">le noyau terrestre<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Le principe de superposition dit :<\/div><button class=\"opt\" data-o=\"0\">la couche du dessus est plus récente<\/button><button class=\"opt\" data-o=\"1\">la couche du dessus est plus ancienne<\/button><button class=\"opt\" data-o=\"2\">toutes les couches ont le même âge<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Paléozoïque est l&#39;ancien nom de l&#39;ère :<\/div><button class=\"opt\" data-o=\"0\">primaire<\/button><button class=\"opt\" data-o=\"1\">secondaire<\/button><button class=\"opt\" data-o=\"2\">tertiaire<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"temps-geologiques","rep":["0.25"],"tol":null},{"n":"temps-geologiques","rep":null,"tol":null},{"n":"temps-geologiques","rep":null,"tol":null}],"qcm":[{"n":"temps-geologiques","q":"Le Mésozoïque comprend :","o":["Trias, Jurassique, Crétacé","Cambrien, Trias, Permien","Permien, Trias, Jurassique"],"a":0,"e":"Le Permien est paléozoïque."},{"n":"temps-geologiques","q":"La limite K-T est marquée par :","o":["une couche riche en iridium","l&#39;apparition des trilobites","la formation de la Pangée"],"a":0,"e":"Impact d&#39;astéroïde."},{"n":"temps-geologiques","q":"Les trilobites disparaissent à la fin :","o":["du Permien","du Crétacé","du Cambrien"],"a":0,"e":"Ils ne sont pas concernés par K-T."},{"n":"temps-geologiques","q":"La datation absolue utilise :","o":["la radioactivité","la superposition","les fossiles seuls"],"a":0,"e":"Radiochronologie."},{"n":"temps-geologiques","q":"Une faille qui coupe trois couches est :","o":["plus récente que les trois","plus ancienne","du même âge"],"a":0,"e":"Recoupement."},{"n":"temps-geologiques","q":"La plus grande crise biologique :","o":["Permien-Trias","K-T","Quaternaire"],"a":0,"e":"≈ 95 % des espèces marines."},{"n":"temps-geologiques","q":"Le Cénozoïque commence à :","o":["66 Ma","252 Ma","541 Ma"],"a":0,"e":"Après K-T."},{"n":"temps-geologiques","q":"Le ¹⁴C sert à dater :","o":["des restes de moins de 50 000 ans","des météorites","le noyau terrestre"],"a":0,"e":"Demi-vie courte."},{"n":"temps-geologiques","q":"Le principe de superposition dit :","o":["la couche du dessus est plus récente","la couche du dessus est plus ancienne","toutes les couches ont le même âge"],"a":0,"e":"Si la série n&#39;est pas renversée."},{"n":"temps-geologiques","q":"Paléozoïque est l&#39;ancien nom de l&#39;ère :","o":["primaire","secondaire","tertiaire"],"a":0,"e":"Mésozoïque = secondaire."}]},{"id":"structure-interne","t":"La structure interne de la Terre","seance":"Géodynamique interne · Sismologie et enveloppes","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir qu&#39;une onde change de vitesse, et donc de direction, quand elle change de milieu (comme la lumière).<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Une onde accélère brutalement à une certaine profondeur. Qu&#39;en déduis-tu ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Il y a une discontinuité : le matériau change en dessous.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « les séismes sont une échographie ».<\/strong> Les ondes sismiques traversent la Terre ; leurs vitesses et leurs zones d&#39;ombre révèlent les couches.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Dire que le champ magnétique naît dans le manteau. Il est produit par les mouvements du <strong>fer liquide du noyau externe<\/strong> (effet dynamo).<\/p>\n<\/aside><p>À la fin, tu sais décrire les enveloppes, les discontinuités et le comportement des ondes P et S.<\/p>\n<h2>Idée 1 · Les ondes sismiques<\/h2>\n<figure class=\"grille\"><figcaption>Ondes de volume<\/figcaption><table><tr><th>Onde,<\/th><th>Type,<\/th><th>Vitesse,<\/th><th>Traverse<\/th><th>les<\/th><th>liquides<\/th><th>?<\/th><\/tr><tr><td class=\"h1\">P<\/td><td>(premières),<\/td><td>compression,<\/td><td>longitudinale,<\/td><td>la<\/td><td>plus<\/td><td>rapide<\/td><td>(jusqu'à<\/td><td>≈<\/td><td>13-14<\/td><td>km/s),<\/td><td>oui<\/td><\/tr><tr><td class=\"h1\">S<\/td><td>(secondes),<\/td><td>cisaillement,<\/td><td>transversale,<\/td><td>plus<\/td><td>lente,<\/td><td>non<\/td><\/tr><\/table><\/figure><p>Une <strong>hodochrone<\/strong> est la courbe du temps d&#39;arrivée des ondes en fonction de la distance à l&#39;épicentre, construite avec les enregistrements des stations sismiques.<\/p>\n<h2>Idée 2 · Les enveloppes et discontinuités<\/h2>\n<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Coupe de la Terre : croûte, manteau, noyau externe liquide, noyau interne solide\" style=\"max-width:300px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"160\" cy=\"85\" r=\"80\"/><circle cx=\"160\" cy=\"85\" r=\"44\" stroke=\"#D9824F\"/><circle cx=\"160\" cy=\"85\" r=\"15\" fill=\"#D9824F\" fill-opacity=\".4\" stroke=\"#D9824F\"/><circle cx=\"160\" cy=\"85\" r=\"77\"/><\/g>\n<g fill=\"currentColor\" font-size=\"10\"><text x=\"245\" y=\"40\">croûte<\/text><text x=\"200\" y=\"65\">manteau<\/text><text x=\"125\" y=\"120\">noyau externe<\/text><text x=\"150\" y=\"88\">graine<\/text><\/g>\n<\/svg><figure class=\"grille\"><figcaption>De la surface au centre<\/figcaption><table><tr><th>Enveloppe,<\/th><th>Profondeur,<\/th><th>État,<\/th><th>Composition<\/th><\/tr><tr><td class=\"h1\">Croûte<\/td><td>continentale,<\/td><td>0<\/td><td>à<\/td><td>30-70<\/td><td>km,<\/td><td>solide,<\/td><td>granitique<\/td><td>(«<\/td><td>Sial<\/td><td>»),<\/td><td>jusqu'à<\/td><td>4<\/td><td>Ga<\/td><\/tr><tr><td class=\"h1\">Croûte<\/td><td>océanique,<\/td><td>0<\/td><td>à<\/td><td>7<\/td><td>km,<\/td><td>solide,<\/td><td>basaltique,<\/td><td>moins<\/td><td>de<\/td><td>200<\/td><td>Ma<\/td><\/tr><tr><td class=\"h1\">Manteau,<\/td><td>Moho<\/td><td>à<\/td><td>2<\/td><td>900<\/td><td>km,<\/td><td>solide<\/td><td>(ductile),<\/td><td>péridotite<\/td><\/tr><tr><td class=\"h1\">Noyau<\/td><td>externe,<\/td><td>2<\/td><td>900<\/td><td>à<\/td><td>5<\/td><td>150<\/td><td>km,<\/td><td>liquide,<\/td><td>Fe<\/td><td>Ni<\/td><td>(+<\/td><td>S,<\/td><td>O)<\/td><\/tr><tr><td class=\"h1\">Noyau<\/td><td>interne<\/td><td>(graine),<\/td><td>5<\/td><td>150<\/td><td>à<\/td><td>6<\/td><td>371<\/td><td>km,<\/td><td>solide,<\/td><td>Fe<\/td><td>Ni<\/td><\/tr><\/table><\/figure><aside class=\"enc retenir\"><div class=\"enc-t\">À retenir<\/div><p>Moho : croûte/manteau. Gutenberg (2 900 km) : manteau/noyau, les ondes S disparaissent. Lehmann (5 150 km) : noyau externe/graine.<\/p>\n<\/aside><h2>Idée 3 · Lithosphère, asthénosphère, chaleur<\/h2>\n<p>La <strong>lithosphère<\/strong> (croûte + manteau supérieur rigide, ≈ 100 km) glisse sur l&#39;<strong>asthénosphère<\/strong> (manteau ductile). Le <strong>gradient géothermique<\/strong> moyen est ≈ <strong>30 °C/km<\/strong> près de la surface.<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Pourquoi les ondes S ne traversent-elles pas le noyau externe ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Il est liquide, et un liquide ne transmet pas le cisaillement.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Une station à 120° de l&#39;épicentre ne reçoit ni P ni S directes. Pourquoi ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Elle est dans la zone d&#39;ombre (≈ 103° à 143°) créée par la réfraction des ondes P au contact du noyau.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Les ondes P sont :<\/div><button class=\"opt\" data-o=\"0\">des ondes de compression<\/button><button class=\"opt\" data-o=\"1\">transversales<\/button><button class=\"opt\" data-o=\"2\">arrêtées par les liquides<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Le noyau externe est :<\/div><button class=\"opt\" data-o=\"0\">liquide<\/button><button class=\"opt\" data-o=\"1\">solide<\/button><button class=\"opt\" data-o=\"2\">gazeux<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Le champ magnétique terrestre :<\/div><button class=\"opt\" data-o=\"0\">est généré dans le noyau externe<\/button><button class=\"opt\" data-o=\"1\">naît dans la croûte<\/button><button class=\"opt\" data-o=\"2\">bloque les météorites<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Épaisseur moyenne de la croûte océanique :<\/div><button class=\"opt\" data-o=\"0\">≈ 7 km<\/button><button class=\"opt\" data-o=\"1\">≈ 35 km<\/button><button class=\"opt\" data-o=\"2\">≈ 100 km<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">La discontinuité de Mohorovičić sépare :<\/div><button class=\"opt\" data-o=\"0\">croûte et manteau<\/button><button class=\"opt\" data-o=\"1\">manteau et noyau<\/button><button class=\"opt\" data-o=\"2\">noyau externe et graine<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Le noyau est surtout fait de :<\/div><button class=\"opt\" data-o=\"0\">Fe et Ni<\/button><button class=\"opt\" data-o=\"1\">Si et Al<\/button><button class=\"opt\" data-o=\"2\">Mg et Ca<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Le gradient géothermique moyen :<\/div><button class=\"opt\" data-o=\"0\">≈ 30 °C/km<\/button><button class=\"opt\" data-o=\"1\">≈ 150 °C/km<\/button><button class=\"opt\" data-o=\"2\">≈ 3 °C/km<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Une hodochrone est utilisée en :<\/div><button class=\"opt\" data-o=\"0\">sismologie<\/button><button class=\"opt\" data-o=\"1\">géochronologie<\/button><button class=\"opt\" data-o=\"2\">paléontologie<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">La lithosphère repose sur :<\/div><button class=\"opt\" data-o=\"0\">l&#39;asthénosphère<\/button><button class=\"opt\" data-o=\"1\">le noyau<\/button><button class=\"opt\" data-o=\"2\">la graine<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">La croûte continentale est :<\/div><button class=\"opt\" data-o=\"0\">plus vieille que la croûte océanique<\/button><button class=\"opt\" data-o=\"1\">plus dense que la croûte océanique<\/button><button class=\"opt\" data-o=\"2\">basaltique<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"structure-interne","rep":null,"tol":null},{"n":"structure-interne","rep":null,"tol":null},{"n":"structure-interne","rep":null,"tol":null}],"qcm":[{"n":"structure-interne","q":"Les ondes P sont :","o":["des ondes de compression","transversales","arrêtées par les liquides"],"a":0,"e":"Longitudinales."},{"n":"structure-interne","q":"Le noyau externe est :","o":["liquide","solide","gazeux"],"a":0,"e":"Les S y disparaissent."},{"n":"structure-interne","q":"Le champ magnétique terrestre :","o":["est généré dans le noyau externe","naît dans la croûte","bloque les météorites"],"a":0,"e":"Il dévie le vent solaire."},{"n":"structure-interne","q":"Épaisseur moyenne de la croûte océanique :","o":["≈ 7 km","≈ 35 km","≈ 100 km"],"a":0,"e":"Basaltique."},{"n":"structure-interne","q":"La discontinuité de Mohorovičić sépare :","o":["croûte et manteau","manteau et noyau","noyau externe et graine"],"a":0,"e":"Moho."},{"n":"structure-interne","q":"Le noyau est surtout fait de :","o":["Fe et Ni","Si et Al","Mg et Ca"],"a":0,"e":"Si, Al : croûte (Sial)."},{"n":"structure-interne","q":"Le gradient géothermique moyen :","o":["≈ 30 °C/km","≈ 150 °C/km","≈ 3 °C/km"],"a":0,"e":"Près de la surface."},{"n":"structure-interne","q":"Une hodochrone est utilisée en :","o":["sismologie","géochronologie","paléontologie"],"a":0,"e":"Temps d&#39;arrivée des ondes."},{"n":"structure-interne","q":"La lithosphère repose sur :","o":["l&#39;asthénosphère","le noyau","la graine"],"a":0,"e":"Manteau ductile."},{"n":"structure-interne","q":"La croûte continentale est :","o":["plus vieille que la croûte océanique","plus dense que la croûte océanique","basaltique"],"a":0,"e":"Granitique, peu recyclée."}]},{"id":"tectonique-des-plaques","t":"La tectonique des plaques","seance":"Géodynamique interne · Plaques, dorsales, subduction, points chauds","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir que la lithosphère est rigide et découpée en plaques.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Sur quoi glissent les plaques lithosphériques ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Sur l&#39;asthénosphère, partie ductile du manteau.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « trois frontières ».<\/strong> Les plaques s&#39;écartent (dorsale), se rapprochent (subduction, collision) ou coulissent (faille transformante). Tout le reste en découle.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Associer une fosse océanique à une dorsale. La fosse marque une <strong>subduction<\/strong>, frontière <strong>convergente<\/strong>.<\/p>\n<\/aside><p>À la fin, tu sais relier chaque relief (dorsale, fosse, chaîne, archipel) à son mécanisme.<\/p>\n<h2>Idée 1 · Les frontières de plaques<\/h2>\n<figure class=\"grille\"><figcaption>Les trois types<\/figcaption><table><tr><th>Frontière,<\/th><th>Mouvement,<\/th><th>Relief,<\/th><th>Exemple<\/th><\/tr><tr><td class=\"h1\">Divergente,<\/td><td>écartement,<\/td><td>dorsale<\/td><td>(accrétion<\/td><td>océanique),<\/td><td>dorsale<\/td><td>médio-atlantique<\/td><\/tr><tr><td class=\"h1\">Convergente,<\/td><td>rapprochement,<\/td><td>fosse<\/td><td>+<\/td><td>volcans<\/td><td>(subduction)<\/td><td>ou<\/td><td>chaîne<\/td><td>(collision),<\/td><td>Andes<\/td><td>;<\/td><td>Himalaya<\/td><\/tr><tr><td class=\"h1\">Transformante,<\/td><td>coulissement,<\/td><td>faille,<\/td><td>faille<\/td><td>de<\/td><td>San<\/td><td>Andreas<\/td><\/tr><\/table><\/figure><svg viewBox=\"0 0 320 110\" role=\"img\" aria-label=\"Plaque océanique qui plonge sous une plaque continentale au niveau d'une fosse\" style=\"max-width:380px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M10 40h140l20 10M170 50l130 55\"/><path d=\"M190 30h120\" stroke=\"#D9824F\"/><path d=\"M60 25l30 0M75 20l15 5-15 5\"/><\/g>\n<g fill=\"currentColor\" font-size=\"10\"><text x=\"20\" y=\"30\">plaque océanique<\/text><text x=\"200\" y=\"22\">plaque continentale<\/text><text x=\"150\" y=\"70\">fosse<\/text><\/g>\n<\/svg><h2>Idée 2 · Les preuves<\/h2>\n<ul>\n<li>Les <strong>anomalies magnétiques<\/strong> symétriques de part et d&#39;autre des dorsales (le champ s&#39;inverse et reste fossilisé dans les basaltes).<\/li>\n<li>L&#39;âge des fonds océaniques augmente avec la distance à la dorsale.<\/li>\n<li>Les séismes dessinent les limites de plaques.<\/li>\n<li>La <strong>Pangée<\/strong> : un supercontinent qui a existé de la fin du Paléozoïque au Jurassique (Wegener).<\/li>\n<\/ul>\n<h2>Idée 3 · Les points chauds<\/h2>\n<p>Un panache venu du manteau profond perce la plaque : volcanisme intraplaque. La plaque se déplace au-dessus d&#39;un point fixe : chaîne d&#39;îles de plus en plus vieilles (Hawaï).<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>À quoi correspond une fosse océanique ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Une limite convergente (subduction), là où les fonds océaniques sont les plus profonds (Mariannes ≈ 11 km).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Pourquoi les îles d&#39;Hawaï ont-elles des âges croissants vers le nord-ouest ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>La plaque Pacifique dérive au-dessus d&#39;un point chaud fixe : chaque île s&#39;éloigne de la source et s&#39;éteint.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Une dorsale est une frontière :<\/div><button class=\"opt\" data-o=\"0\">divergente<\/button><button class=\"opt\" data-o=\"1\">convergente<\/button><button class=\"opt\" data-o=\"2\">transformante<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Une fosse océanique souligne :<\/div><button class=\"opt\" data-o=\"0\">une limite convergente<\/button><button class=\"opt\" data-o=\"1\">une dorsale<\/button><button class=\"opt\" data-o=\"2\">un point chaud<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Un point chaud se traduit par :<\/div><button class=\"opt\" data-o=\"0\">des éruptions volcaniques<\/button><button class=\"opt\" data-o=\"1\">des séismes uniquement<\/button><button class=\"opt\" data-o=\"2\">une fosse<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">La Pangée était :<\/div><button class=\"opt\" data-o=\"0\">un continent<\/button><button class=\"opt\" data-o=\"1\">un océan<\/button><button class=\"opt\" data-o=\"2\">une roche<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">L&#39;Himalaya résulte :<\/div><button class=\"opt\" data-o=\"0\">d&#39;une collision<\/button><button class=\"opt\" data-o=\"1\">d&#39;une dorsale<\/button><button class=\"opt\" data-o=\"2\">d&#39;un point chaud<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Les anomalies magnétiques des fonds océaniques sont :<\/div><button class=\"opt\" data-o=\"0\">symétriques par rapport à la dorsale<\/button><button class=\"opt\" data-o=\"1\">aléatoires<\/button><button class=\"opt\" data-o=\"2\">absentes<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">La croûte océanique la plus ancienne a :<\/div><button class=\"opt\" data-o=\"0\">moins de 200 Ma<\/button><button class=\"opt\" data-o=\"1\">4 Ga<\/button><button class=\"opt\" data-o=\"2\">1 Ga<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">La faille de San Andreas est :<\/div><button class=\"opt\" data-o=\"0\">transformante<\/button><button class=\"opt\" data-o=\"1\">divergente<\/button><button class=\"opt\" data-o=\"2\">une fosse<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">La croûte continentale est recyclée en subduction :<\/div><button class=\"opt\" data-o=\"0\">facilement<\/button><button class=\"opt\" data-o=\"1\">très peu (trop légère)<\/button><button class=\"opt\" data-o=\"2\">jamais créée<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Le mot accrétion océanique désigne :<\/div><button class=\"opt\" data-o=\"0\">la création de croûte océanique à la dorsale<\/button><button class=\"opt\" data-o=\"1\">la disparition d&#39;un océan<\/button><button class=\"opt\" data-o=\"2\">l&#39;érosion des côtes<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"tectonique-des-plaques","rep":null,"tol":null},{"n":"tectonique-des-plaques","rep":null,"tol":null},{"n":"tectonique-des-plaques","rep":null,"tol":null}],"qcm":[{"n":"tectonique-des-plaques","q":"Une dorsale est une frontière :","o":["divergente","convergente","transformante"],"a":0,"e":"Accrétion."},{"n":"tectonique-des-plaques","q":"Une fosse océanique souligne :","o":["une limite convergente","une dorsale","un point chaud"],"a":0,"e":"Subduction."},{"n":"tectonique-des-plaques","q":"Un point chaud se traduit par :","o":["des éruptions volcaniques","des séismes uniquement","une fosse"],"a":0,"e":"Archipels intra-océaniques."},{"n":"tectonique-des-plaques","q":"La Pangée était :","o":["un continent","un océan","une roche"],"a":0,"e":"Supercontinent."},{"n":"tectonique-des-plaques","q":"L&#39;Himalaya résulte :","o":["d&#39;une collision","d&#39;une dorsale","d&#39;un point chaud"],"a":0,"e":"Inde contre Asie."},{"n":"tectonique-des-plaques","q":"Les anomalies magnétiques des fonds océaniques sont :","o":["symétriques par rapport à la dorsale","aléatoires","absentes"],"a":0,"e":"Preuve de l&#39;expansion."},{"n":"tectonique-des-plaques","q":"La croûte océanique la plus ancienne a :","o":["moins de 200 Ma","4 Ga","1 Ga"],"a":0,"e":"Recyclée par subduction."},{"n":"tectonique-des-plaques","q":"La faille de San Andreas est :","o":["transformante","divergente","une fosse"],"a":0,"e":"Coulissement."},{"n":"tectonique-des-plaques","q":"La croûte continentale est recyclée en subduction :","o":["facilement","très peu (trop légère)","jamais créée"],"a":1,"e":"Elle est peu dense."},{"n":"tectonique-des-plaques","q":"Le mot accrétion océanique désigne :","o":["la création de croûte océanique à la dorsale","la disparition d&#39;un océan","l&#39;érosion des côtes"],"a":0,"e":"Frontière divergente."}]},{"id":"annales-2022","t":"Annales corrigées · contrôles 2022 (normale et rattrapage)","seance":"Module G116, contrôles du 21/01/2022 et du 11/02/2022 (QCM)","imp":5,"payant":true,"html":"<p>Les deux contrôles 2022 sont des QCM à réponses multiples. Voici les questions reprises du sujet, avec les bonnes réponses justifiées. Rappel de la consigne : toute rature annule la réponse.<\/p>\n<aside class=\"enc attention\"><div class=\"enc-t\">Attention<\/div><p>Les fichiers « corrigés » fournis ne montrent pas les cases cochées. Les réponses ci-dessous sont rédigées par nous à partir du cours.<\/p>\n<\/aside><h2>Contrôle normal (21/01/2022)<\/h2>\n<section class=\"exo\"><h3>Questions 1 à 6<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><ol>\n<li>Subdivisions du Mésozoïque parmi : Cambrien, Trias, Permien, Crétacé, Jurassique.<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p><strong>Trias, Jurassique, Crétacé.<\/strong> Cambrien et Permien sont paléozoïques.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><ol start=\"2\">\n<li>L&#39;âge de la Terre…<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Justes : <strong>est de 4,56·10⁹ ans<\/strong>, <strong>a été mesuré sur des météorites<\/strong>, <strong>est de 4560·10⁶ ans<\/strong> (même valeur), <strong>est obtenu par radiochronologie<\/strong>. Faux : mesuré sur des roches de la croûte.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><ol start=\"3\">\n<li>Le champ magnétique terrestre…<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Justes : <strong>bouclier qui bloque (dévie) les vents solaires<\/strong>, <strong>fossilisé par les minéraux ferromagnétiques des roches magmatiques<\/strong>, <strong>généré par le mouvement de matière chaude du noyau externe<\/strong>. Faux : naît dans le manteau ; protège des météorites.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"3\"><div class=\"ex-q\"><ol start=\"4\">\n<li>Les plus anciennes roches terrestres…<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Justes : <strong>découvertes au nord du Canada<\/strong>, <strong>sont des gneiss<\/strong>, <strong>≈ 4,04·10⁹ ans<\/strong>, <strong>appartiennent à la croûte continentale<\/strong>. Faux : croûte océanique.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"4\"><div class=\"ex-q\"><ol start=\"5\">\n<li>Une courbe hodochrone…<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Justes : <strong>utilisée en sismologie<\/strong>, <strong>exprime le retard d&#39;arrivée des ondes dans une station<\/strong>, <strong>construite grâce aux enregistrements des stations sismiques<\/strong>. Faux : géochronologie, analyse chimique.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"5\"><div class=\"ex-q\"><ol start=\"6\">\n<li>La limite K-T…<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Justes : <strong>passage de l&#39;ère secondaire à l&#39;ère cénozoïque<\/strong>, <strong>soulignée par une couche argileuse riche en iridium<\/strong>. Faux : extinction des trilobites (fin du Permien).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Contrôle de rattrapage (11/02/2022)<\/h2>\n<section class=\"exo\"><h3>Questions 1 à 7<\/h3><div class=\"ex\" data-x=\"6\"><div class=\"ex-q\"><ol>\n<li>La Pangée est…<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p><strong>Un continent<\/strong> (supercontinent). La formulation du sujet « jusqu&#39;à la fin de l&#39;ère primaire » est discutable : la Pangée se forme à la fin du Paléozoïque et se fragmente au Jurassique.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"7\"><div class=\"ex-q\"><ol start=\"2\">\n<li>Le gradient géothermique est…<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Justes : <strong>l&#39;augmentation de la température avec la profondeur<\/strong>, <strong>estimé à 30 °C/km en moyenne<\/strong>.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"8\"><div class=\"ex-q\"><ol start=\"3\">\n<li>Un point chaud…<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Justes : <strong>se traduit par des éruptions volcaniques<\/strong>, <strong>est à l&#39;origine d&#39;archipels intra-océaniques<\/strong>.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"9\"><div class=\"ex-q\"><ol start=\"4\">\n<li>Une fosse océanique…<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Justes : <strong>souligne une limite convergente<\/strong>, <strong>zone des profondeurs maximales<\/strong>. Faux : zone d&#39;accrétion, associée à une dorsale, caractéristique de l&#39;Atlantique (marges passives).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"10\"><div class=\"ex-q\"><ol start=\"5\">\n<li>La croûte continentale…<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Justes : <strong>plus vieille que la croûte océanique<\/strong>, <strong>dénommée « Sial »<\/strong>, <strong>composition granitique<\/strong>. Faux : épaisseur 7 km (c&#39;est l&#39;océanique) ; « recyclable en subduction » (très peu).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"11\"><div class=\"ex-q\"><ol start=\"6\">\n<li>Éléments du noyau interne.<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p><strong>Ni, Fe<\/strong> (et la proposition Ni, Fe, S est acceptée par de nombreux cours pour le noyau dans son ensemble ; le soufre est surtout dans le noyau externe).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"12\"><div class=\"ex-q\"><ol start=\"7\">\n<li>Les ondes de compression…<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Justes : <strong>ondes longitudinales P<\/strong>, <strong>vitesse jusqu&#39;à ≈ 14 km/s<\/strong>. Faux : ondes S, ne traversent pas les liquides.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>QCM d&#39;entraînement<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Le Permien appartient au :<\/div><button class=\"opt\" data-o=\"0\">Paléozoïque<\/button><button class=\"opt\" data-o=\"1\">Mésozoïque<\/button><button class=\"opt\" data-o=\"2\">Cénozoïque<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">4,56·10⁹ ans et 4560·10⁶ ans :<\/div><button class=\"opt\" data-o=\"0\">sont la même valeur<\/button><button class=\"opt\" data-o=\"1\">diffèrent d&#39;un facteur 10<\/button><button class=\"opt\" data-o=\"2\">diffèrent d&#39;un facteur 1000<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Le champ magnétique est fossilisé dans :<\/div><button class=\"opt\" data-o=\"0\">les minéraux ferromagnétiques des roches magmatiques<\/button><button class=\"opt\" data-o=\"1\">les fossiles<\/button><button class=\"opt\" data-o=\"2\">les glaciers<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">La croûte de 7 km d&#39;épaisseur est :<\/div><button class=\"opt\" data-o=\"0\">océanique<\/button><button class=\"opt\" data-o=\"1\">continentale<\/button><button class=\"opt\" data-o=\"2\">le manteau<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">« Sial » désigne :<\/div><button class=\"opt\" data-o=\"0\">la croûte continentale<\/button><button class=\"opt\" data-o=\"1\">le noyau<\/button><button class=\"opt\" data-o=\"2\">le manteau<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Les ondes S :<\/div><button class=\"opt\" data-o=\"0\">ne traversent pas les liquides<\/button><button class=\"opt\" data-o=\"1\">sont les plus rapides<\/button><button class=\"opt\" data-o=\"2\">sont longitudinales<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">La couche à iridium date de :<\/div><button class=\"opt\" data-o=\"0\">66 Ma<\/button><button class=\"opt\" data-o=\"1\">252 Ma<\/button><button class=\"opt\" data-o=\"2\">4,56 Ga<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Les archipels alignés témoignent :<\/div><button class=\"opt\" data-o=\"0\">d&#39;un point chaud<\/button><button class=\"opt\" data-o=\"1\">d&#39;une dorsale<\/button><button class=\"opt\" data-o=\"2\">d&#39;une fosse<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Une fosse est associée à :<\/div><button class=\"opt\" data-o=\"0\">une subduction<\/button><button class=\"opt\" data-o=\"1\">une accrétion<\/button><button class=\"opt\" data-o=\"2\">un rift continental<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Dans ces QCM, une question peut avoir :<\/div><button class=\"opt\" data-o=\"0\">plusieurs bonnes réponses<\/button><button class=\"opt\" data-o=\"1\">une seule bonne réponse<\/button><button class=\"opt\" data-o=\"2\">aucune réponse<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"annales-2022","rep":null,"tol":null},{"n":"annales-2022","rep":null,"tol":null},{"n":"annales-2022","rep":null,"tol":null},{"n":"annales-2022","rep":null,"tol":null},{"n":"annales-2022","rep":null,"tol":null},{"n":"annales-2022","rep":null,"tol":null},{"n":"annales-2022","rep":null,"tol":null},{"n":"annales-2022","rep":null,"tol":null},{"n":"annales-2022","rep":null,"tol":null},{"n":"annales-2022","rep":null,"tol":null},{"n":"annales-2022","rep":null,"tol":null},{"n":"annales-2022","rep":null,"tol":null},{"n":"annales-2022","rep":null,"tol":null}],"qcm":[{"n":"annales-2022","q":"Le Permien appartient au :","o":["Paléozoïque","Mésozoïque","Cénozoïque"],"a":0,"e":"Dernière période de l&#39;ère primaire."},{"n":"annales-2022","q":"4,56·10⁹ ans et 4560·10⁶ ans :","o":["sont la même valeur","diffèrent d&#39;un facteur 10","diffèrent d&#39;un facteur 1000"],"a":0,"e":"Piège de notation."},{"n":"annales-2022","q":"Le champ magnétique est fossilisé dans :","o":["les minéraux ferromagnétiques des roches magmatiques","les fossiles","les glaciers"],"a":0,"e":"Magnétite."},{"n":"annales-2022","q":"La croûte de 7 km d&#39;épaisseur est :","o":["océanique","continentale","le manteau"],"a":0,"e":"Basaltique."},{"n":"annales-2022","q":"« Sial » désigne :","o":["la croûte continentale","le noyau","le manteau"],"a":0,"e":"Silicium + aluminium."},{"n":"annales-2022","q":"Les ondes S :","o":["ne traversent pas les liquides","sont les plus rapides","sont longitudinales"],"a":0,"e":"Transversales."},{"n":"annales-2022","q":"La couche à iridium date de :","o":["66 Ma","252 Ma","4,56 Ga"],"a":0,"e":"K-T."},{"n":"annales-2022","q":"Les archipels alignés témoignent :","o":["d&#39;un point chaud","d&#39;une dorsale","d&#39;une fosse"],"a":0,"e":"Hawaï."},{"n":"annales-2022","q":"Une fosse est associée à :","o":["une subduction","une accrétion","un rift continental"],"a":0,"e":"Convergence."},{"n":"annales-2022","q":"Dans ces QCM, une question peut avoir :","o":["plusieurs bonnes réponses","une seule bonne réponse","aucune réponse"],"a":0,"e":"Consigne du module."}]}];
+const NOTIONS=[{"id":"univers-systeme-solaire","t":"L'Univers et le système solaire","imp":4,"ch":"univers-systeme-solaire"},{"id":"temps-geologiques","t":"Le temps en géologie","imp":4,"ch":"temps-geologiques"},{"id":"structure-interne","t":"La structure interne de la Terre","imp":5,"ch":"structure-interne"},{"id":"tectonique-des-plaques","t":"La tectonique des plaques","imp":5,"ch":"tectonique-des-plaques"},{"id":"annales-2022","t":"Annales corrigées · contrôles 2022 (normale et rattrapage)","imp":5,"ch":"annales-2022"}];
+const CARTES=[{"n":"univers-systeme-solaire","k":0,"ch":"univers-systeme-solaire","q":"<p>Âge de l&#39;Univers<\/p>\n","r":"<p>≈ 13,8 Ga.<\/p>\n"},{"n":"univers-systeme-solaire","k":1,"ch":"univers-systeme-solaire","q":"<p>Âge de la Terre<\/p>\n","r":"<p>4,56 Ga, mesuré sur des météorites par radiochronologie.<\/p>\n"},{"n":"univers-systeme-solaire","k":2,"ch":"univers-systeme-solaire","q":"<p>Plus vieilles roches terrestres<\/p>\n","r":"<p>Gneiss d&#39;Acasta (Canada), ≈ 4,03 Ga.<\/p>\n"},{"n":"univers-systeme-solaire","k":3,"ch":"univers-systeme-solaire","q":"<p>Planètes telluriques<\/p>\n","r":"<p>Mercure, Vénus, Terre, Mars.<\/p>\n"},{"n":"temps-geologiques","k":4,"ch":"temps-geologiques","q":"<p>Mésozoïque<\/p>\n","r":"<p>Trias, Jurassique, Crétacé (252 à 66 Ma).<\/p>\n"},{"n":"temps-geologiques","k":5,"ch":"temps-geologiques","q":"<p>Limite K-T<\/p>\n","r":"<p>66 Ma, couche riche en iridium, extinction des dinosaures.<\/p>\n"},{"n":"temps-geologiques","k":6,"ch":"temps-geologiques","q":"<p>Principe de recoupement<\/p>\n","r":"<p>Ce qui recoupe est plus récent.<\/p>\n"},{"n":"temps-geologiques","k":7,"ch":"temps-geologiques","q":"<p>Disparition des trilobites<\/p>\n","r":"<p>Fin du Permien (crise Permien-Trias).<\/p>\n"},{"n":"structure-interne","k":8,"ch":"structure-interne","q":"<p>Discontinuité de Gutenberg<\/p>\n","r":"<p>2 900 km, limite manteau/noyau.<\/p>\n"},{"n":"structure-interne","k":9,"ch":"structure-interne","q":"<p>Ondes S<\/p>\n","r":"<p>Transversales, ne traversent pas les liquides.<\/p>\n"},{"n":"structure-interne","k":10,"ch":"structure-interne","q":"<p>Champ magnétique terrestre<\/p>\n","r":"<p>Créé par le fer liquide du noyau externe ; il dévie le vent solaire.<\/p>\n"},{"n":"structure-interne","k":11,"ch":"structure-interne","q":"<p>Gradient géothermique<\/p>\n","r":"<p>≈ 30 °C/km en moyenne.<\/p>\n"},{"n":"tectonique-des-plaques","k":12,"ch":"tectonique-des-plaques","q":"<p>Dorsale<\/p>\n","r":"<p>Frontière divergente, création de lithosphère océanique.<\/p>\n"},{"n":"tectonique-des-plaques","k":13,"ch":"tectonique-des-plaques","q":"<p>Subduction<\/p>\n","r":"<p>Une plaque océanique plonge sous une autre ; fosse, séismes profonds, volcans.<\/p>\n"},{"n":"tectonique-des-plaques","k":14,"ch":"tectonique-des-plaques","q":"<p>Point chaud<\/p>\n","r":"<p>Panache mantellique fixe, volcanisme intraplaque, archipels alignés.<\/p>\n"},{"n":"tectonique-des-plaques","k":15,"ch":"tectonique-des-plaques","q":"<p>Pangée<\/p>\n","r":"<p>Supercontinent unique, fin du Paléozoïque au Jurassique.<\/p>\n"}];
+const OUTILS=[];
+// ---------- Sauvegarde ----------
+// Format « essais » : un objet partagé avec l'ancien module (attempts par notion, cards par indice) ; on ne touche qu'à ces deux champs.
+// Format « score10 » : scores des chapitres dans MODULE.cle, essais et cartes dans MODULE.cleEtat.
+const lireJ = (k) => { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } };
+const ecrireJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const etat = () => { const S = lireJ(MODULE.cleEtat); S.attempts = S.attempts || {}; S.cards = S.cards || {}; return S; };
+function noter(n, ok) { const S = etat(); (S.attempts[n] = S.attempts[n] || []).push(ok ? 1 : 0); if (S.attempts[n].length > 30) S.attempts[n].shift(); ecrireJ(MODULE.cleEtat, S); }
+// Maîtrisé = au moins 3 essais et 80 % de réussite sur les 5 derniers (règle commune à la plateforme).
+function statut(n) {
+  if (MODULE.format === "score10") { const v = lireJ(MODULE.cle)[n]; if (v !== undefined) return [v >= 8 ? "ok" : "fragile", v / 10]; }
+  if (MODULE.format === "best") { const v = (lireJ(MODULE.cle).notions || {})[n]; return v && v.best != null ? [v.best >= 0.8 ? "ok" : "fragile", v.best] : ["jamais", null]; }
+  if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[n]; return v && v.pc !== undefined ? [v.pc >= 80 ? "ok" : "fragile", v.pc / 100] : ["jamais", null]; } const a = (etat().attempts[n] || []).slice(-5); if (!a.length) return ["jamais", null]; const r = a.reduce((x, y) => x + y, 0) / a.length; return [(etat().attempts[n].length >= 3 && r >= 0.8) ? "ok" : "fragile", r]; }
+const NCH = {}; NOTIONS.forEach((n) => (NCH[n.ch] = NCH[n.ch] || []).push(n));
+function scoreChap(c) {
+  if (MODULE.format === "score10") return lireJ(MODULE.cle)[c.id];
+  if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[c.id]; return v && v.pc !== undefined ? Math.round(v.pc / 10) : undefined; }
+  if (MODULE.format === "best") { const v = (lireJ(MODULE.cle).notions || {})[c.id]; return v && v.best != null ? Math.round(v.best * 10) : undefined; }
+  const l = NCH[c.id] || []; if (!l.length || !l.some((n) => statut(n.id)[0] !== "jamais")) return undefined;
+  return Math.round((10 * l.filter((n) => statut(n.id)[0] === "ok").length) / l.length);
+}
+// ---------- Flashcards (boîtes de Leitner, mêmes intervalles que les anciens modules) ----------
+const CFG_C = MODULE.cartes || { champ: "box", intervalles: [0, 1, 3, 7, 14, 30], echec: 1, depart: 0 };
+const INTV = CFG_C.intervalles, CHAMP = CFG_C.champ;
+const jour = () => new Date().toISOString().slice(0, 10);
+const numJour = (d) => Math.floor(new Date(d + "T00:00:00").getTime() / 864e5);
+const dansJours = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); };
+const aRevoir = () => { const S = etat(), t = numJour(jour()); return CARTES.map((_, i) => i).filter((i) => { const st = S.cards[CARTES[i].k]; return !st || numJour(st.due) <= t; }); };
+let file = [], montre = false;
+
+const nav = document.getElementById("nav"), main = document.getElementById("main"), pct = document.getElementById("pct");
+let cur = -1, rep = {};
+const VUES = { bord: -3, cartes: -2, intro: -1 };
+function dessinerNav() {
+  let ok = 0;
+  const ligne = (i, titre, sous, v) => `<button class="${cur === i ? "on" : ""}" data-go="${i}"><span>${titre}${sous ? `<span class="se">${sous}</span>` : ""}</span><span class="sc ${v >= 8 ? "ok" : ""}">${v === undefined ? "" : v + "/10"}</span></button>`;
+  const dues = CARTES.length ? aRevoir().length : 0;
+  let h = ligne(VUES.bord, "📊 Tableau de bord");
+  if (CARTES.length) h += ligne(VUES.cartes, `🃏 Flashcards${dues ? ` <b>(${dues})</b>` : ""}`);
+  if (MODULE.intro) h += ligne(VUES.intro, "Avant de commencer");
+  h += '<div class="sep"></div>' + CHAPS.map((c, i) => { const v = scoreChap(c); if (v >= 8) ok++; return ligne(i, `${i + 1}. ${c.t}`, c.seance, v); }).join("");
+  nav.innerHTML = h;
+  pct.textContent = `${ok}/${CHAPS.length} maîtrisés`;
+}
+function vueBord() {
+  const st = NOTIONS.map((n) => ({ ...n, s: statut(n.id) }));
+  const okN = st.filter((n) => n.s[0] === "ok").length, fr = st.filter((n) => n.s[0] === "fragile"), jam = st.filter((n) => n.s[0] === "jamais");
+  const chapDe = (id) => CHAPS.findIndex((c) => c.id === id);
+  const li = (n) => `<li><button data-go="${chapDe(n.ch)}">${n.t}</button><span>${n.s[1] === null ? "jamais testé" : Math.round(100 * n.s[1]) + " %"}</span></li>`;
+  return `<h1 class="t">Tableau de bord</h1>
+  <div class="kpi"><div><b>${okN}/${NOTIONS.length}</b>${MODULE.format === "essais" ? "notions" : "chapitres"} maîtrisé(e)s</div><div><b>${fr.length}</b>à consolider</div><div><b>${CARTES.length ? aRevoir().length : 0}</b>flashcards à revoir aujourd'hui</div></div>
+  <div class="barre"><i style="width:${NOTIONS.length ? (100 * okN) / NOTIONS.length : 0}%"></i></div>
+  ${fr.length ? `<h2>À consolider en priorité</h2><ul class="liste-n">${fr.sort((a, b) => b.imp - a.imp || a.s[1] - b.s[1]).slice(0, 10).map(li).join("")}</ul>` : ""}
+  ${jam.length ? `<h2>Pas encore travaillé (les plus importants d'abord)</h2><ul class="liste-n">${jam.sort((a, b) => b.imp - a.imp).slice(0, 10).map(li).join("")}</ul>` : ""}
+  <p style="color:var(--mute);font-size:14px">Une ${MODULE.format === "essais" ? "notion" : "partie"} est maîtrisée après au moins 3 essais (QCM, exercices, flashcards) avec 80 % de réussite sur les 5 derniers.</p>`;
+}
+function vueCartes() {
+  if (!file.length) { file = aRevoir(); montre = false; }
+  if (!file.length) return `<h1 class="t">Flashcards</h1><p>✔ Rien à revoir aujourd'hui. Reviens demain : les cartes réussies reviennent après 1, 3, 7, 14 puis 30 jours.</p>`;
+  const i = file[0], c = CARTES[i], st = etat().cards[c.k], n = NOTIONS.find((x) => x.id === c.n);
+  return `<h1 class="t">Flashcards</h1><p style="color:var(--mute)">${file.length} carte(s) à revoir aujourd'hui.</p>
+  <div class="carte"><div class="lbl">${n ? n.t : ""} · ${st && st[CHAMP] >= 0 ? "boîte " + st[CHAMP] : "nouvelle"}</div>${c.q}${montre ? `<div class="rep">${c.r}</div>` : ""}</div>
+  <div class="ex-b">${montre ? `<button class="b ko" data-fc="0">Raté</button><button class="b ok" data-fc="1">Je savais</button>` : `<button class="b p" data-fc="voir">Retourner la carte</button>`}</div>`;
+}
+window.typeset = () => { if (MODULE.maths && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([main]).catch(() => {}); };
+const nEval = (c) => c.qcm.length + c.ex.filter((x) => x.rep).length;
+const norm = (t) => String(t).toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "").replace(/,/g, ".");
+function bilanChap() {
+  typeset();
+  const c = CHAPS[cur], tot = nEval(c), fait = Object.keys(rep).length, juste = Object.values(rep).reduce((a, b) => a + b, 0), bilan = document.getElementById("bilan");
+  if (!bilan) return;
+  if (fait < tot) { bilan.textContent = `Évaluation du chapitre : ${fait}/${tot} répondu(s) · ${juste} juste${juste > 1 ? "s" : ""}`; dessinerNav(); return; }
+  const sc = Math.round((10 * juste) / fait);
+  if (MODULE.format === "score10") { const s = lireJ(MODULE.cle); s[c.id] = Math.max(sc, s[c.id] ?? 0); ecrireJ(MODULE.cle, s); }
+  if (MODULE.format === "pc") { const s = lireJ(MODULE.cle); s[c.id] = { ...(s[c.id] || {}), pc: Math.round((100 * juste) / fait), date: new Date().toLocaleDateString("fr-FR") }; ecrireJ(MODULE.cle, s); }
+  if (MODULE.format === "best") { const S = etat(); S.notions = S.notions || {}; const st = S.notions[c.id] = { ...(S.notions[c.id] || {}), read: true }; st.last = juste / fait; st.best = Math.max(st.best || 0, st.last); st.tries = (st.tries || 0) + 1; ecrireJ(MODULE.cle, S); }
+  bilan.textContent = `Score : ${sc}/10 ${sc >= 8 ? "· très bien ✔" : "· relis les encadrés « Piège » puis recommence (recharge le chapitre)."}`;
+  dessinerNav();
+}
+// Outils d'origine affichés dans le chapitre : même origine, on masque tout sauf l'outil visé.
+const vueIntegre = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { vueIntegre.unobserve(e.target); chargerIntegre(e.target); } }), { rootMargin: "400px" });
+function chargerIntegre(box) {
+  const f = document.createElement("iframe");
+  f.title = "Outil interactif"; f.loading = "lazy";
+  f.src = box.dataset.src + (box.dataset.ancre ? "#" + box.dataset.ancre : "");
+  f.onload = () => {
+    let d; try { d = f.contentDocument; } catch (e) { return; }
+    if (!d) return;
+    const st = d.createElement("style");
+    st.textContent = "#mztBtn,#mztPan,.toast{display:none!important}html,body{background:transparent!important;margin:0!important;padding:0!important;min-height:0!important}";
+    d.head.appendChild(st);
+    const appliquer = () => {
+      const cible = d.querySelector(box.dataset.cible);
+      if (!cible) return;
+      let e = cible;
+      while (e && e !== d.body) {
+        e.hidden = false; e.style.display = e.style.display === "none" ? "" : e.style.display;
+        e.style.margin = "0"; e.style.padding = e === cible ? "8px 14px" : "0"; e.style.maxWidth = "none";
+        for (const sib of e.parentElement.children) if (sib !== e && !/^(SCRIPT|STYLE|LINK|META|TITLE)$/.test(sib.tagName)) sib.style.display = "none";
+        e = e.parentElement;
+      }
+      if (box.dataset.garder) for (const c of cible.children) c.style.display = c.matches(box.dataset.garder) ? "" : "none";
+    };
+    appliquer(); setTimeout(appliquer, 400);
+    const ajuster = () => { const h = Math.max(d.body.scrollHeight, d.documentElement.scrollHeight); if (h && Math.abs(f.offsetHeight - h) > 4) f.style.height = h + "px"; };
+    ajuster(); new ResizeObserver(ajuster).observe(d.body); setInterval(ajuster, 1500);
+    const att = box.querySelector(".integre-att"); if (att) att.remove();
+  };
+  box.appendChild(f);
+}
+function lancerOutils() {
+  main.querySelectorAll(".integre").forEach((b) => vueIntegre.observe(b));
+  main.querySelectorAll("[data-outil]").forEach((d) => {
+    const tmp = document.createElement("div"); tmp.innerHTML = OUTILS[Number(d.dataset.outil)];
+    tmp.querySelectorAll("script").forEach((sc) => { const n = document.createElement("script"); n.textContent = sc.textContent; sc.replaceWith(n); });
+    d.replaceWith(...tmp.childNodes);
+  });
+}
+function aller(i) {
+  if (i === VUES.intro && !MODULE.intro) i = 0;
+  if (i === VUES.cartes && !CARTES.length) i = 0;
+  cur = i; rep = {}; nav.classList.remove("open");
+  try { localStorage.setItem(MODULE.cleEtat + "_dernier", String(i)); } catch (e) {}
+  if (i === VUES.bord) main.innerHTML = vueBord();
+  else if (i === VUES.cartes) { file = []; main.innerHTML = vueCartes(); }
+  else if (i === VUES.intro) main.innerHTML = `<h1 class="t">Avant de commencer</h1>${MODULE.intro}<div class="nx"><span></span><button class="b p" data-go="0">Commencer →</button></div>`;
+  else {
+    const c = CHAPS[i], n = nEval(c);
+    main.innerHTML = `${c.seance ? `<div class="seance">${c.seance}</div>` : ""}<h1 class="t">${c.t}</h1>${c.html}${n ? `<div class="bilan" id="bilan">Évaluation du chapitre : 0/${n} répondu(s)</div>` : ""}<div class="nx">${i > 0 || MODULE.intro ? `<button class="b" data-go="${i > 0 ? i - 1 : VUES.intro}">← Précédent</button>` : "<span></span>"}${i < CHAPS.length - 1 ? `<button class="b p" data-go="${i + 1}">Chapitre suivant →</button>` : ""}</div>`;
+    lancerOutils();
+  }
+  scrollTo(0, 0); dessinerNav(); typeset();
+}
+document.addEventListener("click", (e) => {
+  const g = e.target.closest("[data-go]"); if (g) return aller(Number(g.dataset.go));
+  const et = e.target.closest("[data-et]");
+  if (et) { const f = et.closest(".etapes"), l = f.querySelectorAll(".etape"); let i = Math.min(l.length - 1, Math.max(0, Number(f.dataset.i) + Number(et.dataset.et))); f.dataset.i = i; l.forEach((x, j) => (x.hidden = j !== i)); return; }
+  const fc = e.target.closest("[data-fc]");
+  if (fc) {
+    if (fc.dataset.fc === "voir") { montre = true; main.innerHTML = vueCartes(); typeset(); return; }
+    const i = file.shift(), ok = fc.dataset.fc === "1", S = etat(), k = CARTES[i].k, st = S.cards[k] || { [CHAMP]: CFG_C.depart ?? 0 };
+    st[CHAMP] = ok ? Math.min(INTV.length - 1, Math.max(0, st[CHAMP] + 1)) : CFG_C.echec; st.due = dansJours(ok ? INTV[st[CHAMP]] : 1); S.cards[k] = st; ecrireJ(MODULE.cleEtat, S);
+    noter(CARTES[i].n, ok); montre = false; main.innerHTML = vueCartes(); dessinerNav(); typeset(); return;
+  }
+  const xb = e.target.closest("[data-ex]");
+  if (xb) {
+    const ex = xb.closest(".ex"), v = xb.dataset.ex;
+    if (v === "h") ex.querySelector(".ex-h").hidden = false;
+    else if (v === "v") {
+      const k = Number(ex.dataset.x), it = CHAPS[cur].ex[k], inp = ex.querySelector("input");
+      if (!inp.value.trim() || ("x" + k) in rep) return;
+      const ok = it.tol !== null ? Math.abs(parseFloat(norm(inp.value)) - parseFloat(it.rep[0])) <= it.tol : it.rep.some((r) => norm(r) === norm(inp.value));
+      rep["x" + k] = ok ? 1 : 0; noter(it.n, ok); inp.disabled = true; xb.disabled = true;
+      inp.style.borderColor = ok ? "var(--ok)" : "var(--ko)";
+      const c = ex.querySelector(".ex-c"); c.hidden = false; c.insertAdjacentHTML("afterbegin", `<p>${ok ? "✔ Bonne réponse." : "✘ Raté."}</p>`);
+      bilanChap();
+    }
+    else if (v === "c") ex.querySelector(".ex-c").hidden = false;
+    else if (!ex.classList.contains("fait")) { ex.classList.add("fait"); noter(CHAPS[cur].ex[Number(ex.dataset.x)].n, v === "1"); xb.parentNode.innerHTML = v === "1" ? "✔ Noté : réussi." : "✘ Noté : à retravailler."; dessinerNav(); }
+    return;
+  }
+  const o = e.target.closest(".opt"); if (!o) return;
+  const qq = o.closest(".qq"), k = Number(qq.dataset.k), c = CHAPS[cur], q = c.qcm[k];
+  if (("q" + k) in rep) return;
+  rep["q" + k] = Number(o.dataset.o) === q.a ? 1 : 0;
+  noter(q.n, rep["q" + k] === 1);
+  qq.querySelectorAll(".opt").forEach((b, j) => { b.disabled = true; if (j === q.a) b.classList.add("bon"); else if (b === o) b.classList.add("faux"); });
+  const ex = qq.querySelector(".qq-e"); ex.innerHTML = (rep["q" + k] ? "✔ Bonne réponse. " : "✘ Raté. ") + q.e; ex.hidden = false;
+  bilanChap();
+});
+document.getElementById("menu").onclick = () => nav.classList.toggle("open");
+let depart = MODULE.intro ? -1 : 0; try { const d = localStorage.getItem(MODULE.cleEtat + "_dernier"); if (d !== null) depart = Number(d); } catch (e) {}
+aller(depart >= -3 && depart < CHAPS.length ? depart : 0);
+</script>
+<script>
+window.MZT_CONFIG={"id":"cosmologie-geodynamique","module":"Cosmologie et géodynamique interne","prof":"","student":"un étudiant de licence (FST Béni Mellal)","conventions":"Module G116 « Cosmologie & Géodynamique interne », parcours BCG, Département des Sciences de la Terre, FST Béni Mellal. Les contrôles sont des QCM à réponses multiples (une question peut avoir plusieurs bonnes réponses ; toute rature annule la réponse). Âges en Ga (milliards d'années) ou Ma. Vitesses sismiques en km/s."};
+window.MZT_CONFIG.getContext = () => { const h = document.querySelector("h1.t"); return { label: h ? h.textContent : MODULE.titre, text: (document.querySelector("main").innerText || "").slice(0, 6000) }; };
+</script>
+<script>
+/* ToumaiLearn · tuteur commun (bouton flottant présent sur chaque section)
+   Configuration attendue avant ce script : window.MZT_CONFIG = {
+     id: 'crypto',                      // identifiant court du module (stockage)
+     module: 'Cryptographie',           // nom affiché et donné au tuteur
+     prof: 'Pr A. Farchane',
+     student:'un étudiant de licence (FSABM)',
+     conventions: '…',                  // conventions du prof à respecter
+     getContext: () => ({label, text})  // facultatif : extrait courant (sinon section visible)
+   };
+   Fonctions : extrait automatique de la section visible (ou contexte fourni par le module),
+   mode rapide explicatif par défaut, mode approfondi (modèle supérieur), relances rapides,
+   photo jointe, bouton Arrêter, mémoire des difficultés (note cachée MÉMO), historique par
+   section avec recherche. Stockage : compte (db) si disponible, sinon navigateur. */
+(function () {
+  if (window.MZT) return;
+  const C = Object.assign({ id: 'module', module: 'ce module', prof: '', student: 'un étudiant', conventions: '' }, window.MZT_CONFIG || {});
+  const LS = 'mzt-' + C.id;
+  const $ = (s, r) => (r || document).querySelector(s);
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const today = () => new Date().toLocaleDateString('fr-FR');
+  const norm = (t) => String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  // ---------- état ----------
+  let ST = { threads: [], memos: [] };
+  try { ST = Object.assign(ST, JSON.parse(localStorage.getItem(LS) || '{}')); } catch (e) {}
+  const saveLocal = () => { try { localStorage.setItem(LS, JSON.stringify({ threads: ST.threads.slice(-80), memos: ST.memos.slice(-30) })); } catch (e) {} };
+  let sample = null, ready = false, imgOK = false, db = null, base = null;
+  let cur = null, busy = false, ctl = null, img = null, forced = null;
+
+  // ---------- extrait de la section visible ----------
+  function visibleSection() {
+    const cands = [...document.querySelectorAll('section, [data-tab], [data-view], main')]
+      .filter((el) => !el.closest('.mzt-pan') && el.offsetParent !== null && (el.innerText || '').trim().length > 80);
+    // la plus profonde parmi les visibles qui contiennent le plus de texte
+    cands.sort((a, b) => (b.innerText || '').length - (a.innerText || '').length);
+    let el = cands.find((c) => !cands.some((d) => d !== c && c.contains(d) && (d.innerText || '').length > 0.6 * (c.innerText || '').length)) || cands[0] || document.body;
+    const h = el.querySelector('h1, h2, h3');
+    return { label: (h ? h.innerText : document.title).trim().slice(0, 80), text: (el.innerText || '').replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim() };
+  }
+  // MathJax découpe une formule en un symbole par ligne dans innerText : on la remplace le temps de la lecture par son LaTeX.
+  // (vaut aussi pour l'extrait fourni par la page du module, qui lit lui-même innerText)
+  function avecFormulesEnLatex(lire) {
+    let items = [];
+    try { if (window.MathJax && MathJax.startup && MathJax.startup.document) items = MathJax.startup.document.getMathItemsWithin(document.body) || []; } catch (e) {}
+    const poses = [];
+    items.forEach((it) => {
+      const r = it.typesetRoot; if (!r || !r.isConnected || !r.parentNode) return;
+      const s = document.createElement('span'); s.textContent = it.display ? '\n$$' + it.math.trim() + '$$\n' : '$' + it.math.trim() + '$';
+      r.parentNode.insertBefore(s, r); const d = r.style.display; r.style.display = 'none'; poses.push([s, r, d]);
+    });
+    try { return lire(); } finally { poses.forEach(([s, r, d]) => { s.remove(); r.style.display = d; }); }
+  }
+  function context() {
+    if (forced) return forced;
+    return avecFormulesEnLatex(() => {
+      try { if (C.getContext) { const c = C.getContext(); if (c && c.text) return c; } } catch (e) {}
+      return visibleSection();
+    });
+  }
+
+  // ---------- interface ----------
+  const css = `
+.mzt-btn{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9999;font:600 15px Inter,system-ui,sans-serif;background:#B4532A;color:#fff;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.mzt-pan{--b:#FBF7F0;--s:#F4EDE1;--i:#1E2433;--m:#5C5346;--l:#DCCFBA;--a:#B4532A;--w:#8A5A12;--bad:#A23B2A;position:fixed;right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:9999;width:min(440px,calc(100vw - 20px));height:min(680px,calc(100vh - 70px));height:min(680px,calc(100dvh - 70px));max-height:calc(100vh - 20px);max-height:calc(100dvh - 20px);background:var(--b);color:var(--i);border:1px solid var(--l);border-radius:12px;display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(0,0,0,.3);font:14px/1.5 system-ui,sans-serif}
+@media (prefers-color-scheme:dark){.mzt-pan{--b:#1E2532;--s:#141922;--i:#EDE6D9;--m:#A9A094;--l:#343D4D;--a:#E8906A;--w:#E4C48A;--bad:#E58A7A}}
+.mzt-pan *{box-sizing:border-box}
+.mzt-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:8px 10px;border-bottom:1px solid var(--l)}
+.mzt-h b{flex:0 0 auto}.mzt-h .mzt-ctx{flex:1 1 90px;min-width:0;color:var(--m);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mzt-pan button{font:600 12px system-ui,sans-serif;border:1px solid var(--l);background:var(--s);color:var(--i);border-radius:999px;padding:4px 10px;cursor:pointer}
+.mzt-pan button.mzt-pri{background:var(--a);color:#fff;border-color:var(--a)}
+.mzt-pan button:disabled{opacity:.5}
+.mzt-body{flex:1;min-height:0;display:flex;flex-direction:column}
+.mzt-log{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.mzt-m{padding:8px 11px;border-radius:10px;max-width:92%;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere}
+.mzt-m.a{background:var(--s);align-self:flex-start}.mzt-m.u{background:color-mix(in srgb,var(--a) 22%,transparent);align-self:flex-end}
+.mzt-m .mzt-tag{display:block;font-size:11px;color:var(--w);font-weight:700}
+.mzt-deepbtn{align-self:flex-start;border-color:var(--w)!important;color:var(--w)!important;background:transparent!important}
+.mzt-chips{display:flex;gap:5px;flex-wrap:wrap;padding:4px 10px}
+.mzt-f{display:flex;flex-direction:column;gap:6px;padding:8px 10px;border-top:1px solid var(--l)}
+.mzt-f textarea{width:100%;min-height:54px;max-height:140px;resize:vertical;font:16px system-ui,sans-serif;padding:7px;border:1px solid var(--l);border-radius:8px;background:var(--s);color:var(--i)}
+.mzt-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.mzt-row label{display:flex;gap:4px;align-items:center;font-size:12px;color:var(--m);cursor:pointer}
+.mzt-note{font-size:11.5px;color:var(--m);margin:0}
+.mzt-pan details{padding:0 10px}.mzt-pan summary{cursor:pointer;font-size:12px;color:var(--a);font-weight:600;padding:4px 0}
+.mzt-prev{max-height:140px;overflow:auto;font-size:12px;white-space:pre-wrap;background:var(--s);border-radius:6px;padding:6px;color:var(--m)}
+.mzt-list{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.mzt-item{border:1px solid var(--l);border-radius:8px;padding:8px}
+.mzt-item .mzt-meta{font-size:11px;color:var(--m)}
+.mzt-pan input[type=search]{width:100%;font:16px system-ui,sans-serif;padding:7px;border:1px solid var(--l);border-radius:8px;background:var(--s);color:var(--i)}
+.mzt-pan input[type=checkbox]{width:auto}
+.mzt-pan[hidden],.mzt-btn[hidden],.mzt-pan [hidden]{display:none!important}
+.mzt-h button{flex:0 0 auto;white-space:nowrap}
+.mzt-pan #mztX{background:var(--bad);border-color:var(--bad);color:#fff}
+.mzt-m.a{white-space:normal}.mzt-m.a p{margin:0 0 6px}.mzt-m.a p:last-child{margin-bottom:0}
+.mzt-m.a ul,.mzt-m.a ol{margin:4px 0 6px;padding-left:20px}.mzt-m.a li{margin:2px 0}
+.mzt-m code{font:12.5px ui-monospace,Menlo,Consolas,monospace;background:color-mix(in srgb,var(--i) 10%,transparent);padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
+.mzt-m pre{margin:6px 0;padding:8px;overflow-x:auto;background:color-mix(in srgb,var(--i) 10%,transparent);border-radius:6px;font:12.5px ui-monospace,Menlo,Consolas,monospace;white-space:pre}
+.mzt-m pre code{background:none;padding:0}
+.mzt-tex{font:12.5px ui-monospace,Menlo,Consolas,monospace;color:var(--m)}.mzt-tex[data-ok]{font:inherit;color:inherit}
+.mzt-tex.d{display:block;margin:6px 0;text-align:center}
+.mzt-m mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}.mzt-m mjx-container[display]{margin:0!important}
+.mzt-m mjx-container svg{max-width:none}
+.mzt-tab{overflow-x:auto;margin:6px 0}.mzt-tab table{border-collapse:collapse;font-size:13px;min-width:60%}
+.mzt-tab th,.mzt-tab td{border:1px solid var(--l);padding:4px 8px;text-align:left;vertical-align:top}.mzt-tab th{background:color-mix(in srgb,var(--a) 12%,transparent);font-weight:600}`;
+  const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+  document.body.insertAdjacentHTML('beforeend', `
+<button class="mzt-btn" id="mztBtn" type="button">Tuteur</button>
+<div class="mzt-pan" id="mztPan" hidden role="dialog" aria-label="Tuteur">
+ <div class="mzt-h"><b>Tuteur</b><span class="mzt-ctx" id="mztCtx"></span><button type="button" id="mztTabH">Historique</button><button type="button" id="mztTabM">Mémoire</button><button type="button" id="mztX">Fermer</button></div>
+ <div class="mzt-body" id="mztChat">
+  <details><summary>Voir l'extrait envoyé au tuteur</summary><div class="mzt-prev" id="mztPrev"></div></details>
+  <div class="mzt-log" id="mztLog"></div>
+  <div class="mzt-chips" id="mztChips"></div>
+  <form class="mzt-f" id="mztF">
+   <textarea id="mztIn" placeholder="Ta question, ou ta réponse à vérifier… (Entrée pour envoyer, Maj+Entrée pour aller à la ligne)"></textarea>
+   <div class="mzt-row">
+    <button class="mzt-pri" id="mztSend" type="submit">Envoyer</button>
+    <button type="button" id="mztStop" hidden>Arrêter</button>
+    <label id="mztImgL" hidden>📎 Photo<input type="file" id="mztImg" accept="image/*" hidden></label>
+    <span class="mzt-note" id="mztImgN"></span>
+    <label title="Modèle plus puissant : réponse plus longue et plus détaillée, consomme davantage"><input type="checkbox" id="mztDeep"> Approfondi</label>
+    <button type="button" id="mztNew">Nouvelle discussion</button>
+   </div>
+   <p class="mzt-note" id="mztNote"></p>
+  </form>
+ </div>
+ <div class="mzt-body" id="mztHist" hidden><div style="padding:10px"><input type="search" id="mztQ" placeholder="Chercher dans toutes mes anciennes questions…"></div><div class="mzt-list" id="mztList"></div></div>
+ <div class="mzt-body" id="mztMem" hidden><div class="mzt-list"><p class="mzt-note">Ce que le tuteur retient de tes difficultés d'une conversation à l'autre. Il s'en sert pour faire des liens avec tes confusions passées. Tu peux effacer une note.</p><div id="mztMemL"></div></div></div>
+</div>`);
+
+  const CHIPS = ['Explique plus simplement', 'Donne un exemple concret', "Pourquoi c'est un piège ?", 'Fais-moi un mini-exercice'];
+  $('#mztChips').innerHTML = CHIPS.map((c) => `<button type="button" data-chip="${esc(c)}">${esc(c)}</button>`).join('');
+
+  function view(v) {
+    $('#mztChat').hidden = v !== 'chat'; $('#mztHist').hidden = v !== 'hist'; $('#mztMem').hidden = v !== 'mem';
+    $('#mztTabH').textContent = v === 'hist' ? 'Retour' : 'Historique'; $('#mztTabM').textContent = v === 'mem' ? 'Retour' : 'Mémoire';
+    if (v === 'hist') renderList(); if (v === 'mem') renderMem();
+  }
+  function note() {
+    $('#mztNote').textContent = !ready ? 'Connexion au tuteur…' : sample
+      ? 'Mode rapide (économe) par défaut. « Approfondi » ou « Approfondir cette réponse » utilise un modèle supérieur. Pense à chercher dans l\'Historique avant de reposer une question.'
+      : 'Le tuteur n\'est pas disponible ici (il faut ouvrir la page dans Claude et accepter la demande d\'autorisation). L\'historique reste consultable.';
+  }
+  function refreshCtx() {
+    const c = context(); $('#mztCtx').textContent = '· ' + c.label; $('#mztPrev').textContent = c.text.slice(0, 2500) + (c.text.length > 2500 ? '\n…' : '');
+    return c;
+  }
+  function openPanel(ctx) {
+    forced = ctx && ctx.text ? ctx : null;
+    $('#mztPan').hidden = false; $('#mztBtn').hidden = true; view('chat');
+    const c = refreshCtx();
+    if (!cur || cur.sec !== c.label) { const ts = ST.threads.filter((t) => t.sec === c.label); cur = forced ? null : ts[ts.length - 1] || null; }
+    renderLog(); note(); setTimeout(() => $('#mztIn').focus(), 30);
+  }
+  function closePanel() { $('#mztPan').hidden = true; $('#mztBtn').hidden = false; forced = null; }
+
+  // Sur téléphone, la réponse doit avoir la place : relances et note seulement sur une discussion vide.
+  function compacter(on) { $('#mztChips').hidden = on; $('#mztNote').hidden = on; }
+  function renderLog() {
+    const log = $('#mztLog'); log.innerHTML = ''; compacter(!!(cur && cur.msgs.length));
+    if (!cur || !cur.msgs.length) {
+      log.innerHTML = `<div class="mzt-m a">Pose ta question sur « ${esc(context().label)} » : une phrase que tu ne comprends pas, un calcul à vérifier, un exemple en plus… Tu peux joindre une photo de ton brouillon.</div>`; return;
+    }
+    cur.msgs.forEach((m, i) => {
+      const d = document.createElement('div'); d.className = 'mzt-m ' + (m.r === 'u' ? 'u' : 'a');
+      if (m.d) d.innerHTML = '<span class="mzt-tag">Réponse approfondie</span>';
+      if (m.r === 'u') d.appendChild(document.createTextNode(m.t)); else d.insertAdjacentHTML('beforeend', md(m.t)); log.appendChild(d);
+      if (m.r === 'a' && i === cur.msgs.length - 1 && !m.d && !busy) {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'mzt-deepbtn'; b.textContent = 'Approfondir cette réponse';
+        b.onclick = () => ask('Approfondis ta réponse précédente : explique plus en détail, avec un exemple complet et les pièges.', true); log.appendChild(b);
+      }
+    });
+    dessinerMaths(log); log.scrollTop = 1e9;
+  }
+  function renderList() {
+    const q = norm($('#mztQ').value || ''); const ts = [...ST.threads].reverse().filter((t) => !q || norm(t.msgs.map((m) => m.t).join(' ')).includes(q));
+    $('#mztList').innerHTML = ts.length ? ts.map((t) => `<details class="mzt-item"><summary>${esc(t.title)}</summary><div class="mzt-meta">${esc(t.sec)} · ${esc(t.date)}</div>${t.msgs.map((m) => `<div class="mzt-m ${m.r === 'u' ? 'u' : 'a'}" style="margin:6px 0">${m.r === 'u' ? esc(m.t) : md(m.t)}</div>`).join('')}<button type="button" data-cont="${esc(t.id)}">Continuer cette discussion</button></details>`).join('')
+      : `<p class="mzt-note">${ST.threads.length ? 'Aucune discussion ne contient ce mot.' : 'Aucune discussion pour l\'instant.'}</p>`;
+    dessinerMaths($('#mztList'));
+  }
+  function renderMem() {
+    $('#mztMemL').innerHTML = ST.memos.length ? ST.memos.map((m, i) => `<div class="mzt-item"><div class="mzt-meta">${esc(m.date)}</div>${esc(m.text)}<div><button type="button" data-memdel="${i}" style="margin-top:4px">Effacer</button></div></div>`).join('')
+      : '<p class="mzt-note">Aucune note pour l\'instant. Elles apparaîtront au fil de tes questions.</p>';
+  }
+
+  // ---------- stockage compte ----------
+  async function saveThread(t) {
+    saveLocal(); if (!db) return;
+    try { await db.collection(base + '/threads').doc(t.id).set({ sec: t.sec, date: t.date, title: t.title, msgs: t.msgs.slice(-40) }); } catch (e) {}
+  }
+  async function saveMemos() { saveLocal(); if (!db) return; try { await db.doc(base).set({ memos: ST.memos.slice(-30), updated: Date.now() }); } catch (e) {} }
+
+  // ---------- appel au tuteur ----------
+  const ERR = { not_granted: 'Tu n\'as pas autorisé la page à utiliser Claude. Recharge-la et accepte la demande, ou change-le dans le menu Autorisations de l\'artifact.', rate_limited: 'Trop de questions d\'un coup, ou limite d\'usage atteinte. Réessaie dans un moment.', prompt_too_large: 'L\'extrait est trop long : ouvre une partie plus précise du cours.', image_rejected: 'Cette photo n\'est pas acceptée. Essaie un JPEG ou un PNG plus léger.', refused: 'Claude n\'a pas pu répondre à cette demande. Reformule ta question.' };
+  const visible = (t) => {
+    const L = String(t).split('\n');
+    for (let i = L.length - 1; i >= Math.max(0, L.length - 3); i--) if (/^\s*M[ÉE]MO\s*:/i.test(L[i])) return L.slice(0, i).join('\n').trim();
+    return String(t).trim();
+  };
+  // rendu léger : on échappe le HTML d'abord, puis gras, italique, code, titres, puces, tableaux et blocs de code.
+  // Les formules ($…$, $$…$$, \(…\), \[…\]) sont mises de côté avant le Markdown, puis dessinées par MathJax.
+  const MATHS = [];
+  const protegerMaths = (t) => {
+    MATHS.length = 0;
+    const garde = (tex, d) => { MATHS.push({ tex: tex.trim(), d }); return '\u0000' + (MATHS.length - 1) + '\u0000'; };
+    const RX = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\\\(([\s\S]+?)\\\)|\$(?=[^\s$\d])([^$\n]*?[^\s$\\])\$(?!\d)/g;
+    // le code (blocs ``` et `…`) n'est jamais lu comme une formule
+    return String(t).split(/(```[\s\S]*?(?:```|$))/).map((bloc, i) => i % 2 ? bloc
+      : bloc.split(/(`[^`\n]*`)/).map((x, j) => j % 2 ? x : x.replace(RX, (_, a, b, c, d) => a != null ? garde(a, 1) : b != null ? garde(b, 1) : c != null ? garde(c, 0) : garde(d, 0))).join('')).join('');
+  };
+  const rendreMaths = (h) => h.replace(/\u0000(\d+)\u0000/g, (_, n) => { const m = MATHS[+n]; return m ? `<span class="mzt-tex${m.d ? ' d' : ''}" data-d="${m.d}">${esc(m.tex)}</span>` : ''; });
+  const inl = (s) => {
+    const p = s.split('`'); if (p.length % 2 === 0) { const last = p.pop(); p[p.length - 1] += '`' + last; }
+    return p.map((x, i) => i % 2 ? '<code>' + esc(x) + '</code>' : esc(x).replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*\w])\*([^*\n]+)\*(?![*\w])/g, '$1<em>$2</em>')).join('');
+  };
+  const cellules = (l) => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
+  const md = (t) => {
+    const out = []; let list = null, code = null, tab = null;
+    const flushTab = () => {
+      if (!tab) return;
+      if (tab.length >= 2 && /^[\s|:-]+$/.test(tab[1]) && tab[1].includes('-')) {
+        const [tete, , ...corps] = tab;
+        out.push('<div class="mzt-tab"><table><thead><tr>' + cellules(tete).map((c) => '<th>' + inl(c) + '</th>').join('') + '</tr></thead><tbody>'
+          + corps.map((r) => '<tr>' + cellules(r).map((c) => '<td>' + inl(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>');
+      } else tab.forEach((r) => out.push('<p>' + inl(r) + '</p>'));
+      tab = null;
+    };
+    const flush = () => { flushTab(); if (list) { out.push('</' + list + '>'); list = null; } };
+    protegerMaths(t).split('\n').forEach((raw) => {
+      if (/^\s*```/.test(raw)) { if (code === null) { flush(); code = []; } else { out.push('<pre>' + esc(code.join('\n')) + '</pre>'); code = null; } return; }
+      if (code !== null) { code.push(raw); return; }
+      let m;
+      if (/^\s*\|.*\|\s*$/.test(raw)) { if (list) { out.push('</' + list + '>'); list = null; } (tab = tab || []).push(raw); return; }
+      flushTab();
+      if ((m = raw.match(/^\s*#{1,6}\s+(.*)$/))) { flush(); out.push('<p><strong>' + inl(m[1]) + '</strong></p>'); }
+      else if ((m = raw.match(/^\s*[-*•]\s+(.*)$/))) { if (list !== 'ul') { flush(); out.push('<ul>'); list = 'ul'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if ((m = raw.match(/^\s*\d+[.)]\s+(.*)$/))) { if (list !== 'ol') { flush(); out.push('<ol>'); list = 'ol'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if (!raw.trim()) flush();
+      else { flush(); out.push('<p>' + inl(raw) + '</p>'); }
+    });
+    if (code !== null) out.push('<pre>' + esc(code.join('\n')) + '</pre>');
+    flush(); return rendreMaths(out.join(''));
+  };
+
+  // ---------- MathJax : celui de la page s'il existe, sinon chargé à la première formule ----------
+  let mjPret = null;
+  const mathjax = () => mjPret || (mjPret = new Promise((ok, ko) => {
+    if (!window.MathJax) {
+      window.MathJax = { svg: { fontCache: 'global' }, startup: { typeset: false } };
+      const s = document.createElement('script'); s.async = true; s.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js';
+      s.onerror = () => ko(new Error('MathJax')); document.head.appendChild(s);
+    }
+    let n = 0; const t = setInterval(() => {
+      if (window.MathJax && MathJax.tex2svgPromise && MathJax.startup && MathJax.startup.promise) { clearInterval(t); MathJax.startup.promise.then(ok, ko); }
+      else if (++n > 150) { clearInterval(t); ko(new Error('MathJax')); }
+    }, 100);
+  })).catch((e) => { mjPret = null; throw e; });
+  const svgCache = new Map(); let file = Promise.resolve();
+  function dessinerMaths(racine) {
+    const spans = [...racine.querySelectorAll('.mzt-tex:not([data-ok])')]; if (!spans.length) return;
+    mathjax().then(() => spans.forEach((sp) => {
+      const cle = sp.dataset.d + '|' + sp.textContent;
+      const poser = (n) => { if (!sp.isConnected || sp.dataset.ok) return; sp.textContent = ''; sp.appendChild(n.cloneNode(true)); sp.dataset.ok = '1'; };
+      if (svgCache.has(cle)) return poser(svgCache.get(cle));
+      file = file.then(() => MathJax.tex2svgPromise(sp.textContent, { display: sp.dataset.d === '1' }).then((n) => { svgCache.set(cle, n); poser(n); })).catch(() => {});
+    })).catch(() => {});
+  }
+  async function ask(q, deep) {
+    q = (q || '').trim(); deep = deep || $('#mztDeep').checked;
+    if (busy || !q) return; if (!sample) { note(); return; }
+    const c = refreshCtx();
+    if (!cur || (cur.sec !== c.label && !forced)) { cur = { id: 't' + Date.now().toString(36), sec: c.label, date: today(), title: q.slice(0, 80), msgs: [] }; ST.threads.push(cur); }
+    else if (!ST.threads.includes(cur)) ST.threads.push(cur);
+    cur.msgs.push({ r: 'u', t: q }); busy = true; renderLog();
+    const out = document.createElement('div'); out.className = 'mzt-m a'; out.textContent = deep ? 'Réflexion approfondie…' : 'Réflexion…'; $('#mztLog').appendChild(out);
+    $('#mztSend').disabled = true; $('#mztStop').hidden = false;
+    const style = deep
+      ? 'Réponse APPROFONDIE (400 à 700 mots) : 1) l\'intuition avec une analogie, 2) l\'explication détaillée pas à pas, 3) pourquoi ça marche, 4) un exemple complet chiffré, 5) les pièges fréquents et ce qui tombe à l\'examen, 6) une question pour vérifier la compréhension.'
+      : 'Réponse EXPLICATIVE (150 à 250 mots) : 1) l\'idée en une phrase, 2) l\'explication pas à pas, 3) un petit exemple chiffré ou concret, 4) une courte question pour vérifier la compréhension.';
+    const mem = [];
+    if (ST.memos.length) mem.push('DIFFICULTÉS DÉJÀ REPÉRÉES :\n' + ST.memos.slice(-12).map((m) => `- ${m.date} : ${m.text}`).join('\n'));
+    const lastQ = ST.threads.flatMap((t) => t.msgs.filter((m) => m.r === 'u').map((m) => `[${t.sec}] ${m.t.slice(0, 100)}`)).slice(-6);
+    if (lastQ.length) mem.push('SES DERNIÈRES QUESTIONS :\n' + lastQ.map((x) => '- ' + x).join('\n'));
+    const rules = `Tu es le tuteur de ${C.student}, pour le module ${C.module}${C.prof ? ' du ' + C.prof : ''}. Il apprend souvent la notion pour la première fois.
+Règles : réponds en français simple, en Markdown léger (**gras** pour les termes clés, tirets, étapes numérotées). Toute formule ou tout calcul s'écrit en LaTeX : $…$ dans la phrase, $$…$$ seul sur sa ligne pour une formule importante (ex. $\\hat y_i$, $$\\text{MSE}=\\frac{1}{n}\\sum_{i=1}^{n}(y_i-\\hat y_i)^2$$) ; jamais d'accents graves pour une formule, ils sont réservés au code et aux noms de fonctions. Un petit tableau Markdown est permis s'il clarifie (3 colonnes maximum, l'écran est étroit). ${style} Appuie-toi d'abord sur l'EXTRAIT ci-dessous et sur les conventions du prof ; si une source générale diffère du cours, signale l'écart et dis quelle version utiliser à l'examen (celle du prof). Pour un calcul, pose chaque étape et vérifie-la. S'il envoie une réponse ou une photo de brouillon, corrige étape par étape et nomme précisément l'erreur. Si tu n'es pas sûr, dis-le. S'il demande un mini-exercice, donne l'exercice sans la solution.
+Utilise sa mémoire pour faire des liens avec ses confusions passées, sans la réciter.
+Termine TOUJOURS par une dernière ligne séparée au format exact « MÉMO: … » qui résume en 15 mots maximum la difficulté révélée par sa question (ou « MÉMO: rien »). Cette ligne lui est cachée.
+${C.conventions ? 'CONVENTIONS DU PROF : ' + C.conventions + '\n' : ''}MÉMOIRE DE L'ÉLÈVE :
+${mem.join('\n\n') || '(rien pour l\'instant)'}
+EXTRAIT (${c.label}) :
+${c.text.slice(0, deep ? 9000 : 3500)}`;
+    const recent = cur.msgs.slice(deep ? -9 : -5, -1).map((m) => ({ role: m.r === 'u' ? 'user' : 'assistant', content: m.t }));
+    while (recent.length && recent[0].role !== 'user') recent.shift();
+    const msgs = [...recent.filter((m) => m.content && m.content.trim()), { role: 'user', content: q }]; while (msgs.length > 1 && msgs[0].role !== 'user') msgs.shift(); msgs[0] = { role: 'user', content: rules + '\n\n---\nQuestion : ' + msgs[0].content };
+    ctl = new AbortController();
+    const opts = { modelTier: deep ? 'complex' : 'quick', cache: false, signal: ctl.signal, onText: ({ text }) => { out.innerHTML = md(visible(text)); dessinerMaths(out); $('#mztLog').scrollTop = 1e9; } };
+    if (img) opts.images = [img];
+    try {
+      const r = await sample(msgs, opts);
+      const mm = r.text.match(/(?:^|\n)\s*M[ÉE]MO\s*:\s*(.+)\s*$/i);
+      cur.msgs.push({ r: 'a', t: visible(r.text) + (r.truncated ? '\n\n(Réponse coupée : pose une question plus ciblée.)' : ''), d: !!deep });
+      if (mm && !/^\s*rien/i.test(mm[1])) { ST.memos.push({ date: today(), text: mm[1].trim().slice(0, 160) }); if (ST.memos.length > 30) ST.memos.shift(); saveMemos(); }
+      await saveThread(cur);
+    } catch (e) {
+      const kept = e && e.text ? visible(e.text) : '';
+      if (e && e.code === 'cancelled') { if (kept) cur.msgs.push({ r: 'a', t: kept + '\n(Arrêté.)' }); else cur.msgs.pop(); }
+      else { cur.msgs.pop(); compacter(!!cur.msgs.length); out.textContent = (kept ? kept + '\n\n' : '') + (ERR[e && e.code] || 'Le tuteur n\'a pas pu répondre. Réessaie dans un instant.'); }
+      if (!cur.msgs.length) ST.threads = ST.threads.filter((t) => t !== cur);
+      saveLocal();
+      if (!(e && e.code === 'cancelled')) { busy = false; $('#mztSend').disabled = false; $('#mztStop').hidden = true; img = null; $('#mztImgN').textContent = ''; return; }
+    }
+    busy = false; $('#mztSend').disabled = false; $('#mztStop').hidden = true; img = null; $('#mztImg').value = ''; $('#mztImgN').textContent = ''; renderLog();
+  }
+
+  // ---------- événements ----------
+  $('#mztBtn').onclick = () => openPanel(null);
+  $('#mztX').onclick = closePanel;
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#mztPan').hidden) closePanel(); });
+  $('#mztTabH').onclick = () => view($('#mztHist').hidden ? 'hist' : 'chat');
+  $('#mztTabM').onclick = () => view($('#mztMem').hidden ? 'mem' : 'chat');
+  $('#mztQ').oninput = renderList;
+  $('#mztList').onclick = (e) => { const id = e.target.dataset && e.target.dataset.cont; if (!id) return; cur = ST.threads.find((t) => t.id === id); view('chat'); $('#mztCtx').textContent = '· ' + cur.sec; renderLog(); };
+  $('#mztMemL').onclick = (e) => { const i = e.target.dataset && e.target.dataset.memdel; if (i == null) return; ST.memos.splice(+i, 1); saveMemos(); renderMem(); };
+  $('#mztChips').onclick = (e) => { const b = e.target.closest('[data-chip]'); if (!b) return; const t = $('#mztIn'); t.value = b.dataset.chip + (t.value ? ' : ' + t.value : ''); t.focus(); };
+  $('#mztNew').onclick = () => { cur = null; renderLog(); };
+  $('#mztStop').onclick = () => { if (ctl) ctl.abort(); };
+  $('#mztImg').onchange = (e) => { img = e.target.files[0] || null; $('#mztImgN').textContent = img ? 'Photo : ' + img.name : ''; };
+  $('#mztF').onsubmit = (e) => { e.preventDefault(); const v = $('#mztIn').value; $('#mztIn').value = ''; ask(v); };
+  $('#mztIn').addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('#mztF').requestSubmit(); } });
+
+  // ---------- capacités (facultatives) ----------
+  const W = window.claude;
+  if (W && W.use) {
+    W.use('sample').then((s) => { sample = s; ready = true; note();
+      if (s && s.limits) s.limits().then((l) => { if (l && l.images) { imgOK = true; $('#mztImgL').hidden = false; if (l.images.mediaTypes) $('#mztImg').accept = l.images.mediaTypes.join(','); } }).catch(() => {});
+    }).catch(() => { ready = true; note(); });
+    Promise.all([W.use('db'), W.use('user')]).then(async ([d, u]) => {
+      if (!d || !u) return; const id = await u.id(); if (!id) return; db = d; base = 'data/users/' + id + '/mzt_' + C.id;
+      try {
+        const m = await db.doc(base).get(); if (m.exists) { const v = m.data() || {}; if (Array.isArray(v.memos)) ST.memos = JSON.parse(JSON.stringify(v.memos)); }
+        const q = await db.collection(base + '/threads').get(); const remote = q.docs.map((x) => Object.assign({ id: x.id }, JSON.parse(JSON.stringify(x.data() || {}))));
+        const map = {}; [...ST.threads, ...remote].forEach((t) => { if (!map[t.id] || (t.msgs || []).length > (map[t.id].msgs || []).length) map[t.id] = t; });
+        ST.threads = Object.values(map).sort((a, b) => parseInt(a.id.slice(1), 36) - parseInt(b.id.slice(1), 36)); saveLocal();
+      } catch (e) {}
+    }).catch(() => {});
+  } else { ready = true; note(); }
+
+  window.MZT = { open: openPanel, close: closePanel };
+})();
+
+</script>
+<script>(function(){var a=document.getElementById("retour");if(!a)return;var p="";try{p=window.top.location.pathname}catch(e){}
+if(window.top===window&&location.protocol==="file:"){a.hidden=true;return}
+a.href=p.indexOf("/decouvrir")===0||location.pathname.indexOf("/decouvrir")===0?"/decouvrir":"/app/modules";})();</script>
+</body>
+</html>

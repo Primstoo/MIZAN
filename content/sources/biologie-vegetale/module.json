@@ -1,0 +1,20 @@
+{
+  "titre": "Biologie végétale",
+  "prof": "",
+  "semestre": "S3",
+  "etablissement": "FST Béni Mellal",
+  "fichier": "biologie-vegetale.html",
+  "cle": "biologie-vegetale_scores",
+  "resume": "Biologie végétale de la filière BCG : classification, algues, champignons, bryophytes, cryptogames vasculaires, gymnospermes et angiospermes, multiplication végétative, avec les contrôles corrigés (thallophytes et embryophytes).",
+  "conventions": "Module Biologie végétale, BCG S3, Département des Sciences de la Vie, FST Béni Mellal. Deux parties : Thallophytes (algues = Phycophytes, champignons = Mycota) et Embryophytes (Bryophytes, Cryptogames vasculaires, Spermaphytes). Contrôles en vrai/faux (réponse fausse = −0,5 point) et QCM à réponses multiples. Toujours préciser le cycle (haplophasique, diplophasique, haplodiplophasique).",
+  "intro": "Ce module suit **le cours de Biologie végétale de la FST Béni Mellal** (BCG S3) : des algues aux plantes à fleurs, puis **les contrôles corrigés**.\n\n**Comment l'utiliser**\n\n1. Retiens d'abord la classification du chapitre 1 : tout le reste s'y range.\n2. Pour chaque groupe, apprends : appareil végétatif, conduction, reproduction, cycle.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.** Attention : au contrôle, une réponse fausse retire des points.\n\n**À vérifier** : le cours est rédigé par nous à partir des chapitres fournis ; les réponses des contrôles ne figurent pas dans les fichiers.",
+  "chapitres": [
+    "01-classification.md",
+    "02-algues.md",
+    "03-champignons.md",
+    "04-bryophytes.md",
+    "05-cryptogames-vasculaires.md",
+    "06-spermaphytes-multiplication.md",
+    "07-annales-corrigees.md"
+  ]
+}

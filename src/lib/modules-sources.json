@@ -51,6 +51,23 @@
     "annexes": []
   },
   {
+    "slug": "cosmologie-geodynamique",
+    "titre": "Cosmologie et géodynamique interne",
+    "prof": "",
+    "semestre": "S1",
+    "fichier": "cosmologie-geodynamique.html",
+    "resume": "Module G116 de la filière BCG : l'Univers et le système solaire, le temps géologique et la datation, la structure interne de la Terre par la sismologie, la tectonique des plaques, avec les contrôles 2022 corrigés.",
+    "cles": [
+      "cosmologie-geodynamique_scores",
+      "cosmologie-geodynamique_scores_etat",
+      "mzt-cosmologie-geodynamique*"
+    ],
+    "cle": "cosmologie-geodynamique_scores",
+    "format": "score10",
+    "chapitres": 5,
+    "annexes": []
+  },
+  {
     "slug": "culture-digitale",
     "titre": "Culture digitale (Digital skills)",
     "prof": "",
@@ -239,6 +256,23 @@
     "annexes": [
       "archi-ordinateurs-outils.html"
     ]
+  },
+  {
+    "slug": "biologie-vegetale",
+    "titre": "Biologie végétale",
+    "prof": "",
+    "semestre": "S3",
+    "fichier": "biologie-vegetale.html",
+    "resume": "Biologie végétale de la filière BCG : classification, algues, champignons, bryophytes, cryptogames vasculaires, gymnospermes et angiospermes, multiplication végétative, avec les contrôles corrigés (thallophytes et embryophytes).",
+    "cles": [
+      "biologie-vegetale_scores",
+      "biologie-vegetale_scores_etat",
+      "mzt-biologie-vegetale*"
+    ],
+    "cle": "biologie-vegetale_scores",
+    "format": "score10",
+    "chapitres": 7,
+    "annexes": []
   },
   {
     "slug": "chimie-minerale",

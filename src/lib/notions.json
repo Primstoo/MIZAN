@@ -2977,5 +2977,99 @@
     "g": "cours"
    }
   ]
+ },
+ "cosmologie-geodynamique": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "univers-systeme-solaire",
+    "t": "L'Univers et le système solaire",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "temps-geologiques",
+    "t": "Le temps en géologie",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "structure-interne",
+    "t": "La structure interne de la Terre",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "tectonique-des-plaques",
+    "t": "La tectonique des plaques",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "annales-2022",
+    "t": "Annales corrigées · contrôles 2022 (normale et rattrapage)",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
+ },
+ "biologie-vegetale": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "classification",
+    "t": "Classification des végétaux",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "algues",
+    "t": "Les algues (Phycophytes)",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "champignons",
+    "t": "Les champignons (Mycota)",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "bryophytes",
+    "t": "Les Bryophytes",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "cryptogames-vasculaires",
+    "t": "Les Cryptogames vasculaires",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "spermaphytes-multiplication",
+    "t": "Gymnospermes, Angiospermes et multiplication végétative",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "annales-corrigees",
+    "t": "Annales corrigées · contrôles Thallophytes et Embryophytes",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }
