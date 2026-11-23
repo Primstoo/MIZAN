@@ -3142,5 +3142,130 @@
    "a": 0,
    "e": "Vapeur sous pression."
   }
+ ],
+ "biochimie": [
+  {
+   "n": "enzymologie",
+   "q": "Une enzyme abaisse :",
+   "o": [
+    "l'énergie d'activation",
+    "ΔG",
+    "la constante d'équilibre"
+   ],
+   "a": 0,
+   "e": "Catalyse."
+  },
+  {
+   "n": "metabolisme-glucidique",
+   "q": "La glycolyse a lieu dans :",
+   "o": [
+    "le cytosol",
+    "la mitochondrie",
+    "le noyau"
+   ],
+   "a": 0,
+   "e": "Pas d'O₂ nécessaire."
+  },
+  {
+   "n": "metabolisme-lipidique",
+   "q": "La β-oxydation a lieu dans :",
+   "o": [
+    "la matrice mitochondriale",
+    "le cytosol",
+    "le noyau"
+   ],
+   "a": 0,
+   "e": "Comme Krebs."
+  },
+  {
+   "n": "annale-2020",
+   "q": "Un couplage nécessite ΔG global :",
+   "o": [
+    "négatif",
+    "positif",
+    "nul"
+   ],
+   "a": 0,
+   "e": "Spontanéité."
+  },
+  {
+   "n": "glucides-lipides",
+   "q": "Le saccharose est formé de :",
+   "o": [
+    "glucose + fructose",
+    "glucose + galactose",
+    "glucose + glucose"
+   ],
+   "a": 0,
+   "e": "Sucre de table."
+  },
+  {
+   "n": "acides-amines",
+   "q": "Le pyruvate donne par transamination :",
+   "o": [
+    "l'alanine",
+    "l'aspartate",
+    "la sérine"
+   ],
+   "a": 0,
+   "e": "Famille du pyruvate."
+  }
+ ],
+ "tectonique": [
+  {
+   "n": "failles",
+   "q": "Une faille normale indique :",
+   "o": [
+    "une extension",
+    "une compression",
+    "un plissement"
+   ],
+   "a": 0,
+   "e": "Toit qui descend."
+  },
+  {
+   "n": "plis-schistosite",
+   "q": "Au cœur d'un synclinal :",
+   "o": [
+    "les couches les plus jeunes",
+    "les plus anciennes",
+    "aucune couche"
+   ],
+   "a": 0,
+   "e": "Définition."
+  },
+  {
+   "n": "annale-2020",
+   "q": "Un piège à pétrole structural typique :",
+   "o": [
+    "un anticlinal sous une couverture imperméable",
+    "un synclinal sans couverture",
+    "une plage"
+   ],
+   "a": 0,
+   "e": "Le pétrole monte."
+  },
+  {
+   "n": "contraintes-deformation",
+   "q": "En extension, on observe :",
+   "o": [
+    "des failles normales",
+    "des failles inverses",
+    "des chevauchements"
+   ],
+   "a": 0,
+   "e": "Étirement."
+  },
+  {
+   "n": "domaines-maroc",
+   "q": "Le Rif est une chaîne :",
+   "o": [
+    "alpine",
+    "hercynienne",
+    "précambrienne"
+   ],
+   "a": 0,
+   "e": "Cénozoïque."
+  }
  ]
 }

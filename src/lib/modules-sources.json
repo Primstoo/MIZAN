@@ -429,6 +429,23 @@
     "annexes": []
   },
   {
+    "slug": "biochimie",
+    "titre": "Biochimie structurale et métabolique",
+    "prof": "Pr N. Elabbadi (métabolique)",
+    "semestre": "S4",
+    "fichier": "biochimie.html",
+    "resume": "Biochimie de la filière BCG : glucides et lipides, enzymologie, bioénergétique et métabolisme glucidique, métabolisme des lipides, métabolisme des acides aminés, avec l'examen de septembre 2020 corrigé.",
+    "cles": [
+      "biochimie_scores",
+      "biochimie_scores_etat",
+      "mzt-biochimie*"
+    ],
+    "cle": "biochimie_scores",
+    "format": "score10",
+    "chapitres": 6,
+    "annexes": []
+  },
+  {
     "slug": "javascript",
     "titre": "JavaScript",
     "prof": "Pr Zouina",
@@ -511,6 +528,23 @@
     "cle": "se2_scores",
     "format": "score10",
     "chapitres": 12,
+    "annexes": []
+  },
+  {
+    "slug": "tectonique",
+    "titre": "Tectonique",
+    "prof": "Pr Ben Kabbour",
+    "semestre": "S4",
+    "fichier": "tectonique.html",
+    "resume": "Tectonique de la filière BCG : contraintes et déformation, failles, plis et schistosité, les grands domaines structuraux du Maroc, la tectonique au service des ressources, avec l'examen 2020 corrigé.",
+    "cles": [
+      "tectonique_scores",
+      "tectonique_scores_etat",
+      "mzt-tectonique*"
+    ],
+    "cle": "tectonique_scores",
+    "format": "score10",
+    "chapitres": 5,
     "annexes": []
   },
   {

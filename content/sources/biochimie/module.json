@@ -1,0 +1,19 @@
+{
+  "titre": "Biochimie structurale et métabolique",
+  "prof": "Pr N. Elabbadi (métabolique)",
+  "semestre": "S4",
+  "etablissement": "FST Béni Mellal",
+  "fichier": "biochimie.html",
+  "cle": "biochimie_scores",
+  "resume": "Biochimie de la filière BCG : glucides et lipides, enzymologie, bioénergétique et métabolisme glucidique, métabolisme des lipides, métabolisme des acides aminés, avec l'examen de septembre 2020 corrigé.",
+  "conventions": "Modules Biochimie structurale et Biochimie métabolique (Pr N. Elabbadi), BCG S4, FST Béni Mellal, 2021. L'examen de biochimie métabolique (1 h) se répond par oui ou non. Notations : ΔG°', Km, Vmax, NAD⁺/NADH, FAD/FADH₂. Les cours au format PowerPoint et Word n'ont pas été lus ; le plan suit les PDF fournis.",
+  "intro": "Ce module couvre **la biochimie structurale** (glucides, lipides) et **la biochimie métabolique** du Pr Elabbadi (enzymes, glucides, lipides, acides aminés), puis **l'examen de septembre 2020 corrigé**.\n\n**Comment l'utiliser**\n\n1. Lis un chapitre et retiens le bilan de chaque voie : où, quoi au départ, quoi à l'arrivée, combien d'ATP.\n2. Pour les oui/non, une seule erreur dans la phrase la rend fausse.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n\n**À vérifier** : le cours est rédigé par nous ; les supports structuraux fournis sont surtout des scans et des diaporamas.",
+  "chapitres": [
+    "01-glucides-lipides.md",
+    "02-enzymologie.md",
+    "03-metabolisme-glucidique.md",
+    "04-metabolisme-lipidique.md",
+    "05-acides-amines.md",
+    "06-annale-2020.md"
+  ]
+}

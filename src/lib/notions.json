@@ -3165,5 +3165,93 @@
     "g": "cours"
    }
   ]
+ },
+ "biochimie": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "glucides-lipides",
+    "t": "Glucides et lipides",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "enzymologie",
+    "t": "Enzymologie",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "metabolisme-glucidique",
+    "t": "Bioénergétique et métabolisme glucidique",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "metabolisme-lipidique",
+    "t": "Métabolisme des lipides",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "acides-amines",
+    "t": "Métabolisme des acides aminés",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "annale-2020",
+    "t": "Annale corrigée · examen de septembre 2020",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
+ },
+ "tectonique": {
+  "unite": "chapitre",
+  "groupes": [
+   {
+    "id": "cours",
+    "t": "Chapitres"
+   }
+  ],
+  "items": [
+   {
+    "id": "contraintes-deformation",
+    "t": "Contraintes et déformation",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "failles",
+    "t": "Les failles",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "plis-schistosite",
+    "t": "Plis et schistosité",
+    "imp": 5,
+    "g": "cours"
+   },
+   {
+    "id": "domaines-maroc",
+    "t": "Les grands domaines structuraux du Maroc",
+    "imp": 4,
+    "g": "cours"
+   },
+   {
+    "id": "annale-2020",
+    "t": "Annale corrigée · examen de septembre 2020",
+    "imp": 5,
+    "g": "cours"
+   }
+  ]
  }
 }

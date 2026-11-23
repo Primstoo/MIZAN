@@ -1,0 +1,18 @@
+{
+  "titre": "Tectonique",
+  "prof": "Pr Ben Kabbour",
+  "semestre": "S4",
+  "etablissement": "FST Béni Mellal",
+  "fichier": "tectonique.html",
+  "cle": "tectonique_scores",
+  "resume": "Tectonique de la filière BCG : contraintes et déformation, failles, plis et schistosité, les grands domaines structuraux du Maroc, la tectonique au service des ressources, avec l'examen 2020 corrigé.",
+  "conventions": "Module de Tectonique, BCG S4, Département des Sciences de la Terre, FST Béni Mellal (responsable : Pr Ben Kabbour). Une sortie de terrain dans la région de Khénifra (Moyen Atlas) accompagne le module. Notations : σ1 > σ2 > σ3 contraintes principales ; pendage et direction des couches ; rejet d'une faille.",
+  "intro": "Ce module suit **le cours de Tectonique de la FST Béni Mellal** (BCG S4) et la **sortie de Khénifra**, puis **l'examen de septembre 2020 corrigé** (question de synthèse).\n\n**Comment l'utiliser**\n\n1. Lis un chapitre et redessine chaque schéma de faille et de pli : à l'examen et sur le terrain, tout passe par le dessin.\n2. Retiens les quatre domaines structuraux du Maroc.\n3. Fais le QCM du chapitre. **8/10 = chapitre maîtrisé.**\n\n**À vérifier** : le cours d'introduction est un diaporama non lu et les examens 2022 sont des scans ; le cours est rédigé par nous à partir des rapports de sortie et du sujet 2020.",
+  "chapitres": [
+    "01-contraintes-deformation.md",
+    "02-failles.md",
+    "03-plis-schistosite.md",
+    "04-domaines-maroc.md",
+    "05-annale-2020.md"
+  ]
+}

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biochimie structurale et métabolique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+<script>try{var t=localStorage.getItem('tl-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+
+<!-- Page générée par scripts/construire-module.mjs : modifier les sources (content/sources), pas ce fichier. -->
+<style>
+:root{--bg:#F4EDE1;--card:#FBF7F0;--ink:#1E2433;--mute:#5C5346;--line:#DCCFBA;--acc:#B4532A;--acc2:#F3E2CF;--h2:#2F5A73;--h2b:#DCE7EE;--ok:#2F7D55;--okb:#DFF0E6;--ko:#A23B2A;--kob:#F4DDD6;--code:#1E2433;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#141922;--card:#1E2532;--ink:#EDE6D9;--mute:#A9A094;--line:#343D4D;--acc:#E8906A;--acc2:#3A2A20;--h2:#7FB3CF;--h2b:#1E3340;--ok:#7FD3A6;--okb:#173326;--ko:#F0907F;--kob:#40221E;--code:#0E1118;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#141922;--card:#1E2532;--ink:#EDE6D9;--mute:#A9A094;--line:#343D4D;--acc:#E8906A;--acc2:#3A2A20;--h2:#7FB3CF;--h2b:#1E3340;--ok:#7FD3A6;--okb:#173326;--ko:#F0907F;--kob:#40221E;--code:#0E1118;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:9px 16px;display:flex;gap:12px;align-items:center}
+header h1{font-size:16px;margin:0;line-height:1.25}header small{display:block;color:var(--mute);font-weight:400;font-size:12px}header .pct{margin-left:auto;font-size:13px;color:var(--mute);white-space:nowrap}
+.wrap{display:grid;grid-template-columns:270px 1fr;max-width:1180px;margin:0 auto}
+nav{padding:14px;border-right:1px solid var(--line);position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto}
+nav button{display:flex;width:100%;text-align:left;gap:8px;align-items:flex-start;background:none;border:0;color:var(--ink);padding:8px 10px;border-radius:8px;cursor:pointer;font:inherit;font-size:14px;line-height:1.35}
+nav button:hover{background:var(--acc2)}nav button.on{background:var(--acc2);font-weight:600}
+nav .sc{margin-left:auto;font-size:12px;color:var(--mute);white-space:nowrap}nav .sc.ok{color:var(--ok);font-weight:600}nav .se{display:block;font-size:11.5px;color:var(--mute);font-weight:400}
+main{padding:22px 30px 90px;min-width:0;max-width:860px}
+.seance{color:var(--acc);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+h1.t{font-size:27px;margin:.1em 0 .7em;line-height:1.25}main h2{font-size:21px;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:4px}main h3{font-size:17.5px;margin-top:1.6em}
+pre{position:relative;background:var(--code);color:#f1e7d6;padding:13px 15px;border-radius:10px;overflow:auto;font-size:13.5px;line-height:1.5}
+pre.sortie{background:var(--card);color:var(--ink);border:1px dashed var(--line);padding-top:22px}.code-tag{position:absolute;top:4px;left:12px;font:600 11px system-ui;color:var(--mute);text-transform:uppercase}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}:not(pre)>code{background:var(--acc2);padding:1px 5px;border-radius:5px}
+main>table,.enc table{border-collapse:collapse;margin:14px 0;font-size:14.5px;display:block;overflow:auto}main>table td,main>table th{border:1px solid var(--line);padding:6px 10px}main>table th{background:var(--acc2);text-align:left}
+blockquote{margin:14px 0;padding:8px 14px;border-left:4px solid var(--line);color:var(--mute)}
+.enc{margin:18px 0;padding:10px 16px;border-radius:10px;border-left:5px solid}.enc p{margin:.35em 0}.enc-t{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.enc.piege,.enc.attention{background:var(--kob);border-color:var(--ko)}.enc.piege .enc-t,.enc.attention .enc-t{color:var(--ko)}
+.enc.astuce{background:var(--h2b);border-color:var(--h2)}.enc.astuce .enc-t{color:var(--h2)}
+.enc.retenir{background:var(--okb);border-color:var(--ok)}.enc.retenir .enc-t{color:var(--ok)}
+.enc.prof{background:var(--acc2);border-color:var(--acc)}.enc.prof .enc-t{color:var(--acc)}
+figure{margin:18px 0}figcaption{font-size:13px;font-weight:600;color:var(--mute);margin-bottom:6px}
+.grille table{border-collapse:separate;border-spacing:4px}.grille td,.grille th{min-width:42px;height:38px;text-align:center;font:14px ui-monospace,Menlo,monospace;padding:4px 8px;border-radius:7px}
+.grille td{background:var(--card);border:1px solid var(--line)}.grille th{color:var(--mute);font-weight:500;font-size:12.5px}
+.grille td.h1{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:700}.grille td.h2{background:var(--h2);color:#fff;border-color:var(--h2);font-weight:700}.grille td.h0{opacity:.35}
+.flux-l{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0}.flux-b{background:var(--card);border:1.5px solid var(--acc);border-radius:9px;padding:7px 12px;font-size:14px}.flux-f{color:var(--acc);font-weight:700}
+.etapes{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}.et-t{font-weight:700;color:var(--acc);margin-bottom:4px}.et-nav{display:flex;gap:8px;justify-content:space-between;margin-top:10px}
+.qcm{margin:22px 0}.qq{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}.qq-q{font-weight:600;margin-bottom:8px}.qq-q p{margin:0}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-size:15px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default}.opt.bon{background:var(--okb);border-color:var(--ok)}.opt.faux{background:var(--kob);border-color:var(--ko)}
+.qq-e{margin-top:8px;padding:9px 12px;border-radius:8px;background:var(--acc2);font-size:14.5px}
+.b{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 13px;border-radius:9px;cursor:pointer;font:inherit;font-size:14px}.b.p{background:var(--acc);color:#fff;border-color:var(--acc)}.b:disabled{opacity:.4;cursor:default}
+.bilan{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 0;font-weight:600;margin-top:20px}
+.nx{display:flex;justify-content:space-between;margin-top:30px;gap:10px}
+#menu{display:none}
+/* compatibilité : variables et classes des anciens modules convertis */
+:root{--panel:var(--card);--muted:var(--mute);--soft:var(--acc2);--blue:var(--h2);--orange:var(--acc);--green:var(--ok);--bad:var(--ko);--badbg:var(--kob);--good:var(--ok);--goodbg:var(--okb);--warnbg:var(--acc2);--warn:var(--acc);--mono:ui-monospace,Menlo,Consolas,monospace;--body:system-ui,sans-serif;--display:system-ui,sans-serif}
+main svg{max-width:100%;height:auto}
+.def,.trap,.exam{padding:10px 16px;border-radius:10px;border-left:5px solid;margin:16px 0}.def{background:var(--h2b);border-color:var(--h2)}.trap{background:var(--kob);border-color:var(--ko)}.exam{background:var(--acc2);border-color:var(--acc)}
+.formula{white-space:pre-line;font-family:var(--mono);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;margin:12px 0}
+.table-wrap{overflow-x:auto;margin:12px 0}.table-wrap table{border-collapse:collapse;font-size:14.5px}.table-wrap td,.table-wrap th{border:1px solid var(--line);padding:6px 10px}.table-wrap th{background:var(--acc2)}
+.integre{margin:16px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}.integre iframe{display:block;width:100%;border:0;min-height:120px}.integre-att{padding:16px;color:var(--mute);font-size:14px}
+.cartes-info{font-size:14px;color:var(--mute)}
+.exo h3{margin-top:1.4em}.ex{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}.ex-q p{margin:.3em 0}.ex-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.ex-h,.ex-c{margin-top:10px;padding:10px 12px;border-radius:8px}.ex-h{background:var(--h2b)}.ex-c{background:var(--okb)}.ex.fait{opacity:.75}.ex-r{display:flex;gap:8px;margin-top:8px}.ex-r input{flex:1;font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink)}
+.b.ok{border-color:var(--ok);color:var(--ok)}.b.ko{border-color:var(--ko);color:var(--ko)}
+.carte{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;min-height:180px;margin:14px 0}.carte .lbl{font-size:12.5px;color:var(--mute);margin-bottom:8px}.carte .rep{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}.kpi div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.kpi b{display:block;font-size:24px}
+.barre{height:8px;background:var(--line);border-radius:6px;overflow:hidden}.barre i{display:block;height:100%;background:var(--ok)}
+.liste-n{list-style:none;padding:0}.liste-n li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.liste-n button{background:none;border:0;color:var(--acc);cursor:pointer;font:inherit;padding:0;text-align:left}
+nav .sep{border-top:1px solid var(--line);margin:8px 0}nav a{display:block;padding:8px 10px;color:var(--ink);font-size:14px;text-decoration:none;border-radius:8px}nav a:hover{background:var(--acc2)}
+
+/* ---- Présentation 11/2026 : même identité que l'appli (Fraunces + Inter, cartes, grandes cibles tactiles) ---- */
+body{font:16.5px/1.7 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+header{padding:10px 16px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+header h1{font:700 17px/1.2 Fraunces,Georgia,serif;letter-spacing:-.01em}header small{font:500 12px/1.4 Inter,system-ui,sans-serif}
+header .pct{font-size:12px;font-weight:700;color:var(--acc);border:1px solid var(--acc);border-radius:999px;padding:5px 10px}
+#menu{width:44px;height:44px;padding:0;border-radius:22px;font-size:17px;flex-shrink:0}
+main{padding:28px 30px 110px;max-width:720px;margin:0 auto;width:100%;animation:mz-in .35s ease both}
+@keyframes mz-in{from{opacity:0;transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){main{animation:none}html{scroll-behavior:auto}}
+.seance{font-size:12px;font-weight:700;letter-spacing:.08em}
+h1.t{font:700 34px/1.12 Fraunces,Georgia,serif;letter-spacing:-.02em;margin:.15em 0 .8em;text-wrap:balance}
+main h2{font:700 24px/1.2 Fraunces,Georgia,serif;letter-spacing:-.01em;margin-top:2.4em;padding:0 0 0 14px;border:0;border-left:4px solid var(--acc);text-wrap:balance}
+main h3{font:700 18px/1.3 Fraunces,Georgia,serif;margin-top:1.8em}
+main p,main li{max-width:66ch}main li{margin:.3em 0}main strong,main b{font-weight:700}
+main a{color:var(--acc)}
+nav{padding:16px 12px}
+nav button{padding:11px 12px;border-radius:12px;min-height:44px;font-size:14.5px}nav button.on{background:var(--acc2);color:var(--ink)}
+nav .se{font-size:12px}nav .sc.ok{color:var(--ok)}nav a{min-height:44px;display:flex;align-items:center;border-radius:12px}
+pre{border-radius:14px;padding:15px 16px;font-size:13.5px}
+main>table,.enc table{font-size:14.5px;border-radius:12px}main>table th{font-weight:700}
+.enc{margin:20px 0;padding:14px 16px;border-radius:16px;border:1px solid;border-left-width:5px}
+.enc-t{font-size:12px;letter-spacing:.08em;margin-bottom:4px}
+.enc.piege,.enc.attention{border-color:var(--ko)}.enc.astuce{border-color:var(--h2)}.enc.retenir{border-color:var(--ok)}.enc.prof{border-color:var(--acc)}
+figure{margin:22px 0}figcaption{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.etapes{border-radius:18px;padding:18px}.et-t{font:700 17px/1.3 Fraunces,Georgia,serif;margin-bottom:8px}.et-nav{margin-top:14px}
+.qq{border-radius:18px;padding:18px;margin:14px 0}.qq-q{font-size:17px;line-height:1.45;margin-bottom:12px}
+.opt{min-height:52px;margin:8px 0;padding:12px 16px;border-width:1.5px;border-radius:14px;background:var(--bg);font-size:16px;transition:transform .12s ease,border-color .15s,background .15s}
+.opt:active:not(:disabled){transform:scale(.98)}
+.opt.bon{border-color:var(--ok);font-weight:600;animation:mz-pop .3s ease}.opt.faux{border-color:var(--ko);animation:mz-shake .3s ease}
+@keyframes mz-pop{50%{transform:scale(1.02)}}@keyframes mz-shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.qq-e{margin-top:10px;padding:12px 14px;border-radius:12px;font-size:15px;line-height:1.55;animation:mz-in .25s ease both}
+.b{min-height:44px;padding:9px 16px;border-radius:12px;font-weight:600;font-size:14.5px;transition:transform .12s ease}.b:active:not(:disabled){transform:scale(.97)}
+.b.p{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bilan{bottom:10px;margin-top:28px;padding:12px 16px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 8px 24px rgba(0,0,0,.18);font-size:14.5px;max-width:calc(100% - 96px)}
+.nx{margin-top:36px}.nx .b{min-height:52px;flex:1;border-radius:14px}
+.ex{border-radius:18px;padding:16px 18px;margin:14px 0}.ex-h,.ex-c{border-radius:12px;padding:12px 14px;animation:mz-in .25s ease both}
+.ex-r input{min-height:44px;min-width:0;border-radius:12px;font-size:16px}.ex-r .b{flex-shrink:0}
+.carte{border-radius:22px;padding:26px;min-height:200px;font-size:17px}.carte .lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.kpi div{border-radius:16px;padding:14px 16px}.kpi b{font:700 28px/1.2 Fraunces,Georgia,serif}
+.barre{height:8px;border-radius:4px}.barre i{background:var(--acc);border-radius:4px}
+.liste-n li{padding:12px 0;align-items:center}
+.flux-b{border-radius:12px;padding:9px 14px;font-weight:600}
+.integre{border-radius:18px}
+/* Schémas : un texte ou une forme sans couleur déclarée prend la couleur du texte (lisible en thème sombre), jamais le noir par défaut */
+:where(main svg:not([fill])){fill:currentColor}
+details.prereq{margin:16px 0;border:1px solid var(--line);border-radius:16px;background:var(--card);padding:0 16px}details.prereq summary{cursor:pointer;min-height:52px;padding:14px 0;line-height:1.5;list-style:none;position:relative;padding-right:28px}details.prereq summary::-webkit-details-marker{display:none}details.prereq summary::after{content:"+";position:absolute;right:2px;top:12px;font-size:22px;font-weight:600;color:var(--acc)}details.prereq[open] summary::after{content:"−"}details.prereq p{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:var(--okb);animation:mz-in .25s ease both}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:4px 0}
+
+@media (max-width:860px){.wrap{grid-template-columns:1fr}nav{display:none;position:fixed;inset:54px 0 0 0;height:auto;background:var(--bg);z-index:4;border:0}nav.open{display:block}#menu{display:inline-block}main{padding:20px 18px 110px}h1.t{font-size:28px}main h2{font-size:22px}nav{inset:65px 0 0 0}}
+
+/* Aucun tableau, schéma ou code ne doit élargir la page (téléphone) : défilement dans son cadre. */
+main table{display:block;max-width:100%;overflow-x:auto}main figure,main .grille,main details{max-width:100%;overflow-x:auto}main :not(pre)>code{overflow-wrap:anywhere}main img{max-width:100%;height:auto}main p,main li,main td,main th,main a{overflow-wrap:break-word}mjx-container[display="true"]{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.retour{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;margin-right:6px;width:44px;height:44px;padding:0;border-radius:22px;font-size:18px;flex-shrink:0}.retour[hidden]{display:none}
+</style>
+</head>
+<body>
+<header><a class="b retour" id="retour" href="/app/modules" target="_top" aria-label="Retour aux cours" title="Retour aux cours">←</a><button class="b" id="menu" aria-label="Chapitres">☰</button><h1>Biochimie structurale et métabolique<small>Pr N. Elabbadi (métabolique) · S4 · FST Béni Mellal</small></h1><span class="pct" id="pct"></span></header>
+<div class="wrap"><nav id="nav"></nav><main id="main"></main></div>
+<script>
+const MODULE={"slug":"biochimie","titre":"Biochimie structurale et métabolique","cle":"biochimie_scores","cleEtat":"biochimie_scores_etat","format":"score10","intro":"<p>Ce module couvre <strong>la biochimie structurale<\/strong> (glucides, lipides) et <strong>la biochimie métabolique<\/strong> du Pr Elabbadi (enzymes, glucides, lipides, acides aminés), puis <strong>l&#39;examen de septembre 2020 corrigé<\/strong>.<\/p>\n<p><strong>Comment l&#39;utiliser<\/strong><\/p>\n<ol>\n<li>Lis un chapitre et retiens le bilan de chaque voie : où, quoi au départ, quoi à l&#39;arrivée, combien d&#39;ATP.<\/li>\n<li>Pour les oui/non, une seule erreur dans la phrase la rend fausse.<\/li>\n<li>Fais le QCM du chapitre. <strong>8/10 = chapitre maîtrisé.<\/strong><\/li>\n<\/ol>\n<p><strong>À vérifier<\/strong> : le cours est rédigé par nous ; les supports structuraux fournis sont surtout des scans et des diaporamas.<\/p>\n","annexes":[],"cartes":null,"maths":false};
+const CHAPS=[{"id":"glucides-lipides","t":"Glucides et lipides","seance":"Biochimie structurale · Glucides, lipides, nucléotides","imp":4,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut reconnaître une fonction aldéhyde (−CHO), cétone (C=O dans la chaîne) et alcool (−OH).<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Le glucose porte un aldéhyde ; le fructose une cétone. Comment les appelle-t-on ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Aldose (glucose) et cétose (fructose).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « petites briques, grandes chaînes ».<\/strong> Oses → diholosides → polyosides ; acides gras + glycérol → triglycérides.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Croire que l&#39;amidon et la cellulose sont pareils parce qu&#39;ils sont faits de glucose. La liaison change tout : α(1→4) dans l&#39;amidon (digestible), β(1→4) dans la cellulose (non digestible par l&#39;humain).<\/p>\n<\/aside><p>À la fin, tu sais classer glucides et lipides et dire à quoi ils servent.<\/p>\n<h2>Idée 1 · Les glucides<\/h2>\n<figure class=\"grille\"><figcaption>Glucides<\/figcaption><table><tr><th>Catégorie,<\/th><th>Exemples,<\/th><th>Rôle<\/th><\/tr><tr><td class=\"h1\">Oses,<\/td><td>glucose,<\/td><td>fructose,<\/td><td>ribose,<\/td><td>énergie,<\/td><td>briques<\/td><\/tr><tr><td class=\"h1\">Diholosides,<\/td><td>saccharose<\/td><td>(Glc-Fru),<\/td><td>lactose<\/td><td>(Gal-Glc),<\/td><td>maltose<\/td><td>(Glc-Glc),<\/td><td>transport,<\/td><td>alimentation<\/td><\/tr><tr><td class=\"h1\">Polyosides<\/td><td>de<\/td><td>réserve,<\/td><td>amidon<\/td><td>(plantes),<\/td><td>glycogène<\/td><td>(animaux),<\/td><td>stockage<\/td><\/tr><tr><td class=\"h1\">Polyosides<\/td><td>de<\/td><td>structure,<\/td><td>cellulose,<\/td><td>chitine,<\/td><td>soutien<\/td><\/tr><\/table><\/figure><h2>Idée 2 · Les lipides<\/h2>\n<figure class=\"grille\"><figcaption>Lipides<\/figcaption><table><tr><th>Famille,<\/th><th>Structure,<\/th><th>Rôle<\/th><\/tr><tr><td class=\"h1\">Acides<\/td><td>gras,<\/td><td>longue<\/td><td>chaîne<\/td><td>carbonée<\/td><td>+<\/td><td>COOH<\/td><td>(saturés<\/td><td>ou<\/td><td>insaturés),<\/td><td>énergie<\/td><\/tr><tr><td class=\"h1\">Triglycérides,<\/td><td>glycérol<\/td><td>+<\/td><td>3<\/td><td>acides<\/td><td>gras,<\/td><td>réserve<\/td><\/tr><tr><td class=\"h1\">Phospholipides,<\/td><td>glycérol<\/td><td>+<\/td><td>2<\/td><td>acides<\/td><td>gras<\/td><td>+<\/td><td>phosphate,<\/td><td>membranes<\/td><\/tr><tr><td class=\"h1\">Stérides<\/td><td>et<\/td><td>stérols,<\/td><td>noyau<\/td><td>stérane<\/td><td>(cholestérol),<\/td><td>membranes,<\/td><td>hormones<\/td><\/tr><\/table><\/figure><h2>Idée 3 · ATP et nucléotides<\/h2>\n<p>L&#39;ATP = adénine + ribose + 3 phosphates. Ses liaisons phosphoanhydride libèrent ≈ 30,5 kJ/mol à l&#39;hydrolyse (ATP → ADP + Pi).<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Pourquoi l&#39;humain ne digère-t-il pas la cellulose ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Il n&#39;a pas d&#39;enzyme capable de couper les liaisons β(1→4).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Un acide gras avec deux doubles liaisons est-il saturé ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Non : il est polyinsaturé.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Le saccharose est formé de :<\/div><button class=\"opt\" data-o=\"0\">glucose + fructose<\/button><button class=\"opt\" data-o=\"1\">glucose + galactose<\/button><button class=\"opt\" data-o=\"2\">glucose + glucose<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">La réserve glucidique animale :<\/div><button class=\"opt\" data-o=\"0\">glycogène<\/button><button class=\"opt\" data-o=\"1\">amidon<\/button><button class=\"opt\" data-o=\"2\">cellulose<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Les phospholipides forment :<\/div><button class=\"opt\" data-o=\"0\">les membranes<\/button><button class=\"opt\" data-o=\"1\">les réserves principales<\/button><button class=\"opt\" data-o=\"2\">les hormones stéroïdes<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Le cholestérol est :<\/div><button class=\"opt\" data-o=\"0\">un stérol<\/button><button class=\"opt\" data-o=\"1\">un acide gras<\/button><button class=\"opt\" data-o=\"2\">un ose<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">La cellulose est une liaison :<\/div><button class=\"opt\" data-o=\"0\">β(1→4)<\/button><button class=\"opt\" data-o=\"1\">α(1→4)<\/button><button class=\"opt\" data-o=\"2\">α(1→6)<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Le fructose est :<\/div><button class=\"opt\" data-o=\"0\">un cétose<\/button><button class=\"opt\" data-o=\"1\">un aldose<\/button><button class=\"opt\" data-o=\"2\">un diholoside<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Un triglycéride contient :<\/div><button class=\"opt\" data-o=\"0\">3 acides gras<\/button><button class=\"opt\" data-o=\"1\">2 acides gras et un phosphate<\/button><button class=\"opt\" data-o=\"2\">1 acide gras<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Le lactose est formé de :<\/div><button class=\"opt\" data-o=\"0\">galactose + glucose<\/button><button class=\"opt\" data-o=\"1\">glucose + fructose<\/button><button class=\"opt\" data-o=\"2\">glucose + glucose<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">L&#39;ATP contient :<\/div><button class=\"opt\" data-o=\"0\">un ribose<\/button><button class=\"opt\" data-o=\"1\">un désoxyribose<\/button><button class=\"opt\" data-o=\"2\">un glucose<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">La chitine est :<\/div><button class=\"opt\" data-o=\"0\">un polyoside de structure<\/button><button class=\"opt\" data-o=\"1\">un lipide<\/button><button class=\"opt\" data-o=\"2\">une protéine<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"glucides-lipides","rep":null,"tol":null},{"n":"glucides-lipides","rep":null,"tol":null},{"n":"glucides-lipides","rep":null,"tol":null}],"qcm":[{"n":"glucides-lipides","q":"Le saccharose est formé de :","o":["glucose + fructose","glucose + galactose","glucose + glucose"],"a":0,"e":"Sucre de table."},{"n":"glucides-lipides","q":"La réserve glucidique animale :","o":["glycogène","amidon","cellulose"],"a":0,"e":"Foie, muscles."},{"n":"glucides-lipides","q":"Les phospholipides forment :","o":["les membranes","les réserves principales","les hormones stéroïdes"],"a":0,"e":"Amphiphiles."},{"n":"glucides-lipides","q":"Le cholestérol est :","o":["un stérol","un acide gras","un ose"],"a":0,"e":"Noyau stérane."},{"n":"glucides-lipides","q":"La cellulose est une liaison :","o":["β(1→4)","α(1→4)","α(1→6)"],"a":0,"e":"Non digestible."},{"n":"glucides-lipides","q":"Le fructose est :","o":["un cétose","un aldose","un diholoside"],"a":0,"e":"Fonction cétone."},{"n":"glucides-lipides","q":"Un triglycéride contient :","o":["3 acides gras","2 acides gras et un phosphate","1 acide gras"],"a":0,"e":"Réserve."},{"n":"glucides-lipides","q":"Le lactose est formé de :","o":["galactose + glucose","glucose + fructose","glucose + glucose"],"a":0,"e":"Sucre du lait."},{"n":"glucides-lipides","q":"L&#39;ATP contient :","o":["un ribose","un désoxyribose","un glucose"],"a":0,"e":"Ribonucléotide."},{"n":"glucides-lipides","q":"La chitine est :","o":["un polyoside de structure","un lipide","une protéine"],"a":0,"e":"Carapaces, champignons."}]},{"id":"enzymologie","t":"Enzymologie","seance":"Biochimie métabolique · Enzymes, cinétique, inhibitions","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir qu&#39;une réaction est spontanée si ΔG &lt; 0, mais peut être très lente.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Une réaction avec ΔG &lt; 0 est-elle forcément rapide ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Non : ΔG dit si elle est possible, pas à quelle vitesse. C&#39;est l&#39;énergie d&#39;activation qui fixe la vitesse.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « l&#39;enzyme change le chemin, pas l&#39;arrivée ».<\/strong> Elle abaisse l&#39;énergie d&#39;activation ; elle ne change ni ΔG ni la constante d&#39;équilibre.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Écrire qu&#39;une enzyme baisse ΔG. <strong>Faux<\/strong> : c&#39;est la question 1 de l&#39;examen 2020.<\/p>\n<\/aside><p>À la fin, tu sais interpréter Km et Vmax et reconnaître le type d&#39;inhibition.<\/p>\n<h2>Idée 1 · Propriétés<\/h2>\n<figure class=\"grille\"><figcaption>Ce que fait et ne fait pas une enzyme<\/figcaption><table><tr><th>Une<\/th><th>enzyme…,<\/th><th>Oui<\/th><th>ou<\/th><th>non<\/th><\/tr><tr><td class=\"h1\">abaisse<\/td><td>l'énergie<\/td><td>d'activation,<\/td><td>oui<\/td><\/tr><tr><td class=\"h1\">change<\/td><td>ΔG<\/td><td>de<\/td><td>la<\/td><td>réaction,<\/td><td>non<\/td><\/tr><tr><td class=\"h1\">change<\/td><td>la<\/td><td>constante<\/td><td>d'équilibre,<\/td><td>non<\/td><\/tr><tr><td class=\"h1\">est<\/td><td>retrouvée<\/td><td>intacte<\/td><td>à<\/td><td>la<\/td><td>fin,<\/td><td>oui<\/td><\/tr><tr><td class=\"h1\">catalyse<\/td><td>dans<\/td><td>les<\/td><td>deux<\/td><td>sens<\/td><td>(si<\/td><td>la<\/td><td>réaction<\/td><td>est<\/td><td>réversible),<\/td><td>oui<\/td><\/tr><tr><td class=\"h1\">a<\/td><td>une<\/td><td>structure<\/td><td>tertiaire<\/td><td>à<\/td><td>l'état<\/td><td>natif,<\/td><td>oui<\/td><td>(quaternaire<\/td><td>seulement<\/td><td>si<\/td><td>plusieurs<\/td><td>sous-unités)<\/td><\/tr><\/table><\/figure><h2>Idée 2 · Michaelis-Menten<\/h2>\n<p>v = Vmax·[S] / (Km + [S]). Km est la concentration de substrat qui donne la moitié de Vmax : plus Km est petit, plus l&#39;affinité est grande.<\/p>\n<svg viewBox=\"0 0 320 130\" role=\"img\" aria-label=\"Courbe hyperbolique de Michaelis : v tend vers Vmax, Km à Vmax/2\" style=\"max-width:360px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M30 10v110h280\"/><path d=\"M30 120C70 50 120 35 300 25\" stroke=\"#D9824F\"/><path d=\"M30 22h270M30 70h45v50\" stroke-dasharray=\"4 4\"/><\/g>\n<g fill=\"currentColor\" font-size=\"10\"><text x=\"2\" y=\"20\">Vmax<\/text><text x=\"0\" y=\"74\">Vmax/2<\/text><text x=\"68\" y=\"128\">Km<\/text><text x=\"285\" y=\"128\">[S]<\/text><\/g>\n<\/svg><h2>Idée 3 · Les inhibitions<\/h2>\n<figure class=\"grille\"><figcaption>Types d'inhibition<\/figcaption><table><tr><th>Type,<\/th><th>Se<\/th><th>fixe<\/th><th>sur,<\/th><th>Km,<\/th><th>Vmax<\/th><\/tr><tr><td class=\"h1\">Compétitive,<\/td><td>le<\/td><td>site<\/td><td>actif,<\/td><td>augmente,<\/td><td>inchangée<\/td><\/tr><tr><td class=\"h1\">Non<\/td><td>compétitive,<\/td><td>un<\/td><td>autre<\/td><td>site,<\/td><td>inchangé,<\/td><td>diminue<\/td><\/tr><tr><td class=\"h1\">Incompétitive,<\/td><td>le<\/td><td>complexe<\/td><td>ES,<\/td><td>diminue,<\/td><td>diminue<\/td><\/tr><\/table><\/figure><h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Examen 2020<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>« Le froid conserve les aliments en réduisant l&#39;énergie d&#39;activation » ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Non : le froid ne change pas Ea ; il ralentit les réactions parce que moins de molécules ont l&#39;énergie de franchir la barrière.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>« Un inhibiteur compétitif ne change pas la Vmax » ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Oui : un excès de substrat déplace l&#39;inhibiteur.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Une enzyme abaisse :<\/div><button class=\"opt\" data-o=\"0\">l&#39;énergie d&#39;activation<\/button><button class=\"opt\" data-o=\"1\">ΔG<\/button><button class=\"opt\" data-o=\"2\">la constante d&#39;équilibre<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">En fin de réaction l&#39;enzyme est :<\/div><button class=\"opt\" data-o=\"0\">inchangée<\/button><button class=\"opt\" data-o=\"1\">consommée<\/button><button class=\"opt\" data-o=\"2\">dénaturée<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Km faible signifie :<\/div><button class=\"opt\" data-o=\"0\">forte affinité<\/button><button class=\"opt\" data-o=\"1\">faible affinité<\/button><button class=\"opt\" data-o=\"2\">vitesse nulle<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Inhibiteur compétitif : Vmax<\/div><button class=\"opt\" data-o=\"0\">inchangée<\/button><button class=\"opt\" data-o=\"1\">diminue<\/button><button class=\"opt\" data-o=\"2\">augmente<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Inhibiteur non compétitif : Km<\/div><button class=\"opt\" data-o=\"0\">inchangé<\/button><button class=\"opt\" data-o=\"1\">augmente<\/button><button class=\"opt\" data-o=\"2\">diminue<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Le froid conserve les aliments car :<\/div><button class=\"opt\" data-o=\"0\">il ralentit les réactions<\/button><button class=\"opt\" data-o=\"1\">il réduit l&#39;énergie d&#39;activation<\/button><button class=\"opt\" data-o=\"2\">il change ΔG<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Une enzyme native a toujours une structure quaternaire :<\/div><button class=\"opt\" data-o=\"0\">oui<\/button><button class=\"opt\" data-o=\"1\">non<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">À [S] très grand, v tend vers :<\/div><button class=\"opt\" data-o=\"0\">Vmax<\/button><button class=\"opt\" data-o=\"1\">0<\/button><button class=\"opt\" data-o=\"2\">Km<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Une enzyme peut catalyser une réaction réversible :<\/div><button class=\"opt\" data-o=\"0\">dans les deux sens<\/button><button class=\"opt\" data-o=\"1\">dans un seul sens<\/button><button class=\"opt\" data-o=\"2\">jamais<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Le site actif est :<\/div><button class=\"opt\" data-o=\"0\">la zone de fixation du substrat<\/button><button class=\"opt\" data-o=\"1\">le gène de l&#39;enzyme<\/button><button class=\"opt\" data-o=\"2\">le produit<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"enzymologie","rep":null,"tol":null},{"n":"enzymologie","rep":null,"tol":null},{"n":"enzymologie","rep":null,"tol":null}],"qcm":[{"n":"enzymologie","q":"Une enzyme abaisse :","o":["l&#39;énergie d&#39;activation","ΔG","la constante d&#39;équilibre"],"a":0,"e":"Catalyse."},{"n":"enzymologie","q":"En fin de réaction l&#39;enzyme est :","o":["inchangée","consommée","dénaturée"],"a":0,"e":"Catalyseur."},{"n":"enzymologie","q":"Km faible signifie :","o":["forte affinité","faible affinité","vitesse nulle"],"a":0,"e":"Peu de substrat suffit."},{"n":"enzymologie","q":"Inhibiteur compétitif : Vmax","o":["inchangée","diminue","augmente"],"a":0,"e":"Surmontable."},{"n":"enzymologie","q":"Inhibiteur non compétitif : Km","o":["inchangé","augmente","diminue"],"a":0,"e":"Autre site."},{"n":"enzymologie","q":"Le froid conserve les aliments car :","o":["il ralentit les réactions","il réduit l&#39;énergie d&#39;activation","il change ΔG"],"a":0,"e":"Moins de chocs efficaces."},{"n":"enzymologie","q":"Une enzyme native a toujours une structure quaternaire :","o":["oui","non"],"a":1,"e":"Seulement si plusieurs sous-unités."},{"n":"enzymologie","q":"À [S] très grand, v tend vers :","o":["Vmax","0","Km"],"a":0,"e":"Saturation."},{"n":"enzymologie","q":"Une enzyme peut catalyser une réaction réversible :","o":["dans les deux sens","dans un seul sens","jamais"],"a":0,"e":"Elle ne change pas l&#39;équilibre."},{"n":"enzymologie","q":"Le site actif est :","o":["la zone de fixation du substrat","le gène de l&#39;enzyme","le produit"],"a":0,"e":"Spécificité."}]},{"id":"metabolisme-glucidique","t":"Bioénergétique et métabolisme glucidique","seance":"Glycolyse, cycle de Krebs, phosphorylation oxydative, couplage","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut savoir que NAD⁺ capte des électrons et devient NADH.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>NADH est-il la forme oxydée ou réduite ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Réduite : il porte des électrons qu&#39;il donnera à la chaîne respiratoire.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « où, quoi, combien ».<\/strong> Pour chaque voie : compartiment, entrée et sortie, ATP et coenzymes.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Placer la glycolyse dans la mitochondrie. Elle se déroule dans le <strong>cytosol<\/strong> ; Krebs et la chaîne respiratoire sont mitochondriaux.<\/p>\n<\/aside><p>À la fin, tu sais faire le bilan de l&#39;oxydation complète du glucose et expliquer le couplage énergétique.<\/p>\n<h2>Idée 1 · Les voies et leurs lieux<\/h2>\n<figure class=\"grille\"><figcaption>Bilan<\/figcaption><table><tr><th>Voie,<\/th><th>Lieu,<\/th><th>Bilan<\/th><\/tr><tr><td class=\"h1\">Glycolyse,<\/td><td>cytosol,<\/td><td>glucose<\/td><td>→<\/td><td>2<\/td><td>pyruvates<\/td><td>+<\/td><td>2<\/td><td>ATP<\/td><td>+<\/td><td>2<\/td><td>NADH<\/td><\/tr><tr><td class=\"h1\">Pyruvate<\/td><td>déshydrogénase,<\/td><td>matrice,<\/td><td>2<\/td><td>pyruvates<\/td><td>→<\/td><td>2<\/td><td>acétyl-CoA<\/td><td>+<\/td><td>2<\/td><td>CO₂<\/td><td>+<\/td><td>2<\/td><td>NADH<\/td><\/tr><tr><td class=\"h1\">Cycle<\/td><td>de<\/td><td>Krebs,<\/td><td>matrice,<\/td><td>2<\/td><td>acétyl-CoA<\/td><td>→<\/td><td>4<\/td><td>CO₂<\/td><td>+<\/td><td>6<\/td><td>NADH<\/td><td>+<\/td><td>2<\/td><td>FADH₂<\/td><td>+<\/td><td>2<\/td><td>GTP<\/td><\/tr><tr><td class=\"h1\">Phosphorylation<\/td><td>oxydative,<\/td><td>membrane<\/td><td>interne,<\/td><td>NADH<\/td><td>et<\/td><td>FADH₂<\/td><td>→<\/td><td>ATP<\/td><td>(≈<\/td><td>30-32<\/td><td>ATP<\/td><td>au<\/td><td>total)<\/td><\/tr><\/table><\/figure><h2>Idée 2 · Le couplage énergétique<\/h2>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Faire passer une réaction défavorable<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/4 · 1. Réaction A : ΔG &gt; 0, impossible seule.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/4 · 2. On la couple à une réaction B très favorable (souvent l&#39;hydrolyse de l&#39;ATP).<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/4 · 3. Il faut que ΔG(A) + ΔG(B) &lt; 0.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/4 · 4. Une enzyme spécifique réalise le couplage.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><h2>Idée 3 · La photosynthèse<\/h2>\n<p>Phase claire (thylakoïdes) : la lumière produit ATP et NADPH, l&#39;eau est oxydée et libère O₂. Cycle de Calvin (stroma) : le CO₂ est fixé en glucides. Elle produit la biomasse, régénère l&#39;O₂ et consomme du CO₂. L&#39;activité humaine augmente le CO₂ ; plus de végétation le diminue. Le trou de la couche d&#39;ozone est dû surtout aux CFC, pas au CO₂.<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Couplage : faut-il ΔG global &gt; 0 ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Non : il faut ΔG global &lt; 0.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Combien de CO₂ libère l&#39;oxydation complète d&#39;un glucose ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 6<\/b><\/p><p>6 (2 par la pyruvate déshydrogénase, 4 par le cycle de Krebs).<\/p>\n<\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">La glycolyse a lieu dans :<\/div><button class=\"opt\" data-o=\"0\">le cytosol<\/button><button class=\"opt\" data-o=\"1\">la mitochondrie<\/button><button class=\"opt\" data-o=\"2\">le noyau<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">Le cycle de Krebs a lieu dans :<\/div><button class=\"opt\" data-o=\"0\">la matrice mitochondriale<\/button><button class=\"opt\" data-o=\"1\">le cytosol<\/button><button class=\"opt\" data-o=\"2\">le réticulum<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">La majorité de l&#39;ATP vient de :<\/div><button class=\"opt\" data-o=\"0\">la phosphorylation oxydative<\/button><button class=\"opt\" data-o=\"1\">la glycolyse<\/button><button class=\"opt\" data-o=\"2\">le cycle de Calvin<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Pour qu&#39;un couplage marche :<\/div><button class=\"opt\" data-o=\"0\">ΔG global &lt; 0<\/button><button class=\"opt\" data-o=\"1\">ΔG global &gt; 0<\/button><button class=\"opt\" data-o=\"2\">ΔG global = 0<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">La photosynthèse libère l&#39;O₂ à partir :<\/div><button class=\"opt\" data-o=\"0\">de l&#39;eau<\/button><button class=\"opt\" data-o=\"1\">du CO₂<\/button><button class=\"opt\" data-o=\"2\">du glucose<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Le cycle de Calvin se déroule dans :<\/div><button class=\"opt\" data-o=\"0\">le stroma<\/button><button class=\"opt\" data-o=\"1\">les thylakoïdes<\/button><button class=\"opt\" data-o=\"2\">la mitochondrie<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">L&#39;acétyl-CoA vient du pyruvate par :<\/div><button class=\"opt\" data-o=\"0\">la pyruvate déshydrogénase<\/button><button class=\"opt\" data-o=\"1\">la glycolyse<\/button><button class=\"opt\" data-o=\"2\">la β-oxydation seulement<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Le trou de la couche d&#39;ozone est surtout dû :<\/div><button class=\"opt\" data-o=\"0\">aux CFC<\/button><button class=\"opt\" data-o=\"1\">au CO₂<\/button><button class=\"opt\" data-o=\"2\">à la photosynthèse<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">NADH donne ses électrons :<\/div><button class=\"opt\" data-o=\"0\">à la chaîne respiratoire<\/button><button class=\"opt\" data-o=\"1\">au glucose<\/button><button class=\"opt\" data-o=\"2\">à la glycolyse<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Plus de forêts :<\/div><button class=\"opt\" data-o=\"0\">diminue le CO₂ atmosphérique<\/button><button class=\"opt\" data-o=\"1\">augmente le CO₂<\/button><button class=\"opt\" data-o=\"2\">n&#39;a aucun effet<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"metabolisme-glucidique","rep":null,"tol":null},{"n":"metabolisme-glucidique","rep":null,"tol":null},{"n":"metabolisme-glucidique","rep":["6"],"tol":null}],"qcm":[{"n":"metabolisme-glucidique","q":"La glycolyse a lieu dans :","o":["le cytosol","la mitochondrie","le noyau"],"a":0,"e":"Pas d&#39;O₂ nécessaire."},{"n":"metabolisme-glucidique","q":"Le cycle de Krebs a lieu dans :","o":["la matrice mitochondriale","le cytosol","le réticulum"],"a":0,"e":"Mitochondrie."},{"n":"metabolisme-glucidique","q":"La majorité de l&#39;ATP vient de :","o":["la phosphorylation oxydative","la glycolyse","le cycle de Calvin"],"a":0,"e":"Chaîne respiratoire."},{"n":"metabolisme-glucidique","q":"Pour qu&#39;un couplage marche :","o":["ΔG global &lt; 0","ΔG global &gt; 0","ΔG global = 0"],"a":0,"e":"Spontanéité."},{"n":"metabolisme-glucidique","q":"La photosynthèse libère l&#39;O₂ à partir :","o":["de l&#39;eau","du CO₂","du glucose"],"a":0,"e":"Photolyse."},{"n":"metabolisme-glucidique","q":"Le cycle de Calvin se déroule dans :","o":["le stroma","les thylakoïdes","la mitochondrie"],"a":0,"e":"Fixation du CO₂."},{"n":"metabolisme-glucidique","q":"L&#39;acétyl-CoA vient du pyruvate par :","o":["la pyruvate déshydrogénase","la glycolyse","la β-oxydation seulement"],"a":0,"e":"Décarboxylation oxydative."},{"n":"metabolisme-glucidique","q":"Le trou de la couche d&#39;ozone est surtout dû :","o":["aux CFC","au CO₂","à la photosynthèse"],"a":0,"e":"Chlorofluorocarbures."},{"n":"metabolisme-glucidique","q":"NADH donne ses électrons :","o":["à la chaîne respiratoire","au glucose","à la glycolyse"],"a":0,"e":"Complexe I."},{"n":"metabolisme-glucidique","q":"Plus de forêts :","o":["diminue le CO₂ atmosphérique","augmente le CO₂","n&#39;a aucun effet"],"a":0,"e":"Puits de carbone."}]},{"id":"metabolisme-lipidique","t":"Métabolisme des lipides","seance":"β-oxydation, corps cétoniques, cholestérol","imp":5,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut se souvenir que l&#39;oxaloacétate est le point de départ du cycle de Krebs (il se combine à l&#39;acétyl-CoA).<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Que donne acétyl-CoA + oxaloacétate ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Du citrate : c&#39;est la première réaction du cycle de Krebs.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « à jeun, le foie gère ».<\/strong> Sans glucose, le foie brûle les acides gras, fabrique du glucose (néoglucogenèse) et des corps cétoniques pour les autres organes.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Dire que le cholestérol cellulaire stimule sa propre synthèse. C&#39;est l&#39;inverse : il <strong>inhibe<\/strong> l&#39;HMG-CoA réductase et la production de récepteurs LDL.<\/p>\n<\/aside><p>À la fin, tu sais expliquer la formation des corps cétoniques à jeun et la régulation du cholestérol.<\/p>\n<h2>Idée 1 · La β-oxydation<\/h2>\n<p>Dans la matrice mitochondriale, l&#39;acide gras activé (acyl-CoA) est coupé de 2 carbones à chaque tour : acétyl-CoA + NADH + FADH₂.<\/p>\n<h2>Idée 2 · À jeun : les corps cétoniques<\/h2>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>La logique de l'examen 2020 (question 13)<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/5 · 1. Sans glucose, les acides gras sont oxydés : beaucoup d&#39;acétyl-CoA et de NADH dans la mitochondrie.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/5 · 2. Le NADH abondant pousse l&#39;oxaloacétate vers le malate : l&#39;oxaloacétate chute.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/5 · 3. Le malate sort de la mitochondrie pour fabriquer du glucose (néoglucogenèse).<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/5 · 4. Sans assez d&#39;oxaloacétate, Krebs ralentit ; l&#39;acétyl-CoA est dirigé vers les corps cétoniques.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">5/5 · 5. Le foie fournit glucose et corps cétoniques aux autres organes.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><svg viewBox=\"0 0 320 100\" role=\"img\" aria-label=\"Acétyl-CoA : vers le cycle de Krebs si oxaloacétate, sinon vers les corps cétoniques\" style=\"max-width:380px;width:100%\">\n<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M110 50h40l40-25h40M150 50l40 25h40\" /><path d=\"M190 75h40\" stroke=\"#D9824F\"/><\/g>\n<g fill=\"currentColor\" font-size=\"10\"><text x=\"20\" y=\"54\">acétyl-CoA<\/text><text x=\"235\" y=\"28\">Krebs<\/text><text x=\"235\" y=\"80\">corps cétoniques<\/text><\/g>\n<\/svg><h2>Idée 3 · Le cholestérol<\/h2>\n<p>Synthèse à partir d&#39;acétyl-CoA ; étape limitante : <strong>HMG-CoA réductase<\/strong> (cible des statines). Le cholestérol libre intracellulaire : inhibe l&#39;HMG-CoA réductase, réduit la synthèse des récepteurs LDL, stimule son estérification (stockage en stérides).<\/p>\n<h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>Application<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Pourquoi un diabétique non traité peut-il produire beaucoup de corps cétoniques ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Sans insuline, ses cellules utilisent mal le glucose : elles brûlent les acides gras, l&#39;oxaloacétate manque et l&#39;acétyl-CoA part vers les corps cétoniques.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>Combien de tours de β-oxydation pour un acide gras à 16 carbones ?<\/p>\n<\/div><div class=\"ex-r\"><input type=\"text\" placeholder=\"Ta réponse\" autocomplete=\"off\" spellcheck=\"false\"><button class=\"b p\" data-ex=\"v\">Vérifier<\/button><\/div><div class=\"ex-b\"><\/div><div class=\"ex-c\" hidden><p><b>Réponse attendue : 7<\/b><\/p><p>7 tours, qui donnent 8 acétyl-CoA.<\/p>\n<\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">La β-oxydation a lieu dans :<\/div><button class=\"opt\" data-o=\"0\">la matrice mitochondriale<\/button><button class=\"opt\" data-o=\"1\">le cytosol<\/button><button class=\"opt\" data-o=\"2\">le noyau<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">À jeun, l&#39;oxaloacétate mitochondrial chute car :<\/div><button class=\"opt\" data-o=\"0\">il est transformé en malate<\/button><button class=\"opt\" data-o=\"1\">il est stocké<\/button><button class=\"opt\" data-o=\"2\">il devient du cholestérol<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">À jeun, l&#39;acétyl-CoA en excès forme :<\/div><button class=\"opt\" data-o=\"0\">des corps cétoniques<\/button><button class=\"opt\" data-o=\"1\">du glycogène<\/button><button class=\"opt\" data-o=\"2\">de l&#39;amidon<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">L&#39;organe qui fournit glucose et corps cétoniques à jeun :<\/div><button class=\"opt\" data-o=\"0\">le foie<\/button><button class=\"opt\" data-o=\"1\">le muscle<\/button><button class=\"opt\" data-o=\"2\">le cerveau<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">Le cholestérol libre :<\/div><button class=\"opt\" data-o=\"0\">inhibe l&#39;HMG-CoA réductase<\/button><button class=\"opt\" data-o=\"1\">stimule l&#39;HMG-CoA réductase<\/button><button class=\"opt\" data-o=\"2\">n&#39;a aucun effet<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Le cholestérol libre stimule :<\/div><button class=\"opt\" data-o=\"0\">son estérification<\/button><button class=\"opt\" data-o=\"1\">la production de récepteurs LDL<\/button><button class=\"opt\" data-o=\"2\">sa synthèse<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Chaque tour de β-oxydation retire :<\/div><button class=\"opt\" data-o=\"0\">2 carbones<\/button><button class=\"opt\" data-o=\"1\">1 carbone<\/button><button class=\"opt\" data-o=\"2\">4 carbones<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Les statines ciblent :<\/div><button class=\"opt\" data-o=\"0\">l&#39;HMG-CoA réductase<\/button><button class=\"opt\" data-o=\"1\">la lipase<\/button><button class=\"opt\" data-o=\"2\">le récepteur LDL<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Le cycle de Krebs ralentit à jeun par manque :<\/div><button class=\"opt\" data-o=\"0\">d&#39;oxaloacétate<\/button><button class=\"opt\" data-o=\"1\">d&#39;acétyl-CoA<\/button><button class=\"opt\" data-o=\"2\">d&#39;O₂<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">Le malate sorti de la mitochondrie sert à :<\/div><button class=\"opt\" data-o=\"0\">la néoglucogenèse<\/button><button class=\"opt\" data-o=\"1\">la β-oxydation<\/button><button class=\"opt\" data-o=\"2\">la synthèse d&#39;ADN<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"metabolisme-lipidique","rep":null,"tol":null},{"n":"metabolisme-lipidique","rep":null,"tol":null},{"n":"metabolisme-lipidique","rep":["7"],"tol":null}],"qcm":[{"n":"metabolisme-lipidique","q":"La β-oxydation a lieu dans :","o":["la matrice mitochondriale","le cytosol","le noyau"],"a":0,"e":"Comme Krebs."},{"n":"metabolisme-lipidique","q":"À jeun, l&#39;oxaloacétate mitochondrial chute car :","o":["il est transformé en malate","il est stocké","il devient du cholestérol"],"a":0,"e":"NADH abondant."},{"n":"metabolisme-lipidique","q":"À jeun, l&#39;acétyl-CoA en excès forme :","o":["des corps cétoniques","du glycogène","de l&#39;amidon"],"a":0,"e":"Cétogenèse."},{"n":"metabolisme-lipidique","q":"L&#39;organe qui fournit glucose et corps cétoniques à jeun :","o":["le foie","le muscle","le cerveau"],"a":0,"e":"Rôle central."},{"n":"metabolisme-lipidique","q":"Le cholestérol libre :","o":["inhibe l&#39;HMG-CoA réductase","stimule l&#39;HMG-CoA réductase","n&#39;a aucun effet"],"a":0,"e":"Rétrocontrôle."},{"n":"metabolisme-lipidique","q":"Le cholestérol libre stimule :","o":["son estérification","la production de récepteurs LDL","sa synthèse"],"a":0,"e":"Stockage."},{"n":"metabolisme-lipidique","q":"Chaque tour de β-oxydation retire :","o":["2 carbones","1 carbone","4 carbones"],"a":0,"e":"Acétyl-CoA."},{"n":"metabolisme-lipidique","q":"Les statines ciblent :","o":["l&#39;HMG-CoA réductase","la lipase","le récepteur LDL"],"a":0,"e":"Anti-cholestérol."},{"n":"metabolisme-lipidique","q":"Le cycle de Krebs ralentit à jeun par manque :","o":["d&#39;oxaloacétate","d&#39;acétyl-CoA","d&#39;O₂"],"a":0,"e":"Limitation."},{"n":"metabolisme-lipidique","q":"Le malate sorti de la mitochondrie sert à :","o":["la néoglucogenèse","la β-oxydation","la synthèse d&#39;ADN"],"a":0,"e":"Fabrication de glucose."}]},{"id":"acides-amines","t":"Métabolisme des acides aminés","seance":"TD · Biosynthèse et dégradation des acides aminés","imp":4,"html":"<h2>Avant de commencer<\/h2>\n<p>Il faut reconnaître un α-cétoacide (C=O à la place du NH₂) et un acide aminé.<\/p>\n<section class=\"exo\"><h3>Vérifie ton prérequis<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>Quel acide aminé correspond au pyruvate ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>L&#39;alanine.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Comment aborder ce chapitre<\/h2>\n<aside class=\"enc astuce\"><div class=\"enc-t\">Astuce<\/div><p><strong>Pense « on échange le NH₂ ».<\/strong> La transamination transfère le groupement aminé d&#39;un acide aminé (souvent le glutamate) à un α-cétoacide.<\/p>\n<\/aside><aside class=\"enc piege\"><div class=\"enc-t\">Piège<\/div><p>Croire que l&#39;ammoniac est éliminé tel quel chez l&#39;humain. Il est toxique : le foie le convertit en <strong>urée<\/strong>.<\/p>\n<\/aside><p>À la fin, tu sais écrire une transamination et la réaction de la glutamate déshydrogénase.<\/p>\n<h2>Idée 1 · Fixer l&#39;ammoniac<\/h2>\n<p>Glutamate déshydrogénase : α-cétoglutarate + NH₄⁺ + NAD(P)H ⇄ glutamate + NAD(P)⁺ + H₂O. Réversible ; de fortes concentrations de NADPH et d&#39;α-cétoglutarate poussent vers l&#39;assimilation de l&#39;ammoniac.<\/p>\n<h2>Idée 2 · La transamination<\/h2>\n<figure class=\"grille\"><figcaption>Familles d'acides aminés non indispensables (TD)<\/figcaption><table><tr><th>α-cétoacide,<\/th><th>Acides<\/th><th>aminés<\/th><th>formés<\/th><\/tr><tr><td class=\"h1\">Pyruvate,<\/td><td>alanine<\/td><\/tr><tr><td class=\"h1\">Oxaloacétate,<\/td><td>aspartate,<\/td><td>asparagine<\/td><\/tr><tr><td class=\"h1\">α-cétoglutarate,<\/td><td>glutamate,<\/td><td>glutamine,<\/td><td>proline,<\/td><td>arginine<\/td><\/tr><tr><td class=\"h1\">3-hydroxypyruvate,<\/td><td>sérine<\/td><\/tr><\/table><\/figure><p><strong>Exemple.<\/strong> Glutamate + pyruvate ⇄ α-cétoglutarate + alanine (alanine aminotransférase, coenzyme : phosphate de pyridoxal).<\/p>\n<h2>Idée 3 · Dégradation et cycle de l&#39;urée<\/h2>\n<figure class=\"etapes\" data-i=\"0\"><figcaption>Devenir d'un acide aminé dégradé<\/figcaption><div class=\"etape\"><div class=\"et-t\">1/4 · 1. Transamination : le NH₂ passe sur l&#39;α-cétoglutarate (glutamate).<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">2/4 · 2. Désamination oxydative du glutamate : NH₄⁺ libéré.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">3/4 · 3. Cycle de l&#39;urée (foie) : NH₄⁺ + CO₂ → urée, éliminée par les reins.<\/div><\/div><div class=\"etape\" hidden><div class=\"et-t\">4/4 · 4. Le squelette carboné rejoint Krebs ou la néoglucogenèse.<\/div><\/div><div class=\"et-nav\"><button class=\"b\" data-et=\"-1\">← Étape précédente<\/button><button class=\"b p\" data-et=\"1\">Étape suivante →<\/button><\/div><\/figure><h2>S&#39;exercer<\/h2>\n<section class=\"exo\"><h3>TD<\/h3><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>Écris la transamination qui forme l&#39;aspartate.<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Glutamate + oxaloacétate ⇄ α-cétoglutarate + aspartate.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><p>L&#39;arginine est-elle indispensable ?<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>Seulement pour les nouveau-nés et les enfants, selon le TD.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>Flashcards<\/h2>\n<p class=\"cartes-info\">🃏 4 flashcards de ce chapitre ajoutées à la révision espacée (menu « Flashcards »).<\/p><h2>QCM du chapitre<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Le pyruvate donne par transamination :<\/div><button class=\"opt\" data-o=\"0\">l&#39;alanine<\/button><button class=\"opt\" data-o=\"1\">l&#39;aspartate<\/button><button class=\"opt\" data-o=\"2\">la sérine<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">L&#39;oxaloacétate donne :<\/div><button class=\"opt\" data-o=\"0\">l&#39;aspartate<\/button><button class=\"opt\" data-o=\"1\">l&#39;alanine<\/button><button class=\"opt\" data-o=\"2\">la proline<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Principal donneur de NH₂ :<\/div><button class=\"opt\" data-o=\"0\">le glutamate<\/button><button class=\"opt\" data-o=\"1\">la glycine<\/button><button class=\"opt\" data-o=\"2\">l&#39;urée<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">L&#39;urée est fabriquée dans :<\/div><button class=\"opt\" data-o=\"0\">le foie<\/button><button class=\"opt\" data-o=\"1\">le rein<\/button><button class=\"opt\" data-o=\"2\">le muscle<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">La glutamate déshydrogénase est :<\/div><button class=\"opt\" data-o=\"0\">réversible<\/button><button class=\"opt\" data-o=\"1\">irréversible<\/button><button class=\"opt\" data-o=\"2\">absente du foie<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Coenzyme des aminotransférases :<\/div><button class=\"opt\" data-o=\"0\">phosphate de pyridoxal<\/button><button class=\"opt\" data-o=\"1\">NAD⁺<\/button><button class=\"opt\" data-o=\"2\">ATP<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">L&#39;ammoniac libre est :<\/div><button class=\"opt\" data-o=\"0\">toxique<\/button><button class=\"opt\" data-o=\"1\">inoffensif<\/button><button class=\"opt\" data-o=\"2\">une réserve<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Le squelette carboné d&#39;un acide aminé peut :<\/div><button class=\"opt\" data-o=\"0\">rejoindre Krebs ou la néoglucogenèse<\/button><button class=\"opt\" data-o=\"1\">être éliminé sous forme d&#39;urée<\/button><button class=\"opt\" data-o=\"2\">devenir de l&#39;ADN directement<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">La sérine dérive :<\/div><button class=\"opt\" data-o=\"0\">du 3-hydroxypyruvate<\/button><button class=\"opt\" data-o=\"1\">du pyruvate<\/button><button class=\"opt\" data-o=\"2\">de l&#39;α-cétoglutarate<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">La transamination change :<\/div><button class=\"opt\" data-o=\"0\">le groupement aminé de place<\/button><button class=\"opt\" data-o=\"1\">le nombre de carbones<\/button><button class=\"opt\" data-o=\"2\">l&#39;ADN<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"acides-amines","rep":null,"tol":null},{"n":"acides-amines","rep":null,"tol":null},{"n":"acides-amines","rep":null,"tol":null}],"qcm":[{"n":"acides-amines","q":"Le pyruvate donne par transamination :","o":["l&#39;alanine","l&#39;aspartate","la sérine"],"a":0,"e":"Famille du pyruvate."},{"n":"acides-amines","q":"L&#39;oxaloacétate donne :","o":["l&#39;aspartate","l&#39;alanine","la proline"],"a":0,"e":"Puis l&#39;asparagine."},{"n":"acides-amines","q":"Principal donneur de NH₂ :","o":["le glutamate","la glycine","l&#39;urée"],"a":0,"e":"Transaminations."},{"n":"acides-amines","q":"L&#39;urée est fabriquée dans :","o":["le foie","le rein","le muscle"],"a":0,"e":"Éliminée par le rein."},{"n":"acides-amines","q":"La glutamate déshydrogénase est :","o":["réversible","irréversible","absente du foie"],"a":0,"e":"Assimilation ou libération de NH₄⁺."},{"n":"acides-amines","q":"Coenzyme des aminotransférases :","o":["phosphate de pyridoxal","NAD⁺","ATP"],"a":0,"e":"Vitamine B6."},{"n":"acides-amines","q":"L&#39;ammoniac libre est :","o":["toxique","inoffensif","une réserve"],"a":0,"e":"Transformé en urée."},{"n":"acides-amines","q":"Le squelette carboné d&#39;un acide aminé peut :","o":["rejoindre Krebs ou la néoglucogenèse","être éliminé sous forme d&#39;urée","devenir de l&#39;ADN directement"],"a":0,"e":"Glucoformateurs, cétogènes."},{"n":"acides-amines","q":"La sérine dérive :","o":["du 3-hydroxypyruvate","du pyruvate","de l&#39;α-cétoglutarate"],"a":0,"e":"Tableau du TD."},{"n":"acides-amines","q":"La transamination change :","o":["le groupement aminé de place","le nombre de carbones","l&#39;ADN"],"a":0,"e":"Échange NH₂ / C=O."}]},{"id":"annale-2020","t":"Annale corrigée · examen de septembre 2020","seance":"Examen de Biochimie métabolique BCG (Pr Elabbadi, 1 h, oui/non)","imp":5,"payant":true,"html":"<p>Le vrai sujet, en oui/non. Chaque réponse est justifiée en une ligne. Les réponses sont rédigées par nous à partir du cours.<\/p>\n<section class=\"exo\"><h3>Enzymologie (questions 1 à 11)<\/h3><div class=\"ex\" data-x=\"0\"><div class=\"ex-q\"><p>1 à 6<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>1 <strong>Non<\/strong> (ΔG inchangé). 2 <strong>Oui<\/strong>. 3 <strong>Non<\/strong> (Kéq inchangée). 4 <strong>Oui<\/strong>. 5 <strong>Oui<\/strong>. 6 <strong>Non<\/strong> (seulement si plusieurs sous-unités).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"1\"><div class=\"ex-q\"><p>7 à 11<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>7 <strong>Non<\/strong> (le froid ne change pas Ea ; il ralentit les réactions). 8 <strong>Oui<\/strong>. 9 <strong>Oui<\/strong> (non compétitif classique). 10 <strong>Non<\/strong> (cytosol). 11 <strong>Oui<\/strong> (si la réaction est réversible).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><section class=\"exo\"><h3>Couplage et régulation (questions 12 à 14)<\/h3><div class=\"ex\" data-x=\"2\"><div class=\"ex-q\"><ol start=\"12\">\n<li>Couplage : a) ΔG global &gt; 0 ; b) enzyme spécifique ; c) produit indispensable.<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>a <strong>Non<\/strong> (il faut ΔG &lt; 0). b <strong>Oui<\/strong>. c <strong>Non<\/strong> (ce n&#39;est pas une condition thermodynamique).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"3\"><div class=\"ex-q\"><ol start=\"13\">\n<li>À jeun : a) à e).<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>a <strong>Oui<\/strong> (oxaloacétate → malate). b <strong>Oui<\/strong>. c <strong>Oui<\/strong> (néoglucogenèse). d <strong>Oui<\/strong> (corps cétoniques). e <strong>Oui<\/strong> (le foie).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><div class=\"ex\" data-x=\"4\"><div class=\"ex-q\"><ol start=\"14\">\n<li>Cholestérol libre : a) inhibe les LDLR ; b) inhibe l&#39;HMG-CoA réductase ; c) stimule son estérification.<\/li>\n<\/ol>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>a <strong>Oui<\/strong>. b <strong>Oui<\/strong>. c <strong>Oui<\/strong>.<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><section class=\"exo\"><h3>Photosynthèse (question 15)<\/h3><div class=\"ex\" data-x=\"5\"><div class=\"ex-q\"><p>a) à f)<\/p>\n<\/div><div class=\"ex-b\"><button class=\"b p\" data-ex=\"c\">Voir le corrigé<\/button><\/div><div class=\"ex-c\" hidden><p>a <strong>Oui<\/strong> (biomasse). b <strong>Oui<\/strong> (O₂). c <strong>Oui<\/strong> (lumière → énergie chimique). d <strong>Oui<\/strong>. e <strong>Oui<\/strong>. f <strong>Non<\/strong> (l&#39;ozone est détruit surtout par les CFC).<\/p>\n<div class=\"ex-b\"><button class=\"b ok\" data-ex=\"1\">J'avais juste<\/button><button class=\"b ko\" data-ex=\"0\">J'avais faux<\/button><\/div><\/div><\/div><\/section><h2>QCM d&#39;entraînement<\/h2>\n<section class=\"qcm\"><div class=\"qq\" data-k=\"0\"><div class=\"qq-q\">Une enzyme change la constante d&#39;équilibre :<\/div><button class=\"opt\" data-o=\"0\">oui<\/button><button class=\"opt\" data-o=\"1\">non<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"1\"><div class=\"qq-q\">La glycolyse se déroule dans la mitochondrie :<\/div><button class=\"opt\" data-o=\"0\">oui<\/button><button class=\"opt\" data-o=\"1\">non<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"2\"><div class=\"qq-q\">Un inhibiteur non compétitif change le Km :<\/div><button class=\"opt\" data-o=\"0\">oui<\/button><button class=\"opt\" data-o=\"1\">non<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"3\"><div class=\"qq-q\">Un couplage nécessite ΔG global :<\/div><button class=\"opt\" data-o=\"0\">négatif<\/button><button class=\"opt\" data-o=\"1\">positif<\/button><button class=\"opt\" data-o=\"2\">nul<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"4\"><div class=\"qq-q\">À jeun, le malate sort de la mitochondrie pour :<\/div><button class=\"opt\" data-o=\"0\">la néoglucogenèse<\/button><button class=\"opt\" data-o=\"1\">la glycolyse<\/button><button class=\"opt\" data-o=\"2\">la β-oxydation<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"5\"><div class=\"qq-q\">Le cholestérol libre inhibe :<\/div><button class=\"opt\" data-o=\"0\">l&#39;HMG-CoA réductase<\/button><button class=\"opt\" data-o=\"1\">son estérification<\/button><button class=\"opt\" data-o=\"2\">la glycolyse<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"6\"><div class=\"qq-q\">Le CO₂ perturbe la couche d&#39;ozone :<\/div><button class=\"opt\" data-o=\"0\">oui<\/button><button class=\"opt\" data-o=\"1\">non<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"7\"><div class=\"qq-q\">Le froid réduit l&#39;énergie d&#39;activation :<\/div><button class=\"opt\" data-o=\"0\">oui<\/button><button class=\"opt\" data-o=\"1\">non<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"8\"><div class=\"qq-q\">Une enzyme native possède une structure tertiaire :<\/div><button class=\"opt\" data-o=\"0\">oui<\/button><button class=\"opt\" data-o=\"1\">non<\/button><div class=\"qq-e\" hidden><\/div><\/div><div class=\"qq\" data-k=\"9\"><div class=\"qq-q\">À jeun, l&#39;acétyl-CoA est dirigé vers :<\/div><button class=\"opt\" data-o=\"0\">les corps cétoniques<\/button><button class=\"opt\" data-o=\"1\">le glycogène<\/button><button class=\"opt\" data-o=\"2\">les acides nucléiques<\/button><div class=\"qq-e\" hidden><\/div><\/div><\/section>","ex":[{"n":"annale-2020","rep":null,"tol":null},{"n":"annale-2020","rep":null,"tol":null},{"n":"annale-2020","rep":null,"tol":null},{"n":"annale-2020","rep":null,"tol":null},{"n":"annale-2020","rep":null,"tol":null},{"n":"annale-2020","rep":null,"tol":null}],"qcm":[{"n":"annale-2020","q":"Une enzyme change la constante d&#39;équilibre :","o":["oui","non"],"a":1,"e":"Elle accélère dans les deux sens."},{"n":"annale-2020","q":"La glycolyse se déroule dans la mitochondrie :","o":["oui","non"],"a":1,"e":"Cytosol."},{"n":"annale-2020","q":"Un inhibiteur non compétitif change le Km :","o":["oui","non"],"a":1,"e":"Vmax diminue."},{"n":"annale-2020","q":"Un couplage nécessite ΔG global :","o":["négatif","positif","nul"],"a":0,"e":"Spontanéité."},{"n":"annale-2020","q":"À jeun, le malate sort de la mitochondrie pour :","o":["la néoglucogenèse","la glycolyse","la β-oxydation"],"a":0,"e":"Glucose."},{"n":"annale-2020","q":"Le cholestérol libre inhibe :","o":["l&#39;HMG-CoA réductase","son estérification","la glycolyse"],"a":0,"e":"Rétrocontrôle."},{"n":"annale-2020","q":"Le CO₂ perturbe la couche d&#39;ozone :","o":["oui","non"],"a":1,"e":"CFC."},{"n":"annale-2020","q":"Le froid réduit l&#39;énergie d&#39;activation :","o":["oui","non"],"a":1,"e":"Il réduit l&#39;agitation."},{"n":"annale-2020","q":"Une enzyme native possède une structure tertiaire :","o":["oui","non"],"a":0,"e":"Repliement fonctionnel."},{"n":"annale-2020","q":"À jeun, l&#39;acétyl-CoA est dirigé vers :","o":["les corps cétoniques","le glycogène","les acides nucléiques"],"a":0,"e":"Cétogenèse."}]}];
+const NOTIONS=[{"id":"glucides-lipides","t":"Glucides et lipides","imp":4,"ch":"glucides-lipides"},{"id":"enzymologie","t":"Enzymologie","imp":5,"ch":"enzymologie"},{"id":"metabolisme-glucidique","t":"Bioénergétique et métabolisme glucidique","imp":5,"ch":"metabolisme-glucidique"},{"id":"metabolisme-lipidique","t":"Métabolisme des lipides","imp":5,"ch":"metabolisme-lipidique"},{"id":"acides-amines","t":"Métabolisme des acides aminés","imp":4,"ch":"acides-amines"},{"id":"annale-2020","t":"Annale corrigée · examen de septembre 2020","imp":5,"ch":"annale-2020"}];
+const CARTES=[{"n":"glucides-lipides","k":0,"ch":"glucides-lipides","q":"<p>Amidon / glycogène<\/p>\n","r":"<p>Réserves de glucose des plantes / des animaux.<\/p>\n"},{"n":"glucides-lipides","k":1,"ch":"glucides-lipides","q":"<p>Cellulose<\/p>\n","r":"<p>Glucose en β(1→4), structure.<\/p>\n"},{"n":"glucides-lipides","k":2,"ch":"glucides-lipides","q":"<p>Triglycéride<\/p>\n","r":"<p>Glycérol + 3 acides gras.<\/p>\n"},{"n":"glucides-lipides","k":3,"ch":"glucides-lipides","q":"<p>ATP → ADP + Pi<\/p>\n","r":"<p>≈ −30,5 kJ/mol.<\/p>\n"},{"n":"enzymologie","k":4,"ch":"enzymologie","q":"<p>Km<\/p>\n","r":"<p>[S] donnant Vmax/2 ; petit Km = forte affinité.<\/p>\n"},{"n":"enzymologie","k":5,"ch":"enzymologie","q":"<p>Enzyme et ΔG<\/p>\n","r":"<p>L&#39;enzyme ne change pas ΔG ni Kéq.<\/p>\n"},{"n":"enzymologie","k":6,"ch":"enzymologie","q":"<p>Inhibition compétitive<\/p>\n","r":"<p>Km augmente, Vmax inchangée.<\/p>\n"},{"n":"enzymologie","k":7,"ch":"enzymologie","q":"<p>Inhibition non compétitive<\/p>\n","r":"<p>Km inchangé, Vmax diminue.<\/p>\n"},{"n":"metabolisme-glucidique","k":8,"ch":"metabolisme-glucidique","q":"<p>Glycolyse<\/p>\n","r":"<p>Cytosol ; 2 ATP et 2 NADH nets par glucose.<\/p>\n"},{"n":"metabolisme-glucidique","k":9,"ch":"metabolisme-glucidique","q":"<p>Krebs<\/p>\n","r":"<p>Matrice ; 3 NADH, 1 FADH₂, 1 GTP, 2 CO₂ par acétyl-CoA.<\/p>\n"},{"n":"metabolisme-glucidique","k":10,"ch":"metabolisme-glucidique","q":"<p>Couplage<\/p>\n","r":"<p>ΔG global &lt; 0, grâce à une réaction très favorable.<\/p>\n"},{"n":"metabolisme-glucidique","k":11,"ch":"metabolisme-glucidique","q":"<p>Ozone et CO₂<\/p>\n","r":"<p>Le trou d&#39;ozone vient surtout des CFC, pas du CO₂.<\/p>\n"},{"n":"metabolisme-lipidique","k":12,"ch":"metabolisme-lipidique","q":"<p>β-oxydation<\/p>\n","r":"<p>Matrice mitochondriale, 2 C par tour.<\/p>\n"},{"n":"metabolisme-lipidique","k":13,"ch":"metabolisme-lipidique","q":"<p>Corps cétoniques<\/p>\n","r":"<p>Faits par le foie à jeun quand l&#39;oxaloacétate manque.<\/p>\n"},{"n":"metabolisme-lipidique","k":14,"ch":"metabolisme-lipidique","q":"<p>HMG-CoA réductase<\/p>\n","r":"<p>Étape limitante de la synthèse du cholestérol, inhibée par le cholestérol.<\/p>\n"},{"n":"metabolisme-lipidique","k":15,"ch":"metabolisme-lipidique","q":"<p>Statines<\/p>\n","r":"<p>Inhibiteurs de l&#39;HMG-CoA réductase.<\/p>\n"},{"n":"acides-amines","k":16,"ch":"acides-amines","q":"<p>Transamination<\/p>\n","r":"<p>Transfert du NH₂ d&#39;un acide aminé vers un α-cétoacide.<\/p>\n"},{"n":"acides-amines","k":17,"ch":"acides-amines","q":"<p>Glutamate déshydrogénase<\/p>\n","r":"<p>α-cétoglutarate + NH₄⁺ ⇄ glutamate, réversible.<\/p>\n"},{"n":"acides-amines","k":18,"ch":"acides-amines","q":"<p>Cycle de l&#39;urée<\/p>\n","r":"<p>Dans le foie, élimine l&#39;azote sous forme d&#39;urée.<\/p>\n"},{"n":"acides-amines","k":19,"ch":"acides-amines","q":"<p>Coenzyme des aminotransférases<\/p>\n","r":"<p>Phosphate de pyridoxal (vitamine B6).<\/p>\n"}];
+const OUTILS=[];
+// ---------- Sauvegarde ----------
+// Format « essais » : un objet partagé avec l'ancien module (attempts par notion, cards par indice) ; on ne touche qu'à ces deux champs.
+// Format « score10 » : scores des chapitres dans MODULE.cle, essais et cartes dans MODULE.cleEtat.
+const lireJ = (k) => { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } };
+const ecrireJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const etat = () => { const S = lireJ(MODULE.cleEtat); S.attempts = S.attempts || {}; S.cards = S.cards || {}; return S; };
+function noter(n, ok) { const S = etat(); (S.attempts[n] = S.attempts[n] || []).push(ok ? 1 : 0); if (S.attempts[n].length > 30) S.attempts[n].shift(); ecrireJ(MODULE.cleEtat, S); }
+// Maîtrisé = au moins 3 essais et 80 % de réussite sur les 5 derniers (règle commune à la plateforme).
+function statut(n) {
+  if (MODULE.format === "score10") { const v = lireJ(MODULE.cle)[n]; if (v !== undefined) return [v >= 8 ? "ok" : "fragile", v / 10]; }
+  if (MODULE.format === "best") { const v = (lireJ(MODULE.cle).notions || {})[n]; return v && v.best != null ? [v.best >= 0.8 ? "ok" : "fragile", v.best] : ["jamais", null]; }
+  if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[n]; return v && v.pc !== undefined ? [v.pc >= 80 ? "ok" : "fragile", v.pc / 100] : ["jamais", null]; } const a = (etat().attempts[n] || []).slice(-5); if (!a.length) return ["jamais", null]; const r = a.reduce((x, y) => x + y, 0) / a.length; return [(etat().attempts[n].length >= 3 && r >= 0.8) ? "ok" : "fragile", r]; }
+const NCH = {}; NOTIONS.forEach((n) => (NCH[n.ch] = NCH[n.ch] || []).push(n));
+function scoreChap(c) {
+  if (MODULE.format === "score10") return lireJ(MODULE.cle)[c.id];
+  if (MODULE.format === "pc") { const v = lireJ(MODULE.cle)[c.id]; return v && v.pc !== undefined ? Math.round(v.pc / 10) : undefined; }
+  if (MODULE.format === "best") { const v = (lireJ(MODULE.cle).notions || {})[c.id]; return v && v.best != null ? Math.round(v.best * 10) : undefined; }
+  const l = NCH[c.id] || []; if (!l.length || !l.some((n) => statut(n.id)[0] !== "jamais")) return undefined;
+  return Math.round((10 * l.filter((n) => statut(n.id)[0] === "ok").length) / l.length);
+}
+// ---------- Flashcards (boîtes de Leitner, mêmes intervalles que les anciens modules) ----------
+const CFG_C = MODULE.cartes || { champ: "box", intervalles: [0, 1, 3, 7, 14, 30], echec: 1, depart: 0 };
+const INTV = CFG_C.intervalles, CHAMP = CFG_C.champ;
+const jour = () => new Date().toISOString().slice(0, 10);
+const numJour = (d) => Math.floor(new Date(d + "T00:00:00").getTime() / 864e5);
+const dansJours = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); };
+const aRevoir = () => { const S = etat(), t = numJour(jour()); return CARTES.map((_, i) => i).filter((i) => { const st = S.cards[CARTES[i].k]; return !st || numJour(st.due) <= t; }); };
+let file = [], montre = false;
+
+const nav = document.getElementById("nav"), main = document.getElementById("main"), pct = document.getElementById("pct");
+let cur = -1, rep = {};
+const VUES = { bord: -3, cartes: -2, intro: -1 };
+function dessinerNav() {
+  let ok = 0;
+  const ligne = (i, titre, sous, v) => `<button class="${cur === i ? "on" : ""}" data-go="${i}"><span>${titre}${sous ? `<span class="se">${sous}</span>` : ""}</span><span class="sc ${v >= 8 ? "ok" : ""}">${v === undefined ? "" : v + "/10"}</span></button>`;
+  const dues = CARTES.length ? aRevoir().length : 0;
+  let h = ligne(VUES.bord, "📊 Tableau de bord");
+  if (CARTES.length) h += ligne(VUES.cartes, `🃏 Flashcards${dues ? ` <b>(${dues})</b>` : ""}`);
+  if (MODULE.intro) h += ligne(VUES.intro, "Avant de commencer");
+  h += '<div class="sep"></div>' + CHAPS.map((c, i) => { const v = scoreChap(c); if (v >= 8) ok++; return ligne(i, `${i + 1}. ${c.t}`, c.seance, v); }).join("");
+  nav.innerHTML = h;
+  pct.textContent = `${ok}/${CHAPS.length} maîtrisés`;
+}
+function vueBord() {
+  const st = NOTIONS.map((n) => ({ ...n, s: statut(n.id) }));
+  const okN = st.filter((n) => n.s[0] === "ok").length, fr = st.filter((n) => n.s[0] === "fragile"), jam = st.filter((n) => n.s[0] === "jamais");
+  const chapDe = (id) => CHAPS.findIndex((c) => c.id === id);
+  const li = (n) => `<li><button data-go="${chapDe(n.ch)}">${n.t}</button><span>${n.s[1] === null ? "jamais testé" : Math.round(100 * n.s[1]) + " %"}</span></li>`;
+  return `<h1 class="t">Tableau de bord</h1>
+  <div class="kpi"><div><b>${okN}/${NOTIONS.length}</b>${MODULE.format === "essais" ? "notions" : "chapitres"} maîtrisé(e)s</div><div><b>${fr.length}</b>à consolider</div><div><b>${CARTES.length ? aRevoir().length : 0}</b>flashcards à revoir aujourd'hui</div></div>
+  <div class="barre"><i style="width:${NOTIONS.length ? (100 * okN) / NOTIONS.length : 0}%"></i></div>
+  ${fr.length ? `<h2>À consolider en priorité</h2><ul class="liste-n">${fr.sort((a, b) => b.imp - a.imp || a.s[1] - b.s[1]).slice(0, 10).map(li).join("")}</ul>` : ""}
+  ${jam.length ? `<h2>Pas encore travaillé (les plus importants d'abord)</h2><ul class="liste-n">${jam.sort((a, b) => b.imp - a.imp).slice(0, 10).map(li).join("")}</ul>` : ""}
+  <p style="color:var(--mute);font-size:14px">Une ${MODULE.format === "essais" ? "notion" : "partie"} est maîtrisée après au moins 3 essais (QCM, exercices, flashcards) avec 80 % de réussite sur les 5 derniers.</p>`;
+}
+function vueCartes() {
+  if (!file.length) { file = aRevoir(); montre = false; }
+  if (!file.length) return `<h1 class="t">Flashcards</h1><p>✔ Rien à revoir aujourd'hui. Reviens demain : les cartes réussies reviennent après 1, 3, 7, 14 puis 30 jours.</p>`;
+  const i = file[0], c = CARTES[i], st = etat().cards[c.k], n = NOTIONS.find((x) => x.id === c.n);
+  return `<h1 class="t">Flashcards</h1><p style="color:var(--mute)">${file.length} carte(s) à revoir aujourd'hui.</p>
+  <div class="carte"><div class="lbl">${n ? n.t : ""} · ${st && st[CHAMP] >= 0 ? "boîte " + st[CHAMP] : "nouvelle"}</div>${c.q}${montre ? `<div class="rep">${c.r}</div>` : ""}</div>
+  <div class="ex-b">${montre ? `<button class="b ko" data-fc="0">Raté</button><button class="b ok" data-fc="1">Je savais</button>` : `<button class="b p" data-fc="voir">Retourner la carte</button>`}</div>`;
+}
+window.typeset = () => { if (MODULE.maths && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([main]).catch(() => {}); };
+const nEval = (c) => c.qcm.length + c.ex.filter((x) => x.rep).length;
+const norm = (t) => String(t).toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "").replace(/,/g, ".");
+function bilanChap() {
+  typeset();
+  const c = CHAPS[cur], tot = nEval(c), fait = Object.keys(rep).length, juste = Object.values(rep).reduce((a, b) => a + b, 0), bilan = document.getElementById("bilan");
+  if (!bilan) return;
+  if (fait < tot) { bilan.textContent = `Évaluation du chapitre : ${fait}/${tot} répondu(s) · ${juste} juste${juste > 1 ? "s" : ""}`; dessinerNav(); return; }
+  const sc = Math.round((10 * juste) / fait);
+  if (MODULE.format === "score10") { const s = lireJ(MODULE.cle); s[c.id] = Math.max(sc, s[c.id] ?? 0); ecrireJ(MODULE.cle, s); }
+  if (MODULE.format === "pc") { const s = lireJ(MODULE.cle); s[c.id] = { ...(s[c.id] || {}), pc: Math.round((100 * juste) / fait), date: new Date().toLocaleDateString("fr-FR") }; ecrireJ(MODULE.cle, s); }
+  if (MODULE.format === "best") { const S = etat(); S.notions = S.notions || {}; const st = S.notions[c.id] = { ...(S.notions[c.id] || {}), read: true }; st.last = juste / fait; st.best = Math.max(st.best || 0, st.last); st.tries = (st.tries || 0) + 1; ecrireJ(MODULE.cle, S); }
+  bilan.textContent = `Score : ${sc}/10 ${sc >= 8 ? "· très bien ✔" : "· relis les encadrés « Piège » puis recommence (recharge le chapitre)."}`;
+  dessinerNav();
+}
+// Outils d'origine affichés dans le chapitre : même origine, on masque tout sauf l'outil visé.
+const vueIntegre = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { vueIntegre.unobserve(e.target); chargerIntegre(e.target); } }), { rootMargin: "400px" });
+function chargerIntegre(box) {
+  const f = document.createElement("iframe");
+  f.title = "Outil interactif"; f.loading = "lazy";
+  f.src = box.dataset.src + (box.dataset.ancre ? "#" + box.dataset.ancre : "");
+  f.onload = () => {
+    let d; try { d = f.contentDocument; } catch (e) { return; }
+    if (!d) return;
+    const st = d.createElement("style");
+    st.textContent = "#mztBtn,#mztPan,.toast{display:none!important}html,body{background:transparent!important;margin:0!important;padding:0!important;min-height:0!important}";
+    d.head.appendChild(st);
+    const appliquer = () => {
+      const cible = d.querySelector(box.dataset.cible);
+      if (!cible) return;
+      let e = cible;
+      while (e && e !== d.body) {
+        e.hidden = false; e.style.display = e.style.display === "none" ? "" : e.style.display;
+        e.style.margin = "0"; e.style.padding = e === cible ? "8px 14px" : "0"; e.style.maxWidth = "none";
+        for (const sib of e.parentElement.children) if (sib !== e && !/^(SCRIPT|STYLE|LINK|META|TITLE)$/.test(sib.tagName)) sib.style.display = "none";
+        e = e.parentElement;
+      }
+      if (box.dataset.garder) for (const c of cible.children) c.style.display = c.matches(box.dataset.garder) ? "" : "none";
+    };
+    appliquer(); setTimeout(appliquer, 400);
+    const ajuster = () => { const h = Math.max(d.body.scrollHeight, d.documentElement.scrollHeight); if (h && Math.abs(f.offsetHeight - h) > 4) f.style.height = h + "px"; };
+    ajuster(); new ResizeObserver(ajuster).observe(d.body); setInterval(ajuster, 1500);
+    const att = box.querySelector(".integre-att"); if (att) att.remove();
+  };
+  box.appendChild(f);
+}
+function lancerOutils() {
+  main.querySelectorAll(".integre").forEach((b) => vueIntegre.observe(b));
+  main.querySelectorAll("[data-outil]").forEach((d) => {
+    const tmp = document.createElement("div"); tmp.innerHTML = OUTILS[Number(d.dataset.outil)];
+    tmp.querySelectorAll("script").forEach((sc) => { const n = document.createElement("script"); n.textContent = sc.textContent; sc.replaceWith(n); });
+    d.replaceWith(...tmp.childNodes);
+  });
+}
+function aller(i) {
+  if (i === VUES.intro && !MODULE.intro) i = 0;
+  if (i === VUES.cartes && !CARTES.length) i = 0;
+  cur = i; rep = {}; nav.classList.remove("open");
+  try { localStorage.setItem(MODULE.cleEtat + "_dernier", String(i)); } catch (e) {}
+  if (i === VUES.bord) main.innerHTML = vueBord();
+  else if (i === VUES.cartes) { file = []; main.innerHTML = vueCartes(); }
+  else if (i === VUES.intro) main.innerHTML = `<h1 class="t">Avant de commencer</h1>${MODULE.intro}<div class="nx"><span></span><button class="b p" data-go="0">Commencer →</button></div>`;
+  else {
+    const c = CHAPS[i], n = nEval(c);
+    main.innerHTML = `${c.seance ? `<div class="seance">${c.seance}</div>` : ""}<h1 class="t">${c.t}</h1>${c.html}${n ? `<div class="bilan" id="bilan">Évaluation du chapitre : 0/${n} répondu(s)</div>` : ""}<div class="nx">${i > 0 || MODULE.intro ? `<button class="b" data-go="${i > 0 ? i - 1 : VUES.intro}">← Précédent</button>` : "<span></span>"}${i < CHAPS.length - 1 ? `<button class="b p" data-go="${i + 1}">Chapitre suivant →</button>` : ""}</div>`;
+    lancerOutils();
+  }
+  scrollTo(0, 0); dessinerNav(); typeset();
+}
+document.addEventListener("click", (e) => {
+  const g = e.target.closest("[data-go]"); if (g) return aller(Number(g.dataset.go));
+  const et = e.target.closest("[data-et]");
+  if (et) { const f = et.closest(".etapes"), l = f.querySelectorAll(".etape"); let i = Math.min(l.length - 1, Math.max(0, Number(f.dataset.i) + Number(et.dataset.et))); f.dataset.i = i; l.forEach((x, j) => (x.hidden = j !== i)); return; }
+  const fc = e.target.closest("[data-fc]");
+  if (fc) {
+    if (fc.dataset.fc === "voir") { montre = true; main.innerHTML = vueCartes(); typeset(); return; }
+    const i = file.shift(), ok = fc.dataset.fc === "1", S = etat(), k = CARTES[i].k, st = S.cards[k] || { [CHAMP]: CFG_C.depart ?? 0 };
+    st[CHAMP] = ok ? Math.min(INTV.length - 1, Math.max(0, st[CHAMP] + 1)) : CFG_C.echec; st.due = dansJours(ok ? INTV[st[CHAMP]] : 1); S.cards[k] = st; ecrireJ(MODULE.cleEtat, S);
+    noter(CARTES[i].n, ok); montre = false; main.innerHTML = vueCartes(); dessinerNav(); typeset(); return;
+  }
+  const xb = e.target.closest("[data-ex]");
+  if (xb) {
+    const ex = xb.closest(".ex"), v = xb.dataset.ex;
+    if (v === "h") ex.querySelector(".ex-h").hidden = false;
+    else if (v === "v") {
+      const k = Number(ex.dataset.x), it = CHAPS[cur].ex[k], inp = ex.querySelector("input");
+      if (!inp.value.trim() || ("x" + k) in rep) return;
+      const ok = it.tol !== null ? Math.abs(parseFloat(norm(inp.value)) - parseFloat(it.rep[0])) <= it.tol : it.rep.some((r) => norm(r) === norm(inp.value));
+      rep["x" + k] = ok ? 1 : 0; noter(it.n, ok); inp.disabled = true; xb.disabled = true;
+      inp.style.borderColor = ok ? "var(--ok)" : "var(--ko)";
+      const c = ex.querySelector(".ex-c"); c.hidden = false; c.insertAdjacentHTML("afterbegin", `<p>${ok ? "✔ Bonne réponse." : "✘ Raté."}</p>`);
+      bilanChap();
+    }
+    else if (v === "c") ex.querySelector(".ex-c").hidden = false;
+    else if (!ex.classList.contains("fait")) { ex.classList.add("fait"); noter(CHAPS[cur].ex[Number(ex.dataset.x)].n, v === "1"); xb.parentNode.innerHTML = v === "1" ? "✔ Noté : réussi." : "✘ Noté : à retravailler."; dessinerNav(); }
+    return;
+  }
+  const o = e.target.closest(".opt"); if (!o) return;
+  const qq = o.closest(".qq"), k = Number(qq.dataset.k), c = CHAPS[cur], q = c.qcm[k];
+  if (("q" + k) in rep) return;
+  rep["q" + k] = Number(o.dataset.o) === q.a ? 1 : 0;
+  noter(q.n, rep["q" + k] === 1);
+  qq.querySelectorAll(".opt").forEach((b, j) => { b.disabled = true; if (j === q.a) b.classList.add("bon"); else if (b === o) b.classList.add("faux"); });
+  const ex = qq.querySelector(".qq-e"); ex.innerHTML = (rep["q" + k] ? "✔ Bonne réponse. " : "✘ Raté. ") + q.e; ex.hidden = false;
+  bilanChap();
+});
+document.getElementById("menu").onclick = () => nav.classList.toggle("open");
+let depart = MODULE.intro ? -1 : 0; try { const d = localStorage.getItem(MODULE.cleEtat + "_dernier"); if (d !== null) depart = Number(d); } catch (e) {}
+aller(depart >= -3 && depart < CHAPS.length ? depart : 0);
+</script>
+<script>
+window.MZT_CONFIG={"id":"biochimie","module":"Biochimie structurale et métabolique","prof":"Pr N. Elabbadi (métabolique)","student":"un étudiant de licence (FST Béni Mellal)","conventions":"Modules Biochimie structurale et Biochimie métabolique (Pr N. Elabbadi), BCG S4, FST Béni Mellal, 2021. L'examen de biochimie métabolique (1 h) se répond par oui ou non. Notations : ΔG°', Km, Vmax, NAD⁺/NADH, FAD/FADH₂. Les cours au format PowerPoint et Word n'ont pas été lus ; le plan suit les PDF fournis."};
+window.MZT_CONFIG.getContext = () => { const h = document.querySelector("h1.t"); return { label: h ? h.textContent : MODULE.titre, text: (document.querySelector("main").innerText || "").slice(0, 6000) }; };
+</script>
+<script>
+/* ToumaiLearn · tuteur commun (bouton flottant présent sur chaque section)
+   Configuration attendue avant ce script : window.MZT_CONFIG = {
+     id: 'crypto',                      // identifiant court du module (stockage)
+     module: 'Cryptographie',           // nom affiché et donné au tuteur
+     prof: 'Pr A. Farchane',
+     student:'un étudiant de licence (FSABM)',
+     conventions: '…',                  // conventions du prof à respecter
+     getContext: () => ({label, text})  // facultatif : extrait courant (sinon section visible)
+   };
+   Fonctions : extrait automatique de la section visible (ou contexte fourni par le module),
+   mode rapide explicatif par défaut, mode approfondi (modèle supérieur), relances rapides,
+   photo jointe, bouton Arrêter, mémoire des difficultés (note cachée MÉMO), historique par
+   section avec recherche. Stockage : compte (db) si disponible, sinon navigateur. */
+(function () {
+  if (window.MZT) return;
+  const C = Object.assign({ id: 'module', module: 'ce module', prof: '', student: 'un étudiant', conventions: '' }, window.MZT_CONFIG || {});
+  const LS = 'mzt-' + C.id;
+  const $ = (s, r) => (r || document).querySelector(s);
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const today = () => new Date().toLocaleDateString('fr-FR');
+  const norm = (t) => String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  // ---------- état ----------
+  let ST = { threads: [], memos: [] };
+  try { ST = Object.assign(ST, JSON.parse(localStorage.getItem(LS) || '{}')); } catch (e) {}
+  const saveLocal = () => { try { localStorage.setItem(LS, JSON.stringify({ threads: ST.threads.slice(-80), memos: ST.memos.slice(-30) })); } catch (e) {} };
+  let sample = null, ready = false, imgOK = false, db = null, base = null;
+  let cur = null, busy = false, ctl = null, img = null, forced = null;
+
+  // ---------- extrait de la section visible ----------
+  function visibleSection() {
+    const cands = [...document.querySelectorAll('section, [data-tab], [data-view], main')]
+      .filter((el) => !el.closest('.mzt-pan') && el.offsetParent !== null && (el.innerText || '').trim().length > 80);
+    // la plus profonde parmi les visibles qui contiennent le plus de texte
+    cands.sort((a, b) => (b.innerText || '').length - (a.innerText || '').length);
+    let el = cands.find((c) => !cands.some((d) => d !== c && c.contains(d) && (d.innerText || '').length > 0.6 * (c.innerText || '').length)) || cands[0] || document.body;
+    const h = el.querySelector('h1, h2, h3');
+    return { label: (h ? h.innerText : document.title).trim().slice(0, 80), text: (el.innerText || '').replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim() };
+  }
+  // MathJax découpe une formule en un symbole par ligne dans innerText : on la remplace le temps de la lecture par son LaTeX.
+  // (vaut aussi pour l'extrait fourni par la page du module, qui lit lui-même innerText)
+  function avecFormulesEnLatex(lire) {
+    let items = [];
+    try { if (window.MathJax && MathJax.startup && MathJax.startup.document) items = MathJax.startup.document.getMathItemsWithin(document.body) || []; } catch (e) {}
+    const poses = [];
+    items.forEach((it) => {
+      const r = it.typesetRoot; if (!r || !r.isConnected || !r.parentNode) return;
+      const s = document.createElement('span'); s.textContent = it.display ? '\n$$' + it.math.trim() + '$$\n' : '$' + it.math.trim() + '$';
+      r.parentNode.insertBefore(s, r); const d = r.style.display; r.style.display = 'none'; poses.push([s, r, d]);
+    });
+    try { return lire(); } finally { poses.forEach(([s, r, d]) => { s.remove(); r.style.display = d; }); }
+  }
+  function context() {
+    if (forced) return forced;
+    return avecFormulesEnLatex(() => {
+      try { if (C.getContext) { const c = C.getContext(); if (c && c.text) return c; } } catch (e) {}
+      return visibleSection();
+    });
+  }
+
+  // ---------- interface ----------
+  const css = `
+.mzt-btn{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9999;font:600 15px Inter,system-ui,sans-serif;background:#B4532A;color:#fff;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.mzt-pan{--b:#FBF7F0;--s:#F4EDE1;--i:#1E2433;--m:#5C5346;--l:#DCCFBA;--a:#B4532A;--w:#8A5A12;--bad:#A23B2A;position:fixed;right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:9999;width:min(440px,calc(100vw - 20px));height:min(680px,calc(100vh - 70px));height:min(680px,calc(100dvh - 70px));max-height:calc(100vh - 20px);max-height:calc(100dvh - 20px);background:var(--b);color:var(--i);border:1px solid var(--l);border-radius:12px;display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(0,0,0,.3);font:14px/1.5 system-ui,sans-serif}
+@media (prefers-color-scheme:dark){.mzt-pan{--b:#1E2532;--s:#141922;--i:#EDE6D9;--m:#A9A094;--l:#343D4D;--a:#E8906A;--w:#E4C48A;--bad:#E58A7A}}
+.mzt-pan *{box-sizing:border-box}
+.mzt-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:8px 10px;border-bottom:1px solid var(--l)}
+.mzt-h b{flex:0 0 auto}.mzt-h .mzt-ctx{flex:1 1 90px;min-width:0;color:var(--m);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mzt-pan button{font:600 12px system-ui,sans-serif;border:1px solid var(--l);background:var(--s);color:var(--i);border-radius:999px;padding:4px 10px;cursor:pointer}
+.mzt-pan button.mzt-pri{background:var(--a);color:#fff;border-color:var(--a)}
+.mzt-pan button:disabled{opacity:.5}
+.mzt-body{flex:1;min-height:0;display:flex;flex-direction:column}
+.mzt-log{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.mzt-m{padding:8px 11px;border-radius:10px;max-width:92%;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere}
+.mzt-m.a{background:var(--s);align-self:flex-start}.mzt-m.u{background:color-mix(in srgb,var(--a) 22%,transparent);align-self:flex-end}
+.mzt-m .mzt-tag{display:block;font-size:11px;color:var(--w);font-weight:700}
+.mzt-deepbtn{align-self:flex-start;border-color:var(--w)!important;color:var(--w)!important;background:transparent!important}
+.mzt-chips{display:flex;gap:5px;flex-wrap:wrap;padding:4px 10px}
+.mzt-f{display:flex;flex-direction:column;gap:6px;padding:8px 10px;border-top:1px solid var(--l)}
+.mzt-f textarea{width:100%;min-height:54px;max-height:140px;resize:vertical;font:16px system-ui,sans-serif;padding:7px;border:1px solid var(--l);border-radius:8px;background:var(--s);color:var(--i)}
+.mzt-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.mzt-row label{display:flex;gap:4px;align-items:center;font-size:12px;color:var(--m);cursor:pointer}
+.mzt-note{font-size:11.5px;color:var(--m);margin:0}
+.mzt-pan details{padding:0 10px}.mzt-pan summary{cursor:pointer;font-size:12px;color:var(--a);font-weight:600;padding:4px 0}
+.mzt-prev{max-height:140px;overflow:auto;font-size:12px;white-space:pre-wrap;background:var(--s);border-radius:6px;padding:6px;color:var(--m)}
+.mzt-list{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
+.mzt-item{border:1px solid var(--l);border-radius:8px;padding:8px}
+.mzt-item .mzt-meta{font-size:11px;color:var(--m)}
+.mzt-pan input[type=search]{width:100%;font:16px system-ui,sans-serif;padding:7px;border:1px solid var(--l);border-radius:8px;background:var(--s);color:var(--i)}
+.mzt-pan input[type=checkbox]{width:auto}
+.mzt-pan[hidden],.mzt-btn[hidden],.mzt-pan [hidden]{display:none!important}
+.mzt-h button{flex:0 0 auto;white-space:nowrap}
+.mzt-pan #mztX{background:var(--bad);border-color:var(--bad);color:#fff}
+.mzt-m.a{white-space:normal}.mzt-m.a p{margin:0 0 6px}.mzt-m.a p:last-child{margin-bottom:0}
+.mzt-m.a ul,.mzt-m.a ol{margin:4px 0 6px;padding-left:20px}.mzt-m.a li{margin:2px 0}
+.mzt-m code{font:12.5px ui-monospace,Menlo,Consolas,monospace;background:color-mix(in srgb,var(--i) 10%,transparent);padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
+.mzt-m pre{margin:6px 0;padding:8px;overflow-x:auto;background:color-mix(in srgb,var(--i) 10%,transparent);border-radius:6px;font:12.5px ui-monospace,Menlo,Consolas,monospace;white-space:pre}
+.mzt-m pre code{background:none;padding:0}
+.mzt-tex{font:12.5px ui-monospace,Menlo,Consolas,monospace;color:var(--m)}.mzt-tex[data-ok]{font:inherit;color:inherit}
+.mzt-tex.d{display:block;margin:6px 0;text-align:center}
+.mzt-m mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}.mzt-m mjx-container[display]{margin:0!important}
+.mzt-m mjx-container svg{max-width:none}
+.mzt-tab{overflow-x:auto;margin:6px 0}.mzt-tab table{border-collapse:collapse;font-size:13px;min-width:60%}
+.mzt-tab th,.mzt-tab td{border:1px solid var(--l);padding:4px 8px;text-align:left;vertical-align:top}.mzt-tab th{background:color-mix(in srgb,var(--a) 12%,transparent);font-weight:600}`;
+  const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+  document.body.insertAdjacentHTML('beforeend', `
+<button class="mzt-btn" id="mztBtn" type="button">Tuteur</button>
+<div class="mzt-pan" id="mztPan" hidden role="dialog" aria-label="Tuteur">
+ <div class="mzt-h"><b>Tuteur</b><span class="mzt-ctx" id="mztCtx"></span><button type="button" id="mztTabH">Historique</button><button type="button" id="mztTabM">Mémoire</button><button type="button" id="mztX">Fermer</button></div>
+ <div class="mzt-body" id="mztChat">
+  <details><summary>Voir l'extrait envoyé au tuteur</summary><div class="mzt-prev" id="mztPrev"></div></details>
+  <div class="mzt-log" id="mztLog"></div>
+  <div class="mzt-chips" id="mztChips"></div>
+  <form class="mzt-f" id="mztF">
+   <textarea id="mztIn" placeholder="Ta question, ou ta réponse à vérifier… (Entrée pour envoyer, Maj+Entrée pour aller à la ligne)"></textarea>
+   <div class="mzt-row">
+    <button class="mzt-pri" id="mztSend" type="submit">Envoyer</button>
+    <button type="button" id="mztStop" hidden>Arrêter</button>
+    <label id="mztImgL" hidden>📎 Photo<input type="file" id="mztImg" accept="image/*" hidden></label>
+    <span class="mzt-note" id="mztImgN"></span>
+    <label title="Modèle plus puissant : réponse plus longue et plus détaillée, consomme davantage"><input type="checkbox" id="mztDeep"> Approfondi</label>
+    <button type="button" id="mztNew">Nouvelle discussion</button>
+   </div>
+   <p class="mzt-note" id="mztNote"></p>
+  </form>
+ </div>
+ <div class="mzt-body" id="mztHist" hidden><div style="padding:10px"><input type="search" id="mztQ" placeholder="Chercher dans toutes mes anciennes questions…"></div><div class="mzt-list" id="mztList"></div></div>
+ <div class="mzt-body" id="mztMem" hidden><div class="mzt-list"><p class="mzt-note">Ce que le tuteur retient de tes difficultés d'une conversation à l'autre. Il s'en sert pour faire des liens avec tes confusions passées. Tu peux effacer une note.</p><div id="mztMemL"></div></div></div>
+</div>`);
+
+  const CHIPS = ['Explique plus simplement', 'Donne un exemple concret', "Pourquoi c'est un piège ?", 'Fais-moi un mini-exercice'];
+  $('#mztChips').innerHTML = CHIPS.map((c) => `<button type="button" data-chip="${esc(c)}">${esc(c)}</button>`).join('');
+
+  function view(v) {
+    $('#mztChat').hidden = v !== 'chat'; $('#mztHist').hidden = v !== 'hist'; $('#mztMem').hidden = v !== 'mem';
+    $('#mztTabH').textContent = v === 'hist' ? 'Retour' : 'Historique'; $('#mztTabM').textContent = v === 'mem' ? 'Retour' : 'Mémoire';
+    if (v === 'hist') renderList(); if (v === 'mem') renderMem();
+  }
+  function note() {
+    $('#mztNote').textContent = !ready ? 'Connexion au tuteur…' : sample
+      ? 'Mode rapide (économe) par défaut. « Approfondi » ou « Approfondir cette réponse » utilise un modèle supérieur. Pense à chercher dans l\'Historique avant de reposer une question.'
+      : 'Le tuteur n\'est pas disponible ici (il faut ouvrir la page dans Claude et accepter la demande d\'autorisation). L\'historique reste consultable.';
+  }
+  function refreshCtx() {
+    const c = context(); $('#mztCtx').textContent = '· ' + c.label; $('#mztPrev').textContent = c.text.slice(0, 2500) + (c.text.length > 2500 ? '\n…' : '');
+    return c;
+  }
+  function openPanel(ctx) {
+    forced = ctx && ctx.text ? ctx : null;
+    $('#mztPan').hidden = false; $('#mztBtn').hidden = true; view('chat');
+    const c = refreshCtx();
+    if (!cur || cur.sec !== c.label) { const ts = ST.threads.filter((t) => t.sec === c.label); cur = forced ? null : ts[ts.length - 1] || null; }
+    renderLog(); note(); setTimeout(() => $('#mztIn').focus(), 30);
+  }
+  function closePanel() { $('#mztPan').hidden = true; $('#mztBtn').hidden = false; forced = null; }
+
+  // Sur téléphone, la réponse doit avoir la place : relances et note seulement sur une discussion vide.
+  function compacter(on) { $('#mztChips').hidden = on; $('#mztNote').hidden = on; }
+  function renderLog() {
+    const log = $('#mztLog'); log.innerHTML = ''; compacter(!!(cur && cur.msgs.length));
+    if (!cur || !cur.msgs.length) {
+      log.innerHTML = `<div class="mzt-m a">Pose ta question sur « ${esc(context().label)} » : une phrase que tu ne comprends pas, un calcul à vérifier, un exemple en plus… Tu peux joindre une photo de ton brouillon.</div>`; return;
+    }
+    cur.msgs.forEach((m, i) => {
+      const d = document.createElement('div'); d.className = 'mzt-m ' + (m.r === 'u' ? 'u' : 'a');
+      if (m.d) d.innerHTML = '<span class="mzt-tag">Réponse approfondie</span>';
+      if (m.r === 'u') d.appendChild(document.createTextNode(m.t)); else d.insertAdjacentHTML('beforeend', md(m.t)); log.appendChild(d);
+      if (m.r === 'a' && i === cur.msgs.length - 1 && !m.d && !busy) {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'mzt-deepbtn'; b.textContent = 'Approfondir cette réponse';
+        b.onclick = () => ask('Approfondis ta réponse précédente : explique plus en détail, avec un exemple complet et les pièges.', true); log.appendChild(b);
+      }
+    });
+    dessinerMaths(log); log.scrollTop = 1e9;
+  }
+  function renderList() {
+    const q = norm($('#mztQ').value || ''); const ts = [...ST.threads].reverse().filter((t) => !q || norm(t.msgs.map((m) => m.t).join(' ')).includes(q));
+    $('#mztList').innerHTML = ts.length ? ts.map((t) => `<details class="mzt-item"><summary>${esc(t.title)}</summary><div class="mzt-meta">${esc(t.sec)} · ${esc(t.date)}</div>${t.msgs.map((m) => `<div class="mzt-m ${m.r === 'u' ? 'u' : 'a'}" style="margin:6px 0">${m.r === 'u' ? esc(m.t) : md(m.t)}</div>`).join('')}<button type="button" data-cont="${esc(t.id)}">Continuer cette discussion</button></details>`).join('')
+      : `<p class="mzt-note">${ST.threads.length ? 'Aucune discussion ne contient ce mot.' : 'Aucune discussion pour l\'instant.'}</p>`;
+    dessinerMaths($('#mztList'));
+  }
+  function renderMem() {
+    $('#mztMemL').innerHTML = ST.memos.length ? ST.memos.map((m, i) => `<div class="mzt-item"><div class="mzt-meta">${esc(m.date)}</div>${esc(m.text)}<div><button type="button" data-memdel="${i}" style="margin-top:4px">Effacer</button></div></div>`).join('')
+      : '<p class="mzt-note">Aucune note pour l\'instant. Elles apparaîtront au fil de tes questions.</p>';
+  }
+
+  // ---------- stockage compte ----------
+  async function saveThread(t) {
+    saveLocal(); if (!db) return;
+    try { await db.collection(base + '/threads').doc(t.id).set({ sec: t.sec, date: t.date, title: t.title, msgs: t.msgs.slice(-40) }); } catch (e) {}
+  }
+  async function saveMemos() { saveLocal(); if (!db) return; try { await db.doc(base).set({ memos: ST.memos.slice(-30), updated: Date.now() }); } catch (e) {} }
+
+  // ---------- appel au tuteur ----------
+  const ERR = { not_granted: 'Tu n\'as pas autorisé la page à utiliser Claude. Recharge-la et accepte la demande, ou change-le dans le menu Autorisations de l\'artifact.', rate_limited: 'Trop de questions d\'un coup, ou limite d\'usage atteinte. Réessaie dans un moment.', prompt_too_large: 'L\'extrait est trop long : ouvre une partie plus précise du cours.', image_rejected: 'Cette photo n\'est pas acceptée. Essaie un JPEG ou un PNG plus léger.', refused: 'Claude n\'a pas pu répondre à cette demande. Reformule ta question.' };
+  const visible = (t) => {
+    const L = String(t).split('\n');
+    for (let i = L.length - 1; i >= Math.max(0, L.length - 3); i--) if (/^\s*M[ÉE]MO\s*:/i.test(L[i])) return L.slice(0, i).join('\n').trim();
+    return String(t).trim();
+  };
+  // rendu léger : on échappe le HTML d'abord, puis gras, italique, code, titres, puces, tableaux et blocs de code.
+  // Les formules ($…$, $$…$$, \(…\), \[…\]) sont mises de côté avant le Markdown, puis dessinées par MathJax.
+  const MATHS = [];
+  const protegerMaths = (t) => {
+    MATHS.length = 0;
+    const garde = (tex, d) => { MATHS.push({ tex: tex.trim(), d }); return '\u0000' + (MATHS.length - 1) + '\u0000'; };
+    const RX = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\\\(([\s\S]+?)\\\)|\$(?=[^\s$\d])([^$\n]*?[^\s$\\])\$(?!\d)/g;
+    // le code (blocs ``` et `…`) n'est jamais lu comme une formule
+    return String(t).split(/(```[\s\S]*?(?:```|$))/).map((bloc, i) => i % 2 ? bloc
+      : bloc.split(/(`[^`\n]*`)/).map((x, j) => j % 2 ? x : x.replace(RX, (_, a, b, c, d) => a != null ? garde(a, 1) : b != null ? garde(b, 1) : c != null ? garde(c, 0) : garde(d, 0))).join('')).join('');
+  };
+  const rendreMaths = (h) => h.replace(/\u0000(\d+)\u0000/g, (_, n) => { const m = MATHS[+n]; return m ? `<span class="mzt-tex${m.d ? ' d' : ''}" data-d="${m.d}">${esc(m.tex)}</span>` : ''; });
+  const inl = (s) => {
+    const p = s.split('`'); if (p.length % 2 === 0) { const last = p.pop(); p[p.length - 1] += '`' + last; }
+    return p.map((x, i) => i % 2 ? '<code>' + esc(x) + '</code>' : esc(x).replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*\w])\*([^*\n]+)\*(?![*\w])/g, '$1<em>$2</em>')).join('');
+  };
+  const cellules = (l) => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
+  const md = (t) => {
+    const out = []; let list = null, code = null, tab = null;
+    const flushTab = () => {
+      if (!tab) return;
+      if (tab.length >= 2 && /^[\s|:-]+$/.test(tab[1]) && tab[1].includes('-')) {
+        const [tete, , ...corps] = tab;
+        out.push('<div class="mzt-tab"><table><thead><tr>' + cellules(tete).map((c) => '<th>' + inl(c) + '</th>').join('') + '</tr></thead><tbody>'
+          + corps.map((r) => '<tr>' + cellules(r).map((c) => '<td>' + inl(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>');
+      } else tab.forEach((r) => out.push('<p>' + inl(r) + '</p>'));
+      tab = null;
+    };
+    const flush = () => { flushTab(); if (list) { out.push('</' + list + '>'); list = null; } };
+    protegerMaths(t).split('\n').forEach((raw) => {
+      if (/^\s*```/.test(raw)) { if (code === null) { flush(); code = []; } else { out.push('<pre>' + esc(code.join('\n')) + '</pre>'); code = null; } return; }
+      if (code !== null) { code.push(raw); return; }
+      let m;
+      if (/^\s*\|.*\|\s*$/.test(raw)) { if (list) { out.push('</' + list + '>'); list = null; } (tab = tab || []).push(raw); return; }
+      flushTab();
+      if ((m = raw.match(/^\s*#{1,6}\s+(.*)$/))) { flush(); out.push('<p><strong>' + inl(m[1]) + '</strong></p>'); }
+      else if ((m = raw.match(/^\s*[-*•]\s+(.*)$/))) { if (list !== 'ul') { flush(); out.push('<ul>'); list = 'ul'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if ((m = raw.match(/^\s*\d+[.)]\s+(.*)$/))) { if (list !== 'ol') { flush(); out.push('<ol>'); list = 'ol'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if (!raw.trim()) flush();
+      else { flush(); out.push('<p>' + inl(raw) + '</p>'); }
+    });
+    if (code !== null) out.push('<pre>' + esc(code.join('\n')) + '</pre>');
+    flush(); return rendreMaths(out.join(''));
+  };
+
+  // ---------- MathJax : celui de la page s'il existe, sinon chargé à la première formule ----------
+  let mjPret = null;
+  const mathjax = () => mjPret || (mjPret = new Promise((ok, ko) => {
+    if (!window.MathJax) {
+      window.MathJax = { svg: { fontCache: 'global' }, startup: { typeset: false } };
+      const s = document.createElement('script'); s.async = true; s.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js';
+      s.onerror = () => ko(new Error('MathJax')); document.head.appendChild(s);
+    }
+    let n = 0; const t = setInterval(() => {
+      if (window.MathJax && MathJax.tex2svgPromise && MathJax.startup && MathJax.startup.promise) { clearInterval(t); MathJax.startup.promise.then(ok, ko); }
+      else if (++n > 150) { clearInterval(t); ko(new Error('MathJax')); }
+    }, 100);
+  })).catch((e) => { mjPret = null; throw e; });
+  const svgCache = new Map(); let file = Promise.resolve();
+  function dessinerMaths(racine) {
+    const spans = [...racine.querySelectorAll('.mzt-tex:not([data-ok])')]; if (!spans.length) return;
+    mathjax().then(() => spans.forEach((sp) => {
+      const cle = sp.dataset.d + '|' + sp.textContent;
+      const poser = (n) => { if (!sp.isConnected || sp.dataset.ok) return; sp.textContent = ''; sp.appendChild(n.cloneNode(true)); sp.dataset.ok = '1'; };
+      if (svgCache.has(cle)) return poser(svgCache.get(cle));
+      file = file.then(() => MathJax.tex2svgPromise(sp.textContent, { display: sp.dataset.d === '1' }).then((n) => { svgCache.set(cle, n); poser(n); })).catch(() => {});
+    })).catch(() => {});
+  }
+  async function ask(q, deep) {
+    q = (q || '').trim(); deep = deep || $('#mztDeep').checked;
+    if (busy || !q) return; if (!sample) { note(); return; }
+    const c = refreshCtx();
+    if (!cur || (cur.sec !== c.label && !forced)) { cur = { id: 't' + Date.now().toString(36), sec: c.label, date: today(), title: q.slice(0, 80), msgs: [] }; ST.threads.push(cur); }
+    else if (!ST.threads.includes(cur)) ST.threads.push(cur);
+    cur.msgs.push({ r: 'u', t: q }); busy = true; renderLog();
+    const out = document.createElement('div'); out.className = 'mzt-m a'; out.textContent = deep ? 'Réflexion approfondie…' : 'Réflexion…'; $('#mztLog').appendChild(out);
+    $('#mztSend').disabled = true; $('#mztStop').hidden = false;
+    const style = deep
+      ? 'Réponse APPROFONDIE (400 à 700 mots) : 1) l\'intuition avec une analogie, 2) l\'explication détaillée pas à pas, 3) pourquoi ça marche, 4) un exemple complet chiffré, 5) les pièges fréquents et ce qui tombe à l\'examen, 6) une question pour vérifier la compréhension.'
+      : 'Réponse EXPLICATIVE (150 à 250 mots) : 1) l\'idée en une phrase, 2) l\'explication pas à pas, 3) un petit exemple chiffré ou concret, 4) une courte question pour vérifier la compréhension.';
+    const mem = [];
+    if (ST.memos.length) mem.push('DIFFICULTÉS DÉJÀ REPÉRÉES :\n' + ST.memos.slice(-12).map((m) => `- ${m.date} : ${m.text}`).join('\n'));
+    const lastQ = ST.threads.flatMap((t) => t.msgs.filter((m) => m.r === 'u').map((m) => `[${t.sec}] ${m.t.slice(0, 100)}`)).slice(-6);
+    if (lastQ.length) mem.push('SES DERNIÈRES QUESTIONS :\n' + lastQ.map((x) => '- ' + x).join('\n'));
+    const rules = `Tu es le tuteur de ${C.student}, pour le module ${C.module}${C.prof ? ' du ' + C.prof : ''}. Il apprend souvent la notion pour la première fois.
+Règles : réponds en français simple, en Markdown léger (**gras** pour les termes clés, tirets, étapes numérotées). Toute formule ou tout calcul s'écrit en LaTeX : $…$ dans la phrase, $$…$$ seul sur sa ligne pour une formule importante (ex. $\\hat y_i$, $$\\text{MSE}=\\frac{1}{n}\\sum_{i=1}^{n}(y_i-\\hat y_i)^2$$) ; jamais d'accents graves pour une formule, ils sont réservés au code et aux noms de fonctions. Un petit tableau Markdown est permis s'il clarifie (3 colonnes maximum, l'écran est étroit). ${style} Appuie-toi d'abord sur l'EXTRAIT ci-dessous et sur les conventions du prof ; si une source générale diffère du cours, signale l'écart et dis quelle version utiliser à l'examen (celle du prof). Pour un calcul, pose chaque étape et vérifie-la. S'il envoie une réponse ou une photo de brouillon, corrige étape par étape et nomme précisément l'erreur. Si tu n'es pas sûr, dis-le. S'il demande un mini-exercice, donne l'exercice sans la solution.
+Utilise sa mémoire pour faire des liens avec ses confusions passées, sans la réciter.
+Termine TOUJOURS par une dernière ligne séparée au format exact « MÉMO: … » qui résume en 15 mots maximum la difficulté révélée par sa question (ou « MÉMO: rien »). Cette ligne lui est cachée.
+${C.conventions ? 'CONVENTIONS DU PROF : ' + C.conventions + '\n' : ''}MÉMOIRE DE L'ÉLÈVE :
+${mem.join('\n\n') || '(rien pour l\'instant)'}
+EXTRAIT (${c.label}) :
+${c.text.slice(0, deep ? 9000 : 3500)}`;
+    const recent = cur.msgs.slice(deep ? -9 : -5, -1).map((m) => ({ role: m.r === 'u' ? 'user' : 'assistant', content: m.t }));
+    while (recent.length && recent[0].role !== 'user') recent.shift();
+    const msgs = [...recent.filter((m) => m.content && m.content.trim()), { role: 'user', content: q }]; while (msgs.length > 1 && msgs[0].role !== 'user') msgs.shift(); msgs[0] = { role: 'user', content: rules + '\n\n---\nQuestion : ' + msgs[0].content };
+    ctl = new AbortController();
+    const opts = { modelTier: deep ? 'complex' : 'quick', cache: false, signal: ctl.signal, onText: ({ text }) => { out.innerHTML = md(visible(text)); dessinerMaths(out); $('#mztLog').scrollTop = 1e9; } };
+    if (img) opts.images = [img];
+    try {
+      const r = await sample(msgs, opts);
+      const mm = r.text.match(/(?:^|\n)\s*M[ÉE]MO\s*:\s*(.+)\s*$/i);
+      cur.msgs.push({ r: 'a', t: visible(r.text) + (r.truncated ? '\n\n(Réponse coupée : pose une question plus ciblée.)' : ''), d: !!deep });
+      if (mm && !/^\s*rien/i.test(mm[1])) { ST.memos.push({ date: today(), text: mm[1].trim().slice(0, 160) }); if (ST.memos.length > 30) ST.memos.shift(); saveMemos(); }
+      await saveThread(cur);
+    } catch (e) {
+      const kept = e && e.text ? visible(e.text) : '';
+      if (e && e.code === 'cancelled') { if (kept) cur.msgs.push({ r: 'a', t: kept + '\n(Arrêté.)' }); else cur.msgs.pop(); }
+      else { cur.msgs.pop(); compacter(!!cur.msgs.length); out.textContent = (kept ? kept + '\n\n' : '') + (ERR[e && e.code] || 'Le tuteur n\'a pas pu répondre. Réessaie dans un instant.'); }
+      if (!cur.msgs.length) ST.threads = ST.threads.filter((t) => t !== cur);
+      saveLocal();
+      if (!(e && e.code === 'cancelled')) { busy = false; $('#mztSend').disabled = false; $('#mztStop').hidden = true; img = null; $('#mztImgN').textContent = ''; return; }
+    }
+    busy = false; $('#mztSend').disabled = false; $('#mztStop').hidden = true; img = null; $('#mztImg').value = ''; $('#mztImgN').textContent = ''; renderLog();
+  }
+
+  // ---------- événements ----------
+  $('#mztBtn').onclick = () => openPanel(null);
+  $('#mztX').onclick = closePanel;
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#mztPan').hidden) closePanel(); });
+  $('#mztTabH').onclick = () => view($('#mztHist').hidden ? 'hist' : 'chat');
+  $('#mztTabM').onclick = () => view($('#mztMem').hidden ? 'mem' : 'chat');
+  $('#mztQ').oninput = renderList;
+  $('#mztList').onclick = (e) => { const id = e.target.dataset && e.target.dataset.cont; if (!id) return; cur = ST.threads.find((t) => t.id === id); view('chat'); $('#mztCtx').textContent = '· ' + cur.sec; renderLog(); };
+  $('#mztMemL').onclick = (e) => { const i = e.target.dataset && e.target.dataset.memdel; if (i == null) return; ST.memos.splice(+i, 1); saveMemos(); renderMem(); };
+  $('#mztChips').onclick = (e) => { const b = e.target.closest('[data-chip]'); if (!b) return; const t = $('#mztIn'); t.value = b.dataset.chip + (t.value ? ' : ' + t.value : ''); t.focus(); };
+  $('#mztNew').onclick = () => { cur = null; renderLog(); };
+  $('#mztStop').onclick = () => { if (ctl) ctl.abort(); };
+  $('#mztImg').onchange = (e) => { img = e.target.files[0] || null; $('#mztImgN').textContent = img ? 'Photo : ' + img.name : ''; };
+  $('#mztF').onsubmit = (e) => { e.preventDefault(); const v = $('#mztIn').value; $('#mztIn').value = ''; ask(v); };
+  $('#mztIn').addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('#mztF').requestSubmit(); } });
+
+  // ---------- capacités (facultatives) ----------
+  const W = window.claude;
+  if (W && W.use) {
+    W.use('sample').then((s) => { sample = s; ready = true; note();
+      if (s && s.limits) s.limits().then((l) => { if (l && l.images) { imgOK = true; $('#mztImgL').hidden = false; if (l.images.mediaTypes) $('#mztImg').accept = l.images.mediaTypes.join(','); } }).catch(() => {});
+    }).catch(() => { ready = true; note(); });
+    Promise.all([W.use('db'), W.use('user')]).then(async ([d, u]) => {
+      if (!d || !u) return; const id = await u.id(); if (!id) return; db = d; base = 'data/users/' + id + '/mzt_' + C.id;
+      try {
+        const m = await db.doc(base).get(); if (m.exists) { const v = m.data() || {}; if (Array.isArray(v.memos)) ST.memos = JSON.parse(JSON.stringify(v.memos)); }
+        const q = await db.collection(base + '/threads').get(); const remote = q.docs.map((x) => Object.assign({ id: x.id }, JSON.parse(JSON.stringify(x.data() || {}))));
+        const map = {}; [...ST.threads, ...remote].forEach((t) => { if (!map[t.id] || (t.msgs || []).length > (map[t.id].msgs || []).length) map[t.id] = t; });
+        ST.threads = Object.values(map).sort((a, b) => parseInt(a.id.slice(1), 36) - parseInt(b.id.slice(1), 36)); saveLocal();
+      } catch (e) {}
+    }).catch(() => {});
+  } else { ready = true; note(); }
+
+  window.MZT = { open: openPanel, close: closePanel };
+})();
+
+</script>
+<script>(function(){var a=document.getElementById("retour");if(!a)return;var p="";try{p=window.top.location.pathname}catch(e){}
+if(window.top===window&&location.protocol==="file:"){a.hidden=true;return}
+a.href=p.indexOf("/decouvrir")===0||location.pathname.indexOf("/decouvrir")===0?"/decouvrir":"/app/modules";})();</script>
+</body>
+</html>
