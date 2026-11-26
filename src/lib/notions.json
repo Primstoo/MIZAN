@@ -75,6 +75,10 @@
     "t": "TP 2 · Packet Tracer"
    },
    {
+    "id": "tp3",
+    "t": "TP 3 · Routage statique (Packet Tracer)"
+   },
+   {
     "id": "entrainement",
     "t": "Entraînement : calculs, rédaction, TD inédit"
    }
@@ -367,6 +371,24 @@
     "t": "Ch3 · IPv6 : écriture, lien local EUI-64, MAC multicast",
     "imp": 3,
     "g": "adressage"
+   },
+   {
+    "id": "n49",
+    "t": "TP3 · Routage statique : table de routage, routes récursives, reliées directement, par défaut",
+    "imp": 5,
+    "g": "tp3"
+   },
+   {
+    "id": "n50",
+    "t": "TP3 · Route récapitulative (résumé de réseaux)",
+    "imp": 4,
+    "g": "tp3"
+   },
+   {
+    "id": "n51",
+    "t": "TP3 · Distance administrative et route flottante",
+    "imp": 4,
+    "g": "tp3"
    }
   ]
  },

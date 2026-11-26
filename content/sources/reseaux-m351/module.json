@@ -308,6 +308,24 @@
       "t": "Ch3 · IPv6 : écriture, lien local EUI-64, MAC multicast",
       "imp": 3,
       "chapitre": "adressage"
+    },
+    {
+      "id": "n49",
+      "t": "TP3 · Routage statique : table de routage, routes récursives, reliées directement, par défaut",
+      "imp": 5,
+      "chapitre": "tp3"
+    },
+    {
+      "id": "n50",
+      "t": "TP3 · Route récapitulative (résumé de réseaux)",
+      "imp": 4,
+      "chapitre": "tp3"
+    },
+    {
+      "id": "n51",
+      "t": "TP3 · Distance administrative et route flottante",
+      "imp": 4,
+      "chapitre": "tp3"
     }
   ],
   "chapitres": [
@@ -329,6 +347,7 @@
     "15-td.md",
     "16-tp1.md",
     "17-tp2.md",
+    "17b-tp3.md",
     "18-entrainement.md"
   ]
 }
