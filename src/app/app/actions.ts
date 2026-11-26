@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { admin, estAdmin, estMembre, nouveauCode } from "@/lib/acces";
 import { MODULES } from "@/lib/modules";
-import { dateEstimee, jourMaroc } from "@/lib/parcours";
+import { communesPour, dateEstimee, jourMaroc } from "@/lib/parcours";
 import { secretWebhook } from "@/lib/telegram";
 import { pousser, pousserAdmins } from "@/lib/push";
 import { randomBytes } from "node:crypto";
@@ -18,6 +18,7 @@ import { nouveauCodeOffre, offresActives, offreDe, rangEffectif, type Plan } fro
 
 type QCM = { n: string; a: number };
 const estSlug = (s: unknown): s is string => typeof s === "string" && MODULES.some((m) => m.slug === s);
+const estUuid = (s: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(s);
 const estDate = (s: string) => /^\d{4}-\d{2}-\d{2}$/.test(s) && !Number.isNaN(Date.parse(s + "T00:00:00Z"));
 // Lien saisi par l'admin (visio, etc.) : uniquement http(s), pour qu'aucun « javascript: » n'arrive chez les élèves.
 const lienSur = (v: FormDataEntryValue | null) => { const t = String(v || "").trim(); return /^https?:\/\/\S+$/i.test(t) ? t.slice(0, 500) : null; };
@@ -89,8 +90,8 @@ export async function enregistrerProfil(form: FormData): Promise<void> {
     const { error: e2 } = await db.from("profiles").upsert((estMascotte(masc) ? { ...ligne, mascotte: masc } : ligne) as Record<string, unknown>);
     if (e2) await db.from("profiles").upsert(ligne);
   }
-  const { data: communes } = await db.from("module_dates").select("module_slug, exam_date");
-  const commune = new Map((communes ?? []).map((c) => [c.module_slug as string, c.exam_date as string]));
+  const { data: communes } = await db.from("module_dates").select("module_slug, etablissement_id, exam_date");
+  const commune = new Map(Array.from(communesPour(communes, (lieu.etablissement_id as string | undefined) ?? null)).map(([k, c]) => [k, c.exam_date as string]));
   const auj = jourMaroc();
   const choisis = form.getAll("module").map(String).filter((s) => MODULES.some((m) => m.slug === s));
   const lignes = choisis.map((slug) => {
@@ -194,12 +195,14 @@ export async function declarerPaiement(form: FormData): Promise<void> {
 export async function majDateModule(form: FormData): Promise<void> {
   await chef();
   const slug = String(form.get("module"));
+  const etab = String(form.get("etablissement_id") || "");
   const date = String(form.get("date") || "");
-  if (!estSlug(slug) || (date && !estDate(date))) return;
+  if (!estSlug(slug) || !estUuid(etab) || (date && !estDate(date))) return;
   const db = admin();
-  if (!date) { await db.from("module_dates").delete().eq("module_slug", slug); }
-  else await db.from("module_dates").upsert({ module_slug: slug, exam_date: date, officielle: form.get("officielle") === "on",
-    source: String(form.get("source") || "").trim().slice(0, 120) || null, updated_at: new Date().toISOString() });
+  // Une date par module ET par établissement : celle de la FSABM ne s'applique jamais à l'EST Salé.
+  if (!date) { await db.from("module_dates").delete().eq("module_slug", slug).eq("etablissement_id", etab); }
+  else await db.from("module_dates").upsert({ module_slug: slug, etablissement_id: etab, exam_date: date, officielle: form.get("officielle") === "on",
+    source: String(form.get("source") || "").trim().slice(0, 120) || null, updated_at: new Date().toISOString() }, { onConflict: "module_slug,etablissement_id" });
   revalidatePath("/app"); revalidatePath("/app/admin");
 }
 

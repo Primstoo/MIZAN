@@ -12,15 +12,24 @@ export const jourMaroc = (d = new Date()) =>
 export const joursEntre = (de: string, a: string) =>
   Math.round((Date.parse(a + "T00:00:00Z") - Date.parse(de + "T00:00:00Z")) / 864e5);
 
+// Dates communes d'examen : chacune vaut pour UN établissement. Un élève ne reçoit que celles de sa fac,
+// même s'il suit un module produit pour une autre fac (il garde alors sa date estimée ou la sienne).
+export function communesPour<T extends { module_slug: string; etablissement_id: string | null }>(
+  communes: T[] | null | undefined, etablissementId: string | null | undefined,
+): Map<string, T> {
+  if (!etablissementId) return new Map();
+  return new Map((communes ?? []).filter((c) => c.etablissement_id === etablissementId).map((c) => [c.module_slug, c]));
+}
+
 export async function chargerParcours(u: User) {
   const db = admin();
   const [{ data: profil }, { data: exams }, { data: act }, { data: communes }] = await Promise.all([
     db.from("profiles").select("*").eq("user_id", u.id).maybeSingle(),
     db.from("exams").select("module_slug, exam_date, estimee").eq("user_id", u.id),
     db.from("activity").select("day, module_slug").eq("user_id", u.id).gte("day", jourMaroc(new Date(Date.now() - 60 * 864e5))),
-    db.from("module_dates").select("module_slug, exam_date, officielle"),
+    db.from("module_dates").select("module_slug, etablissement_id, exam_date, officielle"),
   ]);
-  const commune = new Map((communes ?? []).map((c) => [c.module_slug as string, c]));
+  const commune = communesPour(communes, profil?.etablissement_id);
   const auj = jourMaroc();
   const jours = new Set((act ?? []).map((a) => a.day as string));
 

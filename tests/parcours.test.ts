@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { dateEstimee, jourMaroc, joursEntre, missionDuJour, missionPerso } from "@/lib/parcours";
+import { communesPour, dateEstimee, jourMaroc, joursEntre, missionDuJour, missionPerso } from "@/lib/parcours";
 import { calculerMaitrise, notePrevue } from "@/lib/maitrise";
 
 describe("dates", () => {
@@ -58,5 +58,26 @@ describe("maîtrise et note prévue", () => {
   it("ne plante pas sur une progression corrompue ou un module inconnu", () => {
     expect(calculerMaitrise("crypto", { cryptoPR: "{pas du json" })!.pct).toBe(0);
     expect(calculerMaitrise("module-inconnu", {})).toBeNull();
+  });
+});
+
+describe("dates communes par établissement", () => {
+  const FSABM = "6c881dd6-2383-4e4d-9d57-f9f57f5bd020", EST = "11111111-1111-1111-1111-111111111111";
+  const communes = [
+    { module_slug: "crypto", etablissement_id: FSABM, exam_date: "2026-12-14" },
+    { module_slug: "analyse-1", etablissement_id: EST, exam_date: "2027-01-20" },
+  ];
+  it("un élève de l'EST ne reçoit jamais une date de la FSABM", () => {
+    const m = communesPour(communes, EST);
+    expect(m.has("crypto")).toBe(false);
+    expect(m.get("analyse-1")?.exam_date).toBe("2027-01-20");
+  });
+  it("un élève de la FSABM reçoit seulement les siennes", () => {
+    const m = communesPour(communes, FSABM);
+    expect(Array.from(m.keys())).toEqual(["crypto"]);
+  });
+  it("sans établissement renseigné : aucune date commune", () => {
+    expect(communesPour(communes, null).size).toBe(0);
+    expect(communesPour(communes, undefined).size).toBe(0);
   });
 });

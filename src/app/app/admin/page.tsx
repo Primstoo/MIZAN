@@ -27,11 +27,19 @@ export default async function Suivi() {
     db.from("progress").select("user_id, module_slug, updated_at"),
     db.from("tutor_usage").select("user_id, day, count").gte("day", jourMoins(29)),
     db.from("invites").select("code, owner, uses, max_uses"),
-    db.from("module_dates").select("module_slug, exam_date, officielle, source"),
+    db.from("module_dates").select("module_slug, etablissement_id, exam_date, officielle, source").order("exam_date"),
     db.from("live_sessions").select("id, titre, starts_at, prix_dh, places, lien").order("starts_at", { ascending: false }).limit(20),
     db.from("live_bookings").select("session_id, user_id, email, statut, ref_paiement, created_at").order("created_at", { ascending: false }),
   ]);
   const S = sessions ?? [], R = resas ?? [];
+  // Établissements pour les dates d'examen : ceux des élèves inscrits en tête, puis tous les autres validés.
+  const [{ data: etabsTous }, { data: etabsEleves }] = await Promise.all([
+    db.from("etablissements").select("id, nom").eq("valide", true).order("nom"),
+    db.from("profiles").select("etablissement_id").not("etablissement_id", "is", null),
+  ]);
+  const nomEtab = new Map((etabsTous ?? []).map((e) => [e.id as string, e.nom as string]));
+  const idsEleves = new Set((etabsEleves ?? []).map((e) => e.etablissement_id as string));
+  const etabsTries = [...(etabsTous ?? []).filter((e) => idsEleves.has(e.id)), ...(etabsTous ?? []).filter((e) => !idsEleves.has(e.id))];
   const { data: tgs } = await db.from("telegram_links").select("chat_id");
   const { data: notes } = await db.from("notes_reelles").select("user_id, module_slug, note, note_prevue");
   const N = (notes ?? []).filter((n) => n.note_prevue !== null);
@@ -89,24 +97,27 @@ export default async function Suivi() {
       </div>
 
       <section className="bloc">
-        <h2>Dates d&apos;examen par module</h2>
-        <p className="muted small">Dès qu&apos;une date est connue (calendrier de la fac, annonce du prof), renseigne-la ici : elle remplace l&apos;estimation chez tous les élèves qui n&apos;avaient pas de date.</p>
+        <h2>Dates d&apos;examen</h2>
+        <p className="muted small">Une date vaut pour un module <strong>dans une seule fac</strong> : elle remplace l&apos;estimation chez les élèves de cette fac uniquement. Pour la retirer, renvoie le formulaire avec une date vide.</p>
         <div className="tabw"><table className="tab dates"><tbody>
-          {MODULES.map((m) => {
-            const d = (dates ?? []).find((x) => x.module_slug === m.slug);
-            return (
-              <tr key={m.slug}><td>{m.titre}</td><td>
-                <form action={majDateModule} className="dates-form">
-                  <input type="hidden" name="module" value={m.slug} />
-                  <input type="date" name="date" defaultValue={d?.exam_date ?? ""} />
-                  <label className="row small"><input type="checkbox" name="officielle" defaultChecked={!!d?.officielle} /> officielle</label>
-                  <input name="source" defaultValue={d?.source ?? ""} placeholder="Source (ex. affichage fac)" />
-                  <button className="btn alt small">OK</button>
-                </form>
-              </td></tr>
-            );
-          })}
+          {!(dates ?? []).length && <tr><td className="muted small">Aucune date commune.</td></tr>}
+          {(dates ?? []).map((d) => (
+            <tr key={d.module_slug + d.etablissement_id}>
+              <td>{MODULES.find((m) => m.slug === d.module_slug)?.titre ?? d.module_slug}</td>
+              <td className="small">{nomEtab.get(d.etablissement_id) ?? "?"}</td>
+              <td>{d.exam_date}{d.officielle ? " · officielle" : ""}</td>
+              <td className="small muted">{d.source}</td>
+            </tr>
+          ))}
         </tbody></table></div>
+        <form action={majDateModule} className="dates-form">
+          <select name="module" required defaultValue=""><option value="" disabled>Module</option>{MODULES.map((m) => <option key={m.slug} value={m.slug}>{m.titre} ({m.etablissement})</option>)}</select>
+          <select name="etablissement_id" required defaultValue=""><option value="" disabled>Établissement</option>{etabsTries.map((e) => <option key={e.id} value={e.id}>{idsEleves.has(e.id) ? "● " : ""}{e.nom}</option>)}</select>
+          <input type="date" name="date" />
+          <label className="row small"><input type="checkbox" name="officielle" /> officielle</label>
+          <input name="source" placeholder="Source (ex. affichage fac)" />
+          <button className="btn alt small">Enregistrer</button>
+        </form>
       </section>
 
       <section className="bloc">
