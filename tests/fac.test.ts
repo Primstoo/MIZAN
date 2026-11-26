@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { contenuValide, estSemestre, norm, score, suggestions, type Etab } from "@/lib/fac-commun";
+import { GENERALISTE, memeEtablissement } from "@/lib/modules";
 
 const e = (nom: string, ville: string | null = null, alias: string[] = []): Etab => ({ id: nom, nom, ville, alias, valide: true });
 const FSABM = e("Faculté des Sciences Appliquées de Béni Mellal", "Béni Mellal", ["fsabm", "fpbm", "faculte polydisciplinaire de beni mellal"]);
@@ -37,4 +38,23 @@ describe("reconnaissance des établissements", () => {
     expect(contenuValide({ titre: "x", sections: [] })).toBe(false);
     expect(contenuValide(null)).toBe(false);
   });
+});
+
+describe("établissement choisi à l'inscription → cours de sa fac", () => {
+  // Noms exacts de la table etablissements (ceux que l'élève choisit à l'inscription).
+  const attendu: [string, string | null][] = [
+    ["Faculté des Sciences Appliquées de Béni Mellal (FSABM)", "FSABM"],
+    ["Faculté des Sciences et Techniques Béni Mellal (FST Béni Mellal)", "FST Béni Mellal"],
+    ["École Nationale des Sciences Appliquées Al Hoceima (ENSA Al Hoceima)", "ENSA Al Hoceima"],
+    ["École Nationale des Sciences Appliquées Béni Mellal (ENSA Béni Mellal)", null],
+    ["Faculté des Sciences et Techniques Al Hoceima (FST Al Hoceima)", null],
+    ["Faculté Polydisciplinaire de Khouribga (FP Khouribga)", null],
+    ["École Supérieure de Technologie Salé (EST Salé)", null],
+  ];
+  for (const [nom, code] of attendu) {
+    it(nom, () => {
+      for (const c of ["FSABM", "FST Béni Mellal", "ENSA Al Hoceima"]) expect(memeEtablissement(nom, c), c).toBe(c === code);
+      expect(memeEtablissement(nom, GENERALISTE)).toBe(true);
+    });
+  }
 });

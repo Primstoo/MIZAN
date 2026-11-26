@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
-import { MODULES } from "@/lib/modules";
+import { MODULES, GENERALISTE, memeEtablissement } from "@/lib/modules";
+import Mascotte, { estMascotte } from "@/components/Mascotte";
 import { chargerParcours, chargerMaitrise } from "@/lib/parcours";
 import Embleme, { couleurCours } from "@/components/Embleme";
 
@@ -10,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 const court = (t: string) => t.split(" (")[0];
 
-export default async function Cours() {
+export default async function Cours({ searchParams }: { searchParams: { vue?: string } }) {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
   const [{ data: prog }, p, maitrise] = await Promise.all([
@@ -18,6 +19,12 @@ export default async function Cours() {
     chargerParcours(user!), chargerMaitrise(user!),
   ]);
   const restes = new Map(p.examens.map((e) => [e.module_slug, e]));
+  // « Mon établissement » : l'établissement choisi à l'inscription (profiles.etablissement), les cours
+  // généralistes, et les modules d'autres facs que l'élève a ajoutés à ses examens.
+  const tout = searchParams.vue === "tout";
+  const etab = p.profil?.etablissement as string | null | undefined;
+  const deSaFac = MODULES.filter((m) => m.etablissement !== GENERALISTE && memeEtablissement(etab, m.etablissement));
+  const liste = tout ? MODULES : MODULES.filter((m) => memeEtablissement(etab, m.etablissement) || restes.has(m.slug));
   // À reprendre : l'examen le plus proche, sinon le dernier cours ouvert.
   const slugUne = p.examens[0]?.module_slug ?? prog?.find((x) => MODULES.some((m) => m.slug === x.module_slug))?.module_slug;
   const une = MODULES.find((m) => m.slug === slugUne);
@@ -43,8 +50,24 @@ export default async function Cours() {
         </a>
       )}
 
+      <nav className="segm" aria-label="Catalogue">
+        <a href="/app/modules" aria-current={tout ? undefined : "page"}>Mon établissement</a>
+        <a href="/app/modules?vue=tout" aria-current={tout ? "page" : undefined}>Tout le catalogue</a>
+      </nav>
+
+      {!tout && !deSaFac.length && (
+        <section className="tl-pionnier">
+          <Mascotte id={estMascotte(p.profil?.mascotte) ? p.profil.mascotte : "toumai"} taille={56} />
+          <div>
+            <strong>{etab || "Ton établissement"}</strong>
+            <p>Personne n&apos;a encore ouvert la voie ici. Dépose le cours de ton prof et commence tes révisions.</p>
+            <a href="/app/supports" className="btn">Déposer un cours</a>
+          </div>
+        </section>
+      )}
+
       <div className="tl-grille">
-        {MODULES.map((m) => {
+        {liste.map((m) => {
           const mm = maitrise[m.slug], e = restes.get(m.slug);
           return (
             <a key={m.slug} href={`/app/module/${m.slug}`} className="tl-couv" style={{ borderLeftColor: couleurCours(m.slug) }}>
@@ -53,14 +76,14 @@ export default async function Cours() {
                 <strong>{court(m.titre)}</strong>
                 <small>{m.chapitres ? `${m.chapitres} chapitre${m.chapitres > 1 ? "s" : ""}` : m.semestre}</small>
                 <span className="tl-prog" aria-label={`${mm?.pct ?? 0} % maîtrisé`}><i style={{ width: `${mm?.pct ?? 0}%`, background: couleurCours(m.slug) }} /></span>
-                <small>{mm?.testes ? `${mm.pct} % maîtrisé` : "Pas encore commencé"}</small>
+                {!!mm?.testes && <small>{mm.pct} % maîtrisé</small>}
               </span>
             </a>
           );
         })}
       </div>
 
-      <a href="/app/supports" className="btn alt">Déposer le cours de mon prof</a>
+      {(tout || deSaFac.length > 0) && <a href="/app/supports" className="btn alt">Déposer le cours de mon prof</a>}
     </main>
   );
 }
