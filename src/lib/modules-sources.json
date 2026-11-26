@@ -4,6 +4,7 @@
     "titre": "Algèbre 1",
     "prof": "Pr M. El Omari",
     "semestre": "S1",
+    "etablissement": "FSABM",
     "fichier": "algebre-1.html",
     "resume": "Logique, ensembles, applications, relations, arithmétique, groupes et anneaux, polynômes et fractions rationnelles, avec les TD 1 à 3 corrigés.",
     "cles": [
@@ -21,6 +22,7 @@
     "titre": "Algorithmique et programmation Python 1",
     "prof": "Pr Y. Madani",
     "semestre": "S1",
+    "etablissement": "FSABM",
     "fichier": "algo-python-1.html",
     "resume": "Pseudo-code (variables, conditions, boucles, tableaux, tris, recherche) puis Python (types, chaînes, if/match, boucles, array, listes, tuples, ensembles, dictionnaires). Séances 1 à 9 + TD 1 à 6 corrigés.",
     "cles": [
@@ -38,6 +40,7 @@
     "titre": "Analyse 1",
     "prof": "",
     "semestre": "S1",
+    "etablissement": "Cours généraliste",
     "fichier": "analyse-1.html",
     "resume": "Nombres réels, suites, limites et continuité, dérivabilité et accroissements finis, séries de TD corrigées et examen blanc.",
     "cles": [
@@ -55,6 +58,7 @@
     "titre": "Cosmologie et géodynamique interne",
     "prof": "",
     "semestre": "S1",
+    "etablissement": "FST Béni Mellal",
     "fichier": "cosmologie-geodynamique.html",
     "resume": "Module G116 de la filière BCG : l'Univers et le système solaire, le temps géologique et la datation, la structure interne de la Terre par la sismologie, la tectonique des plaques, avec les contrôles 2022 corrigés.",
     "cles": [
@@ -72,6 +76,7 @@
     "titre": "Culture digitale (Digital skills)",
     "prof": "",
     "semestre": "S1",
+    "etablissement": "FSABM",
     "fichier": "culture-digitale.html",
     "resume": "Matériel, système d'exploitation, Internet et le Web, intelligence artificielle : les 4 séquences du module, avec beaucoup de QCM car l'évaluation est un quiz.",
     "cles": [
@@ -89,6 +94,7 @@
     "titre": "Dessin industriel",
     "prof": "Pr I. El Hadouti",
     "semestre": "S1",
+    "etablissement": "ENSA Al Hoceima",
     "fichier": "dessin-industriel.html",
     "resume": "Projection orthogonale : les six vues, le premier dièdre, les correspondances et la droite à 45°, le choix des vues, les vues particulières. Chapitre 2 du cours, avec examen blanc.",
     "cles": [
@@ -106,6 +112,7 @@
     "titre": "Mécanique du point",
     "prof": "Pr M. Driouich",
     "semestre": "S1",
+    "etablissement": "FSABM",
     "fichier": "mecanique-point.html",
     "resume": "Vecteurs et coordonnées, cinématique, changement de référentiel, lois de Newton et théorèmes généraux, avec les trois séries corrigées et un examen blanc.",
     "cles": [
@@ -123,6 +130,7 @@
     "titre": "Optique géométrique et radioactivité",
     "prof": "Pr C. Satif",
     "semestre": "S1",
+    "etablissement": "FST Béni Mellal",
     "fichier": "optique-radioactivite.html",
     "resume": "Module Optique et radioactivité de la filière BCG : principe de Fermat et lois de Descartes, miroirs, dioptres et lentilles, œil et instruments, radioactivité et dosimétrie, avec les examens 2021 corrigés.",
     "cles": [
@@ -140,6 +148,7 @@
     "titre": "Réactivité chimique",
     "prof": "Pr Hafid",
     "semestre": "S1",
+    "etablissement": "FST Béni Mellal",
     "fichier": "reactivite-chimique.html",
     "resume": "Module BCG-C213 : pH des solutions, titrages, précipitation et complexation, oxydoréduction et piles, cinétique chimique, avec le devoir 2 et les exercices de révision corrigés.",
     "cles": [
@@ -157,6 +166,7 @@
     "titre": "Thermodynamique",
     "prof": "Pr I. Arroub",
     "semestre": "S1",
+    "etablissement": "FSABM",
     "fichier": "thermodynamique.html",
     "resume": "Thermodynamique I du Pr Arroub : systèmes et formes différentielles, premier principe, calorimétrie, gaz parfaits, entropie et machines thermiques, avec les séries de TD et l'examen 2022-2023 corrigés.",
     "cles": [
@@ -174,6 +184,7 @@
     "titre": "Algorithmique et programmation Python 2",
     "prof": "Pr M. Biniz",
     "semestre": "S2",
+    "etablissement": "FSABM",
     "fichier": "algo-python-2.html",
     "resume": "Procédures et fonctions typées, passage des paramètres, portée, récursivité, enregistrements, énumérations, dictionnaires, ensembles, tuples et fichiers, en pseudo-code et en Python.",
     "cles": [
@@ -191,6 +202,7 @@
     "titre": "Analyse 2",
     "prof": "",
     "semestre": "S2",
+    "etablissement": "Cours généraliste",
     "fichier": "analyse-2.html",
     "resume": "Rolle et accroissements finis, formules de Taylor, développements limités et leurs applications, intégrale simple et intégrales impropres, séries de TD corrigées et examen blanc.",
     "cles": [
@@ -208,6 +220,7 @@
     "titre": "Biologie cellulaire",
     "prof": "Pr A. Ait Chaoui · Pr N. Wahid",
     "semestre": "S2",
+    "etablissement": "FST Béni Mellal",
     "fichier": "biologie-cellulaire.html",
     "resume": "La cellule de A à Z pour la filière BCG : organisation, méthodes d'étude, membrane et échanges, système endomembranaire, mitochondrie et chloroplaste, noyau et information génétique, mitose et méiose, avec les examens corrigés.",
     "cles": [
@@ -225,6 +238,7 @@
     "titre": "Électricité",
     "prof": "Pr S. Bentachfine",
     "semestre": "S2",
+    "etablissement": "FST Béni Mellal",
     "fichier": "electricite.html",
     "resume": "Module Électricité de la filière BCG : analyse vectorielle, électrostatique (Coulomb, champ, potentiel, Gauss), électrocinétique (Kirchhoff, diviseurs, Thévenin et Norton), magnétostatique (Biot-Savart, Ampère, Laplace), avec l'examen 2021 corrigé.",
     "cles": [
@@ -242,6 +256,7 @@
     "titre": "Architecture des ordinateurs",
     "prof": "Pr Zouina",
     "semestre": "S3",
+    "etablissement": "FSABM",
     "fichier": "archi-ordinateurs.html",
     "resume": "Représentation de l'information, algèbre de Boole, circuits, mémoires, processeur et assembleur 8086.",
     "cles": [
@@ -262,6 +277,7 @@
     "titre": "Biologie végétale",
     "prof": "",
     "semestre": "S3",
+    "etablissement": "FST Béni Mellal",
     "fichier": "biologie-vegetale.html",
     "resume": "Biologie végétale de la filière BCG : classification, algues, champignons, bryophytes, cryptogames vasculaires, gymnospermes et angiospermes, multiplication végétative, avec les contrôles corrigés (thallophytes et embryophytes).",
     "cles": [
@@ -279,6 +295,7 @@
     "titre": "Chimie minérale",
     "prof": "",
     "semestre": "S3",
+    "etablissement": "FST Béni Mellal",
     "fichier": "chimie-minerale.html",
     "resume": "Chimie minérale 1 de la filière BCG : réseaux et diffraction X, empilements compacts des métaux, cristaux ioniques, diagrammes de phases, diagrammes d'Ellingham, avec les examens corrigés.",
     "cles": [
@@ -296,6 +313,7 @@
     "titre": "Électrocinétique : régimes transitoires",
     "prof": "",
     "semestre": "S3",
+    "etablissement": "ENSA Al Hoceima",
     "fichier": "electrocinetique.html",
     "resume": "Chapitre 3 de Physique 3 : régime transitoire, condensateur et bobine, circuits RC, RL, LC et RLC série, avec les exercices du cours et un examen blanc.",
     "cles": [
@@ -313,6 +331,7 @@
     "titre": "Probabilités et statistiques",
     "prof": "",
     "semestre": "S3",
+    "etablissement": "FSABM",
     "fichier": "probas-S3.html",
     "resume": "Probabilités et statistiques de S3, préparées à partir des annales 2016-2024.",
     "cles": [
@@ -331,6 +350,7 @@
     "titre": "Programmation en C",
     "prof": "Pr Safi",
     "semestre": "S3",
+    "etablissement": "FSABM",
     "fichier": "prog-c.html",
     "resume": "Le langage C du Pr Safi : types, opérateurs, tests et boucles, printf/scanf, fonctions, tableaux et pointeurs, avec TD 1-2, TP 2 à 5 et l'examen blanc corrigés.",
     "cles": [
@@ -348,6 +368,7 @@
     "titre": "Programmation Web 1",
     "prof": "Pr N. Falih",
     "semestre": "S3",
+    "etablissement": "FSABM",
     "fichier": "prog-web-1.html",
     "resume": "Généralités du web (HTTP, client-serveur, URL), HTML5 (structure, texte, liens, tableaux, médias, formulaires) et CSS3 (sélecteurs, cascade, polices, couleurs, modèle de boîte), avec le TD et les TP 1-2 corrigés.",
     "cles": [
@@ -365,6 +386,7 @@
     "titre": "Stratigraphie et paléontologie",
     "prof": "Pr M. Rhalmi (paléontologie)",
     "semestre": "S3",
+    "etablissement": "FST Béni Mellal",
     "fichier": "stratigraphie.html",
     "resume": "Stratigraphie, lithostratigraphie, biostratigraphie, fossilisation et paléoécologie pour la filière BCG, avec les contrôles corrigés du Pr Rhalmi.",
     "cles": [
@@ -382,6 +404,7 @@
     "titre": "Systèmes d'exploitation 1",
     "prof": "Pr Amrani",
     "semestre": "S3",
+    "etablissement": "FSABM",
     "fichier": "se1.html",
     "resume": "Rôle d'un système d'exploitation, Unix (fichiers, inodes, liens, regex), commandes de base, droits, redirections, processus et programmation shell Bash. Chapitres I à IV + TD/TP corrigés + examen blanc.",
     "cles": [
@@ -399,6 +422,7 @@
     "titre": "Analyse numérique",
     "prof": "Pr Laaribi",
     "semestre": "S4",
+    "etablissement": "FSABM",
     "fichier": "analyse-numerique.html",
     "resume": "Arithmétique machine, dichotomie, point fixe, Newton et sécante, Gauss, LU, Cholesky, Jacobi, Gauss-Seidel et relaxation, avec les séries 1 à 4 corrigées et un examen blanc.",
     "cles": [
@@ -416,6 +440,7 @@
     "titre": "Bases de données : algèbre relationnelle et SQL",
     "prof": "Pr Y. Madani",
     "semestre": "S4",
+    "etablissement": "FSABM",
     "fichier": "bdd-sql.html",
     "resume": "Merise (MCD, MLD, normalisation), algèbre relationnelle et SQL sous MySQL : LDD, LMD, SELECT, jointures, sous-requêtes, index, vues et utilisateurs. Séances 1 à 11 + TD/TP corrigés + examen blanc.",
     "cles": [
@@ -433,6 +458,7 @@
     "titre": "Biochimie structurale et métabolique",
     "prof": "Pr N. Elabbadi (métabolique)",
     "semestre": "S4",
+    "etablissement": "FST Béni Mellal",
     "fichier": "biochimie.html",
     "resume": "Biochimie de la filière BCG : glucides et lipides, enzymologie, bioénergétique et métabolisme glucidique, métabolisme des lipides, métabolisme des acides aminés, avec l'examen de septembre 2020 corrigé.",
     "cles": [
@@ -450,6 +476,7 @@
     "titre": "JavaScript",
     "prof": "Pr Zouina",
     "semestre": "S4",
+    "etablissement": "FSABM",
     "fichier": "javascript.html",
     "resume": "Programmation web 2 : syntaxe, objets et tableaux, DOM, événements, stockage local et JSON, promesses et fetch. Séances 1 à 7 + TD/TP corrigés + examen blanc.",
     "cles": [
@@ -467,6 +494,7 @@
     "titre": "Microbiologie générale",
     "prof": "",
     "semestre": "S4",
+    "etablissement": "FST Béni Mellal",
     "fichier": "microbiologie.html",
     "resume": "Microbiologie générale de la filière BCG : la cellule bactérienne, nutrition et croissance, métabolisme énergétique, génétique bactérienne, lutte contre les microorganismes, avec l'examen 2020 corrigé.",
     "cles": [
@@ -484,6 +512,7 @@
     "titre": "Programmation orientée objet en C++",
     "prof": "Pr A. Farchane",
     "semestre": "S4",
+    "etablissement": "FSABM",
     "fichier": "poo-cpp.html",
     "resume": "Du C au C++, classes, recopie, opérateurs, héritage simple et multiple, polymorphisme, patrons et exceptions, avec les TD1–4 et le TP1 corrigés.",
     "cles": [
@@ -501,6 +530,7 @@
     "titre": "Structures de données en C",
     "prof": "Pr A. Farchane",
     "semestre": "S4",
+    "etablissement": "FSABM",
     "fichier": "sd-c.html",
     "resume": "Listes chaînées (simples, doubles, circulaires, par tableau), piles, files, arbres binaires et ABR en langage C, avec les TD 1 à 3, les TP et un examen blanc.",
     "cles": [
@@ -518,6 +548,7 @@
     "titre": "Systèmes d'exploitation 2",
     "prof": "Pr Ouchitachen",
     "semestre": "S4",
+    "etablissement": "FSABM",
     "fichier": "se2.html",
     "resume": "Processus (fork, wait, zombies), ordonnancement (Gantt FCFS, SJF, SRTF, RR, priorités), mémoire (pagination, segmentation, remplacement), fichiers et disques, synchronisation et IPC (sémaphores, tubes, signaux).",
     "cles": [
@@ -535,6 +566,7 @@
     "titre": "Tectonique",
     "prof": "Pr Ben Kabbour",
     "semestre": "S4",
+    "etablissement": "FST Béni Mellal",
     "fichier": "tectonique.html",
     "resume": "Tectonique de la filière BCG : contraintes et déformation, failles, plis et schistosité, les grands domaines structuraux du Maroc, la tectonique au service des ressources, avec l'examen 2020 corrigé.",
     "cles": [
@@ -552,6 +584,7 @@
     "titre": "CMS : systèmes de gestion de contenu",
     "prof": "Pr N. Falih",
     "semestre": "S5",
+    "etablissement": "FSABM",
     "fichier": "cms.html",
     "resume": "Ce qu'est un CMS, libre ou propriétaire, puis WordPress de A à Z : installation XAMPP, tableau de bord, SSL, WooCommerce.",
     "cles": [
@@ -569,6 +602,7 @@
     "titre": "Cryptographie (partie 1 + TD1)",
     "prof": "Pr A. Farchane",
     "semestre": "S5",
+    "etablissement": "FSABM",
     "fichier": "crypto-farchane.html",
     "resume": "Chiffres classiques, arithmétique modulaire, LFSR, modes, DES, TD1 et TP1 corrigés.",
     "cles": [
@@ -590,6 +624,7 @@
     "titre": "Machine Learning (Apprentissage automatique)",
     "prof": "Pr Y. Madani",
     "semestre": "S5",
+    "etablissement": "FSABM",
     "fichier": "machine-learning.html",
     "resume": "Les 7 séances du Pr Madani : cycle d'un projet ML, maths de l'apprentissage, régression, classification, arbres et forêts, clustering. 9 chapitres, TP corrigés et examen blanc QCM.",
     "cles": [
@@ -607,6 +642,7 @@
     "titre": "Programmation orientée objet en Java",
     "prof": "",
     "semestre": "S5",
+    "etablissement": "FSABM",
     "fichier": "java-poo.html",
     "resume": "Des paradigmes à la POO, puis Java : bases, tableaux, classes, constructeurs, static. Avec les TD 1, 2 et 3 corrigés et vérifiés.",
     "cles": [
@@ -624,6 +660,7 @@
     "titre": "Réseaux informatiques (M351)",
     "prof": "Pr A. Darif",
     "semestre": "S5",
+    "etablissement": "FSABM",
     "fichier": "reseaux-M351.html",
     "resume": "Introduction aux réseaux, topologies, débit, modèles OSI et TCP/IP.",
     "cles": [
@@ -642,6 +679,7 @@
     "titre": "Traitement et analyse des données",
     "prof": "Pr Y. Madani",
     "semestre": "S5",
+    "etablissement": "FSABM",
     "fichier": "traitement-ad.html",
     "resume": "Fonctions Python, NumPy (tableaux, matrices, aléatoire, ufuncs) et Pandas (Series, DataFrames, groupby). Séances 1 à 6 + TP corrigés.",
     "cles": [
@@ -659,6 +697,7 @@
     "titre": "UML",
     "prof": "",
     "semestre": "S5",
+    "etablissement": "FSABM",
     "fichier": "uml.html",
     "resume": "Diagrammes et modélisation orientée objet.",
     "cles": [

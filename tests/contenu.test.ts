@@ -54,3 +54,16 @@ describe("modules HTML", () => {
     expect(html).not.toMatch(/sb_secret_/);
   });
 });
+
+describe("établissement des modules", () => {
+  it("le catalogue garde l'établissement déclaré dans chaque module.json", async () => {
+    const fs = await import("node:fs");
+    const cat = JSON.parse(fs.readFileSync("src/lib/modules-sources.json", "utf8")) as { slug: string; etablissement?: string }[];
+    for (const m of cat) {
+      const p = `content/sources/${m.slug}/module.json`;
+      if (!fs.existsSync(p)) continue;
+      const e = JSON.parse(fs.readFileSync(p, "utf8")).etablissement;
+      expect(m.etablissement, m.slug).toBe(e);
+    }
+  });
+});
