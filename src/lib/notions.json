@@ -59,6 +59,10 @@
     "t": "Ch3 · Adressage IP, sous-réseaux, IPv6"
    },
    {
+    "id": "routage",
+    "t": "Ch4 · Routage IP : statique, RIP, OSPF"
+   },
+   {
     "id": "nat",
     "t": "Ch5 · NAT : traduction d'adresses"
    },
@@ -423,6 +427,60 @@
     "t": "Ch5 · Vérification : show ip nat translations / statistics",
     "imp": 4,
     "g": "nat"
+   },
+   {
+    "id": "n57",
+    "t": "Ch3 · Unicast, multicast, broadcast ; adressage statique ou DHCP",
+    "imp": 3,
+    "g": "adressage"
+   },
+   {
+    "id": "n58",
+    "t": "Ch3 · Adresses privées, publiques et spéciales (bouclage, lien local)",
+    "imp": 4,
+    "g": "adressage"
+   },
+   {
+    "id": "n59",
+    "t": "Ch3 · VLSM : plan d'adressage à masques variables",
+    "imp": 5,
+    "g": "adressage"
+   },
+   {
+    "id": "n60",
+    "t": "Ch3 · En-tête IPv6 et types d'adresses (unicast, multicast, anycast)",
+    "imp": 3,
+    "g": "adressage"
+   },
+   {
+    "id": "n61",
+    "t": "Ch4 · Acheminement du datagramme IP, TTL et fragmentation",
+    "imp": 5,
+    "g": "routage"
+   },
+   {
+    "id": "n62",
+    "t": "Ch4 · Routage statique : standard, par défaut, récapitulative, flottante",
+    "imp": 5,
+    "g": "routage"
+   },
+   {
+    "id": "n63",
+    "t": "Ch4 · Routage dynamique : IGP/EGP, BGP, distance administrative",
+    "imp": 4,
+    "g": "routage"
+   },
+   {
+    "id": "n64",
+    "t": "Ch4 · Vecteur de distance : RIP et sa configuration",
+    "imp": 4,
+    "g": "routage"
+   },
+   {
+    "id": "n65",
+    "t": "Ch4 · État de liens : OSPF, Dijkstra, configuration à zone unique",
+    "imp": 5,
+    "g": "routage"
    }
   ]
  },

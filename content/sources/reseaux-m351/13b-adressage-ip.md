@@ -1,7 +1,7 @@
 ---
 id: adressage
 titre: Ch3 · Adressage IP, sous-réseaux, IPv6
-seance: Chapitre 3 (rédigé d'après le TD 4)
+seance: Chapitre 3
 importance: 5
 ---
 
@@ -19,11 +19,38 @@ Une adresse IPv4 est faite de 4 octets. Chaque octet s'écrit sur 8 bits : 128, 
 
 > [!piege] Compter toutes les adresses d'un réseau comme des machines. La première (bits machine à 0) est l'adresse du réseau, la dernière (bits machine à 1) est l'adresse de diffusion : il reste 2^h − 2 adresses pour les machines.
 
-À la fin, tu sais trouver la classe d'une adresse, calculer réseau, diffusion et plage d'hôtes, découper un bloc en sous-réseaux, expliquer pourquoi deux réseaux ne se parlent pas sans routeur, et lire une adresse IPv6.
+À la fin, tu sais distinguer unicast, multicast et broadcast, reconnaître une adresse privée ou spéciale, trouver la classe d'une adresse, calculer réseau, diffusion et plage d'hôtes, découper un bloc en sous-réseaux égaux ou en VLSM, expliquer pourquoi deux réseaux ne se parlent pas sans routeur, et lire une adresse IPv6.
 
-> [!attention] **Source de ce chapitre.** Il est rédigé à partir du TD 4 de ton prof et des règles standard de l'adressage IP. Le cours du prof sur ce chapitre n'a pas été fourni (le dossier contient les chapitres 1 et 2) : vérifie les définitions avec ton cours dès que tu l'as. Les exercices viennent du TD 4 ; les exercices 6 et 7 ne sont pas corrigés dans le scan, les corrigés ci-dessous sont rédigés ici et vérifiés par calcul.
+> [!attention] **Sources.** Cours du chapitre 3 et TD 4 de ton prof. Les exercices 6 et 7 du TD ne sont pas corrigés dans le scan : leurs corrigés sont rédigés ici et vérifiés par calcul.
 
-## Idée 1 · Une adresse IPv4 = réseau + machine
+## Idée 1 · Qui reçoit le paquet, et qui donne l'adresse
+
+Idée : une adresse sert à viser **une** machine, **un groupe** ou **tout le réseau**. Elle est posée à la main (statique) ou prêtée par un serveur DHCP (dynamique).
+
+```html
+<svg viewBox="0 0 560 150" role="img" aria-label="Trois types de communication : unicast d'une machine vers une seule, multicast vers un groupe inscrit, broadcast vers toutes les machines du réseau local" style="max-width:100%;height:auto"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="40" cy="75" r="12" stroke="#D9824F" stroke-width="2.5"/><circle cx="140" cy="40" r="10" stroke="#D9824F" stroke-width="2.5"/><circle cx="140" cy="75" r="10"/><circle cx="140" cy="110" r="10"/><path d="M52 72L129 43" stroke="#D9824F" stroke-width="2"/><circle cx="230" cy="75" r="12" stroke="#D9824F" stroke-width="2.5"/><circle cx="330" cy="40" r="10" stroke="#D9824F" stroke-width="2.5"/><circle cx="330" cy="75" r="10"/><circle cx="330" cy="110" r="10" stroke="#D9824F" stroke-width="2.5"/><path d="M242 72L319 43M242 78L319 107" stroke="#D9824F" stroke-width="2"/><circle cx="420" cy="75" r="12" stroke="#D9824F" stroke-width="2.5"/><circle cx="520" cy="40" r="10" stroke="#D9824F" stroke-width="2.5"/><circle cx="520" cy="75" r="10" stroke="#D9824F" stroke-width="2.5"/><circle cx="520" cy="110" r="10" stroke="#D9824F" stroke-width="2.5"/><path d="M432 72L509 43M432 75H509M432 78L509 107" stroke="#D9824F" stroke-width="2"/></g><g font-family="sans-serif" font-size="13" fill="currentColor" text-anchor="middle"><text x="90" y="142">unicast : 1 → 1</text><text x="280" y="142">multicast : 1 → groupe</text><text x="470" y="142">broadcast : 1 → tous</text></g></svg>
+```
+
+| Type | Vers qui | Exemple d'adresse |
+|---|---|---|
+| Monodiffusion (unicast) | une seule machine | 192.168.1.10 |
+| Multidiffusion (multicast) | les machines inscrites à un groupe | 224.0.0.0 à 239.255.255.255 |
+| Diffusion (broadcast) | toutes les machines du réseau local | 192.168.1.255 en /24 |
+
+| | Statique | Dynamique (DHCP) |
+|---|---|---|
+| Qui pose l'adresse | l'administrateur, à la main | un serveur DHCP, automatiquement |
+| Durée | ne change pas | prêtée pour une durée (le bail), peut changer |
+| Pour qui | serveurs, imprimantes réseau, caméras IP | PC, téléphones, Wi-Fi public, écoles |
+| Risque | conflit si deux machines ont la même adresse | panne du serveur DHCP = plus d'adresses |
+
+Qui distribue les adresses publiques ? L'**IANA** les répartit entre 5 registres régionaux (**RIR**) : ARIN (Amérique du Nord), RIPE NCC (Europe, Moyen-Orient, Asie centrale), APNIC (Asie-Pacifique), LACNIC (Amérique latine), **AFRINIC (Afrique, donc le Maroc et le Tchad)**. L'IANA ne donne jamais d'adresse directement à un utilisateur.
+
+> [!prof] Dans les diapos, l'inconvénient « temps de configuration plus long » est listé pour le statique **et** pour le DHCP. C'est un copier-coller : le DHCP est justement ce qui évite de configurer à la main. Ne le cite pas comme inconvénient du DHCP.
+
+> [!retenir] Unicast 1 → 1, multicast 1 → groupe, broadcast 1 → tous (réseau local). Statique pour ce qui doit rester joignable à la même adresse, DHCP pour le reste.
+
+## Idée 2 · Une adresse IPv4 = réseau + machine
 
 Idée : l'adresse est une seule suite de 32 bits ; la **classe** (lue dans le premier octet) dit où se trouve la coupure par défaut.
 
@@ -57,7 +84,7 @@ indice: Regarde seulement le premier octet : 0-127 classe A, 128-191 classe B, 1
 = <b>a)</b> 204 ∈ [192, 223] → <b>classe C</b>, /24, 2⁸ − 2 = <b>254</b> hôtes.<br><b>b)</b> 138 ∈ [128, 191] → <b>classe B</b>, /16, 2¹⁶ − 2 = <b>65 534</b>.<br><b>c)</b> 18 ∈ [0, 127] → <b>classe A</b>, /8, 2²⁴ − 2 = <b>16 777 214</b>.<br><b>d)</b> 191 = 10111111 commence par 10 → <b>classe B</b>, /16, <b>65 534</b> hôtes (191 est le dernier octet de la classe B, pas de la classe C).
 ```
 
-## Idée 2 · Le masque coupe l'adresse : réseau, diffusion, plage d'hôtes
+## Idée 3 · Le masque coupe l'adresse : réseau, diffusion, plage d'hôtes
 
 Idée : le masque est une suite de 1 (partie réseau) puis de 0 (partie machine). Un « ET » bit à bit entre l'adresse et le masque donne l'adresse du réseau.
 
@@ -125,7 +152,46 @@ indice: Fais le ET avec le masque et compare avec l'adresse du sous-réseau.
 = 35 = 00100011. ET avec 11100000 = 00100000 = 32 = adresse du sous-réseau. <b>Oui</b>, elle appartient à 200.100.10.32/27 (plage 33 à 62).
 ```
 
-## Idée 3 · Découper un bloc en sous-réseaux
+## Idée 4 · Adresses spéciales, privées et publiques
+
+Idée : certaines plages ne s'attribuent jamais à un PC sur Internet. Il faut les reconnaître au premier coup d'œil.
+
+```html
+<svg viewBox="0 0 560 140" role="img" aria-label="Un réseau local en adresses privées 192.168.1.0/24 sort sur Internet par un routeur NAT qui le remplace par une adresse publique fournie par le FAI" style="max-width:100%;height:auto"><g fill="none" stroke="currentColor" stroke-width="1.5"><rect x="10" y="30" width="200" height="80" rx="8"/><circle cx="290" cy="70" r="24" stroke="#D9824F" stroke-width="2.5"/><path d="M210 70h56M314 70h56"/><path d="M380 60c10-30 60-30 75-10c25-15 70 0 60 25c25 15 0 45-25 35c-15 20-70 20-85 0c-30 5-45-30-25-50z"/></g><g font-family="sans-serif" font-size="13" fill="currentColor" text-anchor="middle"><text x="110" y="62">LAN : adresses privées</text><text x="110" y="85">192.168.1.0/24</text><text x="290" y="74" fill="#D9824F">NAT</text><text x="455" y="78">Internet</text><text x="290" y="125" fill="#D9824F" font-size="12">privée → publique (du FAI)</text></g></svg>
+```
+
+| Plage | Rôle |
+|---|---|
+| 10.0.0.0 à 10.255.255.255 (10.0.0.0/8) | privée (classe A) |
+| 172.16.0.0 à 172.31.255.255 (172.16.0.0/12) | privée (classe B) |
+| 192.168.0.0 à 192.168.255.255 (192.168.0.0/16) | privée (classe C) |
+| 127.0.0.0/8 (souvent 127.0.0.1) | bouclage : la machine se parle à elle-même |
+| 169.254.0.0/16 | lien local : prise toute seule quand aucun DHCP ne répond |
+| 192.0.2.0/24 (TEST-NET) | réservée aux exemples et à la documentation |
+| 0.0.0.0/8 | « ce réseau » ; 0.0.0.0/0 sert d'écriture à la route par défaut |
+
+Les adresses **privées** ne sont pas routées sur Internet : des milliers de réseaux utilisent les mêmes. Pour sortir, le routeur les traduit en une adresse **publique** fournie par le FAI : c'est le **NAT**, vu en détail au chapitre 5.
+
+```etapes Classer 172.20.5.9, 172.40.1.1 et 169.254.3.7
+172.20.5.9 :: 172.20 est entre 172.16 et 172.31 : privée.
+172.40.1.1 :: 172.40 dépasse 172.31 : publique (piège classique).
+169.254.3.7 :: Plage 169.254.0.0/16 : lien local. La machine n'a pas trouvé de serveur DHCP.
+```
+
+> [!prof] La diapo 17 écrit « 69.254.0.0 à 169.254.255.255 » : il manque le 1, c'est **169.254.0.0**. Elle appelle aussi « route par défaut » la plage 0.0.0.0 à 0.255.255.255 : cette plage veut dire « ce réseau » ; la route par défaut, c'est 0.0.0.0/0 (chapitre 4).
+
+> [!retenir] Privées : 10/8, 172.16/12 (de 172.16 à 172.31), 192.168/16. Bouclage 127/8. Lien local 169.254/16.
+
+```exercice Adresses spéciales
+? {n58} Un PC affiche l'adresse 169.254.12.4. Que s'est-il passé ?
+indice: Regarde à quelle plage spéciale appartient 169.254.
+= C'est une adresse de **lien local** (169.254.0.0/16) : le PC était réglé en DHCP mais **aucun serveur DHCP n'a répondu**. Il s'est donné une adresse tout seul, qui ne permet pas de sortir du réseau local.
+? {n58} Parmi 10.4.4.4, 172.32.0.1, 192.168.100.1 et 8.8.8.8, lesquelles sont privées ?
+indice: 172.16 à 172.31 seulement pour la classe B.
+= **10.4.4.4** et **192.168.100.1**. 172.32.0.1 est publique (172.32 > 172.31), 8.8.8.8 aussi.
+```
+
+## Idée 5 · Découper un bloc en sous-réseaux
 
 Idée : pour obtenir n sous-réseaux, on **emprunte** x bits à la partie machine, avec 2^x ≥ n. Ces bits s'ajoutent au préfixe.
 
@@ -190,7 +256,45 @@ indice: Une liaison série n'a besoin que de 2 adresses.
 = Chaque liaison série reçoit un /23 : 510 hôtes possibles pour 2 utilisés = 508 gaspillées. Pour les 3 liaisons : 3 × 508 = <b>1 524 adresses gaspillées</b>. (Piste d'amélioration hors cours : un masque /30 pour les liaisons séries, avec 2 hôtes chacune, ne gaspille rien.)
 ```
 
-## Idée 4 · Deux réseaux ne se parlent pas sans routeur
+### Application · exercice du cours (diapo 31)
+
+```exercice Découper 192.168.20.0/24 en 5 sous-réseaux
+? {n46} Donne le masque, puis pour chaque sous-réseau : adresse, première machine, dernière machine, diffusion.
+indice: 2ˣ ≥ 5 donne x = 3. 24 + 3 = /27, blocs de 32.
+= Masque <b>/27 = 255.255.255.224</b> (8 sous-réseaux possibles, 30 hôtes chacun).<br>SR1 192.168.20.0 · .1 · .30 · <b>.31</b><br>SR2 192.168.20.32 · .33 · .62 · <b>.63</b><br>SR3 192.168.20.64 · .65 · .94 · <b>.95</b><br>SR4 192.168.20.96 · .97 · .126 · <b>.127</b><br>SR5 192.168.20.128 · .129 · .158 · <b>.159</b><br>Vérifié par programme, identique à la diapo 32.
+```
+
+## Idée 6 · VLSM : un masque adapté à chaque sous-réseau
+
+Idée : quand les besoins sont différents (126 machines ici, 2 là), des sous-réseaux tous de la même taille gaspillent des adresses. Le **VLSM** découpe **le plus grand d'abord**, puis redécoupe ce qui reste.
+
+```html
+<svg viewBox="0 0 560 120" role="img" aria-label="Le bloc 192.168.0.0/24 découpé en VLSM : un /25 de 128 adresses, trois /27 de 32, un /28 de 16 et quatre /30 de 4" style="max-width:100%;height:auto"><g stroke="currentColor" stroke-width="1.2"><rect x="10" y="30" width="270" height="40" fill="none" stroke="#D9824F" stroke-width="2"/><rect x="280" y="30" width="67.5" height="40" fill="none"/><rect x="347.5" y="30" width="67.5" height="40" fill="none"/><rect x="415" y="30" width="67.5" height="40" fill="none"/><rect x="482.5" y="30" width="33.75" height="40" fill="none"/><rect x="516.25" y="30" width="8.44" height="40" fill="none"/><rect x="524.69" y="30" width="8.44" height="40" fill="none"/><rect x="533.13" y="30" width="8.44" height="40" fill="none"/><rect x="541.56" y="30" width="8.44" height="40" fill="none"/></g><g font-family="sans-serif" font-size="12" fill="currentColor" text-anchor="middle"><text x="145" y="55" fill="#D9824F">SR1 /25 (126)</text><text x="314" y="55">SR2 /27</text><text x="381" y="55">SR3 /27</text><text x="449" y="55">SR4 /27</text><text x="499" y="92">SR5</text><text x="533" y="20">/30</text><text x="280" y="110">.0 → .127 | .128 → .223 | .224 → .239 | .240 → .255</text></g></svg>
+```
+
+```etapes Plan d'adressage VLSM de 192.168.0.0/24 (exercice du cours, diapo 40)
+Trie les besoins :: 126, 26, 26, 26, 14, 2, 2, 2, 2 machines.
+Taille de chaque bloc :: 126 → /25 (2⁷ − 2 = 126). 26 → /27 (2⁵ − 2 = 30). 14 → /28 (2⁴ − 2 = 14). 2 → /30 (2² − 2 = 2).
+Place le plus grand :: SR1 = 192.168.0.0/25 (de .0 à .127).
+Redécoupe le reste en /27 :: SR2 = .128/27, SR3 = .160/27, SR4 = .192/27. Il reste .224/27.
+Redécoupe .224/27 en /28 :: SR5 = .224/28 (de .224 à .239). Il reste .240/28.
+Redécoupe .240/28 en /30 :: SR6 = .240/30, SR7 = .244/30, SR8 = .248/30, SR9 = .252/30. Tout le bloc est utilisé.
+```
+
+> [!retenir] VLSM : trier du plus grand au plus petit, prendre le plus petit bloc où 2^h − 2 ≥ besoin, redécouper ce qui reste. Les liaisons entre deux routeurs : /30.
+
+> [!prof] Dans l'exemple 192.168.50.0 (diapos 36 à 38), les diapos parlent de « 125 », « 60 » et « 29 adresses utilisables » : ce sont les **besoins**. Les adresses réellement utilisables sont 126 (/25), 62 (/26) et 30 (/27). Sur la diapo 41, « 2⁴ − 2 = 16 » vaut en fait **14**.
+
+```exercice VLSM
+? {n59} Dans l'exemple du cours, 192.168.50.0/24 doit fournir 125, 60, 29 et 29 adresses. Donne les 4 sous-réseaux.
+indice: 125 → /25, 60 → /26, 29 → /27. Le plus grand d'abord.
+= SR1 <b>192.168.50.0/25</b> (126 hôtes) · SR2 <b>192.168.50.128/26</b> (62) · SR3 <b>192.168.50.192/27</b> (30) · SR4 <b>192.168.50.224/27</b> (30).
+? {n59} Quel masque choisir pour une liaison entre deux routeurs, et pourquoi ?
+indice: Combien d'adresses faut-il sur une liaison point à point ?
+= <b>/30 (255.255.255.252)</b> : 2² − 2 = 2 hôtes, exactement les deux interfaces des routeurs. Aucun gaspillage.
+```
+
+## Idée 7 · Deux réseaux ne se parlent pas sans routeur
 
 Idée : deux machines sont dans le même réseau si leur adresse ET masque donne le même résultat. Sinon, il faut un routeur et une passerelle par défaut.
 
@@ -221,7 +325,7 @@ indice: Le masque est /24 : regarde les bits machine du dernier octet.
 = Dans 192.168.16.0/24, <b>192.168.16.0</b> a tous ses bits machine à 0 : c'est l'<b>adresse du réseau</b>. <b>192.168.16.255</b> les a tous à 1 : c'est l'<b>adresse de diffusion</b>. Aucune des deux ne peut être attribuée à une machine.
 ```
 
-## Idée 5 · IPv6 : 128 bits, une écriture plus courte
+## Idée 8 · IPv6 : 128 bits, une écriture plus courte
 
 Idée : IPv6 règle le manque d'adresses d'IPv4. Une adresse fait 128 bits, écrits en 8 groupes de 4 chiffres hexadécimaux.
 
@@ -263,6 +367,52 @@ indice: MAC multicast IPv4 = 01:00:5e suivi des 23 bits de poids faible de l'adr
 = 212 = 11010100 → on garde 7 bits : 1010100 = 0x54. 110 = 0x6e. 199 = 0xc7. Adresse MAC : <b>01:00:5e:54:6e:c7</b>. Vérifié par programme.
 ```
 
+## Idée 9 · En-tête IPv6 et types d'adresses
+
+Idée : IPv6 garde l'essentiel de l'en-tête IPv4, renomme certains champs et en **supprime** d'autres pour aller plus vite. Le broadcast disparaît.
+
+| IPv4 | IPv6 | Ce qui change |
+|---|---|---|
+| Version | Version | 6 au lieu de 4 |
+| Longueur d'en-tête (IHL) | supprimé | l'en-tête IPv6 fait toujours 40 octets |
+| Type de service | Classe de trafic | même rôle (priorité) |
+| aucun | Étiquette de flux (flow label, 20 bits) | nouveau : repère un flux pour la qualité de service |
+| Longueur totale | Longueur des données (payload length) | ne compte plus l'en-tête |
+| Identification, drapeaux, décalage | supprimés | les routeurs ne fragmentent plus ; seule la source le fait (en-tête d'extension) |
+| TTL | Limite de sauts (hop limit) | même rôle, nom plus juste |
+| Protocole | En-tête suivant (next header) | même rôle |
+| Somme de contrôle d'en-tête | supprimée | déjà faite par les couches 2 et 4 |
+| Adresses (32 bits) | Adresses (128 bits) | 4 fois plus longues |
+
+> [!attention] Les diapos 44 à 54 sur l'en-tête sont des images. Ce tableau est rédigé d'après la norme IPv6 (RFC 8200), certitude élevée ; compare-le avec le résumé de la diapo 54.
+
+| Type | Rôle | Exemple |
+|---|---|---|
+| Unicast global | adresse publique d'une interface | commence par 2 ou 3 (2000::/3) |
+| Unicast lien local | ne sort pas du lien | FE80::/10 |
+| Multicast | un groupe : remplace le broadcast | FF00::/8, ex. FF02::1 (tous les nœuds du lien) |
+| Anycast | même adresse sur plusieurs machines, la plus proche répond | |
+
+Une adresse **unicast globale** se lit en trois morceaux : **préfixe de routage global** (donné par le FAI, souvent 48 bits), **ID de sous-réseau** (16 bits, soit 65 536 sous-réseaux), **ID d'interface** (64 bits, la « partie hôte »). Une même interface peut avoir plusieurs adresses IPv6 (au moins une lien local, plus une ou des globales).
+
+```etapes Abréger FF02:0000:0000:0000:0000:0001:FF00:0001 (diapo 59)
+Enlève les zéros de tête :: FF02:0:0:0:0:1:FF00:1.
+Repère la plus longue suite de groupes nuls :: les 4 groupes après FF02.
+Remplace-la une seule fois par :: :: FF02::1:FF00:1.
+```
+
+> [!piege] Utiliser « :: » deux fois. 2001::14::95 est **interdit** : on ne saurait pas combien de zéros mettre de chaque côté (diapo 59).
+
+```exercice IPv6 : écriture et types
+? {n60} Lesquelles sont des adresses IPv6 valides ? a) 2001.1111.2222.3333.4444.5555.6666.7777 · b) 2001:AAAA:BBBB:CCCC:DDDD:EEEE:FFFF:GGGG · c) 2001:d02::14:0:0:95 · d) 2001:1111:2222:3333:44444:55555:6666:7777
+indice: Séparateur « : », chiffres 0-9 et a-f, au plus 4 chiffres par groupe, 8 groupes en tout.
+= Seule <b>c)</b> est valide. a) séparée par des points · b) G n'est pas hexadécimal · d) des groupes de 5 chiffres.
+? {n60} Abrège 3001:0000:0000:0000:0000:0000:0000:1111.
+= <b>3001::1111</b>.
+? {n60} Pourquoi n'y a-t-il pas d'adresse de diffusion en IPv6 ?
+= Le broadcast dérangeait toutes les machines du réseau. IPv6 le remplace par le <b>multicast</b> (par exemple FF02::1 pour joindre tous les nœuds du lien), qui ne touche que les machines concernées.
+```
+
 ## Flashcards
 
 ```cartes
@@ -278,6 +428,13 @@ indice: MAC multicast IPv4 = 01:00:5e suivi des 23 bits de poids faible de l'adr
 {n48} Taille et écriture d'une adresse IPv6 ? :: 128 bits, 8 groupes de 4 chiffres hexadécimaux. On supprime les zéros de tête et on remplace une seule suite de groupes nuls par « :: ».
 {n48} Adresse lien local depuis une MAC (EUI-64) ? :: ff:fe au milieu de la MAC, 7ᵉ bit du 1ᵉʳ octet inversé, préfixe fe80::.
 {n48} MAC multicast d'une IP multicast IPv4 ? :: 01:00:5e + les 23 bits de poids faible de l'adresse IP.
+{n57} Unicast, multicast, broadcast ? :: Unicast : 1 → 1. Multicast : 1 → groupe inscrit (224 à 239). Broadcast : 1 → tous les hôtes du réseau local.
+{n57} Statique ou DHCP pour un serveur ? :: Statique : son adresse ne doit pas changer. DHCP pour les PC et téléphones (adresse prêtée pour un bail).
+{n58} Les 3 plages privées ? :: 10.0.0.0/8, 172.16.0.0/12 (172.16 à 172.31), 192.168.0.0/16.
+{n58} 127.0.0.1 et 169.254.x.x ? :: 127/8 : bouclage. 169.254/16 : lien local, prise quand aucun DHCP ne répond.
+{n59} Principe du VLSM ? :: Trier les besoins du plus grand au plus petit, donner à chacun le plus petit bloc suffisant, redécouper ce qui reste.
+{n60} Champs IPv4 supprimés en IPv6 ? :: Longueur d'en-tête, champs de fragmentation (identification, drapeaux, décalage) et somme de contrôle d'en-tête.
+{n60} Types d'adresses IPv6 ? :: Unicast (globale, lien local FE80::/10), multicast (FF00::/8), anycast. Pas de broadcast.
 ```
 
 ## QCM du chapitre
@@ -366,4 +523,60 @@ indice: MAC multicast IPv4 = 01:00:5e suivi des 23 bits de poids faible de l'adr
 - ff:ff:ff
 - 02:00:4c
 = Pour IPv4, 01:00:5e suivi des 23 bits de poids faible de l'adresse IP (TD 4, exercice 7).
+
+? {n57} Un message envoyé à toutes les machines du réseau local est une…
+- monodiffusion
+- multidiffusion
++ diffusion (broadcast)
+- anycast
+= Broadcast : 1 vers tous les hôtes du réseau local. Multicast : seulement un groupe inscrit.
+
+? {n57} Pour une imprimante réseau partagée, on préfère…
++ une adresse statique
+- une adresse DHCP
+- une adresse 169.254.x.x
+- une adresse multicast
+= Elle doit rester joignable à la même adresse : statique.
+
+? {n58} Laquelle de ces adresses est privée ?
+- 172.32.10.1
++ 172.18.10.1
+- 192.169.1.1
+- 11.0.0.1
+= Plage privée de classe B : 172.16 à 172.31. 172.18 en fait partie.
+
+? {n58} Quel organisme distribue les adresses IP en Afrique ?
+- RIPE NCC
+- ARIN
++ AFRINIC
+- l'IANA, directement aux utilisateurs
+= AFRINIC est le RIR de l'Afrique. L'IANA ne donne rien directement aux utilisateurs.
+
+? {n59} En VLSM, quel bloc donner à un sous-réseau de 26 machines ?
+- /26
++ /27
+- /28
+- /24
+= /27 : 2⁵ − 2 = 30 ≥ 26. /28 ne donne que 14.
+
+? {n59} Quel masque pour une liaison point à point entre deux routeurs ?
+- /24
+- /29
++ /30
+- /32
+= /30 : 2 adresses utilisables, une par interface.
+
+? {n60} Quel champ IPv4 n'existe plus dans l'en-tête IPv6 ?
+- Version
+- Adresse source
++ Somme de contrôle d'en-tête
+- Limite de sauts
+= La somme de contrôle est supprimée (déjà faite par les couches 2 et 4). Le TTL devient la limite de sauts.
+
+? {n60} En IPv6, ce qui remplace le broadcast, c'est…
+- l'anycast
++ le multicast
+- le lien local
+- le NAT
+= Pas de broadcast en IPv6 : le multicast (ex. FF02::1) le remplace.
 ```
