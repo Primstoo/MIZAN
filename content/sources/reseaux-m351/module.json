@@ -11,8 +11,8 @@
   "clesSupplementaires": [
     "mzt-reseau*"
   ],
-  "resume": "Introduction aux réseaux, topologies, débit, modèles OSI et TCP/IP.",
-  "conventions": "Conventions du prof (à respecter dans tes réponses) : tailles de fichier en Ko/Mo/Go en binaire (1 Go = 1024³ × 8 bits) mais « millions d'octets » en décimal ; débits en décimal (1 Mbit/s = 10⁶ bit/s) ; T = taille (bits) / débit (bits/s). TCP/IP numéroté 1 Accès réseau, 2 Internet, 3 Transport, 4 Application. PDU : Données, Segment, Paquet, Trame, Bits. MSS = MTU − 40. Hamming (7,4) : positions C0 C1 U0 C2 U1 U2 U3, C0 = U0+U1+U3, C1 = U0+U2+U3, C2 = U1+U2+U3 (mod 2). Parité : bit ajouté à la fin. Manchester (cours) : 0 = transition bas→haut, 1 = haut→bas au milieu du bit (inverse de l'IEEE 802.3). VRC = parité par caractère, LRC = parité sur le bloc. CRC : ajouter r = degré de G zéros, diviser modulo 2, reste sur r bits. Adressage (TD 4) : hôtes = 2^h − 2 (h = bits machine) ; classe A 0-127 (/8), B 128-191 (/16), C 192-223 (/24) ; adresse réseau = bits machine à 0, diffusion = bits machine à 1 ; n sous-réseaux : 2^x ≥ n.",
+  "resume": "Introduction aux réseaux, topologies, débit, modèles OSI et TCP/IP, adressage IP, routage statique et NAT.",
+  "conventions": "Conventions du prof (à respecter dans tes réponses) : tailles de fichier en Ko/Mo/Go en binaire (1 Go = 1024³ × 8 bits) mais « millions d'octets » en décimal ; débits en décimal (1 Mbit/s = 10⁶ bit/s) ; T = taille (bits) / débit (bits/s). TCP/IP numéroté 1 Accès réseau, 2 Internet, 3 Transport, 4 Application. PDU : Données, Segment, Paquet, Trame, Bits. MSS = MTU − 40. Hamming (7,4) : positions C0 C1 U0 C2 U1 U2 U3, C0 = U0+U1+U3, C1 = U0+U2+U3, C2 = U1+U2+U3 (mod 2). Parité : bit ajouté à la fin. Manchester (cours) : 0 = transition bas→haut, 1 = haut→bas au milieu du bit (inverse de l'IEEE 802.3). VRC = parité par caractère, LRC = parité sur le bloc. CRC : ajouter r = degré de G zéros, diviser modulo 2, reste sur r bits. Adressage (TD 4) : hôtes = 2^h − 2 (h = bits machine) ; classe A 0-127 (/8), B 128-191 (/16), C 192-223 (/24) ; adresse réseau = bits machine à 0, diffusion = bits machine à 1 ; n sous-réseaux : 2^x ≥ n. NAT (chapitre 5) : vocabulaire Cisco du cours — locale interne / globale interne / locale externe / globale externe (inside local, inside global, outside local, outside global) ; NAT statique 1:1, dynamique m:n avec pool, PAT m:1 avec le mot-clé overload ; commandes ip nat inside source static|list … pool|interface … [overload], ip nat inside / ip nat outside, vérification show ip nat translations et show ip nat statistics.",
   "intro": "Le cours chapitre par chapitre, avec **QCM**, **flashcards** (révision espacée) et **TD corrigés**.\n\n- **Tableau de bord** : tes notions à consolider, les plus importantes d'abord.\n- **Flashcards** : quelques minutes par jour ; une carte réussie revient après 1, 3, 7, 14 puis 30 jours.\n- **TD** : cherche, ouvre l'indice si besoin, compare avec le corrigé et note-toi.\n- **Outils interactifs** (calculs générés, rédaction corrigée par le tuteur, TD inédit, journal d'erreurs) : directement dans les chapitres.\n\nTa progression d'avant la nouvelle version est conservée.",
   "annexes": [
     {
@@ -326,6 +326,36 @@
       "t": "TP3 · Distance administrative et route flottante",
       "imp": 4,
       "chapitre": "tp3"
+    },
+    {
+      "id": "n52",
+      "t": "Ch5 · NAT : rôle, adresses locale/globale interne/externe, SNAT et DNAT",
+      "imp": 5,
+      "chapitre": "nat"
+    },
+    {
+      "id": "n53",
+      "t": "Ch5 · Types de NAT : statique (1:1), dynamique (pool), PAT (m:1)",
+      "imp": 5,
+      "chapitre": "nat"
+    },
+    {
+      "id": "n54",
+      "t": "Ch5 · Configuration Cisco du NAT statique et dynamique (pool, ACL, inside/outside)",
+      "imp": 5,
+      "chapitre": "nat"
+    },
+    {
+      "id": "n55",
+      "t": "Ch5 · PAT (overload) : table avec ports, pool ou adresse de l'interface",
+      "imp": 5,
+      "chapitre": "nat"
+    },
+    {
+      "id": "n56",
+      "t": "Ch5 · Vérification : show ip nat translations / statistics",
+      "imp": 4,
+      "chapitre": "nat"
     }
   ],
   "chapitres": [
@@ -343,6 +373,7 @@
     "12-s12.md",
     "13-s13.md",
     "13b-adressage-ip.md",
+    "13c-nat.md",
     "14-s14.md",
     "15-td.md",
     "16-tp1.md",

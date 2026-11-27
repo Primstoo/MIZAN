@@ -59,6 +59,10 @@
     "t": "Ch3 · Adressage IP, sous-réseaux, IPv6"
    },
    {
+    "id": "nat",
+    "t": "Ch5 · NAT : traduction d'adresses"
+   },
+   {
     "id": "s14",
     "t": "En-têtes IP, TCP et UDP (à mémoriser)"
    },
@@ -389,6 +393,36 @@
     "t": "TP3 · Distance administrative et route flottante",
     "imp": 4,
     "g": "tp3"
+   },
+   {
+    "id": "n52",
+    "t": "Ch5 · NAT : rôle, adresses locale/globale interne/externe, SNAT et DNAT",
+    "imp": 5,
+    "g": "nat"
+   },
+   {
+    "id": "n53",
+    "t": "Ch5 · Types de NAT : statique (1:1), dynamique (pool), PAT (m:1)",
+    "imp": 5,
+    "g": "nat"
+   },
+   {
+    "id": "n54",
+    "t": "Ch5 · Configuration Cisco du NAT statique et dynamique (pool, ACL, inside/outside)",
+    "imp": 5,
+    "g": "nat"
+   },
+   {
+    "id": "n55",
+    "t": "Ch5 · PAT (overload) : table avec ports, pool ou adresse de l'interface",
+    "imp": 5,
+    "g": "nat"
+   },
+   {
+    "id": "n56",
+    "t": "Ch5 · Vérification : show ip nat translations / statistics",
+    "imp": 4,
+    "g": "nat"
    }
   ]
  },

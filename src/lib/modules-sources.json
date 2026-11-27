@@ -662,14 +662,14 @@
     "semestre": "S5",
     "etablissement": "FSABM",
     "fichier": "reseaux-M351.html",
-    "resume": "Introduction aux réseaux, topologies, débit, modèles OSI et TCP/IP.",
+    "resume": "Introduction aux réseaux, topologies, débit, modèles OSI et TCP/IP, adressage IP, routage statique et NAT.",
     "cles": [
       "m351-revision-v1",
       "mzt-reseau*"
     ],
     "cle": "m351-revision-v1",
     "format": "essais",
-    "chapitres": 20,
+    "chapitres": 21,
     "annexes": [
       "reseaux-M351-outils.html"
     ]
