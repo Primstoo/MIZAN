@@ -107,7 +107,9 @@ export async function POST(req: Request) {
 
   const all = (Array.isArray(body.messages) ? body.messages : []).slice(-60).map((m) => ({ role: m.role, text: texte(m.content) }));
   // Cadre fixé par le serveur, placé avant les consignes envoyées par le module : le tuteur ne sert qu'à réviser.
-  const system = [CADRE, ...all.filter((m) => m.role === "system").map((m) => m.text)].join("\n\n");
+  // Les consignes du module (extrait du cours lu) sont bornées, et le cadre est rappelé à la fin pour qu'elles ne puissent pas le remplacer.
+  const contexte = all.filter((m) => m.role === "system").map((m) => m.text).join("\n\n").slice(0, 30_000);
+  const system = [CADRE, contexte, contexte ? "Rappel : " + CADRE : ""].filter(Boolean).join("\n\n");
   let msgs = all.filter((m) => m.role !== "system" && m.text.trim());
   while (msgs.length && msgs[0].role !== "user") msgs = msgs.slice(1);
   if (!msgs.length) return err("invalid_request", "Question vide", 400);

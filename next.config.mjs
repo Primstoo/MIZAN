@@ -22,6 +22,14 @@ const nextConfig = {
       ],
     }];
   },
+  async redirects() {
+    return [
+      // Les navigateurs demandent toujours /favicon.ico : on les renvoie vers l'icône de l'appli.
+      { source: "/favicon.ico", destination: "/icons/icon-192.png", permanent: true },
+      // L'ancienne adresse Vercel (MIZAN) renvoie vers le domaine officiel.
+      { source: "/:path*", has: [{ type: "host", value: "mizan-five-iota.vercel.app" }], destination: "https://toumailearn.app/:path*", permanent: true },
+    ];
+  },
   experimental: {
     outputFileTracingIncludes: { "/app/modules/[file]": ["./content/modules/**/*"] },
   },
