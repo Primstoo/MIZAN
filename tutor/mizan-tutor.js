@@ -179,15 +179,15 @@
     return p.map((x, i) => i % 2 ? '<code>' + esc(x) + '</code>' : esc(x).replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*\w])\*([^*\n]+)\*(?![*\w])/g, '$1<em>$2</em>')).join('');
   };
   const md = (t) => {
-    const out = []; let list = null, code = null;
+    const out = []; let list = null, code = null, olN = 0;
     const flush = () => { if (list) { out.push('</' + list + '>'); list = null; } };
     String(t).split('\n').forEach((raw) => {
       if (/^\s*```/.test(raw)) { if (code === null) { flush(); code = []; } else { out.push('<pre>' + esc(code.join('\n')) + '</pre>'); code = null; } return; }
       if (code !== null) { code.push(raw); return; }
       let m;
-      if ((m = raw.match(/^\s*#{1,6}\s+(.*)$/))) { flush(); out.push('<p><strong>' + inl(m[1]) + '</strong></p>'); }
+      if ((m = raw.match(/^\s*#{1,6}\s+(.*)$/))) { flush(); olN = 0; out.push('<p><strong>' + inl(m[1]) + '</strong></p>'); }
       else if ((m = raw.match(/^\s*[-*•]\s+(.*)$/))) { if (list !== 'ul') { flush(); out.push('<ul>'); list = 'ul'; } out.push('<li>' + inl(m[1]) + '</li>'); }
-      else if ((m = raw.match(/^\s*\d+[.)]\s+(.*)$/))) { if (list !== 'ol') { flush(); out.push('<ol>'); list = 'ol'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if ((m = raw.match(/^\s*(\d+)[.)]\s+(.*)$/))) { if (list !== 'ol') { flush(); const n = +m[1]; olN = (n === 1 && olN > 1) ? olN : n; out.push('<ol start="' + olN + '">'); list = 'ol'; } out.push('<li>' + inl(m[2]) + '</li>'); olN++; }
       else if (!raw.trim()) flush();
       else { flush(); out.push('<p>' + inl(raw) + '</p>'); }
     });

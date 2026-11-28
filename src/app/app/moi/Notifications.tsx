@@ -11,12 +11,14 @@ const versBytes = (b64: string) => {
 
 type Etat = "chargement" | "indisponible" | "ios" | "refuse" | "inactif" | "actif";
 
-export default function Notifications() {
+export default function Notifications({ bandeau = false }: { bandeau?: boolean }) {
+  const [masque, setMasque] = useState(false);
   const [etat, setEtat] = useState<Etat>("chargement");
   const [msg, setMsg] = useState("");
   const [charge, setCharge] = useState(false);
 
   useEffect(() => {
+    try { const t = Number(localStorage.getItem("tl_rappels_plus_tard") || 0); if (bandeau && Date.now() - t < 7 * 864e5) setMasque(true); } catch {}
     (async () => {
       const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
       const installee = window.matchMedia("(display-mode: standalone)").matches || (navigator as unknown as { standalone?: boolean }).standalone === true;
@@ -27,7 +29,7 @@ export default function Notifications() {
       const abo = await reg.pushManager.getSubscription();
       setEtat(abo && Notification.permission === "granted" ? "actif" : "inactif");
     })().catch(() => setEtat("indisponible"));
-  }, []);
+  }, [bandeau]);
 
   async function activer() {
     setCharge(true); setMsg("");
@@ -55,6 +57,21 @@ export default function Notifications() {
     } finally { setCharge(false); }
   }
 
+  // Bandeau (accueil, Aujourd'hui) : une phrase, un bouton, et rien du tout si c'est déjà réglé.
+  if (bandeau) {
+    if (masque || (etat !== "inactif" && etat !== "ios")) return null;
+    const plusTard = () => { setMasque(true); try { localStorage.setItem("tl_rappels_plus_tard", String(Date.now())); } catch {} };
+    return (
+      <div className="rappel-bandeau card">
+        <p><strong>Je te préviens avant tes examens.</strong></p>
+        {etat === "ios"
+          ? <p className="small muted">Sur iPhone : Partager, puis « Sur l&apos;écran d&apos;accueil ». Ouvre l&apos;appli depuis l&apos;icône et active-les.</p>
+          : <div className="row"><button type="button" className="btn small" disabled={charge} onClick={activer}>{charge ? "…" : "Activer les rappels"}</button>
+              <button type="button" className="btn alt small" onClick={plusTard}>Plus tard</button></div>}
+        {msg && <p className="alert bad" role="status">{msg}</p>}
+      </div>
+    );
+  }
   if (etat === "chargement" || etat === "indisponible") return etat === "indisponible" ? <p className="small muted">Les notifications ne sont pas disponibles sur cet appareil ou ce navigateur.</p> : null;
   if (etat === "ios") return <p className="small muted">Sur iPhone : dans Safari, touche Partager puis « Sur l&apos;écran d&apos;accueil », ouvre ToumaiLearn depuis cette icône, puis reviens ici pour activer les notifications.</p>;
   if (etat === "refuse") return <p className="small muted">Les notifications sont bloquées pour ce site. Autorise-les dans les réglages du navigateur, puis recharge la page.</p>;

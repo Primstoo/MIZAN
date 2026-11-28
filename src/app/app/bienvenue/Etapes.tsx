@@ -1,4 +1,5 @@
 "use client";
+import Notifications from "../moi/Notifications";
 import { useState } from "react";
 import { enregistrerProfil } from "../actions";
 import Mascotte, { MASCOTTES, type MascotteId } from "@/components/Mascotte";
@@ -41,6 +42,7 @@ export default function Etapes({ etabs, etablissementId, semestre, modules, pren
       {/* Les champs restent dans le formulaire même quand l'étape est masquée */}
       <section hidden={etape !== 0}>
         <h1>Comment tu t&apos;appelles ?</h1>
+        <Notifications bandeau />
         <input name="prenom" value={nom} onChange={(e) => setNom(e.target.value)} placeholder="Ton prénom" autoComplete="given-name" />
         <p className="eyebrow">Ton guide (tu pourras changer plus tard)</p>
         <div className="mascottes" role="radiogroup" aria-label="Choix du guide">

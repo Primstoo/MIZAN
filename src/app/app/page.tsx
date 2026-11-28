@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { chargerParcours, chargerMaitrise, missionPerso } from "@/lib/parcours";
 import { notePrevue } from "@/lib/maitrise";
 import Installer from "./Installer";
+import Notifications from "./moi/Notifications";
 import Toumai from "@/components/Toumai";
 import { cartesDuJour, type Carte } from "@/lib/conseils";
 import { estMascotte } from "@/components/Mascotte";
@@ -39,6 +40,7 @@ export default async function Aujourdhui() {
         {cible ? <a href={`/app/module/${cible.module_slug}`} className="tl-pastille">{titre} ›</a> : <h1 className="tl-salut">{salut}</h1>}
         {cible && <strong className="tl-compte">Examen {cible.estimee ? "≈ " : ""}dans {cible.reste} jour{cible.reste > 1 ? "s" : ""}</strong>}
       </header>
+      <Notifications bandeau />
 
       {cible && (
         <section className="tl-note">

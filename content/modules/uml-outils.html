@@ -3796,7 +3796,7 @@ window.MZT_CONFIG={id:'uml',module:'UML',prof:'',student:'un étudiant de licenc
   };
   const cellules = (l) => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
   const md = (t) => {
-    const out = []; let list = null, code = null, tab = null;
+    const out = []; let list = null, code = null, tab = null, olN = 0;
     const flushTab = () => {
       if (!tab) return;
       if (tab.length >= 2 && /^[\s|:-]+$/.test(tab[1]) && tab[1].includes('-')) {
@@ -3813,9 +3813,9 @@ window.MZT_CONFIG={id:'uml',module:'UML',prof:'',student:'un étudiant de licenc
       let m;
       if (/^\s*\|.*\|\s*$/.test(raw)) { if (list) { out.push('</' + list + '>'); list = null; } (tab = tab || []).push(raw); return; }
       flushTab();
-      if ((m = raw.match(/^\s*#{1,6}\s+(.*)$/))) { flush(); out.push('<p><strong>' + inl(m[1]) + '</strong></p>'); }
+      if ((m = raw.match(/^\s*#{1,6}\s+(.*)$/))) { flush(); olN = 0; out.push('<p><strong>' + inl(m[1]) + '</strong></p>'); }
       else if ((m = raw.match(/^\s*[-*•]\s+(.*)$/))) { if (list !== 'ul') { flush(); out.push('<ul>'); list = 'ul'; } out.push('<li>' + inl(m[1]) + '</li>'); }
-      else if ((m = raw.match(/^\s*\d+[.)]\s+(.*)$/))) { if (list !== 'ol') { flush(); out.push('<ol>'); list = 'ol'; } out.push('<li>' + inl(m[1]) + '</li>'); }
+      else if ((m = raw.match(/^\s*(\d+)[.)]\s+(.*)$/))) { if (list !== 'ol') { flush(); const n = +m[1]; olN = (n === 1 && olN > 1) ? olN : n; out.push('<ol start="' + olN + '">'); list = 'ol'; } out.push('<li>' + inl(m[2]) + '</li>'); olN++; }
       else if (!raw.trim()) flush();
       else { flush(); out.push('<p>' + inl(raw) + '</p>'); }
     });
