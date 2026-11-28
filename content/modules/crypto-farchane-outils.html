@@ -1480,7 +1480,7 @@ window.MZT_CONFIG={id:'crypto',module:'Cryptographie (partie 1)',prof:'Pr A. Far
 .mzt-m pre{margin:6px 0;padding:8px;overflow-x:auto;background:color-mix(in srgb,var(--i) 10%,transparent);border-radius:6px;font:12.5px ui-monospace,Menlo,Consolas,monospace;white-space:pre}
 .mzt-m pre code{background:none;padding:0}
 .mzt-tex{font:12.5px ui-monospace,Menlo,Consolas,monospace;color:var(--m)}.mzt-tex[data-ok]{font:inherit;color:inherit}
-.mzt-tex.d{display:block;margin:6px 0;text-align:center}
+.mzt-tex.d{display:block;margin:6px 0;text-align:center;overflow-x:auto;overflow-y:hidden}
 .mzt-m mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}.mzt-m mjx-container[display]{margin:0!important}
 .mzt-m mjx-container svg{max-width:none}
 .mzt-tab{overflow-x:auto;margin:6px 0}.mzt-tab table{border-collapse:collapse;font-size:13px;min-width:60%}
@@ -1586,7 +1586,7 @@ window.MZT_CONFIG={id:'crypto',module:'Cryptographie (partie 1)',prof:'Pr A. Far
   const protegerMaths = (t) => {
     MATHS.length = 0;
     const garde = (tex, d) => { MATHS.push({ tex: tex.trim(), d }); return '\u0000' + (MATHS.length - 1) + '\u0000'; };
-    const RX = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\\\(([\s\S]+?)\\\)|\$(?=[^\s$\d])([^$\n]*?[^\s$\\])\$(?!\d)/g;
+    const RX = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\\\(([\s\S]+?)\\\)|\$(?=[^\s$])([^$\n]*?[^\s$\\])\$(?!\d)/g;
     // le code (blocs ``` et `…`) n'est jamais lu comme une formule
     return String(t).split(/(```[\s\S]*?(?:```|$))/).map((bloc, i) => i % 2 ? bloc
       : bloc.split(/(`[^`\n]*`)/).map((x, j) => j % 2 ? x : x.replace(RX, (_, a, b, c, d) => a != null ? garde(a, 1) : b != null ? garde(b, 1) : c != null ? garde(c, 0) : garde(d, 0))).join('')).join('');
@@ -1639,13 +1639,16 @@ window.MZT_CONFIG={id:'crypto',module:'Cryptographie (partie 1)',prof:'Pr A. Far
     }, 100);
   })).catch((e) => { mjPret = null; throw e; });
   const svgCache = new Map(); let file = Promise.resolve();
+  // tex2svg ne pose ni la feuille de style MathJax ni le cache des glyphes (police « global ») : sans eux, les glyphes sont invisibles,
+  // seuls les caractères hors police (é, ô…) s'affichent en flottant, et le MathML d'accessibilité apparaît en clair. updateDocument les ajoute une fois.
+  const pagePrete = () => { try { MathJax.startup.document.updateDocument(); } catch (e) {} };
   function dessinerMaths(racine) {
     const spans = [...racine.querySelectorAll('.mzt-tex:not([data-ok])')]; if (!spans.length) return;
     mathjax().then(() => spans.forEach((sp) => {
       const cle = sp.dataset.d + '|' + sp.textContent;
       const poser = (n) => { if (!sp.isConnected || sp.dataset.ok) return; sp.textContent = ''; sp.appendChild(n.cloneNode(true)); sp.dataset.ok = '1'; };
       if (svgCache.has(cle)) return poser(svgCache.get(cle));
-      file = file.then(() => MathJax.tex2svgPromise(sp.textContent, { display: sp.dataset.d === '1' }).then((n) => { svgCache.set(cle, n); poser(n); })).catch(() => {});
+      file = file.then(() => MathJax.tex2svgPromise(sp.textContent, { display: sp.dataset.d === '1' }).then((n) => { svgCache.set(cle, n); poser(n); pagePrete(); })).catch(() => {});
     })).catch(() => {});
   }
   async function ask(q, deep) {
